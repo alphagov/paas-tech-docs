@@ -1,3 +1,5 @@
+## Deploying static sites
+
 This section explains how to create and deploy a static HTML page. It's
 worth testing that you can carry out this process before you try to deploy a more complex app.
 

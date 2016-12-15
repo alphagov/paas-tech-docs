@@ -1,3 +1,5 @@
+## Production checklist
+
 Before deploying an app for production use, check the following:
 
 1. If your app uses a PostgreSQL service, make sure that you have selected the high-availability plan (``M-HA-dedicated-9.5``) for the bound ``postgres`` service instance.

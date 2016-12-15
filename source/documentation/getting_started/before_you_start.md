@@ -1,3 +1,7 @@
+#Getting Started
+
+## PaaS requirements
+
 To be hosted by Government PaaS, your application must:
 
 * follow the [twelve-factor application](http://12factor.net/) principles (described in more detail below) - this will be the case if your app was written to be deployed to another PaaS like Heroku
@@ -23,7 +27,7 @@ Visit the [12factor.net website](http://12factor.net/) to further ensure your ap
 
 |Principle  |Meaning  |Relevance to Cloud Foundry  |
 |:---|:---|:---|
-|One codebase many deploys  |Each of your applications needs its own source-controlled repository.  |You can push the same codebase to many Cloud Foundry applications with these commands: ``` $ cf push myapp-staging``` <br/> ```$ cf push myapp-production```  |
+|One codebase many deploys  |Each of your applications needs its own source-controlled repository.  |You can push the same codebase to many Cloud Foundry applications with these commands: <br>``` $ cf push myapp-staging``` <br/> ```$ cf push myapp-production```  |
 |Isolate dependencies |All required dependencies (eg a database or image library) must be vendored into your software system.|If you don’t declare your dependencies, you probably won’t be able to deploy your application on Cloud Foundry. How you specify dependencies depends on which language and buildpack you use. For example, the python buildpack expects you to provide a requirements.txt file which it will pass to pip.  |
 |Store your configuration in the environment  | Ensure you separate the storage of your code and configuration (this is anything that may vary between environments, such as passwords). |Cloud Foundry provides environment variables to tell an application how to configure itself, e.g. VCAP_SERVICES tells applications what services are available and how to connect to them. You can create your own environment variables for each application. |
 |Backing Services  |All your backing services (e.g. an email service or a monitoring system) should be loosely coupled to your code so you can easily change services if you need to. A change in service should not require a code change.|In Cloud Foundry, backing services are referred to as ‘services’. Users can create services, bind them to applications, and delete them.  |

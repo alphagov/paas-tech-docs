@@ -1,4 +1,6 @@
-## Getting an account
+## Quick setup guide
+
+### Getting an account
 
 Government PaaS is currently in private beta.
 
@@ -8,7 +10,7 @@ We currently restrict which IP addresses are allowed to access the PaaS to deplo
 
 In order to provide you with an account, we need to store some personal data about you. Please see [our Privacy Policy](/getting_started/privacy) for details.
 
-## Setting up the command line
+### Setting up the command line
 
 Government PaaS uses a hosting technology called Cloud Foundry. As a tenant (that is, someone who is hosting an application on the PaaS), you will use the Cloud Foundry command line client to interact with the PaaS. To set it up:
 
@@ -58,7 +60,7 @@ Government PaaS uses a hosting technology called Cloud Foundry. As a tenant (tha
 Once logged in, you can see the available commands by running ```cf```.
 
 
-## Deploying a test app
+### Deploying a test app
 
 To practice deploying an app, try following the [deploying a static site](/deploying_apps/deploying_static_sites/) process.
 

@@ -1,3 +1,5 @@
+## Benefits of PaaS
+
 Right now, development teams spend considerable time and money setting up all the components required to host a government service (eg, application monitoring, logging and alerting techniques). With Government PaaS, development teams can save on this effort by using a hosting stack that’s already been developed.
 
 Your development team can use PaaS to deploy and run government applications written in a range of languages and web frameworks. You’ll simply need to push your source code to the PaaS environment and the code will be compiled and deployed for you.
@@ -26,4 +28,4 @@ This table summarises the core characteristics of the PaaS offering.
 | Multi-tenant architecture| Applications running on the platform are isolated from each other and can’t read or change each others’ code, data or logs (eg the Digital Marketplace application can’t access the data of the GOV.UK publishing platform).|
 | Application development teams manage their own user support|   A platform where [people developing applications also support the application out of hours](http://www.infoq.com/presentations/gov-uk-devops) leads to better software and a better user experience.	|
 |Self-service model|PaaS makes it easy for development teams to get started, and to make frequent changes to their applications without requiring support from a member of the PaaS team (eg they can create a Postgres instance). Because application teams have this complete control, they won’t experience any unnecessary delays. |
-|Runs on multiple public clouds|   PaaS isn’t locked into a single provider in order to encourage price competition, and to also remove the risk of a[single point of failure](https://www.google.com/url?q=https://en.wikipedia.org/wiki/Single_point_of_failure)	|
+|Runs on multiple public clouds|   PaaS isn’t locked into a single provider in order to encourage price competition, and to also remove the risk of a [single point of failure](https://www.google.com/url?q=https://en.wikipedia.org/wiki/Single_point_of_failure)	|

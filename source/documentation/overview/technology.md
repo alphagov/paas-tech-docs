@@ -1,6 +1,8 @@
+## Technology
+
 PaaS uses Cloud Foundry and Amazon Web Services (AWS).
 
-## Cloud Foundry
+### Cloud Foundry
 
 The PaaS platform is built using the open source [Cloud Foundry](https://www.cloudfoundry.org/) project. Multiple open source products were evaluated before Cloud Foundry was selected as the best fit for PaaS.
 
@@ -15,7 +17,7 @@ For more information on why we chose Cloud Foundry, [read our blog post](https:/
 
 Government PaaS addresses common usability, security, compliance and scalability concerns experienced by government development teams. This makes the platform a superior option to your development team deploying their own version of the Cloud Foundry software, where they’d need to address cloud security implications and build a continuous integration pipeline.
 
-## Amazon Web Services
+### Amazon Web Services
 
 Currently PaaS runs on [Amazon Web Services](https://aws.amazon.com/). As a tenant, you do not have to interact with AWS directly; all interactions required to deploy and manage your service are carried out through Cloud Foundry commands.
 

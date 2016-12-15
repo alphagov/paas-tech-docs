@@ -1,6 +1,8 @@
+##Limitations
+
 While the Government PaaS is built using Cloud Foundry technology, we don't support all Cloud Foundry features. This section explains some Cloud Foundry features that are not enabled, as well as some limitations of the beta phase.
 
-## IP restrictions
+### IP restrictions
 
 We currently only accept command line client connections from a list of approved IP addresses (a 'whitelist'). When you sign up to use the PaaS, you must tell us the IPs or IP ranges you and your developers will connect from, so we can add them to our whitelist. 
 
@@ -8,7 +10,7 @@ You can view [the list of allowed IPs](https://github.com/alphagov/paas-cf/blob/
 
 Note that IP restrictions only apply to use of the command line client; there is no restriction on access to your deployed apps, which are available to everyone.
 
-## Custom buildpacks are not supported
+### Custom buildpacks are not supported
 
 Cloud Foundry uses buildpacks to provide runtime and framework support for applications in different languages. 
 
@@ -18,7 +20,7 @@ If you want to use a custom buildpack because you need a newer version of a runt
 
 If you'd like to use custom buildpacks, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-## Custom domains require CDN
+### Custom domains require CDN
 
 By default, your uploaded apps will be hosted on the ``cloudapps.digital`` domain. In production, you will probably want your app to be available through your own url (for example, ``yourapp.service.gov.uk``).
 
@@ -26,13 +28,8 @@ Custom domains are not yet fully supported by the Government PaaS due to TLS cer
 
 Currently, we recommend that you use a CDN to serve your app with a custom domain. If this is not a suitable solution for you, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) with details of your use case.
 
-## Direct SSH access is currently disabled
 
-The Cloud Foundry command line client has an option to enable you to connect directly to the virtual machines on which your apps run using ``cf ssh``. (See the [Cloud Foundry documentation on accessing apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html) [external link].
-
-This functionality is currently disabled on the Government PaaS. We intend to make it available in future, following security testing.
-
-## 404s after commands that restart the app
+### 404s after commands that restart the app
 
 After you use a command that restarts application instances, such as ``cf push`` or ``cf restart``, your app may briefly return incorrect 404 errors. Apart from the brief downtime, this may lead to problems if the 404 is cached, or visiting web crawling bots (as used by search engines) receive a 404.
 
@@ -46,7 +43,7 @@ We are working on a fix to prevent this happening.
 
 In the meantime, we suggest that you use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link], where you have two versions of an app, one that is 'live' and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to facilitate this process. We haven't evaluated the available plugins in enough detail to recommend one, but some tenants have successfully used [autopilot](https://github.com/contraband/autopilot).
 
-## API access may have brief outages during beta
+### API access may have brief outages during beta
 
 During the beta period, there may be occasional brief periods where API access is unavailable during a platform update, causing commands sent from the command line client to fail. 
 
@@ -55,7 +52,7 @@ If you find that a valid command is failing and the error message does not expla
 We are working on a fix to prevent the interruption of API access when we update the platform.
 
 
-## Deploying Docker images is not currently enabled
+### Deploying Docker images is not currently enabled
 
 Cloud Foundry supports pushing a [Docker](https://www.docker.com/) image as an app. 
 
@@ -63,7 +60,7 @@ This feature is *not* currently enabled on the Government PaaS because allowing 
 
 We may enable support for Docker images in the future. If you would like to be able to push Docker images, please contact our support team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
 
-## Route services are currently disabled
+### Route services are currently disabled
 
 [Cloud Foundry route services](http://docs.cloudfoundry.org/services/route-services.html) [external link] are used to apply transformation or processing to requests before they reach an application.
 

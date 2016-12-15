@@ -22,7 +22,7 @@ then you should do the equivalent command with ``cf set-env``:
 
 ``cf set-env APPNAME VARIABLE value``
 
-##System-provided environment variables
+###System-provided environment variables
 
 As well as environment variables you set yourself, there are a number of system-provided variables which give you information about configuration details handled by the PaaS: the port on which the application is listening, the maximum memory each instance can use, the external IP address of the instance, and so on.
 

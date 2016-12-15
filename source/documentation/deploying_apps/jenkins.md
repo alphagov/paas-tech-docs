@@ -1,20 +1,20 @@
-# Pushing an app to Cloud Foundry using Jenkins
+## Pushing an app to Cloud Foundry using Jenkins
 
 There are two main approaches to pushing applications to the Government PaaS with [Jenkins](https://jenkins.io/):
 
 1. Use custom scripts (allows full scripting of deployments)
 1. Use the Cloud Foundry plugin for Jenkins (less flexible)
 
-Both of these approaches require you to add a Cloud Foundry username and password to Jenkins using the credentials plugin. To do this, follow the instructions on [Setting up the credentials plugin](/deploying_apps/jenkins/#setting-up-the-credentials-plugin).
+Both of these approaches require you to add a Cloud Foundry username and password to Jenkins using the credentials plugin. To do this, follow the instructions on [Setting up the credentials plugin](#setting-up-the-credentials-plugin).
 
 
-Setting up custom scripts allows you to fully script your deployment. To do this securely, you will need to follow the [Setting up custom scripts](/deploying_apps/jenkins/#setting-up-custom-scripts) instructions to make credentials available as environment variables.
+Setting up custom scripts allows you to fully script your deployment. To do this securely, you will need to follow the [Setting up custom scripts](#setting-up-custom-scripts) instructions to make credentials available as environment variables.
 
-Using the Cloud Foundry plugin only allows Jenkins to push your application to the Government PaaS as a post-build action: the equivalent of doing a `cf login` followed by a `cf push`. There is little scope for configuration beyond using the application manifest. To use the plugin, follow the [Setting up the Cloud Foundry plugin](/deploying_apps/jenkins/#setting-up-the-cloud-foundry-plugin) instructions.
+Using the Cloud Foundry plugin only allows Jenkins to push your application to the Government PaaS as a post-build action: the equivalent of doing a `cf login` followed by a `cf push`. There is little scope for configuration beyond using the application manifest. To use the plugin, follow the [Setting up the Cloud Foundry plugin](#setting-up-the-cloud-foundry-plugin) instructions.
 
 
 
-## Setting up the credentials plugin
+### Setting up the credentials plugin
 
 To install the credentials plugin manually:
 
@@ -34,12 +34,12 @@ You should provide the credentials for a dedicated PaaS user account created for
 
 You can now go on to either:
 
-* [set up custom scripts](/deploying_apps/jenkins/#setting-up-custom-scripts) *or*
-* [set up the Cloud Foundry plugin](/deploying_apps/jenkins/#setting-up-the-cloud-foundry-plugin)
+* [set up custom scripts](#setting-up-custom-scripts) *or*
+* [set up the Cloud Foundry plugin](#setting-up-the-cloud-foundry-plugin)
 
-## Setting up custom scripts
+### Setting up custom scripts
 
-Before you do this, make sure you first [set up the credentials plugin](/deploying_apps/jenkins/#setting-up-the-credentials-plugin).
+Before you do this, make sure you first [set up the credentials plugin](#setting-up-the-credentials-plugin).
 
 Note that using the custom scripts approach exposes the password via the process command line, so it can be read by other processes running on the same machine. If this risk is not acceptable, please use the Cloud Foundry plugin described below. The Cloud Foundry project is aware of the problem and we expect they will provide a more secure login mechanism soon.
 
@@ -77,7 +77,7 @@ cf logout
 
 
 
-## Setting up the Cloud Foundry plugin
+### Setting up the Cloud Foundry plugin
 
 Before you do this, make sure you first [set up the credentials plugin](/deploying_apps/jenkins/#setting-up-the-credentials-plugin).
 

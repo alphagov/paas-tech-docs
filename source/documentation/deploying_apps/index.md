@@ -1,3 +1,5 @@
+# Deploying apps
+
 ## Deployment overview
 
 The `cf push` command is used both to create a new app and to push a new version of an existing one. The basic steps:
@@ -33,7 +35,7 @@ After deployment, you can increase the running instances to two using:
 
 ``cf scale APPNAME -i 2``
 
-## Caveats
+### Caveats
 * Your app should not write to local storage. Cloud Foundry local storage is ephemeral and can be deleted at any time.
 * You may need to set environment variables for your app to work. All configuration information should be stored in environment variables, not in the code. 
 * Instances will be restarted if they [exceed memory limits](/managing_apps/quotas/).

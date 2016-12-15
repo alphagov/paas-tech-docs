@@ -1,4 +1,6 @@
-## Organisations
+## Organisations, spaces & targets
+
+### Organisations
 
 Your tenant account belongs to at least one **organisation** ("org" for short) within the PaaS. This typically represents the real-world organisation, department or team you work for. Your co-workers' tenant accounts will belong to the same org. 
 
@@ -12,11 +14,11 @@ To see details about an org, run:
 
 where ORGNAME is the name of the org.
 
-## Spaces
+### Spaces
 
 Each organisation is divided into one or more **spaces**, which are used to organise app development, deployment, and maintenance. For example, you might have spaces for development and production versions of your app.
 
-![Diagram showing that an organisation contains multiple spaces](/img/org-spaces.png)
+![Diagram showing that an organisation contains multiple spaces](/figures/org-spaces.png)
 
 Different accounts can have different permissions to access each space. For example, you may choose to grant a junior developer's account access to your ``development`` space, but not to ``production``. To set access, your account needs to have the ``OrgManager`` role; see the section below on [Managing spaces](#managing-spaces) for details.
 
@@ -24,7 +26,7 @@ To see the spaces you can access in your current org, run:
 
 ``cf spaces``
 
-## Setting a target
+### Setting a target
 
 To deploy an app, you need to specify a combination of an organisation and a space: this is called the **target**.
 
@@ -38,7 +40,7 @@ You can change space without changing org using:
 
 ``cf target -s SPACENAME``
 
-## Managing spaces
+### Managing spaces
 
 You can create new spaces within an org if your account has the ``OrgManager`` role. To find out who has that role, run:
 
@@ -67,6 +69,6 @@ For example, say you had just created a space called ``test`` within your org ca
 ``cf set-space-role ana@example.com acme test SpaceDeveloper``
 
 
-## Further reading
+### Learning more
 
 See the Cloud Foundry documentation on [Orgs, Spaces, Roles, and Permissions](https://docs.cloudfoundry.org/concepts/roles.html) [external link] for more details.
