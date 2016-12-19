@@ -1,3 +1,7 @@
+# Managing apps
+
+## Scaling
+
 The Cloud Foundry technology makes it easy to scale your application to meet increasing demand. Scaling does not happen automatically; you have to use the commands described below.
 
 Note that the maximum resources you can use will be limited by your organization quotas. You can view them by running:

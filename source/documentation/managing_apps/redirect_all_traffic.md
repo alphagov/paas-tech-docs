@@ -1,4 +1,6 @@
 
+## Redirecting all traffic
+
 If a site moves to a different domain name, you can use a simple static site with a custom `nginx.conf`
 file to redirect all traffic from the old domain to the new domain. Example `nginx.conf` site for `NEW_DOMAIN_NAME`:
 

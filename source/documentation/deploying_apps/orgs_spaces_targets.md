@@ -18,7 +18,7 @@ where ORGNAME is the name of the org.
 
 Each organisation is divided into one or more **spaces**, which are used to organise app development, deployment, and maintenance. For example, you might have spaces for development and production versions of your app.
 
-![Diagram showing that an organisation contains multiple spaces](/figures/org-spaces.png)
+![Diagram showing that an organisation contains multiple spaces](/documentation/figures/org-spaces.png)
 
 Different accounts can have different permissions to access each space. For example, you may choose to grant a junior developer's account access to your ``development`` space, but not to ``production``. To set access, your account needs to have the ``OrgManager`` role; see the section below on [Managing spaces](#managing-spaces) for details.
 

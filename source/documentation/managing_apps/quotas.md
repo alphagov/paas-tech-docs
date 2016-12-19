@@ -1,6 +1,8 @@
+## Quotas
+
 Cloud Foundry capacity is managed by quotas. Quotas provide a reservation of application routes, memory, compute power, and service instances which your organization cannot exceed. You can set individual application quotas to control how much of your quota each of your applications can use.
 
-## Quota allocations
+### Quota allocations
 
 Your organisation will be assigned a quota based on your stated needs. This will cover the app instances you run. Backing services do not count towards this quota.
 
@@ -20,7 +22,7 @@ To see your organisation quota, run the command:
 
 where YOURORG is your organisation's name. (If you don't know the name, you can use ``cf orgs`` to find out).
 
-## Quota limits
+### Quota limits
 
 If a new application `push` would exceed your organization's quota, the request will fail with status code `400` and a message describing the limit that would be exceeded.
 
@@ -37,7 +39,7 @@ In this situation you have three options:
 2. Reconfigure existing [application quotas](#application-quotas) and redeploy.
 3. Request a quota change: contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-## Application quotas
+### Application quotas
 
 As a PaaS tenant, you can divide your organization's quota capacity amongst your applications as you see fit, by way of application quotas. Application limits are specified in your application manifest or as `cf push` command line options.
 
@@ -57,7 +59,7 @@ Use the following commands to set application quota options (in each pair below,
 
 	For a production application, you should always launch at least two instances.
 
-### Memory share and compute share
+#### Memory share and compute share
 
 Your application's compute limit is derived from its memory limit. Each application receives a guaranteed compute share equal to its relative share of memory.
 
@@ -69,7 +71,7 @@ If there are other applications competing for time, each application's guarantee
 The application cannot access more than the specified amount of memory.
 
 
-### Application quota sizing
+#### Application quota sizing
 
 - The environment default of 512MB `memory` is sufficient for most applications. Static sites and utility applications such as schedulers or loaders may require less. Use `cf app APPNAME` to check your application's current memory and compute utilization.
 

@@ -10,7 +10,7 @@ phase: Beta
 # Links to show on right-hand-side of header
 header_links:
   About: https://www.cloud.service.gov.uk
-  Get Started: #getting-started
+  Get Started: "#getting-started"
   Documentation: /
   Support: https://www.cloud.service.gov.uk/support
 

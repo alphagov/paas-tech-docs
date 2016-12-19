@@ -1,3 +1,6 @@
+# Troubleshooting
+
+## Logs
 
 If your app deployment is failing and it's not clear why from the command line client messages, you should consult the logs.
 
@@ -16,7 +19,7 @@ cf logs APPNAME --recent
 ```
 
 
-## ``cf events`` command
+### ``cf events`` command
 
 If you are trying to troubleshoot a problem and it's hard to understand what's happening from the logs, you can use the command:
 
@@ -26,7 +29,7 @@ cf events APPNAME
 
 Running ``cf events`` shows you when an app starts, stops, restarts, or crashes (including error codes). The output is often easier to interpret than the output of ``cf logs``.
 
-## Further information
+### More about logs and troubleshooting
 
 For more information about logging and troubleshooting app deployment, see the following sections of the Cloud Foundry documentation:
 
