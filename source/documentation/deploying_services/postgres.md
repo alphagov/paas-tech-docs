@@ -23,12 +23,12 @@ The letter at the beginning of the plan name corresponds to the instance size on
 
 Full details of what these plans include is available on [the AWS Product Details page](https://aws.amazon.com/rds/details/#DB_Instance_Classes).
 
-## Paid services
+### Paid services
 
 ``postgres`` is considered a paid service. Paid services may not be enabled on your account. If you try to create a service and receive an error stating "service instance cannot be created because paid service plans are not allowed", please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 
-## Setting up a PostgreSQL service
+### Setting up a PostgreSQL service
 
 To create a service and bind it to your app:
 
@@ -101,7 +101,7 @@ To create a service and bind it to your app:
 5. Your app should now able to access the PostgreSQL service. If the app was already running, you may need to restart the app to connect.
 
 
-## Accessing PostgreSQL from your app
+### Accessing PostgreSQL from your app
 
 Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the PostgreSQL service. Most libraries use TLS by default.
 
@@ -113,7 +113,7 @@ Use ``cf env APPNAME`` to see the environment variables.
 
 You can check for database connection errors by viewing the recent logs with ``cf logs APPNAME --recent``.
 
-## PostgreSQL service maintenance times
+### PostgreSQL service maintenance times
 
 The PaaS PostgreSQL service is currently provided by Amazon Web Services RDS. Each PostgreSQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. (To minimise downtime, select the ``*-HA-dedicated-9.5`` high availability plan, where the asterisk is the size of the plan). Minor version upgrades (for example from 9.4.1 to 9.4.2) will be applied during this window.
 
@@ -121,7 +121,7 @@ For more details, see the [Amazon RDS Maintenance documentation](http://docs.aws
 
 If you need to know the time of your maintenance window, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). Times will be from 22:00 to 06:00 UTC. We will add the ability to set the time of the maintenance window in a future version of GOV.UK PaaS.
 
-## PostgreSQL service backup
+### PostgreSQL service backup
 
 The data stored within any PostgreSQL service you create is backed up using the standard Amazon RDS backup system.
 
@@ -135,7 +135,7 @@ Note that data restore will not be available in the event of an RDS outage affec
 
 For more details about how the RDS backup system works, see [Amazon's DB Instance Backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html) [external page].
 
-## High availability details
+### High availability details
 
 We recommend you use the high availability plan (``*-HA-dedicated-9.5``) for any production apps, where the asterisk is the size of the plan.
 
@@ -149,12 +149,12 @@ See the [Amazon RDS documentation on the failover process](http://docs.aws.amazo
 
 If you wish to test how your app deals with a failover, we can trigger one for you. Please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to arrange this.
 
-## Read replicas
+### Read replicas
 
 Amazon RDS has the capability to provide a read replica: a read-only copy of your PostgreSQL database. This can be useful for performance, availability or security reasons.
 
 See the [Amazon RD documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) to learn more.
 
-ThE GOV.UK PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
+GOV.UK PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
 
 
