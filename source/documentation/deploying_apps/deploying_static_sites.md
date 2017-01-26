@@ -58,9 +58,17 @@ The site should now be live at `https://APPNAME.cloudapps.digital`.
 
 ##Adding more instances
 
-For a production site, you should run at least two instances of the app to ensure availability.
+For a production service, you should run at least two instances of the app to ensure availability.
 
 You can add another instance of this static app by running:
 
 ``cf scale APPNAME -i 2``
+
+or by adding this to the manifest and pushing again:
+
+```
+---
+  ...
+  instances: 2
+```
 

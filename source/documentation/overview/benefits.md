@@ -1,6 +1,6 @@
 ## Benefits of PaaS
 
-Right now, development teams spend considerable time and money setting up all the components required to host a government service (eg, application monitoring, logging and alerting techniques). With Government PaaS, development teams can save on this effort by using a hosting stack that’s already been developed.
+Right now, development teams spend considerable time and money setting up all the components required to host a government service (eg, application monitoring, logging and alerting techniques). With GOV.UK PaaS, development teams can save on this effort by using a hosting stack that’s already been developed.
 
 Your development team can use PaaS to deploy and run government applications written in a range of languages and web frameworks. You’ll simply need to push your source code to the PaaS environment and the code will be compiled and deployed for you.
 
@@ -13,12 +13,12 @@ The platform itself will be supported 24/7 by GDS, although this does not includ
 Features of the PaaS platform currently include:
 
 *   PostgreSQL and will include database back-ups
-*   language support as provided by the [default Cloud Foundry buildpacks](http://docs.cloudfoundry.org/buildpacks/) [external link]
+*   language support as provided by most of the [default Cloud Foundry buildpacks](http://docs.cloudfoundry.org/buildpacks/) [external link]. The only one not currently supported is the .NET Core buildpack as we have not yet identified a user need for it.
 *   ability to stream application logs to Software as a Service logging platforms
 
 ### Coding in the open
 
-We are making all new source code open and reusable at PaaS. You can use our source code if you want to prioritise different backing services (any networked attached service that your application consumes to do its job, eg a MongoDB instance or a PostgreSQL database).
+We are making all new source code open and reusable at PaaS. You can use our source code if you want to prioritise different backing services (any networked attached service that your application consumes to do its job, for example a MongoDB instance or a PostgreSQL database).
 
 ### Characteristics of PaaS
 This table summarises the core characteristics of the PaaS offering.

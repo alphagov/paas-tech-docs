@@ -1,6 +1,6 @@
 ## Pushing an app to Cloud Foundry using Jenkins
 
-There are two main approaches to pushing applications to the Government PaaS with [Jenkins](https://jenkins.io/):
+There are two main approaches to pushing applications to GOV.UK PaaS with [Jenkins](https://jenkins.io/):
 
 1. Use custom scripts (allows full scripting of deployments)
 1. Use the Cloud Foundry plugin for Jenkins (less flexible)
@@ -10,7 +10,7 @@ Both of these approaches require you to add a Cloud Foundry username and passwor
 
 Setting up custom scripts allows you to fully script your deployment. To do this securely, you will need to follow the [Setting up custom scripts](#setting-up-custom-scripts) instructions to make credentials available as environment variables.
 
-Using the Cloud Foundry plugin only allows Jenkins to push your application to the Government PaaS as a post-build action: the equivalent of doing a `cf login` followed by a `cf push`. There is little scope for configuration beyond using the application manifest. To use the plugin, follow the [Setting up the Cloud Foundry plugin](#setting-up-the-cloud-foundry-plugin) instructions.
+Using the Cloud Foundry plugin only allows Jenkins to push your application to GOV.UK PaaS as a post-build action: the equivalent of doing a `cf login` followed by a `cf push`. There is little scope for configuration beyond using the application manifest. To use the plugin, follow the [Setting up the Cloud Foundry plugin](#setting-up-the-cloud-foundry-plugin) instructions.
 
 
 

@@ -10,7 +10,7 @@ Note that the maximum resources you can use will be limited by your organization
 
 from the command line.
 
-If you are anticipating a spike in demand for a service hosted on the Government PaaS, please contact us well in advance at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+If you are anticipating a spike in demand for a service hosted on GOV.UK PaaS, please contact us well in advance at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 ##Increasing instances
 
@@ -20,6 +20,15 @@ Incoming requests are automatically load-balanced across all instances.
 For example, this command sets the number of running instances to five:
 
 ``cf scale APPNAME -i 5``
+
+You can also use the manifest to set the number of instances that will start when you push the app:
+
+```
+---
+  ...
+  instances: 2
+```
+
 
 For a production app, you should always have at least two running instances.
 

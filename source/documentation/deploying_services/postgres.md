@@ -1,10 +1,10 @@
 ## PostgreSQL
 
-Government PaaS enables you to create a PostgreSQL database service (powered by Amazon Web Services) and bind it to your app.
+GOV.UK PaaS enables you to create a PostgreSQL database service (powered by Amazon Web Services) and bind it to your app.
 
 In Cloud Foundry, each service may have multiple plans available with different characteristics.
 
-Currently, Government PaaS offers a ``postgres`` service which is available with six separate plans:
+Currently, GOV.UK PaaS offers a ``postgres`` service which is available with six separate plans:
 
 * ``S-dedicated-9.5``
 * ``S-HA-dedicated-9.5`` (high availability, recommended for production)
@@ -119,7 +119,7 @@ The PaaS PostgreSQL service is currently provided by Amazon Web Services RDS. Ea
 
 For more details, see the [Amazon RDS Maintenance documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html) [external page].
 
-If you need to know the time of your maintenance window, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). Times will be from 22:00 to 06:00 UTC. We will add the ability to set the time of the maintenance window in a future version of Government PaaS.
+If you need to know the time of your maintenance window, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). Times will be from 22:00 to 06:00 UTC. We will add the ability to set the time of the maintenance window in a future version of GOV.UK PaaS.
 
 ## PostgreSQL service backup
 
@@ -155,6 +155,6 @@ Amazon RDS has the capability to provide a read replica: a read-only copy of you
 
 See the [Amazon RD documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) to learn more.
 
-ThE Government PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
+ThE GOV.UK PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
 
 

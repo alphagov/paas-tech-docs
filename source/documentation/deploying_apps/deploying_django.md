@@ -84,7 +84,7 @@ If you are just getting started learning CloudFoundry, you can use the sandbox s
           memory: 512M
           buildpack: python_buildpack
 
-    where `my-django-app` is the name that will be used for the app within Government PaaS.
+    where `my-django-app` is the name that will be used for the app within GOV.UK PaaS.
 
     Replace ``my-django-app`` with a unique name for your app. (You can use ``cf apps`` to see apps which already exist).
 

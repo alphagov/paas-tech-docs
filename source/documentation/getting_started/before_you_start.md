@@ -2,26 +2,26 @@
 
 ## PaaS requirements
 
-To be hosted by Government PaaS, your application must:
+To be hosted by GOV.UK PaaS, your application must:
 
 * follow the [twelve-factor application](http://12factor.net/) principles (described in more detail below) - this will be the case if your app was written to be deployed to another PaaS like Heroku
 * not require any backing service apart from a database (currently the only service available is PostgreSQL)
-* not carry data at SECRET or above (this is currently out of scope for Government PaaS)
-* be written in a language supported by the [default Cloud Foundry buildpacks](http://docs.cloudfoundry.org/buildpacks/) [external link]:
+* not carry data at SECRET or above (this is currently out of scope for GOV.UK PaaS)
+* be written in one of these languages:
     * Go
     * Nodejs
     * Java
     * PHP
     * Python
     * Ruby
-    * or be a static HTML/CSS/Javascript site
+    * or be a static HTML/CSS/Javascript site or compiled binary
 
-Buildpacks provide runtime and framework support for your application. For most languages, you will need to provide configuration files to describe your app's dependencies. Note that most buildpacks will support a limited range of versions of the language.
+[Cloud Foundry buildpacks](https://docs.cloudfoundry.org/buildpacks/) provide runtime and framework support for your application. For most languages, you will need to provide configuration files to describe your app's dependencies. Note that most buildpacks will support a limited range of versions of the language.
 
 ### 12-factor application principles
-These principles were formulated by Adam Wiggins, the cofounder of the [Heroku](https://www.heroku.com/) platform. They outline practices for modern apps to follow during development to make them scalable and easy to deploy. Your app must follow these practices to work on the Cloud Foundry technology which is used by the Government PaaS.
+These principles were formulated by Adam Wiggins, the cofounder of the [Heroku](https://www.heroku.com/) platform. They outline practices for modern apps to follow during development to make them scalable and easy to deploy. Your app must follow these practices to work on the Cloud Foundry technology which is used by GOV.UK PaaS.
 
-We have summarised the practices in the table below, and noted the relevance of each principle to the Government PaaS.
+We have summarised the practices in the table below, and noted the relevance of each principle to GOV.UK PaaS.
 
 Visit the [12factor.net website](http://12factor.net/) to further ensure your application supports these practices.
 
@@ -37,5 +37,5 @@ Visit the [12factor.net website](http://12factor.net/) to further ensure your ap
 |Concurrency  | Ensure all your processes (e.g. web requests or API calls) are running separately so your application can scale easily.  | Cloud Foundry expects applications to behave according to this principle. To increase the number of processes running, use the ```cf scale``` command.|
 |Disposability  | You should be able to rapidly release new code. Also, applications should be able to start back up fast and cleanly following shut down.  | Cloud Foundry expects applications to follow this principle.|
 |Development parity  | Applications should be rapidly deployed from their development environment to production.  To ensure this rapid deployment, keep a developer’s environment similar to that of production (eg both environments should use the same backing services).  | CF helps you achieve this development/production parity by letting you create and deploy similar services for development, test and production environments|
-|Logs  | Maintain and archive log files so you have visibility of how your application works over time.  |Cloud Foundry [describes how to log files here](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html) [external link]. PaaS will offer the Loggregator function in beta. |
+|Logs  | Maintain and archive log files so you have visibility of how your application works over time.  |Cloud Foundry [describes how to log files here](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html) [external link]. GOV.UK PaaS will offer the Loggregator function in beta. |
 |Administrative processes  |Run one-off administrative processes (eg running analytics) in your production environment.  |  |

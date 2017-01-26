@@ -1,12 +1,12 @@
 ##Privacy policy
 
-This privacy policy relates to the data we store about you as a Government PaaS tenant. It does not relate to the privacy of the end users of any service you host on the PaaS: you are responsible for the data stored by your service.
+This privacy policy relates to the data we store about you as a GOV.UK PaaS tenant. It does not relate to the privacy of the end users of any service you host on the PaaS: you are responsible for the data stored by your service.
 
 If this privacy policy changes, all PaaS tenants will be notified.
 
 ### Introduction
 
-Government Platform as a Service (PaaS) is provided by the Government Digital Service (GDS), which is part of the [Cabinet Office](https://www.gov.uk/government/organisations/cabinet-office). We use your personal data to provide you with access to PaaS systems, and to administer that access.
+GOV.UK Platform as a Service (GOV.UK PaaS) is provided by the Government Digital Service (GDS), which is part of the [Cabinet Office](https://www.gov.uk/government/organisations/cabinet-office). We use your personal data to provide you with access to PaaS systems, and to administer that access.
 
 This privacy policy explains the kinds of data that we process, how it’s used, how it’s stored, how it’s protected and how you can find out about it.
 

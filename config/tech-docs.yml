@@ -3,7 +3,7 @@ host: paas-tech-docs.cloudapps.digital
 
 # Header-related options
 show_govuk_logo: true
-service_name: Government Platform as a Service
+service_name: GOV.UK Platform as a Service Technical Documentation
 service_link: https://www.cloud.service.gov.uk
 phase: Beta
 
