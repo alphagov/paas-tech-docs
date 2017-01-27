@@ -10,7 +10,7 @@ For full details about Cloud Foundry roles, see [the Cloud Foundry documentation
 
 ## User roles
 
-There are multiple **roles** that a user can have. These are always defined in relation to an [organisation](/deploying_apps/orgs_spaces_targets#organisations) or a [space](/deploying_apps/orgs_spaces_targets#spaces). A user can have different roles in different orgs or spaces. A user can have more than one role within the same org or space.
+There are multiple **roles** that a user can have. These are always defined in relation to an [organisation](/#organisations) or a [space](/#spaces). A user can have different roles in different orgs or spaces. A user can have more than one role within the same org or space.
 
 To find out details of the users in an organisation and their roles, run:
 
@@ -35,9 +35,9 @@ For example, suppose you have a senior developer who manages junior developers w
 ### Org Manager
 This role applies to a particular organisation. Typically, each team only has one organisation, but you can have more than one. 
 
-An Org Manager can create/delete spaces and edit user roles. See the sections on [Managing spaces](/deploying_apps/orgs_spaces_targets#managing-spaces) and [Granting access](/deploying_apps/orgs_spaces_targets#granting-access) for details. 
+An Org Manager can create/delete spaces and edit user roles. See the sections on [Managing spaces](/#managing-spaces) and [Granting access](/#granting-access) for details. 
 
-As an Org Manager, you have responsibilities related to adding and removing users: see the section on [User lifecycle](/managing_users/user_lifecycle).
+As an Org Manager, you have responsibilities related to adding and removing users: see the section on [User lifecycle](/#user_lifecycle).
 
 As part of our onboarding process, we will create an account with the Org Manager role. We recommend you have at least two people who are Org Managers, in case one is unavailable. The Org Managers would typically be senior staff: for example, you might choose to grant the role to your technical architect and a lead developer.
 

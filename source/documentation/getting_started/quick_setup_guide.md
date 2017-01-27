@@ -8,9 +8,9 @@ If your organisation is already taking part in the private beta and you need an 
 
 If you'd like to find out about taking part in the beta, please contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-We currently restrict which IP addresses are allowed to access the PaaS to deploy and manage apps. As part of the setup process, you will need to provide us with a list of all the IPs you and your developers will use to access the PaaS. You can [check our whitelist of allowed IPs here](https://github.com/alphagov/paas-cf/blob/master/terraform/prod.tfvars#L9).
+We currently restrict which IP addresses are allowed to access the PaaS to deploy and manage apps. As part of the setup process, you will need to provide us with a list of all the IPs you and your developers will use to access the PaaS. You can [check our whitelist of allowed IPs here](https://github.com/alphagov/paas-cf/blob/master/terraform/prod.tfvars#L12).
 
-In order to provide you with an account, we need to store some personal data about you. Please see [our Privacy Policy](/getting_started/privacy) for details.
+In order to provide you with an account, we need to store some personal data about you. Please see [our Privacy Policy](/#privacy-policy) for details.
 
 ### Setting up the command line
 
@@ -51,13 +51,13 @@ GOV.UK PaaS uses a hosting technology called Cloud Foundry. As a tenant (that is
     Error performing request: Get https://api.cloud.service.gov.uk/v2/info: EOF
     ```
 
-    and your internet connection is otherwise working, the most likely cause is that your IP address is not on [our whitelist](https://github.com/alphagov/paas-cf/blob/master/terraform/prod.tfvars#L9). Please contact support and ask to be whitelisted.
+    and your internet connection is otherwise working, the most likely cause is that your IP address is not on [our whitelist](https://github.com/alphagov/paas-cf/blob/master/terraform/prod.tfvars#L12). Please contact support and ask to be whitelisted.
 
-4. **It's important for security that you now change your password**. Run:
+4. It's important for security that you now change your password. Run:
 
      ``cf passwd``
 
-    You will be prompted to enter your password from the previous step. You should then enter a new secure password. For our advice on how to do this, see [Choosing Passwords](/getting_started/passwords). 
+    You will be prompted to enter your password from the previous step. You should then enter a new secure password. For our advice on how to do this, see [Choosing passwords](/#passwords). 
 
     Make sure you remember or securely record your new password. Your session will expire in 7 days, and you will be prompted to log in again.
 
@@ -66,7 +66,7 @@ Once logged in, you can see the available commands by running ```cf```.
 
 ### Deploying a test app
 
-To practice deploying an app, try following the [deploying a static site](/deploying_apps/deploying_static_sites/) process.
+To practice deploying an app, try following the [deploying a static site](/#deploying-static-sites) process.
 
 
 

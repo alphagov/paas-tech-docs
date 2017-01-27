@@ -3,7 +3,7 @@
 This section explains how to create and deploy a static HTML page. It's
 worth testing that you can carry out this process before you try to deploy a more complex app.
 
-When you deploy an app, you must select a combination of an organisation and a space (see [Orgs, Spaces and Targets](/deploying_apps/orgs_spaces_targets) for more information). This is called the **target**.
+When you deploy an app, you must select a combination of an organisation and a space (see [Orgs, Spaces and Targets](/#orgs_spaces_targets) for more information). This is called the **target**.
 
 We have provided a ``sandbox`` space in your organisation for you to use for learning about the PaaS. You may want to target the sandbox while you are testing by running:
 
@@ -11,7 +11,7 @@ We have provided a ``sandbox`` space in your organisation for you to use for lea
 
 It's also important to realise that if you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team.
 
-These steps assume you have already carried out the setup process explained in the [Quick Setup Guide](/getting_started/quick_setup_guide) section.
+These steps assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick_setup_guide) section.
 
 1. In an empty directory, create an `index.html` file.
 

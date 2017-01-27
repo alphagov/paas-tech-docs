@@ -1,3 +1,5 @@
+##Choosing passwords
+
 When setting a password for your GOV.UK PaaS account, it is important to choose one that is both unique and resistant to attack. 
 
 We reserve the right to suspend your account if we detect that it has an insecure password.

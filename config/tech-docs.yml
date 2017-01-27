@@ -1,16 +1,17 @@
 # Host to use for canonical URL generation (without trailing slash)
-host: paas-tech-docs.cloudapps.digital
+host: govuk-paas.cloudapps.digital
 
 # Header-related options
 show_govuk_logo: true
-service_name: GOV.UK Platform as a Service Technical Documentation
+service_name: Platform as a Service
 service_link: https://www.cloud.service.gov.uk
 phase: Beta
 
 # Links to show on right-hand-side of header
 header_links:
-  About: https://www.cloud.service.gov.uk
-  Get Started: "#getting-started"
+  About: https://govuk-paas.cloudapps.digital
+  Features: https://govuk-paas.cloudapps.digital/features.html
+  Roadmap: https://govuk-paas.cloudapps.digital/roadmap.html
   Documentation: /
   Support: https://www.cloud.service.gov.uk/support
 

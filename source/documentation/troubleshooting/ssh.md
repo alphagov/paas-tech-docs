@@ -2,7 +2,7 @@
 
 When you deploy an app to GOV.UK PaaS, it runs in a container, which is like a lightweight Linux virtual machine. Each app runs in its own isolated container.
 
-Sometimes, it can be useful to connect directly to the container with SSH. You would usually only do this to get information for troubleshooting purposes, for example, if you can't work out what is happening with your app using the `cf logs` and `cf events` commands described in the [App Deployment and Logs](/troubleshooting) section. 
+Sometimes, it can be useful to connect directly to the container with SSH. You would usually only do this to get information for troubleshooting purposes, for example, if you can't work out what is happening with your app using the `cf logs` and `cf events` commands described in the [Logs](/#troubleshooting) section. 
 
 If you do run commands which will change the container temporarily, it's a good idea to restart the app afterwards.  
 

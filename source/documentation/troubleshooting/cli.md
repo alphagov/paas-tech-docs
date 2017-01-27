@@ -2,7 +2,7 @@
 
 We restrict which IP addresses are allowed to access the PaaS through the command line client.
 
-If you have set up the command line client as explained in the [Quick Setup Guide section](/getting_started/quick_setup_guide/#setting-up-the-command-line), and you find that any commands you try are met with an EOF error similar to this:
+If you have set up the command line client as explained in the [Quick Setup Guide section](/#setting-up-the-command-line), and you find that any commands you try are met with an EOF error similar to this:
 
 ```
 FAILED

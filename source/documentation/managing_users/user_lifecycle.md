@@ -1,6 +1,6 @@
 Users will need to be added or removed from GOV.UK PaaS as they join or leave your team.
 
-The responsibility for managing the user lifecycle is split between GOV.UK PaaS support and the [Org Managers](/managing_users/user_accounts#org-manager) on your team. 
+The responsibility for managing the user lifecycle is split between GOV.UK PaaS support and the [Org Managers](/#org-manager) on your team. 
 
 This section explains what needs to be done to add or delete users.
 
