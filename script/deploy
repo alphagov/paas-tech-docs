@@ -6,17 +6,17 @@ error() {
   echo " ! $1"
 }
 
-# Check that we have a Staticfile.auth we can use
-echo "Checking Staticfile.auth..."
-if [[ ! -f Staticfile.auth ]]; then
-  error "You are attempting to deploy to an environment that requires a Staticfile.auth, but do not have one locally."
-  error "Please add a Staticfile.auth file to this directory and try again."
-  error
-  error "For information on generating a Staticfile.auth, see"
-  error "http://docs.cloudfoundry.org/buildpacks/staticfile/index.html#basic-auth"
-  exit 1
-fi
-echo "OK!"
+# # Check that we have a Staticfile.auth we can use
+# echo "Checking Staticfile.auth..."
+# if [[ ! -f Staticfile.auth ]]; then
+#   error "You are attempting to deploy to an environment that requires a Staticfile.auth, but do not have one locally."
+#   error "Please add a Staticfile.auth file to this directory and try again."
+#   error
+#   error "For information on generating a Staticfile.auth, see"
+#   error "http://docs.cloudfoundry.org/buildpacks/staticfile/index.html#basic-auth"
+#   exit 1
+# fi
+# echo "OK!"
 
 # Check that we're on master, or there's an environment variable set to override
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -49,7 +49,7 @@ fi
 echo "OK!"
 
 bundle exec middleman build
-cp Staticfile.auth build
+#cp Staticfile.auth build
 cp nginx.conf build
-cf target -o govuk-service-manual -s production-paas
+cf target -o govuk-paas -s paas-tech-docs
 cf push
