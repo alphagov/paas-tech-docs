@@ -79,7 +79,7 @@ cf logout
 
 ### Setting up the Cloud Foundry plugin
 
-Before you do this, make sure you first [set up the credentials plugin](/deploying_apps/jenkins/#setting-up-the-credentials-plugin).
+Before you do this, make sure you first [set up the credentials plugin](#setting-up-the-credentials-plugin).
 
 To install the Cloud Foundry plugin manually:
 
@@ -91,7 +91,7 @@ An extra post-build action called "Push to Cloud Foundry" is now available in th
 1. In your job's configuration, click the **Add post-build action** dropdown menu and select **Push to Cloud Foundry**.
 2. In the **Target** field, enter `https://api.cloud.service.gov.uk`.
 3. In **Credentials**, select the user you created using the credentials plugin.
-4. Enter your organisation and the space the application will be deployed to. See [Orgs, Spaces and Targets](/deploying_apps/orgs_spaces_targets/) for more details about organisations and spaces. You do not need to tick "Allow self-signed certificate" or "Reset app if already exists".
+4. Enter your organisation and the space the application will be deployed to. See [Orgs, Spaces and Targets](/#orgs_spaces_targets) for more details about organisations and spaces. You do not need to tick "Allow self-signed certificate" or "Reset app if already exists".
 5. The rest of the fields can be left with their default values. The plugin expects you to have a manifest file called `manifest.yml` in the root of the application folder. If you do not, you can provide the path to the application manifest, or enter a manifest configuration directly into the plugin.
 6. Click **Save**.
 

@@ -4,9 +4,9 @@
 This section explains minimal steps for deploying a basic Rails app. For full details of how to deploy Ruby on Rails apps, see the official Cloud Foundry guide [Getting Started Deploying Ruby on Rails Apps](http://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html) [external link]. 
 
 
-These steps assume you have already carried out the setup process explained in the [Quick Setup Guide](/getting_started/quick_setup_guide) section.
+These steps assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
-When you deploy an app, you must select a combination of an organisation and a space (see [Orgs and spaces](/deploying_apps/orgs_spaces_targets) for more information). This is called the **target**.
+When you deploy an app, you must select a combination of an organisation and a space (see [Orgs and spaces](/#orgs_spaces_targets) for more information). This is called the **target**.
 
 We have provided a ``sandbox`` space for you to use for learning about the PaaS. You may want to target the sandbox while you are testing by running:
 
@@ -20,7 +20,7 @@ This is how to deploy a Rails app that doesn't require a database.
 
 1. Check out your Rails app to a local folder.
 
-1. [Exclude files ignored by Git](/deploying_apps/excluding_files/).
+1. [Exclude files ignored by Git](/#excluding_files).
 
 1. If you're using Rails 4, [add the `rails_12factor` gem](https://github.com/heroku/rails_12factor#install) for better logging. Rails 5 has this functionality built in by default.
 
@@ -48,7 +48,7 @@ This is how to deploy a Rails app that doesn't require a database.
 
     If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
 
-1. Set any additional [environment variables](/deploying_apps/env_variables/) required by your app. For example:
+1. Set any additional [environment variables](/#env_variables) required by your app. For example:
 
     ```
     cf set-env APPNAME VARIABLE `value`
@@ -72,7 +72,7 @@ Note that the only database service currently supported by PaaS is PostgreSQL. I
 
 1. Check out your Rails app to a local folder.
 
-1. [Exclude files ignored by Git](/deploying_apps/excluding_files/).
+1. [Exclude files ignored by Git](/#excluding_files).
 
 1. If you're using Rails 4, [add the `rails_12factor` gem](https://github.com/heroku/rails_12factor#install) for better logging. Rails 5 has this functionality built in by default.
 
@@ -102,7 +102,7 @@ Note that the only database service currently supported by PaaS is PostgreSQL. I
     If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
 
 
-1. Set any additional [environment variables](/deploying_apps/env_variables/) required by your app. For example:
+1. Set any additional [environment variables](/#env_variables) required by your app. For example:
 
     ```
     cf set-env APPNAME VARIABLE `value`
@@ -111,7 +111,7 @@ Note that the only database service currently supported by PaaS is PostgreSQL. I
     where VARIABLE is a unique name for the variable, and `value` is the value to set.
 
 
-1. [Create a PostgreSQL backing service (if required) and bind it to your app](/deploying_services/postgres/).
+1. [Create a PostgreSQL backing service (if required) and bind it to your app](/#postgres).
     
     To enable Rails support for database migrations, you may wish to create a `Procfile` in the same directory as your `manifest.yml` and `Gemfile`. The `Procfile` is a way to specify commands to be run when deploying your app.
 

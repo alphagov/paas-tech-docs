@@ -5,7 +5,7 @@ This section covers how to deploy a basic Node.js application to GOV.UK PaaS. Se
 
 Note that the only database service currently supported by PaaS is PostgreSQL. If your Node.js app requires a database, it must be able to work with PostgreSQL.
 
-These instructions assume you have already carried out the setup process explained in the [Quick Setup Guide](/getting_started/quick_setup_guide) section.
+These instructions assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
 This is the code for the example app we are going to use. It is a basic web server that responds with a 'Hello World' message.
 
@@ -64,9 +64,9 @@ See [Tips for Node.js Applications](https://docs.cloudfoundry.org/buildpacks/nod
 
 ##PostgreSQL setup with Node.js
 
-If your app depends on [backing services](/deploying_services/) such as PostgreSQL, it will need to parse the `VCAP_SERVICES` environment variable to get required details, such as service URLs and credentials.
+If your app depends on [backing services](/#deploying_services) such as PostgreSQL, it will need to parse the `VCAP_SERVICES` environment variable to get required details, such as service URLs and credentials.
 
-You must create the service and bind it to your Node.js app as described in the [Deploying Services](/deploying_services/) section.
+You must create the service and bind it to your Node.js app as described in the [Deploying Services](/#deploying_services) section.
 
 You can use the [cfenv](https://www.npmjs.com/package/cfenv) module to assist with parsing the environment variables.
 

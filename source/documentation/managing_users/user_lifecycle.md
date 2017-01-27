@@ -8,7 +8,7 @@ This section explains what needs to be done to add or delete users.
 
 User account creation is currently handled by our support team.
 
-To add a new user to an existing project, have an Org Manager on your team contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). We'll add the new account and give it access to your `sandbox` space. An Org Manager will then need to [grant access](/deploying_apps/orgs_spaces_targets#granting-access) to additional spaces.
+To add a new user to an existing project, have an Org Manager on your team contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). We'll add the new account and give it access to your `sandbox` space. An Org Manager will then need to [grant access](/#granting-access) to additional spaces.
 
 If you are looking to start a new project on the platform, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). We will create an Org Manager account first, so make sure to let us know who should have this responsibility.
 
