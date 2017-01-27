@@ -51,5 +51,5 @@ echo "OK!"
 bundle exec middleman build
 #cp Staticfile.auth build
 cp nginx.conf build
-cf target -o govuk-paas -s paas-tech-docs
+cf target -o govuk-paas -s docs
 cf push
