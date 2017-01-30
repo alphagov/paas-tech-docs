@@ -1,9 +1,9 @@
-## Deploying static sites
+## Deploy a static site
 
 This section explains how to create and deploy a static HTML page. It's
 worth testing that you can carry out this process before you try to deploy a more complex app.
 
-When you deploy an app, you must select a combination of an organisation and a space (see [Orgs, Spaces and Targets](/#orgs_spaces_targets) for more information). This is called the **target**.
+When you deploy an app, you must select a combination of an organisation and a space (see [Orgs, Spaces and Targets](/#organisations-spaces-amp-targets) for more information). This is called the **target**.
 
 We have provided a ``sandbox`` space in your organisation for you to use for learning about the PaaS. You may want to target the sandbox while you are testing by running:
 
@@ -56,7 +56,7 @@ The site should now be live at `https://APPNAME.cloudapps.digital`.
 **Note:** The `http://` version of the URL will not work. You must enter `https://`.
 
 
-##Adding more instances
+###Adding more instances
 
 For a production service, you should run at least two instances of the app to ensure availability.
 

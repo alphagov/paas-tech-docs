@@ -1,4 +1,6 @@
-## App names and cloudapps.digital hostname clash
+##Names, routes and domains
+
+### App names and cloudapps.digital hostname clash
 
 When you push an app, you have to assign an app name, either in the manifest or using the command line. The app name is also used as the default hostname of the ``cloudapps.digital`` URL where the app will be hosted.
 
@@ -49,7 +51,7 @@ There are a few possible solutions to this problem:
 
     This is a convenient way to avoid clashes automatically. The disadvantage is that if your end users can see the resulting URLs, they may find the random words strange.
 
-## Custom domains
+### Custom domains
 
 In production, you will probably want your app to be available through your own url (for example, ``yourapp.service.gov.uk``).
 

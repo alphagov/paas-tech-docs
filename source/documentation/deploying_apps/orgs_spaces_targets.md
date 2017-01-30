@@ -22,7 +22,7 @@ Each organisation is divided into one or more **spaces**, which are used to orga
 
 ![Diagram showing that an organisation contains multiple spaces](/documentation/figures/org-spaces.png)
 
-Different accounts can have different permissions to access each space, which are granted through user roles. For example, you may choose to give a junior developer access to your ``development`` space, but not to ``production``. To change which accounts have access, your account needs to have the Org Manager role. See the section on [User accounts](/#user-accounts) for more about roles.
+Different accounts can have different permissions to access each space, which are granted through user roles. For example, you may choose to give a junior developer access to your ``development`` space, but not to ``production``. To change which accounts have access, your account needs to have the Org Manager role. See the section on [Managing users](/#managing-users) for more about roles.
 
 When we set up your organisation, we create a default `sandbox` space you can use for experimenting with the PaaS.
 
@@ -59,7 +59,11 @@ As an Org Manager, you can use:
 
 ``cf create-space SPACENAME -o ORGNAME`` 
 
-to create a new space. 
+to create a new space. You will then need to grant access to any tenant accounts who should be able to use that space.
+
+### Granting access
+
+You grant access to a space by assigning a role to an account. To assign roles, you need to be an [Org Manager](/#org-manager) or [Space Manager](/#space-manager).
 
 In most cases, the role you will assign is [Space Developer](/#space-developer), which gives the account an ability to deploy and manage apps in the specified space.
 

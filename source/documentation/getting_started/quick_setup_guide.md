@@ -57,7 +57,7 @@ GOV.UK PaaS uses a hosting technology called Cloud Foundry. As a tenant (that is
 
      ``cf passwd``
 
-    You will be prompted to enter your password from the previous step. You should then enter a new secure password. For our advice on how to do this, see [Choosing passwords](/#passwords). 
+    You will be prompted to enter your password from the previous step. You should then enter a new secure password. For our advice on how to do this, see [Choosing passwords](/#choosing-passwords). 
 
     Make sure you remember or securely record your new password. Your session will expire in 7 days, and you will be prompted to log in again.
 

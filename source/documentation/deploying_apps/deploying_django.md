@@ -1,4 +1,4 @@
-## Deploying Django apps
+## Deploy a Django app
 
 This section explains how to deploy an app using the Django framework. You may also need to refer to the [Cloud Foundry documentation about the Python buildpack](https://docs.cloudfoundry.org/buildpacks/python/index.html) [external link].
 
@@ -11,7 +11,7 @@ If you are just getting started learning CloudFoundry, you can use the sandbox s
 1. Check out your Django app to a local folder.
 
 2. Add `*.pyc` and `local_settings.py` to your `.gitignore`, file, then 
-   [exclude files ignored by Git](/#excluding_files) so Cloud Foundry will ignore them too.
+   [exclude files ignored by Git](/#excluding-files) so Cloud Foundry will ignore them too.
 
 3. Tell Cloud Foundry which Python runtime to use by creating a `runtime.txt`   file in the root of the local folder. The contents of the file should  
    be:
@@ -90,7 +90,7 @@ If you are just getting started learning CloudFoundry, you can use the sandbox s
 
     The `memory` line tells the PaaS how much memory to allocate to the app.
 
-1. If your app requires a database, [create a PostgreSQL backing service and bind it to your app](/#postgres). Then see the section on [PostgreSQL setup]() below.
+1. If your app requires a database, [create a PostgreSQL backing service and bind it to your app](/#postgresql). Then see the section on [PostgreSQL setup]() below.
 
 1. To push your app, do:
 
@@ -102,7 +102,7 @@ If you are just getting started learning CloudFoundry, you can use the sandbox s
 
 You can now view your app at `https://APPNAME.cloudapps.digital`.
 
-## PostgreSQL setup with Django
+### PostgreSQL setup with Django
 
 Add these lines to your ``requirements.txt``:
 

@@ -1,4 +1,4 @@
-## Deploying Node.js apps
+## Deploy a Node.js app
 
 
 This section covers how to deploy a basic Node.js application to GOV.UK PaaS. See the Cloud Foundry [Tips for Node.js Applications](http://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] for more details.
@@ -62,11 +62,11 @@ This is the code for the example app we are going to use. It is a basic web serv
 
 See [Tips for Node.js Applications](https://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] in the Cloud Foundry documentation for more information.
 
-##PostgreSQL setup with Node.js
+###PostgreSQL setup with Node.js
 
-If your app depends on [backing services](/#deploying_services) such as PostgreSQL, it will need to parse the `VCAP_SERVICES` environment variable to get required details, such as service URLs and credentials.
+If your app depends on [backing services](/#deploying-services) such as PostgreSQL, it will need to parse the `VCAP_SERVICES` environment variable to get required details, such as service URLs and credentials.
 
-You must create the service and bind it to your Node.js app as described in the [Deploying Services](/#deploying_services) section.
+You must create the service and bind it to your Node.js app as described in the [Deploying Services](/#deploying-services) section.
 
 You can use the [cfenv](https://www.npmjs.com/package/cfenv) module to assist with parsing the environment variables.
 
