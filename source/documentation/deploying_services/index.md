@@ -1,4 +1,4 @@
-# Deploying backing services
+# Deploy a backing service
 
 ## Backing services overview
 

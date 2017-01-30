@@ -66,7 +66,7 @@ Once logged in, you can see the available commands by running ```cf```.
 
 ### Deploying a test app
 
-To practice deploying an app, try following the [deploying a static site](/#deploying-static-sites) process.
+To practice deploying an app, try following the process to [deploy a static site](/#deploy-a-static-site).
 
 
 

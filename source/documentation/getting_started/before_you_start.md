@@ -4,7 +4,7 @@
 
 To be hosted by GOV.UK PaaS, your application must:
 
-* follow the [twelve-factor application](http://12factor.net/) principles (described in more detail below) - this will be the case if your app was written to be deployed to another PaaS like Heroku
+* follow the [twelve-factor application](https://12factor.net/) principles (described in more detail below) - this will be the case if your app was written to be deployed to another PaaS like Heroku
 * not require any backing service apart from a database (currently the only service available is PostgreSQL)
 * not carry data at SECRET or above (this is currently out of scope for GOV.UK PaaS)
 * be written in one of these languages:
@@ -23,7 +23,7 @@ These principles were formulated by Adam Wiggins, the cofounder of the [Heroku](
 
 We have summarised the practices in the table below, and noted the relevance of each principle to GOV.UK PaaS.
 
-Visit the [12factor.net website](http://12factor.net/) to further ensure your application supports these practices.
+Visit the [12factor.net website](https://12factor.net/) to further ensure your application supports these practices.
 
 |Principle  |Meaning  |Relevance to Cloud Foundry  |
 |:---|:---|:---|

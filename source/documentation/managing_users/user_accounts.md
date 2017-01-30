@@ -1,5 +1,7 @@
 # Managing users
 
+## User management overview
+
 GOV.UK PaaS relies on the Cloud Foundry user management system to determine what each individual tenant user account can do.
 
 Note that the "users" we're talking about here are members of your team who use the command-line tool to manage apps on the PaaS, **not** the end users of your apps.

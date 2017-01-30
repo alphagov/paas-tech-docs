@@ -48,7 +48,7 @@ This is how to deploy a Rails app that doesn't require a database.
 
     If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
 
-1. Set any additional [environment variables](/#env-variables) required by your app. For example:
+1. Set any additional [environment variables](/#environment-variables) required by your app. For example:
 
     ```
     cf set-env APPNAME VARIABLE `value`
@@ -102,7 +102,7 @@ Note that the only database service currently supported by PaaS is PostgreSQL. I
     If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
 
 
-1. Set any additional [environment variables](/#env-variables) required by your app. For example:
+1. Set any additional [environment variables](/#environment-variables) required by your app. For example:
 
     ```
     cf set-env APPNAME VARIABLE `value`
