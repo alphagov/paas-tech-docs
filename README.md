@@ -40,6 +40,8 @@ generated output.
 Including files manually like this lets you specify the position they appear in
 the page.
 
+The sections in the documentation are controlled by the use of markdown headers, *not* the file structure.
+
 Avoid editing any of the following:
 
 + source/images/*
