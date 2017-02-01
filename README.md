@@ -97,4 +97,10 @@ Push your changes to Github (on the main branch).
 
 Run ``./script/deploy`` from the application folder.
 
+## Updating the template
 
+The master repository for the tech docs template system is at https://github.com/alphagov/tech-docs-template 
+
+See the section "Updating a project to use the latest template" at https://github.com/alphagov/tech-docs-template
+
+The template system is maintained and developed by the service design manual team.  You can contact them at `#tech-docs-format` on GDS Slack. Note that this is an MVP version and there is a roadmap of planned features and improvements.
