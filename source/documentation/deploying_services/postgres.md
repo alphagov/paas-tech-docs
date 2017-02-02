@@ -4,49 +4,62 @@ GOV.UK PaaS enables you to create a PostgreSQL database service (powered by Amaz
 
 In Cloud Foundry, each service may have multiple plans available with different characteristics.
 
-Currently, GOV.UK PaaS offers a ``postgres`` service which is available with six separate plans:
+Currently, GOV.UK PaaS offers a ``postgres`` service with multiple plans available.
 
-* ``S-dedicated-9.5``
-* ``S-HA-dedicated-9.5`` (high availability, recommended for production)
-* ``M-dedicated-9.5``
-* ``M-HA-dedicated-9.5`` (high availability, recommended for production)
-* ``L-dedicated-9.5``
-* ``L-HA-dedicated-9.5`` (high availability, recommended for production)
+To see the available plans, run:
 
-The number in the plan name (in this example, ``9.5``) is the PostgreSQL version.
+```
+cf marketplace -s postgres
+```
 
-The letter at the beginning of the plan name corresponds to the instance size on Amazon Web Services as follows:
+Here is a shortened example of the sort of output you will see (the exact plans will vary):
 
-* ``S`` - ``t2.small``
-* ``M`` - ``m4.medium``
-* ``L`` - ``m4.2xlarge``
+```
+service plan             description                                                                                                                                                       free or paid
+M-dedicated-9.5          20GB Storage, Dedicated Instance, Max 500 Concurrent Connections. Postgres Version 9.5. DB Instance Class: db.m4.large.                                           paid
+M-HA-dedicated-9.5       20GB Storage, Dedicated Instance, Highly Available, Max 500 Concurrent Connections. Postgres Version 9.5. DB Instance Class: db.m4.large.                         paid
+...
+Free                     5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version 9.5. DB Instance Class: db.t2.micro.                              free
+```
 
-Full details of what these plans include is available on [the AWS Product Details page](https://aws.amazon.com/rds/details/#DB_Instance_Classes).
+You can look up the ``DB Instance Class``  to find out more detail about what these plans offer on [the AWS Product Details page](https://aws.amazon.com/rds/details/#DB_Instance_Classes).
 
-### Paid services
+### Free and paid PostgreSQL plans
 
-``postgres`` is considered a paid service. Paid services may not be enabled on your account. If you try to create a service and receive an error stating "service instance cannot be created because paid service plans are not allowed", please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+Most PostgreSQL plans are paid, meaning that we will bill you based on your usage of the service.
 
+There is a free plan available with limited storage. This should *only* be used for development or testing, not for production.
+
+Paid services may not be enabled for your organisation. If they're not enabled, when you try to set up a paid service, you'll receive the error "service instance cannot be created because paid service plans are not allowed". One of your [Org Managers](/#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
+
+
+### High availability plans
+
+We recommend you use one of the high availability plans (indicated by `HA` in the name) for your production apps. These plans use Amazon RDS Multi-AZ instances which are designed to be 99.95% available (see [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details).
+
+When you use the high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.
+
+The failover process means that Amazon RDS will automatically change the DNS record of the database instance to point to the standby instance. You should make sure that your app doesn't cache the database IP, and any DNS caching should be configured with a low time to live (TTL). Consult the documentation for the language/framework you are using to find out how to do this.
+
+During failover, there will be an outage period (from tens of seconds to a few minutes).
+
+See the [Amazon RDS documentation on the failover process](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) for more details.
+
+You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. We can trigger a failover for you. Please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to arrange this.
+
+### Encrypted PostgreSQL plans
+
+Plans with ``enc`` in the name include encryption at rest of the database storage. This means that the data is encrypted while the service is stopped.
+
+We recommend that you use an encrypted plan for production services.
+
+Once you've created a service instance, you can't enable or disable encryption. There's no way to convert an unencrypted PostgreSQL service instance to an encrypted one later.
 
 ### Setting up a PostgreSQL service
 
 To create a service and bind it to your app:
 
 1. From the command line, run:
-
-    ``cf marketplace``
-
-    to see the available services.
-
-    You will see output like this:
-
-    
-        service     plans                                   description
-        postgres    S-dedicated-9.5*, S-HA-dedicated-9.5*,  AWS RDS PostgreSQL service
-                    M-dedicated-9.5*, M-HA-dedicated-9.5*,
-                    L-dedicated-9.5*, L-HA-dedicated-9.5*
-
-2.  Run:
 
     ``cf marketplace -s postgres``
 
@@ -60,7 +73,7 @@ To create a service and bind it to your app:
 
     ``cf create-service postgres M-dedicated-9.5 my-pg-service``
 
-    Note that for a production service, we strongly recommend you select the high-availability plan (``M-HA-dedicated-9.5``).
+    Note that for production usage, we recommend you select a high-availability encrypted plan (with ``HA-enc`` in the name).
 
 3. It may take some time (5 to 10 minutes) for the service instance to be set up. To find out its status, run:
 
@@ -135,19 +148,7 @@ Note that data restore will not be available in the event of an RDS outage affec
 
 For more details about how the RDS backup system works, see [Amazon's DB Instance Backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html) [external page].
 
-### High availability details
 
-We recommend you use the high availability plan (``*-HA-dedicated-9.5``) for any production apps, where the asterisk is the size of the plan.
-
-When you use the high availability plan, Amazon RDS provides a hot standby service to use for failover in the event that the original service fails.
-
-The failover process means that Amazon RDS will automatically change the DNS record of the database instance to point to the standby instance. You should make sure that your app doesn't cache the database IP, and any DNS caching should be configured with a low time to live (TTL). Consult the documentation for the language/framework you are using to find out how to do this.
-
-During failover, there will be an outage period (from tens of seconds to a few minutes).
-
-See the [Amazon RDS documentation on the failover process](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) for more details.
-
-If you wish to test how your app deals with a failover, we can trigger one for you. Please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to arrange this.
 
 ### Read replicas
 
