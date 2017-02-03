@@ -118,7 +118,7 @@ To create a service and bind it to your app:
 
 Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the PostgreSQL service. Most libraries use TLS by default.
 
-The Cloud Foundry buildpack will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the PostgreSQL service. The buildpack will set `DATABASE_URL` to the first database found.
+GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the  service and then set the `DATABASE_URL` variable to the first database found.
 
 Use ``cf env APPNAME`` to see the environment variables.
 
