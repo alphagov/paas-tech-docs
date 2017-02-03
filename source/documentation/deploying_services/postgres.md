@@ -51,7 +51,7 @@ You should test how your app deals with a failover to make sure you are benefiti
 
 Plans with ``enc`` in the name include encryption at rest of the database storage. This means that the data is encrypted while the service is stopped.
 
-We recommend that you use an encrypted plan for production services.
+We recommend that you use an encrypted plan for production services or those that use real data.
 
 Once you've created a service instance, you can't enable or disable encryption. There's no way to convert an unencrypted PostgreSQL service instance to an encrypted one later.
 
@@ -73,7 +73,7 @@ To create a service and bind it to your app:
 
     ``cf create-service postgres M-dedicated-9.5 my-pg-service``
 
-    Note that for production usage, we recommend you select a high-availability encrypted plan (with ``HA-enc`` in the name).
+    Note that for production usage, we recommend you select a high-availability encrypted plan (one with ``HA-enc`` in the name).
 
 3. It may take some time (5 to 10 minutes) for the service instance to be set up. To find out its status, run:
 
@@ -120,7 +120,7 @@ Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Securit
 
 Your app will need to parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the PostgreSQL service (or use a library that does so).
 
-(Note that for some languages/frameworks, the Cloud Foundry buildpack will automatically parse ``VCAP_SERVICES`` and set DATABASE_URL to the first database found.)
+(Note that for some languages/frameworks, the Cloud Foundry buildpack will automatically parse ``VCAP_SERVICES`` and set `DATABASE_URL` to the first database found.)
 
 Use ``cf env APPNAME`` to see the environment variables.
 
@@ -128,15 +128,17 @@ You can check for database connection errors by viewing the recent logs with ``c
 
 ### PostgreSQL service maintenance times
 
-The PaaS PostgreSQL service is currently provided by Amazon Web Services RDS. Each PostgreSQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. (To minimise downtime, select the ``*-HA-dedicated-9.5`` high availability plan, where the asterisk is the size of the plan). Minor version upgrades (for example from 9.4.1 to 9.4.2) will be applied during this window.
+The PaaS PostgreSQL service is currently provided by Amazon Web Services RDS. Each PostgreSQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. (To minimise this downtime, select a high availability plan with `HA` in its name). 
+
+Minor version upgrades (for example from 9.4.1 to 9.4.2) will be applied during the maintenance window.
 
 For more details, see the [Amazon RDS Maintenance documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html) [external page].
 
-If you need to know the time of your maintenance window, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). Times will be from 22:00 to 06:00 UTC. We will add the ability to set the time of the maintenance window in a future version of GOV.UK PaaS.
+If you need to know the time of your maintenance window, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). Window start times will vary from 22:00 to 06:00 UTC. We will add the ability to set the time of the maintenance window in a future version of GOV.UK PaaS.
 
 ### PostgreSQL service backup
 
-The data stored within any PostgreSQL service you create is backed up using the standard Amazon RDS backup system.
+The data stored within any PostgreSQL service you create is backed up using the standard Amazon RDS backup system, except if you are using the free plan.
 
 Backups are taken nightly and data is retained for 7 days.
 
