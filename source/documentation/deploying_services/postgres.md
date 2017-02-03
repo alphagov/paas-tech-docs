@@ -49,7 +49,7 @@ You should test how your app deals with a failover to make sure you are benefiti
 
 ### Encrypted PostgreSQL plans
 
-Plans with ``enc`` in the name include encryption at rest of the database storage. This means that the data is encrypted while the service is stopped.
+Plans with ``enc`` in the name include encryption at rest of the database storage. This means that the data on the disk and in snapshots is encrypted.
 
 We recommend that you use an encrypted plan for production services or those that use real data.
 
@@ -118,9 +118,7 @@ To create a service and bind it to your app:
 
 Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the PostgreSQL service. Most libraries use TLS by default.
 
-Your app will need to parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the PostgreSQL service (or use a library that does so).
-
-(Note that for some languages/frameworks, the Cloud Foundry buildpack will automatically parse ``VCAP_SERVICES`` and set `DATABASE_URL` to the first database found.)
+The Cloud Foundry buildpack will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the PostgreSQL service. The buildpack will set `DATABASE_URL` to the first database found.
 
 Use ``cf env APPNAME`` to see the environment variables.
 
