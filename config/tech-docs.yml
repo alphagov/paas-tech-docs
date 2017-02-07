@@ -9,11 +9,11 @@ phase: Beta
 
 # Links to show on right-hand-side of header
 header_links:
-  About: https://govuk-paas.cloudapps.digital
-  Features: https://govuk-paas.cloudapps.digital/features.html
-  Roadmap: https://govuk-paas.cloudapps.digital/roadmap.html
+  About: https://www.cloud.service.gov.uk
+  Features: https://www.cloud.service.gov.uk/features.html
+  Roadmap: hhttps://www.cloud.service.gov.uk/roadmap.html
   Documentation: /
-  Support: https://www.cloud.service.gov.uk/support
+  Support: https://www.cloud.service.gov.uk/support.html
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
 ga_tracking_id:
@@ -24,4 +24,4 @@ ga_tracking_id:
 max_toc_heading_level: 2
 
 # Prevent robots from indexing (e.g. whilst in development)
-prevent_indexing: true
+prevent_indexing: false
