@@ -85,6 +85,19 @@ You should now be able to view a live preview at http://localhost:4567.
 
 Changes to the `tech-docs.yml` file require stopping and restarting the server to show up in the preview. (Stop it with `Ctrl-C`).
 
+## Running tests
+
+This repo is configured in Travis to run a link-checker over the generated docs
+to find any broken links etc. If you want to run this locally, do the
+following:
+
+```
+virtualenv .venv
+source .venv/bin/activate
+pip install -Ur requirements.txt
+./script/test
+```
+
 ## Build and deploy
 
 The docs are hosted on the PaaS.
