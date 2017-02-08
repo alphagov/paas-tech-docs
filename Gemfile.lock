@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/alphagov/table_of_contents.git
+  remote: https://github.com/alphagov/table_of_contents
   revision: f6d37fe1e837cebf7354abafd891f755148e7efa
   ref: f6d37fe1e837cebf7354abafd891f755148e7efa
   specs:
@@ -160,4 +160,4 @@ DEPENDENCIES
   wdm (~> 0.1.0)
 
 BUNDLED WITH
-   1.12.5
+   1.13.7
