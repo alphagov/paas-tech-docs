@@ -8,15 +8,27 @@ If you do run commands which will change the container temporarily, it's a good 
 
 SSH is enabled by default. In most cases, you will find that you can SSH directly to your app's container.
 
-Simply run:
+1. Run:
 
-```
-cf ssh APPNAME
-```
+    ```
+    cf ssh APPNAME
+    ```
 
-where `APPNAME` is the name of the app. 
+    where `APPNAME` is the name of the app. 
 
-You will see a command prompt that you can use to run standard Linux commands. Type `exit` to end the session.
+2. For some tasks to work, you need to set up the interactive SSH session to match the buildpack environment. To do this, run:
+
+    ```
+    export HOME=/home/vcap/app
+    [ -d ~/.profile.d ] && for f in ~/.profile.d/*; do source $f; done
+    source /home/vcap/app/.profile
+    ```
+
+    You need to run this every time you start an SSH session.
+
+    For more information, see the Cloud Foundry documentation on [SSH Session Environment](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html#ssh-env) [external link].
+
+3. When you're finished using SSH, use `exit` to end the session.
 
 If you get an error like this:
 
@@ -137,3 +149,7 @@ Your GOV.UK PaaS account needs the ``OrgManager`` or ``SpaceManager`` role to be
 ### Limiting SSH access
 
 You should consider disabling SSH where it is not needed. For example, if you host the live versions of your apps in a ``production`` space, you may decide to disable SSH access there, but leave it enabled in your ``development`` and ``testing`` spaces.
+
+### More about SSH
+
+See the Clound Foundry documentation on [Accessing Apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html) [external link].
