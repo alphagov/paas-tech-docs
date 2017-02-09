@@ -58,7 +58,9 @@ This is the code for the example app we are going to use. It is a basic web serv
 
 1. You can optionally run `npm install` to preinstall dependencies rather than having them added during the PaaS staging process.
 
-1. Run `cf push APPNAME` to upload and start the app. If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run `cf push --no-start APPNAME`, then when you are ready to start the app, run `cf start APPNAME`.
+1. Run `cf push APPNAME` from the top level of the directory which contains all the code and configuration files. 
+
+  If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run `cf push --no-start APPNAME`, then when you are ready to start the app, run `cf start APPNAME`.
 
 See [Tips for Node.js Applications](https://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] in the Cloud Foundry documentation for more information.
 

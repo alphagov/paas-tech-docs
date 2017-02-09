@@ -43,7 +43,7 @@ These steps assume you have already carried out the setup process explained in t
 
     A buildpack provides any framework and runtime support required by an app. If your app was written in Ruby, you would use ``ruby_buildpack``. In this case, we just want to serve a static file, so we use ``staticfile_buildpack``.
 
-4. From the directory where the `manifest.yml` file is, run:
+4. From the directory where you created the files, run:
 
     ``
     cf push
