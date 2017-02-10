@@ -18,7 +18,7 @@ It's also important to realise that if you deploy an app using the same name and
 
 This is how to deploy a Rails app that doesn't require a database.
 
-1. Check out your Rails app to a local folder.
+1. Put the code for your Rails app into a local directory (for example, by checking it out of version control).
 
 1. [Exclude files ignored by Git](/#excluding-files).
 
@@ -44,7 +44,7 @@ This is how to deploy a Rails app that doesn't require a database.
     cf push APPNAME
     ```
 
-    from the folder where you checked out your app.
+    from the directory which contains all the code and configuration files for your app.
 
     If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
 
@@ -70,13 +70,13 @@ Note that the only database service currently supported by PaaS is PostgreSQL. I
 
  The Cloud Foundry buildpack for Ruby automatically gets the details of the first available PostgreSQL service from the ``VCAP_SERVICES`` environment variable and sets the Ruby `DATABASE_URL` environment variable accordingly. Ensure that your app is configured to use `DATABASE_URL` to set its database configuration when deployed to the PaaS.
 
-1. Check out your Rails app to a local folder.
+1. Put the code for your Rails app into a local directory (for example, by checking it out of version control).
 
-1. [Exclude files ignored by Git](/#excluding-files).
+1. If you are using Git, you may wish to [exclude files ignored by Git](/#excluding-files).
 
 1. If you're using Rails 4, [add the `rails_12factor` gem](https://github.com/heroku/rails_12factor#install) for better logging. Rails 5 has this functionality built in by default.
 
-1. Create a manifest.yml file in the folder where you checked out your app.
+1. Create a manifest.yml file in the directory where you checked out your app.
 
         ---
         applications:
@@ -97,7 +97,7 @@ Note that the only database service currently supported by PaaS is PostgreSQL. I
     cf push --no-start APPNAME
     ```
 
-    from the folder where you checked out your app.
+    from the directory which contains all the code and configuration files for your app.
 
     If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
 

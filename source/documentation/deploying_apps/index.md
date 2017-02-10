@@ -4,12 +4,7 @@
 
 The `cf push` command is used both to create a new app and to push a new version of an existing one. The basic steps:
 
-1. Check out whatever version of the code you want to deploy from version control.
-
-    ```
-    git checkout master
-    ```
-
+1. Put the code you want to deploy in a directory. This is usually accomplished by checking it out of version control.
 
 1. Target the appropriate organisation and space.
 
@@ -23,7 +18,7 @@ The `cf push` command is used both to create a new app and to push a new version
     cf push APPNAME
     ```
 
-    from the directory where you checked out the code.
+    from the directory which contains the code and configuration files for your app.
 
 The app should now be live at `https://APPNAME.cloudapps.digital`.
 

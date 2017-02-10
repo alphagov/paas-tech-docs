@@ -8,9 +8,9 @@ These steps assume you have already carried out the setup process explained in t
 
 If you are just getting started learning CloudFoundry, you can use the sandbox space by running: ``cf target -s sandbox``
 
-1. Check out your Django app to a local folder.
+1. Put the code for your Django app into a local directory (for example, by checking it out of version control).
 
-2. Add `*.pyc` and `local_settings.py` to your `.gitignore`, file, then 
+2. If you are using Git, add `*.pyc` and `local_settings.py` to your `.gitignore`, file, then 
    [exclude files ignored by Git](/#excluding-files) so Cloud Foundry will ignore them too.
 
 3. Tell Cloud Foundry which Python runtime to use by creating a `runtime.txt`   file in the root of the local folder. The contents of the file should  
@@ -96,7 +96,7 @@ If you are just getting started learning CloudFoundry, you can use the sandbox s
 
     ``cf push APPNAME``
 
-    from the local folder.
+    from the directory which contains all the code and configuration files.
 
     If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run `cf push --no-start APPNAME`, then when you are ready to start the app, run `cf start APPNAME`.
 
