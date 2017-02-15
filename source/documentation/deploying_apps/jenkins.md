@@ -3,15 +3,17 @@
 There are two main approaches to pushing applications to GOV.UK PaaS with [Jenkins](https://jenkins.io/):
 
 1. Use custom scripts (allows full scripting of deployments)
-1. Use the Cloud Foundry plugin for Jenkins (less flexible)
+1. Use the Cloud Foundry plugin for Jenkins (less flexible, relies on application manifest for configuration)
 
-Both of these approaches require you to add a Cloud Foundry username and password to Jenkins using the credentials plugin. To do this, follow the instructions on [Setting up the credentials plugin](#setting-up-the-credentials-plugin).
+Both approaches require you to set up the credentials plugin first.
 
+### Login rate limit
 
-Setting up custom scripts allows you to fully script your deployment. To do this securely, you will need to follow the [Setting up custom scripts](#setting-up-custom-scripts) instructions to make credentials available as environment variables.
+For security reasons, the PaaS will lock an account if it logs in 5 times within a 5 minute period. The methods we describe below will trigger a new login every time Jenkins pushes an app. 
 
-Using the Cloud Foundry plugin only allows Jenkins to push your application to GOV.UK PaaS as a post-build action: the equivalent of doing a `cf login` followed by a `cf push`. There is little scope for configuration beyond using the application manifest. To use the plugin, follow the [Setting up the Cloud Foundry plugin](#setting-up-the-cloud-foundry-plugin) instructions.
+If you have multiple Jenkins jobs, or jobs that run frequently, you should take care not to go over this rate limit by having Jenkins push 5 times from the same account within 5 minutes.
 
+We are looking into an alternative login method to avoid this limitation.
 
 
 ### Setting up the credentials plugin
@@ -39,7 +41,7 @@ You can now go on to either:
 
 ### Setting up custom scripts
 
-Before you do this, make sure you first [set up the credentials plugin](#setting-up-the-credentials-plugin).
+Before you set up custom scripts, make sure you first [set up the credentials plugin](#setting-up-the-credentials-plugin).
 
 Note that using the custom scripts approach exposes the password via the process command line, so it can be read by other processes running on the same machine. If this risk is not acceptable, please use the Cloud Foundry plugin described below. The Cloud Foundry project is aware of the problem and we expect they will provide a more secure login mechanism soon.
 
@@ -77,9 +79,11 @@ cf logout
 
 
 
-### Setting up the Cloud Foundry plugin
+### Setting up the Cloud Foundry Jenkins plugin
 
-Before you do this, make sure you first [set up the credentials plugin](#setting-up-the-credentials-plugin).
+Using the Cloud Foundry plugin only allows Jenkins to push your application to GOV.UK PaaS as a post-build action: the equivalent of doing a `cf login` followed by a `cf push`. There is little scope for configuration beyond using the application manifest.
+
+Before you do these steps, make sure you first [set up the credentials plugin](#setting-up-the-credentials-plugin).
 
 To install the Cloud Foundry plugin manually:
 
