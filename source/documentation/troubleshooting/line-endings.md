@@ -1,10 +1,8 @@
-## Push failure from Windows due to CRLF
+## Pushing apps fails on Windows (line endings issue)
 
-Pushing an app can fail if you are pushing from a Windows machine that has saved the app files with Windows-style (CRLF) line breaks.
+We are aware of some cases where pushing an app can fail if you are pushing from a Windows machine that has saved Cloud Foundry configuration files with Windows-style (CRLF) line endings.
 
-In interpreted languages, you will get a `No such file or directory` error.
-
-This is an example of the error with Ruby:
+This happens because some buildpacks do not interpret the CRLF line endings correctly. This is an example of an error arising from this problem when using the Ruby buildpack:
 
 ```
 2016-12-02T06:03:25.95-0800 [APP/PROC/WEB/0]ERR /usr/bin/env: ruby
@@ -12,9 +10,9 @@ This is an example of the error with Ruby:
 2016-12-02T06:03:25.95-0800 [APP/PROC/WEB/0]OUT Exit status 127
 ```
 
-If you find that pushing an app from a Windows machine is failing like this, you must make sure that files are not being saved with CRLF line breaks. Check the settings in your text editor or IDE.
+Similar problems may happen in other buildpacks. If you find that pushing an app from Windows is failing, try making sure that files in your project are being saved with Unix-style LF line endings, not Windows-style CRLF line endings. Most text editors aimed at developers allow you to change the line ending style.
 
-If the files are from a Git repository, disable Git's `autocrlf` setting:
+If you are working with a Git repository, disable Git's `autocrlf` setting:
 
 ```
 git config --global core.autocrlf false
