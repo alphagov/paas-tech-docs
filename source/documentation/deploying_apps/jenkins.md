@@ -7,13 +7,7 @@ There are two main approaches to pushing applications to GOV.UK PaaS with [Jenki
 
 Both approaches require you to set up the credentials plugin first.
 
-### Login rate limit
-
-For security reasons, the PaaS will lock an account if it logs in 5 times within a 5 minute period. The methods we describe below will trigger a new login every time Jenkins pushes an app. 
-
-If you have multiple Jenkins jobs, or jobs that run frequently, you should take care not to go over this rate limit by having Jenkins push 5 times from the same account within 5 minutes.
-
-We are looking into an alternative login method to avoid this limitation.
+Note that for security reasons, GOV.UK PaaS will lock your account if Jenkins makes multiple failed login attempts within a short period of time. This can happen if you provide incorrect or expired login details. See the [Failed login rate limit](#failed-login-rate-limit) section for more information.
 
 
 ### Setting up the credentials plugin
