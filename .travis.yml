@@ -9,4 +9,4 @@ before_install:
   - pip install --user -r requirements.txt
 
 script:
-  - ./script/test
+  - ./release/test
