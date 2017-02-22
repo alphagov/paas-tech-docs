@@ -1,6 +1,6 @@
 FROM ruby:2.3.3-alpine
 
-ENV RUNTIME_PACKAGES "python git"
+ENV RUNTIME_PACKAGES "python git nodejs"
 ENV DEV_PACKAGES "py-pip python-dev musl-dev gcc ruby-dev make g++ zlib-dev libffi-dev"
 COPY requirements.txt /tmp/requirements.txt
 COPY Gemfile /tmp/Gemfile
