@@ -122,7 +122,7 @@ GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable
 
 Use ``cf env APPNAME`` to see the environment variables.
 
-You can check for database connection errors by viewing the recent logs with ``cf logs APPNAME --recent``.
+You can check for database connection errors by viewing the recent logs with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
 
 ### PostgreSQL service maintenance times
 
