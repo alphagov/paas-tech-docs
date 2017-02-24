@@ -130,7 +130,7 @@ GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable
 
 Use ``cf env APPNAME`` to see the app's environment variables and confirm that the variable has been set correctly.
 
-If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
 
 ### PostgreSQL service maintenance times
 
