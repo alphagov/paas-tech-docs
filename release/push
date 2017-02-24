@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -eu
+
+echo Deploy with zero downtime
+cf blue-green-deploy tech-docs
+
+echo Delete left over app
+cf delete -f tech-docs-old
