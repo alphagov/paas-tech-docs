@@ -1,6 +1,6 @@
 # GOV.UK PaaS Technical Documentation
 
-This is the new technical documentation system for GOV.UK PaaS. 
+This is the new technical documentation system for GOV.UK PaaS.
 
 The official docs to give out to tenants are still those hosted at https://government-paas-developer-docs.readthedocs.io/en/latest/ (powered by readthedocs) - however, that will change very shortly.
 
@@ -61,7 +61,7 @@ In order to configure some aspects of layout, like the header, edit ``config/tec
 ## Preview
 
 Whilst writing documentation, you can run a middleman server to preview how the
-published version will look in the browser. 
+published version will look in the browser.
 
 The preview is only available on your own computer. Others won't be able to
 access it if they are given the link.
@@ -95,24 +95,24 @@ following:
 virtualenv .venv
 source .venv/bin/activate
 pip install -Ur requirements.txt
-./script/test
+./release/test
 ```
 
 ## Build and deploy
 
-The docs are hosted on the PaaS.
+The docs are hosted on the PaaS and any change to master is automatically deployed by the [PaaS release CI](https://github.com/alphagov/paas-release-ci). The build status can be seen here: https://concourse.build.ci.cloudpipeline.digital/teams/main/pipelines/tech-docs
 
-To deploy your changes:
+To deploy your changes manually:
 
 Make sure you have the correct PaaS permissions to push to the org `govuk-paas` in the space `docs`.
 
-Push your changes to Github (on the main branch). 
+Push your changes to Github (on the main branch).
 
-Run ``./script/deploy`` from the application folder.
+Run `./release/build && ./release/push` from the application folder.
 
 ## Updating the template
 
-The master repository for the tech docs template system is at https://github.com/alphagov/tech-docs-template 
+The master repository for the tech docs template system is at https://github.com/alphagov/tech-docs-template
 
 See the section "Updating a project to use the latest template" at https://github.com/alphagov/tech-docs-template
 
