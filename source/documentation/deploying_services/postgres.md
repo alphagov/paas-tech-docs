@@ -107,11 +107,19 @@ To create a service and bind it to your app:
 
     ``cf bind-service APPLICATION SERVICE_INSTANCE``
 
-    where APPLICATION is the name of a deployed instance of your application (exactly as specified in your manifest or push command), for example:
+    where APPLICATION is the name of a deployed instance of your application (exactly as specified in your manifest or push command), and SERVICE_INSTANCE is the name you gave the instance when you created it, for example:
 
     ``cf bind-service my-app my-pg-service``
 
-5. Your app should now able to access the PostgreSQL service. If the app was already running, you may need to restart the app to connect.
+5. If the app is already running, you should restage the app to make sure it connects:
+
+    ``cf restage APPLICATION``
+
+6. To confirm that the service is bound to the app, you can run:
+
+    ``cf service SERVICE_INSTANCE``
+
+    and check the ``Bound apps:`` line of the output.
 
 
 ### Accessing PostgreSQL from your app
@@ -120,9 +128,9 @@ Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Securit
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the  service and then set the `DATABASE_URL` variable to the first database found.
 
-Use ``cf env APPNAME`` to see the environment variables.
+Use ``cf env APPNAME`` to see the app's environment variables and confirm that the variable has been set correctly.
 
-You can check for database connection errors by viewing the recent logs with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
 
 ### PostgreSQL service maintenance times
 
@@ -147,8 +155,6 @@ Please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:
 Note that data restore will not be available in the event of an RDS outage affecting the entire Amazon availability zone.
 
 For more details about how the RDS backup system works, see [Amazon's DB Instance Backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html) [external page].
-
-
 
 ### Read replicas
 
