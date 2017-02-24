@@ -152,4 +152,4 @@ You should consider disabling SSH where it is not needed. For example, if you ho
 
 ### More about SSH
 
-See the Clound Foundry documentation on [Accessing Apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html) [external link].
+See the Cloud Foundry documentation on [Accessing Apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html) [external link].
