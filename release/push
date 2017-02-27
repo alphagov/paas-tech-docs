@@ -2,8 +2,9 @@
 
 set -eu
 
+# Note: the app name must be kept in sync with the name inside manifest.yml
 echo Deploy with zero downtime
-cf blue-green-deploy tech-docs
+cf blue-green-deploy paas-tech-docs
 
 echo Delete left over app
-cf delete -f tech-docs-old
+cf delete -f paas-tech-docs-old
