@@ -2,9 +2,9 @@
 
 When you deploy an app to GOV.UK PaaS, it runs in a container, which is like a lightweight Linux virtual machine. Each app runs in its own isolated container.
 
-Sometimes, it can be useful to connect directly to the container with SSH. You would usually only do this to get information for troubleshooting purposes, for example, if you can't work out what is happening with your app using the `cf logs` and `cf events` commands described in the [Logs](/#troubleshooting) section. 
+Sometimes, it can be useful to connect directly to the container with SSH. You would usually only do this to get information for troubleshooting purposes, for example, if you can't work out what is happening with your app using the `cf logs` and `cf events` commands described in the [Logs](/#troubleshooting) section.
 
-If you do run commands which will change the container temporarily, it's a good idea to restart the app afterwards.  
+If you do run commands which will change the container temporarily, it's a good idea to restart the app afterwards.
 
 SSH is enabled by default. In most cases, you will find that you can SSH directly to your app's container.
 
@@ -14,7 +14,7 @@ SSH is enabled by default. In most cases, you will find that you can SSH directl
     cf ssh APPNAME
     ```
 
-    where `APPNAME` is the name of the app. 
+    where `APPNAME` is the name of the app.
 
 2. For some tasks to work, you need to set up the interactive SSH session to match the buildpack environment. To do this, run:
 
@@ -64,7 +64,7 @@ buildpack: staticfile_buildpack
 
 There are 3 instances, with instance indexes from 0 to 2.
 
-If you have multiple instances like this and use `cf-ssh`, you will be connected to the app with an instance index of 0. 
+If you have multiple instances like this and use `cf-ssh`, you will be connected to the app with an instance index of 0.
 
 You can connect to a particular instance. For example, if you want to connect to instance 2, you can do this:
 
@@ -72,15 +72,94 @@ You can connect to a particular instance. For example, if you want to connect to
 cf ssh --app-instance-index 2
 ```
 
+### Creating TCP tunnels with SSH
 
+The `cf ssh` command supports [*Local port forwarding*](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a service that is only accessible from the application running in the platform. For instance, a backing service.
+
+To enable, you can add one or more times the parameter `-L`:
+
+```cf ssh APPNAME -L  LOCALPORT:REMOTEHOST:REMOTEPORT```
+
+It specifies that the given `LOCALPORT` port on the local system is to be forwarded to the given `REMOTEHOST` host and `REMOTEPORT` port on application container side.  Whenever a connection is made to this port, the connection is forwarded over the secure SSH channel, and a connection is made to the host and port `REMOTEHOST:REMOTEPORT` from the remote application container.
+
+The tunnel will be closed once the `cf ssh` command is stopped.
+
+For example, you can connect to the PostgreSQL service bound to an application following these steps:
+
+ 1. Learn the remote address and port of the instance. You can use `cf env APPNAME` to print the credentials of the bound services:
+
+    ```
+    $ cf env myapp
+    Getting env variables for app myapp in org myoth / space myorg as randomuser...
+    OK
+
+    System-Provided:
+    {
+     "VCAP_SERVICES": {
+      "postgres": [
+       {
+        "credentials": {
+         "host": "rdsbroker0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com",
+         "jdbcuri": "jdbc:postgresql://rdsbroker0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com:5432/rdsbroker_abcdef_dbname?user=rdsbroker_0fce5c72_dfed_4233_9a36_b7371c7ccab7_owner\u0026password=pass123456789",
+         "name": "rdsbroker_2fce5c72_dfed_4233_9a36_b7371c7ccab7",
+         "password": "yDjAt7G1ZuViOQkZnTWwfWMyFg5NpIDB",
+         "port": 5433,
+         "uri": "postgres://rdsbroker_aaa_owner:pass123456789@rdsbroker-0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com:5432/rdsbroker_abcdef_dbname",
+         "username": "rdsbroker_1fce5c72_dfed_4233_9a36_b7371c7ccab7_owner"
+        },
+        "label": "postgres",
+        "name": "mydb",
+        "plan": "Free",
+        "provider": null,
+        "syslog_drain_url": null,
+        "tags": [
+         "postgres",
+         "relational"
+        ],
+        "volume_mounts": []
+       }
+      ]
+     }
+    }
+    ...
+    ```
+
+    In this case the remote host is `rdsbroker0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com` and the remote port is `5433`. The login credentials are also displayed there.
+
+ 2. Create a SSH tunnel in the local port 6666
+
+    ```
+    cf ssh myapp -L 6666:rdsbroker0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com:5433
+    ```
+
+    This will open a shell in the remote container, and create a local tunnel in the port 6666.
+
+    Note: Be aware that this shell is in the remote application container, **not** the local system. You will need to open a new console if you want to work locally. The new port is open in the local system.
+
+
+ 3. In a different terminal, you can now connect to the local port in `localhost:6666` using a postgres client:
+
+    ```
+    psql postgres://rdsbroker_aaa_owner:pass123456789@localhost:6666/rdsbroker_abcdef_dbname
+    ```
+
+    or dump the database with [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html):
+
+    ```
+    pg_dump postgres://rdsbroker_aaa_owner:pass123456789@localhost:6666/rdsbroker_abcdef_dbname > db.dump
+    ```
+
+    Note that we are specifying the host and port `localhost:6666`
+
+You can learn more about [SSH tunneling here](https://www.ssh.com/ssh/tunneling/).
 
 ### SSH permissions
 
-SSH can be either enabled or disabled independently for each **space** and **app**. 
+SSH can be either enabled or disabled independently for each **space** and **app**.
 
 SSH must be enabled for *both* the space *and* the app before it will work. For example, if you have an app where SSH is enabled, but it is deployed to a space where SSH is disabled, SSH won't work.
 
-All new apps and spaces start out with SSH enabled. 
+All new apps and spaces start out with SSH enabled.
 
 ### Enabling SSH for an app
 
