@@ -85,7 +85,7 @@ To create a service and bind it to your app:
 
 4. Wait until the service status reported by the above command is 'create succeeded'. Here is an example of the type of output you will see once the service is created:
 
-        
+
         Service instance: my-pg-service
         Service: postgres
         Bound apps:
@@ -100,7 +100,7 @@ To create a service and bind it to your app:
         Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
         Started: 2016-08-23T15:34:41Z
         Updated: 2016-08-23T15:42:02Z
-        
+
 
 
 5. You can now bind the PostgreSQL service to your app. Run:
@@ -134,7 +134,7 @@ If your app writes database connection errors to `STDOUT` or `STDERR`, you can v
 
 ### PostgreSQL service maintenance times
 
-The PaaS PostgreSQL service is currently provided by Amazon Web Services RDS. Each PostgreSQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. (To minimise this downtime, select a high availability plan with `HA` in its name). 
+The PaaS PostgreSQL service is currently provided by Amazon Web Services RDS. Each PostgreSQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. (To minimise this downtime, select a high availability plan with `HA` in its name).
 
 Minor version upgrades (for example from 9.4.1 to 9.4.2) will be applied during the maintenance window.
 
@@ -156,6 +156,51 @@ Note that data restore will not be available in the event of an RDS outage affec
 
 For more details about how the RDS backup system works, see [Amazon's DB Instance Backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html) [external page].
 
+### Restoring a PostgreSQL service snapshot
+
+As a tenant it is possible to create a copy of any exiting PostgreSQL service instance using the latest snapshot of the RDS instance.
+These snapshots are taken during [the daily backups described above](#postgresql-service-backup).
+
+This can be useful, for instance, to clone a production database to be used for testing or batch processing.
+
+In order to restore from a snapshot:
+
+ 1. Get the `GUID` of the existing instance by running:
+
+    ``cf service SERVICE_INSTANCE --guid``
+
+    for example:
+
+    ``cf service my-pg-service --guid``
+
+    This shall return a `GUID` like `32938330-e603-44c6-810e-b4f12d7d109e`
+
+ 2. Trigger the creation of a new service based on the snapshot with
+
+    ``cf create-service SERVICE PLAN SERVICE_INSTANCE -c '{"restore_from_latest_snapshot_of": "GUID"}'``
+
+    where SERVICE is the service you want, PLAN must be the same plan used in the original instance, SERVICE_INSTANCE is a unique, descriptive name for this instance of the service copy, and GUID the `GUID` from the original service instance obtained before; for example:
+
+    ``cf create-service postgres M-dedicated-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938330-e603-44c6-810e-b4f12d7d109e"}'``
+
+ 3. As described in [Setting up a PostgreSQL service](#setting-up-a-postgresql-service), it may take some time (5 to 10 minutes) for the service instance to be set up. To find out its status, run:
+
+    ``cf service SERVICE_INSTANCE``
+
+    for example:
+
+    ``cf service my-pg-service``
+
+ 4. Once the service status reported by the above command is 'create succeeded', you can use the instance as any other instance. See [Setting up a PostgreSQL service](#setting-up-a-postgresql-service) for more details.
+
+This feature has currently some limitations:
+
+ * Only the lastest snapshot will be used. It is not possible to trigger adhoc an immediate creation of a snapshot, they will be created during [the daily backups described above](#postgresql-service-backup).
+ * The instance to restore from must exist when the restore operation is triggered. You cannot restore from a service that has been deleted.
+ * You must explicitly pass the `GUID` of the instance, queried with `cf service SERVICE_INSTANCE --guid`.
+ * You must use the same plan than the original service instance. The plan of the original service instance can be queried with `cf service SERVICE_INSTANCE`
+ * You must create the new service instance in the same organisation and space than the original service instance. This is to prevent unauthorised access to data between spaces. To copy the data to a different organisation and/or space, it must be exported and imported using alternative methods, for example using [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html) and [`pg_restore`](https://www.postgresql.org/docs/9.5/static/app-pgrestore.html) via [SSH tunnels](#creating-tcp-tunnels-with-ssh).
+
 ### Read replicas
 
 Amazon RDS has the capability to provide a read replica: a read-only copy of your PostgreSQL database. This can be useful for performance, availability or security reasons.
@@ -163,5 +208,3 @@ Amazon RDS has the capability to provide a read replica: a read-only copy of you
 See the [Amazon RD documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) to learn more.
 
 GOV.UK PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
-
-
