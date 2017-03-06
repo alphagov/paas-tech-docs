@@ -2,7 +2,7 @@
 
 This is the new technical documentation system for GOV.UK PaaS.
 
-It is published at https://docs.cloud.service.gov.uk
+It is published at https://docs.cloud.service.gov.uk (for technical reasons, it is also available at https://paas-tech-docs.cloudapps.digital but that is NOT the official address and you should not send cloudapps.digital URLs to tenants, link to them etc).
 
 ## Getting started
 
