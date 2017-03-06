@@ -64,7 +64,7 @@ GOV.UK PaaS uses a hosting technology called Cloud Foundry. As a tenant (that is
 Once logged in, you can see the available commands by running ```cf```.
 
 
-### Deploying a test app
+### Deploying a test app
 
 To practice deploying an app, try following the process to [deploy a static site](/#deploy-a-static-site).
 
