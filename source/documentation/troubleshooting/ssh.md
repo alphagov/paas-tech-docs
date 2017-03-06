@@ -74,84 +74,82 @@ cf ssh --app-instance-index 2
 
 ### Creating TCP tunnels with SSH
 
-The `cf ssh` command supports [*Local port forwarding*](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a service that is only accessible from the application running in the platform. For instance, a backing service.
+The `cf ssh` command supports [local port forwarding](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows you to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a backing service that is only accessible from an app running on GOV.UK PaaS.
 
-To enable, you can add one or more times the parameter `-L`:
+To enable local port forwarding, you can use the parameter `-L`:
 
-```cf ssh APPNAME -L  LOCALPORT:REMOTEHOST:REMOTEPORT```
+```
+cf ssh APPNAME -L LOCALPORT:REMOTEHOST:REMOTEPORT
+```
 
-It specifies that the given `LOCALPORT` port on the local system is to be forwarded to the given `REMOTEHOST` host and `REMOTEPORT` port on application container side.  Whenever a connection is made to this port, the connection is forwarded over the secure SSH channel, and a connection is made to the host and port `REMOTEHOST:REMOTEPORT` from the remote application container.
+This will forward the `LOCALPORT` port on the local system to the given `REMOTEHOST` host and `REMOTEPORT` port on the application container side.  
+
+Whenever a connection is made to this port, the connection is forwarded over the secure SSH channel, and a connection is made to the host and port `REMOTEHOST:REMOTEPORT` from the remote application container.
+
+You can use the `-L` parameter multiple times to forward different ports.
 
 The tunnel will be closed once the `cf ssh` command is stopped.
 
-For example, you can connect to the PostgreSQL service bound to an application following these steps:
+For example, you can connect directly to the PostgreSQL service bound to an application following these steps:
 
- 1. Learn the remote address and port of the instance. You can use `cf env APPNAME` to print the credentials of the bound services:
+ 1. Find the details of the service using `cf env APPNAME`. Here is some simplified and shortened example output:
 
     ```
     $ cf env myapp
     Getting env variables for app myapp in org myoth / space myorg as randomuser...
     OK
 
-    System-Provided:
-    {
-     "VCAP_SERVICES": {
-      "postgres": [
-       {
-        "credentials": {
-         "host": "rdsbroker0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com",
-         "jdbcuri": "jdbc:postgresql://rdsbroker0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com:5432/rdsbroker_abcdef_dbname?user=rdsbroker_0fce5c72_dfed_4233_9a36_b7371c7ccab7_owner\u0026password=pass123456789",
-         "name": "rdsbroker_2fce5c72_dfed_4233_9a36_b7371c7ccab7",
-         "password": "yDjAt7G1ZuViOQkZnTWwfWMyFg5NpIDB",
-         "port": 5433,
-         "uri": "postgres://rdsbroker_aaa_owner:pass123456789@rdsbroker-0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com:5432/rdsbroker_abcdef_dbname",
-         "username": "rdsbroker_1fce5c72_dfed_4233_9a36_b7371c7ccab7_owner"
+        System-Provided:
+        {
+        "VCAP_SERVICES": {
+         "postgres": [
+         {
+         "credentials": {
+         "host": "rdsbroker-01-ff-d2.cwm.eu-west-1.rds.amazonaws.com",
+         "jdbcUrl": "jdbc:postgresql://rdsbroker-01-ff-d2.cwm.eu-west-1.rds.amazonaws.com:5432/rdsbroker_9f0_97_aa4?user=rdsbroker_9f0_97_aa4_owner\u0026password=xnYXthsgUFwPUOO",
+         "name": "rdsbroker_9f0_97_aa4",
+         "password": "xnYXthsgUFwPUOO",
+         "port": 5432,
+         "uri": "postgres://rdsbroker_9f0_97_aa4_owner:xnYXthsgUFwPUOO@rdsbroker-01-ff-d2.cwm.eu-west-1.rds.amazonaws.com:5432/rdsbroker_9f0_97_aa4",
+         "username": "rdsbroker_9f0_97_aa4_owner"
         },
-        "label": "postgres",
-        "name": "mydb",
-        "plan": "Free",
-        "provider": null,
-        "syslog_drain_url": null,
-        "tags": [
-         "postgres",
-         "relational"
-        ],
-        "volume_mounts": []
-       }
-      ]
-     }
-    }
-    ...
+        ...
     ```
 
-    In this case the remote host is `rdsbroker0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com` and the remote port is `5433`. The login credentials are also displayed there.
+    You will need to know:
 
- 2. Create a SSH tunnel in the local port 6666
+    + the remote host, displayed as `"host":`
+    + the remote port, displayed as `"port"` (usually 5433).
+    + the PostgreSQL username, displayed as `"username":`
+    + the PostgreSQL password, displayed as `password:`
+    + the name of the database, displayed as `name:`
+
+ 2. Create a SSH tunnel using the local port 6666:
 
     ```
-    cf ssh myapp -L 6666:rdsbroker0fce5c72-dfed-4233-9a36-b7371c7ccab7.colgoy4debsd.eu-west-1.rds.amazonaws.com:5433
+    cf ssh myapp -L 6666:HOST:PORT
     ```
 
-    This will open a shell in the remote container, and create a local tunnel in the port 6666.
+    where HOST is the host value you found in the previous step, and PORT is the port (usually 5433).
 
-    Note: Be aware that this shell is in the remote application container, **not** the local system. You will need to open a new console if you want to work locally. The new port is open in the local system.
+    This will open a shell in the remote container, and create a local tunnel using port 6666.
+
+    Note: Be aware that this shell is in the remote application container, not the local system. You will need to open a new console if you want to work locally. The new port is open in the local system.
 
 
  3. In a different terminal, you can now connect to the local port in `localhost:6666` using a postgres client:
 
     ```
-    psql postgres://rdsbroker_aaa_owner:pass123456789@localhost:6666/rdsbroker_abcdef_dbname
+    psql postgres://USER:PASSWORD@localhost:6666/DATABASE_NAME
     ```
 
-    or dump the database with [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html):
+    replacing USER, PASSWORD and DATABASE_NAME with the values from step 1
+
+    You can also dump the database with [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html):
 
     ```
-    pg_dump postgres://rdsbroker_aaa_owner:pass123456789@localhost:6666/rdsbroker_abcdef_dbname > db.dump
+    pg_dump postgres://USER:PASSWORD@localhost:6666/DATABASE_NAME > db.dump
     ```
-
-    Note that we are specifying the host and port `localhost:6666`
-
-You can learn more about [SSH tunneling here](https://www.ssh.com/ssh/tunneling/).
 
 ### SSH permissions
 
@@ -229,6 +227,6 @@ Your GOV.UK PaaS account needs the ``OrgManager`` or ``SpaceManager`` role to be
 
 You should consider disabling SSH where it is not needed. For example, if you host the live versions of your apps in a ``production`` space, you may decide to disable SSH access there, but leave it enabled in your ``development`` and ``testing`` spaces.
 
-### More about SSH
+### More about using SSH
 
 See the Cloud Foundry documentation on [Accessing Apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html) [external link].
