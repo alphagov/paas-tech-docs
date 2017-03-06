@@ -2,12 +2,7 @@
 
 This is the new technical documentation system for GOV.UK PaaS.
 
-The official docs to give out to tenants are still those hosted at https://government-paas-developer-docs.readthedocs.io/en/latest/ (powered by readthedocs) - however, that will change very shortly.
-
-The *temporary* URL for the output of the new system is https://paas-tech-docs.cloudapps.digital/ - do not publicise this, link to it, or give it to tenants. The permanent URL will be https://docs.cloud.service.gov.uk and will start working soon.
-
-Do not update the docs content on the old system. Update it here.
-
+It is published at https://docs.cloud.service.gov.uk
 
 ## Getting started
 
