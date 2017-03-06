@@ -1,0 +1,28 @@
+strict digraph A {
+    rankdir=LR;
+    //splines=line;
+   // graph [ splines = false ]
+    node [shape=box]
+    edge [fontsize=8 ]
+    concentrate="false";
+
+    client [shape=none width=0.8 fixedsize=true shapefile="actor.png" label="\n\n\n\N"];
+
+    route_service;
+
+    subgraph cluster_paas {
+        label="Government PaaS";
+        router [label="Router" shape=diamond];
+        app;
+    }
+
+    subgraph service {
+        route_service;
+    }
+
+    client -> router [label="1. https://myapp.cloudapps.digital"];
+    router -> route_service [label="2. https://my-route-service.example.com\nX-CF-Forwarded-Url: https://myapp.cloudapps.digital\nX-CF-Proxy-Signature: 1234567890abcd\nX-CF-Proxy-Metadata: ..."];
+    route_service -> router [label="3. https://myapp.cloudapps.digital\nX-CF-Proxy-Signature: 1234567890abcd\nX-CF-Proxy-Metadata: ..."];
+    router -> app [label="4. https://myapp.cloudapps.digital"];
+}
+
