@@ -72,7 +72,7 @@ You can connect to a particular instance. For example, if you want to connect to
 cf ssh --app-instance-index 2
 ```
 
-### Creating TCP tunnels with SSH
+## Creating TCP tunnels with SSH
 
 The `cf ssh` command supports [local port forwarding](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows you to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a backing service that is only accessible from an app running on GOV.UK PaaS.
 
@@ -119,7 +119,7 @@ For example, you can connect directly to the PostgreSQL service bound to an appl
     You will need to know:
 
     + the remote host, displayed as `"host":`
-    + the remote port, displayed as `"port"` (usually 5433).
+    + the remote port, displayed as `"port"`.
     + the PostgreSQL username, displayed as `"username":`
     + the PostgreSQL password, displayed as `password:`
     + the name of the database, displayed as `name:`
@@ -130,7 +130,7 @@ For example, you can connect directly to the PostgreSQL service bound to an appl
     cf ssh myapp -L 6666:HOST:PORT
     ```
 
-    where HOST is the host value you found in the previous step, and PORT is the port (usually 5433).
+    where HOST and PORT are the values you found in the previous step.
 
     This will open a shell in the remote container, and create a local tunnel using port 6666.
 
@@ -140,15 +140,15 @@ For example, you can connect directly to the PostgreSQL service bound to an appl
  3. In a different terminal, you can now connect to the local port in `localhost:6666` using a postgres client:
 
     ```
-    psql postgres://USER:PASSWORD@localhost:6666/DATABASE_NAME
+    psql postgres://USERNAME:PASSWORD@localhost:6666/DATABASE_NAME
     ```
 
-    replacing USER, PASSWORD and DATABASE_NAME with the values from step 1
+    replacing USERNAME, PASSWORD and DATABASE_NAME with the values from step 1
 
     You can also dump the database with [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html):
 
     ```
-    pg_dump postgres://USER:PASSWORD@localhost:6666/DATABASE_NAME > db.dump
+    pg_dump postgres://USERNAME:PASSWORD@localhost:6666/DATABASE_NAME > db.dump
     ```
 
 ### SSH permissions
