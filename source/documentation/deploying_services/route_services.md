@@ -2,11 +2,11 @@
 
 Tenants may wish to apply some processing to requests before they reach an application. Common examples of use cases are authentication, rate limiting, and caching services.
 
-Cloud Foundry allows the tenants to bind [application routes](/#names-routes-and-domains) to [Route Services](https://docs.cloudfoundry.org/services/route-services.html) [external-link]. A Route Service acts as a full proxy. Once it is bound to a route, the platform routing layer will send every request for that route to the Route Service endpoint. The Route Service can then process the incoming request, proxy it back to the original application, and finally process the response request before returning it to the original client.
+Cloud Foundry allows the tenants to bind [application routes](/#names-routes-and-domains) to [Route Services](https://docs.cloudfoundry.org/services/route-services.html) [external link]. A Route Service acts as a full proxy. Once it is bound to a route, the platform routing layer will send every request for that route to the Route Service endpoint. The Route Service can then process the incoming request, proxy it back to the original application, and finally process the response request before returning it to the original client.
 
 Using Route Services has some consequences to be aware of:
 
-- Every request will be penalised with some additional latency as it will be proxied via the Routing Service.
+- Every request will include additional latency as it will be proxied via the Routing Service.
 - The Route Service will be able to access all the request content in clear.
 - The Route Service would become a critical point of failure, and if it is not available, the application will not be available for the end users.
 
@@ -15,7 +15,7 @@ Using Route Services has some consequences to be aware of:
 Tenants can define their own Route Service instance by using a [User-Provided Service Instance](/#user-provided-service-instance) that points to any HTTPS service. This endpoint must fulfill the following requirements:
 
 - It must be a HTTPS endpoint with a valid certificate.
-- It can be a application running in the platform itself or a external service in the Internet.
+- It can be a application running in the platform itself or an external service on the Internet.
 - It must be reachable from the platform (ie. not blocked by a firewall or in a private network).
 - It must implement the [Route Service Protocol](/#route-service-protocol)
 
@@ -42,7 +42,7 @@ This is how you define a User-Provided Route Service Instance and map it to the 
 
    ``cf bind-route-service cloudapps.digital my-route-service --hostname myapp``
 
-3. You can list the [routes](/#names-routes-and-domains) of the current [space](https://docs.cloud.service.gov.uk/#organisations-spaces-amp-targets), to learn the applications and Route Services bound to them:
+3. You can list the [routes](/#names-routes-and-domains) of the current [space](/#organisations-spaces-amp-targets), to see the applications and Route Services bound to them:
 
    ``cf routes``
 
@@ -60,8 +60,52 @@ A Route Service can be implemented as a HTTPS application that will receive all 
 - `X-CF-Proxy-Signature` and `X-CF-Proxy-Metadata`: Signature and metadata used by the platform route itself to validate the request sent by the route service.
   The route service must always include these headers.
 
-The Route Services must proxy back the request to the application route defined in header `X-CF-Forwarded-Url` within 60 seconds, otherwise the request will be refused. In addition, the total time to process the request and send a response back must be within 900 seconds.
+The Route Service must proxy back the request to the application route defined in header `X-CF-Forwarded-Url` within 60 seconds, otherwise the request will be refused. In addition, the total time to process the request and send a response back must be within 900 seconds.
 
 ![Route Service request life cycle](images/route-service.png)
 
-You can refer to the [Cloud Foundry documentation](https://docs.cloudfoundry.org/services/route-services.html#service-instance-responsibilities), [example route services](https://docs.cloudfoundry.org/services/route-services.html#examples), and [tutorial](https://docs.cloudfoundry.org/services/route-services.html#tutorial) to learn more about how to implement route services.
+You can refer to the [Cloud Foundry documentation](https://docs.cloudfoundry.org/services/route-services.html#service-instance-responsibilities), [example route services](https://docs.cloudfoundry.org/services/route-services.html#examples), and [tutorial](https://docs.cloudfoundry.org/services/route-services.html#tutorial) [external links] to learn more about how to implement route services.
+
+### Example: Route Service to add authentication
+
+In the following example we will add a Route Service to provide basic HTTP authentication to the bound routes. This can be used to restrict access to a beta application.
+
+An example of such a Route Service application code can be found in [cf basic auth route service](https://github.com/alext/cf_basic_auth_route_service) [external link].
+Please note this is a proof-of-concept and is *not intended to run in production*.
+
+We will deploy it as an application in the platform itself. Then we will bind this Route Service to a deployed application called `myapp`, accessible via https://myapp.cloudapps.digital.
+
+1. Deploy the route service as [any other other application](/#deploying-apps).
+   Do not start it yet, as we need to configure it first.
+
+    ```
+    git clone https://github.com/alext/cf_basic_auth_route_service
+    cd cf_basic_auth_route_service
+    cf push my-basic-auth-service-app --no-start
+    ```
+
+   Note: You might want to change `my-basic-auth-service-app` with a different name to avoid conflicts with other tenants' apps.
+
+2. This example route service can only authenticate one user with fixed username and password. Choose any value for username and password then pass them to the application via environment variables `AUTH_USERNAME` and `AUTH_PASSWORD`. Finally the Route Service can be started:
+
+    ```
+    cf set-env my-basic-auth-service-app AUTH_USERNAME myuser
+    cf set-env my-basic-auth-service-app AUTH_PASSWORD pass1234
+    cf start my-basic-auth-service-app
+    ```
+
+   The new service is serving in https://my-basic-auth-service-app.cloudapps.digital.
+
+3. Register the Route Service endpoint as a User-Provided Service Instance:
+
+    ```
+    cf create-user-provided-service my-basic-auth-service -r https://my-basic-auth-service-app.cloudapps.digital
+    ```
+
+4. Finally, bind the Route Service to the application route:
+
+    ```
+    cf bind-route-service cloudpipelineapps.digital my-basic-auth-service --hostname myapp
+    ```
+
+The application in https://myapp.cloudapps.digital will now ask for basic HTTP authentication, with login `myuser` and password `pass1234`.
