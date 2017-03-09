@@ -2,9 +2,9 @@
 
 When you deploy an app to GOV.UK PaaS, it runs in a container, which is like a lightweight Linux virtual machine. Each app runs in its own isolated container.
 
-Sometimes, it can be useful to connect directly to the container with SSH. You would usually only do this to get information for troubleshooting purposes, for example, if you can't work out what is happening with your app using the `cf logs` and `cf events` commands described in the [Logs](/#troubleshooting) section. 
+Sometimes, it can be useful to connect directly to the container with SSH. You would usually only do this to get information for troubleshooting purposes, for example, if you can't work out what is happening with your app using the `cf logs` and `cf events` commands described in the [Logs](/#troubleshooting) section.
 
-If you do run commands which will change the container temporarily, it's a good idea to restart the app afterwards.  
+If you do run commands which will change the container temporarily, it's a good idea to restart the app afterwards.
 
 SSH is enabled by default. In most cases, you will find that you can SSH directly to your app's container.
 
@@ -14,7 +14,7 @@ SSH is enabled by default. In most cases, you will find that you can SSH directl
     cf ssh APPNAME
     ```
 
-    where `APPNAME` is the name of the app. 
+    where `APPNAME` is the name of the app.
 
 2. For some tasks to work, you need to set up the interactive SSH session to match the buildpack environment. To do this, run:
 
@@ -64,7 +64,7 @@ buildpack: staticfile_buildpack
 
 There are 3 instances, with instance indexes from 0 to 2.
 
-If you have multiple instances like this and use `cf-ssh`, you will be connected to the app with an instance index of 0. 
+If you have multiple instances like this and use `cf-ssh`, you will be connected to the app with an instance index of 0.
 
 You can connect to a particular instance. For example, if you want to connect to instance 2, you can do this:
 
@@ -72,15 +72,92 @@ You can connect to a particular instance. For example, if you want to connect to
 cf ssh --app-instance-index 2
 ```
 
+## Creating TCP tunnels with SSH
 
+The `cf ssh` command supports [local port forwarding](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows you to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a backing service that is only accessible from an app running on GOV.UK PaaS.
+
+To enable local port forwarding, you can use the parameter `-L`:
+
+```
+cf ssh APPNAME -L LOCALPORT:REMOTEHOST:REMOTEPORT
+```
+
+This will forward the `LOCALPORT` port on the local system to the given `REMOTEHOST` host and `REMOTEPORT` port on the application container side.  
+
+Whenever a connection is made to this port, the connection is forwarded over the secure SSH channel, and a connection is made to the host and port `REMOTEHOST:REMOTEPORT` from the remote application container.
+
+You can use the `-L` parameter multiple times to forward different ports.
+
+The tunnel will be closed once the `cf ssh` command is stopped.
+
+For example, you can connect directly to the PostgreSQL service bound to an application following these steps:
+
+ 1. Find the details of the service using `cf env APPNAME`. Here is some simplified and shortened example output:
+
+    ```
+    $ cf env myapp
+    Getting env variables for app myapp in org myoth / space myorg as randomuser...
+    OK
+
+        System-Provided:
+        {
+        "VCAP_SERVICES": {
+         "postgres": [
+         {
+         "credentials": {
+         "host": "rdsbroker-01-ff-d2.cwm.eu-west-1.rds.amazonaws.com",
+         "jdbcUrl": "jdbc:postgresql://rdsbroker-01-ff-d2.cwm.eu-west-1.rds.amazonaws.com:5432/rdsbroker_9f0_97_aa4?user=rdsbroker_9f0_97_aa4_owner\u0026password=xnYXthsgUFwPUOO",
+         "name": "rdsbroker_9f0_97_aa4",
+         "password": "xnYXthsgUFwPUOO",
+         "port": 5432,
+         "uri": "postgres://rdsbroker_9f0_97_aa4_owner:xnYXthsgUFwPUOO@rdsbroker-01-ff-d2.cwm.eu-west-1.rds.amazonaws.com:5432/rdsbroker_9f0_97_aa4",
+         "username": "rdsbroker_9f0_97_aa4_owner"
+        },
+        ...
+    ```
+
+    You will need to know:
+
+    + the remote host, displayed as `"host":`
+    + the remote port, displayed as `"port"`.
+    + the PostgreSQL username, displayed as `"username":`
+    + the PostgreSQL password, displayed as `password:`
+    + the name of the database, displayed as `name:`
+
+ 2. Create a SSH tunnel using the local port 6666:
+
+    ```
+    cf ssh myapp -L 6666:HOST:PORT
+    ```
+
+    where HOST and PORT are the values you found in the previous step.
+
+    This will open a shell in the remote container, and create a local tunnel using port 6666.
+
+    Note: Be aware that this shell is in the remote application container, not the local system. You will need to open a new console if you want to work locally. The new port is open in the local system.
+
+
+ 3. In a different terminal, you can now connect to the local port in `localhost:6666` using a postgres client:
+
+    ```
+    psql postgres://USERNAME:PASSWORD@localhost:6666/DATABASE_NAME
+    ```
+
+    replacing USERNAME, PASSWORD and DATABASE_NAME with the values from step 1
+
+    You can also dump the database with [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html):
+
+    ```
+    pg_dump postgres://USERNAME:PASSWORD@localhost:6666/DATABASE_NAME > db.dump
+    ```
 
 ### SSH permissions
 
-SSH can be either enabled or disabled independently for each **space** and **app**. 
+SSH can be either enabled or disabled independently for each **space** and **app**.
 
 SSH must be enabled for *both* the space *and* the app before it will work. For example, if you have an app where SSH is enabled, but it is deployed to a space where SSH is disabled, SSH won't work.
 
-All new apps and spaces start out with SSH enabled. 
+All new apps and spaces start out with SSH enabled.
 
 ### Enabling SSH for an app
 
@@ -150,6 +227,6 @@ Your GOV.UK PaaS account needs the ``OrgManager`` or ``SpaceManager`` role to be
 
 You should consider disabling SSH where it is not needed. For example, if you host the live versions of your apps in a ``production`` space, you may decide to disable SSH access there, but leave it enabled in your ``development`` and ``testing`` spaces.
 
-### More about SSH
+### More about using SSH
 
 See the Cloud Foundry documentation on [Accessing Apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html) [external link].
