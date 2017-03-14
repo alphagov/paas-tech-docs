@@ -117,7 +117,6 @@ For example, you can connect directly to the PostgreSQL service bound to an appl
     ```
 
     You will need to know:
-
     + the remote host, displayed as `"host":`
     + the remote port, displayed as `"port"`.
     + the PostgreSQL username, displayed as `"username":`
