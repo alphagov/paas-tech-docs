@@ -182,7 +182,7 @@ This feature currently has some limitations:
  * You can only restore the latest snapshot.
  * You cannot restore from a service instance that has been deleted.
  * You must use the same service plan for the copy as for the original service instance.
- * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can use [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html) and [`pg_restore`](https://www.postgresql.org/docs/9.5/static/app-pgrestore.html) via [SSH tunnels](#creating-tcp-tunnels-with-ssh).
+ * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can use [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html) and [`pg_restore`](https://www.postgresql.org/docs/9.5/static/app-pgrestore.html) via [SSH tunnels](#creating-tcp-tunnels-with-ssh). **Note**: it's not currently recommnended to use this for files > 1GB.
 
 To restore from a snapshot:
 
