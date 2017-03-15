@@ -76,6 +76,8 @@ cf ssh --app-instance-index 2
 
 The `cf ssh` command supports [local port forwarding](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows you to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a backing service that is only accessible from an app running on GOV.UK PaaS.
 
+**Note**: We are aware of some problems sending more than 1GB of data through an SSH tunnel to a Cloud Foundry application. While we investigate and fix these problems, we suggest that you workaround the problem by sending no more than 1GB of data at a time.
+
 To enable local port forwarding, you can use the parameter `-L`:
 
 ```
