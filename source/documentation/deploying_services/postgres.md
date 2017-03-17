@@ -172,16 +172,16 @@ For more details about how the RDS backup system works, see [Amazon's DB Instanc
 
 ### Restoring a PostgreSQL service snapshot (experimental)
 
-As a tenant, you can create a copy of any existing PostgreSQL service instance using the latest snapshot of the RDS instance.
+You can create a copy of any existing PostgreSQL service instance using the latest snapshot of the RDS instance.
 These snapshots are taken during [the nightly backups described above](#postgresql-service-backup).
 
 This can be useful if you want to clone a production database to be used for testing or batch processing.
 
 This feature is experimental; we expect it to work and we'd like people who use it to tell us if it worked for them. It has the following limitations:
 
- * You can only restore the latest snapshot.
- * You cannot restore from a service instance that has been deleted.
- * You must use the same service plan for the copy as for the original service instance.
+ * You can only restore the most recent snapshot from the latest nightly backup
+ * You cannot restore from a service instance that has been deleted
+ * You must use the same service plan for the copy as for the original service instance
  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can use [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html) and [`pg_restore`](https://www.postgresql.org/docs/9.5/static/app-pgrestore.html) via [SSH tunnels](#creating-tcp-tunnels-with-ssh). **Note**: it's not currently recommnended to use this for files > 1GB.
 
 To restore from a snapshot:
