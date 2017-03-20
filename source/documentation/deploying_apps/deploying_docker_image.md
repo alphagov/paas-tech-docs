@@ -1,6 +1,6 @@
 ## Deploy a docker image (experimental)
 
-This section explains how to deploy an app from a docker image. The role of the docker image is to serve as a packaging format and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks. Configuration via manifest.yml also stays the same, albeit you should not specify buildpack. If you do, it will be ignored, which can create some confusion to anyone reading the manifest. Our platform currently only supports deploying images from docker hub or [Docker Trusted Registry](https://docs.docker.com/datacenter/dtr/2.1/guides/) [external page] servers. You cannot deploy from local images.
+This section explains how to deploy an app from a docker image. The role of the docker image is to serve as a packaging format and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks. Configuration via manifest.yml also stays the same, albeit you should not specify buildpack. If you do, it will be ignored, which can create some confusion to anyone reading the manifest. Our platform currently only supports deploying images from docker hub or [Docker Trusted Registry](https://docs.docker.com/datacenter/dtr/2.1/guides/) [external page] servers. You cannot currently deploy from local images.
 
 To deploy an app using a docker image stored in docker hub via CF cli:
 
@@ -23,7 +23,9 @@ There are a few more specifics about docker image support in Cloud Foundry:
 
 ### Experimental feature
 
-Please note that this is currently only an experimental feature, meaning you can potentially encounter some unexpected behaviour or glitches. It is also possible that we might turn the feature off in the future. Lastly, our support for this functionality has lower priority than usual requests, so it is possible that responses to your queries regarding this will take a bit longer.
+Please note that this is currently only an experimental feature, meaning you can potentially encounter some unexpected behaviour or glitches. It is also possible that we might turn the feature off in the future. It should not be used in live services at this stage. 
+
+Lastly, our support for this functionality has lower priority than usual requests, so it is possible that responses to your queries regarding this will take a bit longer. However we are turning on this feature in order get feedback from service teams, so please contact support with any comments or to talk about use in production systems.
 
 ### Applying security updates
 
