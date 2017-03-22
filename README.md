@@ -95,7 +95,7 @@ pip install -Ur requirements.txt
 
 ## Build and deploy
 
-The docs are hosted on the PaaS and any change to master is automatically deployed by the [PaaS release CI](https://github.com/alphagov/paas-release-ci). The build status can be seen here: https://concourse.build.ci.cloudpipeline.digital/teams/main/pipelines/tech-docs
+The docs are hosted on the PaaS and any change to master is automatically deployed by the [PaaS release CI](https://github.com/alphagov/paas-release-ci). The build status can be seen here: https://concourse.build.ci.cloudpipeline.digital/teams/main/pipelines/paas-tech-docs
 
 To deploy your changes manually:
 
