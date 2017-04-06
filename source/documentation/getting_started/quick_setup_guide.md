@@ -42,7 +42,7 @@ GOV.UK PaaS uses a hosting technology called Cloud Foundry. As a tenant (that is
 
     Your `USERNAME` is your email address your account was created with.
 
-    You will then be prompted to enter your password, which should have been sent to you by email (subject "Welcome to GOV.UK PaaS").
+    You will then be prompted to enter your password. You set this when you clicked on the invite link in your welcome email.
 
     If your login fails with a message like this:
 
@@ -52,14 +52,6 @@ GOV.UK PaaS uses a hosting technology called Cloud Foundry. As a tenant (that is
     ```
 
     and your internet connection is otherwise working, the most likely cause is that your IP address is not on [our whitelist](https://github.com/alphagov/paas-cf/blob/master/terraform/prod.tfvars#L12). Please contact support and ask to be whitelisted.
-
-4. It's important for security that you now change your password. Run:
-
-     ``cf passwd``
-
-    You will be prompted to enter your password from the previous step. You should then enter a new secure password. For our advice on how to do this, see [Choosing passwords](/#choosing-passwords). 
-
-    Make sure you remember or securely record your new password. Your session will expire in 7 days, and you will be prompted to log in again.
 
 Once logged in, you can see the available commands by running ```cf```.
 
