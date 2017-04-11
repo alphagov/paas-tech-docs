@@ -7,9 +7,6 @@ There are two main approaches to pushing applications to GOV.UK PaaS with [Jenki
 
 Both approaches require you to set up the credentials plugin first.
 
-Note that for security reasons, GOV.UK PaaS will lock your account if Jenkins makes multiple failed login attempts within a short period of time. This can happen if you provide incorrect or expired login details. See the [Failed login rate limit](#failed-login-rate-limit) section for more information.
-
-
 ### Setting up the credentials plugin
 
 To install the credentials plugin manually:
@@ -70,8 +67,6 @@ cf push
 # Destroy token
 cf logout
 ```
-
-
 
 ### Setting up the Cloud Foundry Jenkins plugin
 
