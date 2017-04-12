@@ -8,8 +8,6 @@ If your organisation is already taking part in the private beta and you need an 
 
 If you'd like to find out about taking part in the beta, please contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-We currently restrict which IP addresses are allowed to access the PaaS to deploy and manage apps. As part of the setup process, you will need to provide us with a list of all the IPs you and your developers will use to access the PaaS. You can [check our whitelist of allowed IPs here](https://github.com/alphagov/paas-cf/blob/master/terraform/prod.tfvars#L12).
-
 In order to provide you with an account, we need to store some personal data about you. Please see [our Privacy Policy](/#privacy-policy) for details.
 
 ### Setting up the command line
@@ -44,22 +42,9 @@ GOV.UK PaaS uses a hosting technology called Cloud Foundry. As a tenant (that is
 
     You will then be prompted to enter your password. You set this when you clicked on the invite link in your welcome email.
 
-    If your login fails with a message like this:
-
-    ```
-    FAILED
-    Error performing request: Get https://api.cloud.service.gov.uk/v2/info: EOF
-    ```
-
-    and your internet connection is otherwise working, the most likely cause is that your IP address is not on [our whitelist](https://github.com/alphagov/paas-cf/blob/master/terraform/prod.tfvars#L12). Please contact support and ask to be whitelisted.
-
 Once logged in, you can see the available commands by running ```cf```.
 
 
 ### Deploying a test app
 
 To practice deploying an app, try following the process to [deploy a static site](/#deploy-a-static-site).
-
-
-
-
