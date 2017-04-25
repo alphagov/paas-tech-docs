@@ -8,7 +8,7 @@ Use the switch icons allow you to turn on the repos Travis will manage - remembe
 
 You will need to know the the particular Cloudfoundry `organisation` and `space` you want Travis to deploy your app into. If you don't know, you can get these by logging into PaaS with a terminal window and using the `cf orgs` and `cf spaces` commands.
 
-If you haven't already done so, we also strongly recommend that you add a `name` entry to your `manifest.yml` file so that you'll know the address of your app once published.
+If you haven't already done so, we also strongly recommend that you add a `name` entry to your `manifest.yml` file so that you'll know the address of your app once published. [Find out about names and URLs on PaaS](#names_routes_domains).
 
 ### Download the Travis Gem
 
