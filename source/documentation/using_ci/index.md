@@ -4,8 +4,8 @@ Setting up a CI service helps you make sure your team are delivering new feature
 
 Tools we have seen used to manage the tests and deployments include Travis, Circle, TeamCity and Jenkins. Detailed instructions on configuring Travis or Jenkins are below.
 
-- [Travis CI](https://travis-ci.com/) is cloud-based, has a free tier, and is commonly used when a team want to start deploying prototypes from shared GitHub repositories - rather than code running locally on a particular machine. This is equivalent to linking GitHub repositories to Heroku, and takes less than ten minutes. [Set up Travis](#travis)
-- [Jenkins](https://jenkins.io/) is more complex, needs detailed technical knowledge, and requires its own infrastructure. [Set up Jenkins](#jenkins)
+- [Travis CI](https://travis-ci.com/) is cloud-based, has a free tier, and is commonly used when a team want to start deploying prototypes from shared GitHub repositories - rather than code running locally on a particular machine. This is equivalent to linking GitHub repositories to Heroku, and takes less than ten minutes. [Set up Travis](#use-travis)
+- [Jenkins](https://jenkins.io/) is more complex, needs detailed technical knowledge, and requires its own infrastructure. [Set up Jenkins](#push-an-app-with-jenkins)
 
 Security is a key concern when setting up a CI system that interacts with a PaaS. You should protect confidential data and your systems by:
 - running all tests as a low-privilege user
