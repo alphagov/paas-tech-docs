@@ -2,14 +2,6 @@
 
 While GOV.UK PaaS is built using Cloud Foundry technology, we don't support all Cloud Foundry features. This section explains some Cloud Foundry features that are not enabled, as well as some limitations of the beta phase.
 
-### IP restrictions
-
-We currently only accept command line client connections from a list of approved IP addresses (a 'whitelist'). When you sign up to use the PaaS, you must tell us the IPs or IP ranges you and your developers will connect from, so we can add them to our whitelist. 
-
-You can view [the list of allowed IPs](https://github.com/alphagov/paas-cf/blob/master/terraform/prod.tfvars#L9). If you want us to allow additional IPs, please email us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
-
-Note that IP restrictions only apply to use of the command line client; there is no restriction on access to your deployed apps, which are available to everyone.
-
 ### Custom buildpacks and .NET are not supported
 
 Cloud Foundry uses buildpacks to provide runtime and framework support for applications in different languages. 
