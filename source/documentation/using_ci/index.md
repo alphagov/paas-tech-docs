@@ -8,8 +8,13 @@ Tools we have seen used to manage the tests and deployments include Travis, Circ
 - [Jenkins](https://jenkins.io/) is more complex, needs detailed technical knowledge, and requires its own infrastructure. [Set up Jenkins](#push-an-app-with-jenkins)
 
 Security is a key concern when setting up a CI system that interacts with a PaaS. You should protect confidential data and your systems by:
-- running all tests as a low-privilege user
-- not exposing your credentials publicly; you should store them in encrypted form and decrypt only during runtime.
+
+- running all tests as a [low-privilege PaaS user](#credentials-for-automated-accounts)
+- not exposing your PaaS credentials publicly; you should store them in encrypted form and decrypt only during runtime.
 - running your tests in a dedicated environment before deploying to production
 
 For security reasons, GOV.UK PaaS will lock your account if your CI system makes multiple failed login attempts in a short period of time. This can happen if you provide incorrect or expired login details. See the [Failed login rate limit](#failed-login-rate-limit) section for more information.
+
+### Credentials for automated accounts
+
+In order to avoid developer credentials leaking, particularly those with admin rights, you should should request a dedicated PaaS user account for use by your CI service. If you want to deploy to multiple spaces with your CI tool, use a different user account for each. Each user should only have `SpaceDeveloper` access to a single space within your organisation.
