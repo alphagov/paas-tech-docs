@@ -7,9 +7,9 @@ There are two main approaches to pushing applications to GOV.UK PaaS with [Jenki
 
 Both approaches require you to set up the credentials plugin first.
 
-### Set up dedicated users for testing
+### Set up dedicated accounts
 
-In order to avoid developer credentials - particularly those with admin rights - leaking, you should should request a dedicated PaaS user account for use by Jenkins. If you want to deploy to multiple spaces with Jenkins, use a different user account for each. Each user should only have `SpaceDeveloper` access to a single space within your organisation.
+CI systems should not use normal user accounts. Find out more about setting [credentials for automated accounts](#credentials-for-automated-accounts) in PaaS.
 
 ### Setting up the credentials plugin
 
