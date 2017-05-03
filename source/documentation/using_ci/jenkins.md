@@ -7,6 +7,10 @@ There are two main approaches to pushing applications to GOV.UK PaaS with [Jenki
 
 Both approaches require you to set up the credentials plugin first.
 
+### Set up dedicated accounts
+
+CI systems should not use normal user accounts. Find out more about setting [credentials for automated accounts](#credentials-for-automated-accounts) in PaaS.
+
 ### Setting up the credentials plugin
 
 To install the credentials plugin manually:
@@ -15,11 +19,9 @@ To install the credentials plugin manually:
 2. Click on the **Installed** tab and check if "Credentials Plugin" is listed. If it's listed, skip the next step.
 3. Click on the **Available** tab and find "Credentials Plugin". Check the box to select the plugin, then click either **Install without restart** or **Download now and install after restart** at the bottom of the interface.
 
-Once the plugin is installed, you will see a **Credentials** link in the left-hand navigation menu. 
+Once the plugin is installed, you will see a **Credentials** link in the left-hand navigation menu.
 
 Now you can add credentials for the Cloud Foundry user you will be using to push apps from Jenkins.
-
-You should provide the credentials for a dedicated PaaS user account created for use by Jenkins. Each user should have `SpaceDeveloper` access to a single space within your organisation. If you want to deploy to multiple spaces with Jenkins, use a different user account for each.
 
 1. Click on **Credentials**, then **System**. By default, you will see a 'Global credentials (unrestricted)' domain. You should set up a different domain for each deployment target/PaaS user account.
 2. Click **Add domain** and enter a name and description, then click **Save**.
@@ -89,5 +91,3 @@ An extra post-build action called "Push to Cloud Foundry" is now available in th
 6. Click **Save**.
 
 Further information can be found on the [Cloud Foundry plugin's wiki page](https://wiki.jenkins-ci.org/display/JENKINS/Cloud+Foundry+Plugin).
-
-
