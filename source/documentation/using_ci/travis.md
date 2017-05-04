@@ -32,18 +32,16 @@ travis setup cloudfoundry
 
 ### Manual setup
 
-Create `.travis.yml` and put Cloudfoundry configuration in it. If you already have a `.travis.yml` file please add the appropriate lines.
+Create `.travis.yml` and put Cloudfoundry configuration in it. If you already have a `.travis.yml` file please add the appropriate lines:
 
 ```
-language: go
-script: true
- deploy:
-   edge: true
-   provider: cloudfoundry
-   username: tests@example.com
-   api: https://api.cloud.service.gov.uk
-   organization: mydepartament
-   space: ci
+deploy:
+  edge: true
+  provider: cloudfoundry
+  username: tests@example.com
+  api: https://api.cloud.service.gov.uk
+  organization: mydepartament
+  space: ci
 ```
 
 Now you can add encrypted credentials to `.travis.yml` with the following command
