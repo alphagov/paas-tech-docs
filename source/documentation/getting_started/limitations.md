@@ -26,6 +26,7 @@ Currently, we recommend that you use a CDN to serve your app with a custom domai
 After you use a command that restarts application instances, such as ``cf push`` or ``cf restart``, your app may briefly return incorrect 404 errors. Apart from the brief downtime, this may lead to problems if the 404 is cached, or visiting web crawling bots (as used by search engines) receive a 404.
 
 Commands known to do this are:
+
 - ``cf push``
 - ``cf restage``
 - ``cf restart``
