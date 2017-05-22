@@ -34,7 +34,7 @@ Commands known to do this are:
 
 We are working on a fix to prevent this happening.
 
-In the meantime, we suggest that you use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link], where you have two versions of an app, one that is 'live' and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to facilitate this process. We haven't evaluated the available plugins in enough detail to recommend one, but some tenants have successfully used [autopilot](https://github.com/contraband/autopilot).
+In the meantime, we suggest that you use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link], where you have two versions of an app, one that is 'live' and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to facilitate this process. We can recommend the [cf-blue-green-deploy](https://github.com/bluemixgaragelondon/cf-blue-green-deploy) plugin.
 
 ### API access may have brief outages during beta
 
