@@ -12,15 +12,6 @@ If you want to use a custom buildpack because you need a newer version of a runt
 
 If you'd like to use custom buildpacks or the .NET Core buildpack, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-### Custom domains require CDN
-
-By default, your uploaded apps will be hosted on the ``cloudapps.digital`` domain. In production, you will probably want your app to be available through your own url (for example, ``yourapp.service.gov.uk``).
-
-Custom domains are not yet fully supported by GOV.UK PaaS due to TLS certificate issues.
-
-Currently, we recommend that you use a CDN to serve your app with a custom domain. If this is not a suitable solution for you, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) with details of your use case.
-
-
 ### 404s after commands that restart the app
 
 After you use a command that restarts application instances, such as ``cf push`` or ``cf restart``, your app may briefly return incorrect 404 errors. Apart from the brief downtime, this may lead to problems if the 404 is cached, or visiting web crawling bots (as used by search engines) receive a 404.

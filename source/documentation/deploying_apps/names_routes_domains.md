@@ -53,9 +53,6 @@ There are a few possible solutions to this problem:
 
 ### Custom domains
 
-In production, you will probably want your app to be available through your own url (for example, ``yourapp.service.gov.uk``).
+In production, you will probably want your app to be available through your own url (for example, ``yourapp.service.gov.uk``). Go to [using a custom domain](https://docs.cloud.service.gov.uk/#using-a-custom-domain) to see how to set this up. 
 
-Custom domains are not yet fully supported by GOV.UK PaaS due to TLS certificate issues. We are working on a solution for this.
-
-Currently, we recommend that you use a CDN to serve your app with a custom domain. If that's not suitable, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) with details of your use case.
 
