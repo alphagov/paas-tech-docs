@@ -53,6 +53,6 @@ There are a few possible solutions to this problem:
 
 ### Custom domains
 
-In production, you will probably want your app to be available through your own url (for example, ``yourapp.service.gov.uk``). Go to [using a custom domain](https://docs.cloud.service.gov.uk/#using-a-custom-domain) to see how to set this up. 
+In production, you will probably want your app to be available through your own url (for example, ``yourapp.service.gov.uk``). Go to [using a custom domain](#using-a-custom-domain) to see how to set this up.
 
 
