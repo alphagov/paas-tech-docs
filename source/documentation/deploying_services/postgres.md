@@ -59,7 +59,7 @@ Once you've created a service instance, you can't enable or disable encryption. 
 
 Amazon RDS has the capability to provide a read replica: a read-only copy of your PostgreSQL database. This can be useful for performance, availability or security reasons.
 
-See the [Amazon RD documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) to learn more.
+See the [Amazon RDS documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) to learn more.
 
 GOV.UK PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
 
