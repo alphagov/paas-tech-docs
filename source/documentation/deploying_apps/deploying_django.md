@@ -90,7 +90,7 @@ If you are just getting started learning CloudFoundry, you can use the sandbox s
 
     The `memory` line tells the PaaS how much memory to allocate to the app.
 
-1. If your app requires a database, [create a PostgreSQL backing service and bind it to your app](/#postgresql). Then see the section on [PostgreSQL setup]() below.
+1. If your app requires a database, [create a PostgreSQL backing service and bind it to your app](/#using-postgresql). Then see the section on [PostgreSQL setup](/#postgresql-setup-with-django) below.
 
 1. To push your app, do:
 

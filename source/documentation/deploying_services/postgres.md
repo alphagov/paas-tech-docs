@@ -160,7 +160,7 @@ Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is reta
 
 There are two ways you can restore data to an earlier state:
 
-1. You can restore to the latest snapshot yourself. See [Restoring a PostgreSQL service snapshot](#restoring-a-postgresql-service-snapshot) for details.
+1. You can restore to the latest snapshot yourself. See [Restoring a PostgreSQL service snapshot](#restoring-a-postgresql-service-snapshot-experimental) for details.
 
 2. We can manually restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Data can be restored to a new PostgreSQL service instance running in parallel, or it can replace the existing service instance.
 

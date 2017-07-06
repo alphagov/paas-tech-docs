@@ -17,7 +17,7 @@ Tenants can define their own Route Service instance by using a [User-Provided Se
 - It must be a HTTPS endpoint with a valid certificate.
 - It can be a application running in the platform itself or an external service on the Internet.
 - It must be reachable from the platform (ie. not blocked by a firewall or in a private network).
-- It must implement the [Route Service Protocol](/#route-service-protocol)
+- It must implement the [Route Service Protocol](/#implementing-a-route-service)
 
 This is how you define a User-Provided Route Service Instance and map it to the route of your app:
 
