@@ -111,8 +111,8 @@ Note that the only database service currently supported by PaaS is PostgreSQL. I
     where VARIABLE is a unique name for the variable, and `value` is the value to set.
 
 
-1. [Create a PostgreSQL backing service (if required) and bind it to your app](/#postgresql).
-    
+1. [Create a PostgreSQL backing service (if required) and bind it to your app](/#using-postgresql).
+
     To enable Rails support for database migrations, you may wish to create a `Procfile` in the same directory as your `manifest.yml` and `Gemfile`. The `Procfile` is a way to specify commands to be run when deploying your app.
 
     This is a minimal example of the `Procfile` content for *Rails 5.0*:

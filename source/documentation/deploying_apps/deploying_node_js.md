@@ -68,7 +68,7 @@ See [Tips for Node.js Applications](https://docs.cloudfoundry.org/buildpacks/nod
 
 If your app depends on a backing service such as PostgreSQL, it will need to parse the `VCAP_SERVICES` environment variable to get required details, such as service URLs and credentials.
 
-You must create the service and bind it to your Node.js app as described in the [Deploy a backing service](/#deploy-a-backing-service) section.
+You must create the service and bind it to your Node.js app as described in the [Deploy a backing service](/#deploy-a-backing-or-routing-service) section.
 
 You can use the [cfenv](https://www.npmjs.com/package/cfenv) module to assist with parsing the environment variables.
 
