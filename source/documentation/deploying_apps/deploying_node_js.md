@@ -49,8 +49,7 @@ This is the code for the example app we are going to use. It is a basic web serv
           "version": "0.0.1",
           "author": "Demo",
           "engines": {
-            "node": "6.1.0",
-            "npm": "2.7.4"
+            "node": "6.1.0"
           }
         }
 
