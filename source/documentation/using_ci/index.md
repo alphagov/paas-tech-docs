@@ -18,3 +18,7 @@ For security reasons, GOV.UK PaaS will lock your account if your CI system makes
 ### Credentials for automated accounts
 
 In order to avoid developer credentials leaking, particularly those with admin rights, you should should request a dedicated PaaS user account for use by your CI service. If you want to deploy to multiple spaces with your CI tool, use a different user account for each. Each user should only have `SpaceDeveloper` access to a single space within your organisation.
+
+To request a PaaS user account for a CI service, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) and tell us the email address of the CI user. This should be a unique email address, not already used by another PaaS account. If other people within your team need to be able to reset the password then we recommend that you use a group email address that they also receive the email for.
+
+We set up user accounts for CI services in the same way as user accounts for people; the accounts have the `SpaceDeveloper` role in the `sandbox` space.
