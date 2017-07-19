@@ -10,7 +10,7 @@ Currently, the following database services are available in the marketplace:
 
  - PostgreSQL
  - MySQL
- - MongoDB
+ - MongoDB (currently only available on private beta)
 
 
 Each service in the marketplace can have multiple plans available. For example, there are different PostgreSQL plans which vary by availability, storage capacity and encryption.

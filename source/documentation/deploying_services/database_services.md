@@ -4,7 +4,7 @@ GOV.UK PaaS enables you to create a database service and bind it to your app.
 
 In Cloud Foundry, each service may have multiple plans available with different characteristics.
 
-Currently, GOV.UK PaaS offers a service for PostgreSQL, MySQL and MongoDB, with multiple plans available.
+Currently, GOV.UK PaaS offers a service for PostgreSQL, MySQL and MongoDB, with multiple plans available. Please note that MongoDB is currently only available through private beta.
 
 To see the available plans, run:
 
