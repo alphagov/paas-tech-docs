@@ -1,41 +1,46 @@
-## Using PostgreSQL
+## Using Database Services
 
-GOV.UK PaaS enables you to create a PostgreSQL database service (powered by Amazon Web Services) and bind it to your app.
+GOV.UK PaaS enables you to create a database service and bind it to your app.
 
 In Cloud Foundry, each service may have multiple plans available with different characteristics.
 
-Currently, GOV.UK PaaS offers a ``postgres`` service with multiple plans available.
+Currently, GOV.UK PaaS offers a service for PostgreSQL, MySQL and MongoDB, with multiple plans available. Please note that MongoDB is currently only available through private beta.
 
 To see the available plans, run:
 
 ```
-cf marketplace -s postgres
+cf marketplace -s SERVICE
 ```
 
-Here is a shortened example of the sort of output you will see (the exact plans will vary):
+Where SERVICE is the service you want; it can currently take the following values:
+
+ * postgres
+ * mysql
+ * mongodb
+
+Here is a shortened example of the sort of output you will see for the PostgreSQL service (the exact plans will vary):
 
 ```
 service plan             description                                                                                                                                                       free or paid
-M-dedicated-9.5          20GB Storage, Dedicated Instance, Max 500 Concurrent Connections. Postgres Version 9.5. DB Instance Class: db.m4.large.                                           paid
-M-HA-dedicated-9.5       20GB Storage, Dedicated Instance, Highly Available, Max 500 Concurrent Connections. Postgres Version 9.5. DB Instance Class: db.m4.large.                         paid
+M-dedicated-X.X          20GB Storage, Dedicated Instance, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                                           paid
+M-HA-dedicated-X.X       20GB Storage, Dedicated Instance, Highly Available, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                         paid
 ...
-Free                     5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version 9.5. DB Instance Class: db.t2.micro.                              free
+Free                     5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.t2.micro.                              free
 ```
 
-You can look up the ``DB Instance Class``  to find out more detail about what these plans offer on [the AWS Product Details page](https://aws.amazon.com/rds/details/#DB_Instance_Classes).
+### Free and paid service plans
 
-### Free and paid PostgreSQL plans
-
-Most PostgreSQL plans are paid, meaning that we will bill you based on your usage of the service.
+Most plans are paid, meaning that we will bill you based on your usage of the service.
 
 There is a free plan available with limited storage. This should *only* be used for development or testing, not for production.
 
 Paid services may not be enabled for your organisation. If they're not enabled, when you try to set up a paid service, you'll receive the error "service instance cannot be created because paid service plans are not allowed". One of your [Org Managers](/#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
 
+### Failover process
 
-### High availability plans
+#### High availability plans - PostgreSQL and MySQL
 
-We recommend you use one of the high availability plans (indicated by `HA` in the name) for your production apps. These plans use Amazon RDS Multi-AZ instances which are designed to be 99.95% available (see [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details).
+We recommend you use one of the high availability plans (indicated by `HA` in the name) for your PostgreSQL and MySQL apps. These plans use Amazon RDS Multi-AZ instances which are designed to be 99.95% available (see [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details).
 
 When you use the high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.
 
@@ -47,37 +52,47 @@ See the [Amazon RDS documentation on the failover process](http://docs.aws.amazo
 
 You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. We can trigger a failover for you. Please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to arrange this.
 
-### Encrypted PostgreSQL plans
+#### High availability plans - MongoDB
+
+MongoDB uses replica sets i.e. clusters of MongoDB servers that replicate the contents of the master database. Replica sets provide high availability through sharding, a method for distributing data across multiple machines. A shard is a single mongod instance or replica set that stores some portion of a sharded cluster’s total data set. In the standard configuration for MongoDB on our service provider, you get a single-shard with three nodes in a replica-set. Mongo will push all write operations on to the primary data node and then propagate them to the secondary data node on the shard. Should the primary node fail, the secondary will be promoted to primary providing fault-tolerance and redundancy for your databases. The Mongo routers are responsible for dictating any failover, along with load-balancing operations to any of the nodes in the cluster.
+
+>Your Mongo instances are backed up automatically, but are not yet directly available to tenants. Please contact us if you need to recover a backup or want to know when related features will be in our roadmap.
+
+### Encrypted plans
 
 Plans with ``enc`` in the name include encryption at rest of the database storage. This means that the data on the disk and in snapshots is encrypted.
 
 We recommend that you use an encrypted plan for production services or those that use real data.
 
-Once you've created a service instance, you can't enable or disable encryption. There's no way to convert an unencrypted PostgreSQL service instance to an encrypted one later.
+Once you've created a service instance, you can't enable or disable encryption. There's no way to convert an unencrypted service instance to an encrypted one later.
+
+> This applies to PostgreSQL and MySQL services. There are currently no encrypted plans for the MongoDB service.
 
 ### Read replicas
 
-Amazon RDS has the capability to provide a read replica: a read-only copy of your PostgreSQL database. This can be useful for performance, availability or security reasons.
+Amazon RDS has the capability to provide a read replica: a read-only copy of your database. This can be useful for performance, availability or security reasons.
 
 See the [Amazon RDS documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) to learn more.
 
 GOV.UK PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
 
-### Setting up a PostgreSQL service
+> This applies to PostgreSQL and MySQL services.
+
+### Setting up a service
 
 To create a service and bind it to your app:
 
 1. From the command line, run:
 
-    ``cf marketplace -s postgres``
+    ``cf marketplace -s SERVICE``
 
-    to see details of the available plans.
+    where SERVICE is the service you want, to see details of the available plans.
 
 3. Run:
 
     ``cf create-service SERVICE PLAN SERVICE_INSTANCE``
 
-    where SERVICE is the service you want, PLAN is the plan you want, and SERVICE_INSTANCE is a unique, descriptive name for this instance of the service; for example:
+    where PLAN is the plan you want, and SERVICE_INSTANCE is a unique, descriptive name for this instance of the service; for example:
 
     ``cf create-service postgres M-dedicated-9.5 my-pg-service``
 
@@ -90,6 +105,8 @@ To create a service and bind it to your app:
     for example:
 
     ``cf service my-pg-service``
+
+    where SERVICE_INSTANCE is the name you gave the instance when you created it.
 
 4. Wait until the service status reported by the above command is 'create succeeded'. Here is an example of the type of output you will see once the service is created:
 
@@ -111,11 +128,11 @@ To create a service and bind it to your app:
 
 
 
-5. You can now bind the PostgreSQL service to your app. Run:
+5. You can now bind the service to your app. Run:
 
     ``cf bind-service APPLICATION SERVICE_INSTANCE``
 
-    where APPLICATION is the name of a deployed instance of your application (exactly as specified in your manifest or push command), and SERVICE_INSTANCE is the name you gave the instance when you created it, for example:
+    where APPLICATION is the name of a deployed instance of your application (exactly as specified in your manifest or push command), for example:
 
     ``cf bind-service my-app my-pg-service``
 
@@ -130,9 +147,11 @@ To create a service and bind it to your app:
     and check the ``Bound apps:`` line of the output.
 
 
-### Accessing PostgreSQL from your app
+### Accessing the service from your app
 
-Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the PostgreSQL service. Most libraries use TLS by default.
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
+
+>MongoDB uses self-signed certificates. In order for your app to verify a TLS connection to the MongoDB service, the app must use a CA certificate included in a VCAP_SERVICES environmental variable.
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the  service and then set the `DATABASE_URL` variable to the first database found.
 

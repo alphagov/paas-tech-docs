@@ -6,7 +6,12 @@ Many 12-factor applications rely on backing services such as a database, an emai
 
 In Cloud Foundry, backing and routing services are referred to as 'services' and are available through the Cloud Foundry ``cf marketplace`` command.
 
-Currently, the only services available in the marketplace are the backing [PostgreSQL database service](/#using-postgresql) and [MySQL database service](/#using-mysql).
+Currently, the following database services are available in the marketplace:
+
+ - PostgreSQL
+ - MySQL
+ - MongoDB (currently only available on private beta)
+
 
 Each service in the marketplace can have multiple plans available. For example, there are different PostgreSQL plans which vary by availability, storage capacity and encryption.
 
