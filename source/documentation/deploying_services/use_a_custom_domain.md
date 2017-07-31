@@ -81,13 +81,13 @@ Status: create succeeded
 Message: Service instance provisioned [example.com => origin-my-paas-app.cloudapps.digital]; CDN domain d3nrs0916m1mk2.cloudfront.net
 ```
 
-It may take some time for Cloudfront to serve your origin from all locations. You can check in advance by hitting Cloudfront and passing the custom domain in the `Host` header, using the example below. The Cloudfront domain can be found in the output of the command above.
+It may take some time for CloudFront to serve your origin from all locations. You can check in advance by hitting CloudFront and passing the custom domain in the `Host` header, using the example below. The CloudFront domain can be found in the output of the command above.
 
 ```
-curl -H "Host: <Custom domain>" https://<Cloudfront domain>/
+curl -H "Host: <Custom domain>" https://<CloudFront domain>/
 ```
 
-When this is working consistently, you can flip your DNS record to start serving content from the CDN. You may still have to wait for up to an hour to make sure the Cloudfront distribution is updated everywhere.
+When this is working consistently, you can flip your DNS record to start serving content from the CDN. You may still have to wait for up to an hour to make sure the CloudFront distribution is updated everywhere.
 
 ##### Step 2: Create CNAME record(s)
 
@@ -105,7 +105,15 @@ After the record is created wait for up to an hour for the CloudFront distributi
 
 #### CDN Configuration Options
 
+##### Options available
 
+Name | Required | Description | Default
+--- | --- | --- | ---
+`domain` | *Required* | Your custom domain (or domains separated by commas) |
+`cookies` | *Optional* | Forward cookies to the origin | `true` |
+`headers` | *Optional* | A list of headers to forward to the origin | `["Host"]` |
+
+##### Cookies
 
 [Forwarding cookies to your origin](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html) can be disabled by setting the `cookies` parameter to `false`.
 
@@ -114,12 +122,23 @@ cf create-service cdn-route cdn-route my-cdn-route \
     -c '{"domain": "example.com", "cookies": false}'
 ```
 
-##### Options available
+##### Headers
 
-Name | Required | Description | Default
---- | --- | --- | ---
-`domain` | *Required* | Your custom domain (or domains separated by commas) |
-`cookies` | *Optional* | Forward cookies to the origin | `true` |
+By default our service broker configures CloudFront to forward the `Host` header to your app. Depending on [how CloudFront handles certain headers](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior) [external link], you may want to whitelist extra headers:
+
+```bash
+cf create-service cdn-route cdn-route my-cdn-route \
+    -c '{"domain": "example.com", "headers": ["Accept", "Authorization"]}'
+```
+
+You can supply up to nine headers. If you need to allow more headers you will have to forward all headers:
+
+```bash
+cf create-service cdn-route cdn-route my-cdn-route \
+    -c '{"domain": "example.com", "headers": ["*"]}'
+```
+
+Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](#more-about-how-the-cdn-works) section for details.
 
 #### Troubleshooting
 
@@ -162,6 +181,8 @@ CloudFront uses your application's `Cache-Control` or `Expires` HTTP headers to 
 
 While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV.UK PaaS support](https://www.cloud.service.gov.uk/support.html) can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).
 
+You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) [external link] for more detail. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
+
 #### Authentication
 
-As noted above, cookies are passed through the CDN by default, meaning that cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, contact [GOV.UK PaaS support](https://www.cloud.service.gov.uk/support.html).
+As noted above, cookies are passed through the CDN by default, meaning that cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the above guidance on [CDN configuration options](#cdn-configuration-options).
