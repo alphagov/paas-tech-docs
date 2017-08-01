@@ -2,15 +2,11 @@
 
 While GOV.UK PaaS is built using Cloud Foundry technology, we don't support all Cloud Foundry features. This section explains some Cloud Foundry features that are not enabled, as well as some limitations of the beta phase.
 
-### Custom buildpacks and .NET are not supported
+### .NET is not supported with standard buildpacks
 
 Cloud Foundry uses buildpacks to provide runtime and framework support for applications in different languages. 
 
-GOV.UK PaaS does not support [custom buildpacks](https://docs.cloudfoundry.org/buildpacks/custom.html) [external link]. We support the [standard buildpacks](https://docs.cloudfoundry.org/buildpacks/) [external link] with the exception of the .NET Core buildpack as we have not yet identified a user need for it.
-
-If you want to use a custom buildpack because you need a newer version of a runtime or framework, please note that we update the standard buildpacks on a regular basis (approximately monthly).
-
-If you'd like to use custom buildpacks or the .NET Core buildpack, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+GOV.UK PaaS supports both [standard buildpacks](https://docs.cloudfoundry.org/buildpacks/) [external link] and [custom buildpacks](https://docs.cloudfoundry.org/buildpacks/custom.html) [external link]. Please note that the [.NET Core buildpack](https://docs.cloudfoundry.org/buildpacks/dotnet-core/index.html) [external link] is only available as a custom buildpack.
 
 ### 404s after commands that restart the app
 
