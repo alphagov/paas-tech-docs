@@ -81,7 +81,7 @@ Status: create succeeded
 Message: Service instance provisioned [example.com => origin-my-paas-app.cloudapps.digital]; CDN domain d3nrs0916m1mk2.cloudfront.net
 ```
 
-It may take some time for CloudFront to serve your origin from all locations. You can check in advance by hitting CloudFront and passing the custom domain in the `Host` header, using the example below. The CloudFront domain can be found in the output of the command above.
+It may take some time for CloudFront to serve your origin from all locations, because it is a globally distributed network. You can check in advance by sending requests to CloudFront and passing the custom domain in the `Host` header, using the example below. The CloudFront domain can be found by running `cf service my-cdn-route`.
 
 ```
 curl -H "Host: <Custom domain>" https://<CloudFront domain>/
