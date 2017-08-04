@@ -105,6 +105,8 @@ After the record is created wait for up to an hour for the CloudFront distributi
 
 #### CDN Configuration Options
 
+The following table shows the values you can provide when provisioning or updating a CDN. Further information on using the headers and cookies parameters can be found in the subsections below the table.
+
 ##### Options available
 
 Name | Required | Description | Default
