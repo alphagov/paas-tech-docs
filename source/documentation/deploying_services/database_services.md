@@ -6,6 +6,20 @@ In Cloud Foundry, each service may have multiple plans available with different 
 
 Currently, GOV.UK PaaS offers a service for PostgreSQL, MySQL and MongoDB, with multiple plans available. Please note that MongoDB is currently only available through private beta.
 
+## PostgreSQL
+
+PostgreSQL is a general purpose and object-relational database management system. It allows you to add custom functions developed using different programming languages such as C/C++ and Java, and is designed to be extensible.
+
+## MySQL
+
+MySQL is an open source relational database management system that uses Structured Query Language (SQL).
+
+## MongoDB
+
+MongoDB is an open-source cross-platform document-oriented database program that uses JSON-like documents with schemas.
+
+## Using Database Services
+
 To see the available plans, run:
 
 ```
