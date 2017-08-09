@@ -3,7 +3,7 @@
 
 This section covers how to deploy a basic Node.js application to GOV.UK PaaS. See the Cloud Foundry [Tips for Node.js Applications](http://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] for more details.
 
-Note that the only database service currently supported by PaaS is PostgreSQL. If your Node.js app requires a database, it must be able to work with PostgreSQL.
+Note that the PaaS currently supports the PostgreSQL, MySQL and MongoDB database services. If your Node.js app requires a database, it must be able to work with one of these.
 
 These instructions assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
