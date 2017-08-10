@@ -8,15 +8,15 @@ Currently, GOV.UK PaaS offers a service for PostgreSQL, MySQL and MongoDB, with 
 
 ## PostgreSQL
 
-PostgreSQL is a general purpose and object-relational database management system. It allows you to add custom functions developed using different programming languages such as C/C++ and Java, and is designed to be extensible.
+PostgreSQL is an object-relational database management system. It is open-source and designed to be extensible; currently the postgis and uuid-ossp extensions are enabled. 
 
 ## MySQL
 
-MySQL is an open source relational database management system that uses Structured Query Language (SQL).
+MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is powered by Oracle.
 
 ## MongoDB
 
-MongoDB is an open-source cross-platform document-oriented database program that uses JSON-like documents with schemas.
+MongoDB is an open-source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/).
 
 ## Using Database Services
 
