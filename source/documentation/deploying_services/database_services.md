@@ -12,7 +12,7 @@ PostgreSQL is an object-relational database management system. It is open-source
 
 ## MySQL
 
-MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is powered by Oracle.
+MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is backed by Oracle.
 
 ## MongoDB
 
