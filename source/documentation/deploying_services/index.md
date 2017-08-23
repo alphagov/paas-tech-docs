@@ -1,20 +1,8 @@
 # Deploy a backing or routing service
 
-## Services and plans
-
 Many 12-factor applications rely on backing services such as a database, an email delivery service or a monitoring system. Routing services can be used to proxy and perform preprocessing on application requests such as caching, rate limiting or authentication.
 
-In Cloud Foundry, backing and routing services are referred to as 'services' and are available through the Cloud Foundry ``cf marketplace`` command. GOV.UK PaaS enables you to create a database service and bind it to your app. 
-
-Currently, the following database services are available in the marketplace:
-
- - PostgreSQL
- - MySQL
- - MongoDB (currently only available on private beta)
-
-Each service in the marketplace can have multiple plans available with different characteristics. For example, there are different PostgreSQL plans which vary by availability, storage capacity and encryption.
-
-Users can also define their own external services that are not available in the marketplace by using [User-Provided Service Instances](/#user-provided-service-instance).
+In Cloud Foundry, backing and routing services are referred to as 'services' and are available through the Cloud Foundry ``cf marketplace`` command. GOV.UK PaaS enables you to create a database service and bind it to your app. The available database services are detailed below.
 
 ## PostgreSQL
 
@@ -26,11 +14,17 @@ MySQL is an open source relational database management system that uses Structur
 
 ## MongoDB
 
-MongoDB is an open-source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/).
+MongoDB is an open-source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). It currently only available on private beta.
+
+## Services and plans
+
+Each service in the marketplace can have multiple plans available with different characteristics. For example, there are different PostgreSQL plans which vary by availability, storage capacity and encryption.
+
+Users can also define their own external services that are not available in the marketplace by using [User-Provided Service Instances](/#user-provided-service-instance).
 
 ### Paid service plans
 
-Some service plans are paid: that is, you can potentially be billed by us based on your usage of the service. There is a free plan available with limited storage which should only be used for development or testing, not production.
+Some service plans are paid; you can potentially be billed by us based on your usage of the service. There is a free plan available with limited storage which should only be used for development or testing, not production.
 
 By default, access to paid plans is not enabled for a new organisation. Whether this is enabled or not is controlled by your [organisation's quota settings](/#quotas).
 
