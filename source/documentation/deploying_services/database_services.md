@@ -1,4 +1,4 @@
-## Using Database Services
+## Using database services
 
 To see the available plans, run:
 
