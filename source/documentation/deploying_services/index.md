@@ -1,29 +1,34 @@
 # Deploy a backing or routing service
 
-## Services and plans
-
 Many 12-factor applications rely on backing services such as a database, an email delivery service or a monitoring system. Routing services can be used to proxy and perform preprocessing on application requests such as caching, rate limiting or authentication.
 
-In Cloud Foundry, backing and routing services are referred to as 'services' and are available through the Cloud Foundry ``cf marketplace`` command.
+In Cloud Foundry, backing and routing services are referred to as 'services' and are available through the Cloud Foundry ``cf marketplace`` command. GOV.UK PaaS enables you to create a database service and bind it to your app. The available database services are detailed below.
 
-Currently, the following database services are available in the marketplace:
+## PostgreSQL
 
- - PostgreSQL
- - MySQL
- - MongoDB (currently only available on private beta)
+PostgreSQL is an object-relational database management system. It is open-source and designed to be extensible; currently the postgis and uuid-ossp extensions are enabled.
 
+## MySQL
 
-Each service in the marketplace can have multiple plans available. For example, there are different PostgreSQL plans which vary by availability, storage capacity and encryption.
+MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is backed by Oracle.
+
+## MongoDB
+
+MongoDB is an open-source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). It currently only available on private beta.
+
+## Services and plans
+
+Each service in the marketplace can have multiple plans available with different characteristics. For example, there are different PostgreSQL plans which vary by availability, storage capacity and encryption.
 
 Users can also define their own external services that are not available in the marketplace by using [User-Provided Service Instances](/#user-provided-service-instance).
 
 ### Paid service plans
 
-Some service plans are paid: that is, you can potentially be billed by us for using them.
+Some service plans are paid; you can potentially be billed by us based on your usage of the service. There is a free plan available with limited storage which should only be used for development or testing, not production.
 
 By default, access to paid plans is not enabled for a new organisation. Whether this is enabled or not is controlled by your [organisation's quota settings](/#quotas).
 
-If you try to use a paid service and receive an error stating "service instance cannot be created because paid service plans are not allowed", please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+If paid plans are not enabled, when you try to use a paid service you will receive an error stating "service instance cannot be created because paid service plans are not allowed". One of your [Org Managers](https://docs.cloud.service.gov.uk/#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
 
 ### Accessing services
 

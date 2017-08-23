@@ -1,24 +1,4 @@
-## Using Database Services
-
-GOV.UK PaaS enables you to create a database service and bind it to your app.
-
-In Cloud Foundry, each service may have multiple plans available with different characteristics.
-
-Currently, GOV.UK PaaS offers a service for PostgreSQL, MySQL and MongoDB, with multiple plans available. Please note that MongoDB is currently only available through private beta.
-
-## PostgreSQL
-
-PostgreSQL is an object-relational database management system. It is open-source and designed to be extensible; currently the postgis and uuid-ossp extensions are enabled. 
-
-## MySQL
-
-MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is backed by Oracle.
-
-## MongoDB
-
-MongoDB is an open-source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/).
-
-## Using Database Services
+## Using database services
 
 To see the available plans, run:
 
@@ -41,14 +21,6 @@ M-HA-dedicated-X.X       20GB Storage, Dedicated Instance, Highly Available, Max
 ...
 Free                     5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.t2.micro.                              free
 ```
-
-### Free and paid service plans
-
-Most plans are paid, meaning that we will bill you based on your usage of the service.
-
-There is a free plan available with limited storage. This should *only* be used for development or testing, not for production.
-
-Paid services may not be enabled for your organisation. If they're not enabled, when you try to set up a paid service, you'll receive the error "service instance cannot be created because paid service plans are not allowed". One of your [Org Managers](/#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
 
 ### Failover process
 
