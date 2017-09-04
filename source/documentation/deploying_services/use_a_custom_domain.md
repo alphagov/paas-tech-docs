@@ -125,9 +125,9 @@ Service creation usually takes approximately one hour. Whilst a service is being
 
 It may take some time for CloudFront to serve your origin from all locations, because it is a globally distributed network. You can check in advance by sending requests to CloudFront and passing the custom domain in the `Host` header, using the example below. The CloudFront domain can be found by running `cf service my-cdn-route`.
 
-    ```
-    curl -H "Host: <Custom domain>" https://<CloudFront domain>/
-    ```
+```
+curl -H "Host: <Custom domain>" https://<CloudFront domain>/
+```
 
 When this is working consistently, you can flip your DNS record to start serving content from the CDN. You may still have to wait for up to an hour to make sure the CloudFront distribution is updated everywhere.
 
