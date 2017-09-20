@@ -105,7 +105,7 @@ We will deploy it as an application in the platform itself. Then we will bind th
 4. Finally, bind the Route Service to the application route:
 
     ```
-    cf bind-route-service cloudpipelineapps.digital my-basic-auth-service --hostname myapp
+    cf bind-route-service cloudapps.digital my-basic-auth-service --hostname myapp
     ```
 
 The application in https://myapp.cloudapps.digital will now ask for basic HTTP authentication, with login `myuser` and password `pass1234`.
