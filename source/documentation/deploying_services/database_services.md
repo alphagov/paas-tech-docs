@@ -133,6 +133,29 @@ To create a service and bind it to your app:
     and check the ``Bound apps:`` line of the output.
 
 
+### Changing service plans
+
+It is possible to upgrade to a larger service plan using the `update-service` command. For example if you are currently on a "Free" postgres plan and wanted to upgrade to a larger high-availability plan you could run:
+
+```
+cf update-service my-pg-service -p S-HA-dedicated-9.5
+```
+> It is not currently supported to _downgrade_ service plans.
+
+The process of changing plan will begin immediately and will usually be completed within about an hour. You can check the status of the change by viewing the output of `cf services`.
+
+#### Maintenance windows (PostgreSQL and MySQL onyl)
+
+Depending on the service, the process of migrating to a new plan may cause interuption to your service instance. If you would rather queue the change to begin during a maintainence window then you can run:
+
+```
+cf update-service my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
+```
+
+> Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
+
+
+
 ### Accessing the service from your app
 
 Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
@@ -155,7 +178,15 @@ Minor version upgrades (for example from 9.4.1 to 9.4.2) will be applied during 
 
 For more details, see the [Amazon RDS Maintenance documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html) [external page].
 
-If you need to know the time of your maintenance window, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). Window start times will vary from 22:00 to 06:00 UTC. We will add the ability to set the time of the maintenance window in a future version of GOV.UK PaaS.
+If you need to know the time of the default maintenance window, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). Window start times will vary from 22:00 to 06:00 UTC. You may also, prefer to set your own maintenance window by setting `preferred_maintenance_window` in your custom parameters. It would look something like this:
+
+```
+cf update-service postgres PLAN NEW_SERVICE_INSTANCE -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
+```
+
+Which essentially would set it to Tuesday morning between 4:00 and 4:30 AM UTC.
+
+For more information about syntax, please reffer to [Amazon RDS Maintenance Documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow).
 
 ### PostgreSQL service backup
 
