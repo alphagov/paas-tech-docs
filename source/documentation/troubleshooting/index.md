@@ -55,6 +55,7 @@ filter {
         # if successful, save original `@timestamp` and `host` fields created by logstash
         add_field => [ "received_at", "%{@timestamp}" ]
         add_field => [ "received_from", "%{host}" ]
+        tag_on_failure => ["_syslogparsefailure"]
     }
 
     # parse the syslog pri field into severity/facility
@@ -63,8 +64,8 @@ filter {
     # replace @timestamp field with the one from syslog
     date { match => [ "syslog_timestamp", "ISO8601" ] }
 
-    if !("_grokparsefailure" in [tags]) {
-        # if we successfully parsed grok, replace the message and source_host fields
+    if !("_syslogparsefailure" in [tags]) {
+        # if we successfully parsed syslog, replace the message and source_host fields
         mutate {
             replace => [ "source_host", "%{syslog_host}" ]
             replace => [ "message", "%{syslog_msg}" ]
