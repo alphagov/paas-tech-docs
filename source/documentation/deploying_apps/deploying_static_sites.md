@@ -53,9 +53,6 @@ These steps assume you have already carried out the setup process explained in t
 
 The site should now be live at `https://APPNAME.cloudapps.digital`.
 
-**Note:** The `http://` version of the URL will not work. You must enter `https://`.
-
-
 ###Adding more instances
 
 For a production service, you should run at least two instances of the app to ensure availability.
