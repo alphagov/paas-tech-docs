@@ -32,6 +32,18 @@ After deployment, you can increase the running instances to two using:
 
 ### Caveats
 * Your app should not write to local storage. Cloud Foundry local storage is ephemeral and can be deleted at any time.
-* You may need to set environment variables for your app to work. All configuration information should be stored in environment variables, not in the code. 
+* You may need to set environment variables for your app to work. All configuration information should be stored in environment variables, not in the code.
 * Instances will be restarted if they [exceed memory limits](/#quotas).
 * Your application should write all its log messages to `STDOUT`/`STDERR`, rather than a log file.
+
+## Secure and non-secure requests
+
+Requests could be made to the non-secure `http://` protocol due to:
+
+ * misconfiguration of an app that allows non-encrypted traffic through
+ * a service linking to the HTTP version of a page by mistake
+
+In this situation, any requests made to the `http://` protocol will be
+automatically redirected to the base HTTPS version of that URL. The original
+query path and query parameters will be removed. This prevents a site from
+repeatedly redirecting back to the HTTP protocol without the user noticing.
