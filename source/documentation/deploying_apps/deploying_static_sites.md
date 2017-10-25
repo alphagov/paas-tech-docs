@@ -17,7 +17,7 @@ These steps assume you have already carried out the setup process explained in t
 
 2. Add some markup to the `index.html` file:
 
-    
+
         <html>
           <head>
             <title>Static Site</title>
@@ -26,9 +26,9 @@ These steps assume you have already carried out the setup process explained in t
             <p>Welcome to the static site!</p>
           </body>
         </html>
-    
 
-3. Create a `manifest.yml` file in the same directory. The manifest file tells 
+
+3. Create a `manifest.yml` file in the same directory. The manifest file tells
    Cloud Foundry what to do with your app.
 
         ---
@@ -36,7 +36,7 @@ These steps assume you have already carried out the setup process explained in t
         - name: my-static-site
           memory: 64M
           buildpack: staticfile_buildpack
-    
+
     Replace ``my-static-site`` with a unique name for your app. (You can use ``cf apps`` to see apps which already exist).
 
     The `memory` line tells the PaaS how much memory to allocate to the app.
@@ -48,12 +48,12 @@ These steps assume you have already carried out the setup process explained in t
     ``
     cf push
     ``
-    
+
     If you do not specify an app name with the ``push`` command, the name  specified in the manifest file is used.
 
 The site should now be live at `https://APPNAME.cloudapps.digital`.
 
-###Adding more instances
+### Adding more instances
 
 For a production service, you should run at least two instances of the app to ensure availability.
 
@@ -68,4 +68,3 @@ or by adding this to the manifest and pushing again:
   ...
   instances: 2
 ```
-
