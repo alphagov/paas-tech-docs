@@ -1,7 +1,6 @@
 ## PostgreSQL connection problems
 
-If you have trouble connecting your app to a postgres backing service:
-
+If you are having trouble connecting your app to a PostgreSQL database, follow the steps below. You can also apply these instructions to [other backing services](https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service). If you require more guidance for other supported backing services, contact us at gov-uk-paas-support@digital.cabinet-office.gov.uk.
 
 1. Ensure your app is making a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the PostgreSQL service.
 2. Use ``cf service SERVICE_INSTANCE`` to check that the service is bound to the app.
