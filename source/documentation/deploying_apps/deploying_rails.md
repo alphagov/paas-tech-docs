@@ -64,9 +64,9 @@ You can add another instance of your app by running:
 
 ``cf scale APPNAME -i 2``
 
-###Deploying with a PostgreSQL database
+###Deploying with a database
 
-Note that the only database service currently supported by PaaS is PostgreSQL. If your Rails app requires a database, it must be able to work with PostgreSQL.
+Note that the PaaS currently supports the PostgreSQL, MySQL and MongoDB database services. If your Rails app requires a database, it must be able to work with one of these.
 
  The Cloud Foundry buildpack for Ruby automatically gets the details of the first available PostgreSQL service from the ``VCAP_SERVICES`` environment variable and sets the Ruby `DATABASE_URL` environment variable accordingly. Ensure that your app is configured to use `DATABASE_URL` to set its database configuration when deployed to the PaaS.
 
