@@ -3,7 +3,7 @@
 
 This section covers how to deploy a basic Node.js application to GOV.UK PaaS. See the Cloud Foundry [Tips for Node.js Applications](http://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] for more details.
 
-> If your app requires a [backing service](https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for both are given in this section.
+> If your app requires a [backing service](https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
 These instructions assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
