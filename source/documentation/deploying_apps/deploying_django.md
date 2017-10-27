@@ -2,7 +2,7 @@
 
 This section explains how to deploy an app using the Django framework. You may also need to refer to the [Cloud Foundry documentation about the Python buildpack](https://docs.cloudfoundry.org/buildpacks/python/index.html) [external link].
 
-> If your app requires a [backing service](https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for both are given in this section.
+> If your app requires a [backing service](https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
 These steps assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
