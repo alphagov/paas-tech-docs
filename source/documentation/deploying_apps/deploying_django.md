@@ -2,7 +2,7 @@
 
 This section explains how to deploy an app using the Django framework. You may also need to refer to the [Cloud Foundry documentation about the Python buildpack](https://docs.cloudfoundry.org/buildpacks/python/index.html) [external link].
 
-> If your app requires a [backing service](https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
+> If your app requires a [backing service](/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
 These steps assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
@@ -90,7 +90,7 @@ If you are just getting started learning CloudFoundry, you can use the sandbox s
 
     The `memory` line tells the PaaS how much memory to allocate to the app.
 
-1. If your app requires a database, [create a PostgreSQL backing service and bind it to your app](https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service). Then see the section on [PostgreSQL setup](/#postgresql-setup-with-django) below.
+1. If your app requires a database, [create a PostgreSQL backing service and bind it to your app](/#deploy-a-backing-or-routing-service). Then see the section on [PostgreSQL setup](/#postgresql-setup-with-django) below.
 
 1. To push your app, do:
 
@@ -104,7 +104,7 @@ You can now view your app at `https://APPNAME.cloudapps.digital`.
 
 ### PostgreSQL setup with Django
 
-These instructions are for deploying a Django app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+These instructions are for deploying a Django app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 Add these lines to your ``requirements.txt``:
 
