@@ -17,7 +17,7 @@ It's also important to realise that if you deploy an app using the same name and
 
 ### Deploying an app
 
-To deploy a Rails app that doesn't require a backing service.
+To deploy a Rails app that doesn't require a backing service:
 
 1. Put the code for your Rails app into a local directory (for example, by checking it out of version control).
 
