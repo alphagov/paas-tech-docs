@@ -4,7 +4,7 @@
 
 Cloud Foundry uses buildpacks to provide runtime and framework support for applications in different languages (for example ensuring your app code has both the Ruby runtime and the  Rails framework available to help it run). GOV.UK PaaS supports both standard and custom buildpacks:
 
-- [standard buildpacks](https://docs.cloudfoundry.org/buildpacks/#system-buildpacks) [external link] are buildpacks for common languages and frameworks that are supported by Cloud Foundry
+- [standard buildpacks](https://docs.cloudfoundry.org/buildpacks/#system-buildpacks) [external link] are buildpacks for common languages and frameworks that are supported by Cloud Foundry. You can check the installed buildpacks and their versions by running `cf buildpacks`.
 - custom buildpacks are developed by the wider community to enable hosting of applications in additional languages or frameworks
 - docker images are a packaging format, and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks
 
