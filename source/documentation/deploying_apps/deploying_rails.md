@@ -3,6 +3,7 @@
 
 This section explains minimal steps for deploying a basic Rails app. For full details of how to deploy Ruby on Rails apps, see the official Cloud Foundry guide [Getting Started Deploying Ruby on Rails Apps](http://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html) [external link]. 
 
+> If your app requires a [backing service](/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
 These steps assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
@@ -14,9 +15,9 @@ We have provided a ``sandbox`` space for you to use for learning about the PaaS.
 
 It's also important to realise that if you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team.
 
-###Deploying a non-database app
+### Deploying an app
 
-This is how to deploy a Rails app that doesn't require a database.
+To deploy a Rails app that doesn't require a backing service:
 
 1. Put the code for your Rails app into a local directory (for example, by checking it out of version control).
 
@@ -64,9 +65,9 @@ You can add another instance of your app by running:
 
 ``cf scale APPNAME -i 2``
 
-###Deploying with a PostgreSQL database
+### Deploying with a PostgreSQL database
 
-Note that the only database service currently supported by PaaS is PostgreSQL. If your Rails app requires a database, it must be able to work with PostgreSQL.
+These instructions are for deploying a Rails app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
  The Cloud Foundry buildpack for Ruby automatically gets the details of the first available PostgreSQL service from the ``VCAP_SERVICES`` environment variable and sets the Ruby `DATABASE_URL` environment variable accordingly. Ensure that your app is configured to use `DATABASE_URL` to set its database configuration when deployed to the PaaS.
 
@@ -111,7 +112,7 @@ Note that the only database service currently supported by PaaS is PostgreSQL. I
     where VARIABLE is a unique name for the variable, and `value` is the value to set.
 
 
-1. [Create a PostgreSQL backing service (if required) and bind it to your app](/#using-postgresql).
+1. [Create a PostgreSQL backing service (if required) and bind it to your app](/#deploy-a-backing-or-routing-service).
 
     To enable Rails support for database migrations, you may wish to create a `Procfile` in the same directory as your `manifest.yml` and `Gemfile`. The `Procfile` is a way to specify commands to be run when deploying your app.
 

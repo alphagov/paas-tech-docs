@@ -3,7 +3,7 @@
 
 This section covers how to deploy a basic Node.js application to GOV.UK PaaS. See the Cloud Foundry [Tips for Node.js Applications](http://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] for more details.
 
-Note that the only database service currently supported by PaaS is PostgreSQL. If your Node.js app requires a database, it must be able to work with PostgreSQL.
+> If your app requires a [backing service](/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
 These instructions assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
@@ -63,7 +63,9 @@ This is the code for the example app we are going to use. It is a basic web serv
 
 See [Tips for Node.js Applications](https://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] in the Cloud Foundry documentation for more information.
 
-###PostgreSQL setup with Node.js
+### PostgreSQL setup with Node.js
+
+These instructions are for deploying a Node.js app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 If your app depends on a backing service such as PostgreSQL, it will need to parse the `VCAP_SERVICES` environment variable to get required details, such as service URLs and credentials.
 
