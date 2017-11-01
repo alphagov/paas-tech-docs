@@ -1,4 +1,4 @@
-## Using database services
+## Using backing services
 
 To see the available plans, run:
 
