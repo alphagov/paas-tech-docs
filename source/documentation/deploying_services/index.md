@@ -14,7 +14,15 @@ MySQL is an open source relational database management system that uses Structur
 
 ## MongoDB
 
-MongoDB is an open-source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). It currently only available on private beta.
+MongoDB is an open-source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). It is currently only available on private beta.
+
+## Redis
+
+Redis is an open-source in-memory data store that can be used as a database cache or message broker. It is currently only available on private beta.
+
+## Elasticsearch
+
+Elasticsearch is an open-source full text RESTful search and analytics engine that allows you to store and search data. It is currently only available on private beta.
 
 ## Services and plans
 
@@ -40,4 +48,4 @@ Cloud Foundry enables tenants to define [User-Provided Service Instance](https:/
 
 ### Future services
 
-We are going to add more services in future based on demand, including Elasticsearch and Redis. If you need a particular backing service that we don't yet support, please let us know at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+If you need a particular backing service that we don't yet support, please let us know at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).

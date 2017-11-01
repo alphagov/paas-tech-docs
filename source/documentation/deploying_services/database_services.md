@@ -11,6 +11,8 @@ Where SERVICE is the service you want; it can currently take the following value
  * postgres
  * mysql
  * mongodb
+ * redis
+ * elasticsearch
 
 Here is a shortened example of the sort of output you will see for the PostgreSQL service (the exact plans will vary):
 
@@ -44,6 +46,14 @@ MongoDB uses replica sets i.e. clusters of MongoDB servers that replicate the co
 
 >Your Mongo instances are backed up automatically, but are not yet directly available to tenants. Please contact us if you need to recover a backup or want to know when related features will be in our roadmap.
 
+#### High availability plans - Redis
+
+Visit the [Compose documentation](https://help.compose.com/docs/redis-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Redis service.
+
+#### High availability plans - Elasticsearch
+
+Visit the [Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
+
 ### Encrypted plans
 
 Plans with ``enc`` in the name include encryption at rest of the database storage. This means that the data on the disk and in snapshots is encrypted.
@@ -52,7 +62,7 @@ We recommend that you use an encrypted plan for production services or those tha
 
 Once you've created a service instance, you can't enable or disable encryption. There's no way to convert an unencrypted service instance to an encrypted one later.
 
-> This applies to PostgreSQL and MySQL services. There are currently no encrypted plans for the MongoDB service.
+> This currently only applies to PostgreSQL and MySQL services.
 
 ### Read replicas
 
@@ -160,7 +170,7 @@ cf update-service my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance
 
 Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
 
->MongoDB uses self-signed certificates. In order for your app to verify a TLS connection to the MongoDB service, the app must use a CA certificate included in a VCAP_SERVICES environmental variable.
+>MongoDB and Elasticsearch use self-signed certificates. In order for your app to verify a TLS connection to these services, the app must use a CA certificate included in a VCAP_SERVICES environmental variable.
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the  service and then set the `DATABASE_URL` variable to the first database found.
 
