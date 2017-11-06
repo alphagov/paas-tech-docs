@@ -4,7 +4,7 @@ Right now, development teams spend considerable time and money setting up all th
 
 Your development team can use PaaS to deploy and run government applications written in a range of languages and web frameworks. You’ll simply need to push your source code to the PaaS environment and the code will be compiled and deployed for you.
 
-PaaS makes user management easy by providing development teams with privilege separation options, eg an ‘admin’ user will be able to assign other team members certain permissions from their PaaS console.
+PaaS makes user management easy by providing development teams with privilege separation options, for example an ‘admin’ user will be able to assign other team members certain permissions from their PaaS console.
 
 PaaS is deployed to multiple availability zones, making it resilient and accredited for information up to OFFICIAL.
 
