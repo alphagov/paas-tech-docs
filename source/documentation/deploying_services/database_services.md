@@ -6,7 +6,7 @@ To see the available plans, run:
 cf marketplace -s SERVICE
 ```
 
-Where SERVICE is the service you want; it can currently take the following values:
+SERVICE can currently take the following values:
 
  * postgres
  * mysql
@@ -92,7 +92,7 @@ To create a service and bind it to your app:
 
     ``cf create-service postgres M-dedicated-9.5 my-pg-service``
 
-    Note that for production usage, we recommend you select a high-availability encrypted plan (one with ``HA-enc`` in the name).
+    Note that for production usage, we recommend you select a high-availability encrypted plan.
 
 3. It may take some time (5 to 10 minutes) for the service instance to be set up. To find out its status, run:
 
