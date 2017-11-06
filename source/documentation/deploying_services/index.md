@@ -6,7 +6,7 @@ In Cloud Foundry, backing and routing services are referred to as 'services' and
 
 ## PostgreSQL
 
-PostgreSQL is an object-relational database management system. It is open-source and designed to be extensible; currently the postgis and uuid-ossp extensions are enabled.
+PostgreSQL is an object-relational database management system. It is open source and designed to be extensible; currently the postgis and uuid-ossp extensions are enabled.
 
 ## MySQL
 
@@ -14,15 +14,15 @@ MySQL is an open source relational database management system that uses Structur
 
 ## MongoDB
 
-MongoDB is an open-source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). It is currently only available on private beta.
+MongoDB is an open source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). This is an early version of the service that is available on request so that we can get feedback, and we will make you aware of any constraints in its use at that time.
 
 ## Redis
 
-Redis is an open-source in-memory data store that can be used as a database cache or message broker. It is currently only available on private beta.
+Redis is an open source in-memory data store that can be used as a database cache or message broker. This is an early version of the service that is available on request so that we can get feedback, and we will make you aware of any constraints in its use at that time.
 
 ## Elasticsearch
 
-Elasticsearch is an open-source full text RESTful search and analytics engine that allows you to store and search data. It is currently only available on private beta.
+Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is an early version of the service that is available on request so that we can get feedback, and we will make you aware of any constraints in its use at that time.
 
 ## Services and plans
 
