@@ -156,7 +156,7 @@ The process of changing plan will begin immediately and will usually be complete
 
 #### Maintenance windows (PostgreSQL and MySQL only)
 
-Depending on the service, the process of migrating to a new plan may cause interruption to your service instance. If you would rather queue the change to begin during a maintenance window then you can run:
+Depending on the service, the process of migrating to a new plan may cause interruption to your service instance. If you would rather queue the change to begin during a maintenance window, run:
 
 ```
 cf update-service my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
