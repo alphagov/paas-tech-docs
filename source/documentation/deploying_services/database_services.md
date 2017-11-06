@@ -48,11 +48,11 @@ MongoDB uses replica sets i.e. clusters of MongoDB servers that replicate the co
 
 #### High availability plans - Redis
 
-Visit the [Compose documentation](https://help.compose.com/docs/redis-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Redis service.
+Visit the [Redis on Compose documentation](https://help.compose.com/docs/redis-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Redis service.
 
 #### High availability plans - Elasticsearch
 
-Visit the [Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
+Visit the [Elasticsearch on Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
 
 ### Encrypted plans
 
