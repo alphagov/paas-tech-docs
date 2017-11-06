@@ -8,7 +8,7 @@ PaaS makes user management easy by providing development teams with privilege se
 
 PaaS is deployed to multiple availability zones, making it resilient and accredited for information up to OFFICIAL.
 
-The platform itself will be supported 24/7 by GDS, although this does not include application support.
+The platform itself is supported 24/7 by GDS, although this does not include application support.
 
 Features of the PaaS platform currently include:
 
