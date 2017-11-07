@@ -170,7 +170,7 @@ cf update-service my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance
 
 Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
 
->MongoDB and Elasticsearch use self-signed certificates. In order for your app to verify a TLS connection to these services, the app must use a CA certificate included in a VCAP_SERVICES environmental variable.
+>MongoDB and Elasticsearch use self-signed certificates. In order for your app to verify a TLS connection to these services, the app must use a CA certificate included in a VCAP_SERVICES environment variable.
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the  service and then set the `DATABASE_URL` variable to the first database found.
 
