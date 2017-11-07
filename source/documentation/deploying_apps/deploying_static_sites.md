@@ -51,7 +51,8 @@ These steps assume you have already carried out the setup process explained in t
 
     If you do not specify an app name with the ``push`` command, the name  specified in the manifest file is used.
 
-The site should now be live at `https://APPNAME.cloudapps.digital`.
+The site should now be available at `https://APPNAME.cloudapps.digital`. For a production app, you should read the [production checklist](/#production-checklist).
+
 
 ### Adding more instances
 
