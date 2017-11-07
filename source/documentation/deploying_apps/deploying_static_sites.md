@@ -52,20 +52,3 @@ These steps assume you have already carried out the setup process explained in t
     If you do not specify an app name with the ``push`` command, the name  specified in the manifest file is used.
 
 The site should now be available at `https://APPNAME.cloudapps.digital`. For a production app, you should read the [production checklist](/#production-checklist).
-
-
-### Adding more instances
-
-For a production service, you should run at least two instances of the app to ensure availability.
-
-You can add another instance of this static app by running:
-
-``cf scale APPNAME -i 2``
-
-or by adding this to the manifest and pushing again:
-
-```
----
-  ...
-  instances: 2
-```
