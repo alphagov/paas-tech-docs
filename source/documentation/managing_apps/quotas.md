@@ -57,7 +57,7 @@ Use the following commands to set application quota options (in each pair below,
 
 	Sets the number of application instances to launch. Each additional instance receives the same memory and disk reservation. An application with a manifest specifying `memory: 256M` and `instances: 4` would reserve 1GB (256M x 4) total.
 
-	For a production application, you should always launch at least two instances.
+	For a production application, you should always launch at least two instances. See [Scaling](/#scaling) for more information.
 
 #### Memory share and compute share
 

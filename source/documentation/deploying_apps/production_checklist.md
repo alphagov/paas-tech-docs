@@ -2,6 +2,7 @@
 
 Before deploying an app for production use, check the following:
 
-1. If your app uses a PostgreSQL service, make sure that you have selected the high-availability plan (``M-HA-dedicated-9.5``) for the bound ``postgres`` service instance.
-2. You are running at least two instances of the app to ensure availability. Use ``cf scale APPNAME -i 2`` to add an extra running instance.
-3. You are prepared to use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link] for when the app needs to be updated or restarted (this avoids problems due to a known issue with the PaaS that can generate transient 404 errors).
+1. If your app uses a [backing service](/#deploy-a-backing-or-routing-service), make sure that you have selected the high-availability plan for the service instance.
+1. You have [a domain name](https://www.gov.uk/service-manual/technology/get-a-domain-name) for your service.
+1. You are running at least two instances of the app to ensure availability. Use ``cf scale APPNAME -i 2`` or amend the manifest file to add an extra running instance; see [Scaling](/#scaling) for more information.
+1. You are prepared to use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link] for when the app needs to be updated or restarted (this avoids problems due to a known issue with the PaaS that can generate transient 404 errors).

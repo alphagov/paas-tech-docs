@@ -24,11 +24,7 @@ The app should now be live at `https://APPNAME.cloudapps.digital`.
 
 There are many options available when you ``push`` an app. You can optionally set them in a ``manifest.yml`` file in the directory from which you are running the ``push`` command. See the Cloud Foundry documentation on [Deploying with Application Manifests](http://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html) [external link] for details.
 
-For a production app, you should run at least two instances to ensure availability.
-
-After deployment, you can increase the running instances to two using:
-
-``cf scale APPNAME -i 2``
+For a production app, you should read the [production checklist](/#production-checklist).
 
 ### Caveats
 * Your app should not write to local storage. Cloud Foundry local storage is ephemeral and can be deleted at any time.

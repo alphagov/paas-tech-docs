@@ -57,13 +57,9 @@ To deploy a Rails app that doesn't require a backing service:
 
     where VARIABLE is a unique name for the variable, and `value` is the value to set.
 
-Your app should now be live at `https://APPNAME.cloudapps.digital`!
+Your app should now be available at `https://APPNAME.cloudapps.digital`!
 
-For a production service, you should run at least two instances of the app to ensure availability.
-
-You can add another instance of your app by running:
-
-``cf scale APPNAME -i 2``
+For a production app, you should read the [production checklist](/#production-checklist).
 
 ### Deploying with a PostgreSQL database
 
@@ -128,13 +124,7 @@ These instructions are for deploying a Rails app with a PostgreSQL database, and
     cf start APPNAME
     ```
 
-Your app should now be live at `https://APPNAME.cloudapps.digital`!
-
-For a production service, you should run at least two instances of the app to ensure availability.
-
-You can add another instance of your app by running:
-
-``cf scale APPNAME -i 2``
+Your app should now be available at `https://APPNAME.cloudapps.digital.` For a production app, you should read the [production checklist](/#production-checklist).
 
 ### Web servers
 

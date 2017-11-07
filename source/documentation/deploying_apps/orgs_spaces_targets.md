@@ -45,6 +45,13 @@ You can change space without changing org using:
 
 ``cf target -s SPACENAME``
 
+You should target the sandbox space while you are testing your app. You can do this by running:
+
+``cf target -s sandbox``
+
+You will not normally need to target the sandbox space if you are a new user, as this space is the default for new users. A possible exception to this is if your organisation is mature and has pre-existing spaces; you should check to ensure that you target the appropriate space for testing.
+
+
 ### Managing spaces
 
 You can create new spaces within an org if your account has the [Org Manager](/#org-manager) role. To find out who has that role, run:
