@@ -1,6 +1,10 @@
 ## Deploy a Docker image (experimental)
 
-This section explains how to deploy an app from a Docker image. The role of the Docker image is to serve as a packaging format and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks. Configuration via manifest.yml also stays the same, albeit you should not specify buildpack. If you do, it will be ignored, which can create some confusion to anyone reading the manifest. Our platform currently only supports deploying images from Docker hub or [Docker Trusted Registry](https://docs.docker.com/datacenter/dtr/2.1/guides/) [external page] servers. You cannot currently deploy from local images.
+This section explains how to deploy an app from a Docker image. The role of the Docker image is to serve as a packaging format and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks. Configuration via manifest.yml also stays the same, albeit you should not specify buildpack. If you do, it will be ignored, which can create some confusion to anyone reading the manifest. Our platform currently supports deploying from the following:
+
+* Docker Hub
+* [Docker Trusted Registry](https://docs.docker.com/datacenter/dtr/2.1/guides/) [external page] servers
+* Docker registries that require authentication
 
 To deploy an app using a Docker image stored in Docker Hub via CF cli:
 
@@ -9,6 +13,8 @@ To deploy an app using a Docker image stored in Docker Hub via CF cli:
 To deploy an app using a Docker image stored in Docker Trusted Registry (DTR) via CF cli:
 
 ``cf push myapp --docker-image MY-PRIVATE-REGISTRY.DOMAIN:5000/image/name:tag``
+
+To deploy an app using a Docker image stored in a registry that requires authentication, follow the [Cloud Foundry Docker image documentation instructions](https://docs.cloudfoundry.org/devguide/deploy-apps/push-docker.html#private-repo) [external link].
 
 You might notice that the staging process is simplified when deploying from a Docker image - this is because there is no need to build the app from the pushed code using a buildpack. Also, the buildpack for apps deployed from a Docker image will be reported as `unknown` in the app information (``cf app <myapp>``).
 
@@ -19,7 +25,6 @@ There are a few more specifics about Docker image support in Cloud Foundry:
 * Buildpack based apps use bash to execute the app start command (`bash -c <command>`), but Docker image based apps use sh (`sh -c <command>`) - as bash presence cannot be assumed in your Docker image.
 * Privileged container mode is not supported. Features depending on this will not work.
 * Only registries that use Docker Registry API V2 are supported.
-* There is currently no support for deploying images from private/non DTR registries.
 
 ### Experimental feature
 

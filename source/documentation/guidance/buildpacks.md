@@ -37,10 +37,9 @@ You are responsible for your Docker container and custom image. Learn about this
 
 Custom buildpacks provide some advantages over choosing a Docker solution:
 
-- they are not dependent on [Docker Hub](https://hub.docker.com/) availability
-a single way to specify app dependencies
+- they are not dependent on a Docker registry such as [Docker Hub](https://hub.docker.com/) being available
 - large variety of open source buildpacks, meaning your deployment pipeline doesn’t need to include Docker image creation
-- it is designed for 12-factor; some Docker images may contain databases or other forms of storage that should be provisioned as an external backing service
+- buildpacks are designed for 12-factor apps; some Docker images may contain databases or other forms of storage that should be provisioned as an external backing service
 
 Docker images also provide some advantages over custom buildpacks:
 
