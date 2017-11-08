@@ -6,11 +6,11 @@ Cloud Foundry uses buildpacks to provide runtime and framework support for appli
 
 - [standard buildpacks](https://docs.cloudfoundry.org/buildpacks/#system-buildpacks) [external link] are buildpacks for common languages and frameworks that are supported by Cloud Foundry. You can check the installed buildpacks and their versions by running `cf buildpacks`.
 - custom buildpacks are developed by the wider community to enable hosting of applications in additional languages or frameworks
-- docker images are a packaging format, and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks
+- Docker images are a packaging format, and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks
 
 ### Which Buildpack should I use?
 
-We recommend using the standard buildpacks to maximise the support you will receive from GOV.UK PaaS. Using a custom buildpack or docker image will mean additional setup and maintenance costs.
+We recommend using the standard buildpacks to maximise the support you will receive from GOV.UK PaaS. Using a custom buildpack or Docker image will mean additional setup and maintenance costs.
 
 Refer to the [Guidance](https://docs.cloud.service.gov.uk/#guidance-buildpacks) section for further information on the different options available.
 

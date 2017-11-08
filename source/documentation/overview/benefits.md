@@ -16,7 +16,8 @@ Features of the PaaS platform currently include:
 
 *   support for [multiple backing services](#deploy-a-backing-or-routing-service)
 *   language support through the [standard Cloud Foundry buildpacks](http://docs.cloudfoundry.org/buildpacks/) [external link] except .NET Core
-*   limited support for custom buildpacks and Docker images
+*   limited support for custom buildpacks
+*   support for public and private Docker images
 *   ability to stream application logs to Software as a Service logging platforms
 
 ### Coding in the open

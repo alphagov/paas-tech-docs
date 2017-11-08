@@ -9,7 +9,7 @@ We are keen to help where we can, so please contact us if you are interested in 
 
 ### Responsibilities
 
-Your responsibilities differ depending on whether you use a standard buildpack, custom buildpack or docker image to deploy your app.
+Your responsibilities differ depending on whether you use a standard buildpack, custom buildpack or Docker image to deploy your app.
 
 #### Standard Buildpack
 You are only responsible for the app code and its dependencies.
@@ -31,18 +31,17 @@ Regularly maintain your buildpack to update your runtime and dependencies as new
 
 #### Docker Images
 
-You are responsible for your docker container and custom image. Learn about this [experimental feature](https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental).
+You are responsible for your Docker container and custom image. Learn about this [experimental feature](https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental).
 
 ### Custom Buildpacks compared to Docker Images
 
 Custom buildpacks provide some advantages over choosing a Docker solution:
 
-- they are not dependent on [Docker Hub](https://hub.docker.com/) availability
-a single way to specify app dependencies
-- large variety of open source buildpacks, meaning your deployment pipeline doesn’t need to include docker image creation
-- it is designed for 12-factor; some Docker images may contain databases or other forms of storage that should be provisioned as an external backing service
+- they are not dependent on a Docker registry such as [Docker Hub](https://hub.docker.com/) being available
+- large variety of open source buildpacks, meaning your deployment pipeline doesn’t need to include Docker image creation
+- buildpacks are designed for 12-factor apps; some Docker images may contain databases or other forms of storage that should be provisioned as an external backing service
 
-Docker Images also provide some advantages over custom buildpacks:
+Docker images also provide some advantages over custom buildpacks:
 
 - the same image can be run locally on developer machines, or on any Linux-based machine
 - exactly the same Docker image can be promoted between environments as an immutable asset, rather than being rebuilt each time (CF support for this is still experimental)
