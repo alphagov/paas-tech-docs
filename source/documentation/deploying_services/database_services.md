@@ -1,4 +1,4 @@
-## Using database services
+## Using backing services
 
 To see the available plans, run:
 
@@ -6,11 +6,13 @@ To see the available plans, run:
 cf marketplace -s SERVICE
 ```
 
-Where SERVICE is the service you want; it can currently take the following values:
+SERVICE can currently take the following values:
 
  * postgres
  * mysql
  * mongodb
+ * redis
+ * elasticsearch
 
 Here is a shortened example of the sort of output you will see for the PostgreSQL service (the exact plans will vary):
 
@@ -42,7 +44,15 @@ You should test how your app deals with a failover to make sure you are benefiti
 
 MongoDB uses replica sets i.e. clusters of MongoDB servers that replicate the contents of the master database. Replica sets provide high availability through sharding, a method for distributing data across multiple machines. A shard is a single mongod instance or replica set that stores some portion of a sharded cluster’s total data set. In the standard configuration for MongoDB on our service provider, you get a single-shard with three nodes in a replica-set. Mongo will push all write operations on to the primary data node and then propagate them to the secondary data node on the shard. Should the primary node fail, the secondary will be promoted to primary providing fault-tolerance and redundancy for your databases. The Mongo routers are responsible for dictating any failover, along with load-balancing operations to any of the nodes in the cluster.
 
->Your Mongo instances are backed up automatically, but are not yet directly available to tenants. Please contact us if you need to recover a backup or want to know when related features will be in our roadmap.
+>Your Mongo instances are backed up automatically, but are not yet directly available to tenants. Please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you need to recover a backup or want to know when related features will be in our roadmap.
+
+#### High availability plans - Redis
+
+Visit the [Redis on Compose documentation](https://help.compose.com/docs/redis-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Redis service.
+
+#### High availability plans - Elasticsearch
+
+Visit the [Elasticsearch on Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
 
 ### Encrypted plans
 
@@ -52,7 +62,7 @@ We recommend that you use an encrypted plan for production services or those tha
 
 Once you've created a service instance, you can't enable or disable encryption. There's no way to convert an unencrypted service instance to an encrypted one later.
 
-> This applies to PostgreSQL and MySQL services. There are currently no encrypted plans for the MongoDB service.
+> This currently only applies to PostgreSQL and MySQL services.
 
 ### Read replicas
 
@@ -82,7 +92,7 @@ To create a service and bind it to your app:
 
     ``cf create-service postgres M-dedicated-9.5 my-pg-service``
 
-    Note that for production usage, we recommend you select a high-availability encrypted plan (one with ``HA-enc`` in the name).
+    Note that for production usage, we recommend you select a high-availability encrypted plan.
 
 3. It may take some time (5 to 10 minutes) for the service instance to be set up. To find out its status, run:
 
@@ -144,9 +154,9 @@ cf update-service my-pg-service -p S-HA-dedicated-9.5
 
 The process of changing plan will begin immediately and will usually be completed within about an hour. You can check the status of the change by viewing the output of `cf services`.
 
-#### Maintenance windows (PostgreSQL and MySQL onyl)
+#### Maintenance windows (PostgreSQL and MySQL only)
 
-Depending on the service, the process of migrating to a new plan may cause interuption to your service instance. If you would rather queue the change to begin during a maintainence window then you can run:
+Depending on the service, the process of migrating to a new plan may cause interruption to your service instance. If you would rather queue the change to begin during a maintenance window, run:
 
 ```
 cf update-service my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
@@ -160,7 +170,7 @@ cf update-service my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance
 
 Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
 
->MongoDB uses self-signed certificates. In order for your app to verify a TLS connection to the MongoDB service, the app must use a CA certificate included in a VCAP_SERVICES environmental variable.
+>MongoDB and Elasticsearch use self-signed certificates. In order for your app to verify a TLS connection to these services, the app must use a CA certificate included in a VCAP_SERVICES environment variable.
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the  service and then set the `DATABASE_URL` variable to the first database found.
 

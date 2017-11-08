@@ -4,17 +4,17 @@ Right now, development teams spend considerable time and money setting up all th
 
 Your development team can use PaaS to deploy and run government applications written in a range of languages and web frameworks. You’ll simply need to push your source code to the PaaS environment and the code will be compiled and deployed for you.
 
-PaaS makes user management easy by providing development teams with privilege separation options, eg an ‘admin’ user will be able to assign other team members certain permissions from their PaaS console.
+PaaS makes user management easy by providing development teams with privilege separation options, for example an ‘admin’ user will be able to assign other team members certain permissions from their PaaS console.
 
 PaaS is deployed to multiple availability zones, making it resilient.
 
 PaaS is accredited for information up to OFFICIAL.
 
-The platform itself will be supported 24/7 by GDS, although this does not include application support.
+The platform itself is supported 24/7 by GDS, although this does not include application support.
 
 Features of the PaaS platform currently include:
 
-*   backing service support for PostgreSQL, MySQL and MongoDB
+*   support for [multiple backing services](#deploy-a-backing-or-routing-service)
 *   language support through the [standard Cloud Foundry buildpacks](http://docs.cloudfoundry.org/buildpacks/) [external link] except .NET Core
 *   limited support for custom buildpacks and Docker images
 *   ability to stream application logs to Software as a Service logging platforms
