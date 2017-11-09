@@ -6,6 +6,8 @@ This section explains how to deploy an app from a Docker image. The role of the 
 * [Docker Trusted Registry](https://docs.docker.com/datacenter/dtr/2.1/guides/) [external page] servers
 * Docker registries that require authentication
 
+Pushing local Docker images isn't supported.
+
 To deploy an app using a Docker image stored in Docker Hub via CF cli:
 
 ``cf push myapp --docker-image dockerhuborg/app_image:tag``
@@ -28,7 +30,7 @@ There are a few more specifics about Docker image support in Cloud Foundry:
 
 ### Experimental feature
 
-Please note that this is currently only an experimental feature, meaning you can potentially encounter some unexpected behaviour or glitches. It is also possible that we might turn the feature off in the future. It should not be used in live services at this stage. 
+Please note that this is currently only an experimental feature, meaning you can potentially encounter some unexpected behaviour or glitches. It is also possible that we might turn the feature off in the future. It should not be used in live services at this stage.
 
 Lastly, our support for this functionality has lower priority than usual requests, so it is possible that responses to your queries regarding this will take a bit longer. However we are turning on this feature in order get feedback from service teams, so please contact support with any comments or to talk about use in production systems.
 
