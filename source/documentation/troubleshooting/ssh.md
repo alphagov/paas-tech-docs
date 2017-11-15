@@ -22,7 +22,7 @@ SSH is enabled by default. In most cases, you will find that you can SSH directl
     export DEPS_DIR=/home/vcap/deps
     export HOME=/home/vcap/app
     [ -d ~/.profile.d ] && for f in ~/.profile.d/*; do source $f; done
-    source /home/vcap/app/.profile
+    [ -f ~/.profile ] && source ~/.profile
     ```
 
     You need to run this every time you start an SSH session.
