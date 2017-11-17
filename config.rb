@@ -12,7 +12,8 @@ set :markdown,
       with_toc_data: true
     ),
     fenced_code_blocks: true,
-    tables: true
+    tables: true,
+    no_intra_emphasis: true
 
 # Per-page layout changes:
 #
@@ -48,13 +49,9 @@ helpers do
   include TableOfContents::Helpers
 end
 
-# Build-specific configuration
 configure :build do
-  # Minify CSS on build
-  # activate :minify_css
-
-  # Minify Javascript on build
-  # activate :minify_javascript
+  activate :minify_css
+  activate :minify_javascript
 end
 
 ###
