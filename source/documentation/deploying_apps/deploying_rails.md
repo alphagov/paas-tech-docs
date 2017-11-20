@@ -126,6 +126,26 @@ These instructions are for deploying a Rails app with a PostgreSQL database, and
 
 Your app should now be available at `https://APPNAME.cloudapps.digital.` For a production app, you should read the [production checklist](/#production-checklist).
 
+### Deploying a Rails 5.1+ app with Webpack
+
+Rails 5.1+ allows you to use [webpacker](https://github.com/rails/webpacker) to install and use node.js modules.
+
+You will need to make the following changes to successfully deploy:
+
+1. Specify multiple `buildpacks` in manifest.yml instead of just one, including both the Ruby and node.js buildpacks from GitHub:
+
+    ```yml
+    buildpacks:
+      - https://github.com/cloudfoundry/ruby-buildpack/
+      - https://github.com/cloudfoundry/nodejs-buildpack/
+    ```
+
+1. Exclude `node_modules` during cloudfoundry deployment, which you can do by following the [#excluding-files](https://docs.cloud.service.gov.uk/#excluding-files) instructions and running:
+
+    ```bash
+    ln -s .gitignore .cfignore
+    ```
+
 ### Web servers
 
 By default, the Cloud Foundry Ruby buildpack [runs `bin/rails server`](https://github.com/cloudfoundry/ruby-buildpack/blob/1f0ac3ce10866390d161c3f27e71d64890859454/lib/language_pack/rails4.rb#L27) 
