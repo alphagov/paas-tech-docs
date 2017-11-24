@@ -72,6 +72,13 @@ filter {
         }
     }
 
+    # Cloud Foundry passes the app name, space and organisation in the syslog_host
+    # Filtering them into separate fields makes it easier to query multiple apps in a single Kibana instance
+    dissect {
+        mapping => { "syslog_host" => "%{[cf][org]}.%{[cf][space]}.%{[cf][app]}" }
+        tag_on_failure => ["_sysloghostdissectfailure"]
+    }
+
     # Cloud Foundry gorouter logs
     if [syslog_proc] =~ "RTR" {
         mutate { replace => { "type" => "gorouter" } }
