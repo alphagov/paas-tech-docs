@@ -34,4 +34,4 @@ We recommend using the `cf set-env` command for the mandatory environment variab
 
 You can now check your monitoring system to see if you are receiving metrics data.
 
-If you are not receiving the metrics data, check the [logs](/#logs) for the metrics exporter app. If you still need help, please contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](gov-uk-paas-support@digital.cabinet-office.gov.uk).
+If you are not receiving the metrics data, check the [logs](/#logs) for the metrics exporter app. If you still need help, please contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
