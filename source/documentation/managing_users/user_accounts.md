@@ -46,3 +46,6 @@ As part of our onboarding process, we will create an account with the Org Manage
 We will treat your Org Managers as our primary contacts for support issues. They will need to approve changes like adding new users, setting quotas and enabling paid services.
 
 If you need the Org Manager role to be added to a user account, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+
+## Space Auditor
+Space Auditors can view spaces but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.
