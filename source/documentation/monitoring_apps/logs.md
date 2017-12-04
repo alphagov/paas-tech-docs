@@ -10,7 +10,7 @@ The most direct way to view events related to your application through the deplo
 cf logs APPNAME
 ```
 
-Used alone, `cf logs` will tail the combined stream of logs from each Cloud Foundry service involved in your application deploy. Running with the `--recent` flag will stream the entire [Loggregator](https://docs.cloudfoundry.org/loggregator/architecture.html) [external link] buffer for your app.
+Used alone, `cf logs` will tail the combined stream of logs from each Cloud Foundry service involved in your application deploy. Running with the `--recent` flag will output the entire [Loggregator](https://docs.cloudfoundry.org/loggregator/architecture.html) [external link] buffer for your app.
 
 ```bash
 cf logs APPNAME --recent
