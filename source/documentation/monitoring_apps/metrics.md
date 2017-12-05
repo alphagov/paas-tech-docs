@@ -21,16 +21,16 @@ To set up the metrics app:
 2. [Push the metrics exporter app](/#deployment-overview) to Cloud Foundry without starting the app by running `cf push --no-start metric-exporter`.
 3. Set the following mandatory environment variables in the metrics exporter app using `cf set-env metric-exporter NAME VALUE`:
 
-|Name|Value|
-|:---|:---|
-|`API_ENDPOINT`|Use `https://api.cloud.service.gov.uk`|
-|`STATSD_ENDPOINT`|StatsD endpoint|
-|`USERNAME`|Cloud Foundry User|
-|`PASSWORD`|Cloud Foundry Password|
+	|Name|Value|
+	|:---|:---|
+	|`API_ENDPOINT`|Use `https://api.cloud.service.gov.uk`|
+	|`STATSD_ENDPOINT`|StatsD endpoint|
+	|`USERNAME`|Cloud Foundry User|
+	|`PASSWORD`|Cloud Foundry Password|
 
-You should use the `cf set-env` command for these mandatory variables as they contain secret information, and this method will keep them secure. 
+	You should use the `cf set-env` command for these mandatory variables as they contain secret information, and this method will keep them secure. 
 
-You can also set environment variables by amending the manifest file. We recommend that you use this method for optional environment variables that do not contain secret information. Refer to the [https://github.com/alphagov/paas-cf-apps-statsd](https://github.com/alphagov/paas-cf-apps-statsd) repository for more information.
+	You can also set environment variables by amending the manifest file. We recommend that you use this method for optional environment variables that do not contain secret information. Refer to the [https://github.com/alphagov/paas-cf-apps-statsd](https://github.com/alphagov/paas-cf-apps-statsd) repository for more information.
 
 4. Start your app by running `cf start metric-exporter`.
 
