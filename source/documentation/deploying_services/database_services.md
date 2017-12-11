@@ -46,10 +46,6 @@ MongoDB uses replica sets i.e. clusters of MongoDB servers that replicate the co
 
 >Your Mongo instances are backed up automatically, but are not yet directly available to tenants. Please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you need to recover a backup or want to know when related features will be in our roadmap.
 
-#### High availability plans - Redis
-
-Visit the [Redis on Compose documentation](https://help.compose.com/docs/redis-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Redis service.
-
 #### High availability plans - Elasticsearch
 
 Visit the [Elasticsearch on Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
