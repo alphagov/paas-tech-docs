@@ -245,9 +245,9 @@ To restore from a snapshot:
     ``cf create-service postgres PLAN NEW_SERVICE_INSTANCE -c '{"restore_from_latest_snapshot_of": "GUID"}'``
 
     where:
-        + PLAN is the identifier for the plan used in the original instance; you can find out what this is using `cf service SERVICE_INSTANCE`
-        + NEW_SERVICE_INSTANCE is a unique, descriptive name for this new instance (not the name of the original)
-        + GUID is the `GUID` from step 1
+      + PLAN is the identifier for the plan used in the original instance; you can find out what this is using `cf service SERVICE_INSTANCE`
+      + NEW_SERVICE_INSTANCE is a unique, descriptive name for this new instance (not the name of the original)
+      + GUID is the `GUID` from step 1
 
     For example:
 
