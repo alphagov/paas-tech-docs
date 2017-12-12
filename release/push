@@ -2,9 +2,12 @@
 
 set -eu
 
-# Note: the app name must be kept in sync with the name inside manifest.yml
-echo Deploy with zero downtime
-cf blue-green-deploy paas-tech-docs
+echo "Creating manifest"
+export CF_API
+release/generate-manifest \
+    < manifest.yml \
+    > modified_manifest.yml
 
-echo Delete left over app
-cf delete -f paas-tech-docs-old
+echo "Deploy with zero downtime"
+cf zero-downtime-push paas-tech-docs \
+    -f modified_manifest.yml

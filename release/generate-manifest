@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+
+cf_system_dns_root = ENV['CF_API'].sub('https://api.', '')
+
+manifest = YAML.load($stdin.read)
+manifest['applications'].each { |app|
+  app['routes'] ||= []
+  app['routes'] << { 'route' => 'docs.' + cf_system_dns_root }
+  app['routes'] << { 'route' => 'paas-tech-docs.cloudapps.digital' }
+}
+puts manifest.to_yaml
