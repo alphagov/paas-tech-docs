@@ -42,9 +42,9 @@ If paid plans are not enabled, when you try to use a paid service you will recei
 
 Your app can find out what backing services are available, and obtain credentials for the services, by parsing the VCAP_SERVICES [environment variable](/#environment-variables).
 
-### User-Provided Service Instance
+### User-provided service instance
 
-Cloud Foundry enables tenants to define [User-Provided Service Instance](https://docs.cloudfoundry.org/devguide/services/user-provided.html) [external link]. They can be used to deliver service credentials to an application, and/or to trigger streaming of application logs to a syslog compatible consumer. Once created, user-provided service instances behave like service instances created through the marketplace.
+Cloud Foundry enables tenants to define a [user-provided service instance](https://docs.cloudfoundry.org/devguide/services/user-provided.html) [external link]. They can be used to deliver service credentials to an application, and/or to trigger streaming of application logs to a syslog compatible consumer. Once created, user-provided service instances behave like service instances created through the marketplace.
 
 ### Future services
 

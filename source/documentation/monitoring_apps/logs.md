@@ -27,7 +27,7 @@ cf events APPNAME
 
 Running ``cf events`` shows you when an app starts, stops, restarts, or crashes (including error codes). The output is often easier to interpret than the output of ``cf logs``.
 
-## Using Third-Party Log Management Services
+## Using third-party log management services
 
 The default Cloud Foundry logging system stores a limited amount of logging information for a defined time. You can retain  logging information for a longer period of time by setting up a third-party log management service. Instructions on how to set up a log management service can be found [here](https://docs.cloudfoundry.org/devguide/services/log-management.html) [external link]. The next section details how to set up an example log management service, [Logit.io](https://logit.io/) [external link].
 
