@@ -10,10 +10,10 @@ phase: Beta
 # Links to show on right-hand-side of header
 header_links:
   About: https://www.cloud.service.gov.uk
-  Features: https://www.cloud.service.gov.uk/features.html
-  Roadmap: https://www.cloud.service.gov.uk/roadmap.html
+  Features: https://www.cloud.service.gov.uk/features
+  Roadmap: https://www.cloud.service.gov.uk/roadmap
   Documentation: /
-  Support: https://www.cloud.service.gov.uk/support.html
+  Support: https://www.cloud.service.gov.uk/support
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
 ga_tracking_id: UA-43115970-5
