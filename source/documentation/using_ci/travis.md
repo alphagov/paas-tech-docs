@@ -14,7 +14,7 @@ If you haven't already done so, we also strongly recommend that you add a `name`
 
 Note that using your own PaaS login details within a CI service should only be a temporary measure. Dedicated user accounts should be set up for testing as soon as reasonably possible - by the end of Alpha at the latest. If you are already an `Org Manager` role on another project in Beta or Live, you should do this anyway. Find out more about [credentials for automated accounts](#credentials-for-automated-accounts).
 
-### Download the Travis Gem
+### Download the Travis gem
 
 Make sure you use at least ruby 1.9.3 and download the gem:
 

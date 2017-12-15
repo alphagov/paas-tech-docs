@@ -11,10 +11,10 @@ We are keen to help where we can, so please contact us if you are interested in 
 
 Your responsibilities differ depending on whether you use a standard buildpack, custom buildpack or Docker image to deploy your app.
 
-#### Standard Buildpack
+#### Standard buildpack
 You are only responsible for the app code and its dependencies.
 
-#### Custom Buildpacks
+#### Custom buildpacks
 
 You are responsible for managing this custom buildpack as well as the app code and its dependencies. This applies both in setting up the app, and running it in production.
 
@@ -29,11 +29,11 @@ When running the app in production:
 Regularly maintain your buildpack to update your runtime and dependencies as new security vulnerabilities are discovered and fixed
 - We may not be able to offer support for P1 or out-of-hours incidents; standard SLAs will not apply
 
-#### Docker Images
+#### Docker images
 
 You are responsible for your Docker container and custom image. Learn about this [experimental feature](https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental).
 
-### Custom Buildpacks compared to Docker Images
+### Custom buildpacks compared to Docker images
 
 Custom buildpacks provide some advantages over choosing a Docker solution:
 

@@ -77,7 +77,7 @@ cf update-service my-cdn-route \
 
 The maximum number of domains that can be associated with a single cdn-route service instance is 100.
 
-#### Disabling Forwarding Cookies
+#### Disabling forwarding cookies
 
 By default cookies are forwarded to your application. You can disable this by setting the `cookies` parameter to `false`:
 
@@ -87,7 +87,7 @@ cf update-service my-cdn-route \
 ```
 See the [More about how the CDN works](#more-about-how-custom-domains-work) section for details.
 
-#### Forwarding Headers
+#### Forwarding headers
 
 By default, our service broker configures the CDN to only forward the `Host` header to your application. You can whitelist extra headers; in this example you can whitelist the `Accept` and `Authorization` headers:
 
@@ -121,7 +121,7 @@ You may have to wait for up to an hour for the changes to complete.
 
 Service creation usually takes approximately one hour. Whilst a service is being created, you will see the status "create in progress" reported from commands like `cf services`. If it has not finished after two hours, we recommend that you check your DNS setup to make sure you completed the CNAME record creation correctly (see step seven). If this does not solve the issue, you may need to [contact support](https://www.cloud.service.gov.uk/support).
 
-#### CloudFront timescales for serving your origin from all location
+#### CloudFront timescales for serving your origin from all locations
 
 It may take some time for CloudFront to serve your origin from all locations, because it is a globally distributed network. You can check in advance by sending requests to CloudFront and passing the custom domain in the `Host` header, using the example below. The CloudFront domain can be found by running `cf service my-cdn-route`.
 
