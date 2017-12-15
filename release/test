@@ -8,3 +8,5 @@ cd "${ROOT_DIR}"
 bundle exec middleman build --verbose
 
 linkchecker ./build/
+
+bundle exec rspec
