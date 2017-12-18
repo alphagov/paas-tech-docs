@@ -94,7 +94,7 @@ Then in your app, you can easily get configuration information for backing servi
         client.ssl = true;
         client.connect();
 
-Replace "SERVICE NAME" in the above code with the exact name of the PostgreSQL service you created. The ``getServiceURL`` function returns a connection string which includes the username and password required to connect to the database. 
+Replace "SERVICE NAME" in the above code with the exact name of the PostgreSQL service you created. The ``getServiceURL`` function returns a connection string which includes the username and password required to connect to the database.
 
 Further information can be found in:
 
