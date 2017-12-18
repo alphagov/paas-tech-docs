@@ -99,7 +99,7 @@ Replace "SERVICE NAME" in the above code with the exact name of the PostgreSQL s
 Further information can be found in:
 
 - the Cloud Foundry [community `cf env` page](https://github.com/cloudfoundry-community/node-cfenv/blob/master/README.md) [external link]
-- the Cloud Foundry [documentation on environment variables](https://docs.run.pivotal.io/devguide/deploy-apps/environment-variable.html) [external link]
+- the Cloud Foundry [documentation on environment variables](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) [external link]
 
 You should also remember to include dependencies for any service bindings in ``package.json``.
 
