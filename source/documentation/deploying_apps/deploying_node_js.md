@@ -89,16 +89,20 @@ Then in your app, you can easily get configuration information for backing servi
         var cfenv = require("cfenv");
         var pg = require('pg');
         var appEnv = cfenv.getAppEnv();
-        var connectionString = appEnv.getServiceURL(/.*/);
+        var connectionString = appEnv.getServiceURL("SERVICE NAME");
         var client = new pg.Client(connectionString);
         client.ssl = true;
         client.connect();
 
-Note that in the above you should replace "my-postgres" with the exact name of the PostgreSQL service you created. The ``getServiceURL`` function returns a connection string which includes the username and password required to connect to the database.
+Replace "SERVICE NAME" in the above code with the exact name of the PostgreSQL service you created. The ``getServiceURL`` function returns a connection string which includes the username and password required to connect to the database. 
+
+Further information can be found on:
+
+- the Cloud Foundry [community `cf env` page](https://github.com/cloudfoundry-community/node-cfenv/blob/master/README.md) [external link]
+- the Cloud Foundry [documentation on environment variables](https://docs.run.pivotal.io/devguide/deploy-apps/environment-variable.html) [external link]
 
 You should also remember to include dependencies for any service bindings in ``package.json``.
 
-    ```
     {
       // ...
       "dependencies": {
@@ -106,5 +110,4 @@ You should also remember to include dependencies for any service bindings in ``p
         // ...
       }
     }
-    ```
 
