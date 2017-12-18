@@ -96,7 +96,7 @@ Then in your app, you can easily get configuration information for backing servi
 
 Replace "SERVICE NAME" in the above code with the exact name of the PostgreSQL service you created. The ``getServiceURL`` function returns a connection string which includes the username and password required to connect to the database. 
 
-Further information can be found on:
+Further information can be found in:
 
 - the Cloud Foundry [community `cf env` page](https://github.com/cloudfoundry-community/node-cfenv/blob/master/README.md) [external link]
 - the Cloud Foundry [documentation on environment variables](https://docs.run.pivotal.io/devguide/deploy-apps/environment-variable.html) [external link]
