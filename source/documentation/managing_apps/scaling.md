@@ -12,10 +12,12 @@ from the command line.
 
 If you are anticipating a spike in demand for a service hosted on GOV.UK PaaS, please contact us well in advance at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-###Increasing instances
+### Increasing instances
 
-You can change the number of instances of your app running in parallel.
-Incoming requests are automatically load-balanced across all instances.
+You can change the number of instances of your app running in parallel. Running more than one app instance:
+
+- allows your app to handle increased traffic and demand as incoming requests are automatically load-balanced across all instances
+- helps maintain high availability and decreases the likelihood that the failure of a single component will take down your app
 
 For example, this command sets the number of running instances to five:
 
@@ -29,10 +31,9 @@ You can also use the manifest to set the number of instances that will start whe
   instances: 2
 ```
 
+For a production app, you should always run more than one instance.
 
-For a production app, you should always have at least two running instances.
-
-###Increasing memory and disk space
+### Increasing memory and disk space
 
 You can scale an application vertically by increasing the memory or disk space available to each instance of the app.
 
