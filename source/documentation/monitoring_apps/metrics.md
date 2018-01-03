@@ -4,7 +4,7 @@ Cloud Foundry provides time-series data, or metrics, for each instance of your P
 
 >You can also view data as a one-off snapshot using the Cloud Foundry CLI.
 
-To use the metrics exporter, you deploy it as an app on PaaS. The current metrics supported by the metrics exporter app are CPU, RAM and disk usage data.
+To use the metrics exporter, you deploy it as an app on PaaS. The current metrics supported by the metrics exporter app are CPU, RAM, disk usage data, app crashes, app requests and app response times.
 
 ### Setting up the metrics exporter app
 
