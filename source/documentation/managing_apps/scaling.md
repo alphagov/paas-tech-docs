@@ -33,6 +33,8 @@ You can also use the manifest to set the number of instances that will start whe
 
 For a production app, you should always run more than one instance.
 
+Further information can be found in the Cloud Foundry [documentation on maintaining high availability](https://docs.cloudfoundry.org/concepts/high-availability.html) [external link].
+
 ### Increasing memory and disk space
 
 You can scale an application vertically by increasing the memory or disk space available to each instance of the app.
