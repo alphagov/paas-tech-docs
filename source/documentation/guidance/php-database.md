@@ -1,10 +1,10 @@
-## Connect a PHP app to PostgreSQL and MySQL
+## Connect a PHP app to PostgreSQL or MySQL
 
-If your PHP app uses PostgreSQL or MySQL, it must connect to those databases securely using SSL. 
+If your PHP app uses a PostgreSQL or MySQL database, it must connect to that database securely using SSL. 
 
 > These instructions assume that your app uses the PHP Data Objects (PDO) library to connect to either a MySQL or PostgreSQL backing service database.
 
-You configure your app to enable this secure connection by inserting the following code into the `config.ini` file located within `.bp-config/php/php.ini.d/`:
+You must configure your app to enable this secure connection by inserting the following code into the `config.ini` file located within `.bp-config/php/php.ini.d/`:
 
 ```
 extension=pdo.so
@@ -12,11 +12,11 @@ extension=pdo_mysql.so OR pdo_pgsql.so
 extension=openssl.so
 ```
 
-You should use this method instead of the deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
+You should use this method instead of the now-deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
 You can find more information about how to configure the PHP buildpack at https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html [external link].
 
-Example code showing how to connect to MySQL and PostgreSQL from your app is detailed below.
+Refer to the code below for examples on how to connect your app to the databases.
 
 ### Example code - MySQL
 
@@ -57,7 +57,7 @@ try {
 
 ## Connect Drupal to MySQL
 
-If your Drupal app uses MySQL, it must connect to the database securely using SSL. You configure Drupal to enable this secure connection by: 
+If your Drupal app uses MySQL, it must connect to the database securely using SSL. You must configure Drupal to enable this secure connection by: 
 
 - enabling required PHP extensions
 - setting up the database connection
@@ -72,7 +72,7 @@ If your Drupal app uses MySQL, it must connect to the database securely using SS
     extension=pdo_mysql.so
     extension=openssl.so
     ```
-You should use this method instead of the deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
+You should use this method instead of the now-deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
 You can find more information about how to configure the PHP buildpack at https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html [external link].
 
@@ -100,7 +100,7 @@ $databases['default']['default'] = array(
 
 ## Connect Wordpress to MySQL
 
-Your Wordpress app must connect to MySQL securely using SSL. You configure Wordpress to enable this secure connection by: 
+Your Wordpress app must connect to MySQL securely using SSL. You must configure Wordpress to enable this secure connection by: 
 
 - enabling required PHP extensions
 - setting up the database connection
