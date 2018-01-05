@@ -136,7 +136,7 @@ define('DB_COLLATE', '');
 
 ### Patch Wordpress to enable SSL connections
 
-Search for the `mysqli_real_connect` function call in the `wp-includes/wp-db.php` file, and insert the following code before it:
+Insert the following code before the `mysqli_real_connect` function call in the `wp-includes/wp-db.php` file:
 
 
 ```
