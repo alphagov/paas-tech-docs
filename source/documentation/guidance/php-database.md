@@ -12,7 +12,7 @@ extension=pdo_mysql.so OR pdo_pgsql.so
 extension=openssl.so
 ```
 
-You should use this method even if you have previously defined PHP extensions in the `.bp-config/options.json` buildpack config file. 
+You should use this method instead of the deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
 You can find more information about how to configure the PHP buildpack at https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html [external link].
 
@@ -72,7 +72,7 @@ If your Drupal app uses MySQL, it must connect to the database securely using SS
     extension=pdo_mysql.so
     extension=openssl.so
     ```
-You should use this method even if you have previously defined PHP extensions in the `.bp-config/options.json` buildpack config file.
+You should use this method instead of the deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
 You can find more information about how to configure the PHP buildpack at https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html [external link].
 
@@ -115,7 +115,7 @@ Your Wordpress app must connect to MySQL securely using SSL. You configure Wordp
 extension=mysqli.so
 extension=openssl.so
 ```
-You should use this method even if you have previously defined PHP extensions in the `.bp-config/options.json` buildpack config file.
+You should use this method instead of the deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
 You can find more information about how to configure the PHP buildpack at https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html [external link].
 
