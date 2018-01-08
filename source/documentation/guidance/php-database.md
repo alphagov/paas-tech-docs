@@ -14,7 +14,7 @@ extension=openssl.so
 
 You should use this method instead of the now-deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
-You can find more information about how to configure the PHP buildpack at https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html [external link].
+You can find more information about how to configure the PHP buildpack at [https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html](https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html) [external link].
 
 Refer to the code below for examples on how to connect your app to the databases.
 
@@ -74,7 +74,7 @@ If your Drupal app uses MySQL, it must connect to the database securely using SS
     ```
 You should use this method instead of the now-deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
-You can find more information about how to configure the PHP buildpack at https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html [external link].
+You can find more information about how to configure the PHP buildpack at [https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html](https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html) [external link].
 
 ### Set up the database connection
 
@@ -117,7 +117,7 @@ extension=openssl.so
 ```
 You should use this method instead of the deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
-You can find more information about how to configure the PHP buildpack at https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html [external link].
+You can find more information about how to configure the PHP buildpack at [https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html](https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html) [external link].
 
 ### Set up the database connection
 
