@@ -75,6 +75,8 @@ cf ssh --app-instance-index 2
 
 ## Creating TCP tunnels with SSH
 
+Refer to the [Conduit](#conduit) section under [Useful Plugins](#useful-plugins) for information on how to connect your local system to your remote backing service instances. Refer to this section for information on how to manually create a TCP tunnel with SSH.
+
 The `cf ssh` command supports [local port forwarding](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows you to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a backing service that is only accessible from an app running on GOV.UK PaaS.
 
 **Note**: Versions 6.24 and 6.25 of the `cf` command line client have a bug that means it's not possible to send more than 2GB of data through an SSH tunnel to a Cloud Foundry application. This bug has been fixed in version 6.26 of the client.
