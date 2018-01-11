@@ -75,7 +75,7 @@ cf ssh --app-instance-index 2
 
 ## Creating TCP tunnels with SSH
 
-You can use the [Conduit plugin](#conduit) to connect your local system to your remote backing service instance. If you nstead want to manually create a TCP tunnel with SSH, refer to this section.
+You can use the [Conduit plugin](#conduit) to connect your local system to your remote backing service instance. If you instead want to manually create a TCP tunnel with SSH, refer to this section.
 
 The `cf ssh` command supports [local port forwarding](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows you to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a backing service that is only accessible from an app running on GOV.UK PaaS.
 
