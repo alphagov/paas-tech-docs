@@ -35,6 +35,7 @@ describe "generating a manifest" do
       {
         'CF_API' => 'https://api.foo.bar.baz',
         'CF_APPS_DOMAIN' => 'apps.foo.bar.baz',
+        'CF_APP_NAME' => 'paas-tech-docs',
       },
       cmd.to_s,
       stdin_data: manifest_template

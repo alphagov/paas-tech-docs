@@ -6,5 +6,4 @@ echo "Run middleman..."
 bundle exec middleman build
 
 echo "Copy additional files..."
-cp nginx.conf build
 cp googlec7239f490e1990a5.html build
