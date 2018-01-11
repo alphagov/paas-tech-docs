@@ -23,9 +23,6 @@ M-HA-dedicated-X.X       20GB Storage, Dedicated Instance, Highly Available, Max
 ...
 Free                     5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.t2.micro.                              free
 ```
-### Connecting to a backing service
-
-Refer to the [Conduit](#conduit) section under [Useful Plugins](#useful-plugins) for further information on how to connect your local system to your remote backing service instances.
 
 ### Failover process
 
@@ -176,6 +173,10 @@ GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable
 Use ``cf env APPNAME`` to see the app's environment variables and confirm that the variable has been set correctly.
 
 If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
+
+### Tunneling to a backing service
+
+Refer to the [Conduit](#conduit) section under [Useful Plugins](#useful-plugins) for further information on how to connect your local system to your remote backing service instances.
 
 ## PostgreSQL maintenance & backups
 
