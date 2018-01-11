@@ -19,11 +19,7 @@ SSH is enabled by default. In most cases, you will find that you can SSH directl
 2. For some tasks to work, you need to set up the interactive SSH session to match the buildpack environment. To do this, run:
 
     ```
-    export DEPS_DIR=/home/vcap/deps
-    export HOME=/home/vcap/app
-    [ -d /home/vcap/profile.d ] && for f in /home/vcap/profile.d/*; do source $f; done
-    [ -d ~/.profile.d ] && for f in ~/.profile.d/*; do source $f; done
-    [ -f ~/.profile ] && source ~/.profile
+    exec /tmp/lifecycle/launcher /home/vcap/app "bash -l" ""
     ```
 
     You need to run this every time you start an SSH session.
