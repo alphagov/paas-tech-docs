@@ -4,6 +4,7 @@ set -eu
 
 echo "Creating manifest"
 export CF_API
+export CF_APPS_DOMAIN
 release/generate-manifest \
     < manifest.yml \
     > modified_manifest.yml

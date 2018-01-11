@@ -12,6 +12,7 @@ describe "generating a manifest" do
     stdout, stderr, status = Open3.capture3(
       {
         'CF_API' => 'https://api.foo.bar.baz',
+        'CF_APPS_DOMAIN' => 'apps.foo.bar.baz'
       },
       cmd.to_s,
       stdin_data: manifest_template
@@ -26,8 +27,8 @@ describe "generating a manifest" do
       to include({ 'route' => 'docs.foo.bar.baz' })
   end
 
-  it "adds the cloudapps.digital route" do
+  it "adds the apps route" do
     expect(new_manifest['applications'][0]['routes']).
-      to include({ 'route' => 'paas-tech-docs.cloudapps.digital' })
+      to include({ 'route' => 'paas-tech-docs.apps.foo.bar.baz' })
   end
 end
