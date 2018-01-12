@@ -24,7 +24,7 @@ gem install travis  --no-rdoc --no-ri
 
 ### Automatic setup (recommended for new users)
 
-Run the setup to configure it to work with Cloudfoundry. It will ask for a username and password it can use to login to PaaS, the space and organisation you wish to deploy to, and the API URL. It will encrypt the data for you in `.travis.yml` file.
+Run the setup to configure it to work with Cloud Foundry. It will ask for a username and password it can use to login to PaaS, the space and organisation you wish to deploy to, and the API URL. It will encrypt the data for you in `.travis.yml` file.
 
 ```
 travis setup cloudfoundry
@@ -32,7 +32,7 @@ travis setup cloudfoundry
 
 ### Manual setup
 
-Create `.travis.yml` and put Cloudfoundry configuration in it. If you already have a `.travis.yml` file please add the appropriate lines:
+Create `.travis.yml` and put Cloud Foundry configuration in it. If you already have a `.travis.yml` file please add the appropriate lines:
 
 ```
 deploy:
