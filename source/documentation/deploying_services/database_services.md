@@ -174,6 +174,10 @@ Use ``cf env APPNAME`` to see the app's environment variables and confirm that t
 
 If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
 
+### Tunneling to a backing service
+
+Refer to the [Conduit](#conduit) section under [Useful Plugins](#useful-plugins) for further information on how to connect your local system to your remote backing service instances.
+
 ## PostgreSQL maintenance & backups
 
 ### PostgreSQL service maintenance times
