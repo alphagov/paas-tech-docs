@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+
+cf_system_dns_root = ENV['CF_API'].sub('https://api.', '')
+cf_apps_domain = ENV['CF_APPS_DOMAIN']
+cf_app_name = ENV['CF_APP_NAME']
+
+manifest = YAML.load($stdin.read)
+manifest['applications'].each { |app|
+  app['routes'] ||= []
+  app['routes'] << { 'route' => cf_app_name + '.' + cf_apps_domain }
+
+  app['env'] ||= {}
+  app['env']['REDIRECT_DOMAIN'] = 'docs.' + cf_system_dns_root
+}
+puts manifest.to_yaml
