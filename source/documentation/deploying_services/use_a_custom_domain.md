@@ -1,15 +1,8 @@
-## Using a custom domain
+## Set up a custom domain using the cdn-route service
 
-This section explains how to configure a custom domain name for your application.
+This section explains how to configure a custom domain name for your application by using our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [optionally cache](#caching) requests to your app.
 
-To use a custom domain with PaaS, you can either: 
-
-- use our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [optionally cache](#caching) requests to your app.
-- configure your own CDN
-
-### Use the `cdn-route` service to set up a CDN
-
-#### Setting up a custom domain
+### Setting up a custom domain
 
 >Before you begin, note that once you create a CDN service instance you can't update or delete it until it has been successfully configured. This means that if you make a mistake that prevents it from being successfully configured, you'll need to ask support to manually delete the service instance.
 
@@ -69,9 +62,9 @@ You have now completed the custom domain setup process. Please note that it shou
 >Your application is only available over HTTPS.
 
 
-#### Configuring your custom domain
+### Configuring your custom domain
 
-##### Multiple domains
+#### Multiple domains
 
 If you have more than one domain, you can pass a comma-delimited list to the `domain` parameter. For example, to update your CDN instance to map both https://example.com and https://www.example.com you can run:
 
@@ -82,7 +75,7 @@ cf update-service my-cdn-route \
 
 The maximum number of domains that can be associated with a single cdn-route service instance is 100.
 
-##### Disabling forwarding cookies
+#### Disabling forwarding cookies
 
 By default cookies are forwarded to your application. You can disable this by setting the `cookies` parameter to `false`:
 
@@ -92,7 +85,7 @@ cf update-service my-cdn-route \
 ```
 See the [More about how the CDN works](#more-about-how-custom-domains-work) section for details.
 
-##### Forwarding headers
+#### Forwarding headers
 
 By default, our service broker configures the CDN to only forward the `Host` header to your application. You can whitelist extra headers; in this example you can whitelist the `Accept` and `Authorization` headers:
 
@@ -110,7 +103,7 @@ cf update-service my-cdn-route \
 
 Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](#more-about-how-custom-domains-work) section for details.
 
-#### Removing your custom domain
+### Removing your custom domain
 
 If you no longer want to use your custom domain you can delete it by running the following command, replacing `my-cdn-route` with the name of your service instance:
 
@@ -119,92 +112,6 @@ cf delete-service my-cdn-route
 ```
 
 You may have to wait for up to an hour for the changes to complete.
-
-### Configure your own CDN
-
-There are two ways to configure your own CDN:
-
-- Use Cloud Foundry commands
-- Amend HTTPS request host headers
-
-#### Use Cloud Foundry commands
-
-##### Set up connection between custom domain and CDN 
-
-1. Register your custom domain with a domain name registrar.
-
-1. Sign up for a CDN.
-
-1. Set up the connection between your custom domain and the CDN provider, following the CDN provider’s instructions as needed.
-
-##### Configure your custom domain in Cloud Foundry
-
-1. Target the space your application is running in:
-
-    ```bash
-    cf target -o ORGNAME -s SPACENAME
-    ```
-
-2. Create a domain in your organisation (replace `ORGNAME` with your org name, and replace `example.com` with your domain):
-
-    ```bash
-    cf create-domain ORGNAME example.com
-    ```
-
-3. Map the route to your application:
-
-    ```bash
-    cf map-route APPNAME example.com
-    ```
-
-##### Configure your CDN
-
-Configure your CDN to forward HTTPS traffic to the PaaS at the `cloudapps.digital` domain, providing a HTTP Host header for your custom domain (for example `Host: example.com`) .
-
-When your CDN connects to the `cloudapps.digital` server, that server will present a TLS certificate that is valid only for `cloudapps.digital` and `*.cloudapps.digital`. Your CDN must accept this certificate.
-
-There are many different CDNs available. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](gov-uk-paas-support@digital.cabinet-office.gov.uk) to discuss best practice for configuring your CDN to work with the PaaS.
-
-#### Amend HTTPS request host headers
-
-##### Set up connection between custom domain and CDN 
-
-1. Register your custom domain with a domain name registrar.
-
-1. Sign up for a CDN.
-
-1. Set up the connection between your custom domain and the CDN provider, following the CDN provider’s instructions as needed.
-
-##### Configure your CDN
-
-You must configure your CDN to forward HTTPS requests from your custom domain to the PaaS at the `YOURAPP.cloudapps.digital` domain. 
-
-You must also configure your CDN to amend the HTTPS requests when it forwards those requests:
-
-- change the HTTPS request host header from your custom domain to your app’s domain (for example, change `Host: example.com` to `Host: YOURAPP.cloudapps.digital`) 
-
-- add a X-Forwarded-Host HTTP header containing your custom domain to the HTTPS request (for example `X-Forwarded-Host: example.com`)
-
-In the above example, the HTTPS request header will change from: 
-
-```
-GET / HTTP/1.1
-Host: example.com
-```
-
-to:
-
-```
-GET / HTTP/1.1
-Host: YOURAPP.cloudapps.digital
-X-Forwarded-Host: example.com
-```
-
-##### Configure your app
-
-Configure your app to obtain its hostname from the `X-Forwarded-Host` HTTP header. 
-
-There are many different CDNs available. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](gov-uk-paas-support@digital.cabinet-office.gov.uk) to discuss best practice for configuring your CDN to work with the PaaS.
 
 ### Troubleshooting custom domains
 
@@ -246,11 +153,11 @@ While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV
 
 You can configure CloudFront to forward headers to your application, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) [external link] for more detail. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
 
-#### Authentication
+### Authentication
 
 Cookie headers are forwarded to your application by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](#forwarding-headers).
 
-#### Further information
+### Further information
 
 * The CloudFront documentation on headers can be found [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior) [external link]
 * The CloudFront documentation on cookies can be found [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html) [external link]
