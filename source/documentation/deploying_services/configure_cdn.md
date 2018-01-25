@@ -1,4 +1,4 @@
-## Using a custom domain
+## Set up a custom domain by configuring your own CDN
 
 This section explains how to configure a custom domain name for your application by configuring your own CDN.
 
