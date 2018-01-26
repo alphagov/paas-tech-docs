@@ -5,7 +5,7 @@ This section explains how to configure a custom domain name for your application
 There are two ways to configure your own CDN:
 
 - Use Cloud Foundry commands
-- Amend HTTPS request host headers
+- Amend HTTP request host headers
 
 ### Use Cloud Foundry commands
 
@@ -39,13 +39,13 @@ There are two ways to configure your own CDN:
 
 #### Configure your CDN
 
-Configure your CDN to forward HTTPS traffic to the PaaS at the `cloudapps.digital` domain, providing a HTTP Host header for your custom domain (for example `Host: example.com`) .
+Configure your CDN to forward HTTPS traffic to the PaaS at the `cloudapps.digital` domain, providing a HTTP `Host` header for your custom domain (for example `Host: example.com`) .
 
 When your CDN connects to the `cloudapps.digital` server, that server will present a TLS certificate that is valid only for `cloudapps.digital` and `*.cloudapps.digital`. Your CDN must accept this certificate.
 
-There are many different CDNs available. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](gov-uk-paas-support@digital.cabinet-office.gov.uk) to discuss best practice for configuring your CDN to work with the PaaS.
+There are many different CDNs available. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to discuss best practice for configuring your CDN to work with the PaaS.
 
-### Amend HTTPS request host headers
+### Amend HTTP request host headers
 
 #### Set up connection between custom domain and CDN 
 
@@ -59,13 +59,13 @@ There are many different CDNs available. Contact us at [gov-uk-paas-support@digi
 
 You must configure your CDN to forward HTTPS requests from your custom domain to the PaaS at the `YOURAPP.cloudapps.digital` domain. 
 
-You must also configure your CDN to amend the HTTPS requests when it forwards those requests:
+You must also configure your CDN to amend the HTTP requests when it forwards those requests:
 
 - change the HTTPS request host header from your custom domain to your app’s domain (for example, change `Host: example.com` to `Host: YOURAPP.cloudapps.digital`) 
 
-- add a X-Forwarded-Host HTTP header containing your custom domain to the HTTPS request (for example `X-Forwarded-Host: example.com`)
+- add a `X-Forwarded-Host` HTTP header containing your custom domain to the HTTPS request (for example `X-Forwarded-Host: example.com`)
 
-In the above example, the HTTPS request header will change from: 
+In the above example, the HTTP request header will change from: 
 
 ```
 GET / HTTP/1.1
@@ -84,4 +84,4 @@ X-Forwarded-Host: example.com
 
 Configure your app to obtain its hostname from the `X-Forwarded-Host` HTTP header. 
 
-There are many different CDNs available. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](gov-uk-paas-support@digital.cabinet-office.gov.uk) to discuss best practice for configuring your CDN to work with the PaaS.
+There are many different CDNs available. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to discuss best practice for configuring your CDN to work with the PaaS.
