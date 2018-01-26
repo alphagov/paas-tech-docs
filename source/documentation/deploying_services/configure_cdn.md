@@ -39,7 +39,7 @@ You should use these methods if you need access to features that are not provide
 
 #### Configure your CDN
 
-Configure your CDN to forward HTTPS traffic to the PaaS at the `cloudapps.digital` domain, providing a HTTP `Host` header for your custom domain (for example `Host: example.com`) .
+Configure your CDN to forward HTTPS traffic to the PaaS at the `cloudapps.digital` domain, providing a HTTP `Host` header for your custom domain (for example `Host: example.com`).
 
 When your CDN connects to the `cloudapps.digital` server, that server will present a TLS certificate that is valid only for `cloudapps.digital` and `*.cloudapps.digital`. Your CDN must accept this certificate.
 
