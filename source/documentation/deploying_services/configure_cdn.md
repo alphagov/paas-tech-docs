@@ -1,11 +1,11 @@
 ## Set up a custom domain by configuring your own CDN
 
-This section explains how to configure a custom domain name for your application by configuring your own CDN.
-
-There are two ways to configure your own CDN:
+This section explains how to configure a custom domain name for your application by configuring your own CDN. There are two ways to configure your own CDN:
 
 - Use Cloud Foundry commands
 - Amend HTTP request host headers
+
+You should use these methods if you need access to features that are not provided by the `cdn-route` service.
 
 ### Use Cloud Foundry commands
 
