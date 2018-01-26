@@ -143,7 +143,7 @@ This happens because you can't do anything to a service instance while it's in a
 
 #### Overview
 
-Custom domains are configured by our cdn-route service which uses CloudFront distributions to proxy and/or cache requests to your application.
+Custom domains are configured by our cdn-route service which uses a CloudFront distribution to proxy and/or cache requests to your application.
 
 #### Caching
 
