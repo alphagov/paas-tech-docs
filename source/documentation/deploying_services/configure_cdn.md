@@ -3,7 +3,7 @@
 This section explains how to configure a custom domain name for your application by configuring your own CDN. There are two ways to configure your own CDN:
 
 - Use Cloud Foundry commands
-- Amend HTTP request host headers
+- Amend HTTP request headers
 
 You should use these methods if you need access to features that are not provided by the `cdn-route` service.
 
@@ -45,7 +45,7 @@ When your CDN connects to the `cloudapps.digital` server, that server will prese
 
 There are many different CDNs available. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to discuss best practice for configuring your CDN to work with the PaaS.
 
-### Amend HTTP request host headers
+### Amend HTTP request headers
 
 #### Set up connection between custom domain and CDN 
 
@@ -61,7 +61,7 @@ You must configure your CDN to forward HTTPS requests from your custom domain to
 
 You must also configure your CDN to amend the HTTP requests when it forwards those requests:
 
-- change the HTTPS request host header from your custom domain to your app’s domain (for example, change `Host: example.com` to `Host: YOURAPP.cloudapps.digital`) 
+- change the HTTPS request `Host` header from your custom domain to your app’s domain (for example, change `Host: example.com` to `Host: YOURAPP.cloudapps.digital`) 
 
 - add a `X-Forwarded-Host` HTTP header containing your custom domain to the HTTPS request (for example `X-Forwarded-Host: example.com`)
 
