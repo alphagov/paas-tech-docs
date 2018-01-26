@@ -2,6 +2,8 @@
 
 This section explains how to configure a custom domain name for your application by using our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [optionally cache](#caching) requests to your app.
 
+Using the `cdn-route` service will maximise the support you will receive from GOV.UK PaaS.
+
 ### Setting up a custom domain
 
 >Before you begin, note that once you create a CDN service instance you can't update or delete it until it has been successfully configured. This means that if you make a mistake that prevents it from being successfully configured, you'll need to ask support to manually delete the service instance.
