@@ -1,8 +1,8 @@
-## Using a custom domain
+## Set up a custom domain using the cdn-route service
 
-This section explains how to configure a custom domain name for your application.
+This section explains how to configure a custom domain name for your application by using our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [optionally cache](#caching) requests to your app.
 
-To use a custom domain with PaaS, you will need to use our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [optionally cache](#caching) requests to your app.
+Using the `cdn-route` service will maximise the support you will receive from GOV.UK PaaS.
 
 ### Setting up a custom domain
 
@@ -145,7 +145,7 @@ This happens because you can't do anything to a service instance while it's in a
 
 #### Overview
 
-Custom domains are configured by our cdn-route service which uses sets up CloudFront distributions to proxy and/or cache requests to your application.
+Custom domains are configured by our cdn-route service which uses a CloudFront distribution to proxy and/or cache requests to your application.
 
 #### Caching
 
@@ -155,11 +155,11 @@ While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV
 
 You can configure CloudFront to forward headers to your application, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) [external link] for more detail. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
 
-#### Authentication
+### Authentication
 
 Cookie headers are forwarded to your application by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](#forwarding-headers).
 
-#### Further information
+### Further information
 
 * The CloudFront documentation on headers can be found [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior) [external link]
 * The CloudFront documentation on cookies can be found [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html) [external link]
