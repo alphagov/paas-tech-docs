@@ -1,6 +1,6 @@
 ## Use Travis
 
-*As at April 2017, Cloudfoundry support is currently included in the latest 'edge' version of Travis, which means it will work with GOV.UK PaaS. We expect it will become part of the core product soon. Likewise, our support for this is also new, so please contact our support team with any problems so we can continue to improve our documentation.*
+*As at April 2017, Cloud Foundry support is currently included in the latest 'edge' version of Travis, which means it will work with GOV.UK PaaS. We expect it will become part of the core product soon. Likewise, our support for this is also new, so please contact our support team with any problems so we can continue to improve our documentation.*
 
 In order to do this, you will need to register for a Travis account. If you link this to your GitHub account, it will be able to see all your personal code repositories as well as those of the GitHub organisations you belong to.
 
@@ -24,7 +24,7 @@ gem install travis  --no-rdoc --no-ri
 
 ### Automatic setup (recommended for new users)
 
-Run the setup to configure it to work with Cloudfoundry. It will ask for a username and password it can use to login to PaaS, the space and organisation you wish to deploy to, and the API URL. It will encrypt the data for you in `.travis.yml` file.
+Run the setup to configure it to work with Cloud Foundry. It will ask for a username and password it can use to login to PaaS, the space and organisation you wish to deploy to, and the API URL. It will encrypt the data for you in `.travis.yml` file.
 
 ```
 travis setup cloudfoundry
@@ -32,7 +32,7 @@ travis setup cloudfoundry
 
 ### Manual setup
 
-Create `.travis.yml` and put Cloudfoundry configuration in it. If you already have a `.travis.yml` file please add the appropriate lines:
+Create `.travis.yml` and put Cloud Foundry configuration in it. If you already have a `.travis.yml` file please add the appropriate lines:
 
 ```
 deploy:

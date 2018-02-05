@@ -133,8 +133,7 @@ to spin up the application. In Rails 4 and below, this will use WEBrick as the w
 server. In Rails 5 and above, the default is
 [puma](http://guides.rubyonrails.org/getting_started.html#starting-up-the-web-server).
 
-You may want to use a different web server in production. See the Cloud Foundry docs for
-[more information on configuring a production server](https://docs.cloudfoundry.org/buildpacks/prod-server.html) [external link].
+You may want to use a different web server in production. See the Cloud Foundry docs for [more information on configuring a production server](https://docs.cloudfoundry.org/buildpacks/prod-server.html) [external link].
 
 
 ### Troubleshooting asset precompilation

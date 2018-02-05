@@ -26,7 +26,7 @@ When setting up the app:
 When running the app in production:
 
 - Ensure you have sufficient time to fix issues yourself as using them for deadline-driven development may be risky
-Regularly maintain your buildpack to update your runtime and dependencies as new security vulnerabilities are discovered and fixed
+- Regularly maintain your buildpack to update your runtime and dependencies as new security vulnerabilities are discovered and fixed
 - We may not be able to offer support for P1 or out-of-hours incidents; standard SLAs will not apply
 
 #### Docker images

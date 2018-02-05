@@ -6,7 +6,7 @@ This section explains how to deploy an app using the Django framework. You may a
 
 These steps assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
-If you are just getting started learning CloudFoundry, you can use the sandbox space by running: ``cf target -s sandbox``
+If you are just getting started learning Cloud Foundry, you can use the sandbox space by running: ``cf target -s sandbox``
 
 1. Put the code for your Django app into a local directory (for example, by checking it out of version control).
 

@@ -196,7 +196,7 @@ cf update-service postgres PLAN NEW_SERVICE_INSTANCE -c '{"preferred_maintenance
 
 Which essentially would set it to Tuesday morning between 4:00 and 4:30 AM UTC.
 
-For more information about syntax, please reffer to [Amazon RDS Maintenance Documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow).
+For more information about syntax, please refer to [Amazon RDS Maintenance Documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow).
 
 ### PostgreSQL service backup
 
