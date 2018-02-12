@@ -33,7 +33,7 @@ We will delete your personal data when your user account is no longer required. 
 
 ### Where we store your data
 
-We store your data on our servers in the European Union. We’ll never transfer or your data on servers outside of the European Economic Area.
+We store your data on our servers in the European Union. We’ll never store your data on or transfer your data to servers outside of the European Economic Area.
 
 This means you are covered by EU Data Protection regulations. 
 
