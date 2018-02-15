@@ -28,7 +28,7 @@ There are a few more specifics about Docker image support in Cloud Foundry:
 * Privileged container mode is not supported. Features depending on this will not work.
 * Only registries that use Docker Registry API V2 are supported.
 
-### Offline Docker registry
+### Docker Registry Availability Requirements
 
 Deploying, scaling, restarting or restaging an app using a Docker image are all dependent on the Docker registry being available, because these actions require pulling the image from the registry.
 
