@@ -127,11 +127,13 @@ We have created the [Conduit](#conduit) plugin to simplify the process of connec
 
 `cf install-plugin conduit`
 
-Once the plugin has finished installing, you can use it by running:
+Once the plugin has finished installing, run the following code in the command line to access an SQL shell for your backing service:
 
-`cf conduit --help`
+`cf conduit SERVICE_NAME -- psql`
 
-Refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
+where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+
+Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
 ### Upgrade PostgreSQL service plan
 
@@ -149,7 +151,7 @@ cf update-service my-pg-service -p S-HA-dedicated-9.5
 
 The plan upgrade will begin immediately and will usually be completed within about an hour. You can check the status of the change by running the `cf services` command.
 
-You can also [queue a plan upgrade](/#queue-a-migration-postgresql) to happen during a maintenance window to minimise service interruption.
+You can also [queue a plan upgrade](/#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
 
 Downgrading service plans is not currently supported.
 
@@ -226,18 +228,18 @@ Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-
 You can set your own maintenance window by running `cf update-service` in the command line and setting the `preferred_maintenance_window` custom parameter:
 
 ```
-cf update-service postgres PLAN SERVICE_NAME -c '{"preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
+cf update-service SERVICE_NAME -c '{"preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
 ```
 
-where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan you have, for example:
+where `SERVICE_NAME` is a unique, descriptive name for this service instance, for example:
 
 ```
-cf update-service postgres M-dedicated-9.5 my-pg-service -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
+cf update-service my-pg-service -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
 ```
 
 For more information on maintenance times, refer to the [Amazon RDS Maintenance documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html) [external link].
 
-#### Queue a migration - PostgreSQL
+#### Queue a plan migration - PostgreSQL
 
 Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can queue the change to begin during a maintenance window by running the following code in the command line:
 
@@ -245,7 +247,7 @@ Migrating to a new plan may cause interruption to your service instance. To mini
 cf update-service postgres SERVICE_NAME -p PLAN -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
 ```
 
-where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan you want, for example:
+where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan that you are upgrading to, for example:
 
 ```
 cf update-service postgres my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
@@ -312,7 +314,7 @@ To restore from a snapshot:
   * You can only restore the most recent snapshot from the latest nightly backup
   * You cannot restore from a service instance that has been deleted
   * You must use the same service plan for the copy as for the original service instance
-  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can use [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html) and [`pg_restore`](https://www.postgresql.org/docs/9.5/static/app-pgrestore.html) via [SSH tunnels](#creating-tcp-tunnels-with-ssh).
+  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/#connect-to-a-postgresql-service-from-your-local-machine).
 
 
 ## MySQL
