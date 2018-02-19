@@ -14,7 +14,9 @@ To set up a PostgreSQL service:
 
 1. Run the following code in the command line to see what plans are available for PostgreSQL:
 
-    `cf marketplace -s postgres`
+    ```
+    cf marketplace -s postgres
+    ```
 
     Here is an example of the output you will see (the exact plans will vary):
 
@@ -39,21 +41,29 @@ To set up a PostgreSQL service:
 
 1. Run the following code in the command line:
 
-    `cf create-service postgres PLAN SERVICE_NAME`
+    ```
+    cf create-service postgres PLAN SERVICE_NAME
+    ```
 
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
 
-    `cf create-service postgres M-dedicated-9.5 my-pg-service`
+    ```
+    cf create-service postgres M-dedicated-9.5 my-pg-service
+    ```
 
     You should use a high-availability (`HA`) encrypted plan for production apps.
 
 1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
 
-    `cf service SERVICE_NAME`
+    ```
+    cf service SERVICE_NAME
+    ```
 
     for example:
 
-    `cf service my-pg-service`
+    ```
+    cf service my-pg-service
+    ```
 
     The service is set up when the `cf service SERVICE_NAME` command returns a `create succeeded` status. Here is an example of the output you will see:
 
@@ -80,19 +90,27 @@ You must bind your app to the PostgreSQL service to be able to access the databa
 
 1. Run the following code in the command line:
 
-    `cf bind-service APPLICATION SERVICE_NAME`
+    ```
+    cf bind-service APPLICATION SERVICE_NAME
+    ```
 
     where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
-    `cf bind-service my-app my-pg-service`
+    ```
+    cf bind-service my-app my-pg-service
+    ```
 
 1. If the app is already running, you should restage the app to make sure it connects:
 
-    `cf restage APPLICATION`
+    ```
+    cf restage APPLICATION
+    ```
 
 1. To confirm that the service is bound to the app, run:
 
-    `cf service SERVICE_NAME`
+    ```
+    cf service SERVICE_NAME
+    ```
 
     and check the `Bound apps:` line of the output.
 
@@ -125,13 +143,19 @@ You must bind your app to the PostgreSQL service to be able to access the databa
 
 We have created the [Conduit](#conduit) plugin to simplify the process of connecting your local machine to a PostgreSQL service. To install this plugin, run the following code from the command line:
 
-`cf install-plugin conduit`
+```
+cf install-plugin conduit
+```
 
-Once the plugin has finished installing, you can use it by running:
+Once the plugin has finished installing, run the following code in the command line to access an SQL shell for your backing service:
 
-`cf conduit --help`
+```
+cf conduit SERVICE_NAME -- psql
+```
 
-Refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
+where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+
+Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
 ### Upgrade PostgreSQL service plan
 
@@ -149,7 +173,7 @@ cf update-service my-pg-service -p S-HA-dedicated-9.5
 
 The plan upgrade will begin immediately and will usually be completed within about an hour. You can check the status of the change by running the `cf services` command.
 
-You can also [queue a plan upgrade](/#queue-a-migration-postgresql) to happen during a maintenance window to minimise service interruption.
+You can also [queue a plan upgrade](/#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
 
 Downgrading service plans is not currently supported.
 
@@ -157,11 +181,15 @@ Downgrading service plans is not currently supported.
 
 You must unbind the PostgreSQL service before you can delete it. To unbind the PostgreSQL service, run the following code in the command line:
 
-`cf unbind-service APPLICATION SERVICE_NAME`
+```
+cf unbind-service APPLICATION SERVICE_NAME
+```
 
 where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this instance of the service, for example:
 
-`cf unbind-service my-app my-pg-service`
+```
+cf unbind-service my-app my-pg-service
+```
 
 If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.
 
@@ -169,7 +197,9 @@ If you unbind your services from your app but do not delete them, the services w
 
 Once the PostgreSQL service has been unbound from your app, you can delete it. Run the following code in the command line:
 
-`cf delete-service SERVICE_NAME`
+```
+cf delete-service SERVICE_NAME
+```
 
 where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
 
@@ -226,29 +256,29 @@ Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-
 You can set your own maintenance window by running `cf update-service` in the command line and setting the `preferred_maintenance_window` custom parameter:
 
 ```
-cf update-service postgres PLAN SERVICE_NAME -c '{"preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
+cf update-service SERVICE_NAME -c '{"preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
 ```
 
-where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan you have, for example:
+where `SERVICE_NAME` is a unique, descriptive name for this service instance, for example:
 
 ```
-cf update-service postgres M-dedicated-9.5 my-pg-service -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
+cf update-service my-pg-service -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
 ```
 
 For more information on maintenance times, refer to the [Amazon RDS Maintenance documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html) [external link].
 
-#### Queue a migration - PostgreSQL
+#### Queue a plan migration - PostgreSQL
 
 Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can queue the change to begin during a maintenance window by running the following code in the command line:
 
 ```
-cf update-service postgres SERVICE_NAME -p PLAN -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
+cf update-service SERVICE_NAME -p PLAN -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
 ```
 
-where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan you want, for example:
+where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan that you are upgrading to, for example:
 
 ```
-cf update-service postgres my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
+cf update-service my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
 ```
 
 Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
@@ -281,29 +311,41 @@ To restore from a snapshot:
 
  1. Get the global unique identifier (GUID) of the existing instance by running the following code in the command line:
 
-    `cf service SERVICE_NAME --guid`
+    ```
+    cf service SERVICE_NAME --guid
+    ```
 
     where `SERVICE_NAME` is the name of the PostgreSQL service instance you want to copy. For example:
 
-    `cf service my-pg-service --guid`
+    ```
+    cf service my-pg-service --guid
+    ```
 
     This returns a `GUID` in the format `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`, for example `32938730-e603-44d6-810e-b4f12d7d109e`.
 
  2. Trigger the creation of a new service based on the snapshot by running:
 
-    `cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID"}'`
+    ```
+    cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID"}'
+    ```
 
     where `PLAN` is the plan used in the original instance (you can find this out by running `cf service SERVICE_NAME`), and `NEW_SERVICE_NAME` is a unique, descriptive name for this new instance. For example:
 
-    `cf create-service postgres M-dedicated-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'`
+    ```
+    cf create-service postgres M-dedicated-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
+    ```
 
  3. It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:
 
-    `cf service NEW_SERVICE_NAME`
+    ```
+    cf service NEW_SERVICE_NAME
+    ```
 
     for example:
 
-    `cf service my-pg-service-copy`
+    ```
+    cf service my-pg-service-copy
+    ```
 
  4. The new instance is set up when the `cf service NEW_SERVICE_NAME` command returns a `create succeeded` status. See [Set up a PostgreSQL service](#set-up-a-postgresql-service) for more details.
 
@@ -312,12 +354,301 @@ To restore from a snapshot:
   * You can only restore the most recent snapshot from the latest nightly backup
   * You cannot restore from a service instance that has been deleted
   * You must use the same service plan for the copy as for the original service instance
-  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can use [`pg_dump`](https://www.postgresql.org/docs/9.5/static/backup-dump.html) and [`pg_restore`](https://www.postgresql.org/docs/9.5/static/app-pgrestore.html) via [SSH tunnels](#creating-tcp-tunnels-with-ssh).
+  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/#connect-to-a-postgresql-service-from-your-local-machine).
 
 
 ## MySQL
 
 MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is backed by Oracle.
+
+### Set up a MySQL service
+
+To set up a MySQL service:
+
+1. Run the following code in the command line to see what plans are available for MySQL:
+
+    ```
+    cf marketplace -s mysql
+    ```
+
+    Here is an example of the output you will see (the exact plans will vary):
+
+    ```
+    service plan                description                                                                                                                                                       free or paid
+    M-dedicated-5.7             100GB Storage, Dedicated Instance. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                                             paid
+    M-HA-dedicated-5.7          100GB Storage, Dedicated Instance, Highly Available. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                           paid
+    ...
+    Free                        5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.t2.micro.                              free
+    ```
+
+    The syntax in this output is explained in the following table:
+
+    |Syntax|Meaning|
+    |:---|:---|
+    |`HA`|High availability|
+    |`ENC`|Encrypted|
+    |`X.X`|Version number|
+    |`S / M / L / XL`|Size of instance|
+
+    More information can be found in the [MySQL plans](/#mysql-plans) section.
+
+1. Run the following code in the command line:
+
+    ```
+    cf create-service mysql PLAN SERVICE_NAME
+    ```
+
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
+
+    ```
+    cf create-service mysql M-dedicated-5.7 my-ms-service
+    ```
+
+    You should use a high-availability (`HA`) encrypted plan for production apps.
+
+1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
+
+    ```
+    cf service SERVICE_NAME
+    ```
+
+    for example:
+
+    ```
+    cf service my-ms-service
+    ```
+
+    The service is set up when the `cf service SERVICE_NAME` command returns a `create succeeded` status. Here is an example of the output you will see:
+
+    ```
+    Service instance: my-ms-service
+    Service: mysql
+    Bound apps:
+    Tags:
+    Plan: M-dedicated-5.7
+    Description: AWS RDS MySQL service
+    Documentation url: https://aws.amazon.com/documentation/rds/
+    Dashboard:
+
+    Last Operation
+    Status: create succeeded
+    Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
+    Started: 2016-08-23T15:34:41Z
+    Updated: 2016-08-23T15:42:02Z
+    ```
+
+### Bind a MySQL service to your app
+
+You must bind your app to the MySQL service to be able to access the database from the app.
+
+1. Run the following code in the command line:
+
+    ```
+    cf bind-service APPLICATION SERVICE_NAME
+    ```
+
+    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+
+    ```
+    cf bind-service my-app my-ms-service
+    ```
+
+1. If the app is already running, you should restage the app to make sure it connects:
+
+    ```
+    cf restage APPLICATION
+    ```
+
+1. To confirm that the service is bound to the app, run:
+
+    ```
+    cf service SERVICE_NAME
+    ```
+
+    and check the `Bound apps:` line of the output.
+
+    ```
+    Service instance: my-ms-service
+    Service: mysql
+    Bound apps: my-app
+    Tags:
+    Plan: M-dedicated-5.7
+    Description: AWS RDS MySQL service
+    Documentation url: https://aws.amazon.com/documentation/rds/
+    Dashboard:
+
+    Last Operation
+    Status: create succeeded
+    Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
+    Started: 2016-08-23T15:34:41Z
+    Updated: 2016-08-23T15:42:02Z
+    ```
+
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details.
+
+    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
+
+    GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
+
+    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
+
+### Connect to a MySQL service from your local machine
+
+We have created the [Conduit](#conduit) plugin to simplify the process of connecting your local machine to a MySQL service. To install this plugin, run the following code from the command line:
+
+```
+cf install-plugin conduit
+```
+
+Once the plugin has finished installing, run the following code in the command line to access an SQL shell for your backing service:
+
+```
+cf conduit SERVICE_NAME -- mysql
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+
+Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
+
+### Upgrade MySQL service plan
+
+You can upgrade your service plan (for example, from free to paid high availability) by running `cf update-service` in the command line:
+
+```
+cf update-service SERVICE_NAME -p NEW_PLAN_NAME
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `NEW_PLAN_NAME` is the name of your new plan. For example:
+
+```
+cf update-service my-ms-service -p S-HA-dedicated-5.7
+```
+
+The plan upgrade will begin immediately and will usually be completed within about an hour. You can check the status of the change by running the `cf services` command.
+
+You can also [queue a plan upgrade](/#queue-a-plan-migration-mysql) to happen during a maintenance window to minimise service interruption.
+
+Downgrading service plans is not currently supported.
+
+### Unbind a MySQL service from your app
+
+You must unbind the MySQL service before you can delete it. To unbind the MySQL service, run the following code in the command line:
+
+```
+cf unbind-service APPLICATION SERVICE_NAME
+```
+
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this instance of the service, for example:
+
+```
+cf unbind-service my-app my-ms-service
+```
+
+If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.
+
+### Delete a MySQL service
+
+Once the MySQL service has been unbound from your app, you can delete it. Run the following code in the command line:
+
+```
+cf delete-service SERVICE_NAME
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+
+Type `yes` when asked for confirmation.
+
+### MySQL plans
+
+Each service in the marketplace has multiple plans that vary by availability, storage capacity and encryption.
+
+#### Paid plans - MySQL
+
+Some service plans are paid and we can potentially bill you based on your service usage.
+
+New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/#quotas) settings.
+
+If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
+
+There is a free plan available with limited storage which should only be used for development or testing, but __not production__.
+
+#### Encrypted plans - MySQL
+
+Plans with `ENC` in the name include encryption at rest of the database storage. This means that both the data on the disk and in snapshots is encrypted.
+
+You should use an encrypted plan for production services or services that use real data.
+
+Once you've created a service instance, you can't enable or disable encryption.
+
+#### High availability plans - MySQL
+
+We recommend you use a high availability plan (`HA`) for your MySQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available (see [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details).
+
+When you use a high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.
+
+Refer to the [Amazon RDS documentation on the failover process](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) for more information.
+
+You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to arrange for us to trigger a failover for you.
+
+#### Read replicas - MySQL
+
+Amazon RDS has the capability to provide a read-only copy of your database known as a read replica. This can be useful for performance, availability or security reasons.
+
+Refer to the [Amazon RDS documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) for more information.
+
+GOV.UK PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
+
+### MySQL maintenance & backups
+
+#### MySQL maintenance times
+
+Each MySQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. Select a high availability (`HA`) plan to minimise this downtime. Minor version upgrades (for example from 5.7.1 to 5.7.2) are applied during this maintenance window.
+
+Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to find out the default time of your maintenance window. Window start times will vary from 22:00 to 06:00 UTC.
+
+You can set your own maintenance window by running `cf update-service` in the command line and setting the `preferred_maintenance_window` custom parameter:
+
+```
+cf update-service SERVICE_NAME -c '{"preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
+```
+
+where `SERVICE_NAME` is a unique, descriptive name for this service instance, for example:
+
+```
+cf update-service my-ms-service -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
+```
+
+For more information on maintenance times, refer to the [Amazon RDS Maintenance documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html) [external link].
+
+#### Queue a plan migration - MySQL
+
+Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can queue the change to begin during a maintenance window by running the following code in the command line:
+
+```
+cf update-service SERVICE_NAME -p PLAN -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
+```
+
+where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan that you are upgrading to, for example:
+
+```
+cf update-service my-ms-service -p S-HA-dedicated-5.7 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
+```
+
+Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
+
+#### MySQL service backup
+
+The data stored within any MySQL service you create is backed up using the standard Amazon RDS backup system if you are using a paid plan. Your data is not backed up if you are using the free plan.
+
+Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is retained for 7 days.
+
+We can manually restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Data can be restored to a new MySQL service instance running in parallel, or it can replace the existing service instance.
+
+To arrange a manual restore, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). We will need approval from your organization manager if restoring will involve overwriting data.
+
+Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.
+
+For more details about how the RDS backup system works, see [Amazon's DB Instance Backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html) [external page].
 
 ## MongoDB
 
