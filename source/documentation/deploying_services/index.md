@@ -14,7 +14,9 @@ To set up a PostgreSQL service:
 
 1. Run the following code in the command line to see what plans are available for PostgreSQL:
 
-    `cf marketplace -s postgres`
+    ```
+    cf marketplace -s postgres
+    ```
 
     Here is an example of the output you will see (the exact plans will vary):
 
@@ -39,21 +41,29 @@ To set up a PostgreSQL service:
 
 1. Run the following code in the command line:
 
-    `cf create-service postgres PLAN SERVICE_NAME`
+    ```
+    cf create-service postgres PLAN SERVICE_NAME
+    ```
 
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
 
-    `cf create-service postgres M-dedicated-9.5 my-pg-service`
+    ```
+    cf create-service postgres M-dedicated-9.5 my-pg-service
+    ```
 
     You should use a high-availability (`HA`) encrypted plan for production apps.
 
 1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
 
-    `cf service SERVICE_NAME`
+    ```
+    cf service SERVICE_NAME
+    ```
 
     for example:
 
-    `cf service my-pg-service`
+    ```
+    cf service my-pg-service
+    ```
 
     The service is set up when the `cf service SERVICE_NAME` command returns a `create succeeded` status. Here is an example of the output you will see:
 
@@ -80,19 +90,27 @@ You must bind your app to the PostgreSQL service to be able to access the databa
 
 1. Run the following code in the command line:
 
-    `cf bind-service APPLICATION SERVICE_NAME`
+    ```
+    cf bind-service APPLICATION SERVICE_NAME
+    ```
 
     where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
-    `cf bind-service my-app my-pg-service`
+    ```
+    cf bind-service my-app my-pg-service
+    ```
 
 1. If the app is already running, you should restage the app to make sure it connects:
 
-    `cf restage APPLICATION`
+    ```
+    cf restage APPLICATION
+    ```
 
 1. To confirm that the service is bound to the app, run:
 
-    `cf service SERVICE_NAME`
+    ```
+    cf service SERVICE_NAME
+    ```
 
     and check the `Bound apps:` line of the output.
 
@@ -125,11 +143,15 @@ You must bind your app to the PostgreSQL service to be able to access the databa
 
 We have created the [Conduit](#conduit) plugin to simplify the process of connecting your local machine to a PostgreSQL service. To install this plugin, run the following code from the command line:
 
-`cf install-plugin conduit`
+```
+cf install-plugin conduit
+```
 
 Once the plugin has finished installing, run the following code in the command line to access an SQL shell for your backing service:
 
-`cf conduit SERVICE_NAME -- psql`
+```
+cf conduit SERVICE_NAME -- psql
+```
 
 where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
 
@@ -159,11 +181,15 @@ Downgrading service plans is not currently supported.
 
 You must unbind the PostgreSQL service before you can delete it. To unbind the PostgreSQL service, run the following code in the command line:
 
-`cf unbind-service APPLICATION SERVICE_NAME`
+```
+cf unbind-service APPLICATION SERVICE_NAME
+```
 
 where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this instance of the service, for example:
 
-`cf unbind-service my-app my-pg-service`
+```
+cf unbind-service my-app my-pg-service
+```
 
 If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.
 
@@ -171,7 +197,9 @@ If you unbind your services from your app but do not delete them, the services w
 
 Once the PostgreSQL service has been unbound from your app, you can delete it. Run the following code in the command line:
 
-`cf delete-service SERVICE_NAME`
+```
+cf delete-service SERVICE_NAME
+```
 
 where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
 
@@ -283,29 +311,41 @@ To restore from a snapshot:
 
  1. Get the global unique identifier (GUID) of the existing instance by running the following code in the command line:
 
-    `cf service SERVICE_NAME --guid`
+    ```
+    cf service SERVICE_NAME --guid
+    ```
 
     where `SERVICE_NAME` is the name of the PostgreSQL service instance you want to copy. For example:
 
-    `cf service my-pg-service --guid`
+    ```
+    cf service my-pg-service --guid
+    ```
 
     This returns a `GUID` in the format `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`, for example `32938730-e603-44d6-810e-b4f12d7d109e`.
 
  2. Trigger the creation of a new service based on the snapshot by running:
 
-    `cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID"}'`
+    ```
+    cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID"}'
+    ```
 
     where `PLAN` is the plan used in the original instance (you can find this out by running `cf service SERVICE_NAME`), and `NEW_SERVICE_NAME` is a unique, descriptive name for this new instance. For example:
 
-    `cf create-service postgres M-dedicated-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'`
+    ```
+    cf create-service postgres M-dedicated-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
+    ```
 
  3. It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:
 
-    `cf service NEW_SERVICE_NAME`
+    ```
+    cf service NEW_SERVICE_NAME
+    ```
 
     for example:
 
-    `cf service my-pg-service-copy`
+    ```
+    cf service my-pg-service-copy
+    ```
 
  4. The new instance is set up when the `cf service NEW_SERVICE_NAME` command returns a `create succeeded` status. See [Set up a PostgreSQL service](#set-up-a-postgresql-service) for more details.
 
@@ -327,7 +367,9 @@ To set up a MySQL service:
 
 1. Run the following code in the command line to see what plans are available for MySQL:
 
-    `cf marketplace -s mysql`
+    ```
+    cf marketplace -s mysql
+    ```
 
     Here is an example of the output you will see (the exact plans will vary):
 
@@ -352,21 +394,29 @@ To set up a MySQL service:
 
 1. Run the following code in the command line:
 
-    `cf create-service mysql PLAN SERVICE_NAME`
+    ```
+    cf create-service mysql PLAN SERVICE_NAME
+    ```
 
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
 
-    `cf create-service mysql M-dedicated-5.7 my-ms-service`
+    ```
+    cf create-service mysql M-dedicated-5.7 my-ms-service
+    ```
 
     You should use a high-availability (`HA`) encrypted plan for production apps.
 
 1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
 
-    `cf service SERVICE_NAME`
+    ```
+    cf service SERVICE_NAME
+    ```
 
     for example:
 
-    `cf service my-ms-service`
+    ```
+    cf service my-ms-service
+    ```
 
     The service is set up when the `cf service SERVICE_NAME` command returns a `create succeeded` status. Here is an example of the output you will see:
 
@@ -393,19 +443,27 @@ You must bind your app to the MySQL service to be able to access the database fr
 
 1. Run the following code in the command line:
 
-    `cf bind-service APPLICATION SERVICE_NAME`
+    ```
+    cf bind-service APPLICATION SERVICE_NAME
+    ```
 
     where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
-    `cf bind-service my-app my-ms-service`
+    ```
+    cf bind-service my-app my-ms-service
+    ```
 
 1. If the app is already running, you should restage the app to make sure it connects:
 
-    `cf restage APPLICATION`
+    ```
+    cf restage APPLICATION
+    ```
 
 1. To confirm that the service is bound to the app, run:
 
-    `cf service SERVICE_NAME`
+    ```
+    cf service SERVICE_NAME
+    ```
 
     and check the `Bound apps:` line of the output.
 
@@ -438,11 +496,15 @@ You must bind your app to the MySQL service to be able to access the database fr
 
 We have created the [Conduit](#conduit) plugin to simplify the process of connecting your local machine to a MySQL service. To install this plugin, run the following code from the command line:
 
-`cf install-plugin conduit`
+```
+cf install-plugin conduit
+```
 
 Once the plugin has finished installing, run the following code in the command line to access an SQL shell for your backing service:
 
-`cf conduit SERVICE_NAME -- mysql`
+```
+cf conduit SERVICE_NAME -- mysql
+```
 
 where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
 
@@ -472,11 +534,15 @@ Downgrading service plans is not currently supported.
 
 You must unbind the MySQL service before you can delete it. To unbind the MySQL service, run the following code in the command line:
 
-`cf unbind-service APPLICATION SERVICE_NAME`
+```
+cf unbind-service APPLICATION SERVICE_NAME
+```
 
 where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this instance of the service, for example:
 
-`cf unbind-service my-app my-ms-service`
+```
+cf unbind-service my-app my-ms-service
+```
 
 If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.
 
@@ -484,7 +550,9 @@ If you unbind your services from your app but do not delete them, the services w
 
 Once the MySQL service has been unbound from your app, you can delete it. Run the following code in the command line:
 
-`cf delete-service SERVICE_NAME`
+```
+cf delete-service SERVICE_NAME
+```
 
 where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
 
