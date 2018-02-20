@@ -486,7 +486,7 @@ You must bind your app to the MySQL service to be able to access the database fr
 
 1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details.
 
-    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
+    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured. Refer to the Guidance section for information on how to securely connect either a [Drupal app](/#connect-drupal-to-mysql) or a [Wordpress app](https://docs.cloud.service.gov.uk/#connect-wordpress-to-mysql) to MySQL using SSL.
 
     GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
