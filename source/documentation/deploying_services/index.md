@@ -652,7 +652,7 @@ For more details about how the RDS backup system works, see [Amazon's DB Instanc
 
 ## Redis
 
-Redis is an open source in-memory data store that can be used as a database cache or message broker. This is a public beta version of the service that is available on request so that we can get feedback, and we will make you aware of any constraints in its use at that time.
+Redis is an open source in-memory data store that can be used as a database cache or message broker. This is a public beta version of the service that is available on request so that we can get feedback. We will make you aware of any constraints in its use at time of request.
 
 ### Set up a Redis service
 
@@ -671,7 +671,7 @@ To set up a Redis service:
     tiny           568MB RAM, 1 shard, single node, no failover   free
     ```
 
-1. Run the following code in the command line:
+1. Run the following code to create a service instance:
 
     ```
     cf create-service redis PLAN SERVICE_NAME
@@ -695,7 +695,7 @@ To set up a Redis service:
     cf service my-redis-service
     ```
 
-    The service is set up when the `cf service SERVICE_NAME` command returns a `create succeeded` status. Here is an example of the output you will see:
+    The service instance is set up when the `cf service SERVICE_NAME` command returns a `create succeeded` status. Here is an example of the output you will see:
 
     ```
     name:            my-redis-service
