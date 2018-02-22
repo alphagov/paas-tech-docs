@@ -652,7 +652,7 @@ For more details about how the RDS backup system works, see [Amazon's DB Instanc
 
 ## Redis
 
-Redis is an open source in-memory data store that can be used as a database cache or message broker. This is a public beta version of the service that is available on request so that we can get feedback. We will make you aware of any constraints in its use at time of request.
+Redis is an open source in-memory datastore that can be used as a database cache or message broker. This is a public beta version of the service that is available on request so that we can get feedback. We will make you aware of any constraints in its use at time of request.
 
 ### Set up a Redis service
 
@@ -695,7 +695,7 @@ To set up a Redis service:
     cf service my-redis-service
     ```
 
-    The service instance is set up when the `cf service SERVICE_NAME` command returns a `create succeeded` status. Here is an example of the output you will see:
+    When `cf service SERVICE_NAME` returns a `create succeeded` status, you have set up the service instance. Here is an example of the output you will see:
 
     ```
     name:            my-redis-service
@@ -713,11 +713,9 @@ To set up a Redis service:
     message:   ---
                status               : available
                cluster id           : cf-u7zpvbwzxmrvu
-
                engine version       : 3.2.6
                maxmemory policy     : volatile-lru
-               maintenance window   :
-               sun:23:00-mon:01:30
+               maintenance window   : sun:23:00-mon:01:30
                daily backup window  : 02:00-05:00
     started:   2018-02-21T10:44:16Z
     updated:   2018-02-21T10:52:31Z
@@ -770,11 +768,9 @@ You must bind your app to the Redis service to be able to access the cache from 
     message:   ---
                status               : available
                cluster id           : cf-u7zpvbwzxmrvu
-
                engine version       : 3.2.6
                maxmemory policy     : volatile-lru
-               maintenance window   :
-               sun:23:00-mon:01:30
+               maintenance window   : sun:23:00-mon:01:30
                daily backup window  : 02:00-05:00
     started:   2018-02-21T10:44:16Z
     updated:   2018-02-21T10:52:31Z
@@ -852,13 +848,13 @@ Type `yes` when asked for confirmation.
 
 #### Redis maintenance times
 
-Every Redis service has a maintenance window of Sunday 23:00 to Monday 01:30 UTC every week. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you require a different maintenance window.
+Every Redis service has a maintenance window of Sunday 11pm to Monday 1:30am UTC every week. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you require a different maintenance window.
 
 For more information on maintenance times, refer to the [Amazon ElastiCache maintenance window documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/VersionManagement.MaintenanceWindow.html) [external link].
 
 #### Redis service backup
 
-The data stored within any Redis service instance you create is backed up using the Amazon ElastiCache backup system. Backups are taken every day between 02:00 and 05:00 UTC. Data is retained for 7 days, and stored in [Amazon S3](https://aws.amazon.com/s3/) [external link].
+The data stored within any Redis service instance you create is backed up using the Amazon ElastiCache backup system. Backups are taken every day between 2am and 5am UTC. Data is retained for 7 days, and stored in [Amazon S3](https://aws.amazon.com/s3/) [external link].
 
 To restore from the __latest__ backup of your Redis service instance, create a new service instance by running the following code:
 
@@ -871,6 +867,35 @@ where `PLAN` is the name of the plan, `NEW_SERVICE_NAME` is the name of your new
 To restore from an older backup, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 For more details about how the backup system works, see the [Amazon's ElastiCache backups documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/backups-automatic.html) [external link].
+
+### Redis key eviction policy
+
+The eviction policy is the behaviour Redis follows when you reach your plan's maximum memory limit. The eviction policy can take the following values:
+
+|Eviction policy|Definition|
+|:---|:---|
+|`volatile-lru`| evict keys by trying to remove the least recently used (LRU) keys first, but only among keys that have an expire set, in order to make space for the new data added|
+|`allkeys-lru`| evict keys by trying to remove the least recently used (LRU) keys first, in order to make space for the new data added|
+|`allkeys-random`| evict keys randomly in order to make space for the new data added|
+|`volatile-random`| evict keys randomly in order to make space for the new data added, but only evict keys with an expire set|
+|`volatile-ttl`| evict keys with an expire set, and try to evict keys with a shorter time to live (TTL) first, in order to make space for the new data added|
+|`noeviction`| return errors when the memory limit was reached and the client is trying to execute commands that could result in more memory to be used|
+
+Your Redis instance is set to use the `volatile-lru` eviction policy by default. You can check this by running the `cf service SERVICE_NAME` command.
+
+You can set the eviction policy for an existing service instance by running:
+
+```
+cf update-service SERVICE_NAME -c '{"maxmemory_policy": "EVICTION_POLICY"}'
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this service instance and `EVICTION_POLICY` is the eviction policy you want, for example:
+
+```
+cf update-service my-redis-service -c '{"maxmemory_policy": "volatile-ttl"}'
+```
+
+Refer to the [Redis LRU cache documentation](https://redis.io/topics/lru-cache) [external link] for more information.
 
 ### Further information
 
