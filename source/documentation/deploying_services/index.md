@@ -652,7 +652,7 @@ For more details about how the RDS backup system works, see [Amazon's DB Instanc
 
 ## Redis
 
-Redis is an open source in-memory datastore that can be used as a database cache or message broker. This is a public beta version of the service that is available on request so that we can get feedback. We will make you aware of any constraints in its use at time of request.
+Redis is an open source in-memory datastore that can be used as a database cache or message broker. This is a private beta version of the service. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request access to Redis, and we will make you aware of any constraints in its use at that time.
 
 ### Set up a Redis service
 
