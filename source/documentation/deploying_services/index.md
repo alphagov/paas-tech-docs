@@ -652,13 +652,13 @@ For more details about how the RDS backup system works, see [Amazon's DB Instanc
 
 ## Redis
 
-Redis is an open source in-memory datastore that can be used as a database cache or message broker. This is a private beta version of the service. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request access to Redis, and we will make you aware of any constraints in its use at that time.
+Redis is an open source in-memory datastore that can be used as a database cache or message broker. This is a private beta version of the service. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request access to Redis, and we will make you aware of any constraints.
 
 ### Set up a Redis service
 
 To set up a Redis service:
 
-1. Run the following code in the command line to see what plans are available for Redis:
+1. Run the following in the command line to see what plans are available for Redis:
 
     ```
     cf marketplace -s redis
@@ -671,7 +671,7 @@ To set up a Redis service:
     tiny           568MB RAM, 1 shard, single node, no failover   free
     ```
 
-1. Run the following code to create a service instance:
+1. Run the following to create a service instance:
 
     ```
     cf create-service redis PLAN SERVICE_NAME
@@ -695,7 +695,7 @@ To set up a Redis service:
     cf service my-redis-service
     ```
 
-    When `cf service SERVICE_NAME` returns a `create succeeded` status, you have set up the service instance. Here is an example of the output you will see:
+    When `cf service SERVICE_NAME` returns a `create succeeded` status, you have set up the service instance. Example output:
 
     ```
     name:            my-redis-service
@@ -726,7 +726,7 @@ To set up a Redis service:
 
 You must bind your app to the Redis service to be able to access the cache from the app.
 
-1. Run the following code in the command line:
+1. Run the following in the command line:
 
     ```
     cf bind-service APPLICATION SERVICE_NAME
@@ -776,7 +776,7 @@ You must bind your app to the Redis service to be able to access the cache from 
     updated:   2018-02-21T10:52:31Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. An example of the output is:
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. Example output:
 
     ```
     {
@@ -809,7 +809,7 @@ You must bind your app to the Redis service to be able to access the cache from 
     }
     ```
 
-    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
+    Your app must make a [TLS connection](https://en.wikipedia.org/wiki/Transport_Layer_Security) to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
 
     Your app should parse the data in the `VCAP_SERVICES` environment variable in order to make a secure connection to Redis.
 
@@ -830,11 +830,11 @@ where `APPLICATION` is the name of a deployed instance of your application (exac
 cf unbind-service my-app my-redis-service
 ```
 
-If you unbind your services from your app but do not delete them, these services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.
+If you unbind your services from your app but do not delete them, these services will persist even after your app is deleted. You can re-bind or reconnect to them in future.
 
 ### Delete a Redis service
 
-Once the Redis service has been unbound from your app, you can delete your service instance. Run the following code in the command line:
+Once the Redis service has been unbound from your app, you can delete your service instance. Run the following in the command line:
 
 ```
 cf delete-service SERVICE_NAME
