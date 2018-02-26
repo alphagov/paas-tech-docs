@@ -650,13 +650,260 @@ Note that data restore will not be available in the event of an RDS outage that 
 
 For more details about how the RDS backup system works, see [Amazon's DB Instance Backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html) [external page].
 
+## Redis
+
+Redis is an open source in-memory datastore that can be used as a database cache or message broker. This is a private beta version of the service. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request access to Redis, and we will make you aware of any constraints.
+
+### Set up a Redis service
+
+To set up a Redis service:
+
+1. Run the following in the command line to see what plans are available for Redis:
+
+    ```
+    cf marketplace -s redis
+    ```
+
+    There is currently only one plan available for Redis:
+
+    ```
+    service plan   description                                    free or paid
+    tiny           568MB RAM, 1 shard, single node, no failover   free
+    ```
+
+1. Run the following to create a service instance:
+
+    ```
+    cf create-service redis PLAN SERVICE_NAME
+    ```
+
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
+
+    ```
+    cf create-service redis tiny my-redis-service
+    ```
+
+1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
+
+    ```
+    cf service SERVICE_NAME
+    ```
+
+    for example:
+
+    ```
+    cf service my-redis-service
+    ```
+
+    When `cf service SERVICE_NAME` returns a `create succeeded` status, you have set up the service instance. Example output:
+
+    ```
+    name:            my-redis-service
+    service:         redis
+    bound apps:      
+    tags:            
+    plan:            tiny
+    description:     AWS ElastiCache Redis service
+    documentation:   
+    dashboard:       
+
+    Showing status of last operation from service my-redis-service...
+
+    status:    create succeeded
+    message:   ---
+               status               : available
+               cluster id           : cf-u7zpvbwzxmrvu
+               engine version       : 3.2.6
+               maxmemory policy     : volatile-lru
+               maintenance window   : sun:23:00-mon:01:30
+               daily backup window  : 02:00-05:00
+    started:   2018-02-21T10:44:16Z
+    updated:   2018-02-21T10:52:31Z
+
+    ```
+
+### Bind a Redis service to your app
+
+You must bind your app to the Redis service to be able to access the cache from the app.
+
+1. Run the following in the command line:
+
+    ```
+    cf bind-service APPLICATION SERVICE_NAME
+    ```
+
+    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+
+    ```
+    cf bind-service my-app my-redis-service
+    ```
+
+1. If the app is already running, you should restage the app to make sure it connects:
+
+    ```
+    cf restage APPLICATION
+    ```
+
+1. To confirm that the service is bound to the app, run:
+
+    ```
+    cf service SERVICE_NAME
+    ```
+
+    and check the `bound apps:` line of the output.
+
+    ```
+    name:            my-redis-service
+    service:         redis
+    bound apps:      my-app
+    tags:            
+    plan:            tiny
+    description:     AWS ElastiCache Redis service
+    documentation:   
+    dashboard:       
+
+    Showing status of last operation from service testing-time...
+
+    status:    create succeeded
+    message:   ---
+               status               : available
+               cluster id           : cf-u7zpvbwzxmrvu
+               engine version       : 3.2.6
+               maxmemory policy     : volatile-lru
+               maintenance window   : sun:23:00-mon:01:30
+               daily backup window  : 02:00-05:00
+    started:   2018-02-21T10:44:16Z
+    updated:   2018-02-21T10:52:31Z
+    ```
+
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. Example output:
+
+    ```
+    {
+     "VCAP_SERVICES": {
+      "redis": [
+       {
+        "binding_name": null,
+        "credentials": {
+         "host": "clustercfg.cf-u7zpvbwzxmrvu.p9lva7.euw1.cache.amazonaws.com",
+         "name": "cf-u7zpvbwzxmrvu",
+         "password": "PASSWORD",
+         "port": 6379,
+         "tls_enabled": true,
+         "uri": "rediss://x:PASSWORD@clustercfg.cf-u7zpvbwzxmrvu.p9lva7.euw1.cache.amazonaws.com:6379"
+        },
+        "instance_name": "my-redis-service",
+        "label": "redis",
+        "name": "my-redis-service",
+        "plan": "tiny",
+        "provider": null,
+        "syslog_drain_url": null,
+        "tags": [
+         "elasticache",
+         "redis"
+        ],
+        "volume_mounts": []
+       }
+      ]
+     }
+    }
+    ```
+
+    Your app must make a [TLS connection](https://en.wikipedia.org/wiki/Transport_Layer_Security) to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
+
+    Your app should parse the data in the `VCAP_SERVICES` environment variable in order to make a secure connection to Redis.
+
+    If your app writes service connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
+
+
+### Unbind a Redis service from your app
+
+You must unbind the Redis service before you can delete your service instance. To unbind the Redis service, run the following code in the command line:
+
+```
+cf unbind-service APPLICATION SERVICE_NAME
+```
+
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+
+```
+cf unbind-service my-app my-redis-service
+```
+
+If you unbind your services from your app but do not delete them, these services will persist even after your app is deleted. You can re-bind or reconnect to them in future.
+
+### Delete a Redis service
+
+Once the Redis service has been unbound from your app, you can delete your service instance. Run the following in the command line:
+
+```
+cf delete-service SERVICE_NAME
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+
+Type `yes` when asked for confirmation.
+
+### Redis maintenance & backups
+
+#### Redis maintenance times
+
+Every Redis service has a maintenance window of Sunday 11pm to Monday 1:30am UTC every week. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you require a different maintenance window.
+
+For more information on maintenance times, refer to the [Amazon ElastiCache maintenance window documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/VersionManagement.MaintenanceWindow.html) [external link].
+
+#### Redis service backup
+
+The data stored within any Redis service instance you create is backed up using the Amazon ElastiCache backup system. Backups are taken every day between 2am and 5am UTC. Data is retained for 7 days, and stored in [Amazon S3](https://aws.amazon.com/s3/) [external link].
+
+To restore from the __latest__ backup of your Redis service instance, create a new service instance by running the following code:
+
+```
+cf create-service redis PLAN NEW_SERVICE_NAME -c '{ "restore_from_latest_snapshot_of": "GUID" }'
+```
+
+where `PLAN` is the name of the plan, `NEW_SERVICE_NAME` is the name of your new service instance, and `GUID` is the UUID of the pre-existing backed-up instance. Get the `GUID` by running `cf service --guid SERVICE_NAME`.
+
+To restore from an older backup, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+
+For more details about how the backup system works, see the [Amazon's ElastiCache backups documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/backups-automatic.html) [external link].
+
+### Redis key eviction policy
+
+The eviction policy is the behaviour Redis follows when you reach your plan's maximum memory limit. The eviction policy can take the following values:
+
+|Eviction policy|Definition|
+|:---|:---|
+|`volatile-lru`| evict keys by trying to remove the least recently used (LRU) keys first, but only among keys that have an expire set, in order to make space for the new data added|
+|`allkeys-lru`| evict keys by trying to remove the least recently used (LRU) keys first, in order to make space for the new data added|
+|`allkeys-random`| evict keys randomly in order to make space for the new data added|
+|`volatile-random`| evict keys randomly in order to make space for the new data added, but only evict keys with an expire set|
+|`volatile-ttl`| evict keys with an expire set, and try to evict keys with a shorter time to live (TTL) first, in order to make space for the new data added|
+|`noeviction`| return errors when the memory limit was reached and the client is trying to execute commands that could result in more memory to be used|
+
+Your Redis instance is set to use the `volatile-lru` eviction policy by default. You can check this by running the `cf service SERVICE_NAME` command.
+
+You can set the eviction policy for an existing service instance by running:
+
+```
+cf update-service SERVICE_NAME -c '{"maxmemory_policy": "EVICTION_POLICY"}'
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this service instance and `EVICTION_POLICY` is the eviction policy you want, for example:
+
+```
+cf update-service my-redis-service -c '{"maxmemory_policy": "volatile-ttl"}'
+```
+
+Refer to the [Redis LRU cache documentation](https://redis.io/topics/lru-cache) [external link] for more information.
+
+### Further information
+
+Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elasticache/redis/) [external link] for more information.
+
 ## MongoDB
 
 MongoDB is an open source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). This is an early version of the service that is available on request so that we can get feedback, and we will make you aware of any constraints in its use at that time.
-
-## Redis
-
-Redis is an open source in-memory data store that can be used as a database cache or message broker. This is an early version of the service that is available on request so that we can get feedback, and we will make you aware of any constraints in its use at that time.
 
 ## Elasticsearch
 
