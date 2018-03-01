@@ -5,77 +5,77 @@
 Your responsibilities differ depending on whether you use a [standard buildpack](/#buildpacks), [custom buildpack](/#how-to-use-custom-buildpacks) or [Docker image](/#deploy-a-docker-image-experimental) to deploy your app.
 
 <div class="table-container">
-	<table>
-		<tbody>
-			<tr>
-				<th style="vertical-align: middle; text-align: left">Responsibility</th>
-				<th style="vertical-align: middle; text-align: center">Standard Buildpack</th>
-				<th style="vertical-align: middle; text-align: center">Custom Buildpack</th>
-				<th style="vertical-align: middle; text-align: center">Docker Images</th>
-			</tr>
-			<tr>
-				<td style="vertical-align: middle; text-align: left">
-					Your app
-					<br> - apply security updates to app dependencies
-					<br> - run <a href="https://docs.cloud.service.gov.uk/#penetration-testing">pen tests</a>
-				</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: middle; text-align: left">
-					Language / runtime
-					<br> - update language and runtime
+  <table>
+    <tbody>
+      <tr>
+        <th style="vertical-align: middle; text-align: left">Responsibility</th>
+        <th style="vertical-align: middle; text-align: center">Standard Buildpack</th>
+        <th style="vertical-align: middle; text-align: center">Custom Buildpack</th>
+        <th style="vertical-align: middle; text-align: center">Docker Images</th>
+      </tr>
+      <tr>
+        <td style="vertical-align: middle; text-align: left">
+          Your app
+          <br> - apply security updates to app dependencies
+          <br> - run <a href="https://docs.cloud.service.gov.uk/#penetration-testing">pen tests</a>
+        </td>
+        <td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: middle; text-align: left">
+          Language / runtime
+          <br> - update language and runtime
           <br> - provide consistent app build process
-					<br> - monitor and patch runtime vulnerabilities
-				</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: middle; text-align: left">
-					Base operating system
-					<br> - update OS libraries
-				</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: middle; text-align: left">
-					App admin
-					<br> - ensure app instances are up and running
-					<br> - ensure provisioning capacity
+          <br> - monitor and patch runtime vulnerabilities
+        </td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: middle; text-align: left">
+          Base operating system
+          <br> - update OS libraries
+        </td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #ffbf47">Yours</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: middle; text-align: left">
+          App admin
+          <br> - ensure app instances are up and running
+          <br> - ensure provisioning capacity
           <br> - stream application logs
-				</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: middle; text-align: left">
-					<a href="https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service">Backing services</a>
-					<br> - maintain service availability
-					<br> - apply security patches
-				</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-			</tr>
-			<tr>
-				<td style="vertical-align: middle; text-align: left">
-					Physical hardware
-					<br>- resolve hardware failures
-					<br>- encrypt network data traffic
-				</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-				<td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
-			</tr>
-		</tbody>
-	</table>
+        </td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: middle; text-align: left">
+          <a href="https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service">Backing services</a>
+          <br> - maintain service availability
+          <br> - apply security patches
+        </td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+      </tr>
+      <tr>
+        <td style="vertical-align: middle; text-align: left">
+          Physical hardware
+          <br>- resolve hardware failures
+          <br>- encrypt network data traffic
+        </td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+        <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 ### Standard buildpacks
