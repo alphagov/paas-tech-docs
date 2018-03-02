@@ -45,10 +45,11 @@ Your responsibilities differ depending on whether you use a [standard buildpack]
       </tr>
       <tr>
         <td style="vertical-align: middle; text-align: left">
-          App admin
-          <br> - ensure app instances are up and running
+          App instance lifecycle
+          <br> - ensure app is running
+          <br> - ensure high availability
           <br> - ensure provisioning capacity
-          <br> - stream application logs
+          <br> - stream application logs and metrics
         </td>
         <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
         <td style="vertical-align: middle; text-align: center; background-color: #2b8cc4">PaaS</td>
@@ -66,7 +67,7 @@ Your responsibilities differ depending on whether you use a [standard buildpack]
       </tr>
       <tr>
         <td style="vertical-align: middle; text-align: left">
-          Physical hardware
+          Underlying infrastructure
           <br>- resolve hardware failures
           <br>- encrypt network data traffic
         </td>
