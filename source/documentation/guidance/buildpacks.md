@@ -86,11 +86,11 @@ If you're relatively new to cloud or have a small development team, we recommend
 
 ### Custom buildpacks
 
-You are responsible for managing this custom buildpack's language and runtime, as well as the app code and its dependencies. This applies both in setting up the app, and running it in production.
+You are responsible for managing a custom buildpack's language and runtime, as well as the app code and its dependencies. This applies both to setting up the app, and running it in production.
 
 When setting up the app:
 
-- Do your own due diligence on finding a maintained and supported custom buildpack so that you have a community to call upon in the case of problems
+- Use a buildpack that has been created and is maintained by a community (rather than creating your own buildpack), so that you can ask that community for support with any issues
 - Test deploy with the buildpack early in your build process, not just before go-live
 
 When running the app in production:
@@ -99,9 +99,7 @@ When running the app in production:
 - Regularly maintain your buildpack to update your runtime and dependencies as new security vulnerabilities are discovered and fixed
 - We may not be able to offer support for P1 or out-of-hours incidents and standard SLAs will not apply
 
-Due to these increased responsibilities, we recommend that, if you must use a custom buildpack, you use a community supported one that is maintained and updated by that community. We do not recommend that you create your own buildpack.
-
-Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you are interested in this feature. If a custom buildpack is requested by multiple tenants, we will look to improve our support in this area.
+Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you are interested in this feature. If a custom buildpack is requested by multiple tenants, we will look into improving our support in this area.
 
 ### Docker images
 
