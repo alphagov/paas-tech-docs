@@ -131,7 +131,39 @@ You must bind your app to the PostgreSQL service to be able to access the databa
     Updated: 2016-08-23T15:42:02Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details.
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+
+    ```
+    {
+     "VCAP_SERVICES": {
+      "postgres": [
+       {
+        "binding_name": null,
+        "credentials": {
+         "host": "rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com",
+         "jdbcuri": "jdbc:postgresql://rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:5432/DATABASE_NAME?password=PASSWORD\u0026ssl=true\u0026user=USERNAME",
+         "name": "DATABASE_NAME",
+         "password": "PASSWORD",
+         "port": 5432,
+         "uri": "postgres://USERNAME:PASSWORD@rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:5432/DATABASE_NAME",
+         "username": "USERNAME"
+        },
+        "instance_name": "SERVICE_NAME",
+        "label": "postgres",
+        "name": "SERVICE_NAME",
+        "plan": "Free",
+        "provider": null,
+        "syslog_drain_url": null,
+        "tags": [
+         "postgres",
+         "relational"
+        ],
+        "volume_mounts": []
+       }
+      ]
+     }
+    }
+    ```
 
     Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
 
@@ -157,6 +189,65 @@ where `SERVICE_NAME` is a unique descriptive name for this instance of the servi
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
+### Import and export bulk data to and from a PostgreSQL database
+
+You must have the PostgreSQL command line tools installed on your local machine for this task.
+
+#### Non-PaaS to PaaS
+
+To move data from a non-PaaS hosted PostgreSQL database to a PaaS-hosted PostgreSQL database:
+
+1. Run the following code in the command line to export data from the non-PaaS hosted database to an SQL data file:
+
+    ```
+    pg_dump --host HOST_NAME --file DATA_FILE_NAME DATABASE_NAME
+    ```
+
+    where:
+    - `HOST_NAME` is the name of your host
+    - `DATA_FILE_NAME` is the SQL data file
+    - `DATABASE_NAME` is the name of the origin non-PaaS hosted database
+
+2. Ensure that you have:
+    - [logged into Cloud Foundry](/#setting-up-the-command-line)
+    - [created the new PaaS-hosted PostgreSQL database](/#set-up-a-postgresql-service)
+    - [targeted the space](/#setting-a-target) where your new database is located
+
+3. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to import the data file into the PaaS-hosted database by running:
+
+    ```
+    cf conduit SERVICE_NAME -- psql < DATA_FILE_NAME
+    ```
+
+    where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `DATA_FILE_NAME` is the SQL file created in the previous step.
+
+If your source database uses PostgresSQL extensions, you may see some extension errors. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
+
+#### PaaS to PaaS
+
+To move data between two PaaS-hosted PostgreSQL databases:
+
+1. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to connect to the origin database and export the data into an SQL file by running:
+
+    ```
+    cf conduit SERVICE_NAME -- pg_dump -f DATA_FILE_NAME
+    ```
+
+    where `SERVICE_NAME` is a unique descriptive name for this service instance and `DATA_FILE_NAME` is the SQL data file created by the `pg_dump` command.
+
+2. Ensure that you have:
+    - [created the new PaaS-hosted PostgreSQL database](/#set-up-a-postgresql-service)
+    - [targeted the space](/#setting-a-target) where your new database is located
+
+3. Run the following code to import the data file into the target database:
+
+     ```
+     cf conduit DESTINATION_SERVICE_NAME -- psql < DATA_FILE_NAME
+     ```
+
+    where `DESTINATION_SERVICE_NAME` is the name of the target database.
+
+
 ### Upgrade PostgreSQL service plan
 
 You can upgrade your service plan (for example, from free to paid high availability) by running `cf update-service` in the command line:
@@ -176,6 +267,7 @@ The plan upgrade will begin immediately and will usually be completed within abo
 You can also [queue a plan upgrade](/#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
 
 Downgrading service plans is not currently supported.
+
 
 ### Unbind a PostgreSQL service from your app
 
@@ -484,7 +576,39 @@ You must bind your app to the MySQL service to be able to access the database fr
     Updated: 2016-08-23T15:42:02Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details.
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+
+    ```
+    {
+     "VCAP_SERVICES": {
+      "mysql": [
+       {
+        "binding_name": null,
+        "credentials": {
+         "host": "rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com",
+         "jdbcuri": "jdbc:mysql://rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:3306/DATABASE_NAME?user=USERNAME\u0026password=PASSWORD",
+         "name": "DATABASE_NAME",
+         "password": "PASSWORD",
+         "port": 3306,
+         "uri": "mysql://USERNAME:PASSWORD@rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:3306/DATABASE_NAME?reconnect=true\u0026useSSL=true",
+         "username": "USERNAME"
+        },
+        "instance_name": "SERVICE_NAME",
+        "label": "mysql",
+        "name": "SERVICE_NAME",
+        "plan": "Free",
+        "provider": null,
+        "syslog_drain_url": null,
+        "tags": [
+         "mysql",
+         "relational"
+        ],
+        "volume_mounts": []
+       }
+      ]
+     }
+    }
+    ```
 
     Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured. Refer to the Guidance section for information on how to securely connect either a [Drupal app](/#connect-drupal-to-mysql) or a [Wordpress app](https://docs.cloud.service.gov.uk/#connect-wordpress-to-mysql) to MySQL using SSL.
 
@@ -509,6 +633,71 @@ cf conduit SERVICE_NAME -- mysql
 where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
+
+
+### Import and export bulk data to and from a MySQL database
+
+You must have the MySQL command line tools installed on your local machine for this task.
+
+#### Non-PaaS to PaaS
+
+To move data from a non-PaaS hosted MySQL database to a PaaS-hosted MySQL database:
+
+1. Run the following code in the command line to export data from the non-PaaS hosted database to a SQL data file:
+
+    ```
+    mysqldump --host HOST_NAME --result-file DATA_FILE_NAME DATABASE_NAME
+    ```
+
+    where:
+    - `HOST_NAME` is the name of your host
+    - `DATA_FILE_NAME` is the SQL data file
+    - `DATABASE_NAME` is the name of the origin non-PaaS hosted database
+
+2. Ensure that you have:
+    - [logged into Cloud Foundry](/#setting-up-the-command-line)
+    - [created the new PaaS-hosted MySQL database](/#set-up-a-mysql-service)
+    - [targeted the space](/#setting-a-target) where your new database is located
+
+3. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to import the data file into the PaaS-hosted database by running:
+
+    ```
+    cf conduit SERVICE_NAME -- mysql < DATA_FILE_NAME
+    ```
+
+    where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `DATA_FILE_NAME` is the SQL file created in the previous step.
+
+If your source database uses MySQL extensions, you may see some extension errors. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
+
+#### PaaS to PaaS
+
+To move data between two PaaS-hosted MySQL databases:
+
+1. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to connect to the origin database and export the data into a SQL file by running:
+
+    ```
+    cf conduit SERVICE_NAME -- mysqldump --result-file DATA_FILE_NAME DATABASE_NAME
+    ```
+
+    where:
+    - `SERVICE_NAME` is a unique descriptive name for this instance of the service
+    - `DATA_FILE_NAME` is the SQL data file name created by the `mysqldump` command
+    - `DATABASE_NAME` is the name of the origin database, you can get this from the [`VCAP_SERVICES` environment variable](/#bind-a-mysql-service-to-your-app)
+
+
+2. Ensure that you have:
+    - [created the new PaaS-hosted MySQL database](/#set-up-a-mysql-service)
+    - [targeted the space](/#setting-a-target) where your new database is located
+
+3. Run the following code to import the data file into the target database:
+
+     ```
+     cf conduit DESTINATION_SERVICE_NAME -- mysql < DATA_FILE_NAME
+     ```
+
+    where `DESTINATION_SERVICE_NAME` is the name of the target database.
+
+
 
 ### Upgrade MySQL service plan
 
