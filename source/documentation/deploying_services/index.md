@@ -230,7 +230,7 @@ To move data between two PaaS-hosted PostgreSQL databases:
 1. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to connect to the origin database and export the data into an SQL file by running:
 
     ```
-    cf conduit SERVICE_NAME -- pg_dump -f DATA_FILE_NAME
+    cf conduit SERVICE_NAME -- pg_dump --file DATA_FILE_NAME
     ```
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance and `DATA_FILE_NAME` is the SQL data file created by the `pg_dump` command.
@@ -267,7 +267,6 @@ The plan upgrade will begin immediately and will usually be completed within abo
 You can also [queue a plan upgrade](/#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
 
 Downgrading service plans is not currently supported.
-
 
 ### Unbind a PostgreSQL service from your app
 
@@ -634,7 +633,6 @@ where `SERVICE_NAME` is a unique descriptive name for this instance of the servi
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
-
 ### Import and export bulk data to and from a MySQL database
 
 You must have the MySQL command line tools installed on your local machine for this task.
@@ -696,8 +694,6 @@ To move data between two PaaS-hosted MySQL databases:
      ```
 
     where `DESTINATION_SERVICE_NAME` is the name of the target database.
-
-
 
 ### Upgrade MySQL service plan
 
