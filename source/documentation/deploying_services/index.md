@@ -6,7 +6,7 @@ In Cloud Foundry, backing and routing services are referred to as 'services' and
 
 ## PostgreSQL
 
-PostgreSQL is an object-relational database management system. It is open source and designed to be extensible; currently the postgis and uuid-ossp extensions are enabled.
+PostgreSQL is an object-relational database management system. It is open source and designed to be extensible; refer to the [extensions whitelist](/#postgresql-extensions-whitelist) for more information.
 
 ### Set up a PostgreSQL service
 
@@ -37,7 +37,7 @@ To set up a PostgreSQL service:
     |`X.X`|Version number|
     |`S / M / L / XL`|Size of instance|
 
-    More information can be found in the [PostgresSQL plans](/#postgresql-plans) section.
+    More information can be found in the [PostgreSQL plans](/#postgresql-plans) section.
 
 1. Run the following code in the command line:
 
@@ -221,7 +221,7 @@ To move data from a non-PaaS hosted PostgreSQL database to a PaaS-hosted Postgre
 
     where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
-If your source database uses PostgresSQL extensions, you may see some extension errors. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
+If your source database uses PostgreSQL extensions, you may see some extension errors since we only allow [certain extensions](/#postgresql-extensions-whitelist). Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
 #### PaaS to PaaS
 
@@ -447,6 +447,12 @@ To restore from a snapshot:
   * You must use the same service plan for the copy as for the original service instance
   * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/#connect-to-a-postgresql-service-from-your-local-machine).
 
+### PostgreSQL extensions whitelist
+
+We currently enable the following extensions for PostgreSQL:
+
+- postgis
+- uuid-ossp
 
 ## MySQL
 
@@ -665,7 +671,7 @@ To move data from a non-PaaS hosted MySQL database to a PaaS-hosted MySQL databa
 
     where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
-If your source database uses MySQL extensions, you may see some extension errors. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
+Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
 #### PaaS to PaaS
 
