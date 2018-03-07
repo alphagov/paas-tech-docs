@@ -6,7 +6,7 @@ In Cloud Foundry, backing and routing services are referred to as 'services' and
 
 ## PostgreSQL
 
-PostgreSQL is an object-relational database management system. It is open source and designed to be extensible; refer to the [extensions whitelist](/#postgresql-extensions-whitelist) for more information.
+PostgreSQL is an object-relational database management system. It is open source and designed to be extensible.
 
 ### Set up a PostgreSQL service
 
