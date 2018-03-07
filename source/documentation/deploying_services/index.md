@@ -45,7 +45,7 @@ To set up a PostgreSQL service:
     cf create-service postgres PLAN SERVICE_NAME
     ```
 
-    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
     cf create-service postgres M-dedicated-9.5 my-pg-service
@@ -185,7 +185,7 @@ Once the plugin has finished installing, run the following code in the command l
 cf conduit SERVICE_NAME -- psql
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
@@ -219,7 +219,7 @@ To move data from a non-PaaS hosted PostgreSQL database to a PaaS-hosted Postgre
     cf conduit SERVICE_NAME -- psql < DATA_FILE_NAME
     ```
 
-    where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `DATA_FILE_NAME` is the SQL file created in the previous step.
+    where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
 If your source database uses PostgreSQL extensions, you may see some extension errors since we only allow [certain extensions](/#postgresql-extensions-whitelist). Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
@@ -256,7 +256,7 @@ You can upgrade your service plan (for example, from free to paid high availabil
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `NEW_PLAN_NAME` is the name of your new plan. For example:
+where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
 
 ```
 cf update-service my-pg-service -p S-HA-dedicated-9.5
@@ -276,7 +276,7 @@ You must unbind the PostgreSQL service before you can delete it. To unbind the P
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this instance of the service, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-pg-service
@@ -292,7 +292,7 @@ Once the PostgreSQL service has been unbound from your app, you can delete it. R
 cf delete-service SERVICE_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
@@ -495,7 +495,7 @@ To set up a MySQL service:
     cf create-service mysql PLAN SERVICE_NAME
     ```
 
-    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
     cf create-service mysql M-dedicated-5.7 my-ms-service
@@ -635,7 +635,7 @@ Once the plugin has finished installing, run the following code in the command l
 cf conduit SERVICE_NAME -- mysql
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
@@ -669,7 +669,7 @@ To move data from a non-PaaS hosted MySQL database to a PaaS-hosted MySQL databa
     cf conduit SERVICE_NAME -- mysql < DATA_FILE_NAME
     ```
 
-    where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `DATA_FILE_NAME` is the SQL file created in the previous step.
+    where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
 Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
@@ -684,7 +684,7 @@ To move data between two PaaS-hosted MySQL databases:
     ```
 
     where:
-    - `SERVICE_NAME` is a unique descriptive name for this instance of the service
+    - `SERVICE_NAME` is a unique descriptive name for this service instance
     - `DATA_FILE_NAME` is the SQL data file name created by the `mysqldump` command
     - `DATABASE_NAME` is the name of the origin database, you can get this from the [`VCAP_SERVICES` environment variable](/#bind-a-mysql-service-to-your-app)
 
@@ -709,7 +709,7 @@ You can upgrade your service plan (for example, from free to paid high availabil
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `NEW_PLAN_NAME` is the name of your new plan. For example:
+where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
 
 ```
 cf update-service my-ms-service -p S-HA-dedicated-5.7
@@ -729,7 +729,7 @@ You must unbind the MySQL service before you can delete it. To unbind the MySQL 
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this instance of the service, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-ms-service
@@ -745,7 +745,7 @@ Once the MySQL service has been unbound from your app, you can delete it. Run th
 cf delete-service SERVICE_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
@@ -868,7 +868,7 @@ To set up a Redis service:
     cf create-service redis PLAN SERVICE_NAME
     ```
 
-    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
     cf create-service redis tiny my-redis-service
@@ -1031,7 +1031,7 @@ Once the Redis service has been unbound from your app, you can delete your servi
 cf delete-service SERVICE_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
