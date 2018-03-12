@@ -6,7 +6,7 @@ In Cloud Foundry, backing and routing services are referred to as 'services' and
 
 ## PostgreSQL
 
-PostgreSQL is an object-relational database management system. It is open source and designed to be extensible; currently the postgis and uuid-ossp extensions are enabled.
+PostgreSQL is an object-relational database management system. It is open source and designed to be extensible.
 
 ### Set up a PostgreSQL service
 
@@ -37,7 +37,7 @@ To set up a PostgreSQL service:
     |`X.X`|Version number|
     |`S / M / L / XL`|Size of instance|
 
-    More information can be found in the [PostgresSQL plans](/#postgresql-plans) section.
+    More information can be found in the [PostgreSQL plans](/#postgresql-plans) section.
 
 1. Run the following code in the command line:
 
@@ -45,7 +45,7 @@ To set up a PostgreSQL service:
     cf create-service postgres PLAN SERVICE_NAME
     ```
 
-    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
     cf create-service postgres M-dedicated-9.5 my-pg-service
@@ -131,7 +131,39 @@ You must bind your app to the PostgreSQL service to be able to access the databa
     Updated: 2016-08-23T15:42:02Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details.
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+
+    ```
+    {
+     "VCAP_SERVICES": {
+      "postgres": [
+       {
+        "binding_name": null,
+        "credentials": {
+         "host": "rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com",
+         "jdbcuri": "jdbc:postgresql://rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:5432/DATABASE_NAME?password=PASSWORD\u0026ssl=true\u0026user=USERNAME",
+         "name": "DATABASE_NAME",
+         "password": "PASSWORD",
+         "port": 5432,
+         "uri": "postgres://USERNAME:PASSWORD@rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:5432/DATABASE_NAME",
+         "username": "USERNAME"
+        },
+        "instance_name": "SERVICE_NAME",
+        "label": "postgres",
+        "name": "SERVICE_NAME",
+        "plan": "Free",
+        "provider": null,
+        "syslog_drain_url": null,
+        "tags": [
+         "postgres",
+         "relational"
+        ],
+        "volume_mounts": []
+       }
+      ]
+     }
+    }
+    ```
 
     Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
 
@@ -153,9 +185,71 @@ Once the plugin has finished installing, run the following code in the command l
 cf conduit SERVICE_NAME -- psql
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
+
+### Import and export bulk data to and from a PostgreSQL database
+
+#### Prerequisites 
+
+You must:
+
+- install and configure the [PostgreSQL command line (CLI)](https://postgresapp.com/documentation/cli-tools.html) tools on your local machine (configuration options vary depending on operating system and version)
+- [log into Cloud Foundry](/#setting-up-the-command-line)
+- [create the new PaaS-hosted PostgreSQL database](/#set-up-a-postgresql-service)
+- [target the space](/#setting-a-target) where your new database is located
+
+
+#### Non-PaaS to PaaS
+
+To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
+
+1. Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:
+
+    ```
+    pg_dump --host HOST_NAME --file DATA_FILE_NAME DATABASE_NAME
+    ```
+
+    where:
+ 
+        - `HOST_NAME` is the name of your host
+    	- `DATA_FILE_NAME` is the SQL data file
+    	- `DATABASE_NAME` is the name of the non-PaaS source database
+
+2. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to import the data file into the PaaS database by running:
+
+    ```
+    cf conduit SERVICE_NAME -- psql < DATA_FILE_NAME
+    ```
+
+    where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
+
+> You can only use [certain PostgreSQL extensions](#postgresql-extensions-whitelist).
+
+#### PaaS to PaaS
+
+To move data between two PaaS-hosted PostgreSQL databases:
+
+1. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
+
+    ```
+    cf conduit SERVICE_NAME -- pg_dump --file DATA_FILE_NAME
+    ```
+
+    where `SERVICE_NAME` is a unique descriptive name for this service instance and `DATA_FILE_NAME` is the SQL data file created by the `pg_dump` command.
+
+
+2. Run the following command to import the data file into the target database:
+
+     ```
+     cf conduit DESTINATION_SERVICE_NAME -- psql < DATA_FILE_NAME
+     ```
+
+    where `DESTINATION_SERVICE_NAME` is the name of the target database.
+
+Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
+
 
 ### Upgrade PostgreSQL service plan
 
@@ -165,7 +259,7 @@ You can upgrade your service plan (for example, from free to paid high availabil
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `NEW_PLAN_NAME` is the name of your new plan. For example:
+where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
 
 ```
 cf update-service my-pg-service -p S-HA-dedicated-9.5
@@ -185,7 +279,7 @@ You must unbind the PostgreSQL service before you can delete it. To unbind the P
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this instance of the service, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-pg-service
@@ -201,7 +295,7 @@ Once the PostgreSQL service has been unbound from your app, you can delete it. R
 cf delete-service SERVICE_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
@@ -356,6 +450,12 @@ To restore from a snapshot:
   * You must use the same service plan for the copy as for the original service instance
   * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/#connect-to-a-postgresql-service-from-your-local-machine).
 
+### PostgreSQL extensions whitelist
+
+We currently enable the following extensions for PostgreSQL:
+
+- postgis
+- uuid-ossp
 
 ## MySQL
 
@@ -398,7 +498,7 @@ To set up a MySQL service:
     cf create-service mysql PLAN SERVICE_NAME
     ```
 
-    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
     cf create-service mysql M-dedicated-5.7 my-ms-service
@@ -484,7 +584,39 @@ You must bind your app to the MySQL service to be able to access the database fr
     Updated: 2016-08-23T15:42:02Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details.
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+
+    ```
+    {
+     "VCAP_SERVICES": {
+      "mysql": [
+       {
+        "binding_name": null,
+        "credentials": {
+         "host": "rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com",
+         "jdbcuri": "jdbc:mysql://rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:3306/DATABASE_NAME?user=USERNAME\u0026password=PASSWORD",
+         "name": "DATABASE_NAME",
+         "password": "PASSWORD",
+         "port": 3306,
+         "uri": "mysql://USERNAME:PASSWORD@rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:3306/DATABASE_NAME?reconnect=true\u0026useSSL=true",
+         "username": "USERNAME"
+        },
+        "instance_name": "SERVICE_NAME",
+        "label": "mysql",
+        "name": "SERVICE_NAME",
+        "plan": "Free",
+        "provider": null,
+        "syslog_drain_url": null,
+        "tags": [
+         "mysql",
+         "relational"
+        ],
+        "volume_mounts": []
+       }
+      ]
+     }
+    }
+    ```
 
     Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured. Refer to the Guidance section for information on how to securely connect either a [Drupal app](/#connect-drupal-to-mysql) or a [Wordpress app](https://docs.cloud.service.gov.uk/#connect-wordpress-to-mysql) to MySQL using SSL.
 
@@ -506,9 +638,70 @@ Once the plugin has finished installing, run the following code in the command l
 cf conduit SERVICE_NAME -- mysql
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
+
+### Import and export bulk data to and from a MySQL database
+
+#### Prerequisites
+
+You must:
+
+- install and configure the [MySQL command line (CLI)](https://dev.mysql.com/downloads/utilities/) tools on your local machine (configuration options vary depending on operating system and version)
+- [log into Cloud Foundry](/#setting-up-the-command-line)
+- [create the new PaaS-hosted MySQL database](/#set-up-a-mysql-service)
+- [target the space](/#setting-a-target) where your new database is located
+
+#### Non-PaaS to PaaS
+
+To move data from a non-PaaS MySQL database to a PaaS MySQL database:
+
+1. Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:
+
+    ```
+    mysqldump --host HOST_NAME --result-file DATA_FILE_NAME DATABASE_NAME
+    ```
+
+    where:
+    
+    - `HOST_NAME` is the name of your host
+    - `DATA_FILE_NAME` is the SQL data file
+    - `DATABASE_NAME` is the name of the non-PaaS source database
+
+2. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to import the data file into the PaaS database by running:
+
+    ```
+    cf conduit SERVICE_NAME -- mysql < DATA_FILE_NAME
+    ```
+
+    where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
+
+#### PaaS to PaaS
+
+To move data between two PaaS-hosted MySQL databases:
+
+1. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
+
+    ```
+    cf conduit SERVICE_NAME -- mysqldump --result-file DATA_FILE_NAME DATABASE_NAME
+    ```
+
+    where:
+    
+    - `SERVICE_NAME` is a unique descriptive name for this service instance
+    - `DATA_FILE_NAME` is the SQL data file name created by the `mysqldump` command
+    - `DATABASE_NAME` is the name of the source database. you should get this from the [`VCAP_SERVICES` environment variable](/#bind-a-mysql-service-to-your-app)
+
+2. Run the following command to import the data file into the target database:
+
+     ```
+     cf conduit DESTINATION_SERVICE_NAME -- mysql < DATA_FILE_NAME
+     ```
+
+    where `DESTINATION_SERVICE_NAME` is the name of the target database.
+
+Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
 ### Upgrade MySQL service plan
 
@@ -518,7 +711,7 @@ You can upgrade your service plan (for example, from free to paid high availabil
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service, and `NEW_PLAN_NAME` is the name of your new plan. For example:
+where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
 
 ```
 cf update-service my-ms-service -p S-HA-dedicated-5.7
@@ -538,7 +731,7 @@ You must unbind the MySQL service before you can delete it. To unbind the MySQL 
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this instance of the service, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-ms-service
@@ -554,7 +747,7 @@ Once the MySQL service has been unbound from your app, you can delete it. Run th
 cf delete-service SERVICE_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
@@ -677,7 +870,7 @@ To set up a Redis service:
     cf create-service redis PLAN SERVICE_NAME
     ```
 
-    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this instance of the service. For example:
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
     cf create-service redis tiny my-redis-service
@@ -840,7 +1033,7 @@ Once the Redis service has been unbound from your app, you can delete your servi
 cf delete-service SERVICE_NAME
 ```
 
-where `SERVICE_NAME` is a unique descriptive name for this instance of the service.
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
