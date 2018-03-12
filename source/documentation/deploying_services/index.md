@@ -191,29 +191,33 @@ Run `cf conduit --help` for more options, and refer to the [Conduit readme file]
 
 ### Import and export bulk data to and from a PostgreSQL database
 
-You must have the PostgreSQL command line tools installed on your local machine for this task.
+#### Prerequisites 
+
+You must:
+
+- install and configure the [PostgreSQL command line (CLI)](https://postgresapp.com/documentation/cli-tools.html) tools on your local machine (configuration options vary depending on operating system and version)
+- [log into Cloud Foundry](/#setting-up-the-command-line)
+- [create the new PaaS-hosted PostgreSQL database](/#set-up-a-postgresql-service)
+- [target the space](/#setting-a-target) where your new database is located
+
 
 #### Non-PaaS to PaaS
 
-To move data from a non-PaaS hosted PostgreSQL database to a PaaS-hosted PostgreSQL database:
+To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
 
-1. Run the following code in the command line to export data from the non-PaaS hosted database to an SQL data file:
+1. Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:
 
     ```
     pg_dump --host HOST_NAME --file DATA_FILE_NAME DATABASE_NAME
     ```
 
     where:
-    - `HOST_NAME` is the name of your host
-    - `DATA_FILE_NAME` is the SQL data file
-    - `DATABASE_NAME` is the name of the origin non-PaaS hosted database
+ 
+        - `HOST_NAME` is the name of your host
+    	- `DATA_FILE_NAME` is the SQL data file
+    	- `DATABASE_NAME` is the name of the non-PaaS source database
 
-2. Ensure that you have:
-    - [logged into Cloud Foundry](/#setting-up-the-command-line)
-    - [created the new PaaS-hosted PostgreSQL database](/#set-up-a-postgresql-service)
-    - [targeted the space](/#setting-a-target) where your new database is located
-
-3. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to import the data file into the PaaS-hosted database by running:
+2. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to import the data file into the PaaS database by running:
 
     ```
     cf conduit SERVICE_NAME -- psql < DATA_FILE_NAME
@@ -221,13 +225,13 @@ To move data from a non-PaaS hosted PostgreSQL database to a PaaS-hosted Postgre
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
-If your source database uses PostgreSQL extensions, you may see some extension errors since we only allow [certain extensions](/#postgresql-extensions-whitelist). Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
+> You can only use [certain PostgreSQL extensions](#postgresql-extensions-whitelist).
 
 #### PaaS to PaaS
 
 To move data between two PaaS-hosted PostgreSQL databases:
 
-1. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to connect to the origin database and export the data into an SQL file by running:
+1. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
 
     ```
     cf conduit SERVICE_NAME -- pg_dump --file DATA_FILE_NAME
@@ -235,17 +239,16 @@ To move data between two PaaS-hosted PostgreSQL databases:
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance and `DATA_FILE_NAME` is the SQL data file created by the `pg_dump` command.
 
-2. Ensure that you have:
-    - [created the new PaaS-hosted PostgreSQL database](/#set-up-a-postgresql-service)
-    - [targeted the space](/#setting-a-target) where your new database is located
 
-3. Run the following code to import the data file into the target database:
+2. Run the following command to import the data file into the target database:
 
      ```
      cf conduit DESTINATION_SERVICE_NAME -- psql < DATA_FILE_NAME
      ```
 
     where `DESTINATION_SERVICE_NAME` is the name of the target database.
+
+Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
 
 ### Upgrade PostgreSQL service plan
@@ -641,29 +644,32 @@ Run `cf conduit --help` for more options, and refer to the [Conduit readme file]
 
 ### Import and export bulk data to and from a MySQL database
 
-You must have the MySQL command line tools installed on your local machine for this task.
+#### Prerequisites
+
+You must:
+
+- install and configure the [MySQL command line (CLI)](https://dev.mysql.com/downloads/utilities/) tools on your local machine (configuration options vary depending on operating system and version)
+- [log into Cloud Foundry](/#setting-up-the-command-line)
+- [create the new PaaS-hosted MySQL database](/#set-up-a-mysql-service)
+- [target the space](/#setting-a-target) where your new database is located
 
 #### Non-PaaS to PaaS
 
-To move data from a non-PaaS hosted MySQL database to a PaaS-hosted MySQL database:
+To move data from a non-PaaS MySQL database to a PaaS MySQL database:
 
-1. Run the following code in the command line to export data from the non-PaaS hosted database to a SQL data file:
+1. Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:
 
     ```
     mysqldump --host HOST_NAME --result-file DATA_FILE_NAME DATABASE_NAME
     ```
 
     where:
+    
     - `HOST_NAME` is the name of your host
     - `DATA_FILE_NAME` is the SQL data file
-    - `DATABASE_NAME` is the name of the origin non-PaaS hosted database
+    - `DATABASE_NAME` is the name of the non-PaaS source database
 
-2. Ensure that you have:
-    - [logged into Cloud Foundry](/#setting-up-the-command-line)
-    - [created the new PaaS-hosted MySQL database](/#set-up-a-mysql-service)
-    - [targeted the space](/#setting-a-target) where your new database is located
-
-3. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to import the data file into the PaaS-hosted database by running:
+2. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to import the data file into the PaaS database by running:
 
     ```
     cf conduit SERVICE_NAME -- mysql < DATA_FILE_NAME
@@ -671,35 +677,31 @@ To move data from a non-PaaS hosted MySQL database to a PaaS-hosted MySQL databa
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
-Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
-
 #### PaaS to PaaS
 
 To move data between two PaaS-hosted MySQL databases:
 
-1. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to connect to the origin database and export the data into a SQL file by running:
+1. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
 
     ```
     cf conduit SERVICE_NAME -- mysqldump --result-file DATA_FILE_NAME DATABASE_NAME
     ```
 
     where:
+    
     - `SERVICE_NAME` is a unique descriptive name for this service instance
     - `DATA_FILE_NAME` is the SQL data file name created by the `mysqldump` command
-    - `DATABASE_NAME` is the name of the origin database, you can get this from the [`VCAP_SERVICES` environment variable](/#bind-a-mysql-service-to-your-app)
+    - `DATABASE_NAME` is the name of the source database. you should get this from the [`VCAP_SERVICES` environment variable](/#bind-a-mysql-service-to-your-app)
 
-
-2. Ensure that you have:
-    - [created the new PaaS-hosted MySQL database](/#set-up-a-mysql-service)
-    - [targeted the space](/#setting-a-target) where your new database is located
-
-3. Run the following code to import the data file into the target database:
+2. Run the following command to import the data file into the target database:
 
      ```
      cf conduit DESTINATION_SERVICE_NAME -- mysql < DATA_FILE_NAME
      ```
 
     where `DESTINATION_SERVICE_NAME` is the name of the target database.
+
+Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
 ### Upgrade MySQL service plan
 
