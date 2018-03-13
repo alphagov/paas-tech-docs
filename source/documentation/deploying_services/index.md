@@ -191,7 +191,7 @@ Run `cf conduit --help` for more options, and refer to the [Conduit readme file]
 
 ### Import and export bulk data to and from a PostgreSQL database
 
-#### Prerequisites 
+#### Prerequisites
 
 You must:
 
@@ -212,10 +212,9 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
     ```
 
     where:
- 
-        - `HOST_NAME` is the name of your host
-    	- `DATA_FILE_NAME` is the SQL data file
-    	- `DATABASE_NAME` is the name of the non-PaaS source database
+      - `HOST_NAME` is the name of your host
+      - `DATA_FILE_NAME` is the SQL data file
+      - `DATABASE_NAME` is the name of the non-PaaS source database
 
 2. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to import the data file into the PaaS database by running:
 
@@ -664,7 +663,6 @@ To move data from a non-PaaS MySQL database to a PaaS MySQL database:
     ```
 
     where:
-    
     - `HOST_NAME` is the name of your host
     - `DATA_FILE_NAME` is the SQL data file
     - `DATABASE_NAME` is the name of the non-PaaS source database
@@ -688,10 +686,9 @@ To move data between two PaaS-hosted MySQL databases:
     ```
 
     where:
-    
     - `SERVICE_NAME` is a unique descriptive name for this service instance
     - `DATA_FILE_NAME` is the SQL data file name created by the `mysqldump` command
-    - `DATABASE_NAME` is the name of the source database. you should get this from the [`VCAP_SERVICES` environment variable](/#bind-a-mysql-service-to-your-app)
+    - `DATABASE_NAME` is the name of the source database (you should get this from the [`VCAP_SERVICES` environment variable](/#bind-a-mysql-service-to-your-app))
 
 2. Run the following command to import the data file into the target database:
 
@@ -1007,6 +1004,102 @@ You must bind your app to the Redis service to be able to access the cache from 
     Your app should parse the data in the `VCAP_SERVICES` environment variable in order to make a secure connection to Redis.
 
     If your app writes service connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
+
+### Connect to a Redis service instance from your local machine
+
+You must use the [Conduit](#conduit) plugin and stunnel tool to connect your local machine to your Redis service instance.
+
+#### Prerequisites
+
+You must:
+
+- install the Redis command line (CLI) tool on your local machine (this is included in the [standard Redis installation](https://redis.io/download) [external link])
+- [log into Cloud Foundry](/#setting-up-the-command-line)
+- [target the space](/#setting-a-target) where your Redis service instance is located
+
+#### Install and configure Conduit
+
+1. Run the following command to install the Conduit plugin:
+
+    ```
+    cf install-plugin conduit
+    ```
+
+1. Start Conduit by running:
+
+    ```
+    $ cf conduit SERVICE_NAME
+    ```
+
+    where `SERVICE_NAME` is a unique descriptive name for this service instance.
+
+    You will see the following output:
+
+    ```
+    service: SERVICE_NAME (redis)
+    host: 127.0.0.1
+    port: 7081
+    username:
+    password: REDIS_PASSWORD
+    db: DATABASE
+    ```
+
+    where `REDIS_PASSWORD` is the password given to you by Conduit.
+
+#### Install and configure stunnel
+
+1. Run the following command to install stunnel:
+
+    ```
+    brew install stunnel
+    ```
+
+    If you're not on a Mac, or don't have Homebrew, see the [stunnel
+    website](https://www.stunnel.org/downloads.html) [external link] for other
+    installation options.
+
+1. Create a stunnel configuration file that contains the following text:
+
+    ```ini
+    debug=7
+    options=NO_SSLv2
+    options=NO_SSLv3
+    foreground=yes
+    [redis]
+    client = yes
+    accept = 127.0.0.1:6379
+    connect = 127.0.0.1:7081
+    ```
+
+    where:
+    - `127.0.0.1:6379` is the default Redis host and port that stunnel will open (you will need to use a different port if you are already running a local Redis service instance)
+    - `127.0.0.1:7081` is the default Conduit host and port outputted by the `cf conduit SERVICE_NAME` command
+
+#### Connect your local machine to your Redis service instance
+
+1. Start stunnel by running:
+
+    ```
+    sudo stunnel CONFIGURATION_FILE
+    ```
+
+1. Connect to your Redis service instance by running:
+
+    ```
+    redis-cli -a REDIS_PASSWORD
+    ```
+
+    where `REDIS_PASSWORD` is the password outputted by the `cf conduit SERVICE_NAME` command.
+
+You have now connected your local machine to your Redis service instance using Conduit and stunnel. You can test this connection with the Redis [PING](https://redis.io/commands/ping) command:
+
+```
+127.0.0.1:6379> PING
+```
+
+Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
+
+Refer to the AWS documentation on [connecting to an encrypted Redis cluster](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/GettingStarted.ConnectToCacheNode.html#GettingStarted.ConnectToCacheNode.Redis.Encrypt) [external link] for more information on this process.
 
 
 ### Unbind a Redis service from your app
