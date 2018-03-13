@@ -1007,13 +1007,13 @@ You must bind your app to the Redis service to be able to access the cache from 
 
 ### Connect to a Redis service instance from your local machine
 
-You must use the [Conduit](#conduit) plugin and stunnel tool to connect your local machine to your Redis service instance.
+We recommend that you use the [Conduit](#conduit) plugin and [stunnel](/#install-and-configure-stunnel) tool to connect your local machine to your Redis service instance. Stunnel is necessary because the Redis command line (CLI) does not support [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security).
 
 #### Prerequisites
 
 You must:
 
-- install the Redis command line (CLI) tool on your local machine (this is included in the [standard Redis installation](https://redis.io/download) [external link])
+- install the Redis CLI tool on your local machine (this is included in the [standard Redis installation](https://redis.io/download) [external link])
 - [log into Cloud Foundry](/#setting-up-the-command-line)
 - [target the space](/#setting-a-target) where your Redis service instance is located
 
