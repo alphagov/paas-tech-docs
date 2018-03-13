@@ -1065,6 +1065,7 @@ You must:
     options=NO_SSLv2
     options=NO_SSLv3
     foreground=yes
+    pid=/tmp/stunnel.pid
     [redis]
     client = yes
     accept = 127.0.0.1:6379
@@ -1080,7 +1081,7 @@ You must:
 1. Start stunnel by running:
 
     ```
-    sudo stunnel CONFIGURATION_FILE
+    stunnel CONFIGURATION_FILE
     ```
 
 1. Connect to your Redis service instance by running:
