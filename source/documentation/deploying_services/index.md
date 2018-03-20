@@ -1190,18 +1190,22 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 
 ## MongoDB
 
-MongoDB is an open source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). This is an early version of the service that is available on request so that we can get feedback, and we will make you aware of any constraints in its use at that time.
+MongoDB is an open source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). This is a private beta trial version of the service that is available on request so that we can get feedback. [Contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request information on how to enable and use this service for your app, and we will make you aware of any constraints in its use at that time.
+
+### TLS connection to MongoDB
+
+MongoDB uses self-signed certificates. In order for your app to verify a TLS connection to this service, the app must use a CA certificate included in a `VCAP_SERVICES` environment variable.
 
 ## Elasticsearch
 
-Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is an early version of the service that is available on request so that we can get feedback, and we will make you aware of any constraints in its use at that time.
+Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is a private beta trial version of the service that is available on request so that we can get feedback. [Contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request information on how to enable and use this service for your app, and we will make you aware of any constraints in its use at that time.
 
-## Services
+### TLS connection to Elasticsearch
 
-### User-provided service instance
+Elasticsearch uses self-signed certificates. In order for your app to verify a TLS connection to this service, the app must use a CA certificate included in a VCAP_SERVICES environment variable.
+
+## User-provided services
 
 Cloud Foundry enables tenants to define their own external services that are not available in the marketplace by using a [user-provided service instance](https://docs.cloudfoundry.org/devguide/services/user-provided.html) [external link]. They can be used to deliver service credentials to an application, and/or to trigger streaming of application logs to a syslog compatible consumer. Once created, user-provided service instances behave like service instances created through the marketplace.
-
-### Future services
 
 If you need a particular backing service that we don't yet support, please let us know at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
