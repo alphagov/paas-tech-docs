@@ -9,7 +9,3 @@ MongoDB uses replica sets i.e. clusters of MongoDB servers that replicate the co
 ### Elasticsearch
 
 Visit the [Elasticsearch on Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
-
-## TLS connection to MongoDB and Elasticsearch
-
-MongoDB and Elasticsearch use self-signed certificates. In order for your app to verify a TLS connection to these services, the app must use a CA certificate included in a VCAP_SERVICES environment variable.
