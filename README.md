@@ -112,3 +112,13 @@ The master repository for the tech docs template system is at https://github.com
 See the section "Updating a project to use the latest template" at https://github.com/alphagov/tech-docs-template
 
 The template system is maintained and developed by the service design manual team.  You can contact them at `#tech-docs-format` on GDS Slack. Note that this is an MVP version and there is a roadmap of planned features and improvements.
+
+## Licence
+
+Unless stated otherwise, the codebase is released under [the MIT licence](./LICENSE).
+
+The data is [© Crown
+copyright](http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/)
+and available under the terms of the [Open Government
+3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/)
+licence.
