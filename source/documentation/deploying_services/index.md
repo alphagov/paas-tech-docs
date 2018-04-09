@@ -854,12 +854,15 @@ To set up a Redis service:
     cf marketplace -s redis
     ```
 
-    There is currently only one plan available for Redis:
+    There are currently two plans available for Redis:
 
     ```
-    service plan   description                                    free or paid
-    tiny           568MB RAM, 1 shard, single node, no failover   free
+    service plan       description                                                                free or paid
+    tiny-clustered     568MB RAM, clustered (1 shard), single node, no failover, daily backups    free
+    tiny-unclustered   568MB RAM, non-clustered, single node, no failover, no backups             free
     ```
+
+    You should use the `tiny-clustered` plan as it backs up every day. Refer to the [Redis plans](/#redis-plans) section of the documentation for more information.
 
 1. Run the following to create a service instance:
 
@@ -870,7 +873,7 @@ To set up a Redis service:
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf create-service redis tiny my-redis-service
+    cf create-service redis tiny-clustered my-redis-service
     ```
 
 1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
@@ -892,7 +895,7 @@ To set up a Redis service:
     service:         redis
     bound apps:      
     tags:            
-    plan:            tiny
+    plan:            tiny-clustered
     description:     AWS ElastiCache Redis service
     documentation:   
     dashboard:       
@@ -947,7 +950,7 @@ You must bind your app to the Redis service to be able to access the cache from 
     service:         redis
     bound apps:      my-app
     tags:            
-    plan:            tiny
+    plan:            tiny-clustered
     description:     AWS ElastiCache Redis service
     documentation:   
     dashboard:       
@@ -985,7 +988,7 @@ You must bind your app to the Redis service to be able to access the cache from 
         "instance_name": "my-redis-service",
         "label": "redis",
         "name": "my-redis-service",
-        "plan": "tiny",
+        "plan": "tiny-clustered",
         "provider": null,
         "syslog_drain_url": null,
         "tags": [
@@ -1130,6 +1133,23 @@ cf delete-service SERVICE_NAME
 where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
+
+### Redis plans
+
+There are two plans available for the Redis service:
+
+- `tiny-clustered`
+- `tiny-unclustered`
+
+You cannot migrate a service from an unclustered to a clustered plan or vice versa.
+
+#### tiny-clustered
+
+This plan is backed up every day. We recommend that you use this plan, unless your client library cannot connect to clustered plans. Also, note that this plan cannot be [vertically scaled](/#scaling) or upgraded to a bigger plan.
+
+#### tiny-unclustered
+
+All client libraries can connect to this plan, and it can be [vertically scaled](/#scaling) or upgraded to a bigger plan. However, it does not have any backups.
 
 ### Redis maintenance & backups
 
