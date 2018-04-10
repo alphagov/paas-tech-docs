@@ -858,8 +858,8 @@ To set up a Redis service:
 
     ```
     service plan       description                                                                free or paid
-    tiny-clustered     568MB RAM, clustered (1 shard), single node, no failover, daily backups    free
-    tiny-unclustered   568MB RAM, non-clustered, single node, no failover, no backups             free
+    tiny-clustered     568MB RAM, clustered (1 shard), single node, no failover, daily backups    paid
+    tiny-unclustered   568MB RAM, non-clustered, single node, no failover, no backups             paid
     ```
 
     You should use the `tiny-clustered` plan as it backs up every day. Refer to the [Redis plans](/#redis-plans) section of the documentation for more information.
