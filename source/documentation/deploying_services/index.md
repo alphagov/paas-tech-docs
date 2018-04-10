@@ -1154,8 +1154,12 @@ We recommend that you use this plan as it is backed up every day. Note that:
 
 Use this plan if your client library cannot connect to clustered plans. Note that:
 
-- it is not backed up
+- it is not automatically backed up
 - it can be [vertically scaled](/#scaling) or upgraded to a bigger plan
+
+Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you need an unclustered plan with backups enabled, or a larger unclustered plan.
+
+Refer to the [Redis documentation](https://redis.io/topics/cluster-tutorial) for more information on clusters.
 
 ### Redis maintenance & backups
 
