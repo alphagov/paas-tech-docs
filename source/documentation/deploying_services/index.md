@@ -862,7 +862,7 @@ To set up a Redis service:
     tiny-unclustered   568MB RAM, non-clustered, single node, no failover, no backups             paid
     ```
 
-    You should use the `tiny-clustered` plan as it backs up every day. Refer to the [Redis plans](/#redis-plans) section of the documentation for more information.
+    You should use the `tiny-clustered` plan as it is backed up every day. Refer to the [Redis plans](/#redis-plans) section of the documentation for more information.
 
 1. Run the following to create a service instance:
 
