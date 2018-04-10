@@ -1145,11 +1145,17 @@ You cannot migrate a service from an unclustered to a clustered plan or vice ver
 
 #### tiny-clustered
 
-This plan is backed up every day. We recommend that you use this plan, unless your client library cannot connect to clustered plans. Also, note that this plan cannot be [vertically scaled](/#scaling) or upgraded to a bigger plan.
+We recommend that you use this plan as it is backed up every day. Note that:
+
+- [Sidekiq](https://sidekiq.org) does not work with clustered Redis
+- this plan cannot be [vertically scaled](/#scaling) or upgraded to a bigger plan
 
 #### tiny-unclustered
 
-All client libraries can connect to this plan, and it can be [vertically scaled](/#scaling) or upgraded to a bigger plan. However, it does not have any backups.
+Use this plan if your client library cannot connect to clustered plans. Note that:
+
+- it is not backed up
+- it can be [vertically scaled](/#scaling) or upgraded to a bigger plan
 
 ### Redis maintenance & backups
 
