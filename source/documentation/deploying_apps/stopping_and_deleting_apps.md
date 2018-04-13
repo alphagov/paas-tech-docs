@@ -50,9 +50,9 @@ You must unbind a service instance from any apps it is bound to before you can d
 1. Run `cf services` to see all service instances in your targeted space. You will see the output as per this example:
 
     ```
-    name      service     plan    bound apps    last operation
-    mystuff   service1    small   my-app        create succeeded
-    mydb      service2    large   not-my-app    create succeeded
+    name      service    plan    bound apps    last operation
+    mystuff   postgres   small   my-app        create succeeded
+    mydb      mysql      large   not-my-app    create succeeded
     ```
 
 1. Run the following to unbind a service instance:
@@ -63,7 +63,7 @@ You must unbind a service instance from any apps it is bound to before you can d
     where APPLICATION is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and SERVICE_NAME is a unique descriptive name for this service instance, for example:
 
     ```
-    cf unbind-service my-app service2
+    cf unbind-service my-app mystuff
     ```
 
 1. Run ``cf delete-service SERVICE_NAME`` to delete that service instance.
