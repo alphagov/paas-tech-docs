@@ -40,30 +40,13 @@ If you accidentally delete your app without the ``-r`` option, you can delete th
 
 ``cf delete-route [domain name] --hostname [hostname]``
 
-### Delete a service instance
+### Deleting services
+Before deleting your app, you will need to delete any services you have provisioned for it.
 
-You must unbind a service instance from any apps it is bound to before you can delete that service instance. Note:
+You can check the details of these by using the ``cf services`` command to see all active services in the current space. You will be able to see which services are bound *only* to your app - don’t delete services that other apps are also using.
 
-- you do not need to delete an app's service instances before you can delete that app
-- a service instance can be bound to more than one app 
+You can then use this information to run
 
-1. Run `cf services` to see all service instances in your targeted space. You will see the output as per this example:
+``cf delete-service [SERVICE INSTANCE]``
 
-    ```
-    name      service    plan    bound apps    last operation
-    mystuff   postgres   small   my-app        create succeeded
-    mydb      mysql      large   not-my-app    create succeeded
-    ```
-
-1. Run the following to unbind a service instance:
-
-    ```
-    cf unbind-service APPLICATION SERVICE_NAME
-    ```
-    where APPLICATION is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and SERVICE_NAME is a unique descriptive name for this service instance, for example:
-
-    ```
-    cf unbind-service my-app mystuff
-    ```
-
-1. Run ``cf delete-service SERVICE_NAME`` to delete that service instance.
+When all services are removed you can then delete your app, as above.
