@@ -842,7 +842,7 @@ For more details about how the RDS backup system works, see [Amazon's DB Instanc
 
 ## Redis
 
-Redis is an open source in-memory datastore that can be used as a database cache or message broker. This is a private beta version of the service. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request access to Redis, and we will make you aware of any constraints.
+Redis is an open source in-memory datastore that can be used as a database cache or message broker.
 
 ### Set up a Redis service
 
@@ -893,12 +893,12 @@ To set up a Redis service:
     ```
     name:            my-redis-service
     service:         redis
-    bound apps:      
-    tags:            
+    bound apps:
+    tags:
     plan:            tiny-clustered
     description:     AWS ElastiCache Redis service
-    documentation:   
-    dashboard:       
+    documentation:
+    dashboard:
 
     Showing status of last operation from service my-redis-service...
 
@@ -949,11 +949,11 @@ You must bind your app to the Redis service to be able to access the cache from 
     name:            my-redis-service
     service:         redis
     bound apps:      my-app
-    tags:            
+    tags:
     plan:            tiny-clustered
     description:     AWS ElastiCache Redis service
-    documentation:   
-    dashboard:       
+    documentation:
+    dashboard:
 
     Showing status of last operation from service testing-time...
 
