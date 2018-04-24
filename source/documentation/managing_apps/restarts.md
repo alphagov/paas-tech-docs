@@ -15,7 +15,7 @@ If your app has more than one instance, the running instances will not restart a
 
 For more information, refer to the Cloud Foundry documentation on how:
 
-- to configure Cloud Foundry for [high availability](https://docs.cloudfoundry.org/concepts/high-availability.html) [external link]
+- to configure Cloud Foundry for [high availability](https://docs.cloudfoundry.org/concepts/high-availability.html#cf-ha) [external link]
 - Cloud Foundry moves your app instances between servers [(evacuations)](https://docs.cloudfoundry.org/devguide/deploy-apps/app-lifecycle.html#evacuation) [external link]
 - Cloud Foundry requests a shutdown of your app instance [(shutdowns)](https://docs.cloudfoundry.org/devguide/deploy-apps/app-lifecycle.html#shutdown) [external link]
 
