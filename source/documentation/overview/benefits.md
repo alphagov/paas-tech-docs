@@ -22,7 +22,7 @@ Features of the PaaS platform currently include:
 
 ### Coding in the open
 
-We are making all new GOV.UK PaaS source code open and reusable. You can use our source code if you want to support a different backing service (any networked attached service that your application consumes to do its job, for example a MongoDB instance or a PostgreSQL database).
+We are making all new GOV.UK PaaS source code open and reusable. You can use our source code if you want to support a different backing service (any networked attached service that your application consumes to do its job, for example a PostgreSQL database).
 
 ### Characteristics of GOV.UK PaaS
 This table summarises the core characteristics of the PaaS offering.

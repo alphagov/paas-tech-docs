@@ -1218,14 +1218,6 @@ Refer to the [Redis LRU cache documentation](https://redis.io/topics/lru-cache) 
 
 Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elasticache/redis/) [external link] for more information.
 
-## MongoDB
-
-MongoDB is an open source cross-platform document-oriented database program. It uses JSON-like documents with schemas, and is often used for content management such as articles on [GOV.UK](https://www.gov.uk/). This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so [contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
-
-### TLS connection to MongoDB
-
-MongoDB uses self-signed certificates. In order for your app to verify a TLS connection to this service, the app must use a CA certificate included in a `VCAP_SERVICES` environment variable.
-
 ## Elasticsearch
 
 Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so [contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
@@ -1233,6 +1225,10 @@ Elasticsearch is an open source full text RESTful search and analytics engine th
 ### TLS connection to Elasticsearch
 
 Elasticsearch uses self-signed certificates. In order for your app to verify a TLS connection to this service, the app must use a CA certificate included in a VCAP_SERVICES environment variable.
+
+### Failover process
+
+Visit the [Elasticsearch on Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
 
 ## User-provided services
 
