@@ -1226,6 +1226,10 @@ Elasticsearch is an open source full text RESTful search and analytics engine th
 
 Elasticsearch uses self-signed certificates. In order for your app to verify a TLS connection to this service, the app must use a CA certificate included in a VCAP_SERVICES environment variable.
 
+### Failover process
+
+Visit the [Elasticsearch on Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
+
 ## User-provided services
 
 Cloud Foundry enables tenants to define their own external services that are not available in the marketplace by using a [user-provided service instance](https://docs.cloudfoundry.org/devguide/services/user-provided.html) [external link]. They can be used to deliver service credentials to an application, and/or to trigger streaming of application logs to a syslog compatible consumer. Once created, user-provided service instances behave like service instances created through the marketplace.
