@@ -140,7 +140,7 @@ Org managers must add users to and remove users from GOV.UK PaaS as they join or
 
 #### Add users
 
-The org manager can add users to GOV.UK PaaS. Go to the [GOV.UK PaaS admin tool](admin,cloud.service.gov.uk) and select Manage team members.
+The org manager can add users to GOV.UK PaaS. Go to the [GOV.UK PaaS admin tool](admin.cloud.service.gov.uk) and select Manage team members.
 
 All new accounts are given access to your org’s sandbox space. An org manager can then grant that account access to other spaces.
 
