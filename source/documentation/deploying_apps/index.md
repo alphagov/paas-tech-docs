@@ -6,7 +6,7 @@ The `cf push` command is used both to create a new app and to push a new version
 
 1. Put the code you want to deploy in a directory. This is usually accomplished by checking it out of version control.
 
-1. Target the appropriate organisation and space.
+1. [Target](/#set-a-target) the appropriate organisation and space.
 
     ```
     cf target -o SOMEORG -s SOMESPACE
@@ -25,6 +25,36 @@ The app should now be live at `https://APPNAME.cloudapps.digital`.
 There are many options available when you ``push`` an app. You can optionally set them in a ``manifest.yml`` file in the directory from which you are running the ``push`` command. See the Cloud Foundry documentation on [Deploying with Application Manifests](http://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html) [external link] for details.
 
 For a production app, you should read the [production checklist](/#production-checklist).
+
+### Set a target
+
+To deploy an app, you need to set a target. A target is a combination of an org and a space.
+
+Run the following to set the target:
+
+```
+cf target -o ORGNAME -s SPACENAME
+```
+
+where `ORGNAME` is the name of the org, and `SPACENAME` is the name of the space.
+
+Once you set the target, the Cloud Foundry client remembers it until you change it.
+
+You can change space without changing org using:
+
+```
+cf target -s SPACENAME
+```
+
+You should target the sandbox space while you are testing your app. You can do this by running:
+
+```
+cf target -s sandbox
+```
+
+You will not normally need to target the sandbox space if you are a new user, as this space is the default for new users. 
+
+A possible exception to this is if your org is mature and has pre-existing spaces; you should check to ensure that you target the appropriate space for testing.
 
 ### Caveats
 * Your app should not write to local storage. Cloud Foundry local storage is ephemeral and can be deleted at any time.
