@@ -12,35 +12,31 @@ The PaaS team creates the first org for a new project, and assigns at least one 
 
 Run `cf orgs` to list the orgs your user account can access.
 
-Run `cf org ORGNAME` to see [quota](/#quotas) information about an org, where `ORGNAME` is the name of the org.
+Run `cf org ORG` to see [quota](/#quotas) information about an org, where `ORG` is the name of the org.
 
 Your user account should belong to at least one org within the PaaS. PaaS will initially assign you one org. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request more orgs.
 
 ## Spaces
 
-An org is divided into one or more spaces. A space is a shared location for app development, deployment and maintenance. Apps and services are pushed to spaces and hosted within them.
+An org is divided into one or more spaces. A space is a shared location for developing, deploying and running apps and backing services.
 
-For example, you might have spaces for development and production versions of your app. When we set up your org, we create a default sandbox space you can use for experimenting with the PaaS.
+For example, you might have separate spaces for the development and production versions of your app. When we set up your org, we create a default sandbox space you can use for experimenting with the PaaS.
 
 Run `cf spaces` to see the spaces you can access in your current org.
 
-[Org managers](/#org-managers) can create new spaces within an org. Run `cf org-users ORGNAME` to find out who has that role, where ORGNAME is the name of the org. You will see a list of users and their roles. You must be a member of that org to see the list of users.
+[Org managers](/#org-managers) can create new spaces within an org. Run `cf org-users ORG` to find out who has that role, where `ORG` is the name of the org. You will see a list of users and their roles. You must be a member of that org to see the list of users.
 
 ## Users and user roles
 
-Users are members of your team who use the command-line tool to manage apps on the GOV.UK PaaS.
+Users are members of your team who can access or manage apps and backing services on the GOV.UK PaaS.
 
-Users are assigned roles which have different permissions for accessing and managing orgs and spaces. A user can have:
+Users are assigned roles which have different permissions for accessing and managing orgs and spaces. A user can have one or multiple roles within the same or different orgs and spaces.
 
-- one or multiple roles
-- more than one role within the same org or space
-- different roles in different orgs and spaces
-
-Run `cf org-users ORGNAME` to find out details of the users in your org, where `ORGNAME` is the name of the org.
+Run `cf org-users ORG` to find out details of the users in your org, where `ORG` is the name of the org.
 
 Run `cf orgs` to see which orgs you can access.
 
-To change which user accounts have access, your user account must have the Org Manager role.
+Your user account must have the org manager role to manager user accounts in an org.
 
 Although there are multiple roles, the five most common roles are:
 
@@ -50,7 +46,7 @@ Although there are multiple roles, the five most common roles are:
 - Space manager
 - Space auditor
 
-Refer to the [Cloud Foundry documentation on roles and permissions](https://docs.cloudfoundry.org/concepts/roles.html#roles) for more information on these roles and others.
+Refer to the [Cloud Foundry documentation on roles and permissions](https://docs.cloudfoundry.org/concepts/roles.html#roles) [external link] for more information on these roles and others.
 
 ### Org manager
 
@@ -96,36 +92,38 @@ This role applies within a space.
 
 Space auditors can view apps, users and resources used within a space, but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.
 
-## Manage spaces
+## Manage spaces and user roles
 
-Org managers and space managers can manage spaces.
+There are several common tasks to manage spaces and user roles. 
+
+### Create a new space
+
+Org managers can create spaces.
 
 Run the following to create a new space:
 
 ```
-cf create-space SPACENAME -o ORGNAME
+cf create-space SPACE -o ORG
 ```
 
-where `SPACENAME` is the name of the space, and `ORGNAME` is the name of the org.
+where `SPACE` is the name of the space, and `ORG` is the name of the org.
 
 You will then need to grant access to any user accounts who should be able to use that space.
 
-## Manage user roles
+### Grant users access to a space
 
 Both org managers and space managers can grant a user access to a space by assigning a role to a user.
 
-### Grant access to a space
-
-Run the following to grant an account access to a space:
+Run the following to grant a user account access to a space:
 
 ```
-cf set-space-role USERNAME ORGNAME SPACENAME ROLE
+cf set-space-role USERNAME ORG SPACE ROLE
 ```
 
 where:
 - `USERNAME` is the email address the user logs in with when using the command line client
-- `ORGNAME` is the name of the org
-- `SPACENAME` is the name of the space
+- `ORG` is the name of the org
+- `SPACE` is the name of the space
 - `ROLE` is the user role you are granting to the user of the email address in the `USERNAME` field
 
 For example, to grant your colleague ana@example.com the space developer role in the test space within the acme org, you would run:
@@ -134,17 +132,17 @@ For example, to grant your colleague ana@example.com the space developer role in
 cf set-space-role ana@example.com acme test SpaceDeveloper
 ```
 
-### Add or delete users
+### Add users to the GOV.UK PaaS
 
-Org managers must add users to and remove users from GOV.UK PaaS as they join or leave their team.
+Org managers must add users to the GOV.UK PaaS when they join their team. 
 
-#### Add users
+Go to the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk) and select Manage team members.
 
-The org manager can add users to GOV.UK PaaS. Go to the [GOV.UK PaaS admin tool](admin.cloud.service.gov.uk) and select Manage team members.
+All new user accounts are given access to your org’s sandbox space. An org manager can then grant that user account access to other spaces.
 
-All new accounts are given access to your org’s sandbox space. An org manager can then grant that account access to other spaces.
+#### Remove users
 
-#### Delete users
+Org managers must remove users from the GOV.UK PaaS when they leave their team.
 
 When a team member leaves or stops working on a project, the org manager must revoke that team member’s access rights. The org manager does this by removing all of that team member’s user roles within the team’s orgs and spaces.
 
@@ -157,8 +155,8 @@ cf unset-space-role USERNAME ORG SPACE ROLE
 where:
 
 - `USERNAME` is the email address the user logs in with when using the command line client
-- `ORGNAME` is the name of the org
-- `SPACENAME` is the name of the space
+- `ORG` is the name of the org
+- `SPACE` is the name of the space
 - `ROLE` is the user role you are granting to the user of the email address in the `USERNAME` field
 
 For example, to remove your colleague ana@example.com's space developer role from the sandbox space within the acme org, you would run:
@@ -170,7 +168,7 @@ cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
 If the user is an org manager, you will also need to remove that role from all your orgs:
 
 ```
-cf unset-org-role USERNAME ORGNAME ROLE
+cf unset-org-role USERNAME ORG ROLE
 ```
 
 For example `cf unset-org-role boss@example.com acme OrgManager`.
@@ -178,6 +176,9 @@ For example `cf unset-org-role boss@example.com acme OrgManager`.
 If the user still needs access on the PaaS to work on other projects, the org manager does not need to do anything more.
 
 If the user no longer needs access to GOV.UK PaaS, then the org manager should ask us to delete the user account.
+
+
+https://docs.cloudfoundry.org/adminguide/cli-user-management.html
 
 ## Case studies
 
@@ -191,7 +192,7 @@ An org represents a service or service team within a government department or bu
 
 Departments that use this structure include the Department for Business, Energy and Industrial Strategy, and GDS Digital Marketplace.
 
-![Diagram showing that model 1 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-1.png)
+![Diagram showing model 1 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-1.png)
 
 This model has the following advantages:
 
@@ -207,9 +208,6 @@ An org represents an environment such as development, staging or production. Eac
 
 Departments that use this structure include the Department for International Trade.
 
-![Diagram showing that model 2 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-2.png)
+![Diagram showing model 2 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-2.png)
 
-This model has the following advantages:
-
-- Users working in a development org cannot submit code that affects production apps.
-- Resources and spending between different environments can be more easily controlled.
+This model makes it more easy to control resources and spending between different environments.
