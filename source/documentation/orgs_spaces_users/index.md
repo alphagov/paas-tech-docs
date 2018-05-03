@@ -1,6 +1,6 @@
-# Managing orgs, spaces and users
+# Managing organisations, spaces and users
 
-![Diagram showing that an org that contains multiple spaces](/documentation/figures/orgs-spaces.png)
+![Diagram showing an org that contains multiple spaces](/documentation/figures/orgs-spaces.png)
 
 Refer to the [case studies](#case-studies) documentation for information on common structures for orgs, spaces and apps.
 
@@ -10,7 +10,7 @@ An organisation, or org, represents a group of users, resources, applications an
 
 The PaaS team creates the first org for a new project, and assigns at least one [org manager](/#org-manager) to that org. If you want to start a new project on the platform, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), telling us who the org manager(s) should be.
 
-Run `cf orgs` to list the orgs your user account can access:
+Run `cf orgs` to list the orgs your user account can access.
 
 Run `cf org ORGNAME` to see [quota](/#quotas) information about an org, where `ORGNAME` is the name of the org.
 
