@@ -121,6 +121,7 @@ cf set-space-role USERNAME ORG SPACE ROLE
 ```
 
 where:
+
 - `USERNAME` is the email address the user logs in with when using the command line client
 - `ORG` is the name of the org
 - `SPACE` is the name of the space
