@@ -36,7 +36,7 @@ Run `cf org-users ORG` to find out details of the users in your org, where `ORG`
 
 Run `cf orgs` to see which orgs you can access.
 
-Your user account must have the org manager role to manager user accounts in an org.
+Your user account must have the org manager role to manage user accounts in an org.
 
 Although there are multiple roles, the five most common roles are:
 
@@ -92,7 +92,7 @@ This role applies within a space.
 
 Space auditors can view apps, users and resources used within a space, but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.
 
-## Manage spaces and user roles
+## Manage orgs, spaces and user roles
 
 There are several common tasks to manage spaces and user roles. 
 
@@ -110,7 +110,7 @@ where `SPACE` is the name of the space, and `ORG` is the name of the org.
 
 You will then need to grant access to any user accounts who should be able to use that space.
 
-### Grant users access to a space
+### Add users to a space
 
 Both org managers and space managers can grant a user access to a space by assigning a role to a user.
 
@@ -132,21 +132,9 @@ For example, to grant your colleague ana@example.com the space developer role in
 cf set-space-role ana@example.com acme test SpaceDeveloper
 ```
 
-### Add users to the GOV.UK PaaS
+### Remove users from a space
 
-Org managers must add users to the GOV.UK PaaS when they join their team. 
-
-Go to the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk) and select Manage team members.
-
-All new user accounts are given access to your org’s sandbox space. An org manager can then grant that user account access to other spaces.
-
-#### Remove users
-
-Org managers must remove users from the GOV.UK PaaS when they leave their team.
-
-When a team member leaves or stops working on a project, the org manager must revoke that team member’s access rights. The org manager does this by removing all of that team member’s user roles within the team’s orgs and spaces.
-
-Run the following to remove a role within a space:
+When a team member leaves or stops working on a project, the org manager must revoke that team member’s access rights. The org manager does this by removing all of that team member’s user roles within the team’s spaces. Run the following to remove a role within a space:
 
 ```
 cf unset-space-role USERNAME ORG SPACE ROLE
@@ -157,7 +145,7 @@ where:
 - `USERNAME` is the email address the user logs in with when using the command line client
 - `ORG` is the name of the org
 - `SPACE` is the name of the space
-- `ROLE` is the user role you are granting to the user of the email address in the `USERNAME` field
+- `ROLE` is the user role granted to the user of the email address in the `USERNAME` field
 
 For example, to remove your colleague ana@example.com's space developer role from the sandbox space within the acme org, you would run:
 
@@ -165,20 +153,44 @@ For example, to remove your colleague ana@example.com's space developer role fro
 cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
 ```
 
-If the user is an org manager, you will also need to remove that role from all your orgs:
+### Invite users to an org
+
+Org managers must add users to their org when they join their team:
+
+1. Go to the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
+2. Select the appropriate org.
+3. Select __View and manage team members__.
+4. Select __Invite a new team member__.
+5. Complete the email address field, and select the relevant org and space roles.
+6. Select __Send invitation__.
+
+### Remove users from an org
+
+When a team member leaves or stops working on a project, the org manager must revoke that team member’s access rights. The org manager does this by [removing all of that team member’s user roles within the team’s spaces](/#remove-users-from-a-space). 
+
+If the team member has an org role such as org manager or billing manager, you will also need to remove that team member's roles from all of your orgs. Run the following to remove a role within an org:
 
 ```
 cf unset-org-role USERNAME ORG ROLE
 ```
 
-For example `cf unset-org-role boss@example.com acme OrgManager`.
+where:
+
+- `USERNAME` is the email address the user logs in with when using the command line client
+- `ORG` is the name of the org
+- `ROLE` is the user role granted to the user of the email address in the `USERNAME` field
+
+For example, to remove your colleague ana@example.com's org manager role from the acme org, you would run:
+
+```
+cf unset-org-role ana@example.com acme OrgManager
+```
 
 If the user still needs access on the PaaS to work on other projects, the org manager does not need to do anything more.
 
-If the user no longer needs access to GOV.UK PaaS, then the org manager should ask us to delete the user account.
+If the user no longer needs access to GOV.UK PaaS, then the org manager should contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to ask us to delete the user account.
 
-
-https://docs.cloudfoundry.org/adminguide/cli-user-management.html
+Refer to the [Cloud Foundry documentation on creating and managing users with the CLI](https://docs.cloudfoundry.org/adminguide/cli-user-management.html) [external link] for more information.
 
 ## Case studies
 
