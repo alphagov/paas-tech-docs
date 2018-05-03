@@ -86,7 +86,7 @@ An extra post-build action called "Push to Cloud Foundry" is now available in th
 1. In your job's configuration, click the **Add post-build action** dropdown menu and select **Push to Cloud Foundry**.
 2. In the **Target** field, enter `https://api.cloud.service.gov.uk`.
 3. In **Credentials**, select the user you created using the credentials plugin.
-4. Enter your organisation and the space the application will be deployed to. See [Managing orgs, spaces and users](/#managing-orgs-spaces-and-users) for more details about organisations and spaces. You do not need to tick "Allow self-signed certificate" or "Reset app if already exists".
+4. Enter your organisation and the space the application will be deployed to. See [Managing orgs, spaces and users](/#managing-organisations-spaces-and-users) for more details about organisations and spaces. You do not need to tick "Allow self-signed certificate" or "Reset app if already exists".
 5. The rest of the fields can be left with their default values. The plugin expects you to have a manifest file called `manifest.yml` in the root of the application folder. If you do not, you can provide the path to the application manifest, or enter a manifest configuration directly into the plugin.
 6. Click **Save**.
 
