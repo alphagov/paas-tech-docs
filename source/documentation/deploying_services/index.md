@@ -1010,7 +1010,7 @@ You must bind your app to the Redis service to be able to access the cache from 
 
 ### Connect to a Redis service instance from your local machine
 
-We recommend that you use the [Conduit](#conduit) plugin and [stunnel](/#install-and-configure-stunnel) tool to connect your local machine to your Redis service instance. Stunnel is necessary because the Redis command line (CLI) does not support [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security).
+We have created the [Conduit](#conduit) plugin to simplify the process of connecting your local machine to a Redis service.
 
 #### Prerequisites
 
@@ -1028,83 +1028,21 @@ You must:
     cf install-plugin conduit
     ```
 
-1. Start Conduit by running:
+1. Run the following command to connect to your service instance with the Redis client:
 
     ```
-    $ cf conduit SERVICE_NAME
+    $ cf conduit SERVICE_NAME -- redis-cli
     ```
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
-    You will see the following output:
-
-    ```
-    service: SERVICE_NAME (redis)
-    host: 127.0.0.1
-    port: 7081
-    username:
-    password: REDIS_PASSWORD
-    db: DATABASE
-    ```
-
-    where `REDIS_PASSWORD` is the password given to you by Conduit.
-
-#### Install and configure stunnel
-
-1. Run the following command to install stunnel:
-
-    ```
-    brew install stunnel
-    ```
-
-    If you're not on a Mac, or don't have Homebrew, see the [stunnel
-    website](https://www.stunnel.org/downloads.html) [external link] for other
-    installation options.
-
-1. Create a stunnel configuration file that contains the following text:
-
-    ```ini
-    debug=7
-    options=NO_SSLv2
-    options=NO_SSLv3
-    foreground=yes
-    pid=/tmp/stunnel.pid
-    [redis]
-    client = yes
-    accept = 127.0.0.1:6379
-    connect = 127.0.0.1:7081
-    ```
-
-    where:
-    - `127.0.0.1:6379` is the default Redis host and port that stunnel will open (you will need to use a different port if you are already running a local Redis service instance)
-    - `127.0.0.1:7081` is the default Conduit host and port outputted by the `cf conduit SERVICE_NAME` command
-
-#### Connect your local machine to your Redis service instance
-
-1. Start stunnel by running:
-
-    ```
-    stunnel CONFIGURATION_FILE
-    ```
-
-1. Connect to your Redis service instance by running:
-
-    ```
-    redis-cli -a REDIS_PASSWORD
-    ```
-
-    where `REDIS_PASSWORD` is the password outputted by the `cf conduit SERVICE_NAME` command.
-
-You have now connected your local machine to your Redis service instance using Conduit and stunnel. You can test this connection with the Redis [PING](https://redis.io/commands/ping) command:
+You have now connected your local machine to your Redis service instance using Conduit. You can test this connection with the Redis [PING](https://redis.io/commands/ping) command:
 
 ```
 127.0.0.1:6379> PING
 ```
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
-
-Refer to the AWS documentation on [connecting to an encrypted Redis cluster](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/GettingStarted.ConnectToCacheNode.html#GettingStarted.ConnectToCacheNode.Redis.Encrypt) [external link] for more information on this process.
-
 
 ### Unbind a Redis service from your app
 
