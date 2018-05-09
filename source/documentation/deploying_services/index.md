@@ -1039,7 +1039,8 @@ You must:
 You have now connected your local machine to your Redis service instance using Conduit. You can test this connection with the Redis [PING](https://redis.io/commands/ping) command:
 
 ```
-127.0.0.1:6379> PING
+127.0.0.1:7081> PING
+PONG
 ```
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
