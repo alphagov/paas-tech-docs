@@ -1,20 +1,16 @@
 # Managing organisations, spaces and users
 
-![Diagram showing an org that contains multiple spaces](/documentation/figures/orgs-spaces.png)
-
-Refer to the [case studies](#case-studies) documentation for information on common structures for orgs, spaces and apps.
-
 ## Organisations
 
-An organisation, or org, represents a group of users, resources, applications and environments. Each org shares the same resource, quota and custom domain. Orgs usually represent a service or [service team](https://www.gov.uk/service-manual/the-team/what-each-role-does-in-service-team).
+An organisation, or org, represents a group of users, applications and environments. Each org shares the same resource, quota and custom domain. 
 
-The PaaS team creates the first org for a new project, and assigns at least one [org manager](/#org-manager) to that org. If you want to start a new project on the platform, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), telling us who the org manager(s) should be.
+The PaaS team creates the first org for a new project, and assigns at least one [org manager](/#org-manager) to that org. If you want to start a new project on the PaaS, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), telling us who the org manager(s) should be.
 
 Run `cf orgs` to list the orgs your user account can access.
 
 Run `cf org ORG` to see [quota](/#quotas) information about an org, where `ORG` is the name of the org.
 
-Your user account should belong to at least one org within the PaaS. PaaS will initially assign you one org. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request more orgs.
+Your user account should belong to at least one org within the PaaS. We will initially assign you to one org. You can contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request more orgs.
 
 ## Spaces
 
@@ -24,7 +20,11 @@ For example, you might have separate spaces for the development and production v
 
 Run `cf spaces` to see the spaces you can access in your current org.
 
-[Org managers](/#org-managers) can create new spaces within an org. Run `cf org-users ORG` to find out who has that role, where `ORG` is the name of the org. You will see a list of users and their roles. You must be a member of that org to see the list of users.
+[Org managers](/#org-managers) can create new spaces within an org. Run `cf org-users ORG` to find out who has that role, where `ORG` is the name of the org. You will see a list of [users and their roles](#users-and-user-roles). 
+
+![Diagram showing an org that contains multiple spaces](/documentation/figures/orgs-spaces.png)
+
+Refer to the [case studies](#case-studies) documentation for information on common structures for orgs, spaces and apps.
 
 ## Users and user roles
 
@@ -34,11 +34,9 @@ Users are assigned roles which have different permissions for accessing and mana
 
 Run `cf org-users ORG` to find out details of the users in your org, where `ORG` is the name of the org.
 
-Run `cf orgs` to see which orgs you can access.
+Your user account must have the [org manager role](#org-manager) to manage user accounts in an org.
 
-Your user account must have the org manager role to manage user accounts in an org.
-
-Although there are multiple roles, the five most common roles are:
+Although there are multiple roles, the five most common are:
 
 - Org manager
 - Billing manager
@@ -66,7 +64,7 @@ This role applies within an org.
 
 Billing managers create and manage billing account and payment information. They can also view users and roles.
 
-You should assign a billing manager to your org before your service moves to production. We will send all payment requests to the billing manager. The org manager can also be the billing manager.
+You should assign a billing manager to your org before your service moves to production. We will send all payment requests to the billing manager. An org manager can also be a billing manager.
 
 Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
@@ -74,7 +72,7 @@ Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-
 
 This role applies within a space.
 
-A space developer can deploy, run and manage apps, and create and bind services. This is the default role for a user who is not a manager.
+A space developer can deploy, run and manage apps, and create and bind services. This is the default role for any user who is not assigned a manager role.
 
 For example, a space developer in the testing space can only change apps in this space, but cannot do anything in the production space.
 
@@ -84,7 +82,7 @@ This role applies within a space.
 
 A space manager can grant user roles within a space and change space properties. A space manager cannot deploy, run or manage apps or services.
 
-For example, a developer needs to change apps in both testing and production. You grant this developer the space manager role in testing, and the space developer role in both testing and production. That developer can add users to testing but not to production, and can change apps in both spaces.
+For example, a developer needs to change apps in both testing and production. The org manager grants this developer the space manager role in testing, and the space developer role in both testing and production. That developer can add users to testing but not to production, and can change apps in both spaces.
 
 ### Space auditor
 
@@ -108,7 +106,7 @@ cf create-space SPACE -o ORG
 
 where `SPACE` is the name of the space, and `ORG` is the name of the org.
 
-You will then need to grant access to any user accounts who should be able to use that space.
+You then need to grant access to any user accounts who should be able to use that space.
 
 ### Add users to a space
 
@@ -122,7 +120,7 @@ cf set-space-role USERNAME ORG SPACE ROLE
 
 where:
 
-- `USERNAME` is the email address the user logs in with when using the command line client
+- `USERNAME` is the email address the user signs in with when using the command line client
 - `ORG` is the name of the org
 - `SPACE` is the name of the space
 - `ROLE` is the user role you are granting to the user of the email address in the `USERNAME` field
@@ -133,9 +131,11 @@ For example, to grant your colleague ana@example.com the space developer role in
 cf set-space-role ana@example.com acme test SpaceDeveloper
 ```
 
+Refer to the [Cloud Foundry reference guide on `cf set-space-role`](https://cli.cloudfoundry.org/en-US/cf/set-space-role.html) for a complete list of roles.
+
 ### Remove users from a space
 
-When a team member leaves or stops working on a project, the org manager must revoke that team member’s access rights. The org manager does this by removing all of that team member’s user roles within the team’s spaces. Run the following to remove a role within a space:
+When a team member leaves or stops working on a project, the org manager must revoke that team member’s access rights. The org manager can do this by removing all of that team member’s user roles within the team’s spaces, using the following command:
 
 ```
 cf unset-space-role USERNAME ORG SPACE ROLE
@@ -143,7 +143,7 @@ cf unset-space-role USERNAME ORG SPACE ROLE
 
 where:
 
-- `USERNAME` is the email address the user logs in with when using the command line client
+- `USERNAME` is the email address the user signs in with when using the command line client
 - `ORG` is the name of the org
 - `SPACE` is the name of the space
 - `ROLE` is the user role granted to the user of the email address in the `USERNAME` field
@@ -153,6 +153,8 @@ For example, to remove your colleague ana@example.com's space developer role fro
 ```
 cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
 ```
+
+Refer to the [Cloud Foundry reference guide on `cf unset-space-role`](https://cli.cloudfoundry.org/en-US/cf/unset-space-role.html) for a complete list of roles.
 
 ### Invite users to an org
 
@@ -195,13 +197,13 @@ Refer to the [Cloud Foundry documentation on creating and managing users with th
 
 ## Case studies
 
-This section summarises two common structures for orgs and spaces.
+This section summarises two common models for orgs and spaces.
 
 There are other ways to structure orgs and spaces, and you can change your existing structure to suit the project you’re working on.
 
 ### Model 1
 
-An org represents a service or service team within a government department or business area. Each org has multiple spaces. Spaces represent environments such as development, staging or production. These spaces host apps.
+In this example model, an org represents a service or service team within a government department or business area. Each org has multiple spaces. Spaces represent environments such as development, staging or production. These spaces host apps.
 
 Departments that use this structure include the Department for Business, Energy and Industrial Strategy, and GDS Digital Marketplace.
 
@@ -217,7 +219,7 @@ However, there is no reuse of orgs and spaces in this structure, which incurs a 
 
 ### Model 2
 
-An org represents an environment such as development, staging or production. Each org has multiple spaces. Spaces represent services or service teams within a government department or business area. These spaces host apps.
+In this example model, an org represents an environment such as development, staging or production. Each org has multiple spaces. Spaces represent services or service teams within a government department or business area. These spaces host apps.
 
 Departments that use this structure include the Department for International Trade.
 
