@@ -32,6 +32,14 @@ For a production app, you should read the [production checklist](/#production-ch
 * Instances will be restarted if they [exceed memory limits](/#quotas).
 * Your application should write all its log messages to `STDOUT`/`STDERR`, rather than a log file.
 
+## Data security classification
+
+You can store data classified up to "official" on the PaaS.
+
+You cannot store data classified "secret" or "top secret" on the PaaS.
+
+Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for information on the assurance process.
+
 ## Secure and non-secure requests
 
 Requests could be made to the non-secure `http://` protocol due to:
