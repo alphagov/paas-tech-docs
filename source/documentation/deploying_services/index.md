@@ -298,6 +298,14 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
+### Data security classification
+
+You can store data classified up to "official" on the PaaS.
+
+You cannot store data classified "secret" or "top secret" on the PaaS.
+
+Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
+
 ### PostgreSQL plans
 
 Each service in the marketplace has multiple plans that vary by availability, storage capacity and encryption.
@@ -748,6 +756,14 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
+### Data security classification
+
+You can store data classified up to "official" on the PaaS.
+
+You cannot store data classified "secret" or "top secret" on the PaaS.
+
+Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
+
 ### MySQL plans
 
 Each service in the marketplace has multiple plans that vary by availability, storage capacity and encryption.
@@ -1134,6 +1150,14 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
+### Data security classification
+
+You can store data classified up to "official" on the PaaS.
+
+You cannot store data classified "secret" or "top secret" on the PaaS.
+
+Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
+
 ### Redis plans
 
 There are two plans available for the Redis service:
@@ -1221,6 +1245,14 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 ## Elasticsearch
 
 Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so [contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
+
+### Data security classification
+
+You can store data classified up to "official" on the PaaS.
+
+You cannot store data classified "secret" or "top secret" on the PaaS.
+
+Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
 
 ### TLS connection to Elasticsearch
 
