@@ -89,21 +89,13 @@ following:
 ```
 virtualenv .venv
 source .venv/bin/activate
-pip install -Ur requirements.txt
-./release/test
+make dependencies
+make test
 ```
 
 ## Build and deploy
 
 The docs are hosted on the PaaS and any change to master is automatically deployed by the [PaaS release CI](https://github.com/alphagov/paas-release-ci). The build status can be seen here: https://concourse.build.ci.cloudpipeline.digital/teams/main/pipelines/paas-tech-docs
-
-To deploy your changes manually:
-
-Make sure you have the correct PaaS permissions to push to the org `govuk-paas` in the space `docs`.
-
-Push your changes to Github (on the main branch).
-
-Run `./release/build && ./release/push` from the application folder.
 
 ## Updating the template
 
