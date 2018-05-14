@@ -20,4 +20,3 @@ build: ## Builds the project
 test: ## Runs the tests
 	bundle exec middleman build --verbose
 	linkchecker ./build/
-	bundle exec rspec
