@@ -300,11 +300,13 @@ Type `yes` when asked for confirmation.
 
 ### Data security classification
 
-You can store data classified up to "official" on the PaaS.
+You can store data classified up to ‘official’ on the PaaS.
 
-You cannot store data classified "secret" or "top secret" on the PaaS.
+You cannot store data classified ‘secret‘ or ‘top secret‘ on the PaaS.
 
 Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
+
+Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
 
 ### PostgreSQL plans
 
@@ -758,11 +760,13 @@ Type `yes` when asked for confirmation.
 
 ### Data security classification
 
-You can store data classified up to "official" on the PaaS.
+You can store data classified up to ‘official’ on the PaaS.
 
-You cannot store data classified "secret" or "top secret" on the PaaS.
+You cannot store data classified ‘secret‘ or ‘top secret‘ on the PaaS.
 
 Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
+
+Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
 
 ### MySQL plans
 
@@ -1248,11 +1252,13 @@ Elasticsearch is an open source full text RESTful search and analytics engine th
 
 ### Data security classification
 
-You can store data classified up to "official" on the PaaS.
+You can store data classified up to ‘official’ on the PaaS.
 
-You cannot store data classified "secret" or "top secret" on the PaaS.
+You cannot store data classified ‘secret‘ or ‘top secret‘ on the PaaS.
 
 Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
+
+Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
 
 ### TLS connection to Elasticsearch
 
