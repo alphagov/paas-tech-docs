@@ -40,6 +40,8 @@ You cannot store data classified ‘secret‘ or ‘top secret‘ on the PaaS.
 
 Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for information on the assurance process.
 
+Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
+
 ## Secure and non-secure requests
 
 Requests could be made to the non-secure `http://` protocol due to:
