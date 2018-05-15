@@ -8,7 +8,7 @@ PaaS makes user management easy by providing development teams with privilege se
 
 PaaS is deployed to multiple availability zones, making it resilient.
 
-PaaS is accredited for information up to OFFICIAL.
+PaaS is accredited for information up to ‘official’.
 
 The platform itself is supported 24/7 by GDS, although this does not include application support.
 
