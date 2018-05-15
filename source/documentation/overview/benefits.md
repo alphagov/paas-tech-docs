@@ -6,9 +6,9 @@ Your development team can use PaaS to deploy and run government applications wri
 
 PaaS makes user management easy by providing development teams with privilege separation options, for example an ‘admin’ user will be able to assign other team members certain permissions from their PaaS console.
 
-PaaS is deployed to multiple availability zones, making it resilient.
+The GOV.UK PaaS is deployed to multiple availability zones, making it resilient.
 
-PaaS is accredited for information up to ‘official’.
+The GOV.UK PaaS is accredited for information up to ‘official’.
 
 The platform itself is supported 24/7 by GDS, although this does not include application support.
 
