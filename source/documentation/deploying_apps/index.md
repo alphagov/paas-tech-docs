@@ -34,9 +34,9 @@ For a production app, you should read the [production checklist](/#production-ch
 
 ## Data security classification
 
-You can store data classified up to ‘official’ on the PaaS.
+You can store data classified up to ‘official’ on the GOV.UK PaaS.
 
-You cannot store data classified ‘secret‘ or ‘top secret‘ on the PaaS.
+You cannot store data classified ‘secret‘ or ‘top secret‘ on the GOV.UK PaaS.
 
 Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for information on the assurance process.
 
