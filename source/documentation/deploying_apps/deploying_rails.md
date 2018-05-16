@@ -7,7 +7,7 @@ This section explains minimal steps for deploying a basic Rails app. For full de
 
 These steps assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
 
-When you deploy an app, you must select a combination of an organisation and a space (see [Orgs and spaces](/#organisations-spaces-amp-targets) for more information). This is called the **target**.
+When you deploy an app, you must select a combination of an organisation and a space. This is called the [**target**](/#set-a-target).
 
 We have provided a ``sandbox`` space for you to use for learning about the PaaS. You may want to target the sandbox while you are testing by running:
 
