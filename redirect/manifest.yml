@@ -1,6 +1,0 @@
----
-applications:
-  - name: paas-tech-docs-redirect
-    buildpack: staticfile_buildpack
-    memory: 32M
-    instances: 2

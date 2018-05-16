@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -eu
-
-echo "Run middleman..."
-bundle exec middleman build
-
-echo "Copy additional files..."
-cp googlec7239f490e1990a5.html build

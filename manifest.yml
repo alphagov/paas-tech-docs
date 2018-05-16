@@ -1,8 +1,0 @@
----
-applications:
-# Note: the app name must be kept in sync with the name used in the push script
-- name: paas-tech-docs
-  memory: 64M
-  path: ./build
-  buildpack: staticfile_buildpack
-  instances: 2

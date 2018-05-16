@@ -13,6 +13,8 @@
 # Ignore the build directory
 /build
 
+/vendor
+
 # Ignore cache
 /.sass-cache
 /.cache
@@ -21,5 +23,3 @@
 .DS_Store
 
 Staticfile.auth
-
-modified_manifest.yml
