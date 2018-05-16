@@ -62,6 +62,16 @@ A possible exception to this is if your org is mature and has pre-existing space
 * Instances will be restarted if they [exceed memory limits](/#quotas).
 * Your application should write all its log messages to `STDOUT`/`STDERR`, rather than a log file.
 
+## Data security classification
+
+You can store data classified up to ‘official’ on the GOV.UK PaaS.
+
+You cannot store data classified ‘secret‘ or ‘top secret‘ on the GOV.UK PaaS.
+
+Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for information on the assurance process.
+
+Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
+
 ## Secure and non-secure requests
 
 Requests could be made to the non-secure `http://` protocol due to:
