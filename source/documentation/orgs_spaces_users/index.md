@@ -75,7 +75,7 @@ This role applies within a space.
 
 A space developer can deploy, run and manage apps, and create and bind services. This is the default role for any user who is not assigned a manager role.
 
-For example, a space developer in the testing space can only change apps in this space, but cannot do anything in the production space.
+For example, a space developer granted access to the testing space only can change apps in this space. However, that developer cannot do anything in the production space because they do not have access to this space.
 
 ### Space manager
 
@@ -83,7 +83,7 @@ This role applies within a space.
 
 A space manager can grant user roles within a space and change space properties. A space manager cannot deploy, run or manage apps or services.
 
-For example, a developer needs to change apps in both testing and production. The org manager grants this developer the space manager role in testing, and the space developer role in both testing and production. That developer can add users to testing but not to production, and can change apps in both spaces.
+For example, a team member needs to change apps in both the testing and production spaces. The org manager grants this team member the space manager role in the testing space, and the space developer role in both the testing and production spaces. That team member can add users to testing but not to production (as a space manager), and can change apps in both spaces (as a space developer).
 
 ### Space auditor
 
