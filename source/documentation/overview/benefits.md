@@ -8,7 +8,7 @@ PaaS makes user management easy by providing development teams with privilege se
 
 The GOV.UK PaaS is deployed to multiple availability zones, making it resilient.
 
-The GOV.UK PaaS is accredited for information up to ‘official’.
+The GOV.UK PaaS is accredited for information up to ‘official’. Refer to the [data security classification documentation](/#data-security-classification) for more information.
 
 The platform itself is supported 24/7 by GDS, although this does not include application support.
 
