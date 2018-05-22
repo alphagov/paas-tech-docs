@@ -4,6 +4,16 @@ Many 12-factor applications rely on backing services such as a database, an emai
 
 In Cloud Foundry, backing and routing services are referred to as 'services' and are available through the Cloud Foundry ``cf marketplace`` command. GOV.UK PaaS enables you to create a backing service and bind it to your app. The available backing services are detailed below.
 
+## Data security classification
+
+You can store data classified up to ‘official’ on the GOV.UK PaaS.
+
+You cannot store data classified ‘secret‘ or ‘top secret‘ on the GOV.UK PaaS.
+
+Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
+
+Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
+
 ## PostgreSQL
 
 PostgreSQL is an object-relational database management system. It is open source and designed to be extensible.
@@ -298,15 +308,9 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
-### Data security classification
+### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS.
-
-You cannot store data classified ‘secret‘ or ‘top secret‘ on the GOV.UK PaaS.
-
-Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
-
-Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/#deploy-a-backing-or-routing-service-data-security-classification) for more information.
 
 ### PostgreSQL plans
 
@@ -758,15 +762,9 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
-### Data security classification
+### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS.
-
-You cannot store data classified ‘secret‘ or ‘top secret‘ on the GOV.UK PaaS.
-
-Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
-
-Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/#deploy-a-backing-or-routing-service-data-security-classification) for more information.
 
 ### MySQL plans
 
@@ -1093,13 +1091,9 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
-### Data security classification
+### Data classification
 
-You can store data classified up to "official" on the GOV.UK PaaS.
-
-You cannot store data classified "secret" or "top secret" on the GOV.UK PaaS.
-
-Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/#deploy-a-backing-or-routing-service-data-security-classification) for more information.
 
 ### Redis plans
 
@@ -1189,15 +1183,9 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 
 Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so [contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
 
-### Data security classification
+### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS.
-
-You cannot store data classified ‘secret‘ or ‘top secret‘ on the GOV.UK PaaS.
-
-Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
-
-Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/#deploy-a-backing-or-routing-service-data-security-classification) for more information.
 
 ### TLS connection to Elasticsearch
 
