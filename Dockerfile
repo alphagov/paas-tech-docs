@@ -1,4 +1,4 @@
-FROM ruby:2.3.3-alpine
+FROM ruby:2.5-alpine
 
 ENV RUNTIME_PACKAGES "python git nodejs make"
 ENV DEV_PACKAGES "py-pip python-dev musl-dev gcc ruby-dev g++ zlib-dev libffi-dev"
