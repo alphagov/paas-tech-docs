@@ -12,4 +12,4 @@ Follow these rules when setting your password:
 * If you must use a memorable password, use [three words in a short sentence](https://www.cyberaware.gov.uk/passwords).
 * We recommend that you generate and store your passwords with password manager software, like [Lastpass](https://www.lastpass.com), [1Password](https://1password.com), or [KeePass](http://keepass.info).
 
-Your session will expire 7 days after logging in using the `cf` command line tool, and you will be prompted to log in again.
+Your session will expire 20 hours after logging in using the `cf` command line tool, and you will be prompted to log in again.
