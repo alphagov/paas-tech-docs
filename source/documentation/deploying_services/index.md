@@ -327,9 +327,7 @@ There is a free plan available with limited storage which should only be used fo
 
 #### Encrypted plans - PostgreSQL
 
-All plans include encryption at rest of the database storage. This means that both the data on the disk and in snapshots is encrypted.
-
-We no longer offered unencrypted plans. If you use a legacy unencrypted plan, it will keep running. However we recommend that you upgrade to the equivalent encrypted plan.
+All plans have encryption at rest unless stated otherwise. This means that both the data on the disk and in snapshots is encrypted.
 
 #### High availability plans - PostgreSQL
 
@@ -776,9 +774,7 @@ There is a free plan available with limited storage which should only be used fo
 
 #### Encrypted plans - MySQL
 
-All plans include encryption at rest of the database storage. This means that both the data on the disk and in snapshots is encrypted.
-
-We no longer offered unencrypted plans. If you use a legacy unencrypted plan, it will keep running. However we recommend that you upgrade to the equivalent encrypted plan.
+All plans have encryption at rest unless stated otherwise. This means that both the data on the disk and in snapshots is encrypted.
 
 #### High availability plans - MySQL
 
