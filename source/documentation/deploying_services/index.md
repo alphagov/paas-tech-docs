@@ -32,20 +32,19 @@ To set up a PostgreSQL service:
 
     ```
     service plan             description                                                                                                                                                       free or paid
-    M-dedicated-X.X          20GB Storage, Dedicated Instance, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                                           paid
-    M-HA-dedicated-X.X       20GB Storage, Dedicated Instance, Highly Available, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                         paid
+    small-9.5                20GB Storage, Dedicated Instance, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                                           paid
+    small-ha-9.5             20GB Storage, Dedicated Instance, Highly Available, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                         paid
     ...
-    Free                     5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.t2.micro.                              free
+    tiny-9.5                 5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.t2.micro.                              free
     ```
 
     The syntax in this output is explained in the following table:
 
     |Syntax|Meaning|
     |:---|:---|
-    |`HA`|High availability|
-    |`ENC`|Encrypted|
+    |`ha`|High availability|
     |`X.X`|Version number|
-    |`S / M / L / XL`|Size of instance|
+    |`small / medium / large / xlarge`|Size of instance|
 
     More information can be found in the [PostgreSQL plans](/#postgresql-plans) section.
 
@@ -58,10 +57,10 @@ To set up a PostgreSQL service:
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf create-service postgres M-dedicated-9.5 my-pg-service
+    cf create-service postgres small-9.5 my-pg-service
     ```
 
-    You should use a high-availability (`HA`) encrypted plan for production apps.
+    You should use a high-availability (`ha`) encrypted plan for production apps.
 
 1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
 
@@ -82,7 +81,7 @@ To set up a PostgreSQL service:
     Service: postgres
     Bound apps:
     Tags:
-    Plan: M-dedicated-9.5
+    Plan: small-9.5
     Description: AWS RDS PostgreSQL service
     Documentation url: https://aws.amazon.com/documentation/rds/
     Dashboard:
@@ -129,7 +128,7 @@ You must bind your app to the PostgreSQL service to be able to access the databa
     Service: postgres
     Bound apps: my-app
     Tags:
-    Plan: M-dedicated-9.5
+    Plan: small-9.5
     Description: AWS RDS PostgreSQL service
     Documentation url: https://aws.amazon.com/documentation/rds/
     Dashboard:
@@ -161,7 +160,7 @@ You must bind your app to the PostgreSQL service to be able to access the databa
         "instance_name": "SERVICE_NAME",
         "label": "postgres",
         "name": "SERVICE_NAME",
-        "plan": "Free",
+        "plan": "PLAN",
         "provider": null,
         "syslog_drain_url": null,
         "tags": [
@@ -271,7 +270,7 @@ cf update-service SERVICE_NAME -p NEW_PLAN_NAME
 where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
 
 ```
-cf update-service my-pg-service -p S-HA-dedicated-9.5
+cf update-service my-pg-service -p small-ha-9.5
 ```
 
 The plan upgrade will begin immediately and will usually be completed within about an hour. You can check the status of the change by running the `cf services` command.
@@ -314,7 +313,7 @@ You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to 
 
 ### PostgreSQL plans
 
-Each service in the marketplace has multiple plans that vary by availability, storage capacity and encryption.
+Each service in the marketplace has multiple plans that vary by availability and storage capacity.
 
 #### Paid plans - PostgreSQL
 
@@ -328,11 +327,7 @@ There is a free plan available with limited storage which should only be used fo
 
 #### Encrypted plans - PostgreSQL
 
-Plans with `ENC` in the name include encryption at rest of the database storage. This means that both the data on the disk and in snapshots is encrypted.
-
-You should use an encrypted plan for production services or services that use real data.
-
-Once you've created a service instance, you can't enable or disable encryption.
+All plans have encryption at rest unless stated otherwise. This means that both the data on the disk and in snapshots is encrypted.
 
 #### High availability plans - PostgreSQL
 
@@ -385,7 +380,7 @@ cf update-service SERVICE_NAME -p PLAN -c '{"apply_at_maintenance_window": true,
 where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan that you are upgrading to, for example:
 
 ```
-cf update-service my-pg-service -p S-HA-dedicated-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
+cf update-service my-pg-service -p small-ha-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
 ```
 
 Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
@@ -439,7 +434,7 @@ To restore from a snapshot:
     where `PLAN` is the plan used in the original instance (you can find this out by running `cf service SERVICE_NAME`), and `NEW_SERVICE_NAME` is a unique, descriptive name for this new instance. For example:
 
     ```
-    cf create-service postgres M-dedicated-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
+    cf create-service postgres small-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
     ```
 
  3. It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:
@@ -488,20 +483,17 @@ To set up a MySQL service:
 
     ```
     service plan                description                                                                                                                                                       free or paid
-    M-dedicated-5.7             100GB Storage, Dedicated Instance. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                                             paid
-    M-HA-dedicated-5.7          100GB Storage, Dedicated Instance, Highly Available. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                           paid
-    ...
-    Free                        5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.t2.micro.                              free
+    medium-5.7                  100GB Storage, Dedicated Instance. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                                             paid
+    medium-ha-5.7               100GB Storage, Dedicated Instance, Highly Available. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                           paid
     ```
 
     The syntax in this output is explained in the following table:
 
     |Syntax|Meaning|
     |:---|:---|
-    |`HA`|High availability|
-    |`ENC`|Encrypted|
+    |`ha`|High availability|
     |`X.X`|Version number|
-    |`S / M / L / XL`|Size of instance|
+    |`small / medium / large / xlarge`|Size of instance|
 
     More information can be found in the [MySQL plans](/#mysql-plans) section.
 
@@ -514,10 +506,10 @@ To set up a MySQL service:
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf create-service mysql M-dedicated-5.7 my-ms-service
+    cf create-service mysql medium-5.7 my-ms-service
     ```
 
-    You should use a high-availability (`HA`) encrypted plan for production apps.
+    You should use a high-availability (`ha`) encrypted plan for production apps.
 
 1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
 
@@ -538,7 +530,7 @@ To set up a MySQL service:
     Service: mysql
     Bound apps:
     Tags:
-    Plan: M-dedicated-5.7
+    Plan: medium-5.7
     Description: AWS RDS MySQL service
     Documentation url: https://aws.amazon.com/documentation/rds/
     Dashboard:
@@ -585,7 +577,7 @@ You must bind your app to the MySQL service to be able to access the database fr
     Service: mysql
     Bound apps: my-app
     Tags:
-    Plan: M-dedicated-5.7
+    Plan: medium-5.7
     Description: AWS RDS MySQL service
     Documentation url: https://aws.amazon.com/documentation/rds/
     Dashboard:
@@ -617,7 +609,7 @@ You must bind your app to the MySQL service to be able to access the database fr
         "instance_name": "SERVICE_NAME",
         "label": "mysql",
         "name": "SERVICE_NAME",
-        "plan": "Free",
+        "plan": "PLAN",
         "provider": null,
         "syslog_drain_url": null,
         "tags": [
@@ -725,7 +717,7 @@ cf update-service SERVICE_NAME -p NEW_PLAN_NAME
 where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
 
 ```
-cf update-service my-ms-service -p S-HA-dedicated-5.7
+cf update-service my-ms-service -p medium-ha-5.7
 ```
 
 The plan upgrade will begin immediately and will usually be completed within about an hour. You can check the status of the change by running the `cf services` command.
@@ -768,7 +760,7 @@ You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to 
 
 ### MySQL plans
 
-Each service in the marketplace has multiple plans that vary by availability, storage capacity and encryption.
+Each service in the marketplace has multiple plans that vary by availability and storage capacity.
 
 #### Paid plans - MySQL
 
@@ -782,11 +774,7 @@ There is a free plan available with limited storage which should only be used fo
 
 #### Encrypted plans - MySQL
 
-Plans with `ENC` in the name include encryption at rest of the database storage. This means that both the data on the disk and in snapshots is encrypted.
-
-You should use an encrypted plan for production services or services that use real data.
-
-Once you've created a service instance, you can't enable or disable encryption.
+All plans have encryption at rest unless stated otherwise. This means that both the data on the disk and in snapshots is encrypted.
 
 #### High availability plans - MySQL
 
@@ -839,7 +827,7 @@ cf update-service SERVICE_NAME -p PLAN -c '{"apply_at_maintenance_window": true,
 where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan that you are upgrading to, for example:
 
 ```
-cf update-service my-ms-service -p S-HA-dedicated-5.7 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
+cf update-service my-ms-service -p medium-5.7 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
 ```
 
 Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
@@ -875,12 +863,12 @@ To set up a Redis service:
     There are currently two plans available for Redis:
 
     ```
-    service plan       description                                                                free or paid
-    tiny-clustered     568MB RAM, clustered (1 shard), single node, no failover, daily backups    paid
-    tiny-unclustered   568MB RAM, non-clustered, single node, no failover, no backups             paid
+    service plan           description                                                                free or paid
+    tiny-clustered-3.2     568MB RAM, clustered (1 shard), single node, no failover, daily backups    paid
+    tiny-unclustered-3.2   568MB RAM, non-clustered, single node, no failover, no backups             paid
     ```
 
-    You should use the `tiny-clustered` plan as it is backed up every day. Refer to the [Redis plans](/#redis-plans) section of the documentation for more information.
+    You should use the `tiny-clustered-3.2` plan as it is backed up every day. Refer to the [Redis plans](/#redis-plans) section of the documentation for more information.
 
 1. Run the following to create a service instance:
 
@@ -891,7 +879,7 @@ To set up a Redis service:
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf create-service redis tiny-clustered my-redis-service
+    cf create-service redis tiny-clustered-3.2 my-redis-service
     ```
 
 1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
@@ -913,7 +901,7 @@ To set up a Redis service:
     service:         redis
     bound apps:
     tags:
-    plan:            tiny-clustered
+    plan:            tiny-clustered-3.2
     description:     AWS ElastiCache Redis service
     documentation:
     dashboard:
@@ -968,7 +956,7 @@ You must bind your app to the Redis service to be able to access the cache from 
     service:         redis
     bound apps:      my-app
     tags:
-    plan:            tiny-clustered
+    plan:            tiny-clustered-3.2
     description:     AWS ElastiCache Redis service
     documentation:
     dashboard:
@@ -1006,7 +994,7 @@ You must bind your app to the Redis service to be able to access the cache from 
         "instance_name": "my-redis-service",
         "label": "redis",
         "name": "my-redis-service",
-        "plan": "tiny-clustered",
+        "plan": "tiny-clustered-3.2",
         "provider": null,
         "syslog_drain_url": null,
         "tags": [
@@ -1099,19 +1087,21 @@ You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to 
 
 There are two plans available for the Redis service:
 
-- `tiny-clustered`
-- `tiny-unclustered`
+- `tiny-clustered-3.2`
+- `tiny-unclustered-3.2`
 
 You cannot migrate a service from an unclustered to a clustered plan or vice versa.
 
-#### tiny-clustered
+Both plans include encryption at rest of the database storage. This means that both the data on the disk and in snapshots is encrypted.
+
+#### tiny-clustered-3.2
 
 We recommend that you use this plan as it is backed up every day. Note that:
 
 - [Sidekiq](https://sidekiq.org) does not work with clustered Redis
 - this plan cannot be [vertically scaled](/#scaling) or upgraded to a bigger plan
 
-#### tiny-unclustered
+#### tiny-unclustered-3.2
 
 Use this plan if your client library cannot connect to clustered plans. Note that:
 
