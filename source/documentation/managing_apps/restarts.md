@@ -21,7 +21,7 @@ For more information, refer to the Cloud Foundry documentation on how:
 
 ### 404s after commands that restart your app
 
-After you use a command that restarts application instances, such as ``cf push`` or ``cf restart``, your app may briefly return incorrect 404 errors. Apart from the brief downtime, this may lead to problems if the 404 is cached, or visiting web crawling bots (as used by search engines) receive a 404.
+After you use a command that restarts application instances, such as ``cf push`` or ``cf restart``, your app may temporarily return incorrect 404 errors instead of returning a 5XX error. Apart from the brief downtime, this may lead to problems if the 404 is cached, or visiting web crawling bots (as used by search engines) receive a 404.
 
 Commands known to do this are:
 
@@ -32,7 +32,7 @@ Commands known to do this are:
 
 We are working on a fix to prevent this happening.
 
-In the meantime, we recommend that you use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link], where you have two versions of an app, one that is 'live' and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to facilitate this process. We can recommend the [cf-blue-green-deploy](https://github.com/bluemixgaragelondon/cf-blue-green-deploy) plugin.
+In the meantime, we recommend that you use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link], where you have two versions of an app, one that is 'live' and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to facilitate this process. We can recommend the [cf-blue-green-deploy](https://github.com/bluemixgaragelondon/cf-blue-green-deploy) [external link] plugin.
 
 ## .NET buildpack support
 
