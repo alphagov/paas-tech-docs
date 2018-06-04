@@ -4,9 +4,7 @@ GOV.UK Platform as a Service (PaaS) is a cloud-hosting platform being built by t
 
 GOV.UK PaaS is currently in private beta.
 
-GOV.UK PaaS is built using the open source [Cloud Foundry](https://www.cloudfoundry.org/) project, and runs on Amazon Web Services. [Read our blog post](https://governmentasaplatform.blog.gov.uk/2015/12/17/choosing-cloudfoundry/) for more information on why we chose Cloud Foundry. Refer to the [features page](https://www.cloud.service.gov.uk/features) for more information on the GOV.UK PaaS.
-
-If you want to use the platform to host your app, contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+GOV.UK PaaS is built using the open source [Cloud Foundry](https://www.cloudfoundry.org/) [external link] project, and runs on Amazon Web Services. [Read our blog post](https://governmentasaplatform.blog.gov.uk/2015/12/17/choosing-cloudfoundry/) [external link] for more information on why we chose Cloud Foundry. Refer to the [features page](https://www.cloud.service.gov.uk/features) for more information on the GOV.UK PaaS.
 
 # Before you start
 
@@ -16,7 +14,7 @@ To be hosted on the GOV.UK PaaS, your app must:
 
 - follow the [twelve-factor application principles](/#12-factor-application-principles); this will be true if your app was written to be deployed to another PaaS like Heroku
 - [store data classified up to ‘official’](/#data-security-classification); your app cannot store data classified as 'secret' or 'top secret'
-- be built using a supported [buildpack](/#buildpacks) or written in one of these languages:
+- written in a language supported by a [Cloud Foundry buildpack](/#buildpacks)):
     - Go
     - Nodejs
     - Java
@@ -31,8 +29,6 @@ To be hosted on the GOV.UK PaaS, your app must:
 
 ## Get an account
 
-GOV.UK PaaS is currently in private beta.
-
 Your department, agency or team must have a GOV.UK PaaS account. This account is called an organisation, or [org](/#organisations). Sign up for an org account at [https://www.cloud.service.gov.uk/signup](https://www.cloud.service.gov.uk/signup).
 
 If your department, agency or team already has an org account and you need an individual account, talk to your [org manager](/#org-manager) who will need to authorise the creation of your account.
@@ -46,8 +42,6 @@ Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailt
 GOV.UK PaaS is hosted on [Cloud Foundry](https://www.cloudfoundry.org/) [external link]. You must use the Cloud Foundry command line interface (CLI) to manage your apps hosted on the GOV.UK PaaS. To set it up:
 
 1. Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli#downloads) [external link] for your platform.
-
-    Installing with Homebrew does not work on macOS Sierra. We recommend using the Mac binary or installer.
 
 2. To check that it is installed correctly, run `cf -v` in the command line.
 
@@ -81,7 +75,7 @@ You can practice deploying an app by deploying a test static HTML page.
 
     where `ORGNAME` is your org and `sandbox` is the name of the sandbox space.
 
-    If you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team or speak to the PaaS team by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk)..
+    If you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team or speak to the PaaS team by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 2. In an empty directory, create an `index.html` file containing the following markup:.
 
@@ -106,11 +100,11 @@ You can practice deploying an app by deploying a test static HTML page.
       buildpack: staticfile_buildpack
     ```
 
-      where `APPNAME` is the unique name for your app. You can run `cf apps` to see apps which already exist.
+    where `APPNAME` is the unique name for your app. You can run `cf apps` to see apps which already exist.
 
-      The `memory` line tells the PaaS how much memory to allocate to the app.
+    The `memory` line tells the PaaS how much memory to allocate to the app.
 
-      A buildpack provides app framework and runtime support. For example, if your app was written in Ruby, you would use the `ruby_buildpack`. In this example, we use the `staticfile_buildpack` for the static HTML page.
+    A buildpack provides app framework and runtime support. For example, if your app was written in Ruby, you would use the `ruby_buildpack`. In this example, we use the `staticfile_buildpack` for the static HTML page.
 
 4. In the directory where you created the files, run `cf push APPNAME` to push the static HTML page to the GOV.UK PaaS.
 
