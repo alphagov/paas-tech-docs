@@ -32,8 +32,4 @@ Commands known to do this are:
 
 We are working on a fix to prevent this happening.
 
-In the meantime, we recommend that you use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link], where you have two versions of an app, one that is 'live' and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to facilitate this process. We can recommend the [cf-blue-green-deploy](https://github.com/bluemixgaragelondon/cf-blue-green-deploy) [external link] plugin.
-
-## .NET buildpack support
-
-The [.NET Core buildpack](https://docs.cloudfoundry.org/buildpacks/dotnet-core/index.html) [external link] is only available as a custom buildpack.
+Until this fix is live, you should use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link]. This is where you have two versions of an app, one that is 'live' and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to help this process. We recommend the [cf-blue-green-deploy](https://github.com/bluemixgaragelondon/cf-blue-green-deploy) [external link] plugin.
