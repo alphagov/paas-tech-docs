@@ -1,10 +1,10 @@
 # Technical documentation for GOV.UK PaaS
 
-GOV.UK Platform as a Service (PaaS) is a cloud-hosting platform being built by the Government Digital Service (GDS). GOV.UK PaaS manages the deployment of your apps, services and background tasks so you don’t need to hire people with specialist cloud skills.
+GOV.UK Platform as a Service (PaaS) is a cloud-hosting platform built by the Government Digital Service (GDS). GOV.UK PaaS manages the deployment of your apps, services and background tasks so you don’t need to hire people with specialist cloud skills.
 
 GOV.UK PaaS is currently in private beta.
 
-GOV.UK PaaS is built using the open source [Cloud Foundry](https://www.cloudfoundry.org/) [external link] project, and runs on Amazon Web Services. [Read our blog post](https://governmentasaplatform.blog.gov.uk/2015/12/17/choosing-cloudfoundry/) [external link] for more information on why we chose Cloud Foundry. Refer to the [features page](https://www.cloud.service.gov.uk/features) for more information on the GOV.UK PaaS.
+GOV.UK PaaS uses the open source [Cloud Foundry](https://www.cloudfoundry.org/) [external link] project, and runs on Amazon Web Services. [Read our blog post](https://governmentasaplatform.blog.gov.uk/2015/12/17/choosing-cloudfoundry/) [external link] for more information on why we chose Cloud Foundry. Refer to the [features page](https://www.cloud.service.gov.uk/features) for more information on the GOV.UK PaaS.
 
 # Before you start
 
@@ -12,9 +12,9 @@ To start using the platform, your department, agency or team must agree to the T
 
 To be hosted on the GOV.UK PaaS, your app must:
 
-- follow the [twelve-factor application principles](/#12-factor-application-principles); this will be true if your app was written to be deployed to another PaaS like Heroku
+- follow the [twelve-factor application principles](/#12-factor-application-principles); this will be true if your app has been written so it can deploy to another PaaS like Heroku
 - [store data classified up to ‘official’](/#data-security-classification); your app cannot store data classified as 'secret' or 'top secret'
-- written in a language supported by a [Cloud Foundry buildpack](/#buildpacks)):
+- be built using a [supported buildpack](/#buildpacks) or written in one of these languages:
     - Go
     - Nodejs
     - Java
@@ -22,6 +22,8 @@ To be hosted on the GOV.UK PaaS, your app must:
     - Python
     - Ruby
     - static HTML/CSS/Javascript site
+
+    >The [.NET Core buildpack](https://docs.cloudfoundry.org/buildpacks/dotnet-core/index.html) [external link] is only available as a custom buildpack.
 
 [Cloud Foundry buildpacks](/#buildpacks) provide runtime and framework support for your application. For most languages, you will need to provide configuration files to describe your app’s dependencies. Most buildpacks will support a limited range of versions of the language.
 
@@ -31,9 +33,9 @@ To be hosted on the GOV.UK PaaS, your app must:
 
 Your department, agency or team must have a GOV.UK PaaS account. This account is called an organisation, or [org](/#organisations). Sign up for an org account at [https://www.cloud.service.gov.uk/signup](https://www.cloud.service.gov.uk/signup).
 
-If your department, agency or team already has an org account and you need an individual account, talk to your [org manager](/#org-manager) who will need to authorise the creation of your account.
+Once your department, agency or team has an org account, you will need an individual account. Ask your [org manager](/#org-manager) to authorise the creation of your individual account.
 
-In order to provide you with an account, we need to store some personal data about you. Please see our [Privacy Policy](/#privacy-policy) for details.
+To provide you with an account, we need to store some personal data about you. Please see our [Privacy Policy](/#privacy-policy) for details.
 
 Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
