@@ -1,16 +1,16 @@
-# Technical documentation for GOV.UK PaaS
+# GOV.UK Platform as a Service
 
 GOV.UK Platform as a Service (PaaS) is a cloud-hosting platform built by the Government Digital Service (GDS). GOV.UK PaaS manages the deployment of your apps, services and background tasks so you don’t need to hire people with specialist cloud skills.
 
 GOV.UK PaaS is currently in private beta.
 
-GOV.UK PaaS uses the open source [Cloud Foundry](https://www.cloudfoundry.org/) [external link] project, and runs on Amazon Web Services. [Read our blog post](https://governmentasaplatform.blog.gov.uk/2015/12/17/choosing-cloudfoundry/) [external link] for more information on why we chose Cloud Foundry. Refer to the [features page](https://www.cloud.service.gov.uk/features) for more information on the GOV.UK PaaS.
+GOV.UK PaaS uses the open source [Cloud Foundry](https://www.cloudfoundry.org/) [external link] project, and runs on Amazon Web Services. [Read our blog post](https://governmentasaplatform.blog.gov.uk/2015/12/17/choosing-cloudfoundry/) [external link] for more information on why we chose Cloud Foundry. Refer to the [features page](https://www.cloud.service.gov.uk/features) for more information on GOV.UK PaaS.
 
 # Before you start
 
-To start using the platform, your department, agency or team must agree to the Terms of Use.
+Before it can start using the platform, your department, agency or team must accept the Terms of Use during account activation.
 
-To be hosted on the GOV.UK PaaS, your app must:
+To be hosted on GOV.UK PaaS, your app must:
 
 - follow the [twelve-factor application principles](/#12-factor-application-principles); this will be true if your app has been written so it can deploy to another PaaS like Heroku
 - [store data classified up to ‘official’](/#data-security-classification); your app cannot store data classified as 'secret' or 'top secret'
