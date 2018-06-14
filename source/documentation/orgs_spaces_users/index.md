@@ -124,7 +124,7 @@ You then need to grant access to any user accounts who should be able to use tha
 
 Both org managers and space managers can grant a user access to a space by assigning a role to a user.
 
-To grant a user account access to a space, you can use the [GOV.UK PaaS admin tool]():
+To grant a user account access to a space, you can use the GOV.UK PaaS admin tool:
 
 1. Sign into the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login).
 1. Select the appropriate org.
