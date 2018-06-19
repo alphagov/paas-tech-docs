@@ -8,10 +8,9 @@ The PaaS team creates the first org for a new project, and assigns at least 1 [o
 
 Run `cf orgs` to list the orgs your user account can access.
 
-To see [quota](/#quotas) information about an org, you can either:
+To see [quota](/#quotas) information about an org, you can select the appropriate org in the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in) and check the __Memory__ total in the top right corner of the screen. The amount of information you can see depends on your user role within the org. For example, org managers can see all quota information, whereas space developers can only see information on spaces that they are members of.
 
-- run `cf org ORGNAME`, where `ORGNAME` is the name of the org
-- select the appropriate org in the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in) and check the __Memory__ total in the top right corner of the screen
+You can also run `cf org ORGNAME` to see [quota](/#quotas) information about an org, where `ORGNAME` is the name of the org.
 
 Your user account will be initially assigned to 1 org by the PaaS team and then you can choose to belong to additional orgs. You can contact [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request more orgs.
 
@@ -39,16 +38,14 @@ Users are members of your team who can access or manage apps and backing service
 
 Users are assigned roles which have different permissions for accessing and managing orgs and spaces. A user can have one or multiple roles within the same or different orgs and spaces.
 
-To see a list of users and their roles in your org, you can either:
+To see a list of users and their roles in your org, you can select the Members screen for the appropriate org in the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in). Your user account must have the [org manager role](#org-manager) or the [org auditor role](#org-auditor) to see this information in the admin tool. 
 
-- run `cf org-users ORGNAME`, where `ORGNAME` is the name of the org
-- select the Members screen for the appropriate org in the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in)
+You can also run `cf org-users ORGNAME` to see a list of users and their roles in your org, where `ORGNAME` is the name of the org.
 
-Your user account must have the [org manager role](#org-manager) to manage user accounts in an org.
-
-Although there are multiple roles, the 5 most common are:
+Although there are multiple roles, the 6 most common are:
 
 - Org manager
+- Org auditor
 - Billing manager
 - Space developer
 - Space manager
@@ -69,6 +66,12 @@ Org managers can invite new users to an org using the [GOV.UK PaaS admin tool](h
 We create at least 1 user account with the org manager role as part of your onboarding process. We recommend you have at least 2 org managers in case 1 is unavailable.
 
 If you need the org manager role added to a user account, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+
+### Org auditor
+
+This role applies within an org.
+
+Org auditors can view user account information and org [quota](/#quotas) information, but cannot edit that information.
 
 ### Billing manager
 
@@ -122,9 +125,7 @@ You then need to grant access to any user accounts who should be able to use tha
 
 ### Add users to a space
 
-Both org managers and space managers can grant a user access to a space by assigning a role to a user.
-
-To grant a user account access to a space, you can use the GOV.UK PaaS admin tool:
+Org managers can use the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in) to grant a user access to a space by assigning a role to that user:
 
 1. Sign into the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login).
 1. Select the appropriate org.
@@ -133,7 +134,7 @@ To grant a user account access to a space, you can use the GOV.UK PaaS admin too
 1. Complete the form and select __Send invitation__.
 
 
-Alternatively, you can run the following in the command line:
+Alternatively, the org manager can run the following in the command line:
 
 ```
 cf set-space-role USERNAME ORGNAME SPACE ROLE
@@ -146,7 +147,7 @@ where:
 - `SPACE` is the name of the space
 - `ROLE` is the user role you are granting to the user of the email address in the `USERNAME` field
 
-For example, to grant your colleague ana@example.com the space developer role in the test space within the acme org, you would run:
+For example, to grant ana@example.com the space developer role in the test space within the acme org, the org manager would run:
 
 ```
 cf set-space-role ana@example.com acme test SpaceDeveloper
@@ -180,7 +181,7 @@ where:
 - `SPACE` is the name of the space
 - `ROLE` is the user role granted to the user of the email address in the `USERNAME` field
 
-For example, to remove your colleague ana@example.com's space developer role from the sandbox space within the acme org, you would run:
+For example, to remove ana@example.com's space developer role from the sandbox space within the acme org, the org manager would run:
 
 ```
 cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
@@ -202,9 +203,7 @@ Org managers must add users to their org when they join their team:
 
 When a team member leaves or stops working on a project, your org manager must revoke that team member’s access rights. Your org manager does this by [removing all of that team member’s user roles within the team’s spaces](/#remove-users-from-a-space). 
 
-If the team member has an org role such as org manager or billing manager, you will also need to remove that team member's roles from all of your orgs. 
-
-Use the GOV.UK PaaS admin tool to remove all of the team member’s user roles within the team’s org:
+If the team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must use the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk) to also remove that team member's user roles from the team’s org: 
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
 1. Select the appropriate org.
@@ -212,7 +211,7 @@ Use the GOV.UK PaaS admin tool to remove all of the team member’s user roles w
 1. Select the appropriate user.
 1. Change the user’s org roles and select __Save role changes__.
 
-Alternatively, you can also run the following in the command line:
+Alternatively, they can run the following in the command line:
 
 ```
 cf unset-org-role USERNAME ORGNAME ROLE
@@ -224,13 +223,13 @@ where:
 - `ORGNAME` is the name of the org
 - `ROLE` is the user role granted to the user of the email address in the `USERNAME` field
 
-For example, to remove your colleague ana@example.com's org manager role from the acme org, you would run:
+For example, to remove ana@example.com's org manager role from the acme org, either the other org manager or the GOV.UK PaaS team would run:
 
 ```
 cf unset-org-role ana@example.com acme OrgManager
 ```
 
-If the user still needs access on the PaaS to work on other projects, your org manager does not need to do anything more.
+If the user still needs access on the PaaS to work on other projects, nothing more needs to be done.
 
 If the user no longer needs access to GOV.UK PaaS, then your org manager should contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to ask us to delete the user account.
 
