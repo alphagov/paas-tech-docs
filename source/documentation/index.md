@@ -35,7 +35,7 @@ Your department, agency or team must have a GOV.UK PaaS account. This account is
 
 Once your department, agency or team has an org account, you will need an individual account. Ask your [org manager](/#org-manager) to authorise the creation of your individual account.
 
-To provide you with an account, we need to store some personal data about you. Please see our [Privacy Policy](/#privacy-policy) for details.
+To provide you with an account, we need to store some personal data about you. Please see our [privacy notice](https://www.cloud.service.gov.uk/privacy-notice) for details.
 
 Once you have an individual account, you can access the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in). This tool allows you to manage your [orgs](/#organisations), [spaces](/#spaces) and [users](/#users-and-user-roles) without using the command line.
 
