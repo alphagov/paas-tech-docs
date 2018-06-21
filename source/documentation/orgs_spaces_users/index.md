@@ -8,7 +8,7 @@ The PaaS team creates the first org for a new project, and assigns at least 1 [o
 
 Run `cf orgs` to list the orgs your user account can access.
 
-To see [quota](/#quotas) information about an org, you can select the appropriate org in the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in) and check the __Memory__ total in the top right corner of the screen. The amount of information you can see depends on your user role within the org. For example, org managers can see all quota information, whereas space developers can only see information on spaces that they are members of.
+To see [quota](/#quotas) information about an org, you can select the appropriate org in the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in) and check the __Memory__ total in the top right corner of the screen. The amount of information you can see depends on your user role within the org. For example, org managers can see all quota information, whereas space developers can only see information on spaces that they are members of.
 
 You can also run `cf org ORGNAME` to see [quota](/#quotas) information about an org, where `ORGNAME` is the name of the org.
 
@@ -24,7 +24,7 @@ For example, you might have separate spaces for the development and production v
 To see the spaces you can access in your current org, you can either:
 
 - run `cf spaces` in the command line
-- sign into the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) and select the appropriate org
+- sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) and select the appropriate org
 
 [Org managers](/#org-managers) can create new spaces within an org. 
 
@@ -38,7 +38,7 @@ Users are members of your team who can access or manage apps and backing service
 
 Users are assigned roles which have different permissions for accessing and managing orgs and spaces. A user can have one or multiple roles within the same or different orgs and spaces.
 
-To see a list of users and their roles in your org, you can select the Members screen for the appropriate org in the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in). Your user account must have the [org manager role](#org-manager) or the [org auditor role](#org-auditor) to see this information in the admin tool. 
+To see a list of users and their roles in your org, you can select the Members screen for the appropriate org in the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in). Your user account must have the [org manager role](#org-manager) or the [org auditor role](#org-auditor) to see this information in the admin tool. 
 
 You can also run `cf org-users ORGNAME` to see a list of users and their roles in your org, where `ORGNAME` is the name of the org.
 
@@ -61,7 +61,7 @@ Every org must have at least 1 org manager. Org managers are primary contacts fo
 
 Org managers manage spaces, users and user roles, and approve org changes such as requesting new quotas and enabling paid services.
 
-Org managers can invite new users to an org using the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in) without needing to contact the GOV.UK PaaS team.
+Org managers can invite new users to an org using the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in) without needing to contact the GOV.UK PaaS team.
 
 We create at least 1 user account with the org manager role as part of your onboarding process. We recommend you have at least 2 org managers in case 1 is unavailable.
 
@@ -77,7 +77,7 @@ Org auditors can view user account information and org [quota](/#quotas) informa
 
 This role applies within an org.
 
-Billing managers create and manage billing account and payment information. They can also view users and roles using either the command line or the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in).
+Billing managers create and manage billing account and payment information. They can also view users and roles using either the command line or the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in).
 
 You should assign a billing manager to your org before your service moves to production. We will send all payment requests to the billing manager. An org manager can also be a billing manager.
 
@@ -95,7 +95,7 @@ For example, a space developer granted access to the testing space only can chan
 
 This role applies within a space.
 
-A space manager can grant user roles within a space using either the command line or the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in). A space manager can also change space properties. A space manager cannot deploy, run or manage apps or services.
+A space manager can grant user roles within a space using either the command line or the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in). A space manager can also change space properties. A space manager cannot deploy, run or manage apps or services.
 
 For example, a team member needs to change apps in both the testing and production spaces. The org manager grants this team member the space manager role in the testing space, and the space developer role in both the testing and production spaces. That team member can add users to testing but not to production (as a space manager), and can change apps in both spaces (as a space developer).
 
@@ -103,7 +103,7 @@ For example, a team member needs to change apps in both the testing and producti
 
 This role applies within a space.
 
-Space auditors can view apps, users and resources used within a space using either the command line or the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in), but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.
+Space auditors can view apps, users and resources used within a space using either the command line or the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in), but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.
 
 ## Manage orgs, spaces and user roles
 
@@ -125,9 +125,9 @@ You then need to grant access to any user accounts who should be able to use tha
 
 ### Add users to a space
 
-Org managers can use the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login) (requires sign in) to grant a user access to a space by assigning a role to that user:
+Org managers can use the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in) to grant a user access to a space by assigning a role to that user:
 
-1. Sign into the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login).
+1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/).
 1. Select the appropriate org.
 1. Select __View and manage team members__.
 1. Select __Invite a new team member__.
@@ -161,7 +161,7 @@ When a team member leaves or stops working on a project, the org manager must re
 
 The org manager can use the GOV.UK PaaS admin tool to remove all of the team member’s user roles within the team’s spaces:
 
-1. Sign into the [GOV.UK PaaS admin tool](https://login.cloud.service.gov.uk/login).
+1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/).
 1. Select the appropriate org.
 1. Select __View and manage team members__.
 1. Select the appropriate user.
