@@ -5,7 +5,7 @@ This section covers how to deploy a basic Node.js application to GOV.UK PaaS. Se
 
 > If your app requires a [backing service](/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
-These instructions assume you have already carried out the setup process explained in the [Quick Setup Guide](/#quick-setup-guide) section.
+These instructions assume you have already carried out the setup process explained in the [Get started](/#get-started) section.
 
 This is the code for the example app we are going to use. It is a basic web server that responds with a 'Hello World' message.
 
