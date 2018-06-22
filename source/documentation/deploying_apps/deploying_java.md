@@ -9,7 +9,7 @@ This section covers how to deploy a Java application to GOV.UK PaaS using the [J
 If your java application can be packaged as a [self-executable JAR](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-java_main.md) [external link] then deployment can be as simple as using `cf push -p [your-app].jar [your-app-name]`.
 
 This example will walk through creating a simple "Hello World" application that embeds the popular ([Jetty](http://www.eclipse.org/jetty/)) [external link] webserver.
-The instructions assume you have already carried out the setup process explained in the [Quick Setup Guide](https://docs.cloud.service.gov.uk/#quick-setup-guide) section.
+The instructions assume you have already carried out the setup process explained in the [Get started](/#get-started) section.
 
 1. Create a directory for your Java application:
 
