@@ -201,15 +201,16 @@ Org managers must add users to their org when they join their team:
 
 ### Remove users from an org
 
-When a team member leaves or stops working on a project, your org manager must revoke that team member’s access rights. Your org manager does this by [removing all of that team member’s user roles within the team’s spaces](/#remove-users-from-a-space). 
+When a team member leaves or stops working on a project, your org manager must revoke that team member’s access rights. Your org manager does this by [removing all of that team member’s user roles within the team’s spaces](/#remove-users-from-a-space).
 
-If the team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must use the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk) to also remove that team member's user roles from the team’s org: 
+If the team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must use the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk) to also remove that team member’s user roles from the team’s org:
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
 1. Select the appropriate org.
 1.Select __View and manage team members__.
 1. Select the appropriate user.
-1. Change the user’s org roles and select __Save role changes__.
+1. Select __Remove user from Organisation__.
+1. To confirm, select __Yes, remove from organisation__.
 
 Alternatively, they can run the following in the command line:
 
