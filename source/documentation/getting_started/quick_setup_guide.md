@@ -8,7 +8,7 @@ If your organisation is already taking part in the private beta and you need an 
 
 If you'd like to find out about taking part in the beta, please contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-In order to provide you with an account, we need to store some personal data about you. Please see [our Privacy Policy](/#privacy-policy) for details.
+In order to provide you with an account, we need to store some personal data about you. Please see our [privacy notice](https://www.cloud.service.gov.uk/privacy-notice) for details.
 
 ### Setting up the command line
 
