@@ -1,13 +1,18 @@
 # GOV.UK PaaS Architecture
 
 ## Characteristics of GOV.UK PaaS
-This table summarises the core characteristics of the PaaS offering.
 
-|PaaS characteristic| Meaning|
-|:---	|:---	|
-| Multi-tenant architecture| Applications running on the platform are isolated from each other and can’t read or change each other’s code, data or logs (for example the Digital Marketplace application can’t access the data of the GOV.UK publishing platform).|
-| Application development teams manage their own user support|   A platform where [people developing applications also support the application out of hours](http://www.infoq.com/presentations/gov-uk-devops) [external link] leads to better software and a better user experience.	|
-|Self-service model|PaaS makes it easy for development teams to get started, and to make frequent changes to their applications without requiring support from a member of the PaaS team (for example they can create a Postgres instance). Because application teams have this complete control, they won’t experience any unnecessary delays. |
+### Multi-tenant architecture
+
+Applications running on the platform are isolated from each other and can’t read or change each other’s code, data or logs (for example the Digital Marketplace application can’t access the data of the GOV.UK publishing platform).
+
+### App development teams manage their own user support
+
+A platform where [people developing applications also support the application out of hours](http://www.infoq.com/presentations/gov-uk-devops) [external link] leads to better software and a better user experience.
+
+### Self-service model
+
+PaaS makes it easy for development teams to get started, and to make frequent changes to their applications without requiring support from a member of the PaaS team (for example they can create a Postgres instance). Because application teams have this complete control, they won’t experience any unnecessary delays.
 
 ## 12-factor application principles
 
