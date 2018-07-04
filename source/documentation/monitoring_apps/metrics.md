@@ -1,3 +1,5 @@
+# Monitoring apps
+
 ## Metrics
 
 Cloud Foundry provides time-series data, or metrics, for each instance of your PaaS app. You should use the metrics exporter app to send this data to a monitoring system of your choice. Your monitoring system can then store this data over time and let you view it.
