@@ -1,4 +1,4 @@
-##Names, routes and domains
+## Names, routes and domains
 
 ### App names and cloudapps.digital hostname clash
 
@@ -30,7 +30,7 @@ There are a few possible solutions to this problem:
 
     or with a line in the app's ``manifest.yml`` file:
 
-    
+
         ---
             ...
             host: HOSTNAME
@@ -40,7 +40,7 @@ There are a few possible solutions to this problem:
     This solution means you can change the hostname while keeping the app name the same. This is more flexible, but means you need to keep track of both a hostname and an app name for each app. It could potentially make it easier to deploy to the wrong target.
 
 3. Use the ``random-route`` option. This appends a couple of random words to the hostname, to avoid clashes. For example, if you run:
-    
+
     ``cf push myapp --random-route``
 
     the app will be hosted at something like ``https://myapp-mummifying-giraffe.cloudapps.digital``.
@@ -53,6 +53,4 @@ There are a few possible solutions to this problem:
 
 ### Custom domains
 
-In production, you will probably want your app to be available through your own url (for example, ``yourapp.service.gov.uk``). Go to [using a custom domain](#using-a-custom-domain) to see how to set this up.
-
-
+In production, you will probably want your app to be available through your own url (for example, ``yourapp.service.gov.uk``). Go to [using a custom domain](deploying_services.html#set-up-a-custom-domain-using-the-cdn-route-service) to see how to set this up.
