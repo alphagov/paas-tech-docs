@@ -28,7 +28,7 @@ There are a few more specifics about Docker image support in Cloud Foundry:
 * Privileged container mode is not supported. Features depending on this will not work.
 * Only registries that use Docker Registry API V2 are supported.
 
-Your responsibilities change if you use a Docker image instead of a buildpack. Refer to the [responsibility model guidance](/#responsibility-model) for further information.
+Your responsibilities change if you use a Docker image instead of a buildpack. Refer to the [responsibility model guidance](/guidance.html#responsibility-model) for further information.
 
 ### Docker Registry Availability Requirements
 
