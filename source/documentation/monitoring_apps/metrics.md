@@ -1,3 +1,4 @@
+
 # Monitoring apps
 
 ## Metrics
@@ -15,12 +16,12 @@ Before you set up the metrics exporter app, you will need:
 - a monitoring system to store the metrics with an accompanying [StatsD](https://github.com/etsy/statsd/wiki) [external link] endpoint set up
 - a live Cloud Foundry account assigned to the spaces you want to receive metrics on; this account should be separate to your primary Cloud Foundry account
 
-We recommend that the separate Cloud Foundry account uses the [`SpaceAuditor` role](/#organisations-spaces-amp-targets), as this role has the minimum permissions needed to meet the requirements of the metrics exporter app.
+We recommend that the separate Cloud Foundry account uses the [`SpaceAuditor` role](/orgs_spaces_users.html#space-auditor), as this role has the minimum permissions needed to meet the requirements of the metrics exporter app.
 
 To set up the metrics app:
 
 1. Clone the [https://github.com/alphagov/paas-metric-exporter](https://github.com/alphagov/paas-metric-exporter) repository.
-2. [Push the metrics exporter app](/#deployment-overview) to Cloud Foundry without starting the app by running `cf push --no-start metric-exporter`.
+2. [Push the metrics exporter app](/deploying_apps.html#deployment-overview) to Cloud Foundry without starting the app by running `cf push --no-start metric-exporter`.
 3. Set the following mandatory environment variables in the metrics exporter app using `cf set-env metric-exporter NAME VALUE`:
 
 	|Name|Value|
@@ -40,7 +41,7 @@ You can now check your monitoring system to see if you are receiving metrics.
 
 ### Troubleshooting
 
-If you are not receiving the metrics, check the [logs](/#logs) for the metrics exporter app. If you still need help, please contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+If you are not receiving the metrics, check the [logs](/monitoring_apps.html#logs) for the metrics exporter app. If you still need help, please contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 ### More about monitoring
 
