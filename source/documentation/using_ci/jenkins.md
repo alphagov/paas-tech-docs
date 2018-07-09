@@ -9,7 +9,7 @@ Both approaches require you to set up the credentials plugin first.
 
 ### Set up dedicated accounts
 
-CI systems should not use normal user accounts. Find out more about setting [credentials for automated accounts](#credentials-for-automated-accounts) in PaaS.
+CI systems should not use normal user accounts. Find out more about setting [credentials for automated accounts](/using_ci.html#credentials-for-automated-accounts) in PaaS.
 
 ### Setting up the credentials plugin
 
@@ -29,12 +29,12 @@ Now you can add credentials for the Cloud Foundry user you will be using to push
 
 You can now go on to either:
 
-* [set up custom scripts](#setting-up-custom-scripts) *or*
-* [set up the Cloud Foundry plugin](#setting-up-the-cloud-foundry-plugin)
+* [set up custom scripts](/using_ci.html#setting-up-custom-scripts) *or*
+* [set up the Cloud Foundry plugin](/using_ci.html#setting-up-the-cloud-foundry-jenkins-plugin)
 
 ### Setting up custom scripts
 
-Before you set up custom scripts, make sure you first [set up the credentials plugin](#setting-up-the-credentials-plugin).
+Before you set up custom scripts, make sure you first [set up the credentials plugin](/using_ci.html#setting-up-the-credentials-plugin).
 
 Note that using the custom scripts approach exposes the password via the process command line, so it can be read by other processes running on the same machine. If this risk is not acceptable, please use the Cloud Foundry plugin described below. The Cloud Foundry project is aware of the problem and we expect they will provide a more secure login mechanism soon.
 
@@ -59,14 +59,14 @@ trap 'rm -r $CF_HOME' EXIT
 
 cf api https://api.cloud.service.gov.uk
 
-# Note: the actual name of the environment variable is determined
-# by what you enter into the Credentials Binding Plugin
+<!-- Note: the actual name of the environment variable is determined -->
+<!-- by what you enter into the Credentials Binding Plugin -->
 cf auth "$CF_USER" "$CF_PASSWORD"
 
 cf target -o myorg -s myspace
 cf push
 
-# Destroy token
+<!-- Destroy token -->
 cf logout
 ```
 
@@ -74,7 +74,7 @@ cf logout
 
 Using the Cloud Foundry plugin only allows Jenkins to push your application to GOV.UK PaaS as a post-build action: the equivalent of doing a `cf login` followed by a `cf push`. There is little scope for configuration beyond using the application manifest.
 
-Before you do these steps, make sure you first [set up the credentials plugin](#setting-up-the-credentials-plugin).
+Before you do these steps, make sure you first [set up the credentials plugin](/using_ci.html#setting-up-the-credentials-plugin).
 
 To install the Cloud Foundry plugin manually:
 
@@ -86,7 +86,7 @@ An extra post-build action called "Push to Cloud Foundry" is now available in th
 1. In your job's configuration, click the **Add post-build action** dropdown menu and select **Push to Cloud Foundry**.
 2. In the **Target** field, enter `https://api.cloud.service.gov.uk`.
 3. In **Credentials**, select the user you created using the credentials plugin.
-4. Enter your organisation and the space the application will be deployed to. See [Managing orgs, spaces and users](/#managing-organisations-spaces-and-users) for more details about organisations and spaces. You do not need to tick "Allow self-signed certificate" or "Reset app if already exists".
+4. Enter your organisation and the space the application will be deployed to. See [Managing orgs, spaces and users](/orgs_spaces_users.html#managing-organisations-spaces-and-users) for more details about organisations and spaces. You do not need to tick "Allow self-signed certificate" or "Reset app if already exists".
 5. The rest of the fields can be left with their default values. The plugin expects you to have a manifest file called `manifest.yml` in the root of the application folder. If you do not, you can provide the path to the application manifest, or enter a manifest configuration directly into the plugin.
 6. Click **Save**.
 
