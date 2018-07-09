@@ -34,7 +34,7 @@ If you have a simple app without any services the best way to delete it is
 
 ``cf delete -r [APPNAME]``
 
-which will delete the app and its routes in one go. If your app does have services, please [delete them first](#deleting-services).
+which will delete the app and its routes in one go. If your app does have services, please [delete them first](/deploying_apps.html#delete-a-service-instance).
 
 If you accidentally delete your app without the ``-r`` option, you can delete the route manually. First confirm the details of the orphaned route by typing the ``cf routes`` command, to get a list of all active routes in the current space. This will list the space, the hostname, the overall domain (normally ``cloudapps.digital``), port, path, type and any bound apps or services. You will see your hostname listed but without an associated app. Use this information to populate the following command:
 
@@ -45,7 +45,7 @@ If you accidentally delete your app without the ``-r`` option, you can delete th
 You must unbind a service instance from any apps it is bound to before you can delete that service instance. Note:
 
 - you do not need to delete an app's service instances before you can delete that app
-- a service instance can be bound to more than one app 
+- a service instance can be bound to more than one app
 
 1. Run `cf services` to see all service instances in your targeted space. You will see the output as per this example:
 
