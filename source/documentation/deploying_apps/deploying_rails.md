@@ -1,13 +1,13 @@
 ## Deploy a Ruby on Rails app
 
 
-This section explains minimal steps for deploying a basic Rails app. For full details of how to deploy Ruby on Rails apps, see the official Cloud Foundry guide [Getting Started Deploying Ruby on Rails Apps](http://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html) [external link]. 
+This section explains minimal steps for deploying a basic Rails app. For full details of how to deploy Ruby on Rails apps, see the official Cloud Foundry guide [Getting Started Deploying Ruby on Rails Apps](http://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html) [external link].
 
-> If your app requires a [backing service](/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
+> If your app requires a [backing service](/deploying_services.html#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
-These steps assume you have already carried out the setup process explained in the [Get started](/#get-started) section.
+These steps assume you have already carried out the setup process explained in the [Get started](/get_started.html#get-started) section.
 
-When you deploy an app, you must select a combination of an organisation and a space. This is called the [**target**](/#set-a-target).
+When you deploy an app, you must select a combination of an organisation and a space. This is called the [**target**](/deploying_apps.html#set-a-target).
 
 We have provided a ``sandbox`` space for you to use for learning about the PaaS. You may want to target the sandbox while you are testing by running:
 
@@ -21,7 +21,7 @@ To deploy a Rails app that doesn't require a backing service:
 
 1. Put the code for your Rails app into a local directory (for example, by checking it out of version control).
 
-1. [Exclude files ignored by Git](/#excluding-files).
+1. [Exclude files ignored by Git](/deploying_apps.html#excluding-files).
 
 1. If you're using Rails 4, [add the `rails_12factor` gem](https://github.com/heroku/rails_12factor#install) for better logging. Rails 5 has this functionality built in by default.
 
@@ -49,7 +49,7 @@ To deploy a Rails app that doesn't require a backing service:
 
     If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
 
-1. Set any additional [environment variables](/#environment-variables) required by your app. For example:
+1. Set any additional [environment variables](/deploying_apps.html#environment-variables) required by your app. For example:
 
     ```
     cf set-env APPNAME VARIABLE `value`
@@ -59,17 +59,17 @@ To deploy a Rails app that doesn't require a backing service:
 
 Your app should now be available at `https://APPNAME.cloudapps.digital`!
 
-For a production app, you should read the [production checklist](/#production-checklist).
+For a production app, you should read the [production checklist](/deploying_apps.html#production-checklist).
 
 ### Deploying with a PostgreSQL database
 
-These instructions are for deploying a Rails app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+These instructions are for deploying a Rails app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/deploying_services.html#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
  The Cloud Foundry buildpack for Ruby automatically gets the details of the first available PostgreSQL service from the ``VCAP_SERVICES`` environment variable and sets the Ruby `DATABASE_URL` environment variable accordingly. Ensure that your app is configured to use `DATABASE_URL` to set its database configuration when deployed to the PaaS.
 
 1. Put the code for your Rails app into a local directory (for example, by checking it out of version control).
 
-1. If you are using Git, you may wish to [exclude files ignored by Git](/#excluding-files).
+1. If you are using Git, you may wish to [exclude files ignored by Git](/deploying_apps.html#excluding-files).
 
 1. If you're using Rails 4, [add the `rails_12factor` gem](https://github.com/heroku/rails_12factor#install) for better logging. Rails 5 has this functionality built in by default.
 
@@ -99,7 +99,7 @@ These instructions are for deploying a Rails app with a PostgreSQL database, and
     If you do not specify a name for the app after the ``cf push`` command, the name from the manifest file is used.
 
 
-1. Set any additional [environment variables](/#environment-variables) required by your app. For example:
+1. Set any additional [environment variables](/deploying_apps.html#environment-variables) required by your app. For example:
 
     ```
     cf set-env APPNAME VARIABLE `value`
@@ -108,7 +108,7 @@ These instructions are for deploying a Rails app with a PostgreSQL database, and
     where VARIABLE is a unique name for the variable, and `value` is the value to set.
 
 
-1. [Create a PostgreSQL backing service (if required)](/#set-up-a-postgresql-service) and [bind it to your app](/#bind-a-postgresql-service-to-your-app).
+1. [Create a PostgreSQL backing service (if required)](/deploying_services.html#postgresql) and [bind it to your app](/deploying_services.html#bind-a-postgresql-service-to-your-app).
 
     To enable Rails support for database migrations, you may wish to create a `Procfile` in the same directory as your `manifest.yml` and `Gemfile`. The `Procfile` is a way to specify commands to be run when deploying your app.
 
@@ -118,17 +118,17 @@ These instructions are for deploying a Rails app with a PostgreSQL database, and
     web: rake db:migrate && bin/rails server
     ```
 
-1. Start your app by running: 
+1. Start your app by running:
 
     ```
     cf start APPNAME
     ```
 
-Your app should now be available at `https://APPNAME.cloudapps.digital.` For a production app, you should read the [production checklist](/#production-checklist).
+Your app should now be available at `https://APPNAME.cloudapps.digital.` For a production app, you should read the [production checklist](/deploying_apps.html#production-checklist).
 
 ### Web servers
 
-By default, the Cloud Foundry Ruby buildpack [runs `bin/rails server`](https://github.com/cloudfoundry/ruby-buildpack/blob/1f0ac3ce10866390d161c3f27e71d64890859454/lib/language_pack/rails4.rb#L27) 
+By default, the Cloud Foundry Ruby buildpack [runs `bin/rails server`](https://github.com/cloudfoundry/ruby-buildpack/blob/1f0ac3ce10866390d161c3f27e71d64890859454/lib/language_pack/rails4.rb#L27)
 to spin up the application. In Rails 4 and below, this will use WEBrick as the web
 server. In Rails 5 and above, the default is
 [puma](http://guides.rubyonrails.org/getting_started.html#starting-up-the-web-server).
