@@ -46,7 +46,7 @@ To set up a PostgreSQL service:
     |`X.X`|Version number|
     |`small / medium / large / xlarge`|Size of instance|
 
-    More information can be found in the [PostgreSQL plans](/#postgresql-plans) section.
+    More information can be found in the [PostgreSQL plans](/deploying_services.html#postgresql-plans) section.
 
 1. Run the following code in the command line:
 
@@ -140,7 +140,7 @@ You must bind your app to the PostgreSQL service to be able to access the databa
     Updated: 2016-08-23T15:42:02Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
 
     ```
     {
@@ -176,13 +176,13 @@ You must bind your app to the PostgreSQL service to be able to access the databa
 
     Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
 
-    GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
+    GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
+    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a PostgreSQL service from your local machine
 
-We have created the [Conduit](#conduit) plugin to simplify the process of connecting your local machine to a PostgreSQL service. To install this plugin, run the following code from the command line:
+We have created the [Conduit](/guidance.html#conduit) plugin to simplify the process of connecting your local machine to a PostgreSQL service. To install this plugin, run the following code from the command line:
 
 ```
 cf install-plugin conduit
@@ -205,9 +205,9 @@ Run `cf conduit --help` for more options, and refer to the [Conduit readme file]
 You must:
 
 - install and configure the [PostgreSQL command line (CLI)](https://postgresapp.com/documentation/cli-tools.html) tools on your local machine (configuration options vary depending on operating system and version)
-- [log into Cloud Foundry](/#setting-up-the-command-line)
-- [create the new PaaS-hosted PostgreSQL database](/#set-up-a-postgresql-service)
-- [target the space](/#setting-a-target) where your new database is located
+- [log into Cloud Foundry](/get_started.html#set-up-command-line)
+- [create the new PaaS-hosted PostgreSQL database](/deploying_services.html#set-up-a-postgresql-service)
+- [target the space](/deploying_apps.html#set-a-target) where your new database is located
 
 
 #### Non-PaaS to PaaS
@@ -225,7 +225,7 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
       - `DATA_FILE_NAME` is the SQL data file
       - `DATABASE_NAME` is the name of the non-PaaS source database
 
-2. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to import the data file into the PaaS database by running:
+2. Use the [Conduit plugin](/deploying_services.html#connect-to-a-postgresql-service-from-your-local-machine) to import the data file into the PaaS database by running:
 
     ```
     cf conduit SERVICE_NAME -- psql < DATA_FILE_NAME
@@ -233,13 +233,13 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
-> You can only use [certain PostgreSQL extensions](#postgresql-extensions-whitelist).
+> You can only use [certain PostgreSQL extensions](/deploying_services.html#postgresql-extensions-whitelist).
 
 #### PaaS to PaaS
 
 To move data between two PaaS-hosted PostgreSQL databases:
 
-1. Use the [Conduit plugin](/#connect-to-a-postgresql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
+1. Use the [Conduit plugin](/deploying_services.html#connect-to-a-postgresql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
 
     ```
     cf conduit SERVICE_NAME -- pg_dump --file DATA_FILE_NAME
@@ -275,7 +275,7 @@ cf update-service my-pg-service -p small-ha-9.5
 
 The plan upgrade will begin immediately and will usually be completed within about an hour. You can check the status of the change by running the `cf services` command.
 
-You can also [queue a plan upgrade](/#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
+You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
 
 Downgrading service plans is not currently supported.
 
@@ -309,7 +309,7 @@ Type `yes` when asked for confirmation.
 
 ### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/#deploy-a-backing-or-routing-service-data-security-classification) for more information.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
 
 ### PostgreSQL plans
 
@@ -321,7 +321,7 @@ Some service plans are paid and we can potentially bill you based on your servic
 
 New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/#quotas) settings.
 
-If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
+If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/orgs_spaces_users.html#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
 
 There is a free plan available with limited storage which should only be used for development or testing, but __not production__.
 
@@ -393,7 +393,7 @@ Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is reta
 
 There are two ways you can restore data to an earlier state:
 
-1. You can restore to the latest snapshot yourself. See [Restoring a PostgreSQL service snapshot](/#restoring-a-postgresql-service-snapshot) for details.
+1. You can restore to the latest snapshot yourself. See [Restoring a PostgreSQL service snapshot](/deploying_services.html#restoring-a-postgresql-service-snapshot) for details.
 
 1. We can manually restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Data can be restored to a new PostgreSQL service instance running in parallel, or it can replace the existing service instance.
 
@@ -405,7 +405,7 @@ For more details about how the RDS backup system works, see [Amazon's DB Instanc
 
 #### Restoring a PostgreSQL service snapshot
 
-You can create a copy of any existing PostgreSQL service instance using the latest snapshot of the RDS instance. These snapshots are taken during [the PostgreSQL nightly backups](#postgresql-service-backup).
+You can create a copy of any existing PostgreSQL service instance using the latest snapshot of the RDS instance. These snapshots are taken during [the PostgreSQL nightly backups](/deploying_services.html#postgresql-service-backup).
 
 This can be useful if you want to clone a production database to be used for testing or batch processing.
 
@@ -449,14 +449,14 @@ To restore from a snapshot:
     cf service my-pg-service-copy
     ```
 
- 4. The new instance is set up when the `cf service NEW_SERVICE_NAME` command returns a `create succeeded` status. See [Set up a PostgreSQL service](#set-up-a-postgresql-service) for more details.
+ 4. The new instance is set up when the `cf service NEW_SERVICE_NAME` command returns a `create succeeded` status. See [Set up a PostgreSQL service](/deploying_services.html#set-up-a-postgresql-service) for more details.
 
  This feature has the following limitations:
 
   * You can only restore the most recent snapshot from the latest nightly backup
   * You cannot restore from a service instance that has been deleted
   * You must use the same service plan for the copy as for the original service instance
-  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/#connect-to-a-postgresql-service-from-your-local-machine).
+  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/deploying_services.html#connect-to-a-postgresql-service-from-your-local-machine).
 
 ### PostgreSQL extensions whitelist
 
@@ -495,7 +495,7 @@ To set up a MySQL service:
     |`X.X`|Version number|
     |`small / medium / large / xlarge`|Size of instance|
 
-    More information can be found in the [MySQL plans](/#mysql-plans) section.
+    More information can be found in the [MySQL plans](/deploying_services.html#mysql-plans) section.
 
 1. Run the following code in the command line:
 
@@ -589,7 +589,7 @@ You must bind your app to the MySQL service to be able to access the database fr
     Updated: 2016-08-23T15:42:02Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
 
     ```
     {
@@ -623,15 +623,15 @@ You must bind your app to the MySQL service to be able to access the database fr
     }
     ```
 
-    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured. Refer to the Guidance section for information on how to securely connect either a [Drupal app](/#connect-drupal-to-mysql) or a [Wordpress app](https://docs.cloud.service.gov.uk/#connect-wordpress-to-mysql) to MySQL using SSL.
+    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured. Refer to the Guidance section for information on how to securely connect either a [Drupal app](/guidance.html#connect-drupal-to-mysql) or a [Wordpress app](/guidance.html#connect-wordpress-to-mysql) to MySQL using SSL.
 
-    GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
+    GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
+    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a MySQL service from your local machine
 
-We have created the [Conduit](#conduit) plugin to simplify the process of connecting your local machine to a MySQL service. To install this plugin, run the following code from the command line:
+We have created the [Conduit](/guidance.html#conduit) plugin to simplify the process of connecting your local machine to a MySQL service. To install this plugin, run the following code from the command line:
 
 ```
 cf install-plugin conduit
@@ -654,9 +654,9 @@ Run `cf conduit --help` for more options, and refer to the [Conduit readme file]
 You must:
 
 - install and configure the [MySQL command line (CLI)](https://dev.mysql.com/downloads/utilities/) tools on your local machine (configuration options vary depending on operating system and version)
-- [log into Cloud Foundry](/#setting-up-the-command-line)
-- [create the new PaaS-hosted MySQL database](/#set-up-a-mysql-service)
-- [target the space](/#setting-a-target) where your new database is located
+- [log into Cloud Foundry](/get_started.html#set-up-command-line)
+- [create the new PaaS-hosted MySQL database](/deploying_services.html#set-up-a-mysql-service)
+- [target the space](/deploying_apps.html#set-a-target) where your new database is located
 
 #### Non-PaaS to PaaS
 
@@ -673,7 +673,7 @@ To move data from a non-PaaS MySQL database to a PaaS MySQL database:
     - `DATA_FILE_NAME` is the SQL data file
     - `DATABASE_NAME` is the name of the non-PaaS source database
 
-2. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to import the data file into the PaaS database by running:
+2. Use the [Conduit plugin](/deploying_services.html#connect-to-a-mysql-service-from-your-local-machine) to import the data file into the PaaS database by running:
 
     ```
     cf conduit SERVICE_NAME -- mysql < DATA_FILE_NAME
@@ -685,7 +685,7 @@ To move data from a non-PaaS MySQL database to a PaaS MySQL database:
 
 To move data between two PaaS-hosted MySQL databases:
 
-1. Use the [Conduit plugin](/#connect-to-a-mysql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
+1. Use the [Conduit plugin](/deploying_services.html#connect-to-a-mysql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
 
     ```
     cf conduit SERVICE_NAME -- mysqldump --result-file DATA_FILE_NAME DATABASE_NAME
@@ -694,7 +694,7 @@ To move data between two PaaS-hosted MySQL databases:
     where:
     - `SERVICE_NAME` is a unique descriptive name for this service instance
     - `DATA_FILE_NAME` is the SQL data file name created by the `mysqldump` command
-    - `DATABASE_NAME` is the name of the source database (you should get this from the [`VCAP_SERVICES` environment variable](/#bind-a-mysql-service-to-your-app))
+    - `DATABASE_NAME` is the name of the source database (you should get this from the [`VCAP_SERVICES` environment variable](/deploying_services.html#bind-a-mysql-service-to-your-app))
 
 2. Run the following command to import the data file into the target database:
 
@@ -722,7 +722,7 @@ cf update-service my-ms-service -p medium-ha-5.7
 
 The plan upgrade will begin immediately and will usually be completed within about an hour. You can check the status of the change by running the `cf services` command.
 
-You can also [queue a plan upgrade](/#queue-a-plan-migration-mysql) to happen during a maintenance window to minimise service interruption.
+You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migration-mysql) to happen during a maintenance window to minimise service interruption.
 
 Downgrading service plans is not currently supported.
 
@@ -756,7 +756,7 @@ Type `yes` when asked for confirmation.
 
 ### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/#deploy-a-backing-or-routing-service-data-security-classification) for more information.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
 
 ### MySQL plans
 
@@ -766,9 +766,9 @@ Each service in the marketplace has multiple plans that vary by availability and
 
 Some service plans are paid and we can potentially bill you based on your service usage.
 
-New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/#quotas) settings.
+New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/managing_apps.html#quotas) settings.
 
-If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
+If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/orgs_spaces_users.html#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
 
 There is a free plan available with limited storage which should only be used for development or testing, but __not production__.
 
@@ -868,7 +868,7 @@ To set up a Redis service:
     tiny-unclustered-3.2   568MB RAM, non-clustered, single node, no failover, no backups             paid
     ```
 
-    You should use the `tiny-clustered-3.2` plan as it is backed up every day. Refer to the [Redis plans](/#redis-plans) section of the documentation for more information.
+    You should use the `tiny-clustered-3.2` plan as it is backed up every day. Refer to the [Redis plans](/deploying_services.html#redis-plans) section of the documentation for more information.
 
 1. Run the following to create a service instance:
 
@@ -975,7 +975,7 @@ You must bind your app to the Redis service to be able to access the cache from 
     updated:   2018-02-21T10:52:31Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/#system-provided-environment-variables) contains the correct service connection details. Example output:
+1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. Example output:
 
     ```
     {
@@ -1012,19 +1012,19 @@ You must bind your app to the Redis service to be able to access the cache from 
 
     Your app should parse the data in the `VCAP_SERVICES` environment variable in order to make a secure connection to Redis.
 
-    If your app writes service connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](#logs) for details.
+    If your app writes service connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a Redis service instance from your local machine
 
-We have created the [Conduit](#conduit) plugin to simplify the process of connecting your local machine to a Redis service.
+We have created the [Conduit](/guidance.html#conduit) plugin to simplify the process of connecting your local machine to a Redis service.
 
 #### Prerequisites
 
 You must:
 
 - install the Redis CLI tool on your local machine (this is included in the [standard Redis installation](https://redis.io/download) [external link])
-- [log into Cloud Foundry](/#setting-up-the-command-line)
-- [target the space](/#setting-a-target) where your Redis service instance is located
+- [log into Cloud Foundry](/get_started.html#set-up-command-line)
+- [target the space](/deploying_apps.html#set-a-target) where your Redis service instance is located
 
 #### Install and configure Conduit
 
@@ -1081,7 +1081,7 @@ Type `yes` when asked for confirmation.
 
 ### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/#deploy-a-backing-or-routing-service-data-security-classification) for more information.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
 
 ### Redis plans
 
@@ -1099,14 +1099,14 @@ Both plans include encryption at rest of the database storage. This means that b
 We recommend that you use this plan as it is backed up every day. Note that:
 
 - [Sidekiq](https://sidekiq.org) does not work with clustered Redis
-- this plan cannot be [vertically scaled](/#scaling) or upgraded to a bigger plan
+- this plan cannot be [vertically scaled](/managing_apps.html#scaling) or upgraded to a bigger plan
 
 #### tiny-unclustered-3.2
 
 Use this plan if your client library cannot connect to clustered plans. Note that:
 
 - it is not automatically backed up
-- it can be [vertically scaled](/#scaling) or upgraded to a bigger plan
+- it can be [vertically scaled](/managing_apps.html#scaling) or upgraded to a bigger plan
 
 Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you need an unclustered plan with backups enabled, or a larger unclustered plan.
 
@@ -1175,7 +1175,7 @@ Elasticsearch is an open source full text RESTful search and analytics engine th
 
 ### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/#deploy-a-backing-or-routing-service-data-security-classification) for more information.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
 
 ### TLS connection to Elasticsearch
 
