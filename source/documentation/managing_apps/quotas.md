@@ -10,9 +10,9 @@ Your quota sets the following:
 
 + **RAM**: The amount of RAM available to your applications. The application also has a compute share derived from its memory limit.
 
-+ **Service instances**: The number of service instances available to your organization. 
++ **Service instances**: The number of service instances available to your organization.
 
-+ **Paid services**: Whether or not paid [services](/#deploy-a-backing-service) are available. ``postgres`` is a paid service.
++ **Paid services**: Whether or not paid [services](/deploying_services.html#deploy-a-backing-or-routing-service) are available. ``postgres`` is a paid service.
 
 + **Routes**: The number of routes available to your applications (hostname and domain pairs where an application that exposes a listening port can be reached).
 
@@ -30,13 +30,13 @@ If a new application `push` would exceed your organization's quota, the request 
 
 	Creating app APPLICATION in org ORG / space SPACE as USER...
 	FAILED
-	Server error, status code: 400, error code: 100007, message: 
+	Server error, status code: 400, error code: 100007, message:
 	You have exceeded the memory limit for your organization's quota.
 
 In this situation you have three options:
 
 1. Delete existing resources with `cf delete`, `cf delete-service`, `cf delete-route` or similar commands.
-2. Reconfigure existing [application quotas](#application-quotas) and redeploy.
+2. Reconfigure existing [application quotas](/managing_apps.html#application-quotas) and redeploy.
 3. Request a quota change: contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 ### Application quotas
@@ -47,7 +47,7 @@ Use the following commands to set application quota options (in each pair below,
 
 + `memory:` / `-m`
 
-	Your application's memory limit. An application's compute limit is derived from its memory limit (see [below](#memory-share-and-compute-share)).
+	Your application's memory limit. An application's compute limit is derived from its memory limit (see [below](/managing_apps.html#memory-share-and-compute-share)).
 
 + `disk_quota:` / `-k`
 
@@ -57,7 +57,7 @@ Use the following commands to set application quota options (in each pair below,
 
 	Sets the number of application instances to launch. Each additional instance receives the same memory and disk reservation. An application with a manifest specifying `memory: 256M` and `instances: 4` would reserve 1GB (256M x 4) total.
 
-	For a production application, you should always launch more than one instance. See [Scaling](/#scaling) for more information.
+	For a production application, you should always launch more than one instance. See [Scaling](/managing_apps.html#scaling) for more information.
 
 #### Memory share and compute share
 
@@ -78,9 +78,9 @@ The application cannot access more than the specified amount of memory.
 		requested state: started
 		instances: 1/1
 		usage: 128M x 1 instances
-		urls: 
+		urls:
 		last uploaded: Wed Jul 22 20:09:56 UTC 2015
-		
+
 		     state     since                    cpu    memory          disk          
 		#0   running   2015-07-30 05:58:11 PM   0.0%   94.6M of 128M   80.4M of 128M      
 
@@ -88,6 +88,4 @@ The application cannot access more than the specified amount of memory.
 - Any application which exceeds its memory quota will be automatically restarted. Use `cf events APPNAME` to look for 'out of memory' crashes.
 
 		... description   
-		... index: 0, reason: CRASHED, exit_description: out of memory, exit_status: 255 
-
-
+		... index: 0, reason: CRASHED, exit_description: out of memory, exit_status: 255
