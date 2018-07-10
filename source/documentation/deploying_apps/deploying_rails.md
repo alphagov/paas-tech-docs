@@ -108,7 +108,7 @@ These instructions are for deploying a Rails app with a PostgreSQL database, and
     where VARIABLE is a unique name for the variable, and `value` is the value to set.
 
 
-1. [Create a PostgreSQL backing service (if required)](/deploying_services.html#postgresql) and [bind it to your app](/deploying_services.html#bind-a-postgresql-service-to-your-app).
+1. [Create a PostgreSQL backing service (if required)](/deploying_services.html#set-up-a-postgresql-service) and [bind it to your app](/deploying_services.html#bind-a-postgresql-service-to-your-app).
 
     To enable Rails support for database migrations, you may wish to create a `Procfile` in the same directory as your `manifest.yml` and `Gemfile`. The `Procfile` is a way to specify commands to be run when deploying your app.
 
