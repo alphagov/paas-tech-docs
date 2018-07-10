@@ -207,7 +207,7 @@ If the team member has an org role such as org manager or billing manager, eithe
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
 1. Select the appropriate org.
-1.Select __View and manage team members__.
+1. Select __View and manage team members__.
 1. Select the appropriate user.
 1. Select __Remove user from Organisation__.
 1. To confirm, select __Yes, remove from organisation__.
