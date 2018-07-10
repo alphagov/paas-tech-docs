@@ -90,7 +90,7 @@ If you are just getting started learning Cloud Foundry, you can use the sandbox 
 
     The `memory` line tells the PaaS how much memory to allocate to the app.
 
-1. If your app requires a database, [create a PostgreSQL backing service](/deploying_services.html#postgresql) and [bind it to your app](/deploying_services.html#bind-a-postgresql-service-to-your-app). Then see the section on [PostgreSQL setup](/deploying_apps.html#postgresql-setup-with-django) below.
+1. If your app requires a database, [create a PostgreSQL backing service](/deploying_services.html#set-up-a-postgresql-service) and [bind it to your app](/deploying_services.html#bind-a-postgresql-service-to-your-app). Then see the section on [PostgreSQL setup](/deploying_apps.html#postgresql-setup-with-django) below.
 
 1. To push your app, do:
 
