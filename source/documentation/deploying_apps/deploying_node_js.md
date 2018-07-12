@@ -1,11 +1,10 @@
 ## Deploy a Node.js app
 
-
 This section covers how to deploy a basic Node.js application to GOV.UK PaaS. See the Cloud Foundry [Tips for Node.js Applications](http://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] for more details.
 
-> If your app requires a [backing service](/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
+> If your app requires a [backing service](/deploying_services.html#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
-These instructions assume you have already carried out the setup process explained in the [Get started](/#get-started) section.
+These instructions assume you have already carried out the setup process explained in the [Get started](/get_started.html#get-started) section.
 
 This is the code for the example app we are going to use. It is a basic web server that responds with a 'Hello World' message.
 
@@ -41,7 +40,7 @@ This is the code for the example app we are going to use. It is a basic web serv
     A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Node.js, you use the ``nodejs_buildpack``.
 
 3. Include an npm ``package.json`` file to specify dependencies. The file should also specify a `start` command used to launch the app.
-  
+
     This is a ``package.json`` file for our example app:
 
         {
@@ -57,7 +56,7 @@ This is the code for the example app we are going to use. It is a basic web serv
 
 1. You can optionally run `npm install` to preinstall dependencies rather than having them added during the PaaS staging process.
 
-1. Run `cf push APPNAME` from the top level of the directory which contains all the code and configuration files. 
+1. Run `cf push APPNAME` from the top level of the directory which contains all the code and configuration files.
 
   If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run `cf push --no-start APPNAME`, then when you are ready to start the app, run `cf start APPNAME`.
 
@@ -65,11 +64,11 @@ See [Tips for Node.js Applications](https://docs.cloudfoundry.org/buildpacks/nod
 
 ### PostgreSQL setup with Node.js
 
-These instructions are for deploying a Node.js app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+These instructions are for deploying a Node.js app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/deploying_services.html#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 If your app depends on a backing service such as PostgreSQL, it will need to parse the `VCAP_SERVICES` environment variable to get required details, such as service URLs and credentials.
 
-You must create the service and bind it to your Node.js app as described in the [PostgreSQL](/#postgresql) section.
+You must create the service and bind it to your Node.js app as described in the [PostgreSQL](/deploying_services.html#postgresql) section.
 
 You can use the [cfenv](https://www.npmjs.com/package/cfenv) module to assist with parsing the environment variables.
 
@@ -82,7 +81,7 @@ In your ``package.json`` file, you would specify ``cfenv`` as a dependency:
             // ...
           }
         }
-    
+
 
 Then in your app, you can easily get configuration information for backing services. This is an example of how to connect to a PostgreSQL service.
 
@@ -110,4 +109,3 @@ You should also remember to include dependencies for any service bindings in ``p
         // ...
       }
     }
-

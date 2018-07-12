@@ -2,16 +2,16 @@
 
 This section explains how to deploy an app using the Django framework. You may also need to refer to the [Cloud Foundry documentation about the Python buildpack](https://docs.cloudfoundry.org/buildpacks/python/index.html) [external link].
 
-> If your app requires a [backing service](/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
+> If your app requires a [backing service](/deploying_services.html#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
-These steps assume you have already carried out the setup process explained in the [Get started](/#get-started) section.
+These steps assume you have already carried out the setup process explained in the [Get started](/get_started.html#get-started) section.
 
 If you are just getting started learning Cloud Foundry, you can use the sandbox space by running: ``cf target -s sandbox``
 
 1. Put the code for your Django app into a local directory (for example, by checking it out of version control).
 
-2. If you are using Git, add `*.pyc` and `local_settings.py` to your `.gitignore`, file, then 
-   [exclude files ignored by Git](/#excluding-files) so Cloud Foundry will ignore them too.
+2. If you are using Git, add `*.pyc` and `local_settings.py` to your `.gitignore`, file, then
+   [exclude files ignored by Git](/deploying_apps.html#excluding-files) so Cloud Foundry will ignore them too.
 
 3. Tell Cloud Foundry which Python runtime to use by creating a `runtime.txt`   file in the root of the local folder. The contents of the file should  
    be:
@@ -37,7 +37,7 @@ If you are just getting started learning Cloud Foundry, you can use the sandbox 
 
         from django.core.wsgi import get_wsgi_application
         application = get_wsgi_application()
-        
+
 
     You'll need to add a few lines to import the `whitenoise` package and wrap the middleware around the WSGI application so that all static files are served using whitenoise. Edit your `wsgi.py` to:
 
@@ -67,13 +67,13 @@ If you are just getting started learning Cloud Foundry, you can use the sandbox 
 
     If your static files are located across multiple folders, you may need to use the STATICFILES_DIRS variable. See the Django documentation for [full details on managing static files](https://docs.djangoproject.com/en/1.9/howto/static-files/).
 
-1. Create a file called `Procfile` in the root of your local folder, 
+1. Create a file called `Procfile` in the root of your local folder,
    and put in it:
-    
+
             web: python manage.py migrate && waitress-serve --port=$PORT PROJECTNAME.wsgi:application
 
     The Procfile is a way to specify commands to be run when deploying your app; in this case, for database migration.
-        
+
     `PROJECTNAME` should be replaced with whatever the name of your WSGI module is. By default, this is the same as the name of your project module, but it may be changed using the DJANGO_SETTINGS_MODULE environment variable. Using this configuration will automatically apply any database migrations.
 
 1. Create a `manifest.yml` file in the root of your local folder.
@@ -90,7 +90,7 @@ If you are just getting started learning Cloud Foundry, you can use the sandbox 
 
     The `memory` line tells the PaaS how much memory to allocate to the app.
 
-1. If your app requires a database, [create a PostgreSQL backing service](/#set-up-a-postgresql-service) and [bind it to your app](/#bind-a-postgresql-service-to-your-app). Then see the section on [PostgreSQL setup](/#postgresql-setup-with-django) below.
+1. If your app requires a database, [create a PostgreSQL backing service](/deploying_services.html#set-up-a-postgresql-service) and [bind it to your app](/deploying_services.html#bind-a-postgresql-service-to-your-app). Then see the section on [PostgreSQL setup](/deploying_apps.html#postgresql-setup-with-django) below.
 
 1. To push your app, do:
 
@@ -104,7 +104,7 @@ You can now view your app at `https://APPNAME.cloudapps.digital`.
 
 ### PostgreSQL setup with Django
 
-These instructions are for deploying a Django app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+These instructions are for deploying a Django app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/deploying_services.html#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 Add these lines to your ``requirements.txt``:
 
@@ -119,7 +119,7 @@ In your `settings.py` file, make sure you import the ``dj_database_url`` package
 
 This package will automatically parse the ``VCAP_SERVICES`` environment variable and set DATABASE_URL to the first database found.
 
-Then you'll need to add a `DATABASES` setting. It's best to add this to the `settings.py` file. 
+Then you'll need to add a `DATABASES` setting. It's best to add this to the `settings.py` file.
 
         DATABASES = {}
         DATABASES['default'] =  dj_database_url.config()

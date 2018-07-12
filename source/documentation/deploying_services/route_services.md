@@ -2,7 +2,7 @@
 
 Tenants may wish to apply some processing to requests before they reach an application. Common examples of use cases are authentication, rate limiting, and caching services.
 
-Cloud Foundry allows the tenants to bind [application routes](/#names-routes-and-domains) to [route services](https://docs.cloudfoundry.org/services/route-services.html) [external link]. A route service acts as a full proxy. Once it is bound to a route, the platform routing layer will send every request for that route to the route service endpoint. The route service can then process the incoming request, proxy it back to the original application, and finally process the response request before returning it to the original client.
+Cloud Foundry allows the tenants to bind [application routes](/deploying_apps.html#names-routes-and-domains) to [route services](https://docs.cloudfoundry.org/services/route-services.html) [external link]. A route service acts as a full proxy. Once it is bound to a route, the platform routing layer will send every request for that route to the route service endpoint. The route service can then process the incoming request, proxy it back to the original application, and finally process the response request before returning it to the original client.
 
 Using route services has some consequences to be aware of:
 
@@ -12,12 +12,12 @@ Using route services has some consequences to be aware of:
 
 ### User-provided Route Services
 
-Tenants can define their own route service instance by using a [user-provided service instance](/#user-provided-service-instance) that points to any HTTPS service. This endpoint must fulfill the following requirements:
+Tenants can define their own route service instance by using a [user-provided service instance](/https://docs.cloudfoundry.org/devguide/services/user-provided.html) [external link] that points to any HTTPS service. This endpoint must fulfill the following requirements:
 
 - It must be a HTTPS endpoint with a valid certificate.
 - It can be a application running in the platform itself or an external service on the Internet.
 - It must be reachable from the platform (ie. not blocked by a firewall or in a private network).
-- It must implement the [route service protocol](/#implementing-a-route-service)
+- It must implement the [route service protocol](/deploying_services.html#implementing-a-route-service)
 
 This is how you define an user-provided route service instance and map it to the route of your app:
 
@@ -34,7 +34,7 @@ This is how you define an user-provided route service instance and map it to the
    ``cf service my-route-service``
 
 
-2. Bind this route service instance to the [application route](/#names-routes-and-domains)
+2. Bind this route service instance to the [application route](/deploying_apps.html#names-routes-and-domains)
 
    ``cf bind-route-service DOMAIN SERVICE_INSTANCE --hostname HOSTNAME``
 
@@ -42,7 +42,7 @@ This is how you define an user-provided route service instance and map it to the
 
    ``cf bind-route-service cloudapps.digital my-route-service --hostname myapp``
 
-3. You can list the [routes](/#names-routes-and-domains) of the current [space](/#organisations-spaces-amp-targets), to see the applications and route services bound to them:
+3. You can list the [routes](/deploying_apps.html#names-routes-and-domains) of the current [space](/orgs_spaces_users.html#spaces), to see the applications and route services bound to them:
 
    ``cf routes``
 
@@ -50,7 +50,7 @@ If the route service endpoint is not responding correctly, you might get the fol
 
    ``502 Bad Gateway: Registered endpoint failed to handle the request.``
 
-If you get this error, double check that the endpoint is working and reachable from the platform, that it is using a valid SSL certificate, that responds timely and that it implements the [route service protocol](/#implementing-a-route-service).
+If you get this error, double check that the endpoint is working and reachable from the platform, that it is using a valid SSL certificate, that responds timely and that it implements the [route service protocol](/deploying_services.html#implementing-a-route-service).
 
 ### Implementing a route service
 
@@ -75,7 +75,7 @@ Please note this is a proof-of-concept and is *not intended to run in production
 
 We will deploy it as an application in the platform itself. Then we will bind this route service to a deployed application called `myapp`, accessible via https://myapp.cloudapps.digital.
 
-1. Deploy the route service as [any other other application](/#deploying-apps).
+1. Deploy the route service as [any other other application](/deploying_apps.html#deploying-apps).
    Do not start it yet, as we need to configure it first.
 
     ```

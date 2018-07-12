@@ -2,7 +2,7 @@
 
 ## Responsibility model
 
-Your responsibilities differ depending on whether you use a [standard buildpack](/#buildpacks), [custom buildpack](/#how-to-use-custom-buildpacks) or [Docker image](/#deploy-a-docker-image-experimental) to deploy your app.
+Your responsibilities differ depending on whether you use a [standard buildpack](/deploying_apps.html#buildpacks), [custom buildpack](/deploying_apps.html#how-to-use-custom-buildpacks) or [Docker image](/deploying_apps.html#deploy-a-docker-image-experimental) to deploy your app.
 
 <div class="table-container">
   <table>
@@ -57,7 +57,7 @@ Your responsibilities differ depending on whether you use a [standard buildpack]
       </tr>
       <tr>
         <td style="vertical-align: middle; text-align: left">
-          <a href="https://docs.cloud.service.gov.uk/#deploy-a-backing-or-routing-service">Backing services</a>
+          <a href="https://docs.cloud.service.gov.uk/deploying_services.html#deploy-a-backing-or-routing-service">Backing services</a>
           <br> - maintain service availability
           <br> - apply security patches
         </td>
@@ -81,7 +81,7 @@ Your responsibilities differ depending on whether you use a [standard buildpack]
 
 ### Standard buildpacks
 
-You are only responsible for the app code and its dependencies. This includes [penetration testing](https://docs.cloud.service.gov.uk/#penetration-testing) your app.
+You are only responsible for the app code and its dependencies. This includes [penetration testing](/guidance.html#penetration-testing) your app.
 
 If you're relatively new to cloud or have a small development team, we recommend using the standard buildpacks to maximise the support you will receive from GOV.UK PaaS.
 
@@ -109,7 +109,7 @@ The [.NET Core buildpack](https://docs.cloudfoundry.org/buildpacks/dotnet-core/i
 
 ### Docker images
 
-You are responsible for your Docker container and custom image. Learn about this [experimental feature](https://docs.cloud.service.gov.uk/#deploy-a-docker-image-experimental).
+You are responsible for your Docker container and custom image. Learn about this [experimental feature](/deploying_apps.html#monitoring-apps-deploy-a-docker-image-experimental).
 
 
 ### Custom buildpacks compared to Docker images

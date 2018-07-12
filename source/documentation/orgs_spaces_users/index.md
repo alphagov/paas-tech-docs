@@ -4,13 +4,13 @@
 
 An organisation, or org, represents a group of users, applications and environments. Each org shares the same resource, quota and custom domain.
 
-The PaaS team creates the first org for a new project, and assigns at least 1 [org manager](/#org-manager) to that org. If you want to start a new project on the GOV.UK PaaS, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), telling us who the org manager(s) should be.
+The PaaS team creates the first org for a new project, and assigns at least 1 [org manager](orgs_spaces_users.html#org-manager) to that org. If you want to start a new project on the GOV.UK PaaS, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), telling us who the org manager(s) should be.
 
 Run `cf orgs` to list the orgs your user account can access.
 
-To see [quota](/#quotas) information about an org, you can select the appropriate org in the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in) and check the __Memory__ total in the top right corner of the screen. The amount of information you can see depends on your user role within the org. For example, org managers can see all quota information, whereas space developers can only see information on spaces that they are members of.
+To see [quota](managing_apps.html#quotas) information about an org, you can select the appropriate org in the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in) and check the __Memory__ total in the top right corner of the screen. The amount of information you can see depends on your user role within the org. For example, org managers can see all quota information, whereas space developers can only see information on spaces that they are members of.
 
-You can also run `cf org ORGNAME` to see [quota](/#quotas) information about an org, where `ORGNAME` is the name of the org.
+You can also run `cf org ORGNAME` to see [quota](managing_apps.html#quotas) information about an org, where `ORGNAME` is the name of the org.
 
 Your user account will be initially assigned to 1 org by the PaaS team and then you can choose to belong to additional orgs. You can contact [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request more orgs.
 
@@ -26,11 +26,11 @@ To see the spaces you can access in your current org, you can either:
 - run `cf spaces` in the command line
 - sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) and select the appropriate org
 
-[Org managers](/#org-managers) can create new spaces within an org. 
+[Org managers](orgs_spaces_users.html#org-manager) can create new spaces within an org.
 
 ![Diagram showing an org that contains multiple spaces](/documentation/figures/orgs-spaces.png)
 
-Refer to the [case studies](#case-studies) documentation for information on common structures for orgs, spaces and apps.
+Refer to the [case studies](orgs_spaces_users.html#case-studies) documentation for information on common structures for orgs, spaces and apps.
 
 ## Users and user roles
 
@@ -38,7 +38,7 @@ Users are members of your team who can access or manage apps and backing service
 
 Users are assigned roles which have different permissions for accessing and managing orgs and spaces. A user can have one or multiple roles within the same or different orgs and spaces.
 
-To see a list of users and their roles in your org, you can select the Members screen for the appropriate org in the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in). Your user account must have the [org manager role](#org-manager) or the [org auditor role](#org-auditor) to see this information in the admin tool. 
+To see a list of users and their roles in your org, you can select the Members screen for the appropriate org in the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in). Your user account must have the [org manager role](orgs_spaces_users.html#org-manager) or the [org auditor role](orgs_spaces_users.html#org-auditor) to see this information in the admin tool.
 
 You can also run `cf org-users ORGNAME` to see a list of users and their roles in your org, where `ORGNAME` is the name of the org.
 
@@ -71,7 +71,7 @@ If you need the org manager role added to a user account, contact us at [gov-uk-
 
 This role applies within an org.
 
-Org auditors can view user account information and org [quota](/#quotas) information, but cannot edit that information.
+Org auditors can view user account information and org [quota](managing_apps.html#quotas) information, but cannot edit that information.
 
 ### Billing manager
 
@@ -107,7 +107,7 @@ Space auditors can view apps, users and resources used within a space using eith
 
 ## Manage orgs, spaces and user roles
 
-There are several common tasks to manage spaces and user roles. 
+There are several common tasks to manage spaces and user roles.
 
 ### Create a new space
 
@@ -157,7 +157,7 @@ Refer to the [Cloud Foundry reference guide on `cf set-space-role`](https://cli.
 
 ### Remove users from a space
 
-When a team member leaves or stops working on a project, the org manager must revoke that team member’s access rights. 
+When a team member leaves or stops working on a project, the org manager must revoke that team member’s access rights.
 
 The org manager can use the GOV.UK PaaS admin tool to remove all of the team member’s user roles within the team’s spaces:
 
@@ -201,13 +201,13 @@ Org managers must add users to their org when they join their team:
 
 ### Remove users from an org
 
-When a team member leaves or stops working on a project, your org manager must revoke that team member’s access rights. Your org manager does this by [removing all of that team member’s user roles within the team’s spaces](/#remove-users-from-a-space).
+When a team member leaves or stops working on a project, your org manager must revoke that team member’s access rights. Your org manager does this by [removing all of that team member’s user roles within the team’s spaces](orgs_spaces_users.html#remove-users-from-a-space).
 
 If the team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must use the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk) to also remove that team member’s user roles from the team’s org:
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
 1. Select the appropriate org.
-1.Select __View and manage team members__.
+1. Select __View and manage team members__.
 1. Select the appropriate user.
 1. Select __Remove user from Organisation__.
 1. To confirm, select __Yes, remove from organisation__.

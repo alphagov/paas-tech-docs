@@ -1,6 +1,6 @@
 ## Set up a custom domain using the cdn-route service
 
-This section explains how to configure a custom domain name for your application by using our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [cache](#caching) requests to your app.
+This section explains how to configure a custom domain name for your application by using our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [cache](/deploying_services.html#caching) requests to your app.
 
 Using the `cdn-route` service will maximise the support you will receive from GOV.UK PaaS.
 
@@ -59,7 +59,7 @@ Using the `cdn-route` service will maximise the support you will receive from GO
 
     Using this example, you will create a `CNAME` record in your DNS server pointing `example.com` to `d3nrs0916m1mk2.cloudfront.net.`
 
-You have now completed the custom domain setup process. Please note that it should take approximately one hour for domain setup to finish. If it has not finished after two hours, please refer to the [troubleshooting](#troubleshooting-custom-domains) section.
+You have now completed the custom domain setup process. Please note that it should take approximately one hour for domain setup to finish. If it has not finished after two hours, please refer to the [troubleshooting](/deploying_services.html#troubleshooting-custom-domains) section.
 
 >Your application is only available over HTTPS.
 
@@ -85,7 +85,7 @@ By default cookies are forwarded to your application. You can disable this by se
 cf update-service my-cdn-route \
     -c '{"domain": "example.com", "cookies": false}'
 ```
-See the [More about how the CDN works](#more-about-how-custom-domains-work) section for details.
+See the [More about how the CDN works](/deploying_services.html#more-about-how-custom-domains-work) section for details.
 
 #### Forwarding headers
 
@@ -103,7 +103,7 @@ cf update-service my-cdn-route \
     -c '{"domain": "example.com", "headers": ["*"]}'
 ```
 
-Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](#more-about-how-custom-domains-work) section for details.
+Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](/deploying_services.html#more-about-how-custom-domains-work) section for details.
 
 ### Removing your custom domain
 
@@ -157,7 +157,7 @@ You can configure CloudFront to forward headers to your application, which cause
 
 ### Authentication
 
-Cookie headers are forwarded to your application by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](#forwarding-headers).
+Cookie headers are forwarded to your application by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services.html#forwarding-headers).
 
 ### Further information
 

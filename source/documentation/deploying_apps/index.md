@@ -6,7 +6,7 @@ The `cf push` command is used both to create a new app and to push a new version
 
 1. Put the code you want to deploy in a directory. This is usually accomplished by checking it out of version control.
 
-1. [Target](/#set-a-target) the appropriate organisation and space.
+1. [Target](deploying_apps.html#set-a-target) the appropriate organisation and space.
 
     ```
     cf target -o SOMEORG -s SOMESPACE
@@ -24,7 +24,7 @@ The app should now be live at `https://APPNAME.cloudapps.digital`.
 
 There are many options available when you ``push`` an app. You can optionally set them in a ``manifest.yml`` file in the directory from which you are running the ``push`` command. See the Cloud Foundry documentation on [Deploying with Application Manifests](http://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html) [external link] for details.
 
-For a production app, you should read the [production checklist](/#production-checklist).
+For a production app, you should read the [production checklist](deploying_apps.html#production-checklist).
 
 ### Set a target
 
@@ -52,14 +52,14 @@ You should target the sandbox space while you are testing your app. You can do t
 cf target -s sandbox
 ```
 
-You will not normally need to target the sandbox space if you are a new user, as this space is the default for new users. 
+You will not normally need to target the sandbox space if you are a new user, as this space is the default for new users.
 
 A possible exception to this is if your org is mature and has pre-existing spaces; you should check to ensure that you target the appropriate space for testing.
 
 ### Caveats
 * Your app should not write to local storage. Cloud Foundry local storage is ephemeral and can be deleted at any time.
 * You may need to set environment variables for your app to work. All configuration information should be stored in environment variables, not in the code.
-* Instances will be restarted if they [exceed memory limits](/#quotas).
+* Instances will be restarted if they [exceed memory limits](managing_apps.html#quotas).
 * Your application should write all its log messages to `STDOUT`/`STDERR`, rather than a log file.
 
 ## Data security classification
@@ -79,7 +79,4 @@ Requests could be made to the non-secure `http://` protocol due to:
  * misconfiguration of an app that allows non-encrypted traffic through
  * a service linking to the HTTP version of a page by mistake
 
-In this situation, any requests made to the `http://` protocol will be
-automatically redirected to the base HTTPS version of that URL. The original
-query path and query parameters will be removed. This prevents a site from
-repeatedly redirecting back to the HTTP protocol without the user noticing.
+In this situation, any requests made to the `http://` protocol will be automatically redirected to the base HTTPS version of that URL. The original query path and query parameters will be removed. This prevents a site from repeatedly redirecting back to the HTTP protocol without the user noticing.

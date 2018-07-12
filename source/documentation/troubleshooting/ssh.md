@@ -2,7 +2,7 @@
 
 When you deploy an app to GOV.UK PaaS, it runs in a container, which is like a lightweight Linux virtual machine. Each app runs in its own isolated container.
 
-Sometimes, it can be useful to connect directly to the container with SSH. You would usually only do this to get information for troubleshooting purposes, for example, if you can't work out what is happening with your app using the `cf logs` and `cf events` commands described in the [Logs](/#troubleshooting) section.
+Sometimes, it can be useful to connect directly to the container with SSH. You would usually only do this to get information for troubleshooting purposes, for example, if you can't work out what is happening with your app using the `cf logs` and `cf events` commands described in the [Logs](/monitoring_apps.html#logs) section.
 
 If you do run commands which will change the container temporarily, it's a good idea to restart the app afterwards.
 
@@ -35,7 +35,7 @@ FAILED
 Error opening SSH connection: ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
 ```
 
-go to the section below on [Enabling SSH for an app](#enabling-ssh-for-an-app).
+go to the section below on [Enabling SSH for an app](/troubleshooting.html#enabling-ssh-for-an-app).
 
 Note that you do not need to generate any SSH keys. The `cf` CLI tool handles authentication for you.
 
@@ -72,7 +72,7 @@ cf ssh --app-instance-index 2
 
 ## Creating TCP tunnels with SSH
 
-You can use the [Conduit plugin](#conduit) to connect your local system to your remote backing service instance. If you instead want to manually create a TCP tunnel with SSH, refer to this section.
+You can use the [Conduit plugin](/guidance.html#conduit) to connect your local system to your remote backing service instance. If you instead want to manually create a TCP tunnel with SSH, refer to this section.
 
 The `cf ssh` command supports [local port forwarding](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows you to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a backing service that is only accessible from an app running on GOV.UK PaaS.
 
@@ -188,7 +188,7 @@ If you are running multiple instances of an app (created with `cf scale` or with
 
 You do not need a special account permission level to enable SSH for an app. The default `SpaceDeveloper` role allows you to do this.
 
-If SSH is already enabled, or enabling it still doesn't make SSH work, go to [Enabling SSH for a space](#enabling-ssh-for-a-space) below.
+If SSH is already enabled, or enabling it still doesn't make SSH work, go to [Enabling SSH for a space](/troubleshooting.html#enabling-ssh-for-a-space) below.
 
 
 ### Enabling SSH for a space

@@ -9,11 +9,11 @@ Tools we have seen used to manage the tests and deployments include Travis, Circ
 
 Security is a key concern when setting up a CI system that interacts with a PaaS. You should protect confidential data and your systems by:
 
-- running all tests as a [low-privilege PaaS user](#credentials-for-automated-accounts)
+- running all tests as a [low-privilege PaaS user](/using_ci.html#credentials-for-automated-accounts)
 - not exposing your PaaS credentials publicly; you should store them in encrypted form and decrypt only during runtime.
 - running your tests in a dedicated environment before deploying to production
 
-For security reasons, GOV.UK PaaS will lock your account if your CI system makes multiple failed login attempts in a short period of time. This can happen if you provide incorrect or expired login details. See the [Failed login rate limit](#failed-login-rate-limit) section for more information.
+For security reasons, GOV.UK PaaS will lock your account if your CI system makes multiple failed login attempts in a short period of time. This can happen if you provide incorrect or expired login details. See the [Failed login rate limit](/troubleshooting.html#failed-login-rate-limit) section for more information.
 
 ### Credentials for automated accounts
 
