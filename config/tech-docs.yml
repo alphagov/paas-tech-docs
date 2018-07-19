@@ -31,3 +31,5 @@ multipage_nav: true
 
 # Enable collapsible navigation in the sidebar
 collapsible_nav: true
+
+enable_search: true
