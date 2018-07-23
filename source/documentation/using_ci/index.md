@@ -1,24 +1,26 @@
-# Configuring a custom continuous integration (CI) system
+# Configuring a continuous integration (CI) tool
 
-Setting up a CI service helps you make sure your team are delivering new features without breaking existing functionality. CI will deploy software automatically, but only if the tests pass. This helps you to iterate code faster and with greater confidence, a huge benefit once the codebase becomes larger and more complex.
+A continuous integration (CI) tool deploys software automatically to help you deliver new features without breaking existing functionality.
 
-Tools we have seen used to manage the tests and deployments include Travis, Circle, TeamCity and Jenkins. Detailed instructions on configuring Travis or Jenkins are below.
+Examples of CI tools include [Jenkins](https://jenkins.io/), [Travis](https://travis-ci.com/), [Circle](https://circleci.com/) and [TeamCity](https://www.jetbrains.com/teamcity/) [external links].
 
-- [Travis CI](https://travis-ci.com/) is cloud-based, has a free tier, and is commonly used when a team want to start deploying prototypes from shared GitHub repositories - rather than code running locally on a particular machine. This is equivalent to linking GitHub repositories to Heroku, and takes less than ten minutes. [Set up Travis](#use-travis)
-- [Jenkins](https://jenkins.io/) is more complex, needs detailed technical knowledge, and requires its own infrastructure. [Set up Jenkins](#push-an-app-with-jenkins)
+## Choose CI tool
 
-Security is a key concern when setting up a CI system that interacts with a PaaS. You should protect confidential data and your systems by:
+You should choose a CI tool based on criteria such as:
 
-- running all tests as a [low-privilege PaaS user](/using_ci.html#credentials-for-automated-accounts)
-- not exposing your PaaS credentials publicly; you should store them in encrypted form and decrypt only during runtime.
-- running your tests in a dedicated environment before deploying to production
+- product features
+- support offered
+- pricing
+- security
 
-For security reasons, GOV.UK PaaS will lock your account if your CI system makes multiple failed login attempts in a short period of time. This can happen if you provide incorrect or expired login details. See the [Failed login rate limit](/troubleshooting.html#failed-login-rate-limit) section for more information.
+We recommend you focus on how the tool encrypts and protects any sensitive information or secrets such as keys, usernames or passwords. You are responsible for the assurance of your own services and information. Refer to the [information assurance](https://www.cloud.service.gov.uk/ia) page for more information.
 
-### Credentials for automated accounts
+## Configure your CI tool accounts
 
-In order to avoid developer credentials leaking, particularly those with admin rights, you should request a dedicated PaaS user account for use by your CI service. If you want to deploy to multiple spaces with your CI tool, use a different user account for each. Each user should only have `SpaceDeveloper` access to a single space within your organisation.
+You should request one or more dedicated PaaS user accounts for use by your CI service.
 
-To request a PaaS user account for a CI service, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) and tell us the email address of the CI user. This should be a unique email address, not already used by another PaaS account. If other people within your team need to be able to reset the password then we recommend that you use a group email address that they also receive the email for.
+Use a different account for each [space](/orgs_spaces_users.html#spaces) you want to deploy to with your CI tool.
 
-We set up user accounts for CI services in the same way as user accounts for people; the accounts have the `SpaceDeveloper` role in the `sandbox` space.
+Each of these accounts should be assigned a [user role](https://docs.cloud.service.gov.uk/orgs_spaces_users.html#users-and-user-roles) with the minimum permissions needed for completing the required CI tool actions.
+
+The GOV.UK PaaS will lock your credentials if your CI tool makes multiple failed login attempts in a short period of time. See the [Failed login rate limit](/troubleshooting.html#failed-login-rate-limit) section for more information.
