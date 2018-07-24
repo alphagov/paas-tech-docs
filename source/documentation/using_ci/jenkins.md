@@ -52,21 +52,21 @@ To protect these credentials and prevent them leaking to other Jenkins jobs, we 
 
 A basic 'execute shell' buildstep would look like this:
 
-```
+```bash
 # Set CF_HOME in a temp dir so that jobs do not share or overwrite each others' credentials.
 export CF_HOME="$(mktemp -d)"
 trap 'rm -r $CF_HOME' EXIT
 
 cf api https://api.cloud.service.gov.uk
 
-<!-- Note: the actual name of the environment variable is determined -->
-<!-- by what you enter into the Credentials Binding Plugin -->
+# Note: the actual name of the environment variable is determined
+# by what you enter into the Credentials Binding Plugin
 cf auth "$CF_USER" "$CF_PASSWORD"
 
 cf target -o myorg -s myspace
 cf push
 
-<!-- Destroy token -->
+# Destroy token
 cf logout
 ```
 
