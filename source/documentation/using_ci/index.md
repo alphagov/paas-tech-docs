@@ -13,7 +13,7 @@ You should choose a CI tool based on criteria such as:
 - pricing
 - security
 
-You should focus on how the tool encrypts and protects any sensitive information or secrets such as keys, usernames or passwords. You are responsible for the [assurance of your own services and information](information assurance](https://www.cloud.service.gov.uk/ia). 
+You should focus on how the tool encrypts and protects any sensitive information or secrets such as keys, usernames or passwords. You are responsible for the [assurance of your own services and information](https://www.cloud.service.gov.uk/ia). 
 
 ## Configure your CI tool accounts
 
