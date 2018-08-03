@@ -112,6 +112,12 @@ filter {
             target => "[access][user_agent]"
         }
     }
+
+    if [syslog_msg] == [message] {
+        mutate {
+            remove_field => ["syslog_msg"]
+        }
+    }
 }
 ```
 
