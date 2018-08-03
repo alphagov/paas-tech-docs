@@ -1171,19 +1171,216 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 
 ## Elasticsearch
 
+## Elasticsearch
+
+___Does this need to be changed?___
+
 Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so [contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
+
+### Set up an Elasticsearch service
+
+To set up an Elasticsearch service:
+
+1. Run the following in the command line to see what plans are available for Elasticsearch:
+
+    ```
+    cf marketplace -s elasticsearch
+    ```
+
+    Here is an example of the output you will see (the exact plans will vary):
+
+    ```
+    service plan   description                                                        free or paid
+    small-ha-5.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.   paid
+    small-ha-6.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.   paid
+    ```
+
+    The syntax in this output is explained in the following table:
+
+    |Syntax|Meaning|
+    |:---|:---|
+    |`ha`|High availability|
+    |`X.X`|Version number|
+    |`small`|Size of instance|
+
+    All `ha` plans are suitable for production.
+
+    You should evaluate the size of the available plans against your needs.
+
+    You should only use a Elasticsearch 5.x plan if your app is incompatible with Elasticsearch 6.x.
+
+    More information can be found in the [Elasticsearch plans](LINK) section. ___No plans section?___  
+
+2. Run the following to create a service instance:
+
+    ```
+    cf create-service elasticsearch PLAN SERVICE_NAME
+    ```
+
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+
+    ```
+    cf create-service elasticsearch small-ha-6.x asdf5g0svgj43l
+    ```
+
+    It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
+
+    ```
+    cf service SERVICE_NAME
+    ```
+
+    for example:
+
+    ```
+    cf service asdf5g0svgj43l
+    ```
+
+    When `cf service SERVICE_NAME` returns a `create succeeded` status, you have set up the service instance. Example output:
+
+    ```
+    name:            asdf5g0svgj43l
+    service:         elasticsearch
+    tags:
+    plan:            small-ha-6.x
+    description:     Elasticsearch instances provisioned via Aiven
+    documentation:
+    dashboard:
+
+    There are no bound apps for this service.
+
+    Showing status of last operation from service asdf5g0svgj43l...
+
+    status:    create succeeded
+    message:   Last operation succeeded
+    started:   2018-08-02T10:17:30Z
+    updated:   2018-08-02T10:21:35Z
+    ```
+
+### Bind an Elasticsearch service to your apps
+
+You must bind your app to the Elasticsearch service to be able to access the cache from the app.
+
+1. Run the following in the command line:
+
+    ```
+    cf bind-service APP_NAME SERVICE_NAME
+    ```
+
+    where `APP_NAME` is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+
+    ```
+    cf bind-service 2dm43mfleacfo4 asdf5g0svgj43l
+    ```
+
+2. If the app is already running, you should restage the app to make sure it connects:
+
+    ```
+    cf restage APP_NAME
+    ```
+
+3. To confirm that the service is bound to the app, run:
+
+    ```
+    cf service SERVICE_NAME
+    ```
+
+    and check the `bound apps:` line of the output.
+
+    ```
+    name:            asdf5g0svgj43l
+    service:         elasticsearch
+    bound apps:      2dm43mfleacfo4
+    tags:
+    plan:            small-ha-6.x
+    description:     Elasticsearch instances provisioned via Aiven
+    documentation:
+    dashboard:
+
+    Showing status of last operation from service asdf5g0svgj43l...
+
+    status:    create succeeded
+    message:   Last operation succeeded
+    started:   2018-08-02T10:17:30Z
+    updated:   2018-08-02T10:21:35Z
+    ```
+
+### Connect to an Elasticsearch service from your local machine
+
+JM investigating
+
+cf conduit env var dump the details mode
+
+https://www.elastic.co/guide/en/kibana/current/tutorial-load-dataset.html
+
+### Import and export bulk data to and from an Elasticsearch database
+
+JM investigating
+
+included in above section with example
+
+new ES user and i just want to set up a new shard with an empty store
+
+already have es 6 and want to move data ES to our machine and out again
+
+off paas es 5.x to on paas es 6.x
+
+#### Non-PaaS to PaaS
+
+TBC
+
+### Upgrade Elasticsearch service plan
+
+Elasticsearch currently only has one size of plan.
+
+There is currently no way to upgrade the Elasticsearch version.
+
+### Unbind an Elasticsearch service from your app
+
+You must unbind the Elasticsearch service before you can delete it. Run the following in the command line:
+
+```
+cf unbind-service APP_NAME SERVICE_NAME
+```
+
+where `APP_NAME` is your app's deployed instance name as specified in your manifest or push command, and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+
+```
+cf unbind-service 2dm43mfleacfo4 asdf5g0svgj43l
+```
+
+If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.
+
+### Delete an Elasticsearch service
+
+Once the Elasticsearch service has been unbound from your app, you can delete it. Run the following in the command line:
+
+```
+cf delete-service SERVICE_NAME
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+
+```
+cf delete-service asdf5g0svgj43l
+```
+
+Type `yes` when asked for confirmation.
 
 ### Data classification
 
 You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
 
+### Elasticsearch plans
+
+N/A
+
+### Elasticsearch maintenance & backups
+
+N/A
+
 ### TLS connection to Elasticsearch
 
 Elasticsearch uses self-signed certificates. In order for your app to verify a TLS connection to this service, the app must use a CA certificate included in a VCAP_SERVICES environment variable.
-
-### Failover process
-
-Visit the [Elasticsearch on Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
 
 ## User-provided services
 
