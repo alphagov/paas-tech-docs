@@ -1171,8 +1171,6 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 
 ## Elasticsearch
 
-## Elasticsearch
-
 ___Does this need to be changed?___
 
 Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so [contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
@@ -1220,7 +1218,7 @@ To set up an Elasticsearch service:
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf create-service elasticsearch small-ha-6.x asdf5g0svgj43l
+    cf create-service elasticsearch small-ha-6.x my-es-service
     ```
 
     It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
@@ -1232,13 +1230,13 @@ To set up an Elasticsearch service:
     for example:
 
     ```
-    cf service asdf5g0svgj43l
+    cf service my-es-service
     ```
 
     When `cf service SERVICE_NAME` returns a `create succeeded` status, you have set up the service instance. Example output:
 
     ```
-    name:            asdf5g0svgj43l
+    name:            my-es-service
     service:         elasticsearch
     tags:
     plan:            small-ha-6.x
@@ -1269,7 +1267,7 @@ You must bind your app to the Elasticsearch service to be able to access the cac
     where `APP_NAME` is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf bind-service 2dm43mfleacfo4 asdf5g0svgj43l
+    cf bind-service my-app my-es-service
     ```
 
 2. If the app is already running, you should restage the app to make sure it connects:
@@ -1287,9 +1285,9 @@ You must bind your app to the Elasticsearch service to be able to access the cac
     and check the `bound apps:` line of the output.
 
     ```
-    name:            asdf5g0svgj43l
+    name:            my-es-service
     service:         elasticsearch
-    bound apps:      2dm43mfleacfo4
+    bound apps:      my-app
     tags:
     plan:            small-ha-6.x
     description:     Elasticsearch instances provisioned via Aiven
@@ -1345,7 +1343,7 @@ cf unbind-service APP_NAME SERVICE_NAME
 where `APP_NAME` is your app's deployed instance name as specified in your manifest or push command, and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
-cf unbind-service 2dm43mfleacfo4 asdf5g0svgj43l
+cf unbind-service my-app my-es-service
 ```
 
 If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.
@@ -1361,7 +1359,7 @@ cf delete-service SERVICE_NAME
 where `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
 ```
-cf delete-service asdf5g0svgj43l
+cf delete-service my-es-service
 ```
 
 Type `yes` when asked for confirmation.
