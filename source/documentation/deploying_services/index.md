@@ -1171,9 +1171,12 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 
 ## Elasticsearch
 
-___Does this need to be changed?___
+Elasticsearch is an open-source full text RESTful search and analytics engine that allows you to store and search data. 
 
-Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so [contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
+Before using Elasticsearch as your primary data store, you should assess if an ACID-compliant backing service such as PostgreSQL or MySQL would be more suitable.  
+
+This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
+
 
 ### Set up an Elasticsearch service
 
@@ -1201,19 +1204,14 @@ To set up an Elasticsearch service:
     |`X.X`|Version number|
     |`small`|Size of instance|
 
-    All `ha` plans are suitable for production.
-
-    You should evaluate the size of the available plans against your needs.
-
-    You should only use a Elasticsearch 5.x plan if your app is incompatible with Elasticsearch 6.x.
-
-    More information can be found in the [Elasticsearch plans](LINK) section. ___No plans section?___  
-
+    You should use the Elasticsearch 6.x plan. Refer to the [Elasticsearch plans](/deploying_services.html#elasticsearch-plans) section of the documentation for more information.   
+    
 2. Run the following to create a service instance:
 
     ```
     cf create-service elasticsearch PLAN SERVICE_NAME
     ```
+
 
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
@@ -1267,7 +1265,7 @@ You must bind your app to the Elasticsearch service to be able to access the cac
     where `APP_NAME` is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf bind-service my-app my-es-service
+    cf bind-service my-app my-es-service 
     ```
 
 2. If the app is already running, you should restage the app to make sure it connects:
@@ -1281,7 +1279,7 @@ You must bind your app to the Elasticsearch service to be able to access the cac
     ```
     cf service SERVICE_NAME
     ```
-
+    
     and check the `bound apps:` line of the output.
 
     ```
@@ -1302,35 +1300,15 @@ You must bind your app to the Elasticsearch service to be able to access the cac
     updated:   2018-08-02T10:21:35Z
     ```
 
-### Connect to an Elasticsearch service from your local machine
+You can also use the app's `manifest.yml` to bind apps to service instances during app deployment. You use the same `manifest.yml` to deploy your app to different environments. 
 
-JM investigating
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
 
-cf conduit env var dump the details mode
+### Change Elasticsearch service plan 
 
-https://www.elastic.co/guide/en/kibana/current/tutorial-load-dataset.html
+You cannot currently change your service instance plan.
 
-### Import and export bulk data to and from an Elasticsearch database
-
-JM investigating
-
-included in above section with example
-
-new ES user and i just want to set up a new shard with an empty store
-
-already have es 6 and want to move data ES to our machine and out again
-
-off paas es 5.x to on paas es 6.x
-
-#### Non-PaaS to PaaS
-
-TBC
-
-### Upgrade Elasticsearch service plan
-
-Elasticsearch currently only has one size of plan.
-
-There is currently no way to upgrade the Elasticsearch version.
+Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk] (mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
 ### Unbind an Elasticsearch service from your app
 
@@ -1350,7 +1328,7 @@ If you unbind your services from your app but do not delete them, the services w
 
 ### Delete an Elasticsearch service
 
-Once the Elasticsearch service has been unbound from your app, you can delete it. Run the following in the command line:
+Once the Elasticsearch service has been unbound from your app, you can delete the service. Run the following in the command line:
 
 ```
 cf delete-service SERVICE_NAME
@@ -1370,15 +1348,15 @@ You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to 
 
 ### Elasticsearch plans
 
-N/A
+We recommmend that you use Elasticsearch 6.x plans unless there are compatibility issues between Elasticsearch 6.x and your app.
 
-### Elasticsearch maintenance & backups
+All high availability (`ha`) plans are suitable for production. 
 
-N/A
+You should check the size of the available plans against your service needs. 
 
-### TLS connection to Elasticsearch
+### Further information
 
-Elasticsearch uses self-signed certificates. In order for your app to verify a TLS connection to this service, the app must use a CA certificate included in a VCAP_SERVICES environment variable.
+Refer to the [Elasticsearch reference documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) for more information.
 
 ## User-provided services
 
