@@ -1173,9 +1173,9 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 
 Elasticsearch is an open-source full text RESTful search and analytics engine that allows you to store and search data. 
 
-Before using Elasticsearch as your primary data store, you should assess if an ACID-compliant backing service such as PostgreSQL or MySQL would be more suitable.  
+Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services.html#postgresql) or [MySQL](/deploying_services.html#mysql) would be more suitable.  
 
-This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
+This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for more information. We will make you aware of any constraints in its use at that time.
 
 
 ### Set up an Elasticsearch service
@@ -1244,7 +1244,7 @@ To set up an Elasticsearch service:
 
     There are no bound apps for this service.
 
-    Showing status of last operation from service asdf5g0svgj43l...
+    Showing status of last operation from service my-es-service...
 
     status:    create succeeded
     message:   Last operation succeeded
@@ -1292,7 +1292,7 @@ You must bind your app to the Elasticsearch service to be able to access the cac
     documentation:
     dashboard:
 
-    Showing status of last operation from service asdf5g0svgj43l...
+    Showing status of last operation from service my-es-service...
 
     status:    create succeeded
     message:   Last operation succeeded
@@ -1308,7 +1308,16 @@ Refer to the Cloud Foundry documentation on [deploying with app manifests](https
 
 You cannot currently change your service instance plan.
 
-Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk] (mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
+If you try to change your service instance plan by running `cf update-service`, you will see output similar to the following example:
+
+```
+cf update-service my-es-service -p small-ha-6.x
+Updating service instance my-es-service as admin...
+FAILED
+Server error, status code: 400, error code: 110004, message: The service does not support changing plans.
+```
+
+Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
 ### Unbind an Elasticsearch service from your app
 
