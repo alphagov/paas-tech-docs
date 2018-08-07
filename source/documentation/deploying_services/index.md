@@ -279,6 +279,12 @@ You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migrat
 
 Downgrading service plans is not currently supported.
 
+Upgrading from an unencrypted to an encrypted service plan using `update-service` is not currently supported. If you wish to do this you will need to:
+
+1. [Set up a PostgreSQL service](/deploying_services.html#set-up-a-postgresql-service) using your desired encrypted plan.
+
+2. Move your data from your unencrypted service to the new encrypted service following the steps described in the [PaaS to PaaS](/deploying_services.html#paas-to-paas) guide.
+
 ### Unbind a PostgreSQL service from your app
 
 You must unbind the PostgreSQL service before you can delete it. To unbind the PostgreSQL service, run the following code in the command line:
