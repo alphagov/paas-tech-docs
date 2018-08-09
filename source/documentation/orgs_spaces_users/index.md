@@ -51,7 +51,7 @@ Although there are multiple roles, the 6 most common are:
 - Space manager
 - Space auditor
 
-Refer to the [Cloud Foundry documentation on roles and permissions](https://docs.cloudfoundry.org/concepts/roles.html#roles) [external link] for more information on these roles and others.
+Refer to the [Cloud Foundry documentation on roles and permissions](https://docs.cloudfoundry.org/concepts/roles.html#roles) [external link] for more information.
 
 ### Org manager
 
@@ -95,7 +95,7 @@ For example, a space developer granted access to the testing space only can chan
 
 This role applies within a space.
 
-A space manager can grant user roles within a space using either the command line or the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in). A space manager can also change space properties. A space manager cannot deploy, run or manage apps or services.
+A space manager can grant user roles within a space and change space properties using the command line. A space manager cannot deploy, run or manage apps or services.
 
 For example, a team member needs to change apps in both the testing and production spaces. The org manager grants this team member the space manager role in the testing space, and the space developer role in both the testing and production spaces. That team member can add users to testing but not to production (as a space manager), and can change apps in both spaces (as a space developer).
 
@@ -103,7 +103,7 @@ For example, a team member needs to change apps in both the testing and producti
 
 This role applies within a space.
 
-Space auditors can view apps, users and resources used within a space using either the command line or the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in), but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.
+Space auditors can view apps, users and resources used within a space using the command line, but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.
 
 ## Manage orgs, spaces and user roles
 
@@ -191,7 +191,7 @@ Refer to the [Cloud Foundry reference guide on `cf unset-space-role`](https://cl
 
 ### Invite users to an org
 
-Org managers must add users to their org when they join their team:
+Org managers can add users to their org when they join their team:
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
 1. Select the appropriate org.
@@ -203,7 +203,7 @@ Org managers must add users to their org when they join their team:
 
 When a team member leaves or stops working on a project, your org manager must revoke that team member’s access rights. Your org manager does this by [removing all of that team member’s user roles within the team’s spaces](orgs_spaces_users.html#remove-users-from-a-space).
 
-If the team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must use the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk) to also remove that team member’s user roles from the team’s org:
+If the team member has an org role such as an org manager or billing manager, either the other org manager or the GOV.UK PaaS team must remove that team member’s user role from the team’s org:
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
 1. Select the appropriate org.
@@ -230,12 +230,20 @@ For example, to remove ana@example.com's org manager role from the acme org, eit
 cf unset-org-role ana@example.com acme OrgManager
 ```
 
-If the user still needs access on the PaaS to work on other projects, nothing more needs to be done.
+If the user still needs access on the PaaS to work on other projects, take no further action.
 
 If the user no longer needs access to GOV.UK PaaS, then your org manager should contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to ask us to delete the user account.
 
 Refer to the [Cloud Foundry documentation on creating and managing users with the CLI](https://docs.cloudfoundry.org/adminguide/cli-user-management.html) [external link] for more information.
 
+### View bills
+
+Org managers and billing managers can view current or past bills within an org:
+
+1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
+1. Select the appropriate org.
+1. Select __Billing__.
+1. View your bills. You can filter the bills shown by __Month__, __Space__ or __Services and apps__.
 
 ## Case studies
 
