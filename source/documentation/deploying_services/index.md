@@ -1368,7 +1368,7 @@ Backups are not currently supported for the Elasticsearch service.
 
 ### Further information
 
-Refer to the [Elasticsearch reference documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) for more information.
+Refer to the [Elasticsearch reference documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) [external link] for more information.
 
 ## User-provided services
 
