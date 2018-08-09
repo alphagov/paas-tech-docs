@@ -848,7 +848,7 @@ For more details about how the RDS backup system works, see [Amazon's DB Instanc
 
 ## Redis
 
-Redis is an open source in-memory datastore that can be used as a database cache or message broker.
+Redis is an open source in-memory data store that can be used as a database cache or message broker.
 
 ### Set up a Redis service
 
@@ -1177,7 +1177,6 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 
 This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for more information. We will make you aware of any constraints in its use at that time.
 
-
 ### Set up an Elasticsearch service
 
 To set up an Elasticsearch service:
@@ -1362,6 +1361,10 @@ We recommmend that you use Elasticsearch 6.x plans unless there are compatibilit
 All high availability (`ha`) plans are suitable for production. 
 
 You should check the size of the available plans against your service needs. 
+
+### Elasticsearch backups
+
+Backups are not currently supported for the Elasticsearch service.
 
 ### Further information
 
