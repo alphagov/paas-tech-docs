@@ -848,7 +848,7 @@ For more details about how the RDS backup system works, see [Amazon's DB Instanc
 
 ## Redis
 
-Redis is an open source in-memory datastore that can be used as a database cache or message broker.
+Redis is an open source in-memory data store that can be used as a database cache or message broker.
 
 ### Set up a Redis service
 
@@ -1171,19 +1171,192 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 
 ## Elasticsearch
 
-Elasticsearch is an open source full text RESTful search and analytics engine that allows you to store and search data. This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so [contact the PaaS team](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you want information on how to enable and use this service for your app. We will make you aware of any constraints in its use at that time.
+[Elasticsearch](https://www.elastic.co/) [external link] is an open source full-text RESTful search and analytics engine that allows you to store and search data.
+
+This implementation of Elasticsearch is a request-only private beta trial version of the backing service to gather feedback. This service may not be suitable for everyone. Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for trying the Elasticsearch backing service. 
+
+Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services.html#postgresql) or [MySQL](/deploying_services.html#mysql) would better meet your needs.  
+
+
+### Set up an Elasticsearch service
+
+1. Run the following in the command line to see what plans are available for Elasticsearch:
+
+    ```
+    cf marketplace -s elasticsearch
+    ```
+
+    Here is an example of the output you will see:
+
+    ```
+    service plan   description                                                        free or paid
+    small-ha-5.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.   paid
+    small-ha-6.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.   paid
+    ```
+
+    The following table explains the syntax in this output:
+
+    |Syntax|Meaning|
+    |:---|:---|
+    |`ha`|High availability|
+    |`X.X`|Version number|
+    |`small`|Size of instance|
+
+    You should use the Elasticsearch 6.x plan, unless there are compatibility issues between Elasticsearch 6.x and your app. 
+
+    All high availability (`ha`) plans are suitable for production. 
+
+    You should check the size of the available plans against your service needs.
+    
+2. Run the following to create a service instance:
+
+    ```
+    cf create-service elasticsearch PLAN SERVICE_NAME
+    ```
+
+
+    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+
+    ```
+    cf create-service elasticsearch small-ha-6.x my-es-service
+    ```
+
+    It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
+
+    ```
+    cf service SERVICE_NAME
+    ```
+
+    for example:
+
+    ```
+    cf service my-es-service
+    ```
+
+    When `cf service SERVICE_NAME` returns a `create succeeded` status, you have set up the service instance. An example output could be:
+
+    ```
+    name:            my-es-service
+    service:         elasticsearch
+    tags:
+    plan:            small-ha-6.x
+    description:     Elasticsearch instances provisioned via Aiven
+    documentation:
+    dashboard:
+
+    There are no bound apps for this service.
+
+    Showing status of last operation from service my-es-service...
+
+    status:    create succeeded
+    message:   Last operation succeeded
+    started:   2018-08-02T10:17:30Z
+    updated:   2018-08-02T10:21:35Z
+    ```
+
+### Bind an Elasticsearch service to your apps
+
+To access the cache from the app, you must bind your app to the Elasticsearch service:
+ 
+1. Run the following in the command line:
+
+    ```
+    cf bind-service APP_NAME SERVICE_NAME
+    ```
+
+    where `APP_NAME` is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+
+    ```
+    cf bind-service my-app my-es-service 
+    ```
+
+2. If the app is already running, you should restage it to make sure it connects to Elasticsearch:
+
+    ```
+    cf restage APP_NAME
+    ```
+
+3. To confirm the service is bound to the app, run:
+
+    ```
+    cf service SERVICE_NAME
+    ```
+    
+    and check the `bound apps:` line of the output.
+
+    ```
+    name:            my-es-service
+    service:         elasticsearch
+    bound apps:      my-app
+    tags:
+    plan:            small-ha-6.x
+    description:     Elasticsearch instances provisioned via Aiven
+    documentation:
+    dashboard:
+
+    Showing status of last operation from service my-es-service...
+
+    status:    create succeeded
+    message:   Last operation succeeded
+    started:   2018-08-02T10:17:30Z
+    updated:   2018-08-02T10:21:35Z
+    ```
+
+You can also use the app's `manifest.yml` to bind apps to service instances during app deployment. You can use the same `manifest.yml` to deploy your app to different environments. 
+
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+
+### Changing your Elasticsearch service plan 
+
+Elasticsearch does not currently support changing your service plan.
+
+If this changes, we will announce it in the GOV.UK PaaS announcements email. 
+
+Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any further questions.
+
+### Unbind an Elasticsearch service from your app
+
+You must unbind the Elasticsearch service before you can delete it. Run the following in the command line:
+
+```
+cf unbind-service APP_NAME SERVICE_NAME
+```
+
+where `APP_NAME` is your app's deployed instance name as specified in your manifest or push command, and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+
+```
+cf unbind-service my-app my-es-service
+```
+
+If you unbind your services from your app but do not delete them, the services will persist even after you have deleted your app, and you can re-bind or re-connect to them in future.
+
+### Delete an Elasticsearch service
+
+Once you have unbound the Elasticsearch service from your app, you can delete the service. Run the following in the command line:
+
+```
+cf delete-service SERVICE_NAME
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+
+```
+cf delete-service my-es-service
+```
+
+Enter `yes` when asked for confirmation.
 
 ### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
+You can store data classified up to Official on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
 
-### TLS connection to Elasticsearch
+### Elasticsearch backups
 
-Elasticsearch uses self-signed certificates. In order for your app to verify a TLS connection to this service, the app must use a CA certificate included in a VCAP_SERVICES environment variable.
+Elasticsearch service does not currently support backups.
 
-### Failover process
+### Further information
 
-Visit the [Elasticsearch on Compose documentation](https://help.compose.com/docs/elasticsearch-on-compose#section-high-availability-and-failover-details) [external link] to see information about the availability and failover details for the Elasticsearch service.
+Refer to the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) [external link] for more information.
 
 ## User-provided services
 
