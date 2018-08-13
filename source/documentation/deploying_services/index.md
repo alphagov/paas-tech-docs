@@ -1171,15 +1171,14 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 
 ## Elasticsearch
 
-Elasticsearch is an open-source full text RESTful search and analytics engine that allows you to store and search data. 
+[Elasticsearch](https://www.elastic.co/) [external link] is an open source full-text RESTful search and analytics engine that allows you to store and search data.
 
-Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services.html#postgresql) or [MySQL](/deploying_services.html#mysql) would be more suitable.  
+This implementation of Elasticsearch is a request-only private beta trial version of the backing service to gather feedback. This service may not be suitable for everyone. Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for trying the Elasticsearch backing service. 
 
-This is a private beta trial version of the service that is available on request so that we can get feedback. This service may not be suitable for everyone, so contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for more information. We will make you aware of any constraints in its use at that time.
+Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services.html#postgresql) or [MySQL](/deploying_services.html#mysql) would better meet your needs.  
+
 
 ### Set up an Elasticsearch service
-
-To set up an Elasticsearch service:
 
 1. Run the following in the command line to see what plans are available for Elasticsearch:
 
@@ -1187,7 +1186,7 @@ To set up an Elasticsearch service:
     cf marketplace -s elasticsearch
     ```
 
-    Here is an example of the output you will see (the exact plans will vary):
+    Here is an example of the output you will see:
 
     ```
     service plan   description                                                        free or paid
@@ -1195,7 +1194,7 @@ To set up an Elasticsearch service:
     small-ha-6.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.   paid
     ```
 
-    The syntax in this output is explained in the following table:
+    The following table explains the syntax in this output:
 
     |Syntax|Meaning|
     |:---|:---|
@@ -1203,7 +1202,11 @@ To set up an Elasticsearch service:
     |`X.X`|Version number|
     |`small`|Size of instance|
 
-    You should use the Elasticsearch 6.x plan. Refer to the [Elasticsearch plans](/deploying_services.html#elasticsearch-plans) section of the documentation for more information.   
+    You should use the Elasticsearch 6.x plan, unless there are compatibility issues between Elasticsearch 6.x and your app. 
+
+    All high availability (`ha`) plans are suitable for production. 
+
+    You should check the size of the available plans against your service needs.
     
 2. Run the following to create a service instance:
 
@@ -1230,7 +1233,7 @@ To set up an Elasticsearch service:
     cf service my-es-service
     ```
 
-    When `cf service SERVICE_NAME` returns a `create succeeded` status, you have set up the service instance. Example output:
+    When `cf service SERVICE_NAME` returns a `create succeeded` status, you have set up the service instance. An example output could be:
 
     ```
     name:            my-es-service
@@ -1253,8 +1256,8 @@ To set up an Elasticsearch service:
 
 ### Bind an Elasticsearch service to your apps
 
-You must bind your app to the Elasticsearch service to be able to access the cache from the app.
-
+To access the cache from the app, you must bind your app to the Elasticsearch service:
+ 
 1. Run the following in the command line:
 
     ```
@@ -1267,13 +1270,13 @@ You must bind your app to the Elasticsearch service to be able to access the cac
     cf bind-service my-app my-es-service 
     ```
 
-2. If the app is already running, you should restage the app to make sure it connects:
+2. If the app is already running, you should restage it to make sure it connects to Elasticsearch:
 
     ```
     cf restage APP_NAME
     ```
 
-3. To confirm that the service is bound to the app, run:
+3. To confirm the service is bound to the app, run:
 
     ```
     cf service SERVICE_NAME
@@ -1299,24 +1302,17 @@ You must bind your app to the Elasticsearch service to be able to access the cac
     updated:   2018-08-02T10:21:35Z
     ```
 
-You can also use the app's `manifest.yml` to bind apps to service instances during app deployment. You use the same `manifest.yml` to deploy your app to different environments. 
+You can also use the app's `manifest.yml` to bind apps to service instances during app deployment. You can use the same `manifest.yml` to deploy your app to different environments. 
 
 Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
 
-### Change Elasticsearch service plan 
+### Changing your Elasticsearch service plan 
 
-You cannot currently change your service instance plan.
+Elasticsearch does not currently support changing your service plan.
 
-If you try to change your service instance plan by running `cf update-service`, you will see output similar to the following example:
+If this changes, we will announce it in the GOV.UK PaaS announcements email. 
 
-```
-cf update-service my-es-service -p small-ha-6.x
-Updating service instance my-es-service as admin...
-FAILED
-Server error, status code: 400, error code: 110004, message: The service does not support changing plans.
-```
-
-Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
+Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any further questions.
 
 ### Unbind an Elasticsearch service from your app
 
@@ -1332,11 +1328,11 @@ where `APP_NAME` is your app's deployed instance name as specified in your manif
 cf unbind-service my-app my-es-service
 ```
 
-If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.
+If you unbind your services from your app but do not delete them, the services will persist even after you have deleted your app, and you can re-bind or re-connect to them in future.
 
 ### Delete an Elasticsearch service
 
-Once the Elasticsearch service has been unbound from your app, you can delete the service. Run the following in the command line:
+Once you have unbound the Elasticsearch service from your app, you can delete the service. Run the following in the command line:
 
 ```
 cf delete-service SERVICE_NAME
@@ -1348,27 +1344,19 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance. For
 cf delete-service my-es-service
 ```
 
-Type `yes` when asked for confirmation.
+Enter `yes` when asked for confirmation.
 
 ### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
-
-### Elasticsearch plans
-
-We recommmend that you use Elasticsearch 6.x plans unless there are compatibility issues between Elasticsearch 6.x and your app.
-
-All high availability (`ha`) plans are suitable for production. 
-
-You should check the size of the available plans against your service needs. 
+You can store data classified up to Official on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
 
 ### Elasticsearch backups
 
-Backups are not currently supported for the Elasticsearch service.
+Elasticsearch service does not currently support backups.
 
 ### Further information
 
-Refer to the [Elasticsearch reference documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) [external link] for more information.
+Refer to the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) [external link] for more information.
 
 ## User-provided services
 
