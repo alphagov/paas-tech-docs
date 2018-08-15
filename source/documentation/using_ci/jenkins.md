@@ -9,7 +9,7 @@ Both approaches require you to set up the credentials plugin first.
 
 ### Set up dedicated accounts
 
-CI systems should not use normal user accounts. Find out more about setting [credentials for automated accounts](/using_ci.html#credentials-for-automated-accounts) in PaaS.
+CI systems should not use normal user accounts. Find out more about [configuring your CI tool accounts](/using_ci.html#configure-your-ci-tool-accounts) in PaaS.
 
 ### Setting up the credentials plugin
 
