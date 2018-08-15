@@ -95,15 +95,15 @@ For example, a space developer granted access to the testing space only can chan
 
 This role applies within a space.
 
-A space manager can grant user roles within a space and change space properties using the command line. A space manager cannot deploy, run or manage apps or services.
+A space manager grants user roles within a space and can change space properties using the command line. A space manager cannot deploy, run, or manage apps or services.
 
-For example, a team member needs to change apps in both the testing and production spaces. The org manager grants this team member the space manager role in the testing space, and the space developer role in both the testing and production spaces. That team member can add users to testing but not to production (as a space manager), and can change apps in both spaces (as a space developer).
+For example, a team member needs to change apps in both the testing and production spaces, and manage users in the testing space. The org manager grants this team member the space manager role in the testing space, and the space developer role in both the testing and production spaces. That team member can add users to testing but not to production (as a space manager), and can change apps in both spaces (as a space developer).
 
 ### Space auditor
 
 This role applies within a space.
 
-Space auditors can view apps, users and resources used within a space using the command line, but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.
+Space auditors can view apps, users and resources used within a space using the command line, but cannot edit them. This role is useful for viewing app data without modifying it.
 
 ## Manage orgs, spaces and user roles
 
@@ -121,11 +121,11 @@ cf create-space SPACE -o ORGNAME
 
 where `SPACE` is the name of the space, and `ORGNAME` is the name of the org.
 
-You then need to grant access to any user accounts who should be able to use that space.
+You can then add users to that space.
 
 ### Add users to a space
 
-Org managers can use the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in) to grant a user access to a space by assigning a role to that user:
+After a user has been added to an org, org managers can use the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in) to grant a user access to a space by assigning a role to that user.
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/).
 1. Select the appropriate org.
@@ -153,13 +153,13 @@ For example, to grant ana@example.com the space developer role in the test space
 cf set-space-role ana@example.com acme test SpaceDeveloper
 ```
 
-Refer to the [Cloud Foundry reference guide on `cf set-space-role`](https://cli.cloudfoundry.org/en-US/cf/set-space-role.html) for a complete list of roles.
+Refer to the [Cloud Foundry reference guide on `cf set-space-role`](https://cli.cloudfoundry.org/en-US/cf/set-space-role.html) [external link] for a complete list of roles.
 
 ### Remove users from a space
 
-When a team member leaves or stops working on a project, the org manager must revoke that team member’s access rights.
+When a team member leaves or stops working on a project, the org manager should revoke that team member’s access rights.
 
-The org manager can use the GOV.UK PaaS admin tool to remove all of the team member’s user roles within the team’s spaces:
+The org manager can use the GOV.UK PaaS admin tool to remove all of the team member’s user roles within the team’s spaces.
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/).
 1. Select the appropriate org.
@@ -187,11 +187,11 @@ For example, to remove ana@example.com's space developer role from the sandbox s
 cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
 ```
 
-Refer to the [Cloud Foundry reference guide on `cf unset-space-role`](https://cli.cloudfoundry.org/en-US/cf/unset-space-role.html) for a complete list of roles.
+Refer to the [Cloud Foundry reference guide on `cf unset-space-role`](https://cli.cloudfoundry.org/en-US/cf/unset-space-role.html) [external link] for a complete list of roles.
 
 ### Invite users to an org
 
-Org managers can add users to their org when they join their team:
+Org managers can use the GOV.UK PaaS admin tool to invite users to their org when they join their team.
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
 1. Select the appropriate org.
@@ -201,9 +201,9 @@ Org managers can add users to their org when they join their team:
 
 ### Remove users from an org
 
-When a team member leaves or stops working on a project, your org manager must revoke that team member’s access rights. Your org manager does this by [removing all of that team member’s user roles within the team’s spaces](orgs_spaces_users.html#remove-users-from-a-space).
+When a team member leaves or stops working on a project, their org manager must [remove all of that team member’s user roles from the team’s spaces](orgs_spaces_users.html#remove-users-from-a-space).
 
-If the team member has an org role such as an org manager or billing manager, either the other org manager or the GOV.UK PaaS team must remove that team member’s user role from the team’s org:
+If the leaving team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must also remove that team member’s user role from the team’s org.
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
 1. Select the appropriate org.
@@ -212,7 +212,7 @@ If the team member has an org role such as an org manager or billing manager, ei
 1. Select __Remove user from Organisation__.
 1. To confirm, select __Yes, remove from organisation__.
 
-Alternatively, they can run the following in the command line:
+Alternatively, the other org manager or the GOV.UK PaaS team can run the following in the command line:
 
 ```
 cf unset-org-role USERNAME ORGNAME ROLE
@@ -224,26 +224,26 @@ where:
 - `ORGNAME` is the name of the org
 - `ROLE` is the user role granted to the user of the email address in the `USERNAME` field
 
-For example, to remove ana@example.com's org manager role from the acme org, either the other org manager or the GOV.UK PaaS team would run:
+For example, to remove ana@example.com's org manager role from the acme org, either the other org manager or the GOV.UK PaaS team should run:
 
 ```
 cf unset-org-role ana@example.com acme OrgManager
 ```
 
-If the user still needs access on the PaaS to work on other projects, take no further action.
+If the user still needs access to GOV.UK PaaS to work on other projects, nothing else needs to change.
 
-If the user no longer needs access to GOV.UK PaaS, then your org manager should contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to ask us to delete the user account.
+If the user no longer needs access to GOV.UK PaaS, then your org manager must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to ask us to delete the user account.
 
 Refer to the [Cloud Foundry documentation on creating and managing users with the CLI](https://docs.cloudfoundry.org/adminguide/cli-user-management.html) [external link] for more information.
 
 ### View bills
 
-Org managers and billing managers can view current or past bills within an org:
+[Org managers](/orgs_spaces_users.html#org-manager) and [billing managers](/orgs_spaces_users.html#billing-manager) can use the GOV.UK PaaS admin tool to view current or past bills within an org.
 
 1. Sign into the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk).
 1. Select the appropriate org.
 1. Select __Billing__.
-1. View your bills. You can filter the bills shown by __Month__, __Space__ or __Services and apps__.
+1. View your bills. You can filter the bills shown by __Month__, __Space__, or __Services and apps__.
 
 ## Case studies
 
