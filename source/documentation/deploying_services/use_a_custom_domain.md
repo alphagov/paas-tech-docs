@@ -1,12 +1,22 @@
 ## Set up a custom domain using the cdn-route service
 
-This section explains how to configure a custom domain name for your application by using our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [cache](/deploying_services.html#caching) requests to your app.
+This section explains how to configure a custom domain name for your app by using our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [cache](/deploying_services.html#caching) requests to your app.
 
 Using the `cdn-route` service will maximise the support you will receive from GOV.UK PaaS.
 
-### Setting up a custom domain
+You must configure the `cdn-route` service to use a subdomain. If you configure the service to use an apex domain, the service creation may not succeed, and your users will not be able to connect to your app via the apex domain. For example, with `www.example.com`:
 
->Before you begin, note that once you create a CDN service instance you can't update or delete it until it has been successfully configured. This means that if you make a mistake that prevents it from being successfully configured, you'll need to ask support to manually delete the service instance.
+- the subdomain is `www.example.com`
+- the apex domain is `example.com`
+
+In another example, if the `example` subdomain of `service.gov.uk` is delegated for your app to use:
+
+- a subdomain is `www.example.service.gov.uk`
+- the apex domain is `example.service.gov.uk`
+
+Once you create a CDN service instance, you cannot update or delete it until it has been successfully configured. This means that if you make a mistake that prevents it from being successfully configured, you'll need to ask support to manually delete the service instance.
+
+### Setting up a custom domain
 
 1. Target the space your application is running in:
 
