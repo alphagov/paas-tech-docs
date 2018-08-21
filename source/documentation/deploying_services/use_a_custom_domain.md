@@ -20,17 +20,17 @@ Using the `cdn-route` service will maximise the support you will receive from GO
     cf create-domain ORGNAME example.com
     ```
 
-3. Map the route to your application:
+3. Map a subdomain route to your application:
 
     ```bash
-    cf map-route APPNAME example.com
+    cf map-route APPNAME example.com --hostname www
     ```
 
-4. Create an instance of the `cdn-route` service by running the following command, replacing `my-cdn-route` with the name of your service instance, and `example.com` with your domain:
+4. Create an instance of the `cdn-route` service by running the following command, replacing `my-cdn-route` with the name of your service instance, and `www.example.com` with your domain:
 
     ```bash
     cf create-service cdn-route cdn-route my-cdn-route \
-        -c '{"domain": "example.com"}'
+        -c '{"domain": "www.example.com"}'
     ```
 
     >This command includes `cdn-route` twice because `cdn-route` is the name of the service **and** the name of the service plan.
@@ -46,18 +46,19 @@ Using the `cdn-route` service will maximise the support you will receive from GO
     ```
     Last Operation
     Status: create in progress
-    Message: Provisioning in progress [example.com => origin-my-paas-app.cloudapps.digital]; CNAME or ALIAS domain example.com to d3nrs0916m1mk2.cloudfront.net or create TXT record(s):
-    name: _acme-challenge.example.com., value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
+    Message: Provisioning in progress [www.example.com => origin-my-paas-app.cloudapps.digital];
+    CNAME or ALIAS domain www.example.com to d3nrs0916m1mk2.cloudfront.net or create TXT record(s):
+    name: _acme-challenge.www.example.com., value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
 
     ```
 
 6. Create the TXT record using the DNS information output. This record will be used to validate your domain, and issue the TLS certificate used to encrypt traffic.
 
-    Using this example, you will create a `TXT` record for your domain named `_acme-challenge.example.com.` with a value of `ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E`.
+    Using this example, you would create a `TXT` record for your domain named `_acme-challenge.www.example.com.` with a value of `ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E`.
 
 7. Create the CNAME record using the DNS information output. This will direct traffic from your domain to the service.
 
-    Using this example, you will create a `CNAME` record in your DNS server pointing `example.com` to `d3nrs0916m1mk2.cloudfront.net.`
+    Using this example, you would create a `CNAME` record in your DNS server pointing `www.example.com` to `d3nrs0916m1mk2.cloudfront.net.`
 
 You have now completed the custom domain setup process. Please note that it should take approximately one hour for domain setup to finish. If it has not finished after two hours, please refer to the [troubleshooting](/deploying_services.html#troubleshooting-custom-domains) section.
 
@@ -68,11 +69,11 @@ You have now completed the custom domain setup process. Please note that it shou
 
 #### Multiple domains
 
-If you have more than one domain, you can pass a comma-delimited list to the `domain` parameter. For example, to update your CDN instance to map both https://example.com and https://www.example.com you can run:
+If you have more than one domain, you can pass a comma-delimited list to the `domain` parameter. For example, to update your CDN instance to map both `https://www.example.com` and `https://www.example.net` you can run:
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "example.com,www.example.com"}'
+    -c '{"domain": "www.example.com,www.example.net"}'
 ```
 
 The maximum number of domains that can be associated with a single cdn-route service instance is 100.
@@ -83,7 +84,7 @@ By default cookies are forwarded to your application. You can disable this by se
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "example.com", "cookies": false}'
+    -c '{"domain": "www.example.com", "cookies": false}'
 ```
 See the [More about how the CDN works](/deploying_services.html#more-about-how-custom-domains-work) section for details.
 
@@ -93,14 +94,14 @@ By default, our service broker configures the CDN to only forward the `Host` hea
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "example.com", "headers": ["Accept", "Authorization"]}'
+    -c '{"domain": "www.example.com", "headers": ["Accept", "Authorization"]}'
 ```
 
 You can supply up to nine headers. If you need to allow more headers you will have to forward all headers:
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "example.com", "headers": ["*"]}'
+    -c '{"domain": "www.example.com", "headers": ["*"]}'
 ```
 
 Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](/deploying_services.html#more-about-how-custom-domains-work) section for details.
