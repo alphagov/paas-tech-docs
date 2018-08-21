@@ -62,14 +62,6 @@ filter {
     # replace @timestamp field with the one from syslog
     date { match => [ "syslog_timestamp", "ISO8601" ] }
 
-    if !("_syslogparsefailure" in [tags]) {
-        # if we successfully parsed syslog, replace the message and source_host fields
-        mutate {
-            replace => [ "source_host", "%{syslog_host}" ]
-            replace => [ "message", "%{syslog_msg}" ]
-        }
-    }
-
     # Cloud Foundry passes the app name, space and organisation in the syslog_host
     # Filtering them into separate fields makes it easier to query multiple apps in a single Kibana instance
     dissect {
@@ -113,9 +105,11 @@ filter {
         }
     }
 
-    if [syslog_msg] == [message] {
+    if !("_syslogparsefailure" in [tags]) {
+        # if we successfully parsed syslog, replace the message and source_host fields
         mutate {
-            remove_field => ["syslog_msg"]
+            rename => [ "syslog_host", "source_host" ]
+            rename => [ "syslog_msg", "message" ]
         }
     }
 }
