@@ -1,20 +1,17 @@
 ## Set up a custom domain using the cdn-route service
 
-This section explains how to configure a custom domain name for your app by using our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [cache](/deploying_services.html#caching) requests to your app.
+This section explains how to configure a custom domain name for your app by using the GOV.UK PaaS `cdn-route` service to set up a content distribution network (CDN) that will route and [cache](/deploying_services.html#caching) requests to your app.
 
-Using the `cdn-route` service will maximise the support you will receive from GOV.UK PaaS.
+By using the `cdn-route` service, the GOV.UK PaaS team will be able to provide faster and more effective technical support if you have any issues.
 
-You must configure the `cdn-route` service to use a subdomain. If you configure the service to use an apex domain, the service creation may not succeed, and your users will not be able to connect to your app via the apex domain. For example, with `www.example.com`:
+You must configure the `cdn-route` service to use a subdomain. If you configure the service to use an apex domain, the service creation may not succeed, which means your users will not be able to connect to your app via the apex domain. For example:
 
-- the subdomain is `www.example.com`
-- the apex domain is `example.com`
+|Apex domain|Subdomain|
+|:---|:---|
+|`example.com`|`www.example.com`|
+|`example.service.gov.uk`|`www.example.service.gov.uk`|
 
-In another example, if the `example` subdomain of `service.gov.uk` is delegated for your app to use:
-
-- a subdomain is `www.example.service.gov.uk`
-- the apex domain is `example.service.gov.uk`
-
-Once you create a CDN service instance, you cannot update or delete it until it has been successfully configured. This means that if you make a mistake that prevents it from being successfully configured, you'll need to ask support to manually delete the service instance.
+Once you create a CDN service instance, you cannot update or delete it until it is configured. If you make a mistake that breaks the configuration, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to delete the service instance.
 
 ### Setting up a custom domain
 
