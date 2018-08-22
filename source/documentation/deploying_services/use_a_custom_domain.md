@@ -18,7 +18,7 @@ Once you create a CDN service instance, you cannot update or delete it until it 
 
 ### Setting up a custom domain
 
-1. Target the space your application is running in:
+1. Target the space your app is running in:
 
     ```bash
     cf target -o ORGNAME -s SPACENAME
@@ -30,7 +30,7 @@ Once you create a CDN service instance, you cannot update or delete it until it 
     cf create-domain ORGNAME example.com
     ```
 
-3. Map a subdomain route to your application:
+3. Map a subdomain route to your app:
 
     ```bash
     cf map-route APPNAME example.com --hostname www
@@ -72,7 +72,7 @@ Once you create a CDN service instance, you cannot update or delete it until it 
 
 You have now completed the custom domain setup process. Please note that it should take approximately one hour for domain setup to finish. If it has not finished after two hours, please refer to the [troubleshooting](/deploying_services.html#troubleshooting-custom-domains) section.
 
->Your application is only available over HTTPS.
+>Your app is only available over HTTPS.
 
 
 ### Configuring your custom domain
@@ -90,7 +90,7 @@ The maximum number of domains that can be associated with a single cdn-route ser
 
 #### Disabling forwarding cookies
 
-By default cookies are forwarded to your application. You can disable this by setting the `cookies` parameter to `false`:
+By default cookies are forwarded to your app. You can disable this by setting the `cookies` parameter to `false`:
 
 ```bash
 cf update-service my-cdn-route \
@@ -100,7 +100,7 @@ See the [More about how the CDN works](/deploying_services.html#more-about-how-c
 
 #### Forwarding headers
 
-By default, our service broker configures the CDN to only forward the `Host` header to your application. You can whitelist extra headers; in this example you can whitelist the `Accept` and `Authorization` headers:
+By default, our service broker configures the CDN to only forward the `Host` header to your app. You can whitelist extra headers; in this example you can whitelist the `Accept` and `Authorization` headers:
 
 ```bash
 cf update-service my-cdn-route \
@@ -156,19 +156,19 @@ This happens because you can't do anything to a service instance while it's in a
 
 #### Overview
 
-Custom domains are configured by our cdn-route service which uses a CloudFront distribution to proxy and/or cache requests to your application.
+Custom domains are configured by our cdn-route service which uses a CloudFront distribution to proxy and/or cache requests to your app.
 
 #### Caching
 
-CloudFront uses your application's `Cache-Control` or `Expires` HTTP headers to determine [how long to cache content](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html). If your application does not provide these headers, CloudFront will use a default timeout of **24 hours**. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
+CloudFront uses your app's `Cache-Control` or `Expires` HTTP headers to determine [how long to cache content](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html). If your app does not provide these headers, CloudFront will use a default timeout of **24 hours**. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
 
 While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV.UK PaaS support](https://www.cloud.service.gov.uk/support) can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).
 
-You can configure CloudFront to forward headers to your application, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) [external link] for more detail. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
+You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) [external link] for more detail. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
 
 ### Authentication
 
-Cookie headers are forwarded to your application by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services.html#forwarding-headers).
+Cookie headers are forwarded to your app by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services.html#forwarding-headers).
 
 ### Further information
 
