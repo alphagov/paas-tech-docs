@@ -261,7 +261,9 @@ Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mai
 
 ### Upgrade PostgreSQL service plan
 
-You can upgrade your service plan (for example, from free to paid high availability) by running `cf update-service` in the command line:
+#### Same encryption type
+
+You can upgrade your service plan if the new plan has the same encryption type as your current plan, for example from free encrypted to paid high availability encrypted. Run the following in the command line:
 
 ```
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
@@ -273,9 +275,20 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance, and
 cf update-service my-pg-service -p small-ha-9.5
 ```
 
-The plan upgrade will begin immediately and will usually be completed within about an hour. You can check the status of the change by running the `cf services` command.
+The plan upgrade will begin immediately and will complete within about an hour. You can check the status of the change by running the `cf services` command.
 
 You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
+
+#### Different encryption type
+
+You cannot upgrade your service plan using the `cf update-service` command if the new plan has a different encryption type to the current plan, for example from free unencrypted to paid high availability encrypted.
+
+To upgrade, you must set up a new service and move your app data over.
+
+1. [Set up a new PostgreSQL service](/deploying_services.html#set-up-a-postgresql-service) with a new plan that is the same encryption type as your current plan.
+1. Move your app data from the current service to the new service by following the [import and export bulk data documentation](/deploying_services.html#paas-to-paas).
+
+#### Downgrade PostgreSQL service plan
 
 Downgrading service plans is not currently supported.
 
@@ -384,6 +397,8 @@ cf update-service my-pg-service -p small-ha-9.5 -c '{"apply_at_maintenance_windo
 ```
 
 Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
+
+You can only migrate your service if the new plan has the [same encryption type](#same-encryption-type) as your current plan.
 
 #### PostgreSQL service backup
 
@@ -708,7 +723,9 @@ Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mai
 
 ### Upgrade MySQL service plan
 
-You can upgrade your service plan (for example, from free to paid high availability) by running `cf update-service` in the command line:
+#### Same encryption type
+
+You can upgrade your service plan if the new plan has the same encryption type as your current plan, for example from free encrypted to paid high availability encrypted. Run the following in the command line:
 
 ```
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
@@ -720,9 +737,20 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance, and
 cf update-service my-ms-service -p medium-ha-5.7
 ```
 
-The plan upgrade will begin immediately and will usually be completed within about an hour. You can check the status of the change by running the `cf services` command.
+The plan upgrade will begin immediately and will complete within about an hour. You can check the status of the change by running the `cf services` command.
 
 You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migration-mysql) to happen during a maintenance window to minimise service interruption.
+
+#### Different encryption type
+
+You cannot upgrade your service plan using the `cf update-service` command if the new plan has a different encryption type to the current plan, for example from free unencrypted to paid high availability encrypted.
+
+To upgrade, you must set up a new service and move your app data over.
+
+1. [Set up a new MySQL service](/deploying_services.html#set-up-a-mysql-service) with a new plan that is the same encryption type as your current plan.
+1. Move your app data from the current service to the new service by following the [import and export bulk data documentation](/deploying_services.html#import-and-export-bulk-data-to-and-from-a-mysql-database-paas-to-paas).
+
+#### Downgrade MySQL service plan
 
 Downgrading service plans is not currently supported.
 
@@ -831,6 +859,8 @@ cf update-service my-ms-service -p medium-5.7 -c '{"apply_at_maintenance_window"
 ```
 
 Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
+
+You can only migrate your service if the new plan has the [same encryption type](#upgrade-mysql-service-plan-same-encryption-type) as your current plan.
 
 #### MySQL service backup
 
@@ -1173,7 +1203,7 @@ Refer to the [Amazon ElastiCache for Redis page](https://aws.amazon.com/elastica
 
 [Elasticsearch](https://www.elastic.co/) [external link] is an open source full-text RESTful search and analytics engine that allows you to store and search data.
 
-This implementation of Elasticsearch is a request-only private beta trial version of the backing service to gather feedback. This service may not be suitable for everyone. Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for trying the Elasticsearch backing service. 
+This implementation of Elasticsearch is a request-only private beta trial version of the backing service to gather feedback. This service may not be suitable for everyone. Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for trying the Elasticsearch backing service.
 
 Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services.html#postgresql) or [MySQL](/deploying_services.html#mysql) would better meet your needs.  
 
@@ -1202,12 +1232,12 @@ Before using Elasticsearch as your primary data store, you should assess if an [
     |`X.X`|Version number|
     |`small`|Size of instance|
 
-    You should use the Elasticsearch 6.x plan, unless there are compatibility issues between Elasticsearch 6.x and your app. 
+    You should use the Elasticsearch 6.x plan, unless there are compatibility issues between Elasticsearch 6.x and your app.
 
-    All high availability (`ha`) plans are suitable for production. 
+    All high availability (`ha`) plans are suitable for production.
 
     You should check the size of the available plans against your service needs.
-    
+
 2. Run the following to create a service instance:
 
     ```
@@ -1257,7 +1287,7 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 ### Bind an Elasticsearch service to your apps
 
 To access the cache from the app, you must bind your app to the Elasticsearch service:
- 
+
 1. Run the following in the command line:
 
     ```
@@ -1267,7 +1297,7 @@ To access the cache from the app, you must bind your app to the Elasticsearch se
     where `APP_NAME` is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf bind-service my-app my-es-service 
+    cf bind-service my-app my-es-service
     ```
 
 2. If the app is already running, you should restage it to make sure it connects to Elasticsearch:
@@ -1281,7 +1311,7 @@ To access the cache from the app, you must bind your app to the Elasticsearch se
     ```
     cf service SERVICE_NAME
     ```
-    
+
     and check the `bound apps:` line of the output.
 
     ```
@@ -1302,15 +1332,15 @@ To access the cache from the app, you must bind your app to the Elasticsearch se
     updated:   2018-08-02T10:21:35Z
     ```
 
-You can also use the app's `manifest.yml` to bind apps to service instances during app deployment. You can use the same `manifest.yml` to deploy your app to different environments. 
+You can also use the app's `manifest.yml` to bind apps to service instances during app deployment. You can use the same `manifest.yml` to deploy your app to different environments.
 
 Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
 
-### Changing your Elasticsearch service plan 
+### Changing your Elasticsearch service plan
 
 Elasticsearch does not currently support changing your service plan.
 
-If this changes, we will announce it in the GOV.UK PaaS announcements email. 
+If this changes, we will announce it in the GOV.UK PaaS announcements email.
 
 Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any further questions.
 
