@@ -285,7 +285,7 @@ You cannot upgrade your service plan using the `cf update-service` command if th
 
 To upgrade, you must set up a new service and move your app data over.
 
-1. [Set up a new PostgreSQL service](/deploying_services.html#set-up-a-postgresql-service) with a new plan that is the same encryption type as your current plan.
+1. [Set up a new PostgreSQL service](/deploying_services.html#set-up-a-postgresql-service) with a new plan that is a encryption type to your current plan.
 1. Move your app data from the current service to the new service by following the [import and export bulk data documentation](/deploying_services.html#paas-to-paas).
 
 #### Downgrade PostgreSQL service plan
@@ -747,7 +747,7 @@ You cannot upgrade your service plan using the `cf update-service` command if th
 
 To upgrade, you must set up a new service and move your app data over.
 
-1. [Set up a new MySQL service](/deploying_services.html#set-up-a-mysql-service) with a new plan that is the same encryption type as your current plan.
+1. [Set up a new MySQL service](/deploying_services.html#set-up-a-mysql-service) with a new plan that is a different encryption type to your current plan.
 1. Move your app data from the current service to the new service by following the [import and export bulk data documentation](/deploying_services.html#import-and-export-bulk-data-to-and-from-a-mysql-database-paas-to-paas).
 
 #### Downgrade MySQL service plan
