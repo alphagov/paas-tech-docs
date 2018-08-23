@@ -1,14 +1,21 @@
 ## Set up a custom domain using the cdn-route service
 
-This section explains how to configure a custom domain name for your application by using our `cdn-route` service to set up a Content Distribution Network (CDN) that will route and [cache](/deploying_services.html#caching) requests to your app.
+This section explains how to configure a custom domain name for your app by using the GOV.UK PaaS `cdn-route` service to set up a content distribution network (CDN) that will route and [cache](/deploying_services.html#caching) requests to your app.
 
-Using the `cdn-route` service will maximise the support you will receive from GOV.UK PaaS.
+By using the `cdn-route` service, the GOV.UK PaaS team will be able to provide faster and more effective technical support if you have any issues.
+
+You must configure the `cdn-route` service to use a subdomain. If you configure the service to use an apex domain, the service creation may not succeed, which means your users will not be able to connect to your app via the apex domain. For example:
+
+|Apex domain|Subdomain|
+|:---|:---|
+|`example.com`|`www.example.com`|
+|`example.service.gov.uk`|`www.example.service.gov.uk`|
+
+Once you create a CDN service instance, you cannot update or delete it until it is configured. If you make a mistake that breaks the configuration, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to delete the service instance.
 
 ### Setting up a custom domain
 
->Before you begin, note that once you create a CDN service instance you can't update or delete it until it has been successfully configured. This means that if you make a mistake that prevents it from being successfully configured, you'll need to ask support to manually delete the service instance.
-
-1. Target the space your application is running in:
+1. Target the space your app is running in:
 
     ```bash
     cf target -o ORGNAME -s SPACENAME
@@ -20,17 +27,17 @@ Using the `cdn-route` service will maximise the support you will receive from GO
     cf create-domain ORGNAME example.com
     ```
 
-3. Map the route to your application:
+3. Map a subdomain route to your app:
 
     ```bash
-    cf map-route APPNAME example.com
+    cf map-route APPNAME example.com --hostname www
     ```
 
-4. Create an instance of the `cdn-route` service by running the following command, replacing `my-cdn-route` with the name of your service instance, and `example.com` with your domain:
+4. Create an instance of the `cdn-route` service by running the following command, replacing `my-cdn-route` with the name of your service instance, and `www.example.com` with your domain:
 
     ```bash
     cf create-service cdn-route cdn-route my-cdn-route \
-        -c '{"domain": "example.com"}'
+        -c '{"domain": "www.example.com"}'
     ```
 
     >This command includes `cdn-route` twice because `cdn-route` is the name of the service **and** the name of the service plan.
@@ -46,61 +53,62 @@ Using the `cdn-route` service will maximise the support you will receive from GO
     ```
     Last Operation
     Status: create in progress
-    Message: Provisioning in progress [example.com => origin-my-paas-app.cloudapps.digital]; CNAME or ALIAS domain example.com to d3nrs0916m1mk2.cloudfront.net or create TXT record(s):
-    name: _acme-challenge.example.com., value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
+    Message: Provisioning in progress [www.example.com => origin-my-paas-app.cloudapps.digital];
+    CNAME or ALIAS domain www.example.com to d3nrs0916m1mk2.cloudfront.net or create TXT record(s):
+    name: _acme-challenge.www.example.com., value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
 
     ```
 
 6. Create the TXT record using the DNS information output. This record will be used to validate your domain, and issue the TLS certificate used to encrypt traffic.
 
-    Using this example, you will create a `TXT` record for your domain named `_acme-challenge.example.com.` with a value of `ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E`.
+    Using this example, you would create a `TXT` record for your domain named `_acme-challenge.www.example.com.` with a value of `ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E`.
 
 7. Create the CNAME record using the DNS information output. This will direct traffic from your domain to the service.
 
-    Using this example, you will create a `CNAME` record in your DNS server pointing `example.com` to `d3nrs0916m1mk2.cloudfront.net.`
+    Using this example, you would create a `CNAME` record in your DNS server pointing `www.example.com` to `d3nrs0916m1mk2.cloudfront.net.`
 
 You have now completed the custom domain setup process. Please note that it should take approximately one hour for domain setup to finish. If it has not finished after two hours, please refer to the [troubleshooting](/deploying_services.html#troubleshooting-custom-domains) section.
 
->Your application is only available over HTTPS.
+>Your app is only available over HTTPS.
 
 
 ### Configuring your custom domain
 
 #### Multiple domains
 
-If you have more than one domain, you can pass a comma-delimited list to the `domain` parameter. For example, to update your CDN instance to map both https://example.com and https://www.example.com you can run:
+If you have more than one domain, you can pass a comma-delimited list to the `domain` parameter. For example, to update your CDN instance to map both `https://www.example.com` and `https://www.example.net` you can run:
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "example.com,www.example.com"}'
+    -c '{"domain": "www.example.com,www.example.net"}'
 ```
 
 The maximum number of domains that can be associated with a single cdn-route service instance is 100.
 
 #### Disabling forwarding cookies
 
-By default cookies are forwarded to your application. You can disable this by setting the `cookies` parameter to `false`:
+By default cookies are forwarded to your app. You can disable this by setting the `cookies` parameter to `false`:
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "example.com", "cookies": false}'
+    -c '{"domain": "www.example.com", "cookies": false}'
 ```
 See the [More about how the CDN works](/deploying_services.html#more-about-how-custom-domains-work) section for details.
 
 #### Forwarding headers
 
-By default, our service broker configures the CDN to only forward the `Host` header to your application. You can whitelist extra headers; in this example you can whitelist the `Accept` and `Authorization` headers:
+By default, our service broker configures the CDN to only forward the `Host` header to your app. You can whitelist extra headers; in this example you can whitelist the `Accept` and `Authorization` headers:
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "example.com", "headers": ["Accept", "Authorization"]}'
+    -c '{"domain": "www.example.com", "headers": ["Accept", "Authorization"]}'
 ```
 
 You can supply up to nine headers. If you need to allow more headers you will have to forward all headers:
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "example.com", "headers": ["*"]}'
+    -c '{"domain": "www.example.com", "headers": ["*"]}'
 ```
 
 Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](/deploying_services.html#more-about-how-custom-domains-work) section for details.
@@ -145,19 +153,19 @@ This happens because you can't do anything to a service instance while it's in a
 
 #### Overview
 
-Custom domains are configured by our cdn-route service which uses a CloudFront distribution to proxy and/or cache requests to your application.
+Custom domains are configured by our cdn-route service which uses a CloudFront distribution to proxy and/or cache requests to your app.
 
 #### Caching
 
-CloudFront uses your application's `Cache-Control` or `Expires` HTTP headers to determine [how long to cache content](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html). If your application does not provide these headers, CloudFront will use a default timeout of **24 hours**. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
+CloudFront uses your app's `Cache-Control` or `Expires` HTTP headers to determine [how long to cache content](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html). If your app does not provide these headers, CloudFront will use a default timeout of **24 hours**. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
 
 While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV.UK PaaS support](https://www.cloud.service.gov.uk/support) can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).
 
-You can configure CloudFront to forward headers to your application, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) [external link] for more detail. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
+You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) [external link] for more detail. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
 
 ### Authentication
 
-Cookie headers are forwarded to your application by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services.html#forwarding-headers).
+Cookie headers are forwarded to your app by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services.html#forwarding-headers).
 
 ### Further information
 

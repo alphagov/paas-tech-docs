@@ -33,17 +33,17 @@ There are many different CDNs available. Contact us at [gov-uk-paas-support@digi
     cf create-domain ORGNAME example.com
     ```
 
-3. Map the route to your application:
+3. Map the subdomain route to your application:
 
     ```bash
-    cf map-route APPNAME example.com
+    cf map-route APPNAME example.com --hostname www
     ```
 
 #### Configure your CDN
 
-Configure your CDN to forward HTTPS traffic to the PaaS at the `cloudapps.digital` domain, providing a HTTP `Host` header for your custom domain (for example `Host: example.com`).
+Configure your CDN to forward HTTPS traffic to the PaaS at the `cloudapps.digital` domain, providing a HTTP `Host` header for your custom domain (for example `Host: www.example.com`).
 
-When your CDN connects to the `cloudapps.digital` server, the server will present a TLS certificate  valid only for `cloudapps.digital` and `*.cloudapps.digital`. Your CDN must accept this certificate.
+When your CDN connects to the `cloudapps.digital` server, the server will present a TLS certificate valid only for `cloudapps.digital` and `*.cloudapps.digital`. Your CDN must accept this certificate.
 
 ### Amend HTTP request headers
 
@@ -61,16 +61,16 @@ When your CDN connects to the `cloudapps.digital` server, the server will presen
 
 2. Configure your CDN to amend the HTTP requests when it forwards those requests by:
 
-  - changing the HTTPS request `Host` header from your custom domain to your app’s domain (for example, change `Host: example.com` to `Host: YOURAPP.cloudapps.digital`)
+  - changing the HTTPS request `Host` header from your custom domain to your app’s domain (for example, change `Host: www.example.com` to `Host: YOURAPP.cloudapps.digital`)
 
-  - adding a `X-Forwarded-Host` HTTP header containing your custom domain to the HTTPS request (for example `X-Forwarded-Host: example.com`)
+  - adding a `X-Forwarded-Host` HTTP header containing your custom domain to the HTTPS request (for example `X-Forwarded-Host: www.example.com`)
 
 
 In the above example, the HTTP request header will change from:
 
 ```
 GET / HTTP/1.1
-Host: example.com
+Host: www.example.com
 ```
 
 to:
@@ -78,7 +78,7 @@ to:
 ```
 GET / HTTP/1.1
 Host: YOURAPP.cloudapps.digital
-X-Forwarded-Host: example.com
+X-Forwarded-Host: www.example.com
 ```
 
 #### Configure your app
