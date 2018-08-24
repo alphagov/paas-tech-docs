@@ -263,7 +263,7 @@ Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mai
 
 #### Same encryption type
 
-You can upgrade your service plan if the new plan has the same encryption type as your current plan, for example from free encrypted to paid high availability encrypted. Run the following in the command line:
+You can upgrade your service plan using the `cf update-service` command if the new plan has the same encryption type as your current plan. Run the following in the command line:
 
 ```
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
@@ -281,7 +281,7 @@ You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migrat
 
 #### Different encryption type
 
-You cannot upgrade your service plan using the `cf update-service` command if the new plan has a different encryption type to the current plan, for example from free unencrypted to paid high availability encrypted.
+You cannot upgrade your service plan using the `cf update-service` command if the new plan has a different encryption type to the current plan.
 
 To upgrade, you must set up a new service and move your app data over.
 
@@ -725,7 +725,7 @@ Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mai
 
 #### Same encryption type
 
-You can upgrade your service plan if the new plan has the same encryption type as your current plan, for example from free encrypted to paid high availability encrypted. Run the following in the command line:
+You can upgrade your service plan using the `cf update-service` command if the new plan has the same encryption type as your current plan. Run the following in the command line:
 
 ```
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
@@ -743,7 +743,7 @@ You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migrat
 
 #### Different encryption type
 
-You cannot upgrade your service plan using the `cf update-service` command if the new plan has a different encryption type to the current plan, for example from free unencrypted to paid high availability encrypted.
+You cannot upgrade your service plan using the `cf update-service` command if the new plan has a different encryption type to the current plan.
 
 To upgrade, you must set up a new service and move your app data over.
 
