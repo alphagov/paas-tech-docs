@@ -263,7 +263,7 @@ Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mai
 
 #### Same encryption type
 
-You can upgrade your service plan using the `cf update-service` command if the new plan has the same encryption type as your current plan. Run the following in the command line:
+If your new plan uses the same encryption type as your current plan, you can upgrade your plan using the `cf update-service` command. Run the following in the command line:
 
 ```
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
@@ -275,22 +275,22 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance, and
 cf update-service my-pg-service -p small-ha-9.5
 ```
 
-The plan upgrade will begin immediately and will complete within about an hour. You can check the status of the change by running the `cf services` command.
+The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
 
 You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
 
 #### Different encryption type
 
-You cannot upgrade your service plan using the `cf update-service` command if the new plan has a different encryption type to the current plan.
+You cannot upgrade your service plan using the `cf update-service` command if the new plan uses a different encryption type to your current plan.
 
-To upgrade, you must set up a new service and move your app data over.
+To upgrade, you must set up a new service and migrate your app data.
 
 1. [Set up a new PostgreSQL service](/deploying_services.html#set-up-a-postgresql-service) with a new plan that has a different encryption type to your current plan.
 1. Move your app data from the current service to the new service by following the [import and export bulk data documentation](/deploying_services.html#paas-to-paas).
 
 #### Downgrade PostgreSQL service plan
 
-Downgrading service plans is not currently supported.
+You cannot currently downgrade your service plan.
 
 ### Unbind a PostgreSQL service from your app
 
@@ -725,7 +725,7 @@ Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mai
 
 #### Same encryption type
 
-You can upgrade your service plan using the `cf update-service` command if the new plan has the same encryption type as your current plan. Run the following in the command line:
+If your new plan uses the same encryption type as your current plan, you can upgrade your plan using the `cf update-service` command. Run the following in the command line:
 
 ```
 cf update-service SERVICE_NAME -p NEW_PLAN_NAME
@@ -737,22 +737,22 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance, and
 cf update-service my-ms-service -p medium-ha-5.7
 ```
 
-The plan upgrade will begin immediately and will complete within about an hour. You can check the status of the change by running the `cf services` command.
+The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
 
 You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migration-mysql) to happen during a maintenance window to minimise service interruption.
 
 #### Different encryption type
 
-You cannot upgrade your service plan using the `cf update-service` command if the new plan has a different encryption type to the current plan.
+You cannot upgrade your service plan using the `cf update-service` command if the new plan uses a different encryption type to your current plan.
 
-To upgrade, you must set up a new service and move your app data over.
+To upgrade, you must set up a new service and migrate your app data.
 
-1. [Set up a new MySQL service](/deploying_services.html#set-up-a-mysql-service) with a new plan that is a different encryption type to your current plan.
+1. [Set up a new MySQL service](/deploying_services.html#set-up-a-mysql-service) with a new plan that has a different encryption type to your current plan.
 1. Move your app data from the current service to the new service by following the [import and export bulk data documentation](/deploying_services.html#import-and-export-bulk-data-to-and-from-a-mysql-database-paas-to-paas).
 
 #### Downgrade MySQL service plan
 
-Downgrading service plans is not currently supported.
+You cannot currently downgrade your service plan.
 
 ### Unbind a MySQL service from your app
 
