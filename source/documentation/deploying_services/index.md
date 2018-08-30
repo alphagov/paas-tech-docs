@@ -97,50 +97,41 @@ To set up a PostgreSQL service:
 
 You must bind your app to the PostgreSQL service to be able to access the database from the app.
 
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service when you next deploy your app. For example:
+
+    ```
+    --
+    applications:
+    - name: my-app
+      services:
+      - my-pg-service
+    ```
+
+1. Deploy your app as normal.
+
+This binds your app to a service instance called `my-pg-service`.
+
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+
+#### Use the cf bind-service command
+
+If you are not deploying your app with a `manifest.yml` file, you can manually bind your service instance to your app.
+
 1. Run the following code in the command line:
 
     ```
-    cf bind-service APPLICATION SERVICE_NAME
+    cf bind-service APP_NAME SERVICE_NAME
     ```
 
-    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
 
     ```
     cf bind-service my-app my-pg-service
     ```
 
-1. If the app is already running, you should restage the app to make sure it connects:
+1. Deploy your app as normal.
 
-    ```
-    cf restage APPLICATION
-    ```
-
-1. To confirm that the service is bound to the app, run:
-
-    ```
-    cf service SERVICE_NAME
-    ```
-
-    and check the `Bound apps:` line of the output.
-
-    ```
-    Service instance: my-pg-service
-    Service: postgres
-    Bound apps: my-app
-    Tags:
-    Plan: small-9.5
-    Description: AWS RDS PostgreSQL service
-    Documentation url: https://aws.amazon.com/documentation/rds/
-    Dashboard:
-
-    Last Operation
-    Status: create succeeded
-    Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
-    Started: 2016-08-23T15:34:41Z
-    Updated: 2016-08-23T15:42:02Z
-    ```
-
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+1. Run `cf env APP_NAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
 
     ```
     {
@@ -178,7 +169,7 @@ You must bind your app to the PostgreSQL service to be able to access the databa
 
     GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
+    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APP_NAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a PostgreSQL service from your local machine
 
@@ -300,7 +291,7 @@ You must unbind the PostgreSQL service before you can delete it. To unbind the P
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-pg-service
@@ -567,7 +558,7 @@ You must bind your app to the MySQL service to be able to access the database fr
     cf bind-service APPLICATION SERVICE_NAME
     ```
 
-    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
     cf bind-service my-app my-ms-service
@@ -762,7 +753,7 @@ You must unbind the MySQL service before you can delete it. To unbind the MySQL 
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-ms-service
@@ -961,7 +952,7 @@ You must bind your app to the Redis service to be able to access the cache from 
     cf bind-service APPLICATION SERVICE_NAME
     ```
 
-    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
     cf bind-service my-app my-redis-service
@@ -1089,7 +1080,7 @@ You must unbind the Redis service before you can delete your service instance. T
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-redis-service
@@ -1294,7 +1285,7 @@ To access the cache from the app, you must bind your app to the Elasticsearch se
     cf bind-service APP_NAME SERVICE_NAME
     ```
 
-    where `APP_NAME` is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APP_NAME` is the name of a deployed instance of your app (exactly as specified in your app's `manifest.yml` or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
     cf bind-service my-app my-es-service
@@ -1352,7 +1343,7 @@ You must unbind the Elasticsearch service before you can delete it. Run the foll
 cf unbind-service APP_NAME SERVICE_NAME
 ```
 
-where `APP_NAME` is your app's deployed instance name as specified in your manifest or push command, and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+where `APP_NAME` is your app's deployed instance name as specified in your app's `manifest.yml` or push command, and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-es-service
