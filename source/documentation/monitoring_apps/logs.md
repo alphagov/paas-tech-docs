@@ -146,12 +146,10 @@ Once you have verified that the logs are draining correctly, you have successful
 
 #### Security
 
-The default Logit configuration allows anyone on the Internet to send log messages to your ELK stack.
+The default Logit configuration allows anyone on the Internet to send log messages to your ELK stack. If you want to ensure that only log messages from GOV.UK PaaS can be sent to your ELK stack:
 
-If you want to ensure that only log messages from GOV.UK PaaS can be sent to your ELK stack:
 1. Contact GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for a list of syslog drain egress IP addresses.
 1. Send these IP addresses to Logit support at [https://logit.io/contact-us](https://logit.io/contact-us) [external link] and ask that only log messages from these addresses be allowed to be sent to your ELK stack.
-
 
 ### More about logs and troubleshooting
 
