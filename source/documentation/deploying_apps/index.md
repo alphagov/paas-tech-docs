@@ -2,17 +2,19 @@
 
 ## Deployment overview
 
-The `cf push` command is used both to create a new app and to push a new version of an existing one. The basic steps:
+The `cf push` command is used to both create a new app and to push a new version of an existing app.
 
-1. Put your app's code in a directory. This is usually accomplished by checking it out of version control.
+1. Put your app's code and configuration files in a local directory.
 
-1. [Target](deploying_apps.html#set-a-target) the appropriate organisation and space.
+1. [Target](deploying_apps.html#set-a-target) the appropriate organisation and space by running:
 
     ```
     cf target -o ORG_NAME -s SPACE_NAME
     ```
+    
+    where `ORG_NAME` is the name of the org, and `SPACE_NAME` is the name of the space.
 
-1. Create a `manifest.yml` file in the same directory as your app's code. The manifest file tells Cloud Foundry what to do with your app.
+1. Create a `manifest.yml` file in the same local directory as your app's code. The manifest file tells Cloud Foundry what to do with your app. An exmaple manifest:
 
     ```
     ---
@@ -22,13 +24,13 @@ The `cf push` command is used both to create a new app and to push a new version
 
     where `APP_NAME` is the unique name for your app. You can run `cf apps` to see apps which already exist.
 
-1. In the directory which contains your app's code, configuration files, and manifest, deploy the app by running `cf push`.
+1. Deploy your app by running `cf push` in the directory which contains your app's code, configuration files, and manifest.
 
 Your app should now be live at `https://APP_NAME.cloudapps.digital`.
 
-There are many options available when you deploy an app. See the Cloud Foundry documentation on [Deploying with Application Manifests](http://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html) [external link] for details.
+Refer to the Cloud Foundry documentation on [Deploying with Application Manifests](http://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html) [external link] for more information on the options available when you deploy an app.
 
-For a production app, you should read the [production checklist](deploying_apps.html#production-checklist).
+Refer to the [production checklist](deploying_apps.html#production-checklist) if your app is a production app.
 
 ### Set a target
 
@@ -42,9 +44,9 @@ cf target -o ORG_NAME -s SPACE_NAME
 
 where `ORG_NAME` is the name of the org, and `SPACE_NAME` is the name of the space.
 
-Once you set the target, the Cloud Foundry client remembers it until you change it.
+The Cloud Foundry client remembers the target until you change it.
 
-You can change space without changing org using:
+You can change space without changing org by running:
 
 ```
 cf target -s SPACE_NAME
