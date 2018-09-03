@@ -552,48 +552,38 @@ To set up a MySQL service:
 
 You must bind your app to the MySQL service to be able to access the database from the app.
 
-1. Run the following code in the command line:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service instance when you next deploy your app. An example manifest:
 
     ```
-    cf bind-service APPLICATION SERVICE_NAME
+    --
+    applications:
+      - name: my-app
+        services:
+        - my-ms-service
+    ```
+1. Deploy your app in line with your normal deployment process.
+
+This binds your app to a service instance called `my-ms-service`.
+
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+
+#### Use the cf bind-service command
+
+If you are not deploying your app with a `manifest.yml` file, you can manually bind your service instance to your app.
+
+1. Run the following:
+
+    ```
+    cf bind-service APP_NAME SERVICE_NAME
     ```
 
-    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
 
     ```
     cf bind-service my-app my-ms-service
     ```
 
-1. If the app is already running, you should restage the app to make sure it connects:
-
-    ```
-    cf restage APPLICATION
-    ```
-
-1. To confirm that the service is bound to the app, run:
-
-    ```
-    cf service SERVICE_NAME
-    ```
-
-    and check the `Bound apps:` line of the output.
-
-    ```
-    Service instance: my-ms-service
-    Service: mysql
-    Bound apps: my-app
-    Tags:
-    Plan: medium-5.7
-    Description: AWS RDS MySQL service
-    Documentation url: https://aws.amazon.com/documentation/rds/
-    Dashboard:
-
-    Last Operation
-    Status: create succeeded
-    Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
-    Started: 2016-08-23T15:34:41Z
-    Updated: 2016-08-23T15:42:02Z
-    ```
+1. Deploy your app in line with your normal deployment process.
 
 1. Run `cf env APP_NAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
 
@@ -946,55 +936,38 @@ To set up a Redis service:
 
 You must bind your app to the Redis service to be able to access the cache from the app.
 
-1. Run the following in the command line:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service instance when you next deploy your app. An example manifest:
 
     ```
-    cf bind-service APPLICATION SERVICE_NAME
+    --
+    applications:
+      - name: my-app
+        services:
+        - my-redis-service
+    ```
+1. Deploy your app in line with your normal deployment process.
+
+This binds your app to a service instance called `my-redis-service`.
+
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+
+#### Use the cf bind-service command
+
+If you are not deploying your app with a `manifest.yml` file, you can manually bind your service instance to your app.
+
+1. Run the following:
+
+    ```
+    cf bind-service APP_NAME SERVICE_NAME
     ```
 
-    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
 
     ```
     cf bind-service my-app my-redis-service
     ```
 
-1. If the app is already running, you should restage the app to make sure it connects:
-
-    ```
-    cf restage APPLICATION
-    ```
-
-1. To confirm that the service is bound to the app, run:
-
-    ```
-    cf service SERVICE_NAME
-    ```
-
-    and check the `bound apps:` line of the output.
-
-    ```
-    name:            my-redis-service
-    service:         redis
-    bound apps:      my-app
-    tags:
-    plan:            tiny-clustered-3.2
-    description:     AWS ElastiCache Redis service
-    documentation:
-    dashboard:
-
-    Showing status of last operation from service testing-time...
-
-    status:    create succeeded
-    message:   ---
-               status               : available
-               cluster id           : cf-u7zpvbwzxmrvu
-               engine version       : 3.2.6
-               maxmemory policy     : volatile-lru
-               maintenance window   : sun:23:00-mon:01:30
-               daily backup window  : 02:00-05:00
-    started:   2018-02-21T10:44:16Z
-    updated:   2018-02-21T10:52:31Z
-    ```
+1. Deploy your app in line with your normal deployment process.
 
 1. Run `cf env APP_NAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. Example output:
 
@@ -1277,53 +1250,41 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 
 ### Bind an Elasticsearch service to your apps
 
-To access the cache from the app, you must bind your app to the Elasticsearch service:
+To access the cache from the app, you must bind your app to the Elasticsearch service.
 
-1. Run the following in the command line:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service instance when you next deploy your app. An example manifest:
+
+    ```
+    --
+    applications:
+      - name: my-app
+        services:
+        - my-es-service
+    ```
+
+1. Deploy your app in line with your normal deployment process.
+
+This binds your app to a service instance called `my-es-service`.
+
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+
+#### Use the cf bind-service command
+
+If you are not deploying your app with a `manifest.yml` file, you can manually bind your service instance to your app.
+
+1. Run the following:
 
     ```
     cf bind-service APP_NAME SERVICE_NAME
     ```
 
-    where `APP_NAME` is the name of a deployed instance of your app (exactly as specified in your app's `manifest.yml` or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
 
     ```
     cf bind-service my-app my-es-service
     ```
 
-2. If the app is already running, you should restage it to make sure it connects to Elasticsearch:
-
-    ```
-    cf restage APP_NAME
-    ```
-
-3. To confirm the service is bound to the app, run:
-
-    ```
-    cf service SERVICE_NAME
-    ```
-
-    and check the `bound apps:` line of the output.
-
-    ```
-    name:            my-es-service
-    service:         elasticsearch
-    bound apps:      my-app
-    tags:
-    plan:            small-ha-6.x
-    description:     Elasticsearch instances provisioned via Aiven
-    documentation:
-    dashboard:
-
-    Showing status of last operation from service my-es-service...
-
-    status:    create succeeded
-    message:   Last operation succeeded
-    started:   2018-08-02T10:17:30Z
-    updated:   2018-08-02T10:21:35Z
-    ```
-
-You can also use the app's `manifest.yml` to bind apps to service instances during app deployment. You can use the same `manifest.yml` to deploy your app to different environments.
+1. Deploy your app in line with your normal deployment process.
 
 Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
 
