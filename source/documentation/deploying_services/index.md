@@ -97,7 +97,7 @@ To set up a PostgreSQL service:
 
 You must bind your app to the PostgreSQL service to be able to access the database from the app.
 
-1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service when you next deploy your app. For example:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service instance when you next deploy your app. An example manifest:
 
     ```
     --
@@ -107,7 +107,7 @@ You must bind your app to the PostgreSQL service to be able to access the databa
       - my-pg-service
     ```
 
-1. Deploy your app as normal.
+1. Deploy your app in line with your normal deployment process.
 
 This binds your app to a service instance called `my-pg-service`.
 
@@ -117,7 +117,7 @@ Refer to the Cloud Foundry documentation on [deploying with app manifests](https
 
 If you are not deploying your app with a `manifest.yml` file, you can manually bind your service instance to your app.
 
-1. Run the following code in the command line:
+1. Run the following:
 
     ```
     cf bind-service APP_NAME SERVICE_NAME
@@ -129,7 +129,7 @@ If you are not deploying your app with a `manifest.yml` file, you can manually b
     cf bind-service my-app my-pg-service
     ```
 
-1. Deploy your app as normal.
+1. Deploy your app in line with your normal deployment process.
 
 1. Run `cf env APP_NAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
 
