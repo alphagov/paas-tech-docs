@@ -595,7 +595,7 @@ You must bind your app to the MySQL service to be able to access the database fr
     Updated: 2016-08-23T15:42:02Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+1. Run `cf env APP_NAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
 
     ```
     {
@@ -633,7 +633,7 @@ You must bind your app to the MySQL service to be able to access the database fr
 
     GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
+    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APP_NAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a MySQL service from your local machine
 
@@ -996,7 +996,7 @@ You must bind your app to the Redis service to be able to access the cache from 
     updated:   2018-02-21T10:52:31Z
     ```
 
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. Example output:
+1. Run `cf env APP_NAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. Example output:
 
     ```
     {
@@ -1033,7 +1033,7 @@ You must bind your app to the Redis service to be able to access the cache from 
 
     Your app should parse the data in the `VCAP_SERVICES` environment variable in order to make a secure connection to Redis.
 
-    If your app writes service connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
+    If your app writes service connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APP_NAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a Redis service instance from your local machine
 
