@@ -128,7 +128,7 @@ Your app should now be available at `https://APPNAME.cloudapps.digital.` For a p
 
 ### Specify a Ruby version
 
-You must tell Cloud Foundry which version of Ruby your app uses in the Ruby buildpack.
+You should tell Cloud Foundry which version of Ruby your app uses in the Ruby buildpack.
 
 Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
 
