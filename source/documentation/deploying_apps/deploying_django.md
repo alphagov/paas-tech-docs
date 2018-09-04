@@ -4,21 +4,26 @@ This section explains how to deploy an app using the Django framework. You may a
 
 > If your app requires a [backing service](/deploying_services.html#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
-These steps assume you have already carried out the setup process explained in the [Get started](/get_started.html#get-started) section.
+Before deploying a Django app, you must:
 
-If you are just getting started learning Cloud Foundry, you can use the sandbox space by running: ``cf target -s sandbox``
+- log into your [PaaS account](get_started.html#get-an-account)
+- set up the [Cloud Foundry command line](get_started.html#set-up-command-line)
+- [targeted](deploying_apps.html#set-a-target) the appropriate space
 
 1. Put the code for your Django app into a local directory (for example, by checking it out of version control).
 
-2. If you are using Git, add `*.pyc` and `local_settings.py` to your `.gitignore`, file, then
+1. If you are using Git, add `*.pyc` and `local_settings.py` to your `.gitignore` file, then
    [exclude files ignored by Git](/deploying_apps.html#excluding-files) so Cloud Foundry will ignore them too.
 
-3. Tell Cloud Foundry which Python runtime to use by creating a `runtime.txt`   file in the root of the local folder. The contents of the file should  
-   be:
+1. Run `cf buildpacks` in the command line to check the version of the Python buildpack.
 
-        python-3.5.1  
+1. Go to the [Python buildpack page on GitHub](https://github.com/cloudfoundry/python-buildpack/releases) to check which versions of Python are currently included in the Python buildpack.
 
-    replacing "3.5.1" with the version of Python you want to use (it must be supported by the buildpack: currently versions 2.7.11 to 3.5.2 are supported.)
+1. Tell Cloud Foundry which version of Python to use by creating a `runtime.txt` file in the root of the local directory.
+
+    Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
+
+    Refer to the Cloud Foundry documentation for more information on how to [specify a Python version](https://docs.cloudfoundry.org/buildpacks/python/index.html#runtime) [external link].
 
 4. Make sure you have all the required modules for your project installed into your virtual environment (including Django).
 
