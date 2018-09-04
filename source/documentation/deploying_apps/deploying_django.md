@@ -19,7 +19,7 @@ Before deploying a Django app, you must:
 
 1. Go to the [Python buildpack page on GitHub](https://github.com/cloudfoundry/python-buildpack/releases) to check which versions of Python are currently included in the Python buildpack.
 
-1. Tell Cloud Foundry which version of Python to use by creating a `runtime.txt` file in the root of the local directory.
+1. Tell Cloud Foundry which version of Python to use by creating a `runtime.txt` file in the root of the local directory. This step is optional.
 
     Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
 
