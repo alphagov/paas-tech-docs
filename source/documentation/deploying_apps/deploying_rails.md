@@ -126,6 +126,14 @@ These instructions are for deploying a Rails app with a PostgreSQL database, and
 
 Your app should now be available at `https://APPNAME.cloudapps.digital.` For a production app, you should read the [production checklist](/deploying_apps.html#production-checklist).
 
+### Specify a Ruby version
+
+You must tell Cloud Foundry which version of Ruby your app uses in the Ruby buildpack.
+
+Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
+
+Refer to the Cloud Foundry documentation for more information on how to [specify a Ruby version](https://docs.cloudfoundry.org/buildpacks/ruby/index.html#runtime) [external link].
+
 ### Web servers
 
 By default, the Cloud Foundry Ruby buildpack [runs `bin/rails server`](https://github.com/cloudfoundry/ruby-buildpack/blob/1f0ac3ce10866390d161c3f27e71d64890859454/lib/language_pack/rails4.rb#L27)
