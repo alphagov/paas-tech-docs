@@ -106,7 +106,7 @@ For more configuration options see [Tomcat Container](https://github.com/cloudfo
 
 ### Specify a Java version
 
-You must tell Cloud Foundry which version of Java your app uses in the Java buildpack.
+You should tell Cloud Foundry which version of Java your app uses in the Java buildpack.
 
 Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
 
