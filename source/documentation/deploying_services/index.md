@@ -131,45 +131,13 @@ If you are not deploying your app with a `manifest.yml` file, you can manually b
 
 1. Deploy your app in line with your normal deployment process.
 
-1. Run `cf env APP_NAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+### Connect to a PostgreSQL service from your app
 
-    ```
-    {
-     "VCAP_SERVICES": {
-      "postgres": [
-       {
-        "binding_name": null,
-        "credentials": {
-         "host": "rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com",
-         "jdbcuri": "jdbc:postgresql://rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:5432/DATABASE_NAME?password=PASSWORD\u0026ssl=true\u0026user=USERNAME",
-         "name": "DATABASE_NAME",
-         "password": "PASSWORD",
-         "port": 5432,
-         "uri": "postgres://USERNAME:PASSWORD@rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:5432/DATABASE_NAME",
-         "username": "USERNAME"
-        },
-        "instance_name": "SERVICE_NAME",
-        "label": "postgres",
-        "name": "SERVICE_NAME",
-        "plan": "PLAN",
-        "provider": null,
-        "syslog_drain_url": null,
-        "tags": [
-         "postgres",
-         "relational"
-        ],
-        "volume_mounts": []
-       }
-      ]
-     }
-    }
-    ```
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
 
-    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
+GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-    GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
-
-    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APP_NAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a PostgreSQL service from your local machine
 
