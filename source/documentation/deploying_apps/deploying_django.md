@@ -8,7 +8,7 @@ Before deploying a Django app, you must:
 
 - log into your [PaaS account](get_started.html#get-an-account)
 - set up the [Cloud Foundry command line](get_started.html#set-up-command-line)
-- [targeted](deploying_apps.html#set-a-target) the appropriate space
+- [target](deploying_apps.html#set-a-target) the appropriate space
 
 1. Put the code for your Django app into a local directory (for example, by checking it out of version control).
 
