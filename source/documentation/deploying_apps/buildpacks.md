@@ -24,11 +24,11 @@ You should tell Cloud Foundry which version of your app's language to use in the
 |Minor|`3.5.x`|
 |Major|`3.x`|
 
-If you specify an exact version, you will need to ensure that you update this version when the GOV.UK PaaS team update the language's buildpack. Check the paas-announce email for information on which language versions are in the latest language buildpacks. If the latest language buildpack does not support the language version your app relies on, your app will fail to start.
+If you specify an exact version, you must update this version when the GOV.UK PaaS team update the language's buildpack. If the latest language buildpack does not support the language version your app relies on, your app will fail to start.
 
-If you specify a major or a minor version, your app will automatically upgrade to use a more recent version of its language when the GOV.UK PaaS team updates the buildpack. The major or minor version must still be live for this upgrade to work. However, if there is a breaking change between language versions, your app may not behave as expected or even fail. You should still check the paas-announce email for information on which language versions are in the latest language buildpack.
+If you specify a major or a minor version, your app will automatically upgrade to use a more recent version of its language when the GOV.UK PaaS team updates the buildpack. The major or minor version must still be live for this upgrade to work. However, if there is a breaking change between language versions, your app may not behave as expected or even fail. 
 
-You should decide if automatically upgrading between language versions instead of specifying an exact version that may be removed is an acceptable risk.
+You should always check the "paas-announce" email for information on which language versions are in the latest language buildpacks.
 
 ### How to use custom buildpacks
 
