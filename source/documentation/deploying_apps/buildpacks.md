@@ -14,6 +14,22 @@ We recommend using the standard buildpacks to maximise the support you will rece
 
 Your responsibilities change depending on whether you use a standard buildpack, custom buildpack or a Docker image. Refer to the [responsibility model guidance](guidance.html#guidance-2-responsibility-model) for further information.
 
+### Buildpack language version updates
+
+You should tell Cloud Foundry which version of your app's language to use in the buildpack. You can specify an exact, minor or major version of the language. For example, with Python:
+
+|Category|Python Example|
+|:---|:---|
+|Exact|`3.5.2`|
+|Minor|`3.5.x`|
+|Major|`3.x`|
+
+If you specify an exact version, you must update this version when the GOV.UK PaaS team update the language's buildpack. Your app will fail to start if the language version it relies on is not supported by the latest language buildpack.
+
+If you specify a major or a minor version, your app will automatically upgrade to use a more recent version of its language when the GOV.UK PaaS team updates the buildpack. The major or minor version must still be live for this upgrade to work. However, if there is a breaking change between language versions, your app may not behave as expected or even fail. 
+
+You should always check the GOV.UK PaaS announcements email for information on which language versions are in the latest language buildpacks.
+
 ### How to use custom buildpacks
 
 There are many application attribute options available when you push an app. You can use the buildpack attribute to specify a custom buildpack for your app through:

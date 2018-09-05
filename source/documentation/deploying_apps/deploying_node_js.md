@@ -109,3 +109,11 @@ You should also remember to include dependencies for any service bindings in ``p
         // ...
       }
     }
+
+### Specify a Node.js version
+
+You should tell Cloud Foundry which version of Node.js your app uses in the Node.js buildpack.
+
+Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
+
+Refer to the Cloud Foundry documentation for more information on how to [specify a Node.js version](https://docs.cloudfoundry.org/buildpacks/node/index.html#runtime) [external link].

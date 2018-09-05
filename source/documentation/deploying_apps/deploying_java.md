@@ -104,6 +104,14 @@ Note that you do **not** need to deploy Tomcat along with your application. The 
 
 For more configuration options see [Tomcat Container](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-tomcat.md) [external link].
 
+### Specify a Java version
+
+You should tell Cloud Foundry which version of Java your app uses in the Java buildpack.
+
+Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
+
+Refer to the Cloud Foundry OpenJDK JRE documentation for more information on [the Java buildpack](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/jre-open_jdk_jre.md) [external link].
+
 ### Deploying other JVM-based applications
 
 The Java buildpack supports running any JVM-based applications (such as Scala, Clojure etc.) with little or zero additional configuration. For detailed examples of deploying applications using other frameworks and JVM-based languages:
