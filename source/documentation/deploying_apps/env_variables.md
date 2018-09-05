@@ -1,45 +1,53 @@
 ## Environment variables
 
-All the configuration information for your app must be stored as environment variables, not in the code. 
+You must store all configuration information for your app as environment variables. 
 
-This includes credentials for external services that your app uses, such as a Twitter account, as well as values that will vary with each deployment of the app, like the canonical URL.
+This could include:
 
-To view an app's current environment variables, run:
+- credentials for external services that your app uses, for example a Twitter account
+- values that will vary with each deployment of the app, for example the canonical URL.
 
-``cf env APPNAME``
+To view an app's current environment variables, run `cf env APPNAME`.
 
-To create or update a variable, use:
+To create or update a variable, run `cf set-env APPNAME ENV_VAR_NAME ENV_VAR_VALUE`.
 
-``cf set-env APPNAME ENV_VAR_NAME ENV_VAR_VALUE``
+If you're deploying a pre-existing app written in line with 12-factor principles, you should check the app's documentation for any environment variables you need to set.
 
-If you're deploying a pre-existing app that was written with 12-factor in mind, check the app's documentation for any environment variables you need to set.
+For example, if the app has these instructions for deploying to Heroku:
 
-If the app has instructions to deploy to Heroku, and tells you to do something like:
+```
+heroku config:set VARIABLE=value
+```
 
-``heroku config:set VARIABLE=value``
+then you should run the equivalent command using `cf set-env`:
 
-then you should do the equivalent command with ``cf set-env``:
-
-``cf set-env APPNAME VARIABLE value``
+```
+cf set-env APPNAME VARIABLE value
+```
 
 ### System-provided environment variables
 
-As well as environment variables you set yourself, there are a number of system-provided variables which give you information about configuration details handled by the PaaS: the port on which the application is listening, the maximum memory each instance can use, the external IP address of the instance, and so on.
+System-provided variables tell you about configuration details handled by the PaaS, for example:
+
+- the port on which the application is listening 
+- the maximum memory each instance can use
+- the external IP address of the instance
 
 Do not attempt to change the values of these system-provided variables with the CLI or your app's code.
 
-For a full list, see Cloud Foundry's [Cloud Foundry Environment Variables](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) [external link] documentation.
+Refer to the [Cloud Foundry Environment Variables documentation](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) [external link] for a full list of variables.
 
-Two important variables for initial setup are:
+`VCAP_SERVICES` and `VCAP_APPLICATION` are two important variables for initial setup:
 
-* `VCAP_SERVICES` contains details (including credentials) of any backing services bound to the app
-* `VCAP_APPLICATION` provides details of the currently running application (for example, language runtime version)
+- `VCAP_SERVICES` contains details, including credentials, of any backing services bound to the app.
 
-To see the values of the system-provided variables, run `cf env APPNAME`.
+- `VCAP_APPLICATION` provides details of the currently running application, for example the language runtime version.
 
-If your app connects to a backing service, you may need to have it parse `VCAP_SERVICES` to get the credentials and other settings relating to that service and set the appropriate environment variables.
+To see the values of the system-provided variables, run `cf env APP_NAME`.
 
-However, some buildpacks will do this for you automatically. See the deploy instructions for the language/framework you are using for details.
+If your app connects to a backing service, you may need to have your app parse `VCAP_SERVICES` to get the credentials and other settings relating to that service and set the appropriate environment variables.
+
+Some buildpacks will do this for you automatically. Refer to the deploy instructions for the language or framework you are using for more information.
 
 Here is an example of the structure of the information contained in `VCAP_SERVICES`:
 
