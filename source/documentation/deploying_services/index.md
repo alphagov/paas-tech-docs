@@ -133,7 +133,7 @@ If you are not deploying your app with a `manifest.yml` file, you can manually b
 
 ### Connect to a PostgreSQL service from your app
 
-Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
@@ -167,7 +167,6 @@ You must:
 - [log into Cloud Foundry](/get_started.html#set-up-command-line)
 - [create the new PaaS-hosted PostgreSQL database](/deploying_services.html#set-up-a-postgresql-service)
 - [target the space](/deploying_apps.html#set-a-target) where your new database is located
-
 
 #### Non-PaaS to PaaS
 
@@ -216,7 +215,6 @@ To move data between two PaaS-hosted PostgreSQL databases:
     where `DESTINATION_SERVICE_NAME` is the name of the target database.
 
 Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
-
 
 ### Upgrade PostgreSQL service plan
 
@@ -553,45 +551,15 @@ If you are not deploying your app with a `manifest.yml` file, you can manually b
 
 1. Deploy your app in line with your normal deployment process.
 
-1. Run `cf env APP_NAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
+### Connect to a MySQL service from your app
 
-    ```
-    {
-     "VCAP_SERVICES": {
-      "mysql": [
-       {
-        "binding_name": null,
-        "credentials": {
-         "host": "rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com",
-         "jdbcuri": "jdbc:mysql://rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:3306/DATABASE_NAME?user=USERNAME\u0026password=PASSWORD",
-         "name": "DATABASE_NAME",
-         "password": "PASSWORD",
-         "port": 3306,
-         "uri": "mysql://USERNAME:PASSWORD@rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:3306/DATABASE_NAME?reconnect=true\u0026useSSL=true",
-         "username": "USERNAME"
-        },
-        "instance_name": "SERVICE_NAME",
-        "label": "mysql",
-        "name": "SERVICE_NAME",
-        "plan": "PLAN",
-        "provider": null,
-        "syslog_drain_url": null,
-        "tags": [
-         "mysql",
-         "relational"
-        ],
-        "volume_mounts": []
-       }
-      ]
-     }
-    }
-    ```
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
-    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured. Refer to the Guidance section for information on how to securely connect either a [Drupal app](/guidance.html#connect-drupal-to-mysql) or a [Wordpress app](/guidance.html#connect-wordpress-to-mysql) to MySQL using SSL.
+GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-    GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
-    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APP_NAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
+Refer to the Guidance section for information on how to securely connect either a [Drupal app](/guidance.html#connect-drupal-to-mysql) or a [Wordpress app](/guidance.html#connect-wordpress-to-mysql) to MySQL using SSL.
 
 ### Connect to a MySQL service from your local machine
 
@@ -937,44 +905,13 @@ If you are not deploying your app with a `manifest.yml` file, you can manually b
 
 1. Deploy your app in line with your normal deployment process.
 
-1. Run `cf env APP_NAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. Example output:
+### Connect to a PostgreSQL service from your app
 
-    ```
-    {
-     "VCAP_SERVICES": {
-      "redis": [
-       {
-        "binding_name": null,
-        "credentials": {
-         "host": "clustercfg.cf-u7zpvbwzxmrvu.p9lva7.euw1.cache.amazonaws.com",
-         "name": "cf-u7zpvbwzxmrvu",
-         "password": "PASSWORD",
-         "port": 6379,
-         "tls_enabled": true,
-         "uri": "rediss://x:PASSWORD@clustercfg.cf-u7zpvbwzxmrvu.p9lva7.euw1.cache.amazonaws.com:6379"
-        },
-        "instance_name": "my-redis-service",
-        "label": "redis",
-        "name": "my-redis-service",
-        "plan": "tiny-clustered-3.2",
-        "provider": null,
-        "syslog_drain_url": null,
-        "tags": [
-         "elasticache",
-         "redis"
-        ],
-        "volume_mounts": []
-       }
-      ]
-     }
-    }
-    ```
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
-    Your app must make a [TLS connection](https://en.wikipedia.org/wiki/Transport_Layer_Security) to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
+Your app should parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to make a secure connection to Redis.
 
-    Your app should parse the data in the `VCAP_SERVICES` environment variable in order to make a secure connection to Redis.
-
-    If your app writes service connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APP_NAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a Redis service instance from your local machine
 
