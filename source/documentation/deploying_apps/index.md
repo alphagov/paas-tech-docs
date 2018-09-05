@@ -2,7 +2,7 @@
 
 ## Deployment overview
 
-The `cf push` command is used to both create a new app and to push a new version of an existing app.
+The `cf push` command can both create a new app and push a new version of an existing app.
 
 1. Put your app's code and configuration files in a local directory.
 
@@ -14,7 +14,7 @@ The `cf push` command is used to both create a new app and to push a new version
     
     where `ORG_NAME` is the name of the org, and `SPACE_NAME` is the name of the space.
 
-1. Create a `manifest.yml` file in the same local directory as your app's code. The manifest file tells Cloud Foundry what to do with your app. An exmaple manifest:
+1. Create a `manifest.yml` file in the same local directory as your app's code. The manifest file tells Cloud Foundry what to do with your app. An example manifest:
 
     ```
     ---
