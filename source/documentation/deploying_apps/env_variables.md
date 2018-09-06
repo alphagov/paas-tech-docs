@@ -5,11 +5,11 @@ You must store all configuration information for your app as environment variabl
 This could include:
 
 - credentials for external services that your app uses, for example a Twitter account
-- values that will vary with each deployment of the app, for example the canonical URL.
+- values that will vary with each deployment of the app, for example the canonical URL
 
-To view an app's current environment variables, run `cf env APPNAME`.
+To view an app's current environment variables, run `cf env APP_NAME`.
 
-To create or update a variable, run `cf set-env APPNAME ENV_VAR_NAME ENV_VAR_VALUE`.
+To create or update a variable, run `cf set-env APP_NAME ENV_VAR_NAME ENV_VAR_VALUE`.
 
 If you're deploying a pre-existing app written in line with 12-factor principles, you should check the app's documentation for any environment variables you need to set.
 
@@ -22,7 +22,7 @@ heroku config:set VARIABLE=value
 then you should run the equivalent command using `cf set-env`:
 
 ```
-cf set-env APPNAME VARIABLE value
+cf set-env APP_NAME VARIABLE value
 ```
 
 ### System-provided environment variables
@@ -33,7 +33,7 @@ System-provided variables tell you about configuration details handled by the Pa
 - the maximum memory each instance can use
 - the external IP address of the instance
 
-Do not attempt to change the values of these system-provided variables with the CLI or your app's code.
+Do not attempt to change the values of these system-provided variables.
 
 Refer to the [Cloud Foundry Environment Variables documentation](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) [external link] for a full list of variables.
 
