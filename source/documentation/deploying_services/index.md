@@ -905,7 +905,7 @@ If you are not deploying your app with a `manifest.yml` file, you can manually b
 
 1. Deploy your app in line with your normal deployment process.
 
-### Connect to a PostgreSQL service from your app
+### Connect to a Redis service from your app
 
 Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
