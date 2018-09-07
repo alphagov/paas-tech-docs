@@ -9,9 +9,13 @@ This could include:
 
 To view an app's current environment variables, run `cf env APP_NAME`.
 
-To create or update a variable, run `cf set-env APP_NAME ENV_VAR_NAME ENV_VAR_VALUE`.
+To create or update a variable, run the following:
 
-If you're deploying a pre-existing app written in line with 12-factor principles, you should check the app's documentation for any environment variables you need to set.
+```
+cf set-env APP_NAME ENV_VAR_NAME ENV_VAR_VALUE`
+```
+
+If you're deploying a pre-existing app, you should check the app's documentation for any environment variables you need to set.
 
 For example, if the app has these instructions for deploying to Heroku:
 
@@ -27,21 +31,19 @@ cf set-env APP_NAME VARIABLE value
 
 ### System-provided environment variables
 
-System-provided variables tell you about configuration details handled by the PaaS, for example:
+System-provided environment variables tell you about configuration details handled by the PaaS, for example:
 
-- the port on which the application is listening 
-- the maximum memory each instance can use
-- the external IP address of the instance
+- the port on which the app is listening 
+- the maximum memory each app instance can use
+- the external IP address of the app instance
 
-Do not attempt to change the values of these system-provided variables.
-
-Refer to the [Cloud Foundry Environment Variables documentation](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) [external link] for a full list of variables.
+Do not attempt to change the values of these system-provided variables using the command line or your app's code.
 
 `VCAP_SERVICES` and `VCAP_APPLICATION` are two important variables for initial setup:
 
-- `VCAP_SERVICES` contains details, including credentials, of any backing services bound to the app.
+- `VCAP_SERVICES` contains details, including credentials, of any backing services bound to the app
 
-- `VCAP_APPLICATION` provides details of the currently running application, for example the language runtime version.
+- `VCAP_APPLICATION` provides details of the currently running application, for example the language runtime version
 
 To see the values of the system-provided variables, run `cf env APP_NAME`.
 
@@ -82,3 +84,5 @@ Here is an example of the structure of the information contained in `VCAP_SERVIC
  }
 }
 ```
+
+Refer to the [Cloud Foundry Environment Variables documentation](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) [external link] for a full list of environment variables.
