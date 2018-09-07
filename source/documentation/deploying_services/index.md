@@ -95,90 +95,49 @@ To set up a PostgreSQL service:
 
 ### Bind a PostgreSQL service to your app
 
-You must bind your app to the PostgreSQL service to be able to access the database from the app.
+You must bind your app to the PostgreSQL service so you can access the database from the app.
 
-1. Run the following code in the command line:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
 
     ```
-    cf bind-service APPLICATION SERVICE_NAME
+    --
+    applications:
+    - name: my-app
+      services:
+      - my-pg-service
     ```
 
-    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+1. Deploy your app in line with your normal deployment process.
+
+This binds your app to a service instance called `my-pg-service`.
+
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+
+#### Use the cf bind-service command
+
+Alternatively, you can manually bind your service instance to your app.
+
+1. Run the following:
+
+    ```
+    cf bind-service APP_NAME SERVICE_NAME
+    ```
+
+    where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
 
     ```
     cf bind-service my-app my-pg-service
     ```
 
-1. If the app is already running, you should restage the app to make sure it connects:
+1. Deploy your app in line with your normal deployment process.
 
-    ```
-    cf restage APPLICATION
-    ```
+### Connect to a PostgreSQL service from your app
 
-1. To confirm that the service is bound to the app, run:
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
-    ```
-    cf service SERVICE_NAME
-    ```
+GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-    and check the `Bound apps:` line of the output.
-
-    ```
-    Service instance: my-pg-service
-    Service: postgres
-    Bound apps: my-app
-    Tags:
-    Plan: small-9.5
-    Description: AWS RDS PostgreSQL service
-    Documentation url: https://aws.amazon.com/documentation/rds/
-    Dashboard:
-
-    Last Operation
-    Status: create succeeded
-    Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
-    Started: 2016-08-23T15:34:41Z
-    Updated: 2016-08-23T15:42:02Z
-    ```
-
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
-
-    ```
-    {
-     "VCAP_SERVICES": {
-      "postgres": [
-       {
-        "binding_name": null,
-        "credentials": {
-         "host": "rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com",
-         "jdbcuri": "jdbc:postgresql://rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:5432/DATABASE_NAME?password=PASSWORD\u0026ssl=true\u0026user=USERNAME",
-         "name": "DATABASE_NAME",
-         "password": "PASSWORD",
-         "port": 5432,
-         "uri": "postgres://USERNAME:PASSWORD@rdsbroker-66ecd739-2e98-401a-9e45-17938165be06.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:5432/DATABASE_NAME",
-         "username": "USERNAME"
-        },
-        "instance_name": "SERVICE_NAME",
-        "label": "postgres",
-        "name": "SERVICE_NAME",
-        "plan": "PLAN",
-        "provider": null,
-        "syslog_drain_url": null,
-        "tags": [
-         "postgres",
-         "relational"
-        ],
-        "volume_mounts": []
-       }
-      ]
-     }
-    }
-    ```
-
-    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
-
-    GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
-
-    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a PostgreSQL service from your local machine
 
@@ -208,7 +167,6 @@ You must:
 - [log into Cloud Foundry](/get_started.html#set-up-command-line)
 - [create the new PaaS-hosted PostgreSQL database](/deploying_services.html#set-up-a-postgresql-service)
 - [target the space](/deploying_apps.html#set-a-target) where your new database is located
-
 
 #### Non-PaaS to PaaS
 
@@ -258,7 +216,6 @@ To move data between two PaaS-hosted PostgreSQL databases:
 
 Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
-
 ### Upgrade PostgreSQL service plan
 
 #### Same encryption type
@@ -300,7 +257,7 @@ You must unbind the PostgreSQL service before you can delete it. To unbind the P
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-pg-service
@@ -559,90 +516,50 @@ To set up a MySQL service:
 
 ### Bind a MySQL service to your app
 
-You must bind your app to the MySQL service to be able to access the database from the app.
+You must bind your app to the MySQL service so you can access the database from the app.
 
-1. Run the following code in the command line:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
 
     ```
-    cf bind-service APPLICATION SERVICE_NAME
+    --
+    applications:
+      - name: my-app
+        services:
+        - my-ms-service
+    ```
+1. Deploy your app in line with your normal deployment process.
+
+This binds your app to a service instance called `my-ms-service`.
+
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+
+#### Use the cf bind-service command
+
+Alternatively, you can manually bind your service instance to your app.
+
+1. Run the following:
+
+    ```
+    cf bind-service APP_NAME SERVICE_NAME
     ```
 
-    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
 
     ```
     cf bind-service my-app my-ms-service
     ```
 
-1. If the app is already running, you should restage the app to make sure it connects:
+1. Deploy your app in line with your normal deployment process.
 
-    ```
-    cf restage APPLICATION
-    ```
+### Connect to a MySQL service from your app
 
-1. To confirm that the service is bound to the app, run:
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
-    ```
-    cf service SERVICE_NAME
-    ```
+GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-    and check the `Bound apps:` line of the output.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
-    ```
-    Service instance: my-ms-service
-    Service: mysql
-    Bound apps: my-app
-    Tags:
-    Plan: medium-5.7
-    Description: AWS RDS MySQL service
-    Documentation url: https://aws.amazon.com/documentation/rds/
-    Dashboard:
-
-    Last Operation
-    Status: create succeeded
-    Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
-    Started: 2016-08-23T15:34:41Z
-    Updated: 2016-08-23T15:42:02Z
-    ```
-
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. It should be consistent with this example:
-
-    ```
-    {
-     "VCAP_SERVICES": {
-      "mysql": [
-       {
-        "binding_name": null,
-        "credentials": {
-         "host": "rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com",
-         "jdbcuri": "jdbc:mysql://rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:3306/DATABASE_NAME?user=USERNAME\u0026password=PASSWORD",
-         "name": "DATABASE_NAME",
-         "password": "PASSWORD",
-         "port": 3306,
-         "uri": "mysql://USERNAME:PASSWORD@rdsbroker-9bbd5eac-dcb1-4ddb-bfc6-addcfa085d6a.c7uewwm9qebj.eu-west-1.rds.amazonaws.com:3306/DATABASE_NAME?reconnect=true\u0026useSSL=true",
-         "username": "USERNAME"
-        },
-        "instance_name": "SERVICE_NAME",
-        "label": "mysql",
-        "name": "SERVICE_NAME",
-        "plan": "PLAN",
-        "provider": null,
-        "syslog_drain_url": null,
-        "tags": [
-         "mysql",
-         "relational"
-        ],
-        "volume_mounts": []
-       }
-      ]
-     }
-    }
-    ```
-
-    Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be explicitly configured. Refer to the Guidance section for information on how to securely connect either a [Drupal app](/guidance.html#connect-drupal-to-mysql) or a [Wordpress app](/guidance.html#connect-wordpress-to-mysql) to MySQL using SSL.
-
-    GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
-
-    If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
+Refer to the Guidance section for information on how to securely connect either a [Drupal app](/guidance.html#connect-drupal-to-mysql) or a [Wordpress app](/guidance.html#connect-wordpress-to-mysql) to MySQL using SSL.
 
 ### Connect to a MySQL service from your local machine
 
@@ -762,7 +679,7 @@ You must unbind the MySQL service before you can delete it. To unbind the MySQL 
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-ms-service
@@ -953,96 +870,48 @@ To set up a Redis service:
 
 ### Bind a Redis service to your app
 
-You must bind your app to the Redis service to be able to access the cache from the app.
+You must bind your app to the Redis service so you can access the cache from the app.
 
-1. Run the following in the command line:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
 
     ```
-    cf bind-service APPLICATION SERVICE_NAME
+    --
+    applications:
+      - name: my-app
+        services:
+        - my-redis-service
+    ```
+1. Deploy your app in line with your normal deployment process.
+
+This binds your app to a service instance called `my-redis-service`.
+
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+
+#### Use the cf bind-service command
+
+Alternatively, you can manually bind your service instance to your app.
+
+1. Run the following:
+
+    ```
+    cf bind-service APP_NAME SERVICE_NAME
     ```
 
-    where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
 
     ```
     cf bind-service my-app my-redis-service
     ```
 
-1. If the app is already running, you should restage the app to make sure it connects:
+1. Deploy your app in line with your normal deployment process.
 
-    ```
-    cf restage APPLICATION
-    ```
+### Connect to a Redis service from your app
 
-1. To confirm that the service is bound to the app, run:
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
-    ```
-    cf service SERVICE_NAME
-    ```
+Your app should parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to make a secure connection to Redis.
 
-    and check the `bound apps:` line of the output.
-
-    ```
-    name:            my-redis-service
-    service:         redis
-    bound apps:      my-app
-    tags:
-    plan:            tiny-clustered-3.2
-    description:     AWS ElastiCache Redis service
-    documentation:
-    dashboard:
-
-    Showing status of last operation from service testing-time...
-
-    status:    create succeeded
-    message:   ---
-               status               : available
-               cluster id           : cf-u7zpvbwzxmrvu
-               engine version       : 3.2.6
-               maxmemory policy     : volatile-lru
-               maintenance window   : sun:23:00-mon:01:30
-               daily backup window  : 02:00-05:00
-    started:   2018-02-21T10:44:16Z
-    updated:   2018-02-21T10:52:31Z
-    ```
-
-1. Run `cf env APPNAME` to see the app's environment variables and confirm that the [VCAP_SERVICES environment variable](/deploying_apps.html#system-provided-environment-variables) contains the correct service connection details. Example output:
-
-    ```
-    {
-     "VCAP_SERVICES": {
-      "redis": [
-       {
-        "binding_name": null,
-        "credentials": {
-         "host": "clustercfg.cf-u7zpvbwzxmrvu.p9lva7.euw1.cache.amazonaws.com",
-         "name": "cf-u7zpvbwzxmrvu",
-         "password": "PASSWORD",
-         "port": 6379,
-         "tls_enabled": true,
-         "uri": "rediss://x:PASSWORD@clustercfg.cf-u7zpvbwzxmrvu.p9lva7.euw1.cache.amazonaws.com:6379"
-        },
-        "instance_name": "my-redis-service",
-        "label": "redis",
-        "name": "my-redis-service",
-        "plan": "tiny-clustered-3.2",
-        "provider": null,
-        "syslog_drain_url": null,
-        "tags": [
-         "elasticache",
-         "redis"
-        ],
-        "volume_mounts": []
-       }
-      ]
-     }
-    }
-    ```
-
-    Your app must make a [TLS connection](https://en.wikipedia.org/wiki/Transport_Layer_Security) to the service. Some libraries use TLS by default, but others will need to be explicitly configured.
-
-    Your app should parse the data in the `VCAP_SERVICES` environment variable in order to make a secure connection to Redis.
-
-    If your app writes service connection errors to `STDOUT` or `STDERR`, you can view recent errors with ``cf logs APPNAME --recent``. See the section on [Logs](/monitoring_apps.html#logs) for details.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [Logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a Redis service instance from your local machine
 
@@ -1089,7 +958,7 @@ You must unbind the Redis service before you can delete your service instance. T
 cf unbind-service APPLICATION SERVICE_NAME
 ```
 
-where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+where `APPLICATION` is the name of a deployed instance of your application (exactly as specified in your app's `manifest.yml` file or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-redis-service
@@ -1286,53 +1155,41 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 
 ### Bind an Elasticsearch service to your apps
 
-To access the cache from the app, you must bind your app to the Elasticsearch service:
+To access the cache from the app, you must bind your app to the Elasticsearch service.
 
-1. Run the following in the command line:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
+
+    ```
+    --
+    applications:
+      - name: my-app
+        services:
+        - my-es-service
+    ```
+
+1. Deploy your app in line with your normal deployment process.
+
+This binds your app to a service instance called `my-es-service`.
+
+Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+
+#### Use the cf bind-service command
+
+Alternatively, you can manually bind your service instance to your app.
+
+1. Run the following:
 
     ```
     cf bind-service APP_NAME SERVICE_NAME
     ```
 
-    where `APP_NAME` is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
 
     ```
     cf bind-service my-app my-es-service
     ```
 
-2. If the app is already running, you should restage it to make sure it connects to Elasticsearch:
-
-    ```
-    cf restage APP_NAME
-    ```
-
-3. To confirm the service is bound to the app, run:
-
-    ```
-    cf service SERVICE_NAME
-    ```
-
-    and check the `bound apps:` line of the output.
-
-    ```
-    name:            my-es-service
-    service:         elasticsearch
-    bound apps:      my-app
-    tags:
-    plan:            small-ha-6.x
-    description:     Elasticsearch instances provisioned via Aiven
-    documentation:
-    dashboard:
-
-    Showing status of last operation from service my-es-service...
-
-    status:    create succeeded
-    message:   Last operation succeeded
-    started:   2018-08-02T10:17:30Z
-    updated:   2018-08-02T10:21:35Z
-    ```
-
-You can also use the app's `manifest.yml` to bind apps to service instances during app deployment. You can use the same `manifest.yml` to deploy your app to different environments.
+1. Deploy your app in line with your normal deployment process.
 
 Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
 
@@ -1352,7 +1209,7 @@ You must unbind the Elasticsearch service before you can delete it. Run the foll
 cf unbind-service APP_NAME SERVICE_NAME
 ```
 
-where `APP_NAME` is your app's deployed instance name as specified in your manifest or push command, and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
+where `APP_NAME` is your app's deployed instance name as specified in your app's `manifest.yml` or push command, and `SERVICE_NAME` is a unique descriptive name for this service instance, for example:
 
 ```
 cf unbind-service my-app my-es-service
