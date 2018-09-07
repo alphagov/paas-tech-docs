@@ -95,9 +95,9 @@ To set up a PostgreSQL service:
 
 ### Bind a PostgreSQL service to your app
 
-You must bind your app to the PostgreSQL service to be able to access the database from the app.
+You must bind your app to the PostgreSQL service so you can access the database from the app.
 
-1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service instance when you next deploy your app. An example manifest:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
 
     ```
     --
@@ -115,7 +115,7 @@ Refer to the Cloud Foundry documentation on [deploying with app manifests](https
 
 #### Use the cf bind-service command
 
-If you are not deploying your app with a `manifest.yml` file, you can manually bind your service instance to your app.
+Alternatively, you can manually bind your service instance to your app.
 
 1. Run the following:
 
@@ -516,9 +516,9 @@ To set up a MySQL service:
 
 ### Bind a MySQL service to your app
 
-You must bind your app to the MySQL service to be able to access the database from the app.
+You must bind your app to the MySQL service so you can access the database from the app.
 
-1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service instance when you next deploy your app. An example manifest:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
 
     ```
     --
@@ -535,7 +535,7 @@ Refer to the Cloud Foundry documentation on [deploying with app manifests](https
 
 #### Use the cf bind-service command
 
-If you are not deploying your app with a `manifest.yml` file, you can manually bind your service instance to your app.
+Alternatively, you can manually bind your service instance to your app.
 
 1. Run the following:
 
@@ -870,9 +870,9 @@ To set up a Redis service:
 
 ### Bind a Redis service to your app
 
-You must bind your app to the Redis service to be able to access the cache from the app.
+You must bind your app to the Redis service so you can access the cache from the app.
 
-1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service instance when you next deploy your app. An example manifest:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
 
     ```
     --
@@ -889,7 +889,7 @@ Refer to the Cloud Foundry documentation on [deploying with app manifests](https
 
 #### Use the cf bind-service command
 
-If you are not deploying your app with a `manifest.yml` file, you can manually bind your service instance to your app.
+Alternatively, you can manually bind your service instance to your app.
 
 1. Run the following:
 
@@ -1157,7 +1157,7 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 
 To access the cache from the app, you must bind your app to the Elasticsearch service.
 
-1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app automatically to the service instance when you next deploy your app. An example manifest:
+1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
 
     ```
     --
@@ -1175,7 +1175,7 @@ Refer to the Cloud Foundry documentation on [deploying with app manifests](https
 
 #### Use the cf bind-service command
 
-If you are not deploying your app with a `manifest.yml` file, you can manually bind your service instance to your app.
+Alternatively, you can manually bind your service instance to your app.
 
 1. Run the following:
 
