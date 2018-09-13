@@ -1239,7 +1239,14 @@ You can store data classified up to Official on the GOV.UK PaaS. Refer to the [d
 
 ### Elasticsearch backups
 
-Elasticsearch service does not currently support backups.
+Aiven automatically backs up all data stored within any Elasticsearch service you create. 
+
+Backups are taken every 2 hours. Data is retained for:
+
+- 2 days if you have a `tiny` plan
+- 14 days if you have a `small` plan
+
+To restore data to an earlier state, you can visit the [GOV.UK PaaS support page](https://www.cloud.service.gov.uk/support) or contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 ### Further information
 
