@@ -2,7 +2,10 @@
 
 ## Metrics
 
-Cloud Foundry provides time-series data, or metrics, for each instance of your PaaS app. You can use either [Prometheus](https://prometheus.io/) [external link] or the metrics exporter app with [StatsD](https://github.com/etsy/statsd/wiki) [external link] to receive, store and view this data over time.
+Cloud Foundry provides time-series data, or metrics, for each instance of your PaaS app. You can receive, store and view this data over time in your chosen monitoring system by either:
+
+- using the [Prometheus](https://prometheus.io/) [external link] endpoint provided by the GOV.UK PaaS team
+- deploying the `paas-metric-exporter` app to push metrics data in [StatsD](https://github.com/etsy/statsd/wiki) [external link] format
 
 You can also view data as a one-off snapshot using the Cloud Foundry CLI.
 
@@ -14,17 +17,17 @@ You must set up Prometheus to request metrics from the `https://metrics.cloud.se
 
 1. [Install Prometheus](https://prometheus.io/docs/prometheus/latest/getting_started/) [external link].
 
-1. You must set up a bearer token so the API endpoint can authenticate your Prometheus request. We recommend that you use a bearer token file as it is easy to maintain. Set up an automated cron job to run the following command every 10 minutes:
+1. You must set up a bearer token so the API endpoint can authenticate your Prometheus request. We recommend that you use a `bearer_token_file` as it is easy to maintain. Set up an automated cron job to run the following command every 5 minutes:
 
 	```
 	cf oauth-token > BEARER_TOKEN_FILE
 	```
 
-	where `cf oauth-token` generates a bearer token and passes it to the bearer token file.
+	where `cf oauth-token` generates a bearer token and writes it to the `bearer_token_file` used by the Promtheus configuration.
 
-1. Configure Prometheus to read the bearer token from the bearer token file. Refer to the Prometheus [configuration documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#ingress) [external link] for more information.
+1. Configure Prometheus to read the bearer token from the `bearer_token_file`. Refer to the Prometheus [configuration documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#ingress) [external link] for more information.
 
-You can now check Prometheus to see if you are receiving metrics.
+You can now check Prometheus to see if you are receiving metrics. If you are not receiving any metrics, contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 ### Metrics exporter app with StatsD
 
@@ -36,8 +39,6 @@ To use the metrics exporter, you deploy it as an app on PaaS. The current metric
 - app crashes
 - app requests
 - app response times
-
-#### Pre-requisites
 
 Before you set up the metrics exporter app, you will need:
 
@@ -70,9 +71,7 @@ To set up the metrics exporter app:
 
 You can now check your monitoring system to see if you are receiving metrics.
 
-### Troubleshooting
-
-If you are not receiving the metrics, check the Prometheus or metrics exporter app [logs](/monitoring_apps.html#logs). If you still need help, contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+If you are not receiving any metrics, check the [logs](/monitoring_apps.html#logs) for the metrics exporter app. If you still need help, please contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 ### More about monitoring
 
