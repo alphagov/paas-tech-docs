@@ -7,7 +7,7 @@ Cloud Foundry provides time-series data, or metrics, for each instance of your P
 - using the [Prometheus](https://prometheus.io/) [external link] endpoint provided by the GOV.UK PaaS team
 - deploying the `paas-metric-exporter` app to push metrics data in [StatsD](https://github.com/etsy/statsd/wiki) [external link] format
 
-You can also view data as a one-off snapshot using the Cloud Foundry CLI.
+You can also view all metrics as a one-off snapshot by installing the Cloud Foundry CLI [log cache plug-in](https://github.com/cloudfoundry/log-cache-cli#installing-plugin). 
 
 ### Prometheus
 
