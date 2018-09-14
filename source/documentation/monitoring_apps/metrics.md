@@ -7,7 +7,7 @@ Cloud Foundry provides time-series data, or metrics, for each instance of your P
 - using the [Prometheus](https://prometheus.io/) [external link] endpoint provided by the GOV.UK PaaS team
 - deploying the `paas-metric-exporter` app to push metrics data in [StatsD](https://github.com/etsy/statsd/wiki) [external link] format
 
-You can also view all metrics as a one-off snapshot by installing the Cloud Foundry CLI [log cache plug-in](https://github.com/cloudfoundry/log-cache-cli#installing-plugin). 
+You can also view all metrics as a one-off snapshot by installing the Cloud Foundry CLI [log cache plug-in](https://github.com/cloudfoundry/log-cache-cli#installing-plugin).
 
 ### Prometheus
 
@@ -20,12 +20,14 @@ You must set up Prometheus to request metrics from the `https://metrics.cloud.se
 1. You must set up a bearer token so the API endpoint can authenticate your Prometheus request. We recommend that you use a `bearer_token_file` as it is easy to maintain. Set up an automated cron job to run the following command every 5 minutes:
 
 	```
-	cf oauth-token > BEARER_TOKEN_FILE
+	cf oauth-token > /path/to/bearer_token_file.txt
 	```
 
-	where `cf oauth-token` generates a bearer token and writes it to the `bearer_token_file` used by the Promtheus configuration.
+	where:
+	- `cf oauth-token` is the command that generates a bearer token
+	- `/path/to/bearer_token_file.txt` is the location and name of the `bearer_token_file` used by the Prometheus configuration
 
-1. Configure Prometheus to read the bearer token from the `bearer_token_file`. Refer to the Prometheus [configuration documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#ingress) [external link] for more information.
+1. Configure Prometheus to read the bearer token from the `bearer_token_file.txt`. Refer to the Prometheus [configuration documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#ingress) [external link] for more information.
 
 You can now check Prometheus to see if you are receiving metrics. If you are not receiving any metrics, contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
