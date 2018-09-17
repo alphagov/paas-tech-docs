@@ -1,4 +1,4 @@
-## Route services
+# Route services
 
 Tenants may wish to apply some processing to requests before they reach an application. Common examples of use cases are authentication, rate limiting, and caching services.
 
@@ -17,40 +17,57 @@ Tenants can define their own route service instance by using a [user-provided se
 - It must be a HTTPS endpoint with a valid certificate.
 - It can be a application running in the platform itself or an external service on the Internet.
 - It must be reachable from the platform (ie. not blocked by a firewall or in a private network).
-- It must implement the [route service protocol](/deploying_services.html#implementing-a-route-service)
+- It must implement the [route service protocol](/deploying_services/route_services/#implementing-a-route-service)
 
 This is how you define an user-provided route service instance and map it to the route of your app:
 
 1. From the command line, run:
 
-   ``cf create-user-provided-service SERVICE_INSTANCE -r ROUTE_SERVICE_URL``
+    ```
+    cf create-user-provided-service SERVICE_INSTANCE -r ROUTE_SERVICE_URL
+    ```
 
-   where `SERVICE_INSTANCE` is a unique, descriptive name for this route service instance, and `ROUTE_SERVICE_URL` is the url of the route service endpoint; for example:
+    where `SERVICE_INSTANCE` is a unique, descriptive name for this route service instance, and `ROUTE_SERVICE_URL` is the url of the route service endpoint; for example:
 
-   ``cf create-user-provided-service my-route-service -r https://route-service.example.org``
+    ```
+    cf create-user-provided-service my-route-service -r https://route-service.example.org
+    ```
 
-   the service will be immediately ready to be used, and you can query its status by running:
+    The service will be immediately ready to be used, and you can query its status by running:
 
-   ``cf service my-route-service``
+    ```
+    cf service my-route-service
+    ```
 
 
 2. Bind this route service instance to the [application route](/deploying_apps.html#names-routes-and-domains)
 
-   ``cf bind-route-service DOMAIN SERVICE_INSTANCE --hostname HOSTNAME``
+    ```
+    cf bind-route-service DOMAIN SERVICE_INSTANCE --hostname HOSTNAME
+    ```
 
-   where `DOMAIN` is the domain used by your application, likely the default one `cloudapps.digital`, `SERVICE_INSTANCE` the name of the service that you have just created, and `HOSTNAME` the host or app name assigned to the app. For example:
+    where:
+    - `DOMAIN` is the domain used by your application, likely the default one `cloudapps.digital`
+    - `SERVICE_INSTANCE` the name of the service that you have just created
+    - `HOSTNAME` the host or app name assigned to the app
 
-   ``cf bind-route-service cloudapps.digital my-route-service --hostname myapp``
+    For example:
 
-3. You can list the [routes](/deploying_apps.html#names-routes-and-domains) of the current [space](/orgs_spaces_users.html#spaces), to see the applications and route services bound to them:
+    ```
+    cf bind-route-service cloudapps.digital my-route-service --hostname myapp
+    ```
 
-   ``cf routes``
+3. You can list the [routes](/deploying_apps.html#names-routes-and-domains) of the current [space](/orgs_spaces_users.html#spaces) to see the applications and route services bound to them:
 
-If the route service endpoint is not responding correctly, you might get the following response when querying the route:
+    ```
+    cf routes
+    ```
 
-   ``502 Bad Gateway: Registered endpoint failed to handle the request.``
+    If the route service endpoint is not responding correctly, you might get the following response when querying the route:
 
-If you get this error, double check that the endpoint is working and reachable from the platform, that it is using a valid SSL certificate, that responds timely and that it implements the [route service protocol](/deploying_services.html#implementing-a-route-service).
+    ``502 Bad Gateway: Registered endpoint failed to handle the request.``
+
+    If you get this error, double check that the endpoint is working and reachable from the platform, that it is using a valid SSL certificate, that responds timely and that it implements the [route service protocol](/deploying_services/route_services/#implementing-a-route-service).
 
 ### Implementing a route service
 
@@ -71,7 +88,7 @@ You can refer to the [Cloud Foundry documentation](https://docs.cloudfoundry.org
 In the following example we will add a route service to provide basic HTTP authentication to the bound routes. This can be used to restrict access to a beta application.
 
 An example of such a route service application code can be found in [cf basic auth route service](https://github.com/alext/cf_basic_auth_route_service) [external link].
-Please note this is a proof-of-concept and is *not intended to run in production*.
+Please note this is a proof-of-concept and is not intended to run in production.
 
 We will deploy it as an application in the platform itself. Then we will bind this route service to a deployed application called `myapp`, accessible via https://myapp.cloudapps.digital.
 
@@ -84,7 +101,7 @@ We will deploy it as an application in the platform itself. Then we will bind th
     cf push my-basic-auth-service-app --no-start
     ```
 
-   Note: You might want to change `my-basic-auth-service-app` with a different name to avoid conflicts with other tenants' apps.
+    Note: You might want to change `my-basic-auth-service-app` with a different name to avoid conflicts with other tenants' apps.
 
 2. This example route service can only authenticate one user with fixed username and password. Choose any value for username and password then pass them to the application via environment variables `AUTH_USERNAME` and `AUTH_PASSWORD`. Finally the route service can be started:
 
@@ -94,7 +111,7 @@ We will deploy it as an application in the platform itself. Then we will bind th
     cf start my-basic-auth-service-app
     ```
 
-   The new service is serving in https://my-basic-auth-service-app.cloudapps.digital.
+    The new service is serving in https://my-basic-auth-service-app.cloudapps.digital.
 
 3. Register the route service endpoint as an user-provided service instance:
 
@@ -108,4 +125,4 @@ We will deploy it as an application in the platform itself. Then we will bind th
     cf bind-route-service cloudapps.digital my-basic-auth-service --hostname myapp
     ```
 
-The application in https://myapp.cloudapps.digital will now ask for basic HTTP authentication, with login `myuser` and password `pass1234`.
+    The application in https://myapp.cloudapps.digital will now ask for basic HTTP authentication, with login `myuser` and password `pass1234`.

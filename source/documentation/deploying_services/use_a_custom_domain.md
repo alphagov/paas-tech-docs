@@ -1,6 +1,6 @@
-## Set up a custom domain using the cdn-route service
+# Set up a custom domain using the cdn-route service
 
-This section explains how to configure a custom domain name for your app by using the GOV.UK PaaS `cdn-route` service to set up a content distribution network (CDN) that will route and [cache](/deploying_services.html#caching) requests to your app.
+This section explains how to configure a custom domain name for your app by using the GOV.UK PaaS `cdn-route` service to set up a content distribution network (CDN) that will route and [cache](/deploying_services/use_a_custom_domain/#caching) requests to your app.
 
 By using the `cdn-route` service, the GOV.UK PaaS team will be able to provide faster and more effective technical support if you have any issues.
 
@@ -67,7 +67,7 @@ Once you create a CDN service instance, you cannot update or delete it until it 
 
     Using this example, you would create a `CNAME` record in your DNS server pointing `www.example.com` to `d3nrs0916m1mk2.cloudfront.net.`
 
-You have now completed the custom domain setup process. Please note that it should take approximately one hour for domain setup to finish. If it has not finished after two hours, please refer to the [troubleshooting](/deploying_services.html#troubleshooting-custom-domains) section.
+You have now completed the custom domain setup process. Please note that it should take approximately one hour for domain setup to finish. If it has not finished after two hours, please refer to the [troubleshooting](/deploying_services/use_a_custom_domain/#troubleshooting-custom-domains) section.
 
 >Your app is only available over HTTPS.
 
@@ -93,7 +93,7 @@ By default cookies are forwarded to your app. You can disable this by setting th
 cf update-service my-cdn-route \
     -c '{"domain": "www.example.com", "cookies": false}'
 ```
-See the [More about how the CDN works](/deploying_services.html#more-about-how-custom-domains-work) section for details.
+See the [More about how the CDN works](/deploying_services/use_a_custom_domain/#more-about-how-custom-domains-work) section for details.
 
 #### Forwarding headers
 
@@ -111,7 +111,7 @@ cf update-service my-cdn-route \
     -c '{"domain": "www.example.com", "headers": ["*"]}'
 ```
 
-Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](/deploying_services.html#more-about-how-custom-domains-work) section for details.
+Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](/deploying_services/use_a_custom_domain/#more-about-how-custom-domains-work) section for details.
 
 ### Removing your custom domain
 
@@ -157,7 +157,7 @@ Custom domains are configured by our cdn-route service which uses a CloudFront d
 
 #### Caching
 
-CloudFront uses your app's `Cache-Control` or `Expires` HTTP headers to determine [how long to cache content](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html). If your app does not provide these headers, CloudFront will use a default timeout of **24 hours**. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
+CloudFront uses your app's `Cache-Control` or `Expires` HTTP headers to determine [how long to cache content](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) [external link]. If your app does not provide these headers, CloudFront will use a default timeout of 24 hours. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
 
 While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV.UK PaaS support](https://www.cloud.service.gov.uk/support) can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).
 
@@ -165,7 +165,7 @@ You can configure CloudFront to forward headers to your app, which causes CloudF
 
 ### Authentication
 
-Cookie headers are forwarded to your app by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services.html#forwarding-headers).
+Cookie headers are forwarded to your app by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services/use_a_custom_domain/#forwarding-headers).
 
 ### Further information
 

@@ -30,7 +30,7 @@ To set up a PostgreSQL service:
     |`X.X`|Version number|
     |`small / medium / large / xlarge`|Size of instance|
 
-    More information can be found in the [PostgreSQL plans](/deploying_services.html#postgresql-plans) section.
+    More information can be found in the [PostgreSQL plans](/deploying_services/postgresql/#postgresql-plans) section.
 
 1. Run the following code in the command line:
 
@@ -117,7 +117,7 @@ Alternatively, you can manually bind your service instance to your app.
 
 ### Connect to a PostgreSQL service from your app
 
-Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) [external link] connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
@@ -147,9 +147,9 @@ Run `cf conduit --help` for more options, and refer to the [Conduit readme file]
 
 You must:
 
-- install and configure the [PostgreSQL command line (CLI)](https://postgresapp.com/documentation/cli-tools.html) tools on your local machine (configuration options vary depending on operating system and version)
+- install and configure the [PostgreSQL command line (CLI) tools](https://postgresapp.com/documentation/cli-tools.html) [external link] on your local machine (configuration options vary depending on operating system and version)
 - [log into Cloud Foundry](/get_started.html#set-up-command-line)
-- [create the new PaaS-hosted PostgreSQL database](/deploying_services.html#set-up-a-postgresql-service)
+- [create the new PaaS-hosted PostgreSQL database](/deploying_services/postgresql/#set-up-a-postgresql-service)
 - [target the space](/deploying_apps.html#set-a-target) where your new database is located
 
 #### Non-PaaS to PaaS
@@ -167,7 +167,7 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
       - `DATA_FILE_NAME` is the SQL data file
       - `DATABASE_NAME` is the name of the non-PaaS source database
 
-2. Use the [Conduit plugin](/deploying_services.html#connect-to-a-postgresql-service-from-your-local-machine) to import the data file into the PaaS database by running:
+2. Use the [Conduit plugin](/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine) to import the data file into the PaaS database by running:
 
     ```
     cf conduit SERVICE_NAME -- psql < DATA_FILE_NAME
@@ -175,7 +175,7 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
-> You can only use [certain PostgreSQL extensions](/deploying_services.html#postgresql-extensions-whitelist).
+> You can only use [certain PostgreSQL extensions](/deploying_services/postgresql/#postgresql-extensions-whitelist).
 
 #### PaaS to PaaS
 
@@ -218,7 +218,7 @@ cf update-service my-pg-service -p small-ha-9.5
 
 The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
 
-You can also [queue a plan upgrade](/deploying_services.html#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
+You can also [queue a plan upgrade](/deploying_services/postgresql/#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
 
 #### Different encryption type
 
@@ -226,8 +226,8 @@ You cannot upgrade your service plan using the `cf update-service` command if th
 
 To upgrade, you must set up a new service and migrate your app data.
 
-1. [Set up a new PostgreSQL service](/deploying_services.html#set-up-a-postgresql-service) with a new plan that has a different encryption type to your current plan.
-1. Move your app data from the current service to the new service by following the [import and export bulk data documentation](/deploying_services.html#paas-to-paas).
+1. [Set up a new PostgreSQL service](/deploying_services/postgresql/#set-up-a-postgresql-service) with a new plan that has a different encryption type to your current plan.
+1. Move your app data from the current service to the new service by following the [import and export bulk data documentation](/deploying_services/postgresql/#paas-to-paas).
 
 #### Downgrade PostgreSQL service plan
 
@@ -263,7 +263,7 @@ Type `yes` when asked for confirmation.
 
 ### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services/#data-security-classification) for more information.
 
 ### PostgreSQL plans
 
@@ -277,7 +277,7 @@ New organisations cannot access paid plans by default. Enabling this access is c
 
 If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/orgs_spaces_users.html#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
 
-There is a free plan available with limited storage which should only be used for development or testing, but __not production__.
+There is a free plan available with limited storage which should only be used for development or testing, but not production.
 
 #### Encrypted plans - PostgreSQL
 
@@ -285,11 +285,11 @@ All plans have encryption at rest unless stated otherwise. This means that both 
 
 #### High availability plans - PostgreSQL
 
-We recommend you use a high availability plan (`HA`) for your PostgreSQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available (see [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details).
+We recommend you use a high availability plan (`HA`) for your PostgreSQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See [Amazon's SLA](https://aws.amazon.com/rds/sla/) [external link] for details.
 
 When you use a high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.
 
-Refer to the [Amazon RDS documentation on the failover process](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) for more information.
+Refer to the [Amazon RDS documentation on the failover process](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) [external link] for more information.
 
 You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to arrange for us to trigger a failover for you.
 
@@ -297,7 +297,7 @@ You should test how your app deals with a failover to make sure you are benefiti
 
 Amazon RDS has the capability to provide a read-only copy of your database known as a read replica. This can be useful for performance, availability or security reasons.
 
-Refer to the [Amazon RDS documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) for more information.
+Refer to the [Amazon RDS documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) [external link] for more information.
 
 GOV.UK PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
 
@@ -339,7 +339,7 @@ cf update-service my-pg-service -p small-ha-9.5 -c '{"apply_at_maintenance_windo
 
 Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
 
-You can only migrate your service if the new plan has the [same encryption type](#same-encryption-type) as your current plan.
+You can only migrate your service if the new plan has the [same encryption type](/deploying_services/postgresql/#same-encryption-type) as your current plan.
 
 #### PostgreSQL service backup
 
@@ -349,7 +349,7 @@ Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is reta
 
 There are two ways you can restore data to an earlier state:
 
-1. You can restore to the latest snapshot yourself. See [Restoring a PostgreSQL service snapshot](/deploying_services.html#restoring-a-postgresql-service-snapshot) for details.
+1. You can restore to the latest snapshot yourself. See [Restoring a PostgreSQL service snapshot](/deploying_services/postgresql/#restoring-a-postgresql-service-snapshot) for details.
 
 1. We can manually restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Data can be restored to a new PostgreSQL service instance running in parallel, or it can replace the existing service instance.
 
@@ -357,11 +357,11 @@ There are two ways you can restore data to an earlier state:
 
 Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.
 
-For more details about how the RDS backup system works, see [Amazon's DB Instance Backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html) [external page].
+For more details about how the RDS backup system works, see [Amazon's DB Instance Backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html) [external link].
 
 #### Restoring a PostgreSQL service snapshot
 
-You can create a copy of any existing PostgreSQL service instance using the latest snapshot of the RDS instance. These snapshots are taken during [the PostgreSQL nightly backups](/deploying_services.html#postgresql-service-backup).
+You can create a copy of any existing PostgreSQL service instance using the latest snapshot of the RDS instance. These snapshots are taken during [the PostgreSQL nightly backups](/deploying_services/postgresql/#postgresql-service-backup).
 
 This can be useful if you want to clone a production database to be used for testing or batch processing.
 
@@ -405,14 +405,14 @@ To restore from a snapshot:
     cf service my-pg-service-copy
     ```
 
- 4. The new instance is set up when the `cf service NEW_SERVICE_NAME` command returns a `create succeeded` status. See [Set up a PostgreSQL service](/deploying_services.html#set-up-a-postgresql-service) for more details.
+ 4. The new instance is set up when the `cf service NEW_SERVICE_NAME` command returns a `create succeeded` status. See [Set up a PostgreSQL service](/deploying_services/postgresql/#set-up-a-postgresql-service) for more details.
 
  This feature has the following limitations:
 
   * You can only restore the most recent snapshot from the latest nightly backup
   * You cannot restore from a service instance that has been deleted
   * You must use the same service plan for the copy as for the original service instance
-  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/deploying_services.html#connect-to-a-postgresql-service-from-your-local-machine).
+  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine).
 
 ### PostgreSQL extensions whitelist
 

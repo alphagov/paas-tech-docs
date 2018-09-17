@@ -20,7 +20,7 @@ To set up a Redis service:
     tiny-unclustered-3.2   568MB RAM, non-clustered, single node, no failover, no backups             paid
     ```
 
-    You should use the `tiny-clustered-3.2` plan as it is backed up every day. Refer to the [Redis plans](/deploying_services.html#redis-plans) section of the documentation for more information.
+    You should use the `tiny-clustered-3.2` plan as it is backed up every day. Refer to the [Redis plans](/deploying_services/redis/#redis-plans) section of the documentation for more information.
 
 1. Run the following to create a service instance:
 
@@ -112,7 +112,7 @@ Alternatively, you can manually bind your service instance to your app.
 
 ### Connect to a Redis service from your app
 
-Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) [external link] connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
 Your app should parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to make a secure connection to Redis.
 
@@ -146,7 +146,7 @@ You must:
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
-You have now connected your local machine to your Redis service instance using Conduit. You can test this connection with the Redis [PING](https://redis.io/commands/ping) command:
+You have now connected your local machine to your Redis service instance using Conduit. You can test this connection with the Redis [PING command](https://redis.io/commands/ping) [external link]:
 
 ```
 127.0.0.1:7081> PING
@@ -185,7 +185,7 @@ Type `yes` when asked for confirmation.
 
 ### Data classification
 
-You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services.html#data-security-classification) for more information.
+You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services/#data-security-classification) for more information.
 
 ### Redis plans
 
@@ -202,7 +202,7 @@ Both plans include encryption at rest of the database storage. This means that b
 
 We recommend that you use this plan as it is backed up every day. Note that:
 
-- [Sidekiq](https://sidekiq.org) does not work with clustered Redis
+- [Sidekiq](https://sidekiq.org) [external link] does not work with clustered Redis
 - this plan cannot be [vertically scaled](/managing_apps.html#scaling) or upgraded to a bigger plan
 
 #### tiny-unclustered-3.2
@@ -214,7 +214,7 @@ Use this plan if your client library cannot connect to clustered plans. Note tha
 
 Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you need an unclustered plan with backups enabled, or a larger unclustered plan.
 
-Refer to the [Redis documentation](https://redis.io/topics/cluster-tutorial) for more information on clusters.
+Refer to the [Redis documentation](https://redis.io/topics/cluster-tutorial) [external link] for more information on clusters.
 
 ### Redis maintenance & backups
 
@@ -228,7 +228,7 @@ For more information on maintenance times, refer to the [Amazon ElastiCache main
 
 The data stored within any Redis service instance you create is backed up using the Amazon ElastiCache backup system. Backups are taken every day between 2am and 5am UTC. Data is retained for 7 days, and stored in [Amazon S3](https://aws.amazon.com/s3/) [external link].
 
-To restore from the __latest__ backup of your Redis service instance, create a new service instance by running the following code:
+To restore from the latest backup of your Redis service instance, create a new service instance by running the following code:
 
 ```
 cf create-service redis PLAN NEW_SERVICE_NAME -c '{ "restore_from_latest_snapshot_of": "GUID" }'
