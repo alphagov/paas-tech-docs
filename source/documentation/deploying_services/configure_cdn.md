@@ -1,4 +1,4 @@
-## Set up a custom domain by configuring your own CDN
+# Set up a custom domain by configuring your own CDN
 
 There are two ways to configure your own CDN:
 
