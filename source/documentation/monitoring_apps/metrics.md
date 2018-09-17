@@ -29,6 +29,41 @@ You must set up Prometheus to request metrics from the `https://metrics.cloud.se
 
 1. Configure Prometheus to read the bearer token from the `bearer_token_file.txt`. Refer to the Prometheus [configuration documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#ingress) [external link] for more information.
 
+The above steps can be demonstrated with a script, using docker to run Prometheus locally:
+
+1. Save the following script as `test-metrics.sh`
+```
+#!/usr/bin/env bash
+set -ue
+
+echo "
+global:
+  scrape_interval: 1m
+  evaluation_interval: 1m
+  scrape_timeout: 1m
+
+scrape_configs:
+  - job_name: PaaS
+    bearer_token: $(cf oauth-token | sed 's/bearer //')
+    scheme: https
+    static_configs:
+      - targets:
+        - metrics.cloud.service.gov.uk:443
+" > prometheus.yml
+
+docker run --publish 9090:9090 \
+           --volume "$PWD/prometheus.yml:/etc/prometheus/prometheus.yml" \
+           prom/prometheus
+```
+
+2. Make the script executable: `chmod +x test-metrics.sh`
+
+1. Run the script: `./test-metrics.sh`
+
+1. Open your web browser to `http://localhost:9090/targets`
+
+1. A local Prometheus will now be scraping Cloud Foundry metrics, this may take up to a minute before the `PaaS` target is `UP`.
+
 You can now check Prometheus to see if you are receiving metrics. If you are not receiving any metrics, contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 ### Metrics exporter app with StatsD
