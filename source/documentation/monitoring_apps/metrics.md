@@ -29,42 +29,59 @@ You must set up Prometheus to request metrics from the `https://metrics.cloud.se
 
 1. Configure Prometheus to read the bearer token from the `bearer_token_file.txt`. Refer to the Prometheus [configuration documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#ingress) [external link] for more information.
 
-The above steps can be demonstrated with a script, using docker to run Prometheus locally:
+#### Use Docker to run Prometheus locally
 
-1. Save the following script as `test-metrics.sh`
-```
-#!/usr/bin/env bash
-set -ue
+You can set up Prometheus to request metrics from the API endpoint by using [Docker](https://www.docker.com/) [external link] to run a local instance of Prometheus.
 
-echo "
-global:
-  scrape_interval: 1m
-  evaluation_interval: 1m
-  scrape_timeout: 1m
+1. Save the following script as `test-metrics.sh`:
 
-scrape_configs:
-  - job_name: PaaS
-    bearer_token: $(cf oauth-token | sed 's/bearer //')
-    scheme: https
-    static_configs:
-      - targets:
-        - metrics.cloud.service.gov.uk:443
-" > prometheus.yml
+	```
+	#!/usr/bin/env bash
+	set -ue
 
-docker run --publish 9090:9090 \
-           --volume "$PWD/prometheus.yml:/etc/prometheus/prometheus.yml" \
-           prom/prometheus
-```
+	echo "
+	global:
+	  scrape_interval: 1m
+	  evaluation_interval: 1m
+	  scrape_timeout: 1m
 
-2. Make the script executable: `chmod +x test-metrics.sh`
+	scrape_configs:
+	  - job_name: PaaS
+	    bearer_token: $(cf oauth-token | sed 's/bearer //')
+	    scheme: https
+	    static_configs:
+	      - targets:
+	        - metrics.cloud.service.gov.uk:443
+	" > prometheus.yml
 
-1. Run the script: `./test-metrics.sh`
+	docker run --publish 9090:9090 \
+	           --volume "$PWD/prometheus.yml:/etc/prometheus/prometheus.yml" \
+	           prom/prometheus
+	```
 
-1. Open your web browser to `http://localhost:9090/targets`
+1. Run the following to make the script executable:
 
-1. A local Prometheus will now be scraping Cloud Foundry metrics, this may take up to a minute before the `PaaS` target is `UP`.
+	```
+	chmod +x test-metrics.sh
+	```
 
-You can now check Prometheus to see if you are receiving metrics. If you are not receiving any metrics, contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+1. Run the following to execute the script:
+
+	```
+	./test-metrics.sh
+	```
+
+	If successful, you will see the message:
+
+	```
+	msg="Server is ready to receive web requests."
+	```
+
+1. Open your web browser and go to `http://localhost:9090/targets` to see the local Prometheus instance running in a Docker container and receiving metrics.
+
+If your local Prometheus instance is not receiving any metrics, check that the __PaaS State__ is __UP__.
+
+If the __PaaS State__ is __UP__ and you are still not receiving any metrics, contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 ### Metrics exporter app with StatsD
 
