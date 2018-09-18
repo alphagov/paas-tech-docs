@@ -15,7 +15,6 @@ To be hosted on GOV.UK PaaS, your app must:
     - Python
     - Ruby
     - static HTML/CSS/Javascript site
-
-    >The [.NET Core buildpack](https://docs.cloudfoundry.org/buildpacks/dotnet-core/index.html) [external link] is only available as a custom buildpack.
+    - .NET Core
 
 [Cloud Foundry buildpacks](deploying_apps.html#buildpacks) provide runtime and framework support for your application. For most languages, you will need to provide configuration files to describe your app’s dependencies. Most buildpacks will support a limited range of versions of the language.

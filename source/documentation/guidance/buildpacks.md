@@ -102,10 +102,6 @@ When running the app in production:
 
 Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you are interested in this feature. If a custom buildpack is requested by multiple tenants, we will look into improving our support in this area.
 
-#### .NET buildpack support
-
-The [.NET Core buildpack](https://docs.cloudfoundry.org/buildpacks/dotnet-core/index.html) [external link] is only available as a custom buildpack.
-
 
 ### Docker images
 
