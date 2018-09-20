@@ -2,22 +2,22 @@
 
 ## Metrics
 
-Cloud Foundry provides time-series data, or metrics, for each instance of your PaaS app. You can receive, store and view this data over time in your chosen monitoring system by either:
+Cloud Foundry provides time series data, or metrics, for each instance of your PaaS app. You can receive, store and view this data in a monitoring system of your choice by either:
 
 - using the [Prometheus](https://prometheus.io/) [external link] endpoint provided by the GOV.UK PaaS team
 - deploying the `paas-metric-exporter` app to push metrics data in [StatsD](https://github.com/etsy/statsd/wiki) [external link] format
 
-You can also view all metrics as a one-off snapshot by installing the Cloud Foundry CLI [log cache plug-in](https://github.com/cloudfoundry/log-cache-cli#installing-plugin).
+You can also view all metrics in a one-off snapshot by installing the Cloud Foundry CLI [log cache plug-in](https://github.com/cloudfoundry/log-cache-cli#installing-plugin) [external link].
 
-### Prometheus
+### Use the Prometheus endpoint
 
-The GOV.UK PaaS team maintains the API that Prometheus uses for free, which ensures that you can access all available metrics. You can configure Prometheus manually to filter out any unwanted metrics.
+Prometheus uses the `https://metrics.cloud.service.gov.uk/metrics` API endpoint to request metrics from Cloud Foundry. PaaS maintains this endpoint for free, so you can access all available metrics for free. You can configure Prometheus manually to filter out any metrics you do not need.
 
 You must set up Prometheus to request metrics from the `https://metrics.cloud.service.gov.uk/metrics` API endpoint.
 
 1. [Install Prometheus](https://prometheus.io/docs/prometheus/latest/getting_started/) [external link].
 
-1. You must set up a bearer token so the API endpoint can authenticate your Prometheus request. We recommend that you use a `bearer_token_file` as it is easy to maintain. Set up an automated cron job to run the following command every 5 minutes:
+1. You must set up a bearer token so the API endpoint can authenticate your Prometheus request. We recommend you use a `bearer_token_file`. Set up an automated cron job to run the following command every 5 minutes:
 
 	```
 	cf oauth-token > /path/to/bearer_token_file.txt
@@ -59,25 +59,25 @@ You can set up Prometheus to request metrics from the API endpoint by using [Doc
 	           prom/prometheus
 	```
 
-1. Run the following to make the script executable:
+1. Make the script executable:
 
 	```
 	chmod +x test-metrics.sh
 	```
 
-1. Run the following to execute the script:
+1. Execute the script:
 
 	```
 	./test-metrics.sh
 	```
 
-	If successful, you will see the message:
+	If the script executes successfully, you will see the message:
 
 	```
 	msg="Server is ready to receive web requests."
 	```
 
-1. Open your web browser and go to `http://localhost:9090/targets` to see the local Prometheus instance running in a Docker container and receiving metrics.
+1. Open your web browser and go to `http://localhost:9090/targets`. You should see the local Prometheus instance running in a Docker container and receiving metrics.
 
 If your local Prometheus instance is not receiving any metrics, check that the __PaaS State__ is __UP__.
 
