@@ -338,7 +338,7 @@ cf update-service my-ms-service -p medium-5.7 -c '{"apply_at_maintenance_window"
 
 Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
 
-You can only migrate your service if the new plan has the [same encryption type](deploying_services/mysql/#same-encryption-type) as your current plan.
+You can only migrate your service if the new plan has the [same encryption type](/deploying_services/mysql/#same-encryption-type) as your current plan.
 
 #### MySQL service backup
 
