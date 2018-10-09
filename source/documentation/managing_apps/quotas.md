@@ -12,7 +12,7 @@ Your quota sets the following:
 
 + **Service instances**: The number of service instances available to your organization.
 
-+ **Paid services**: Whether or not paid [services](/deploying_services.html#deploy-a-backing-or-routing-service) are available. ``postgres`` is a paid service.
++ **Paid services**: Whether or not paid [services](/deploying_services/#deploy-a-backing-or-routing-service) are available. ``postgres`` is a paid service.
 
 + **Routes**: The number of routes available to your applications (hostname and domain pairs where an application that exposes a listening port can be reached).
 

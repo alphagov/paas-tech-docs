@@ -2,7 +2,7 @@
 
 This section covers how to deploy a basic Node.js application to GOV.UK PaaS. See the Cloud Foundry [Tips for Node.js Applications](http://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] for more details.
 
-> If your app requires a [backing service](/deploying_services.html#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
+> If your app requires a [backing service](/deploying_services/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
 These instructions assume you have already carried out the setup process explained in the [Get started](/get_started.html#get-started) section.
 
@@ -64,11 +64,11 @@ See [Tips for Node.js Applications](https://docs.cloudfoundry.org/buildpacks/nod
 
 ### PostgreSQL setup with Node.js
 
-These instructions are for deploying a Node.js app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/deploying_services.html#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+These instructions are for deploying a Node.js app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with [other supported backing services](/deploying_services/#deploy-a-backing-or-routing-service), contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 If your app depends on a backing service such as PostgreSQL, it will need to parse the `VCAP_SERVICES` environment variable to get required details, such as service URLs and credentials.
 
-You must create the service and bind it to your Node.js app as described in the [PostgreSQL](/deploying_services.html#postgresql) section.
+You must create the service and bind it to your Node.js app as described in the [PostgreSQL](/deploying_services/postgresql/#postgresql) section.
 
 You can use the [cfenv](https://www.npmjs.com/package/cfenv) module to assist with parsing the environment variables.
 
