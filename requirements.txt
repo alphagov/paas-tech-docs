@@ -1,1 +1,2 @@
 https://github.com/linkchecker/linkchecker/archive/v9.4.0.zip
+requests>=2.15.0
