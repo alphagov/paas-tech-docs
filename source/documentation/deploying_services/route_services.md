@@ -12,7 +12,7 @@ Using route services has some consequences to be aware of:
 
 ### User-provided Route Services
 
-Tenants can define their own route service instance by using a [user-provided service instance](/https://docs.cloudfoundry.org/devguide/services/user-provided.html) [external link] that points to any HTTPS service. This endpoint must fulfill the following requirements:
+Tenants can define their own route service instance by using a [user-provided service instance](https://docs.cloudfoundry.org/devguide/services/user-provided.html) [external link] that points to any HTTPS service. This endpoint must fulfill the following requirements:
 
 - It must be a HTTPS endpoint with a valid certificate.
 - It can be a application running in the platform itself or an external service on the Internet.
