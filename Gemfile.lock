@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/alphagov/middleman-search.git
-  revision: 19df7578dc20621b60dfbc5e4dc986ac4f064c6b
+  revision: 50d072378c6f92a78ea02fed366ec6453aea8552
   specs:
     middleman-search (0.10.0)
       execjs (~> 2.6)
@@ -19,13 +19,16 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     autoprefixer-rails (6.7.7.2)
       execjs
-    backports (3.11.3)
+    backports (3.11.4)
     chronic (0.10.2)
     chunky_png (1.3.10)
+    coderay (1.1.2)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    commonmarker (0.17.13)
+      ruby-enum (~> 0.5)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -48,9 +51,9 @@ GEM
     eventmachine (1.2.7)
     execjs (2.7.0)
     fast_blank (1.0.0)
-    fastimage (2.1.3)
+    fastimage (2.1.4)
     ffi (1.9.25)
-    govuk_tech_docs (1.5.0)
+    govuk_tech_docs (1.6.1)
       activesupport
       chronic (~> 0.10.2)
       middleman (~> 4.0)
@@ -61,13 +64,15 @@ GEM
       middleman-sprockets (~> 4.0.0)
       middleman-syntax (~> 3.0.0)
       nokogiri
+      openapi3_parser
+      pry
       redcarpet (~> 3.3.2)
     haml (5.0.4)
       temple (>= 0.8.0)
       tilt
     hamster (3.0.0)
       concurrent-ruby (~> 1.0)
-    hashie (3.5.7)
+    hashie (3.6.0)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     kramdown (1.17.0)
@@ -75,6 +80,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     memoist (0.16.0)
+    method_source (0.9.0)
     middleman (4.2.1)
       coffee-script (~> 2.2)
       compass-import-once (= 1.0.5)
@@ -127,8 +133,10 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
+    openapi3_parser (0.5.2)
+      commonmarker (~> 0.17)
     padrino-helpers (0.13.3.4)
       i18n (~> 0.6, >= 0.6.7)
       padrino-support (= 0.13.3.4)
@@ -136,7 +144,10 @@ GEM
     padrino-support (0.13.3.4)
       activesupport (>= 3.1)
     parallel (1.12.1)
-    public_suffix (3.0.2)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    public_suffix (3.0.3)
     rack (2.0.5)
     rack-livereload (0.3.17)
       rack
@@ -145,6 +156,8 @@ GEM
       ffi (>= 0.5.0, < 2)
     redcarpet (3.3.4)
     rouge (2.2.1)
+    ruby-enum (0.7.2)
+      i18n
     sass (3.4.25)
     servolux (0.13.0)
     sprockets (3.7.2)
@@ -169,4 +182,4 @@ DEPENDENCIES
   wdm (~> 0.1.0)
 
 BUNDLED WITH
-   1.16.3
+   1.16.6
