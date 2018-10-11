@@ -8,7 +8,7 @@ Once your department, agency or team has an org account, you will need an indivi
 
 To provide you with an account, we need to store some personal data about you. Please see our [privacy notice](https://www.cloud.service.gov.uk/privacy-notice) for details.
 
-Once you have an individual account, you can access the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in). This tool allows you to, depending on your user role permissions, view and manage your [orgs](orgs_spaces_users.html#organisations), [spaces](orgs_spaces_users.html#spaces) and [users](orgs_spaces_users.html#users-and-user-roles) without using the command line.
+Once you have an individual account, you can access the [London-based](http://admin.london.cloud.service.gov.uk/) or the [Ireland-based](http://admin.cloud.service.gov.uk/) GOV.UK PaaS admin tool (requires sign in). This tool allows you to, depending on your user role permissions, view and manage your [orgs](orgs_spaces_users.html#organisations), [spaces](orgs_spaces_users.html#spaces) and [users](orgs_spaces_users.html#users-and-user-roles) without using the command line.
 
 Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
