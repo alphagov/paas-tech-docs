@@ -181,7 +181,7 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
 
 To move data between two PaaS-hosted PostgreSQL databases:
 
-1. Use the [Conduit plugin](/deploying_services.html#connect-to-a-postgresql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
+1. Use the [Conduit plugin](/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
 
     ```
     cf conduit SERVICE_NAME -- pg_dump --file DATA_FILE_NAME
