@@ -25,11 +25,15 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 
     The following table explains the syntax in this output:
 
+    <div style="height:1px;font-size:1px;">&nbsp;</div>
+
     |Syntax|Meaning|
     |:---|:---|
     |`ha`|High availability|
     |`X.X`|Version number|
     |`small`|Size of instance|
+
+    <div style="height:1px;font-size:1px;">&nbsp;</div>
 
     You should use the Elasticsearch 6.x plan, unless there are compatibility issues between Elasticsearch 6.x and your app.
 
