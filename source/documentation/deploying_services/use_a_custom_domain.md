@@ -6,10 +6,14 @@ By using the `cdn-route` service, the GOV.UK PaaS team will be able to provide f
 
 You must configure the `cdn-route` service to use a subdomain. If you configure the service to use an apex domain, the service creation may not succeed, which means your users will not be able to connect to your app via the apex domain. For example:
 
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
 |Apex domain|Subdomain|
 |:---|:---|
 |`example.com`|`www.example.com`|
 |`example.service.gov.uk`|`www.example.service.gov.uk`|
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
 
 Once you create a CDN service instance, you cannot update or delete it until it is configured. If you make a mistake that breaks the configuration, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to delete the service instance.
 
