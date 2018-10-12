@@ -1,48 +1,46 @@
 ## Logs
 
-Cloud Foundry and apps running on Cloud Foundry can generate logs. You should consult your logs if your app is failing to deploy or crashing, and it's not clear why.
+Cloud Foundry and apps running on Cloud Foundry generate logs using [Loggregator](https://docs.cloudfoundry.org/loggregator/architecture.html) [external link] and stream them to your terminal. You should consult your logs if your app is failing to deploy or crashing, and it's not clear why.
 
-For Cloud Foundry to capture your app's logs, your app should write logs to `STDOUT`/`STDERR` instead of a log file.
+Your app must write to `stdout` or `stderr` instead of a log file for its logs to be included in the Loggregator stream.
 
-Run `cf logs` to output all logs from each Cloud Foundry service involved in your app deploy:
+Run `cf logs` in the command line to stream all logs from each Cloud Foundry service involved in your app deployment:
 
 ```bash
 cf logs APP_NAME
 ```
 
-Run `cf logs` with the `--recent` flag to output the entire [Loggregator](https://docs.cloudfoundry.org/loggregator/architecture.html) [external link] buffer for your app:
+Run `cf logs` with the `--recent` flag to stream only the most recent logs:
 
 ```bash
 cf logs APP_NAME --recent
 ```
 
-Run `cf events` to see when an app starts, stops, restarts, or crashes (including error codes):
+You can also run `cf events` to see all recent app events, such as when an app starts, stops, restarts, or crashes (including error codes):
 
 ```bash
 cf events APP_NAME
 ```
 
-## Using commercial log management services
+## Set up the Logit log management service
 
-By default, Cloud Foundry streams a limited amount of logs to your terminal for a defined time. You can keep more logging information for longer by setting up a commercial log management service. This section shows how to set up the [Logit.io log management service](https://logit.io/) [external link].
+By default, Cloud Foundry streams a limited amount of logs to your terminal for a defined time. You can use a commercial log management service to keep more logging information for longer. This section describes how to set up the [Logit log management service](https://logit.io/) [external link].
 
-### Set up the Logit.io log management service
+### Prerequisites
 
-#### Pre-requisites
+Before you set up Logit, you must:
 
-Before setting up Logit, you must:
+- [deploy your app on Cloud Foundry](https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-apps)
+- [have a Logit account](https://logit.io/) [external link]
+- [set up Cloud Foundry](https://docs.cloud.service.gov.uk/get_started.html#set-up-command-line)
 
-- [set up your app on Cloud Foundry](https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-apps)
-- [sign up to Logit](https://logit.io/) [external link]
-- [sign into Cloud Foundry](https://docs.cloud.service.gov.uk/get_started.html#set-up-command-line)
+### Configure logstash filters
 
-#### Configure logstash filters
+You must set up [logstash](https://www.elastic.co/products/logstash) [external link] to process the Cloud Foundry logs into separate [Gorouter](https://docs.cloudfoundry.org/concepts/architecture/router.html) [external link] and app log types.
 
-You must set up logstash to process the Cloud Foundry logs into separate gorouter and app log types.
-
-1. Go to your Logit dashboard and select __Settings__ for the Logit ELK stack you want to use.
-1. Select __Logstash Filters__ on the __Stack options__ menu.
-1. Replace the code on the __Logstash Filters__ page with the following logstash filter code:
+1. Go to your Logit dashboard. For the Logit ELK stack you want to use, select __Settings__. 
+1. On the __Stack options__ menu, select __Logstash Filters__.
+1. Go to the __Logstash Filters__ page, and replace the code there with the following logstash filter code:
 
     ```
     filter {
@@ -115,14 +113,13 @@ You must set up logstash to process the Cloud Foundry logs into separate goroute
     ```
 
 1. Select __Validate__.
-1. Select __Apply__ once the code is valid.
-1. Go back to the Logit dashboard once the following message appears:
-“Filters have been applied to logstash, logstash will be restarted, this may take up to 2 minutes”.
+1. Select __Apply__ once the code is valid. If this is not possible, check you have copied the code correctly or contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) .
+1. Go back to the Logit dashboard once the following message appears: “Filters have been applied to logstash, logstash will be restarted, this may take up to 2 minutes”.
 
-#### Configure app
+### Configure app
 
 1. Select __Settings__ for the stack you want to use.
-1. Select __Logstash Inputs__ on the __Stack options__ menu.
+1. On the __Stack options__ menu, select __Logstash Inputs__.
 1. Note your __Stack Logstash endpoint__ and __TCP-SSL port__.
 1. Run the following in the command line to create the log drain service in Cloud Foundry:
 
@@ -142,18 +139,20 @@ You must set up logstash to process the Cloud Foundry logs into separate goroute
     $ cf restage APP_NAME
     ```
 
-1. Select __Access Kibana on the Stack options__ menu and check that you can see the logs in Kibana.
+1. Select __Access Kibana__ on the __Stack options__ menu and check that you can see the logs in Kibana.
 
-Once you have confirmed that the logs are draining correctly, you have successfully set up Logit.
+Once you confirm that the logs are draining correctly, you have successfully set up Logit.
 
-#### Enable security for your ELK
+Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if the logs are not draining correctly or if you have any questions.
 
-By default, Logit allows anyone on the Internet to send logs to your ELK stack. You can set up Logit to ensure that your ELK stack only receives logs from GOV.UK PaaS.
+### Enable security for your ELK stack
+
+By default, Logit allows anyone on the internet to send logs to your ELK stack. You can set up Logit to make sure that your ELK stack only receives logs from GOV.UK PaaS.
 
 1. Contact GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for a list of syslog drain egress IP addresses.
-1. Send these IP addresses to Logit support at [https://logit.io/contact-us](https://logit.io/contact-us) [external link] and ask that your ELK stack only receive log messages from these addresses.
+1. Send these IP addresses to Logit support at [https://logit.io/contact-us](https://logit.io/contact-us) [external link] and ask that your ELK stack only receives log messages from these addresses.
 
-#### Further information
+### Further information
 
 Refer to the Cloud Foundry documentation for more information on:
 
