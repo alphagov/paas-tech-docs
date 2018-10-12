@@ -244,6 +244,8 @@ For more details about how the backup system works, see the [Amazon's ElastiCach
 
 The eviction policy is the behaviour Redis follows when you reach your plan's maximum memory limit. The eviction policy can take the following values:
 
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
 |Eviction policy|Definition|
 |:---|:---|
 |`volatile-lru`| evict keys by trying to remove the least recently used (LRU) keys first, but only among keys that have an expire set, in order to make space for the new data added|
@@ -252,6 +254,8 @@ The eviction policy is the behaviour Redis follows when you reach your plan's ma
 |`volatile-random`| evict keys randomly in order to make space for the new data added, but only evict keys with an expire set|
 |`volatile-ttl`| evict keys with an expire set, and try to evict keys with a shorter time to live (TTL) first, in order to make space for the new data added|
 |`noeviction`| return errors when the memory limit was reached and the client is trying to execute commands that could result in more memory to be used|
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
 
 Your Redis instance is set to use the `volatile-lru` eviction policy by default. You can check this by running the `cf service SERVICE_NAME` command.
 
