@@ -6,7 +6,7 @@ Your department, agency or team must have a GOV.UK PaaS account. This account is
 
 Once your department, agency or team has an org account, you will need a personal account. Ask your [org manager](orgs_spaces_users.html#org-manager) to authorise the creation of your personal account.
 
-The GOV.UK PaaS is hosted in two regions, London and Ireland. The GOV.UK PaaS team creates all new orgs on the London-based GOV.UK PaaS by default. If you already have an account on the Ireland-based GOV.UK PaaS and request a new org, we will create this new org and account on the London-based GOV.UK PaaS, and you will have two separate accounts.
+The GOV.UK PaaS is hosted in two regions, London and Ireland. The GOV.UK PaaS team creates all new orgs in the London region by default. If you already have an account in the Ireland region and request a new org, we will create this new org and account in the London region, and you will have two separate accounts
 
 To provide you with an account, we need to store some personal data about you. Please see our [privacy notice](https://www.cloud.service.gov.uk/privacy-notice) for details.
 
