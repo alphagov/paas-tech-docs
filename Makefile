@@ -1,6 +1,10 @@
 .DEFAULT_GOAL := help
 
-LINKCHECKER := linkchecker --ignore-url=^mailto: -f ./.linkchecker.rc --verbose
+ifdef VERBOSE
+VERBOSE_FLAG:=--verbose
+endif
+
+LINKCHECKER := linkchecker --ignore-url=^mailto: -f ./.linkchecker.rc $(VERBOSE_FLAG)
 SERVER_PORT?=4567
 
 .PHONY: help
@@ -15,7 +19,7 @@ dependencies: ## Install dependencies
 .PHONY: build
 build: ## Builds the project
 	@echo "Run middleman..."
-	bundle exec middleman build --verbose
+	bundle exec middleman build $(VERBOSE_FLAG)
 	@echo "Copy additional files..."
 	cp googlec7239f490e1990a5.html build
 
