@@ -2,7 +2,7 @@
 
 GOV.UK Platform as a Service (PaaS) is a cloud-hosting platform built by the Government Digital Service (GDS). GOV.UK PaaS manages the deployment of your apps, services and background tasks so you don’t need to hire people with specialist cloud skills.
 
-The GOV.UK PaaS is hosted in two locations, London and Ireland. 
+The GOV.UK PaaS is hosted in two regions, London and Ireland. 
 
 GOV.UK PaaS is currently in private beta.
 
