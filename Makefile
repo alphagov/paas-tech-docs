@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-LINKCHECKER := linkchecker --ignore-url=^mailto: -f ./.linkchecker.rc
+LINKCHECKER := linkchecker --ignore-url=^mailto: -f ./.linkchecker.rc --verbose
 SERVER_PORT?=4567
 
 .PHONY: help
