@@ -22,6 +22,8 @@ We have summarised the practices in the table below, and noted the relevance of 
 
 Visit the [12factor.net website](https://12factor.net/) [external link] to further ensure your application supports these practices.
 
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
 |Principle|Meaning|Relevance to Cloud Foundry|
 |:---|:---|:---|
 |One codebase many deploys  |Each of your apps needs its own version-controlled repository.  |You can push the same codebase to many Cloud Foundry applications with these commands: <br>``` $ cf push myapp-staging``` <br/> ```$ cf push myapp-production```  |
@@ -36,3 +38,5 @@ Visit the [12factor.net website](https://12factor.net/) [external link] to furth
 |Development/Production parity  | Applications should be rapidly deployed from their development environment to production.  To ensure this rapid deployment, keep a developer’s environment similar to that of production (for example both environments should use the same backing services).  | CF helps you achieve this development/production parity by letting you create and deploy similar services for development, test and production environments|
 |Logs  | Maintain and archive log files so you have visibility of how your application works over time.  |Cloud Foundry [describes how to log files here](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html) [external link].|
 |Administrative processes  |Run one-off administrative processes (for example running analytics) in your production environment. You can run administrative processes as [tasks](https://docs.cloudfoundry.org/devguide/using-tasks.html) [external link] in Cloud Foundry. |  |
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>

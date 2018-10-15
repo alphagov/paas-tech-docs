@@ -18,11 +18,15 @@ Your responsibilities change depending on whether you use a standard buildpack, 
 
 You should tell Cloud Foundry which version of your app's language to use in the buildpack. You can specify an exact, minor or major version of the language. For example, with Python:
 
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
 |Category|Python Example|
 |:---|:---|
 |Exact|`3.5.2`|
 |Minor|`3.5.x`|
 |Major|`3.x`|
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
 
 If you specify an exact version, you must update this version when the GOV.UK PaaS team update the language's buildpack. Your app will fail to start if the language version it relies on is not supported by the latest language buildpack.
 
