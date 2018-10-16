@@ -57,7 +57,9 @@ A basic 'execute shell' buildstep would look like this:
 export CF_HOME="$(mktemp -d)"
 trap 'rm -r $CF_HOME' EXIT
 
-cf api https://api.cloud.service.gov.uk
+cf api API_ENDPOINT
+# https://api.cloud.service.gov.uk for the Ireland region
+# https://api.london.cloud.service.gov.uk for the London region
 
 # Note: the actual name of the environment variable is determined
 # by what you enter into the Credentials Binding Plugin
@@ -84,7 +86,7 @@ To install the Cloud Foundry plugin manually:
 An extra post-build action called "Push to Cloud Foundry" is now available in the dropdown menu when you configure a job.
 
 1. In your job's configuration, click the **Add post-build action** dropdown menu and select **Push to Cloud Foundry**.
-2. In the **Target** field, enter `https://api.cloud.service.gov.uk`.
+2. In the **Target** field, enter either `https://api.cloud.service.gov.uk` for the Ireland region, or `https://api.london.cloud.service.gov.uk` for the London region.
 3. In **Credentials**, select the user you created using the credentials plugin.
 4. Enter your organisation and the space the application will be deployed to. See [Managing orgs, spaces and users](/orgs_spaces_users.html#managing-organisations-spaces-and-users) for more details about organisations and spaces. You do not need to tick "Allow self-signed certificate" or "Reset app if already exists".
 5. The rest of the fields can be left with their default values. The plugin expects you to have a manifest file called `manifest.yml` in the root of the application folder. If you do not, you can provide the path to the application manifest, or enter a manifest configuration directly into the plugin.
