@@ -6,7 +6,7 @@ Your department, agency or team must have a GOV.UK PaaS account. This account is
 
 Once your department, agency or team has an org account, you will need a personal account. Ask your [org manager](orgs_spaces_users.html#org-manager) to authorise the creation of your personal account.
 
-The GOV.UK PaaS is hosted in two regions, London and Ireland. The GOV.UK PaaS team creates all new orgs in the London region by default. If you already have an account in the Ireland region and request a new org, we will create this new org and account in the London region, and you will have two separate accounts
+The GOV.UK PaaS is hosted in two independent regions, London and Ireland. The GOV.UK PaaS team creates new accounts in the London region unless you request otherwise. 
 
 To provide you with an account, we need to store some personal data about you. Please see our [privacy notice](https://www.cloud.service.gov.uk/privacy-notice) for details.
 
@@ -26,13 +26,13 @@ GOV.UK PaaS is hosted on [Cloud Foundry](https://www.cloudfoundry.org/) [externa
 
     Depending on your network configuration, you might need to set an [`HTTP_PROXY` environment variable](https://docs.cloudfoundry.org/cf-cli/http-proxy.html) [external link] for the CLI to connect. Contact your network administrator for your configuration settings.
 
-3. Sign in to Cloud Foundry. If your org is hosted on the London region, run:
+3. Sign in to Cloud Foundry. If your org is hosted in the London region, run:
 
     ```
     cf login -a api.london.cloud.service.gov.uk -u USERNAME
     ```
 
-    If your org is hosted on the Ireland region, run:
+    If your org is hosted in the Ireland region, run:
 
     ```
     cf login -a api.cloud.service.gov.uk -u USERNAME
