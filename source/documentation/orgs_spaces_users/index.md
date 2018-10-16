@@ -1,12 +1,18 @@
 # Managing organisations, spaces and users
 
+## Regions
+
+The GOV.UK PaaS is hosted in two independent regions, London and Ireland.
+
+GOV.UK PaaS accounts, credentials and resources (for example [backing services](/deploying_services/)) are created in a single region.
+
 ## Organisations
 
 An organisation, or org, represents a group of users, applications and environments. Each org shares the same resource, quota and custom domain.
 
-The GOV.UK PaaS team creates the first org for a new project, and assigns at least one [org manager](orgs_spaces_users.html#org-manager) to that org. If you want to start a new project on the GOV.UK PaaS, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), telling us who the org manager(s) should be.
+The GOV.UK PaaS team creates new orgs in the London region unless you request otherwise. We assign at least one [org manager](orgs_spaces_users.html#org-manager) to new orgs. Request your first org on the [GOV.UK PaaS signup page](https://www.cloud.service.gov.uk/signup).
 
-The GOV.UK PaaS is hosted in two regions, London and Ireland. The GOV.UK PaaS team creates all new orgs in the London region by default. If you already have an account in the Ireland region and request a new org, we will create this new org and account in the London region, and you will have two separate accounts.    
+To request additional orgs, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), telling us who the org manager(s) should be and the name of one of your existing orgs.
 
 Run `cf orgs` to list the orgs your user account can access.
 
