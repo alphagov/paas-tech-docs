@@ -11,9 +11,14 @@ You can also view all metrics in a one-off snapshot by installing the Cloud Foun
 
 ### Use the Prometheus endpoint
 
-Prometheus uses the `https://metrics.cloud.service.gov.uk/metrics` API endpoint to request metrics from Cloud Foundry. PaaS maintains this endpoint for free, so you can access all available metrics for free. You can configure Prometheus manually to filter out any metrics you do not need.
+Prometheus uses the following API endpoints to request metrics from Cloud Foundry:
 
-You must set up Prometheus to request metrics from the `https://metrics.cloud.service.gov.uk/metrics` API endpoint.
+- `https://metrics.cloud.service.gov.uk/metrics` for the Ireland region
+- `https://metrics.london.cloud.service.gov.uk/metrics` for the London region
+
+PaaS maintains these endpoints for free, so you can access all available metrics for free. You can configure Prometheus manually to filter out any metrics you do not need.
+
+You must set up Prometheus to request metrics from your region's API endpoint.
 
 1. [Install Prometheus](https://prometheus.io/docs/prometheus/latest/getting_started/) [external link].
 
@@ -31,7 +36,7 @@ You must set up Prometheus to request metrics from the `https://metrics.cloud.se
 
 #### Use Docker to run Prometheus locally
 
-You can set up Prometheus to request metrics from the API endpoint by using [Docker](https://www.docker.com/) [external link] to run a local instance of Prometheus.
+You can set up Prometheus to request metrics from your region's API endpoint by using [Docker](https://www.docker.com/) [external link] to run a local instance of Prometheus.
 
 1. Save the following script as `test-metrics.sh`:
 
@@ -51,13 +56,16 @@ You can set up Prometheus to request metrics from the API endpoint by using [Doc
 	    scheme: https
 	    static_configs:
 	      - targets:
-	        - metrics.cloud.service.gov.uk:443
+	        - API_ENDPOINT:443
 	" > prometheus.yml
 
 	docker run --publish 9090:9090 \
 	           --volume "$PWD/prometheus.yml:/etc/prometheus/prometheus.yml" \
 	           prom/prometheus
 	```
+	where API_ENDPOINT is:
+	- `https://metrics.cloud.service.gov.uk/metrics` for the Ireland region
+	- `https://metrics.london.cloud.service.gov.uk/metrics` for the London region
 
 1. Make the script executable:
 
@@ -112,7 +120,7 @@ To set up the metrics exporter app:
 
 	|Name|Value|
 	|:---|:---|
-	|`API_ENDPOINT`|Use `https://api.cloud.service.gov.uk`|
+	|`API_ENDPOINT`|- `https://api.cloud.service.gov.uk` for Ireland<br>- `https://api.london.cloud.service.gov.uk` for London|
 	|`STATSD_ENDPOINT`|StatsD endpoint|
 	|`USERNAME`|Cloud Foundry User|
 	|`PASSWORD`|Cloud Foundry Password|
