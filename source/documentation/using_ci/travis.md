@@ -32,7 +32,7 @@ Before setting up Travis CI, you must have:
 1. Input the following information when asked:
     - [account](/using_ci.html#configure-your-ci-tool-accounts) username and password
     - the [space](/orgs_spaces_users.html#spaces) and [organisation](/orgs_spaces_users.html#organisations) to deploy your app to
-    - the API URL: `https://api.cloud.service.gov.uk`
+    - the API endpoint URL: `https://api.cloud.service.gov.uk` for the Ireland region, or `https://api.london.cloud.service.gov.uk` for the London region
 
 Travis CI encrypts this information into a `.travis.yml` file.
 
@@ -49,7 +49,7 @@ You can now [build and deploy the app](using_ci.html#build-and-deploy-the-app).
       edge: true
       provider: cloudfoundry
       username: USERNAME
-      api: https://api.cloud.service.gov.uk
+      api: API_ENDPOINT
       organization: ORGNAME
       space: SPACENAME
     ```

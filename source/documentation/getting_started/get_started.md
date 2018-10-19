@@ -4,15 +4,19 @@
 
 Your department, agency or team must have a GOV.UK PaaS account. This account is called an organisation, or [org](orgs_spaces_users.html#organisations). Sign up for an org account at [https://www.cloud.service.gov.uk/signup](https://www.cloud.service.gov.uk/signup).
 
-Once your department, agency or team has an org account, you will need an individual account. Ask your [org manager](orgs_spaces_users.html#org-manager) to authorise the creation of your individual account.
+Once your department, agency or team has an org account, you will need a personal account. Ask your [org manager](orgs_spaces_users.html#org-manager) to authorise the creation of your personal account.
+
+The GOV.UK PaaS is hosted in 2 independent regions, London and Ireland. 
+
+By default, the GOV.UK PaaS team creates new accounts in the London region unless you request otherwise during sign up. 
 
 To provide you with an account, we need to store some personal data about you. Please see our [privacy notice](https://www.cloud.service.gov.uk/privacy-notice) for details.
 
-Once you have an individual account, you can access the [GOV.UK PaaS admin tool](https://admin.cloud.service.gov.uk/) (requires sign in). This tool allows you to, depending on your user role permissions, view and manage your [orgs](orgs_spaces_users.html#organisations), [spaces](orgs_spaces_users.html#spaces) and [users](orgs_spaces_users.html#users-and-user-roles) without using the command line.
+Once you have a personal account, you can access the GOV.UK PaaS admin tool for either the [London](https://admin.london.cloud.service.gov.uk/) or the [Ireland](https://admin.cloud.service.gov.uk/) region (requires sign in). This tool allows you to view and manage your [orgs](orgs_spaces_users.html#organisations), [spaces](orgs_spaces_users.html#spaces) and [users](orgs_spaces_users.html#users-and-user-roles) without using the command line. Your level of access depends on your user role permissions.
 
 Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
-## Set up command line
+## Set up the Cloud Foundry command line
 
 GOV.UK PaaS is hosted on [Cloud Foundry](https://www.cloudfoundry.org/) [external link]. You must use the Cloud Foundry command line interface (CLI) to manage your apps hosted on the GOV.UK PaaS. To set it up:
 
@@ -24,17 +28,23 @@ GOV.UK PaaS is hosted on [Cloud Foundry](https://www.cloudfoundry.org/) [externa
 
     Depending on your network configuration, you might need to set an [`HTTP_PROXY` environment variable](https://docs.cloudfoundry.org/cf-cli/http-proxy.html) [external link] for the CLI to connect. Contact your network administrator for your configuration settings.
 
-3. Sign in to Cloud Foundry by running:
+3. Sign in to Cloud Foundry. If your org is hosted in the London region, run:
+
+    ```
+    cf login -a api.london.cloud.service.gov.uk -u USERNAME
+    ```
+
+    If your org is hosted in the Ireland region, run:
 
     ```
     cf login -a api.cloud.service.gov.uk -u USERNAME
     ```
 
-    where `USERNAME` is your individual account email address.
+    `USERNAME` is your personal account email address.
 
-4. Enter your password (you set this password when you clicked on the invite link in your welcome email).
+4. Enter the password you set during the sign up process.
 
-Once you are logged in, run `cf` in the command line to see all available commands.
+When you are signed in, run `cf` in the command line to see all available commands.
 
 ## Deploy a test static HTML page
 
