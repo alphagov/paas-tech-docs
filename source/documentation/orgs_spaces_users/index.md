@@ -2,17 +2,17 @@
 
 ## Regions
 
-The GOV.UK PaaS is hosted in two independent regions, London and Ireland.
+The GOV.UK PaaS is hosted in 2 independent regions, London and Ireland.
 
-GOV.UK PaaS accounts, credentials and resources (for example [backing services](/deploying_services/)) are created in a single region.
+GOV.UK PaaS accounts, credentials and resources are created in a single region. For example, [backing services](/deploying_services/). 
 
 ## Organisations
 
 An organisation, or org, represents a group of users, applications and environments. Each org shares the same resource, quota and custom domain.
 
-The GOV.UK PaaS team creates new orgs in the London region unless you request otherwise. We assign at least one [org manager](orgs_spaces_users.html#org-manager) to new orgs. Request your first org on the [GOV.UK PaaS signup page](https://www.cloud.service.gov.uk/signup).
+The GOV.UK PaaS team creates new orgs in the London region unless you request otherwise. We assign at least one [org manager](orgs_spaces_users.html#org-manager) to new orgs. You can request your first org on the [GOV.UK PaaS signup page](https://www.cloud.service.gov.uk/signup).
 
-To request additional orgs, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), telling us who the org manager(s) should be and the name of one of your existing orgs.
+To request additional orgs, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) and tell us who the org manager(s) should be and the name of one of your existing orgs.
 
 Run `cf orgs` to list the orgs your user account can access.
 
@@ -31,7 +31,7 @@ For example, you might have separate spaces for the development and production v
 To see the spaces you can access in your current org, you can either:
 
 - run `cf spaces` in the command line
-- sign into the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/) and select the appropriate org
+- sign in to the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/) and select the appropriate org
 
 [Org managers](orgs_spaces_users.html#org-manager) can create new spaces within an org.
 
@@ -68,7 +68,7 @@ Every org must have at least one org manager. Org managers are primary contacts 
 
 Org managers manage spaces, users and user roles, and approve org changes such as requesting new quotas and enabling paid services.
 
-Org managers can invite new users to an org using the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/) (requires sign in) without needing to contact the GOV.UK PaaS team.
+Org managers can use the GOV.UK PaaS admin tool to invite new users to an org, without needing to contact the GOV.UK PaaS team. This is possible for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/) (requires sign in).
 
 We create at least one user account with the org manager role as part of your onboarding process. We recommend you have at least 2 org managers in case one is unavailable.
 
@@ -84,7 +84,7 @@ Org auditors can view user account information and org [quota](managing_apps.htm
 
 This role applies within an org.
 
-Billing managers create and manage billing account and payment information. They can also view users and roles using either the command line, the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or the admin tool for [Ireland](https://admin.cloud.service.gov.uk/) (requires sign in).
+Billing managers create and manage billing account and payment information. They can also view users and roles using the command line, or the GOV.UK PaaS admin tool for either the [London](https://admin.london.cloud.service.gov.uk/) or the [Ireland](https://admin.cloud.service.gov.uk/) region (requires sign in).
 
 You should assign a billing manager to your org before your service moves to production. We will send all payment requests to the billing manager. An org manager can also be a billing manager.
 
@@ -134,7 +134,7 @@ You can then add users to that space.
 
 After a user has been added to an org, org managers can use the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/) (requires sign in) to grant a user access to a space by assigning a role to that user.
 
-1. Sign into the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign in to the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
 1. Select the appropriate org.
 1. Select __View and manage team members__.
 1. Select __Invite a new team member__.
@@ -168,7 +168,7 @@ When a team member leaves or stops working on a project, the org manager should 
 
 The org manager can use the GOV.UK PaaS admin tool to remove all of the team member’s user roles within the team’s spaces.
 
-1. Sign into the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign in to the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
 1. Select the appropriate org.
 1. Select __View and manage team members__.
 1. Select the appropriate user.
@@ -199,7 +199,7 @@ Refer to the [Cloud Foundry reference guide on `cf unset-space-role`](https://cl
 
 Org managers can use the GOV.UK PaaS admin tool to invite users to their org when they join their team.
 
-1. Sign into the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign in to the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
 1. Select the appropriate org.
 1. Select __View and manage team members__.
 1. Select __Invite a new team member__.
@@ -211,7 +211,7 @@ When a team member leaves or stops working on a project, their org manager must 
 
 If the leaving team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must also remove that team member’s user role from the team’s org.
 
-1. Sign into the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign in to the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
 1. Select the appropriate org.
 1. Select __View and manage team members__.
 1. Select the appropriate user.
@@ -246,7 +246,7 @@ Refer to the [Cloud Foundry documentation on creating and managing users with th
 
 [Org managers](/orgs_spaces_users.html#org-manager) and [billing managers](/orgs_spaces_users.html#billing-manager) can use the GOV.UK PaaS admin tool to view current or past bills within an org.
 
-1. Sign into the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign in to the GOV.UK PaaS admin tool for either [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
 1. Select the appropriate org.
 1. Select __Billing__.
 1. View your bills. You can filter the bills shown by __Month__, __Space__, or __Services and apps__.
