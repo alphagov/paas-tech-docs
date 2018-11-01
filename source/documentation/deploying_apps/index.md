@@ -107,6 +107,8 @@ applications:
 
 The public app must read the private app URL from an environment variable in the public app's manifest.
 
+Private routes use HTTP by default (see [security](#security)) on port 8080. You must specify the port explicitly in the URL (e.g. `http://PRIVATE_APPNAME.apps.internal:8080`).
+
 Create the public app's manifest with the following code:
 
 ```
