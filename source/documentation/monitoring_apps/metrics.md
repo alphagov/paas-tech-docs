@@ -115,7 +115,7 @@ We recommend that this Cloud Foundry account:
 To set up the metrics exporter app:
 
 1. Clone the [https://github.com/alphagov/paas-metric-exporter](https://github.com/alphagov/paas-metric-exporter) repository.
-1. [Push the metrics exporter app](/deploying_apps.html#deployment-overview) to Cloud Foundry without starting the app by running `cf push --no-start metric-exporter`.
+1. [Push the metrics exporter app](/deploying_apps.html#deploying-public-apps) to Cloud Foundry without starting the app by running `cf push --no-start metric-exporter`.
 1. Set the following mandatory environment variables in the metrics exporter app by running `cf set-env metric-exporter NAME VALUE`:
 
 	|Name|Value|

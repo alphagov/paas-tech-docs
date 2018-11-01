@@ -118,13 +118,14 @@ applications:
   env:
     PRIVATE_APP_URL: http://PRIVATE_APPNAME.apps.internal:8080
 ```
+
 ### Create a network policy for both apps
 
 By default, Cloud Foundry apps do not accept internal connections from other apps.
 
 You must create a [network policy](https://docs.cloudfoundry.org/devguide/deploy-apps/cf-networking.html#create-policies) [external link] to allow the public app to connect to the private app. 
 
-1. [Push](/deploying_apps.html#deployment-overview) both the public and private apps.
+1. [Push](/deploying_apps.html#deploying-public-apps) both the public and private apps.
 
 1. Run the following in the command line to create the network policy:
 
