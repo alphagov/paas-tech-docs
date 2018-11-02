@@ -81,7 +81,7 @@ A common use case is that you have two apps to deploy:
 
 To achieve this, you must:
 
-- specify the internal route in the private app's manifest
+- specify the private route in the private app's manifest
 - set the private app URL as an environment variable in the public app's manifest
 - create a network policy for both apps
 
@@ -91,7 +91,7 @@ The two apps must be in the same [space](/orgs_spaces_users.html#spaces) to be a
 
 A [route](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes) [external link] is an address associated with a Cloud Foundry app. Cloud Foundry uses routes to send requests to apps.
 
-You must specify an internal route in the private app's manifest to tell Cloud Foundry that this app should not be accessible from the internet.
+You must specify a private route in the private app's manifest to tell Cloud Foundry that this app should not be accessible from the internet.
 
 Create the private app's manifest with the following code:
 
@@ -141,9 +141,10 @@ If you need encrypted connections between your apps, it is your responsibility t
 
 ### Further information
 
-For more information, refer to:
+For more information, refer to the Cloud Foundry documentation on:
 
-_further information links?_
+- [container-to-container networking](https://docs.cloudfoundry.org/concepts/understand-cf-networking.html) [external link]
+- [service discovery](https://github.com/cloudfoundry/cf-networking-examples/blob/master/docs/c2c-with-service-discovery.md) [external link]
 
 Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any further questions.
 
