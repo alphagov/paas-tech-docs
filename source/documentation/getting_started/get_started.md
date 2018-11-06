@@ -95,6 +95,6 @@ You can practice deploying an app by deploying a test static HTML page.
 
     If you do not specify the app name in `cf push`, the name specified in the manifest file is used.
 
-    The static HTML page is now available at `https://APPNAME.cloudapps.digital`.
+    The static HTML page is now available at your [app domain](orgs_spaces_users.html#regions).
 
 For a production app, you should read the [production checklist](deploying_apps.html#production-checklist).

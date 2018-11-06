@@ -57,7 +57,7 @@ Once you create a CDN service instance, you cannot update or delete it until it 
     ```
     Last Operation
     Status: create in progress
-    Message: Provisioning in progress [www.example.com => origin-my-paas-app.cloudapps.digital];
+    Message: Provisioning in progress [www.example.com => origin-my-paas-app.london.cloudapps.digital];
     CNAME or ALIAS domain www.example.com to d3nrs0916m1mk2.cloudfront.net or create TXT record(s):
     name: _acme-challenge.www.example.com., value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
 

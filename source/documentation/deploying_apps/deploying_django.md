@@ -105,7 +105,7 @@ Before deploying a Django app, you must:
 
     If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run `cf push --no-start APPNAME`, then when you are ready to start the app, run `cf start APPNAME`.
 
-You can now view your app at `https://APPNAME.cloudapps.digital`.
+You can now view your app at your [app domain](orgs_spaces_users.html#regions).
 
 ### PostgreSQL setup with Django
 
