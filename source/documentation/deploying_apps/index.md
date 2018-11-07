@@ -122,8 +122,14 @@ Create the public app's manifest with the following code:
 applications:
 - name: PUBLIC_APPNAME
   env:
-    PRIVATE_APP_URL: http://PRIVATE_APPNAME.apps.internal:8080
+    ENVIRONMENT_VARIABLE_NAME: http://PRIVATE_APPNAME.apps.internal:8080
 ```
+
+Where:
+
+* `PUBLIC_APPNAME` is the name of your public app
+* `ENVIRONMENT_VARIABLE_NAME` matches the [environment variable](#environment-variables) your public app reads (for example `PRIVATE_APP_URL`)
+* `PRIVATE_APPNAME` is the name of your private app
 
 ### Create a network policy for both apps
 
