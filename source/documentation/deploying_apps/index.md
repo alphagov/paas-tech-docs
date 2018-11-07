@@ -87,7 +87,7 @@ To achieve this, you must:
 
 The two apps must be in the same [space](/orgs_spaces_users.html#spaces) to be able to connect to each other.
 
-### Specify the internal route in the private app's manifest
+### Specify the private route in the private app's manifest
 
 A [route](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes) [external link] is an address associated with a Cloud Foundry app. Cloud Foundry uses routes to send requests to apps.
 
