@@ -103,6 +103,12 @@ applications:
   - route: PRIVATE_APPNAME.apps.internal
 ```
 
+> If you're changing a public app to a private app, run the following to remove the pre-existing public route:
+>
+> ```
+> cf unmap-route PUBLIC_APPNAME DOMAIN --hostname HOSTNAME
+> ```
+
 ### Set the private app URL in the public app's manifest
 
 The public app must read the private app URL from an environment variable in the public app's manifest.
