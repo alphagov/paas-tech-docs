@@ -41,7 +41,7 @@ There are many different CDNs available. Contact us at [gov-uk-paas-support@digi
 
 #### Configure your CDN
 
-Configure your CDN to forward HTTPS traffic to the PaaS at your [app domain](orgs_spaces_users.html#regions), providing a HTTP `Host` header for your custom domain (for example `Host: www.example.com`).
+Configure your CDN to forward HTTPS traffic to the PaaS at your [app domain](/orgs_spaces_users.html#regions), providing a HTTP `Host` header for your custom domain (for example `Host: www.example.com`).
 
 For example, if your app is hosted in the London region, your app domain is `london.cloudapps.digital`. When your CDN connects to the `london.cloudapps.digital` server, the server will present a TLS certificate valid only for `london.cloudapps.digital` and `*.london.cloudapps.digital`. Your CDN must accept this certificate.
 

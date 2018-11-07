@@ -47,7 +47,7 @@ This is how you define an user-provided route service instance and map it to the
     ```
 
     where:
-    - `DOMAIN` is your app domain, and varies depending on which [region](orgs_spaces_users.html#regions) your app is hosted in
+    - `DOMAIN` is your app domain, and varies depending on which [region](/orgs_spaces_users.html#regions) your app is hosted in
     - `SERVICE_INSTANCE` the name of the service that you have just created
     - `HOSTNAME` the host or app name assigned to the app
 

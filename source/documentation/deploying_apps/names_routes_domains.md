@@ -2,7 +2,7 @@
 
 ### App names and cloudapps.digital hostname clash
 
-When you push an app, you have to assign an app name, either in the manifest or using the command line. The app name is also used as the default hostname of the [app domain](orgs_spaces_users.html#regions) where the app will be hosted.
+When you push an app, you have to assign an app name, either in the manifest or using the command line. The app name is also used as the default hostname of the [app domain](/orgs_spaces_users.html#regions) where the app will be hosted.
 
 For example, if you push an app called ``myapp``in the London region, the PaaS tries to host it at `myapp.london.cloudapps.digital`. This is done using Cloud Foundry's **route** functions.
 

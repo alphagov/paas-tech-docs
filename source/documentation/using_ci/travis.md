@@ -66,6 +66,6 @@ You can now build and deploy the app.
 1. Commit the `travis.yml` to GitHub. Travis CI uses this file to automatically build and deploy your app.
 1. View your live app at `https://NAME.APP_DOMAIN`, where:
   - [`NAME`](/deploying_apps.html#names-routes-and-domains) is the name of your app in the `manifest.yml` file
-  - [`APP_DOMAIN`](orgs_spaces_users.html#regions) is the domain your app is hosted in 
+  - [`APP_DOMAIN`](/orgs_spaces_users.html#regions) is the domain your app is hosted in 
 
 For more information on how to use Travis CI, refer to the [Travis CI documentation](https://docs.travis-ci.com) [external link].

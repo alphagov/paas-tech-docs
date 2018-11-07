@@ -36,7 +36,7 @@ If you have a simple app without any services the best way to delete it is
 
 which will delete the app and its routes in one go. If your app does have services, please [delete them first](/deploying_apps.html#delete-a-service-instance).
 
-If you accidentally delete your app without the ``-r`` option, you can delete the route manually. First confirm the details of the orphaned route by typing the ``cf routes`` command, to get a list of all active routes in the current space. This will list the space, the hostname, the [app domain](orgs_spaces_users.html#regions), port, path, type and any bound apps or services. You will see your hostname listed but without an associated app. Use this information to populate the following command:
+If you accidentally delete your app without the ``-r`` option, you can delete the route manually. First confirm the details of the orphaned route by typing the ``cf routes`` command, to get a list of all active routes in the current space. This will list the space, the hostname, the [app domain](/orgs_spaces_users.html#regions), port, path, type and any bound apps or services. You will see your hostname listed but without an associated app. Use this information to populate the following command:
 
 ``cf delete-route [domain name] --hostname [hostname]``
 
