@@ -61,7 +61,7 @@ For example, if your app is hosted in the London region, your app domain is `lon
 
 2. Configure your CDN to amend the HTTP requests when it forwards those requests by:
 
-  - changing the HTTPS request `Host` header from your custom domain to your app’s domain (for example if your app is hosted in the Ireland region, change `Host: www.example.com` to `Host: YOURAPP.london.cloudapps.digital`)
+  - changing the HTTPS request `Host` header from your custom domain to your app’s domain (for example if your app is hosted in the London region, change `Host: www.example.com` to `Host: YOURAPP.london.cloudapps.digital`)
 
   - adding a `X-Forwarded-Host` HTTP header containing your custom domain to the HTTPS request (for example `X-Forwarded-Host: www.example.com`)
 
