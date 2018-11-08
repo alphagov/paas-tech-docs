@@ -49,7 +49,7 @@ In this situation, each instance has a numerical instance index to distinguish i
 requested state: started
 instances: 3/3
 usage: 64M x 3 instances
-urls: exampleapp.cloudapps.digital
+urls: exampleapp.london.cloudapps.digital
 last uploaded: Wed Dec 21 13:56:24 UTC 2016
 stack: cflinuxfs2
 buildpack: staticfile_buildpack
@@ -59,6 +59,7 @@ buildpack: staticfile_buildpack
 1   running   2016-12-21 02:44:46 PM   1.0%   3.5M of 64M   6.8M of 1G
 2   running   2016-12-21 02:44:46 PM   1.0%   3.5M of 64M   6.8M of 1G
 ```
+This example assumes that `exampleapp` is hosted in the [London region](orgs_spaces_users.html#regions).
 
 There are 3 instances, with instance indexes from 0 to 2.
 

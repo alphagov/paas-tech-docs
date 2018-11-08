@@ -1,7 +1,8 @@
 strict digraph A {
     rankdir=LR;
     //splines=line;
-   // graph [ splines = false ]
+    // graph [ splines = false ]
+    graph [ dpi = 200 ];
     node [shape=box]
     edge [fontsize=8 ]
     concentrate="false";
@@ -20,9 +21,9 @@ strict digraph A {
         route_service;
     }
 
-    client -> router [label="1. https://myapp.cloudapps.digital"];
-    router -> route_service [label="2. https://my-route-service.example.com\nX-CF-Forwarded-Url: https://myapp.cloudapps.digital\nX-CF-Proxy-Signature: 1234567890abcd\nX-CF-Proxy-Metadata: ..."];
-    route_service -> router [label="3. https://myapp.cloudapps.digital\nX-CF-Proxy-Signature: 1234567890abcd\nX-CF-Proxy-Metadata: ..."];
-    router -> app [label="4. https://myapp.cloudapps.digital"];
+    client -> router [label="1. https://myapp.london.cloudapps.digital"];
+    router -> route_service [label="2. https://my-route-service.example.com\nX-CF-Forwarded-Url: https://myapp.london.cloudapps.digital\nX-CF-Proxy-Signature: 1234567890abcd\nX-CF-Proxy-Metadata: ..."];
+    route_service -> router [label="3. https://myapp.london.cloudapps.digital\nX-CF-Proxy-Signature: 1234567890abcd\nX-CF-Proxy-Metadata: ..."];
+    router -> app [label="4. https://myapp.london.cloudapps.digital"];
 }
 

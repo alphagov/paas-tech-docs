@@ -26,7 +26,7 @@ The `cf push` command can both create a new app and push a new version of an exi
 
 1. Deploy your app by running `cf push` in the directory which contains your app's code, configuration files, and manifest.
 
-Your app should now be live at `https://APP_NAME.cloudapps.digital`.
+Your app should now be live at your [app domain](/orgs_spaces_users.html#regions).
 
 Refer to the Cloud Foundry documentation on [Deploying with Application Manifests](http://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html) [external link] for more information on the options available when you deploy an app.
 

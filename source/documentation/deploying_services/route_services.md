@@ -47,14 +47,14 @@ This is how you define an user-provided route service instance and map it to the
     ```
 
     where:
-    - `DOMAIN` is the domain used by your application, likely the default one `cloudapps.digital`
+    - `DOMAIN` is your app domain, and varies depending on which [region](/orgs_spaces_users.html#regions) your app is hosted in
     - `SERVICE_INSTANCE` the name of the service that you have just created
     - `HOSTNAME` the host or app name assigned to the app
 
-    For example:
+    For example, if your app is named `myapp` and is hosted in the London region:
 
     ```
-    cf bind-route-service cloudapps.digital my-route-service --hostname myapp
+    cf bind-route-service london.cloudapps.digital my-route-service --hostname myapp
     ```
 
 3. You can list the [routes](/deploying_apps.html#names-routes-and-domains) of the current [space](/orgs_spaces_users.html#spaces) to see the applications and route services bound to them:
@@ -90,7 +90,7 @@ In the following example we will add a route service to provide basic HTTP authe
 An example of such a route service application code can be found in [cf basic auth route service](https://github.com/alext/cf_basic_auth_route_service) [external link].
 Please note this is a proof-of-concept and is not intended to run in production.
 
-We will deploy it as an application in the platform itself. Then we will bind this route service to a deployed application called `myapp`, accessible via https://myapp.cloudapps.digital.
+We will deploy it as an app in the platform itself. Then we will bind this route service to an app named `myapp`, deployed in the London region and therefore accessible via https://myapp.london.cloudapps.digital.
 
 1. Deploy the route service as [any other other application](/deploying_apps.html#deploying-apps).
    Do not start it yet, as we need to configure it first.
@@ -111,18 +111,18 @@ We will deploy it as an application in the platform itself. Then we will bind th
     cf start my-basic-auth-service-app
     ```
 
-    The new service is serving in https://my-basic-auth-service-app.cloudapps.digital.
+    The new service is serving in https://my-basic-auth-service-app.london.cloudapps.digital.
 
 3. Register the route service endpoint as an user-provided service instance:
 
     ```
-    cf create-user-provided-service my-basic-auth-service -r https://my-basic-auth-service-app.cloudapps.digital
+    cf create-user-provided-service my-basic-auth-service -r https://my-basic-auth-service-app.london.cloudapps.digital
     ```
 
 4. Finally, bind the route service to the application route:
 
     ```
-    cf bind-route-service cloudapps.digital my-basic-auth-service --hostname myapp
+    cf bind-route-service london.cloudapps.digital my-basic-auth-service --hostname myapp
     ```
 
-    The application in https://myapp.cloudapps.digital will now ask for basic HTTP authentication, with login `myuser` and password `pass1234`.
+    The application in https://myapp.london.cloudapps.digital will now ask for basic HTTP authentication, with login `myuser` and password `pass1234`.

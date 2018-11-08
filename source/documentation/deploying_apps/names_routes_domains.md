@@ -1,18 +1,18 @@
 ## Names, routes and domains
 
-### App names and cloudapps.digital hostname clash
+### App names and domain hostname clash
 
-When you push an app, you have to assign an app name, either in the manifest or using the command line. The app name is also used as the default hostname of the ``cloudapps.digital`` URL where the app will be hosted.
+When you push an app, you have to assign an app name, either in the manifest or using the command line. The app name is also used as the default hostname of the [app domain](/orgs_spaces_users.html#regions) where the app will be hosted.
 
-For example, if you push an app called ``myapp``, the PaaS tries to host it at ``myapp.cloudapps.digital``. This is done using Cloud Foundry's **route** functions.
+For example, if you push an app called ``myapp``in the London region, the PaaS tries to host it at `myapp.london.cloudapps.digital`. This is done using Cloud Foundry's **route** functions.
 
-The ``cloudapps.digital`` domain is shared across all PaaS tenants. If another tenant is using ``myapp.cloudapps.digital``, and you try to push an app called ``myapp``, you will receive an error like this:
+The [app domain](/orgs_spaces_users.html#regions) is shared across all PaaS tenants within a region. in this example, if another tenant is using ``myapp.cloudapps.digital`` in the Ireland region, and you try to push an app called ``myapp`` to the same region, you will receive an error like this:
 
 ```
-Using route myapp.cloudapps.digital
-Binding myapp.cloudapps.digital to myapp...
+Using route myapp.london.cloudapps.digital
+Binding myapp.london.cloudapps.digital to myapp...
 FAILED
-The route myapp.cloudapps.digital is already in use.
+The route myapp.london.cloudapps.digital is already in use.
 ```
 
 
@@ -39,11 +39,11 @@ There are a few possible solutions to this problem:
 
     This solution means you can change the hostname while keeping the app name the same. This is more flexible, but means you need to keep track of both a hostname and an app name for each app. It could potentially make it easier to deploy to the wrong target.
 
-3. Use the ``random-route`` option. This appends a couple of random words to the hostname, to avoid clashes. For example, if you run:
+3. Use the ``random-route`` option. This appends a couple of random words to the hostname, to avoid clashes. For example, if your app is hosted in the London region and you run:
 
     ``cf push myapp --random-route``
 
-    the app will be hosted at something like ``https://myapp-mummifying-giraffe.cloudapps.digital``.
+    the app will be hosted at something like ``https://myapp-mummifying-giraffe.london.cloudapps.digital``.
 
     You can also specify this in your app's ``manifest.yml`` file:
 

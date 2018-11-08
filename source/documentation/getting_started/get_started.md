@@ -2,9 +2,9 @@
 
 ## Get an account
 
-Your department, agency or team must have a GOV.UK PaaS account. This account is called an organisation, or [org](orgs_spaces_users.html#organisations). Sign up for an org account at [https://www.cloud.service.gov.uk/signup](https://www.cloud.service.gov.uk/signup).
+Your department, agency or team must have a GOV.UK PaaS account. This account is called an organisation, or [org](/orgs_spaces_users.html#organisations). Sign up for an org account at [https://www.cloud.service.gov.uk/signup](https://www.cloud.service.gov.uk/signup).
 
-Once your department, agency or team has an org account, you will need a personal account. Ask your [org manager](orgs_spaces_users.html#org-manager) to authorise the creation of your personal account.
+Once your department, agency or team has an org account, you will need a personal account. Ask your [org manager](/orgs_spaces_users.html#org-manager) to authorise the creation of your personal account.
 
 The GOV.UK PaaS is hosted in 2 independent regions, London and Ireland. 
 
@@ -12,7 +12,7 @@ By default, the GOV.UK PaaS team creates new accounts in the London region unles
 
 To provide you with an account, we need to store some personal data about you. Please see our [privacy notice](https://www.cloud.service.gov.uk/privacy-notice) for details.
 
-Once you have a personal account, you can access the GOV.UK PaaS admin tool for either the [London](https://admin.london.cloud.service.gov.uk/) or the [Ireland](https://admin.cloud.service.gov.uk/) region (requires sign in). This tool allows you to view and manage your [orgs](orgs_spaces_users.html#organisations), [spaces](orgs_spaces_users.html#spaces) and [users](orgs_spaces_users.html#users-and-user-roles) without using the command line. Your level of access depends on your user role permissions.
+Once you have a personal account, you can access the GOV.UK PaaS admin tool for either the [London](https://admin.london.cloud.service.gov.uk/) or the [Ireland](https://admin.cloud.service.gov.uk/) region (requires sign in). This tool allows you to view and manage your [orgs](/orgs_spaces_users.html#organisations), [spaces](/orgs_spaces_users.html#spaces) and [users](/orgs_spaces_users.html#users-and-user-roles) without using the command line. Your level of access depends on your user role permissions.
 
 Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
@@ -50,7 +50,7 @@ When you are signed in, run `cf` in the command line to see all available comman
 
 You can practice deploying an app by deploying a test static HTML page.
 
-1. To deploy an app, you must select a [target](deploying_apps.html#set-a-target). This is a combination of an [organisation](orgs_spaces_users.html#organisations) and a [space](orgs_spaces_users.html#spaces).
+1. To deploy an app, you must select a [target](deploying_apps.html#set-a-target). This is a combination of an [organisation](/orgs_spaces_users.html#organisations) and a [space](/orgs_spaces_users.html#spaces).
 
     All orgs have a sandbox space for you to use when learning about the PaaS. When deploying a test static HTML page, you should target this sandbox space by running:
 
@@ -95,6 +95,6 @@ You can practice deploying an app by deploying a test static HTML page.
 
     If you do not specify the app name in `cf push`, the name specified in the manifest file is used.
 
-    The static HTML page is now available at `https://APPNAME.cloudapps.digital`.
+    The static HTML page is now available at your [app domain](/orgs_spaces_users.html#regions).
 
 For a production app, you should read the [production checklist](deploying_apps.html#production-checklist).
