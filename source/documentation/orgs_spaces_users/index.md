@@ -4,7 +4,7 @@
 
 The GOV.UK PaaS is hosted in 2 independent regions, London and Ireland.
 
-GOV.UK PaaS accounts, credentials and resources are created in a single region. For example, [backing services](/deploying_services/). 
+GOV.UK PaaS accounts, credentials and resources belong to a single region. 
 
 If you have a London region account, your app domain is `APPNAME.london.cloudapps.digital`.
 
