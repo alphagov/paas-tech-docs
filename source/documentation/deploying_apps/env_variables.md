@@ -12,7 +12,7 @@ To view an app's current environment variables, run `cf env APP_NAME`.
 To create or update a variable, run the following:
 
 ```
-cf set-env APP_NAME ENV_VAR_NAME ENV_VAR_VALUE`
+cf set-env APP_NAME ENV_VAR_NAME ENV_VAR_VALUE
 ```
 
 If you're deploying a pre-existing app, you should check the app's documentation for any environment variables you need to set.
