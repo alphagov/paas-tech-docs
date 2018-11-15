@@ -2,6 +2,8 @@
 
 Tenants may wish to apply some processing to requests before they reach an application. Common examples of use cases are authentication, rate limiting, and caching services.
 
+If you need to run a private app that can only be accessed by other apps in the same space, you should refer to the documentation on [private apps](/deploying_apps.html#deploying-private-apps).
+
 Cloud Foundry allows the tenants to bind [application routes](/deploying_apps.html#names-routes-and-domains) to [route services](https://docs.cloudfoundry.org/services/route-services.html) [external link]. A route service acts as a full proxy. Once it is bound to a route, the platform routing layer will send every request for that route to the route service endpoint. The route service can then process the incoming request, proxy it back to the original application, and finally process the response request before returning it to the original client.
 
 Using route services has some consequences to be aware of:
