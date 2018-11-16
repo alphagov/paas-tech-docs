@@ -90,8 +90,6 @@ To achieve this, you must:
 - set the private app URL as an [environment variable](/deploying_apps.html#environment-variables) in the public app's manifest
 - create a network policy to allow the apps to connect with each other
 
-The two apps must be in the same [space](/orgs_spaces_users.html#spaces) to be able to connect to each other.
-
 If you need to restrict access to a public app, you should refer to the documentation on [route services](/deploying_services/route_services/#route-services).
 
 ### Specify a private route in the private app's manifest
