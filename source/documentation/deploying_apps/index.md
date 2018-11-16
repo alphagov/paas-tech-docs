@@ -138,6 +138,7 @@ The public app must read the private app URL from an environment variable in the
 You must specify:
 
 - the private app URL as a non-secure `http` URL
+- `apps.internal` as the domain
 - port 8080 in the URL
 
 To do this, create the public app's manifest with the following code:
