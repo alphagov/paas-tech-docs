@@ -81,7 +81,7 @@ To set up a PostgreSQL service:
 
 You must bind your app to the PostgreSQL service so you can access the database from the app.
 
-1. Use the [app's manifest](/deploying_apps.html#deployment-overview) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
+1. Use the [app's manifest](/deploying_apps.html#deploying-public-apps) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
 
     ```
     --
