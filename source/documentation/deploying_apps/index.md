@@ -2,7 +2,7 @@
 
 ## Deploying public apps
 
-By default, all apps you deploy on Cloud Foundry are publicly accessible.
+By default, all apps you deploy on Cloud Foundry are publicly accessible to everyone through the internet.
 
 The `cf push` command can both create a new app and push a new version of an existing app.
 
@@ -77,12 +77,12 @@ A possible exception to this is if your org is mature and has pre-existing space
 
 ## Deploying private apps
 
-You can deploy your apps such that they are not publicly accessible from the internet.
+You can deploy apps so they are not publicly accessible to everyone through the internet.
 
-A common use case is that you have two apps to deploy:
+The simplest use case is that you have 2 apps to deploy:
 
-- a public app for your users to interact with
-- a private app that the public app needs to connect to without the private app being accessible from the internet
+- a public app for your end users to interact with
+- a private app that the public app can securely connect to, but which is not accessible from the internet
 
 To achieve this, you must:
 
@@ -94,11 +94,11 @@ If you need to restrict access to a public app, you should refer to the document
 
 ### Specify a private route in the private app's manifest
 
-A [route](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes) [external link] is an address associated with a Cloud Foundry app. Cloud Foundry uses routes to send requests to apps.
+Cloud Foundry uses [routes](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes) [external link] to send requests to apps.
 
 You must specify a private route in the private app's manifest to tell Cloud Foundry that this app should not be accessible from the internet.
 
-Create the private app's manifest with the following code:
+Create the private app's `manifest.yml` with the following code:
 
 ```
 ---
@@ -108,7 +108,7 @@ applications:
   - route: PRIVATE_APPNAME.apps.internal
 ```
 
-If the private app was previously a public app, you must also run the following to remove the pre-existing public route:
+If the private app was previously a public app, you must also run the following in the command line to remove the pre-existing public route:
 
 ```
 cf unmap-route PRIVATE_APPNAME DOMAIN --hostname HOSTNAME
@@ -116,7 +116,7 @@ cf unmap-route PRIVATE_APPNAME DOMAIN --hostname HOSTNAME
 
 ### Set the private app URL in the public app's manifest
 
-The public app must read the private app URL from an environment variable in the public app's manifest.
+The public app must read the private app URL from an [environment variable](/deploying_apps.html#environment-variables) in the public app's manifest.
 
 <br>
 
@@ -133,13 +133,13 @@ The public app must read the private app URL from an environment variable in the
   </strong>
 </div>
 
-You must specify:
+You must set:
 
 - the private app URL as a non-secure `http` URL
-- `apps.internal` as the domain
-- port 8080 in the URL
+- the domain as `apps.internal`
+- the URL as port `8080`
 
-To do this, create the public app's manifest with the following code:
+To do this, create the public app's `manifest.yml` with the following code:
 
 ```
 ---
