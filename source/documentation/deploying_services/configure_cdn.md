@@ -5,7 +5,7 @@ There are two ways to configure your own CDN:
  - use Cloud Foundry commands
  - amend HTTP request headers
 
-You should use these methods if you need access to features that are not provided by the `cdn-route` service. The [`cdn-route`](/deploying_services/use_a_custom_domain/#set-up-a-custom-domain-using-the-cdn-route-service) section has information on the features provided by the service.
+You should use these methods if you need access to features that are not provided by the `cdn-route` service. The [`cdn-route`](/deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service) section has information on the features provided by the service.
 
 There are many different CDNs available. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to discuss best practice for configuring your CDN to work with the PaaS.
 
