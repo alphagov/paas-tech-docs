@@ -106,11 +106,15 @@ For more configuration options see [Tomcat Container](https://github.com/cloudfo
 
 ### Specify a Java version
 
-You should tell Cloud Foundry which version of Java your app uses in the Java buildpack.
+You can specify the version of the Java Runtime Environment (JRE) by setting the environment variable `JBP_CONFIG_OPEN_JDK_JRE`. For example to use JRE 11 you could add the following to your application's `manifest.yml`:
 
-Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
+```yaml
+  env:
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
+ ```
+The `+` in the above example acts as a wildcard which will use the latest point release available.
 
-Refer to the Cloud Foundry OpenJDK JRE documentation for more information on [the Java buildpack](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/jre-open_jdk_jre.md) [external link].
+To see if a JRE version is available you can check this [version list](http://download.pivotal.io.s3.amazonaws.com/openjdk/trusty/x86_64/index.yml) [external link]. 
 
 ### Deploying other JVM-based applications
 
