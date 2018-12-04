@@ -106,7 +106,7 @@ For more configuration options see [Tomcat Container](https://github.com/cloudfo
 
 ### Specify a Java version
 
-You can specify the version of the Java Runtime Environment (JRE) by setting the environment variable `JBP_CONFIG_OPEN_JDK_JRE`. For example to use JRE 11 you could add the following to your application's `manifest.yml`:
+You can specify the version of the Java Runtime Environment (JRE) by setting the environment variable `JBP_CONFIG_OPEN_JDK_JRE` in the application's `manifest.yml`. For example, to use JRE 11:
 
 ```yaml
   env:
