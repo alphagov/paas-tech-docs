@@ -112,9 +112,7 @@ You can specify the version of the Java Runtime Environment (JRE) by setting the
   env:
     JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
  ```
-The `+` in the above example acts as a wildcard which will use the latest point release available.
-
-To see if a JRE version is available you can check this [version list](http://download.pivotal.io.s3.amazonaws.com/openjdk/trusty/x86_64/index.yml) [external link]. 
+The `+` in the above example acts as a wildcard which will use the latest point release available. 
 
 ### Deploying other JVM-based applications
 
