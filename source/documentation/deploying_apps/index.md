@@ -182,9 +182,9 @@ Refer to the [GOV.UK page on government security classifications](https://www.go
 
 ## Secure and non-secure requests
 
-Requests could be made to the non-secure `http://` protocol due to:
+Requests could be made to an app's public route over the non-secure `http://` protocol due to:
 
  * misconfiguration of an app that allows non-encrypted traffic through
  * a service linking to the HTTP version of a page by mistake
 
-In this situation, any requests made to the `http://` protocol will be automatically redirected to the base HTTPS version of that URL. The original query path and query parameters will be removed. This prevents a site from repeatedly redirecting back to the HTTP protocol without the user noticing.
+Any requests made to a public app route over the `http://` protocol will be automatically redirected to the base `https://` version of that URL. The original query path and query parameters will be removed. This prevents a site from repeatedly redirecting back to the HTTP protocol without the user noticing.
