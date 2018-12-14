@@ -1,12 +1,15 @@
 # Managing custom domains using the cdn-route service
 
-This section explains how to manage custom domains for your app by using the GOV.UK PaaS cdn-route service to set up a content distribution network (CDN) that routes requests to and [caches](/deploying_services/use_a_custom_domain/#caching) responses from your app.
+This section explains how to manage custom domains for your app with a content distribution network (CDN). The CDN:
 
-By using the cdn-route service, the GOV.UK PaaS team can provide faster and more effective technical support if you have any issues.
+- routes requests to your app
+- [caches](#caching) responses
 
-After following this process, your app will be available on a subdomain of your choice via HTTPS. The GOV.UK PaaS redirects non-secure HTTP requests to a secure version of your app.
+You can use the GOV.UK PaaS cdn-route service to set up the CDN.
 
-You must configure the cdn-route service to use a subdomain. If you configure the service to use an apex domain, the service creation may not succeed. This means your users will not be able to connect to your app via the apex domain. For example:
+With the CDN in place, your app will be available on a domain of your choice through HTTPS. The GOV.UK PaaS redirects non-secure HTTP requests to a secure version of your app.
+
+You must configure the cdn-route service to use a subdomain. If you configure the service to use an apex domain, the service creation might not succeed. The following table contains examples of apex domains and subdomains:
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
@@ -17,9 +20,9 @@ You must configure the cdn-route service to use a subdomain. If you configure th
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
-Once you create a CDN service instance, you cannot update or delete it until you have configured it. If you make a mistake that breaks the configuration, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to delete the service instance.
+Once you create a CDN service instance, you cannot update or delete the instance until you have completed the setup process. If you make a mistake that breaks the configuration, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to delete the service instance.
 
-### Setting up a cdn-route service with one or more custom domains
+### Set up a cdn-route service with one or more custom domains
 
 1. Target the space your app is running in:
 
@@ -31,7 +34,7 @@ Once you create a CDN service instance, you cannot update or delete it until you
     - `ORG_NAME` is the name of your org
     - `SPACE_NAME` is the name of your space
 
-1. Create the required domain(s) in your organisation by running the following for each domain:
+1. Create the required domain(s) in your organisation. Run the following for each domain:
 
     ```
     cf create-domain ORG_NAME DOMAIN_NAME
@@ -45,7 +48,7 @@ Once you create a CDN service instance, you cannot update or delete it until you
     ```
 
     where:
-    - `SERVICE_INSTANCE` is the name you have chosen for your service instance
+    - `SERVICE_INSTANCE` is your chosen name for your service instance
     - `SUBDOMAIN_LIST` is a comma-separated list of your subdomain(s), for example `www.example.com,www.example.net` (do not include a comma after the final subdomain)
 
     This command includes `cdn-route` twice because cdn-route is the name of the service and the name of the service plan.
@@ -56,7 +59,7 @@ Once you create a CDN service instance, you cannot update or delete it until you
     cf service SERVICE_INSTANCE
     ```
 
-    This outputs the DNS information, as per this example:
+    Example output:
 
     ```
     Last Operation
@@ -71,18 +74,18 @@ Once you create a CDN service instance, you cannot update or delete it until you
           value: 4W9jHJIhnfDnWBBAENph6Qr8aeoSV7FzDiEDL-s-o4Q, ttl: 120
     ```
 
-1. Create the TXT records using the DNS information shown. These records validate your subdomain and allow us to issue the TLS certificate used to encrypt traffic.
+1. Create TXT records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.
 
-    Using this example, you create 2 `TXT` records for your domain:
+    In the example, you would create 2 `TXT` records for your subdomains:
 
     ```
     - _acme-challenge.www.example.com with a value of ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E
     - _acme-challenge.www.example.net with a value of 4W9jHJIhnfDnWBBAENph6Qr8aeoSV7FzDiEDL-s-o4Qs
     ```
 
-1. Create a CNAME record per subdomain using the DNS information shown. This directs traffic to your service.
+1. Create one CNAME record for each subdomain using the DNS information. This directs traffic to your service.
 
-    Using this example, you create a `CNAME` record in your DNS server pointing both `www.example.com` and `www.example.net` to `d3nrs0916m1mk2.cloudfront.net.`
+    In the example, you would create 2 `CNAME` records in your DNS server for `www.example.com` and `www.example.net`. Each `CNAME` record would point the associated subdomain to `d3nrs0916m1mk2.cloudfront.net`.
 
     <style>
     .govuk-warning-text{font-family:nta,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-weight:400;font-size:16px;font-size:1rem;line-height:1.25;color:#0b0c0c;position:relative;margin-bottom:20px;padding:10px 0}@media print{.govuk-warning-text{font-family:sans-serif}}@media (min-width:40.0625em){.govuk-warning-text{font-size:19px;font-size:1.1875rem;line-height:1.31579}}@media print{.govuk-warning-text{font-size:14pt;line-height:1.15;color:#000}}@media (min-width:40.0625em){.govuk-warning-text{margin-bottom:30px}}.govuk-warning-text__assistive{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;-webkit-clip-path:inset(50%)!important;clip-path:inset(50%)!important;border:0!important;white-space:nowrap!important}.govuk-warning-text__icon{font-family:nta,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-weight:700;display:inline-block;position:absolute;top:50%;left:0;min-width:32px;min-height:29px;margin-top:-20px;padding-top:3px;border:3px solid #0b0c0c;border-radius:50%;color:#fff;background:#0b0c0c;font-size:1.6em;line-height:29px;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}@media print{.govuk-warning-text__icon{font-family:sans-serif}}.govuk-warning-text__text{display:block;margin-left:-15px;padding-left:65px}
@@ -92,20 +95,20 @@ Once you create a CDN service instance, you cannot update or delete it until you
       <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
       <strong class="govuk-warning-text__text">
         <span class="govuk-warning-text__assistive">Warning</span>
-        <p>This assumes that you are using the GOV.UK PaaS to launch a new service and your subdomains are not already delivering a service</p>
-        <p>If this is not the case and you are migrating an existing service, we recommend that your technical operations team refer to this documentation when they are designing a custom migration process for your service.</p>
+        <p>These instructions assume that you are using the GOV.UK PaaS to launch a new service and your subdomains are not already delivering a service.</p>
+        <p>If this is not the case and you are migrating an existing service, your technical operations team should refer to this documentation when the team are designing a custom migration process for your service.</p>
       </strong>
     </div>
 
-You have now completed the custom domain setup process, and can now [map a subdomain to your app](#mapping-a-subdomain-route-to-your-app).
+You have now set up the custom domain. Next, you should [map a subdomain to your app](#map-a-subdomain-route-to-your-app).
 
-It should take one hour for domain setup to finish after you have created the required DNS records. If it has not finished after 2 hours, please refer to the [troubleshooting](/deploying_services/use_a_custom_domain/#troubleshooting-custom-domains) section.
+It should take one hour for domain setup to finish after you have created the required DNS records. If the process is still incomplete after 2 hours, please refer to the [troubleshooting](/deploying_services/use_a_custom_domain/#troubleshooting-custom-domains) section.
 
-You must [remove a custom domain from your cdn-route service](#removing-a-custom-domain-from-your-cdn-route-service) to stop using any of your custom domains with the GOV.UK PaaS.
+If you have set up a custom domain using the cdn-route service and you want to stop using this custom domain with the GOV.UK PaaS, you must [remove the custom domain from your cdn-route service](#remove-a-custom-domain-from-your-cdn-route-service).
 
 You can associate up to 100 subdomains with a single cdn-route service instance.
 
-### Adding a custom domain to your existing cdn-route service
+### Add a custom domain to your existing cdn-route service
 
 1. Check which custom domains your existing cdn-route service has:
 
@@ -115,12 +118,14 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
 
     where `SERVICE_INSTANCE` is the name of one of your existing cdn-route service instances.
 
-    In this example, the 2 custom domains are `www.example.com` and `www.example.net`:
+    Example output:
 
     ```
     message: Service instance provisioned [www.example.com,www.example.net =>
              london.cloudapps.digital]; CDN domain d3nrs0916m1mk2.cloudfront.net
     ```
+
+    In the example, there are 2 custom domains: `www.example.com` and `www.example.net`.
 
 1. Update your service with the expanded list of custom domains:
 
@@ -129,6 +134,9 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
     -c '{"domain": "EXPANDED_SUBDOMAIN_LIST"}'
     ```
 
+
+	where `EXPANDED_SUBDOMAIN_LIST` is the comma-separated list of subdomains.
+
     For example, your cdn-route service is named `custom-domains-production` and has 2 custom domains, `www.example.com` and `www.example.net`.  Run the following to add `www.example.org` to the list of custom domains:
 
     ```
@@ -136,7 +144,7 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
       -c '{"domain": "www.example.com,www.example.net,www.example.org"}'
     ```
 
-    If you have previously customised the [cookies](#disabling-forwarding-cookies) or the [headers](#forwarding-headers) forwarded by your cdn-route service, you must include those `cookies` or `headers` configuration parameters in this `cf update-service` command. For example:
+    If you have previously customised the [cookies](#disabling-forwarding-cookies) or the [headers](#forwarding-headers) forwarded by your cdn-route service, you must include those as configuration parameters in the `cf update-service` command. For example:
 
     ```
     cf update-service custom-domains-production \
@@ -150,7 +158,7 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
     cf service SERVICE_INSTANCE
     ```
 
-    This outputs the DNS information, as per this example:
+    Example output:
 
     ```
     Last Operation
@@ -167,35 +175,37 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
           value: 534fgHjJIfnfDnIHKAENph6GVU8aeoSV7FzDEDL-s4H, ttl: 120
     ```
 
-1. Create the TXT record for the new subdomain using the DNS information shown. This record:
-    - validates your subdomain
-    - issues the TLS certificate used to encrypt traffic
+1. Create TXT records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.
 
-    Using this example, you create a `TXT` record for your new domain of `_acme-challenge.www.example.org.` with a value of `534fgHjJIfnfDnIHKAENph6GVU8aeoSV7FzDEDL-s4H`.
+    In the example, you would create a single `TXT` record for your new domain of `_acme-challenge.www.example.org.` with a value of `534fgHjJIfnfDnIHKAENph6GVU8aeoSV7FzDEDL-s4H`.
 
-1. Create a CNAME record for the new subdomain using the DNS information shown. This directs traffic to your service.
+1. Create a CNAME record for the new subdomain using the DNS information. This directs traffic to your service.
 
-    Using this example, you create a `CNAME` record in your DNS server pointing `www.example.org` to `d3nrs0916m1mk2.cloudfront.net.`
+    In the example, you would create a `CNAME` record in your DNS server pointing `www.example.org` to `d3nrs0916m1mk2.cloudfront.net.`
 
-You have now completed the custom domain setup process, and can now [map a subdomain to your app](#mapping-a-subdomain-route-to-your-app).
+You have now added a custom domain to your existing cdn-route service. Next, you should [map a subdomain to your app](#mapping-a-subdomain-route-to-your-app).
 
-It should take one hour for domain setup to finish after you have created the required DNS records. If it has not finished after 2 hours, please refer to the [troubleshooting](/deploying_services/use_a_custom_domain/#troubleshooting-custom-domains) section.
+It should take one hour for domain setup to finish after you have created the required DNS records. If the process is still incomplete after 2 hours, please refer to the [troubleshooting](/deploying_services/use_a_custom_domain/#troubleshooting-custom-domains) section.
 
-You must [remove a custom domain from your cdn-route service](#removing-a-custom-domain-from-your-cdn-route-service) to stop using any of your custom domains with the GOV.UK PaaS.
+If you have set up a custom domain using the cdn-route service and you want to stop using this custom domain with the GOV.UK PaaS, you must [remove the custom domain from your cdn-route service](#removing-a-custom-domain-from-your-cdn-route-service).
 
 You can associate up to 100 subdomains with a single cdn-route service instance.
 
-### Mapping a subdomain route to your app
+### Map a subdomain route to your app
 
-For each subdomain on which you want your app to be accessible, map the route to the app:
+Read this section to make your apps accessible through subdomains.
+
+For each subdomain, map the route to the app:
 
 ```
 cf map-route APP_NAME --hostname www DOMAIN_NAME
 ```
 
+where `DOMAIN_NAME` is the name of the domain.
+
 Your app is now ready to receive requests through the subdomain.
 
-### Removing a custom domain from your cdn-route service
+### Remove a custom domain from your cdn-route service
 
 <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -205,25 +215,27 @@ Your app is now ready to receive requests through the subdomain.
   </strong>
 </div>
 
-1. Your org manager should check if any apps are using a custom domain before removing that domain by running:
+1. Your org manager should check if any apps are using a custom domain before removing that domain:
 
     ```
     cf routes --orglevel | grep -we DOMAIN_NAME -e^space
     ```
-    In this example, your org manager must tell the owners of `app-1` and `app-2` that you are removing the domain:
+
+    Example output:
 
     ```
     space   host     domain        port   path   type   apps     service
     tools   www      DOMAIN_NAME                        app-1
     tools   info     DOMAIN_NAME                        app-2
     ```
+    In the example, your org manager must tell the owners of `app-1` and `app-2` that you are removing the domain:
 
-
-1. Remove the custom domain from Cloud Foundry's routing database and from every app using that domain:
+1. Remove the custom domain from Cloud Foundry's routing database:
 
     ```
     cf delete-domain DOMAIN_NAME
     ```
+    This also deletes the custom domain from every app using that domain.
 
 1. Check how many custom domains your cdn-route service has:
 
@@ -233,61 +245,69 @@ Your app is now ready to receive requests through the subdomain.
 
     where `SERVICE_INSTANCE` is the name of one of your existing cdn-route service instances.
 
-    In this example, there are 2 configured domains contained inside the square brackets: `www.example.com` and `www.example.net`.
+    Example output:
 
     ```
     message: Service instance provisioned [www.example.com,www.example.net =>
              london.cloudapps.digital]; CDN domain d3nrs0916m1mk2.cloudfront.net
     ```
+    In the example, there are 2 custom domains: `www.example.com` and `www.example.net`.
 
     If you cannot see this output, please contact GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk.](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) before proceeding.
 
-1. If your cdn-route service only has one associated custom domain, you must delete the service and the associated custom domain:
+The next step depends on whether your cdn-route service has one or multiple associated custom domains.
 
-    ```
-    cf delete-service SERVICE_INSTANCE
-    ```
+#### One associated domain
 
-    where `SERVICE_INSTANCE` is the name of the appropriate cdn-route service instance.
+If your cdn-route service only has one associated custom domain, you must delete the service and the associated custom domain:
 
-    You have now deleted your custom domain from the GOV.UK PAaS, and can [change or remove your domain DNS records](#changing-your-custom-domain-39-s-dns-records).
+```
+cf delete-service SERVICE_INSTANCE
+```
 
-1. If your cdn-route service has multiple associated custom domains, you must update your service with the reduced list of custom domains:
+where `SERVICE_INSTANCE` is the name of the appropriate cdn-route service instance.
 
-    ```
-    cf update-service SERVICE_INSTANCE \
-    -c '{"domain": "REDUCED_SUBDOMAIN_LIST"}'
-    ```
+You have now deleted your custom domain from the GOV.UK PAaS. You should next [change or remove the domain’s DNS records](#changing-your-custom-domain-39-s-dns-records).
 
-    In this example, your cdn-route service is named `custom-domains-production` and has 3 custom domains, `www.example.com`, `www.example.net` and `www.example.org`.  Run the following to remove `www.example.com`:
+#### Multiple associated domains
 
-    ```
-    cf update-service custom-domains-production \
-      -c '{"domain": "www.example.net,www.example.org"}'
-    ```
+If your cdn-route service has multiple associated custom domains, you must update your service with the reduced list of custom domains:
 
-    If you have previously customised the [cookies](#disabling-forwarding-cookies) or the [headers](#forwarding-headers) forwarded by your cdn-route service, you must include those `cookies` or `headers` configuration parameters in this `cf update-service` command.
+```
+cf update-service SERVICE_INSTANCE \
+-c '{"domain": "REDUCED_SUBDOMAIN_LIST"}'
+```
 
-    ```
-    cf update-service custom-domains-production \
-      -c '{"domain": "www.example.net,www.example.org",
-           "cookies": false, "headers": ["Accept", "Authorization"]}'
-    ```
+For example, your cdn-route service is named `custom-domains-production` and has 3 custom domains, `www.example.com`, `www.example.net` and `www.example.org`.  Run the following to remove `www.example.com`:
+
+
+```
+cf update-service custom-domains-production \
+    -c '{"domain": "www.example.net,www.example.org"}'
+```
+
+If you have previously customised the [cookies](#disabling-forwarding-cookies) or the [headers](#forwarding-headers) forwarded by your cdn-route service, you must include those as configuration parameters in the `cf update-service` command. For example:
+
+```
+cf update-service custom-domains-production \
+  -c '{"domain": "www.example.net,www.example.org",
+        "cookies": false, "headers": ["Accept", "Authorization"]}'
+```
 
 #### Changing your custom domain's DNS records
 
-You can change your custom domain's DNS records by:
+Once you have removed the custom domain(s) from your cdn-route service, you should delete any associated DNS records. This stops the removed domains' DNS records from pointing towards the GOV.UK PaaS. You should:
 
-- deleting or amending the subdomain's CNAME so that it no longer points towards the GOV.UK PaaS
-- removing the subdomain's TXT record you created when you configured the subdomain to work with the GOV.UK PaaS
+- delete or amend the subdomain's CNAME so that it does not point to the GOV.UK PaaS
+- delete the subdomain's TXT record you created when you configured the subdomain to work with the GOV.UK PaaS
 
 <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
   <strong class="govuk-warning-text__text">
     <span class="govuk-warning-text__assistive">Warning</span>
-      <p>Do not change any of your domains' DNS records so that they stop pointing towards the GOV.UK PaaS before removing those custom domain(s) from your cdn-route service.</p>
+      <p>Do not stop your domains' DNS records from pointing towards the GOV.UK PaaS before you have removed those custom domain(s) from your cdn-route service.</p>
       <p>If you do, all of your domains' TLS certificates will fail to renew without warning at some point over the next 90 days.</p>
-      <p>Your users will see a browser security warning page and may not be able to use your service.</p>
+      <p>Your users may not be able to use your service.</p>
   </strong>
 </div>
 
