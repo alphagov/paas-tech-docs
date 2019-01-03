@@ -5,7 +5,7 @@
 Cloud Foundry provides time series data known as metrics for each instance of your PaaS app. You can receive, store and view this data in a monitoring system of your choice by deploying either the:
 
 - [`paas-prometheus-exporter`](https://github.com/alphagov/paas-prometheus-exporter) app to collect and display metrics in the [Prometheus format](https://prometheus.io/docs/introduction/overview) [external links]
-- [`paas-metric-exporter`](https://github.com/alphagov/paas-metric-exporter) app to display metrics data in the [StatsD format](https://github.com/etsy/statsd/wiki) [external links]
+- [`paas-metric-exporter`](https://github.com/alphagov/paas-metric-exporter) app to push metrics data in the [StatsD format](https://github.com/etsy/statsd/wiki) [external links]
 
 You can also view all metrics in a one-off snapshot by installing the Cloud Foundry CLI [log cache plug-in](https://github.com/cloudfoundry/log-cache-cli#installing-plugin) [external link].
 
@@ -59,16 +59,16 @@ We recommend this GOV.UK PaaS account:
 
 	You can also set environment variables by changing the manifest file. You should do this for optional environment variables that do not contain secret information. Refer to the [PaaS Prometheus exporter repository](https://github.com/alphagov/paas-prometheus-exporter) [external link] for more information.
 
-1. Configure your Prometheus service's metrics endpoint. The metrics endpoint is the deployed PaaS Prometheus exporter app URL with `/metrics` added on to the end. For this example:
-
-	```
-	https://prometheus-exporter-exampleorg.cloudapps.digital/metrics
-	```
-
 1. Start the PaaS Prometheus exporter app:
 
 	```
 	cf start prometheus-exporter
+	```
+
+1. Configure your Prometheus service's metrics endpoint. The metrics endpoint is the deployed PaaS Prometheus exporter app URL with `/metrics` added on to the end. For this example:
+
+	```
+	https://prometheus-exporter-exampleorg.cloudapps.digital/metrics
 	```
 
 You can now check your Prometheus service to see if you are collecting metrics.
@@ -85,7 +85,7 @@ If you want to add authentication to the app and endpoint, refer to the document
 
 ### Metrics exporter app with StatsD
 
-To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter readme documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) [external link] for more information on supposed metrics.
+To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter readme documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) [external link] for more information on supported metrics.
 
 Before you set up the metrics exporter app, you will need:
 
