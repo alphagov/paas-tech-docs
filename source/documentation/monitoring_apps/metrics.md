@@ -85,7 +85,7 @@ If you want to add authentication to the app and endpoint, refer to the document
 
 ### Metrics exporter app with StatsD
 
-To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter readme documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) [external link] for more information on supposed metrics.
+To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter readme documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) [external link] for more information on supported metrics.
 
 Before you set up the metrics exporter app, you will need:
 
