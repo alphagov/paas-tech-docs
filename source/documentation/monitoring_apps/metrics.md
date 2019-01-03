@@ -2,110 +2,95 @@
 
 ## Metrics
 
-Cloud Foundry provides time series data, or metrics, for each instance of your PaaS app. You can receive, store and view this data in a monitoring system of your choice by either:
+Cloud Foundry provides time series data known as metrics for each instance of your PaaS app. You can receive, store and view this data in a monitoring system of your choice by deploying either the:
 
-- using the [Prometheus](https://prometheus.io/) [external link] endpoint provided by the GOV.UK PaaS team
-- deploying the `paas-metric-exporter` app to push metrics data in [StatsD](https://github.com/etsy/statsd/wiki) [external link] format
+- [`paas-prometheus-exporter`](https://github.com/alphagov/paas-prometheus-exporter) app to collect and display metrics in the [Prometheus format](https://prometheus.io/docs/introduction/overview) [external links]
+- [`paas-metric-exporter`](https://github.com/alphagov/paas-metric-exporter) app to display metrics data in the [StatsD format](https://github.com/etsy/statsd/wiki) [external links]
 
 You can also view all metrics in a one-off snapshot by installing the Cloud Foundry CLI [log cache plug-in](https://github.com/cloudfoundry/log-cache-cli#installing-plugin) [external link].
 
-### Use the Prometheus endpoint
+### Use the PaaS Prometheus exporter app
 
-Prometheus uses the following API endpoints to request metrics from Cloud Foundry:
+The PaaS Prometheus exporter collects metrics from your apps and any backing services configured to send metrics to the PaaS.
 
-- `https://metrics.cloud.service.gov.uk/metrics` for the Ireland region
-- `https://metrics.london.cloud.service.gov.uk/metrics` for the London region
+To use the PaaS Prometheus exporter, deploy it as an app on the GOV.UK PaaS. Refer to the [PaaS Prometheus exporter readme documentation](https://github.com/alphagov/paas-prometheus-exporter/blob/master/README.md) [external link] for more information on supported metrics.
 
-PaaS maintains these endpoints for free, so you can access all available metrics for free. You can configure Prometheus manually to filter out any metrics you do not need.
+#### Prerequisites
 
-You must set up Prometheus to request metrics from your region's API endpoint.
+Before you set up the PaaS Prometheus exporter app, you’ll need a:
 
-1. [Install Prometheus](https://prometheus.io/docs/prometheus/latest/getting_started/) [external link].
+- Prometheus service to request or ‘scrape’, store and expose metrics from a metrics endpoint
+- live [GOV.UK PaaS account](https://docs.cloud.service.gov.uk/get_started.html#get-an-account) assigned to the orgs and spaces you want to receive metrics on
 
-1. You must set up a bearer token so the API endpoint can authenticate your Prometheus request. We recommend you use a `bearer_token_file`. Set up an automated cron job to run the following command every 5 minutes:
+We recommend this GOV.UK PaaS account:
 
-	```
-	cf oauth-token > /path/to/bearer_token_file.txt
-	```
+- uses the [`SpaceAuditor` role](/orgs_spaces_users.html#space-auditor) as this role has the minimum permissions needed to meet the requirements of the PaaS Prometheus exporter app
+- is separate to your primary GOV.UK PaaS account
 
-	where:
-	- `cf oauth-token` is the command that generates a bearer token
-	- `/path/to/bearer_token_file.txt` is the location and name of the `bearer_token_file` used by the Prometheus configuration
+#### Set up the app
 
-1. Configure Prometheus to read the bearer token from the `bearer_token_file.txt`. Refer to the Prometheus [configuration documentation](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#ingress) [external link] for more information.
+1. Clone the [PaaS Prometheus exporter repository](https://github.com/alphagov/paas-prometheus-exporter) [external link].
 
-#### Use Docker to run Prometheus locally
-
-You can set up Prometheus to request metrics from your region's API endpoint by using [Docker](https://www.docker.com/) [external link] to run a local instance of Prometheus.
-
-1. Save the following script as `test-metrics.sh`:
+1. [Push the PaaS Prometheus exporter app](/deploying_apps.html#deploying-public-apps) to Cloud Foundry without starting the app:
 
 	```
-	#!/usr/bin/env bash
-	set -ue
-
-	echo "
-	global:
-	  scrape_interval: 1m
-	  evaluation_interval: 1m
-	  scrape_timeout: 1m
-
-	scrape_configs:
-	  - job_name: PaaS
-	    bearer_token: $(cf oauth-token | sed 's/bearer //')
-	    scheme: https
-	    static_configs:
-	      - targets:
-	        - API_ENDPOINT:443
-	" > prometheus.yml
-
-	docker run --publish 9090:9090 \
-	           --volume "$PWD/prometheus.yml:/etc/prometheus/prometheus.yml" \
-	           prom/prometheus
-	```
-	where API_ENDPOINT is:
-	- `https://metrics.cloud.service.gov.uk/metrics` for the Ireland region
-	- `https://metrics.london.cloud.service.gov.uk/metrics` for the London region
-
-1. Make the script executable:
-
-	```
-	chmod +x test-metrics.sh
+	cf push --no-start prometheus-exporter --hostname prometheus-exporter-ORGNAME
 	```
 
-1. Execute the script:
+	where `ORGNAME` is the name of your org. For example:
 
 	```
-	./test-metrics.sh
+	cf push --no-start prometheus-exporter --hostname prometheus-exporter-exampleorg
 	```
 
-	If the script executes successfully, you will see the message:
+	Running this command deploys the PaaS Prometheus exporter app to `https://prometheus-exporter-exampleorg.cloudapps.digital` without starting the app.
+
+	Refer to the [app names and domain hostnames documentation](/deploying_apps.html#app-names-and-domain-hostname-clash) for more information on how to avoid duplicating existing app names.
+
+1. Set the following mandatory environment variables in the PaaS Prometheus exporter app by running `cf set-env prometheus-exporter NAME VALUE`:
+
+	|Name|Value|
+	|:---|:---|
+	|`API_ENDPOINT`|- `https://api.cloud.service.gov.uk` for Ireland<br>- `https://api.london.cloud.service.gov.uk` for London|
+	|`USERNAME`|Cloud Foundry User|
+	|`PASSWORD`|Cloud Foundry Password|
+
+	You should use the `cf set-env` command for these mandatory variables as they contain secret information, and this method will keep them secure.
+
+	You can also set environment variables by changing the manifest file. You should do this for optional environment variables that do not contain secret information. Refer to the [PaaS Prometheus exporter repository](https://github.com/alphagov/paas-prometheus-exporter) [external link] for more information.
+
+1. Configure your Prometheus service's metrics endpoint. The metrics endpoint is the deployed PaaS Prometheus exporter app URL with `/metrics` added on to the end. For this example:
 
 	```
-	msg="Server is ready to receive web requests."
+	https://prometheus-exporter-exampleorg.cloudapps.digital/metrics
 	```
 
-1. Open your web browser and go to `http://localhost:9090/targets`. You should see the local Prometheus instance running in a Docker container and receiving metrics.
+1. Start the PaaS Prometheus exporter app:
 
-If your local Prometheus instance is not receiving any metrics, check that the __PaaS State__ is __UP__.
+	```
+	cf start prometheus-exporter
+	```
 
-If the __PaaS State__ is __UP__ and you are still not receiving any metrics, contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+You can now check your Prometheus service to see if you are collecting metrics.
+
+If you do not receiving any metrics, check the PaaS Prometheus exporter app [logs](/monitoring_apps.html#logs).
+
+If you still need help, contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+
+#### Add authentication
+
+By default, the PaaS Prometheus exporter app and metrics endpoint are publicly accessible to everyone through the internet.
+
+If you want to add authentication to the app and endpoint, refer to the documentation on [adding a route service to provide basic HTTP authentication](https://docs.cloud.service.gov.uk/deploying_services/route_services/#example-route-service-to-add-authentication).
 
 ### Metrics exporter app with StatsD
 
-To use the metrics exporter, you deploy it as an app on PaaS. The current metrics supported by this app are:
-
-- CPU
-- RAM
-- disk usage data
-- app crashes
-- app requests
-- app response times
+To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter readme documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) [external link] for more information on supposed metrics.
 
 Before you set up the metrics exporter app, you will need:
 
 - a monitoring system to store the metrics with an accompanying [StatsD](https://github.com/etsy/statsd/wiki) [external link] endpoint set up
-- a live Cloud Foundry account assigned to the spaces you want to receive metrics on
+- a live Cloud Foundry account assigned to the orgs and spaces you want to receive metrics on
 
 We recommend that this Cloud Foundry account:
 
