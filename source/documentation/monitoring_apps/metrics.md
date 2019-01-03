@@ -59,16 +59,16 @@ We recommend this GOV.UK PaaS account:
 
 	You can also set environment variables by changing the manifest file. You should do this for optional environment variables that do not contain secret information. Refer to the [PaaS Prometheus exporter repository](https://github.com/alphagov/paas-prometheus-exporter) [external link] for more information.
 
-1. Configure your Prometheus service's metrics endpoint. The metrics endpoint is the deployed PaaS Prometheus exporter app URL with `/metrics` added on to the end. For this example:
-
-	```
-	https://prometheus-exporter-exampleorg.cloudapps.digital/metrics
-	```
-
 1. Start the PaaS Prometheus exporter app:
 
 	```
 	cf start prometheus-exporter
+	```
+
+1. Configure your Prometheus service's metrics endpoint. The metrics endpoint is the deployed PaaS Prometheus exporter app URL with `/metrics` added on to the end. For this example:
+
+	```
+	https://prometheus-exporter-exampleorg.cloudapps.digital/metrics
 	```
 
 You can now check your Prometheus service to see if you are collecting metrics.
