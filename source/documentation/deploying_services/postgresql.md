@@ -240,7 +240,7 @@ You can [reboot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Reb
 - try to fix a problem with your service instance
 - test how your app behaves during a service instance failure
 
-To reboot your service instance, you must have [space developer](/orgs_spaces_users.html#space-developer) permissions in the [space](/orgs_spaces_users.html#spaces) that hosts your service instance.
+To reboot your service instance, you must have the [space developer](/orgs_spaces_users.html#space-developer) role and permissions in the [space](/orgs_spaces_users.html#spaces) that hosts your service instance.
 
 Rebooting your service instance will cause a brief service outage. You can minimise the length of this outage by reducing activity in your PostgreSQL database during the reboot.
 
