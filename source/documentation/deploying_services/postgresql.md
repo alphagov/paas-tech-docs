@@ -240,7 +240,7 @@ You can [reboot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Reb
 - try to fix a problem with your service instance
 - test how your app behaves during a service instance failure
 
-To reboot your service instance, you must have at least [space developer](https://docs.cloud.service.gov.uk/orgs_spaces_users.html#space-developer) permissions or higher in the [space](orgs_spaces_users.html#spaces) that hosts your service instance.
+To reboot your service instance, you must have [space developer](/orgs_spaces_users.html#space-developer) permissions in the [space](/orgs_spaces_users.html#spaces) that hosts your service instance.
 
 Rebooting your service instance will cause a brief service outage. You can minimise the length of this outage by reducing activity in your PostgreSQL database during the reboot.
 
@@ -252,7 +252,7 @@ cf update-service SERVICE_NAME -c '{"reboot": true}'
 
 where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
-If you have a [highly available service instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) [external link], you can force a [failover](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) when you reboot the service instance. You can use this to test how your app behaves when a failover happens.
+If you have a [highly available service instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) [external link], you can force a [failover](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) [external link] when you reboot the service instance. You can use this to test how your app behaves when a failover happens.
 
 Run the following command to reboot your highly available service and force a failover:
 
@@ -260,7 +260,7 @@ Run the following command to reboot your highly available service and force a fa
 cf update-service SERVICE_NAME -c '{"reboot": true, "force_failover": true}'
 ```
 
-When you force a failover, your PostgreSQL database IP address will change. The database's hostname will not change. You must close all your database's connections to the previous IP address after forcing a failover.
+When you force a failover, your PostgreSQL database IP address will change. The database's hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.
 
 ### Unbind a PostgreSQL service from your app
 
