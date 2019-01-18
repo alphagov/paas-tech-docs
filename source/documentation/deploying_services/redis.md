@@ -2,6 +2,8 @@
 
 Redis is an open source in-memory data store that can be used as a database cache or message broker.
 
+## Set up the service
+
 ### Set up a Redis service
 
 To set up a Redis service:
@@ -155,6 +157,8 @@ PONG
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
+## Remove the service
+
 ### Unbind a Redis service from your app
 
 You must unbind the Redis service before you can delete your service instance. To unbind the Redis service, run the following code in the command line:
@@ -182,6 +186,8 @@ cf delete-service SERVICE_NAME
 where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
+
+## Maintaining the service
 
 ### Data classification
 

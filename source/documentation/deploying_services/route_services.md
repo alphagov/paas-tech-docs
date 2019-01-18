@@ -12,7 +12,7 @@ Using route services has some consequences to be aware of:
 - The route service will be able to access all the request content in clear.
 - The route service would become a critical point of failure, and if it is not available, the application will not be available for the end users.
 
-### User-provided Route Services
+## User-provided route services
 
 Tenants can define their own route service instance by using a [user-provided service instance](https://docs.cloudfoundry.org/devguide/services/user-provided.html) [external link] that points to any HTTPS service. This endpoint must fulfill the following requirements:
 
@@ -71,7 +71,7 @@ This is how you define an user-provided route service instance and map it to the
 
     If you get this error, double check that the endpoint is working and reachable from the platform, that it is using a valid SSL certificate, that responds timely and that it implements the [route service protocol](/deploying_services/route_services/#implementing-a-route-service).
 
-### Implementing a route service
+## Implement a route service
 
 A route service can be implemented as a HTTPS application that will receive all requests for the associated route from the Cloud Foundry router. The request will contain the following additional headers:
 
