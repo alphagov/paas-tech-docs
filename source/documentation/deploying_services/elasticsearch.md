@@ -6,6 +6,7 @@ This implementation of Elasticsearch is a request-only private beta trial versio
 
 Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services/postgresql/#postgresql) or [MySQL](/deploying_services/mysql/#mysql) would better meet your needs.  
 
+## Set up the service
 
 ### Set up an Elasticsearch service
 
@@ -127,6 +128,8 @@ Alternatively, you can manually bind your service instance to your app.
 
 Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
 
+## Amend the service
+
 ### Changing your Elasticsearch service plan
 
 Elasticsearch does not currently support changing your service plan.
@@ -134,6 +137,8 @@ Elasticsearch does not currently support changing your service plan.
 If this changes, we will announce it in the GOV.UK PaaS announcements email.
 
 Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any further questions.
+
+## Remove the service
 
 ### Unbind an Elasticsearch service from your app
 
@@ -166,6 +171,8 @@ cf delete-service my-es-service
 ```
 
 Enter `yes` when asked for confirmation.
+
+## Maintaining the service
 
 ### Data classification
 

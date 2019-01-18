@@ -22,6 +22,8 @@ You must configure the cdn-route service to use a subdomain. If you configure th
 
 Once you create a CDN service instance, you cannot update or delete the instance until you have completed the setup process. If you make a mistake that breaks the configuration, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to delete the service instance.
 
+## Set up the service
+
 ### Set up a cdn-route service with one or more custom domains
 
 1. Target the space your app is running in:
@@ -107,6 +109,8 @@ It should take one hour for domain setup to finish after you have created the re
 If you have set up a custom domain using the cdn-route service and you want to stop using this custom domain with the GOV.UK PaaS, you must [remove the custom domain from your cdn-route service](#remove-a-custom-domain-from-your-cdn-route-service).
 
 You can associate up to 100 subdomains with a single cdn-route service instance.
+
+## Amend the service
 
 ### Add a custom domain to your existing cdn-route service
 
@@ -311,9 +315,9 @@ Once you have removed the custom domain(s) from your cdn-route service, you shou
   </strong>
 </div>
 
-### Configuring your custom domain
+## Configuring your custom domain
 
-#### Disabling forwarding cookies
+### Disabling forwarding cookies
 
 By default cookies are forwarded to your app. You can disable this by setting the `cookies` parameter to `false`:
 
@@ -323,7 +327,7 @@ cf update-service my-cdn-route \
 ```
 See the [More about how the CDN works](/deploying_services/use_a_custom_domain/#more-about-how-custom-domains-work) section for details.
 
-#### Forwarding headers
+### Forwarding headers
 
 By default, our service broker configures the CDN to only forward the `Host` header to your app. You can whitelist extra headers; in this example you can whitelist the `Accept` and `Authorization` headers:
 
@@ -367,13 +371,13 @@ Server error, status code: 409, error code: 60016, message: An operation for ser
 
 This happens because you can't do anything to a service instance while it's in a pending state. A CDN service instance stays pending until it detects the CNAME or ALIAS record. If this causes a problem for you, [contact support](https://www.cloud.service.gov.uk/support) to ask us to manually delete the pending instance.
 
-### More about how custom domains work
+## How custom domains work
 
-#### Overview
+### Overview
 
 Custom domains are configured by our cdn-route service which uses a CloudFront distribution to proxy and/or cache requests to your app.
 
-#### Caching
+### Caching
 
 CloudFront uses your app's `Cache-Control` or `Expires` HTTP headers to determine [how long to cache content](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) [external link]. If your app does not provide these headers, CloudFront will use a default timeout of 24 hours. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
 
@@ -381,7 +385,7 @@ While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV
 
 You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) [external link] for more detail. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
 
-#### Authentication
+### Authentication
 
 Cookie headers are forwarded to your app by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services/use_a_custom_domain/#forwarding-headers).
 
