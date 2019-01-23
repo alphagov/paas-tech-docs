@@ -224,7 +224,9 @@ You can use a high availability service plan (`HA`). When you use a high availab
 
 If you have a non-HA service plan, you will lose data during a service instance failure. Before deciding which service plan to use, you should assess your data and what type of plan you need.
 
-Refer to the [Redis documentation](https://redis.io/topics/cluster-tutorial) [external link] for more information.
+Refer to the [Amazon ElastiCache documentation on failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html) [external link] for more information on failover.
+
+Refer to the [Redis documentation](https://redis.io/topics/cluster-tutorial) [external link] for more information on Redis overall.
 
 ### Redis maintenance & backups
 
