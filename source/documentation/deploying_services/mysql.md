@@ -2,6 +2,8 @@
 
 MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is backed by Oracle.
 
+## Set up the service
+
 ### Set up a MySQL service
 
 To set up a MySQL service:
@@ -140,6 +142,8 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
+## Amend the service
+
 ### Import and export bulk data to and from a MySQL database
 
 #### Prerequisites
@@ -267,6 +271,8 @@ cf update-service SERVICE_NAME -c '{"reboot": true, "force_failover": true}'
 
 When you force a failover, your MySQL database IP address will change. The database's hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.
 
+## Remove the service
+
 ### Unbind a MySQL service from your app
 
 You must unbind the MySQL service before you can delete it. To unbind the MySQL service, run the following code in the command line:
@@ -294,6 +300,8 @@ cf delete-service SERVICE_NAME
 where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
+
+## Maintaining the service
 
 ### Data classification
 

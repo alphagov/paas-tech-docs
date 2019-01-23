@@ -9,9 +9,9 @@ You should use these methods if you need access to features that are not provide
 
 There are many different CDNs available. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to discuss best practice for configuring your CDN to work with the PaaS.
 
-### Use Cloud Foundry commands
+## Use Cloud Foundry commands
 
-#### Set up connection between custom domain and CDN
+### Set up connection between custom domain and CDN
 
 1. Register your custom domain with a domain name registrar.
 
@@ -19,7 +19,7 @@ There are many different CDNs available. Contact us at [gov-uk-paas-support@digi
 
 3. Set up the connection between your custom domain and the CDN provider, following the CDN provider’s instructions.
 
-#### Configure your custom domain in Cloud Foundry
+### Configure your custom domain in Cloud Foundry
 
 1. Target the space your application is running in:
 
@@ -39,15 +39,15 @@ There are many different CDNs available. Contact us at [gov-uk-paas-support@digi
     cf map-route APPNAME example.com --hostname www
     ```
 
-#### Configure your CDN
+### Configure your CDN
 
 Configure your CDN to forward HTTPS traffic to the PaaS at your [app domain](/orgs_spaces_users.html#regions), providing a HTTP `Host` header for your custom domain (for example `Host: www.example.com`).
 
 For example, if your app is hosted in the London region, your app domain is `london.cloudapps.digital`. When your CDN connects to the `london.cloudapps.digital` server, the server will present a TLS certificate valid only for `london.cloudapps.digital` and `*.london.cloudapps.digital`. Your CDN must accept this certificate.
 
-### Amend HTTP request headers
+## Amend HTTP request headers
 
-#### Set up connection between custom domain and CDN
+### Set up connection between custom domain and CDN
 
 1. Register your custom domain with a domain name registrar.
 
@@ -55,7 +55,7 @@ For example, if your app is hosted in the London region, your app domain is `lon
 
 3. Set up the connection between your custom domain and the CDN provider, following the CDN provider’s instructions.
 
-#### Configure your CDN
+### Configure your CDN
 
 1. Configure your CDN to forward HTTPS requests from your custom domain to the PaaS at the `YOURAPP.APP_DOMAIN` domain.
 
@@ -81,6 +81,6 @@ Host: YOURAPP.london.cloudapps.digital
 X-Forwarded-Host: www.example.com
 ```
 
-#### Configure your app
+### Configure your app
 
 Configure your app to obtain its hostname from the `X-Forwarded-Host` HTTP header.
