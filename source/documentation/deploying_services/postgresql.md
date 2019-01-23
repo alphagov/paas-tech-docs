@@ -237,6 +237,40 @@ To upgrade, you must set up a new service and migrate your app data.
 
 You cannot currently downgrade your service plan.
 
+### Reboot a PostgreSQL service instance
+
+You can [reboot your PostgreSQL service instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html) [external link] to:
+
+- try to fix a problem with your service instance
+- test how your app behaves during a service instance failure
+
+To reboot your service instance, you must have the [space developer](/orgs_spaces_users.html#space-developer) role and permissions in the [space](/orgs_spaces_users.html#spaces) that hosts your service instance.
+
+Rebooting your service instance will cause a temporary database outage. The length of this outage depends on your service instance’s complexity and configuration.
+
+
+You should tell your users and your team when a reboot is scheduled.
+
+Run the following code in the command line to reboot your service instance:
+
+```
+cf update-service SERVICE_NAME -c '{"reboot": true}'
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this service instance.
+
+#### Force a failover
+
+If you have a [highly available service instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) [external link], you can force a [failover](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) [external link] when you reboot that service instance. You can use this to test how your app behaves when a failover happens.
+
+Run the following code to reboot your highly available service and force a failover:
+
+```
+cf update-service SERVICE_NAME -c '{"reboot": true, "force_failover": true}'
+```
+
+When you force a failover, your PostgreSQL database IP address will change. The database's hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.
+
 ## Remove the service
 
 ### Unbind a PostgreSQL service from your app
