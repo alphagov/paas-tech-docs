@@ -220,13 +220,9 @@ One of your Org Managers must contact us at [gov-uk-paas-support@digital.cabinet
 
 #### High availability
 
-You can use a high availability service plan (`HA`). When you use a high availability service plan, Amazon ElastiCache Redis provides a hot standby service for failover in the event that the original service instance fails.
+You can use a high availability service plan (`HA`). When you use a high availability service plan, Amazon ElastiCache Redis provides a hot standby service for [failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html) [external link] in the event that the original service instance fails.
 
 If you have a non-HA service plan, you will lose data during a service instance failure. Before deciding which service plan to use, you should assess your data and what type of plan you need.
-
-Refer to the [Amazon ElastiCache documentation on failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html) [external link] for more information on failover.
-
-Refer to the [Redis documentation](https://redis.io/topics/cluster-tutorial) [external link] for more information on Redis overall.
 
 ### Redis maintenance & backups
 
