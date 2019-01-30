@@ -8,21 +8,23 @@ Redis is an open source in-memory data store that can be used as a database cach
 
 To set up a Redis service:
 
-1. Run the following in the command line to see what plans are available for Redis:
+1. Run the following in the command line to see what service plans are available for Redis:
 
     ```
     cf marketplace -s redis
     ```
 
-    There are currently two plans available for Redis:
+    Here is an example of the output you will see (the exact service plans will vary):
 
     ```
-    service plan           description                                                                free or paid
-    tiny-clustered-3.2     568MB RAM, clustered (1 shard), single node, no failover, daily backups    paid
-    tiny-unclustered-3.2   568MB RAM, non-clustered, single node, no failover, no backups             paid
+    service plan            description                                                               free or paid
+    tiny-3.2                568MB RAM, single node, no failover, daily backups                        free
+    medium-ha-3.2           6.37GB RAM, highly-available, daily backups                               paid
     ```
 
-    You should use the `tiny-clustered-3.2` plan as it is backed up every day. Refer to the [Redis plans](/deploying_services/redis/#redis-plans) section of the documentation for more information.
+    Refer to the [Redis service plans](/deploying_services/redis/#redis-service-plans) section of the documentation for more information.
+
+    Do not use the `tiny-clustered-3.2` service plan for new service instances as we have deprecated this plan.
 
 1. Run the following to create a service instance:
 
@@ -30,10 +32,10 @@ To set up a Redis service:
     cf create-service redis PLAN SERVICE_NAME
     ```
 
-    where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
+    where `PLAN` is the service plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf create-service redis tiny-clustered-3.2 my-redis-service
+    cf create-service redis tiny-3.2 my-redis-service
     ```
 
 1. It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
@@ -55,7 +57,7 @@ To set up a Redis service:
     service:         redis
     bound apps:
     tags:
-    plan:            tiny-clustered-3.2
+    plan:            tiny-3.2
     description:     AWS ElastiCache Redis service
     documentation:
     dashboard:
@@ -193,34 +195,34 @@ Type `yes` when asked for confirmation.
 
 You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services/#data-security-classification) for more information.
 
-### Redis plans
+### Redis service plans
 
-There are two plans available for the Redis service:
+There are two service plans currently available for the Redis service:
 
-- `tiny-clustered-3.2`
-- `tiny-unclustered-3.2`
+- `tiny-3.2`
+- `medium-ha-3.2`
 
-You cannot migrate a service from an unclustered to a clustered plan or vice versa.
+Do not use the `tiny-clustered-3.2` service plan for new service instances as we have deprecated this plan.
 
-Both plans include encryption at rest of the database storage. This means that both the data on the disk and in snapshots is encrypted.
+Both service plans include encryption at rest of the database storage. This means both the data on the disk and in snapshots is encrypted.
 
-#### tiny-clustered-3.2
+Amazon ElastiCache for Redis backs up both service plans every day.
 
-We recommend that you use this plan as it is backed up every day. Note that:
+You can [vertically scale](/managing_apps.html#scaling) or upgrade your service plan.
 
-- [Sidekiq](https://sidekiq.org) [external link] does not work with clustered Redis
-- this plan cannot be [vertically scaled](/managing_apps.html#scaling) or upgraded to a bigger plan
+#### Billing
 
-#### tiny-unclustered-3.2
+If your org is in its trial period, you can use the `tiny-3.2` service plan for free.
 
-Use this plan if your client library cannot connect to clustered plans. Note that:
+Trial orgs cannot access paid service plans by default. If paid service plans are not enabled, when you try to use a paid service plan, you will receive an error stating “service instance cannot be created because paid service plans are not allowed”.
 
-- it is not automatically backed up
-- it can be [vertically scaled](/managing_apps.html#scaling) or upgraded to a bigger plan
+One of your Org Managers must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid service plans.
 
-Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you need an unclustered plan with backups enabled, or a larger unclustered plan.
+#### High availability
 
-Refer to the [Redis documentation](https://redis.io/topics/cluster-tutorial) [external link] for more information on clusters.
+If you use a high availability service plan, Amazon ElastiCache for Redis provides a hot standby service for [failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html) [external link].
+
+If you don't have a high availability service plan, you will lose data during a service instance failure. Before deciding which service plan to use, you should assess your data and what type of plan you need.
 
 ### Redis maintenance & backups
 
@@ -240,7 +242,7 @@ To restore from the latest backup of your Redis service instance, create a new s
 cf create-service redis PLAN NEW_SERVICE_NAME -c '{ "restore_from_latest_snapshot_of": "GUID" }'
 ```
 
-where `PLAN` is the name of the plan, `NEW_SERVICE_NAME` is the name of your new service instance, and `GUID` is the UUID of the pre-existing backed-up instance. Get the `GUID` by running `cf service --guid SERVICE_NAME`.
+where `PLAN` is the name of the service plan, `NEW_SERVICE_NAME` is the name of your new service instance, and `GUID` is the UUID of the pre-existing backed-up instance. Get the `GUID` by running `cf service --guid SERVICE_NAME`.
 
 To restore from an older backup, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
@@ -248,7 +250,7 @@ For more details about how the backup system works, see the [Amazon's ElastiCach
 
 ### Redis key eviction policy
 
-The eviction policy is the behaviour Redis follows when you reach your plan's maximum memory limit. The eviction policy can take the following values:
+The eviction policy is the behaviour Redis follows when you reach your service plan's maximum memory limit. The eviction policy can take the following values:
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
