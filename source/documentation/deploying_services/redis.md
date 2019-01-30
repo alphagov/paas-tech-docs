@@ -204,9 +204,9 @@ There are two service plans currently available for the Redis service:
 
 Do not use the `tiny-clustered-3.2` service plan for new service instances as we have deprecated this plan.
 
-Both service plans include encryption at rest of the database storage. This means that both the data on the disk and in snapshots is encrypted.
+Both service plans include encryption at rest of the database storage. This means both the data on the disk and in snapshots is encrypted.
 
-Amazon ElastiCache Redis backs up both service plans every day.
+Amazon ElastiCache for Redis backs up both service plans every day.
 
 You can [vertically scale](/managing_apps.html#scaling) or upgrade your service plan.
 
@@ -220,9 +220,9 @@ One of your Org Managers must contact us at [gov-uk-paas-support@digital.cabinet
 
 #### High availability
 
-You can use a high availability service plan (`HA`). When you use a high availability service plan, Amazon ElastiCache Redis provides a hot standby service for [failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html) [external link] in the event that the original service instance fails.
+If you use a high availability service plan, Amazon ElastiCache for Redis provides a hot standby service for [failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html) [external link].
 
-If you have a non-HA service plan, you will lose data during a service instance failure. Before deciding which service plan to use, you should assess your data and what type of plan you need.
+If you don't have a high availability service plan, you will lose data during a service instance failure. Before deciding which service plan to use, you should assess your data and what type of plan you need.
 
 ### Redis maintenance & backups
 
