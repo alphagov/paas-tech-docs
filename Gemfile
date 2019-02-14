@@ -6,5 +6,5 @@ gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
 # Windows does not come with time zone data
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
-gem 'govuk_tech_docs'
+gem 'govuk_tech_docs', '1.8.0'
 gem 'middleman-search', :git => 'https://github.com/alphagov/middleman-search.git'
