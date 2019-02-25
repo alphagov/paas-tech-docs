@@ -19,9 +19,9 @@ Before using Elasticsearch as your primary data store, you should assess if an [
     Here is an example of the output you will see:
 
     ```
-    service plan   description                                                        free or paid
-    small-ha-5.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.   paid
-    small-ha-6.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.   paid
+    service plan   description                                                          free or paid
+    small-ha-6.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.     paid
+    large-ha-6.x   3 dedicated VMs, 2 CPU per VM, 15GB RAM per VM, 1050GB disk space.   paid
     ```
 
     The following table explains the syntax in this output:
