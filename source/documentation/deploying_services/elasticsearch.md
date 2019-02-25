@@ -4,7 +4,7 @@
 
 This implementation of Elasticsearch is a request-only private beta trial version of the backing service to gather feedback. This service may not be suitable for everyone. Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to try the Elasticsearch backing service.
 
-Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services/postgresql/#postgresql) or [MySQL](/deploying_services/mysql/#mysql) would better meet your needs.  
+Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services/postgresql/#postgresql) or [MySQL](/deploying_services/mysql/#mysql) would better meet your needs.
 
 ## Set up the service
 
@@ -130,13 +130,21 @@ Refer to the Cloud Foundry documentation on [deploying with app manifests](https
 
 ## Amend the service
 
-### Changing your Elasticsearch service plan
+### Upgrade Elasticsearch service plan
 
-Elasticsearch does not currently support changing your service plan.
+You can upgrade your plan using the `cf update-service` command. Run the following in the command line:
 
-If this changes, we will announce it in the GOV.UK PaaS announcements email.
+```sh
+cf update-service SERVICE_NAME -p NEW_PLAN_NAME
+```
 
-Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any further questions.
+where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
+
+```sh
+cf update-service my-elasticsearch-service -p small-ha-6.x
+```
+
+The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
 
 ## Remove the service
 
