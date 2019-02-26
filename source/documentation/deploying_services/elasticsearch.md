@@ -4,7 +4,7 @@
 
 This implementation of Elasticsearch is a request-only private beta trial version of the backing service to gather feedback. This service may not be suitable for everyone. Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to try the Elasticsearch backing service.
 
-Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services/postgresql/#postgresql) or [MySQL](/deploying_services/mysql/#mysql) would better meet your needs.  
+Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services/postgresql/#postgresql) or [MySQL](/deploying_services/mysql/#mysql) would better meet your needs.
 
 ## Set up the service
 
@@ -19,9 +19,9 @@ Before using Elasticsearch as your primary data store, you should assess if an [
     Here is an example of the output you will see:
 
     ```
-    service plan   description                                                        free or paid
-    small-ha-5.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.   paid
-    small-ha-6.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.   paid
+    service plan   description                                                          free or paid
+    small-ha-6.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.     paid
+    large-ha-6.x   3 dedicated VMs, 2 CPU per VM, 15GB RAM per VM, 1050GB disk space.   paid
     ```
 
     The following table explains the syntax in this output:
@@ -130,13 +130,21 @@ Refer to the Cloud Foundry documentation on [deploying with app manifests](https
 
 ## Amend the service
 
-### Changing your Elasticsearch service plan
+### Upgrade Elasticsearch service plan
 
-Elasticsearch does not currently support changing your service plan.
+You can upgrade your plan using the `cf update-service` command. Run the following in the command line:
 
-If this changes, we will announce it in the GOV.UK PaaS announcements email.
+```sh
+cf update-service SERVICE_NAME -p NEW_PLAN_NAME
+```
 
-Contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any further questions.
+where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
+
+```sh
+cf update-service my-elasticsearch-service -p small-ha-6.x
+```
+
+The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
 
 ## Remove the service
 
@@ -185,7 +193,7 @@ Aiven automatically backs up all data stored within any Elasticsearch service yo
 Backups are taken every 2 hours. Data is retained for:
 
 - 2 days if you have a `tiny` plan
-- 14 days if you have a `small` plan
+- 14 days if you have a `small`, `medium` or `large` plan
 
 To restore data to an earlier state, you can visit the [GOV.UK PaaS support page](https://www.cloud.service.gov.uk/support) or contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
