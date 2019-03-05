@@ -69,7 +69,7 @@ Once you create a CDN service instance, you cannot update or delete the instance
     Message: Provisioning in progress
              [www.example.com,www.example.net => london.cloudapps.digital];
              CNAME or ALIAS domain www.example.com,www.example.net to
-             d3nrs0916m1mk2.cloudfront.net or create TXT record(s):
+             d3nrs0916m1mk2.cloudfront.net and create TXT record(s):
     name: _acme-challenge.www.example.com.,
           value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
     name: _acme-challenge.www.example.net.,
@@ -170,7 +170,7 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
     Message: Update in progress
              [www.example.com,www.example.net,www.example.org => london.cloudapps.digital];
              CNAME or ALIAS domain www.example.com,www.example.net,www.example.org to
-             d3nrs0916m1mk2.cloudfront.net or create TXT record(s):
+             d3nrs0916m1mk2.cloudfront.net and create TXT record(s):
     name: _acme-challenge.www.example.com.,
           value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
     name: _acme-challenge.www.example.net.,
