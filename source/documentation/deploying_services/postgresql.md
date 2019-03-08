@@ -271,6 +271,93 @@ cf update-service SERVICE_NAME -c '{"reboot": true, "force_failover": true}'
 
 When you force a failover, your PostgreSQL database IP address will change. The database's hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.
 
+### Add or remove extensions for a Postgresql service instance
+
+GOV.UK PaaS supports and enables the following extensions by default:
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
+|Extension|PostgreSQL version|
+|:---|:---|
+|uuid-ossp|9.5, 10|
+|postgis|9.5, 10|
+|citext|10|
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
+GOV.UK PaaS supports the following extensions, but they are not enabled by default:
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
+|Extension|PostgreSQL version|
+|:---|:---|
+|pg_stat_statements|9.5, 10|
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
+You can add or remove extensions for a PostgreSQL service instance by:
+
+- creating a new service instance
+- updating an existing service instance
+- restoring a PostgreSQL service instance snapshot
+
+#### Create a new service instance
+
+You [create a new PostgreSQL service instance](#set-up-a-postgresql-service) by running `cf create-service`. You can enable extensions in this new service instance by running:
+
+```
+cf create-service SERVICE_NAME -c '{"enabled_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
+```
+
+where:
+
+- `SERVICE_NAME` is a unique descriptive name for this service instance
+- `EXTENSION_1...N` are the names of the extensions you want to enable
+
+#### Update an existing service instance
+
+You add or remove extensions on an existing PostgreSQL service instance by updating your service with the new list of extensions:
+
+```
+cf update-service SERVICE_NAME -c '{"enabled_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
+```
+
+For example, your PostgreSQL service instance is named `my-pg-service` and has 3 extensions enabled, `uuid-ossp`, `postgis` and `citext`. Run the following to remove `citext`:
+
+```
+cf update-service my-pg-service -c '{"enabled_extensions": ["uuid-ossp","postgis"]}'
+```
+
+If you add the `pg_stat_statements` extension to your service instance, this extension will not start until the GOV.UK PaaS team reboots your service instance.
+
+This reboot will cause some service downtime. You should schedule this downtime to minimise service disruption.
+
+#### Restore a service instance
+
+If you have a [paid PostgreSQL plan](#paid-plans-postgresql), the Amazon RDS system [backs up your PostgreSQL service data](#postgresql-service-backup) every night. This includes all extensions that were enabled at time of backup.
+
+When you [restore a PostgreSQL service instance from a snapshot](#restoring-a-postgresql-service-snapshot), that restored service instance will by default include these extensions.
+
+If the snapshot contains extensions that GOV.UK PaaS no longer supports, the restored service instance will still include these extensions. However, you cannot create new service instances with unsupported extensions.
+
+#### Add or remove extensions when restoring a service instance
+
+When you restore a service instance, you can change the enabled extensions in that restored service instance. To do this, create your service with a new list of extensions:
+
+```
+cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID", "enabled_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
+```
+where:
+
+- `PLAN` is the plan used in the original service instance
+- `NEW_SERVICE_NAME` is a unique, descriptive name for the restored service instance
+- `GUID` is the global unique identifier of the backed up service instance
+- `EXTENSION_1...N` are the names of the extensions you want to enable
+
+You cannot use this method to enable an unsupported extension if that unsupported extension was not enabled in the original snapshot.  
+
+Refer to the documentation on [restoring a PostgreSQL service snapshot](#restoring-a-postgresql-service-snapshot) for more information.
+
 ## Remove the service
 
 ### Unbind a PostgreSQL service from your app
@@ -455,10 +542,3 @@ To restore from a snapshot:
   * You cannot restore from a service instance that has been deleted
   * You must use the same service plan for the copy as for the original service instance
   * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine).
-
-### PostgreSQL extensions whitelist
-
-We currently enable the following extensions for PostgreSQL:
-
-- postgis
-- uuid-ossp
