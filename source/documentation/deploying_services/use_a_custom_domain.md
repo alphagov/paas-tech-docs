@@ -87,6 +87,8 @@ Once you create a CDN service instance, you cannot update or delete the instance
 
 1. Create one CNAME record for each subdomain using the DNS information. This directs traffic to your service.
 
+    You should not create CNAME records until your cdn-route service instance has been created. Run `cf services SERVICE_INSTANCE` to check the status of your service instance. If the service has been created, the service status will say `Create succeeded`.
+
     In the example, you would create 2 `CNAME` records in your DNS server for `www.example.com` and `www.example.net`. Each `CNAME` record would point the associated subdomain to `d3nrs0916m1mk2.cloudfront.net`.
 
     <style>
@@ -184,6 +186,8 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
     In the example, you would create a single `TXT` record for your new domain of `_acme-challenge.www.example.org.` with a value of `534fgHjJIfnfDnIHKAENph6GVU8aeoSV7FzDEDL-s4H`.
 
 1. Create a CNAME record for the new subdomain using the DNS information. This directs traffic to your service.
+
+    You should not create CNAME records until your cdn-route service instance has finished updating. Run `cf services SERVICE_INSTANCE` to check the status of your service instance. If the update has finished, the service status will say `Update succeeded`.
 
     In the example, you would create a `CNAME` record in your DNS server pointing `www.example.org` to `d3nrs0916m1mk2.cloudfront.net.`
 
