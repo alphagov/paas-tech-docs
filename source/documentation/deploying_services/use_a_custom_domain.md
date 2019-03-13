@@ -69,7 +69,7 @@ Once you create a CDN service instance, you cannot update or delete the instance
     Message: Provisioning in progress
              [www.example.com,www.example.net => london.cloudapps.digital];
              CNAME or ALIAS domain www.example.com,www.example.net to
-             d3nrs0916m1mk2.cloudfront.net or create TXT record(s):
+             d3nrs0916m1mk2.cloudfront.net and create TXT record(s):
     name: _acme-challenge.www.example.com.,
           value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
     name: _acme-challenge.www.example.net.,
@@ -86,6 +86,8 @@ Once you create a CDN service instance, you cannot update or delete the instance
     ```
 
 1. Create one CNAME record for each subdomain using the DNS information. This directs traffic to your service.
+
+    You should not create CNAME records until your cdn-route service instance has been created. Run `cf service SERVICE_INSTANCE` to check the status of your service instance. If the service has been created, the service status will say `Create succeeded`.
 
     In the example, you would create 2 `CNAME` records in your DNS server for `www.example.com` and `www.example.net`. Each `CNAME` record would point the associated subdomain to `d3nrs0916m1mk2.cloudfront.net`.
 
@@ -170,7 +172,7 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
     Message: Update in progress
              [www.example.com,www.example.net,www.example.org => london.cloudapps.digital];
              CNAME or ALIAS domain www.example.com,www.example.net,www.example.org to
-             d3nrs0916m1mk2.cloudfront.net or create TXT record(s):
+             d3nrs0916m1mk2.cloudfront.net and create TXT record(s):
     name: _acme-challenge.www.example.com.,
           value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
     name: _acme-challenge.www.example.net.,
@@ -184,6 +186,8 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
     In the example, you would create a single `TXT` record for your new domain of `_acme-challenge.www.example.org.` with a value of `534fgHjJIfnfDnIHKAENph6GVU8aeoSV7FzDEDL-s4H`.
 
 1. Create a CNAME record for the new subdomain using the DNS information. This directs traffic to your service.
+
+    You should not create CNAME records until your cdn-route service instance has finished updating. Run `cf service SERVICE_INSTANCE` to check the status of your service instance. If the update has finished, the service status will say `Update succeeded`.
 
     In the example, you would create a `CNAME` record in your DNS server pointing `www.example.org` to `d3nrs0916m1mk2.cloudfront.net.`
 
@@ -349,7 +353,7 @@ Note that forwarding headers has a negative impact on cacheability. See the [Mor
 
 #### Service creation timescales
 
-Service creation usually takes approximately one hour. Whilst a service is being created, you will see the status "create in progress" reported from commands like `cf services`. If it has not finished after 2 hours, we recommend that you check your DNS setup to make sure you completed the CNAME record creation correctly (see step seven). If this does not solve the issue, you may need to [contact support](https://www.cloud.service.gov.uk/support).
+Service creation usually takes approximately one hour. Whilst a service is being created, you will see the status "create in progress" reported from commands like `cf service`. If it has not finished after 2 hours, we recommend that you check your DNS setup to make sure you completed the CNAME record creation correctly (see step seven). If this does not solve the issue, you may need to [contact support](https://www.cloud.service.gov.uk/support).
 
 #### CloudFront timescales for serving your origin from all locations
 
