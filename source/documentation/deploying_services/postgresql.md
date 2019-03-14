@@ -285,7 +285,7 @@ The following extensions are always enabled for Postgresql service instances:
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
-You cannot add or remove these mandatory extensions from a Postgresql service instance.
+You cannot remove these mandatory extensions from a Postgresql service instance.
 
 GOV.UK PaaS supports the following optional extensions, but they are not enabled by default:
 
@@ -297,7 +297,7 @@ GOV.UK PaaS supports the following optional extensions, but they are not enabled
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
-You can enable or disable optional extensions for a PostgreSQL service instance by:
+You can enable or disable optional extensions for a PostgreSQL service instance when:
 
 - creating a new service instance
 - updating an existing service instance
@@ -305,7 +305,7 @@ You can enable or disable optional extensions for a PostgreSQL service instance 
 
 #### Create a new service instance
 
-You [create a new PostgreSQL service instance](#set-up-a-postgresql-service) by running `cf create-service`. You can enable additional optional extensions in this new service instance by running:
+You [create a new PostgreSQL service instance](#set-up-a-postgresql-service) by running `cf create-service`. You can enable optional extensions in this new service instance by running:
 
 ```
 cf create-service SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
@@ -314,13 +314,13 @@ cf create-service SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSI
 where:
 
 - `SERVICE_NAME` is a unique descriptive name for this service instance
-- `EXTENSION_1...N` are the names of the additional optional extensions you want to enable
+- `EXTENSION_1...N` are the names of the optional extensions you want to enable
 
 #### Enable an optional extension in an existing service instance
 
-When you enable additional optional extensions in a service instance, you must also reboot that service instance.
+When you enable optional extensions in an existing service instance, you must also reboot that service instance.
 
-Run the following to enable additional optional extensions to a service instance:
+Run the following to enable optional extensions in an existing service instance:
 
 ```
 cf update-service SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"], "reboot": true}'
@@ -329,7 +329,7 @@ cf update-service SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSI
 where:
 
 - `SERVICE_NAME` is a unique descriptive name for this service instance
-- `EXTENSION_1...N` are the names of the additional optional extensions you want to enable
+- `EXTENSION_1...N` are the names of the optional extensions you want to enable
 
 For example, your PostgreSQL service instance is named `my-pg-service` and has 3 mandatory extensions enabled, `uuid-ossp`, `postgis` and `citext`. Run the following to enable `pg_stat_statements`:
 
@@ -366,7 +366,7 @@ Rebooting a service instance will cause some service downtime. You should schedu
 
 When you [restore a PostgreSQL service instance from a snapshot](#restoring-a-postgresql-service-snapshot), that restored service instance will include all extensions that were enabled at time of backup.
 
-You can also enable additional optional extensions when restoring a service instance:
+You can also enable optional extensions when restoring a service instance:
 
 ```
 cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID", "enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
@@ -376,7 +376,7 @@ where:
 - `PLAN` is the plan used in the original service instance
 - `NEW_SERVICE_NAME` is a unique, descriptive name for the restored service instance
 - `GUID` is the global unique identifier of the backed up service instance
-- `EXTENSION_1...N` are the names of the additional optional extensions you want to enable
+- `EXTENSION_1...N` are the names of the optional extensions you want to enable
 
 Refer to the documentation on [restoring a PostgreSQL service snapshot](#restoring-a-postgresql-service-snapshot) for more information.
 
