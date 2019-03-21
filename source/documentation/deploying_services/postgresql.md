@@ -271,9 +271,9 @@ cf update-service SERVICE_NAME -c '{"reboot": true, "force_failover": true}'
 
 When you force a failover, your PostgreSQL database IP address will change. The database's hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.
 
-### Add or remove extensions for a Postgresql service instance
+### Add or remove extensions for a PostgreSQL service instance
 
-The following extensions are always enabled for Postgresql service instances:
+The following extensions are always enabled for PostgreSQL service instances:
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
@@ -285,7 +285,7 @@ The following extensions are always enabled for Postgresql service instances:
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
-You cannot remove these mandatory extensions from a Postgresql service instance.
+You cannot remove these mandatory extensions from a PostgreSQL service instance.
 
 GOV.UK PaaS supports the following optional extensions, but they are not enabled by default:
 
@@ -303,7 +303,7 @@ You can enable or disable optional extensions for a PostgreSQL service instance 
 - updating an existing service instance
 - restoring a PostgreSQL service instance snapshot
 
-#### Create a new service instance
+#### Enable an optional extension when creating a service instance
 
 You [create a new PostgreSQL service instance](#set-up-a-postgresql-service) by running `cf create-service`. You can enable optional extensions in this new service instance by running:
 
@@ -337,7 +337,9 @@ For example, your PostgreSQL service instance is named `my-pg-service` and has 3
 cf update-service my-pg-service -c '{"enable_extensions": ["pg_stat_statements"], "reboot": true}'
 ```
 
-Rebooting a service instance will cause some service downtime. You should schedule this downtime to minimise service disruption. Refer to the [documentation on rebooting a service instance](https://docs.cloud.service.gov.uk/deploying_services/postgresql/#reboot-a-postgresql-service-instance) for more information.
+Rebooting a service instance will cause some service downtime. The length of this outage depends on your service instance’s complexity and configuration. 
+
+You should schedule this downtime to minimise service disruption. Refer to the [documentation on rebooting a service instance](https://docs.cloud.service.gov.uk/deploying_services/postgresql/#reboot-a-postgresql-service-instance) for more information.
 
 #### Disable an optional extension in an existing service instance
 
@@ -362,9 +364,9 @@ cf update-service my-pg-service -c '{"disable_extensions": ["pg_stat_statements"
 
 Rebooting a service instance will cause some service downtime. You should schedule this downtime to minimise service disruption. Refer to the [documentation on rebooting a service instance](https://docs.cloud.service.gov.uk/deploying_services/postgresql/#reboot-a-postgresql-service-instance) for more information.
 
-#### Add extensions when restoring a service instance
+#### Enable an optional extension when restoring a service instance
 
-When you [restore a PostgreSQL service instance from a snapshot](#restoring-a-postgresql-service-snapshot), that restored service instance will include all extensions that were enabled at time of backup.
+When you [restore a PostgreSQL service instance from a snapshot](#restoring-a-postgresql-service-snapshot), that restored service instance will include all extensions enabled at time of backup.
 
 You can also enable optional extensions when restoring a service instance:
 
@@ -379,6 +381,7 @@ where:
 - `EXTENSION_1...N` are the names of the optional extensions you want to enable
 
 Refer to the documentation on [restoring a PostgreSQL service snapshot](#restoring-a-postgresql-service-snapshot) for more information.
+
 
 ## Remove the service
 
