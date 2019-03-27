@@ -271,6 +271,118 @@ cf update-service SERVICE_NAME -c '{"reboot": true, "force_failover": true}'
 
 When you force a failover, your PostgreSQL database IP address will change. The database's hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.
 
+### Add or remove extensions for a PostgreSQL service instance
+
+The following extensions are always enabled for PostgreSQL service instances:
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
+|Extension|PostgreSQL version|
+|:---|:---|
+|uuid-ossp|9.5, 10|
+|postgis|9.5, 10|
+|citext|10|
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
+You cannot remove these mandatory extensions from a PostgreSQL service instance.
+
+GOV.UK PaaS supports the following optional extensions, but they are not enabled by default:
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
+|Extension|PostgreSQL version|
+|:---|:---|
+|pg_stat_statements|9.5, 10|
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+
+You can enable or disable optional extensions for a PostgreSQL service instance when:
+
+- creating a new service instance
+- updating an existing service instance
+- restoring a PostgreSQL service instance snapshot
+
+#### Enable an optional extension when creating a service instance
+
+You [create a new PostgreSQL service instance](#set-up-a-postgresql-service) by running `cf create-service`. You can enable optional extensions in this new service instance by running:
+
+```
+cf create-service SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
+```
+
+where:
+
+- `SERVICE_NAME` is a unique descriptive name for this service instance
+- `EXTENSION_1...N` are the names of the optional extensions you want to enable
+
+#### Enable an optional extension in an existing service instance
+
+When you enable optional extensions in an existing service instance, you must also reboot that service instance.
+
+Run the following to enable optional extensions in an existing service instance:
+
+```
+cf update-service SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"], "reboot": true}'
+```
+
+where:
+
+- `SERVICE_NAME` is a unique descriptive name for this service instance
+- `EXTENSION_1...N` are the names of the optional extensions you want to enable
+
+For example, your PostgreSQL service instance is named `my-pg-service` and has 3 mandatory extensions enabled, `uuid-ossp`, `postgis` and `citext`. Run the following to enable `pg_stat_statements`:
+
+```
+cf update-service my-pg-service -c '{"enable_extensions": ["pg_stat_statements"], "reboot": true}'
+```
+
+Rebooting a service instance will cause some service downtime. The length of this outage depends on your service instance’s complexity and configuration. 
+
+You should schedule this downtime to minimise service disruption. Refer to the [documentation on rebooting a service instance](https://docs.cloud.service.gov.uk/deploying_services/postgresql/#reboot-a-postgresql-service-instance) for more information.
+
+#### Disable an optional extension in an existing service instance
+
+When you disable optional extensions in a service instance, you must also reboot that service instance.
+
+Run the following to disable optional extensions from a service instance:
+
+```
+cf update-service SERVICE_NAME -c '{"disable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"], "reboot": true}'
+```
+
+where:
+
+- `SERVICE_NAME` is a unique descriptive name for this service instance
+- `EXTENSION_1...N` are the names of the optional extensions you want to disable
+
+For example, your PostgreSQL service instance is named `my-pg-service` and has the following extensions enabled, `uuid-ossp`, `postgis`, `citext` and `pg_stat_statements`. Run the following to disable `pg_stat_statements`:
+
+```
+cf update-service my-pg-service -c '{"disable_extensions": ["pg_stat_statements"], "reboot": true}'
+```
+
+Rebooting a service instance will cause some service downtime. You should schedule this downtime to minimise service disruption. Refer to the [documentation on rebooting a service instance](https://docs.cloud.service.gov.uk/deploying_services/postgresql/#reboot-a-postgresql-service-instance) for more information.
+
+#### Enable an optional extension when restoring a service instance
+
+When you [restore a PostgreSQL service instance from a snapshot](#restoring-a-postgresql-service-snapshot), that restored service instance will include all extensions enabled at time of backup.
+
+You can also enable optional extensions when restoring a service instance:
+
+```
+cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID", "enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
+```
+where:
+
+- `PLAN` is the plan used in the original service instance
+- `NEW_SERVICE_NAME` is a unique, descriptive name for the restored service instance
+- `GUID` is the global unique identifier of the backed up service instance
+- `EXTENSION_1...N` are the names of the optional extensions you want to enable
+
+Refer to the documentation on [restoring a PostgreSQL service snapshot](#restoring-a-postgresql-service-snapshot) for more information.
+
+
 ## Remove the service
 
 ### Unbind a PostgreSQL service from your app
@@ -455,10 +567,3 @@ To restore from a snapshot:
   * You cannot restore from a service instance that has been deleted
   * You must use the same service plan for the copy as for the original service instance
   * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine).
-
-### PostgreSQL extensions whitelist
-
-We currently enable the following extensions for PostgreSQL:
-
-- postgis
-- uuid-ossp
