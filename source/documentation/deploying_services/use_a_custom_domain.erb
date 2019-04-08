@@ -91,18 +91,7 @@ Once you create a CDN service instance, you cannot update or delete the instance
 
     In the example, you would create 2 `CNAME` records in your DNS server for `www.example.com` and `www.example.net`. Each `CNAME` record would point the associated subdomain to `d3nrs0916m1mk2.cloudfront.net`.
 
-    <style>
-    .govuk-warning-text{font-family:nta,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-weight:400;font-size:16px;font-size:1rem;line-height:1.25;color:#0b0c0c;position:relative;margin-bottom:20px;padding:10px 0}@media print{.govuk-warning-text{font-family:sans-serif}}@media (min-width:40.0625em){.govuk-warning-text{font-size:19px;font-size:1.1875rem;line-height:1.31579}}@media print{.govuk-warning-text{font-size:14pt;line-height:1.15;color:#000}}@media (min-width:40.0625em){.govuk-warning-text{margin-bottom:30px}}.govuk-warning-text__assistive{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;-webkit-clip-path:inset(50%)!important;clip-path:inset(50%)!important;border:0!important;white-space:nowrap!important}.govuk-warning-text__icon{font-family:nta,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-weight:700;display:inline-block;position:absolute;top:50%;left:0;min-width:32px;min-height:29px;margin-top:-20px;padding-top:3px;border:3px solid #0b0c0c;border-radius:50%;color:#fff;background:#0b0c0c;font-size:1.6em;line-height:29px;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}@media print{.govuk-warning-text__icon{font-family:sans-serif}}.govuk-warning-text__text{display:block;margin-left:-15px;padding-left:65px}
-    </style>
-
-    <div class="govuk-warning-text">
-      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-      <strong class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive">Warning</span>
-        <p>These instructions assume that you are using the GOV.UK PaaS to launch a new service and your subdomains are not already delivering a service.</p>
-        <p>If this is not the case and you are migrating an existing service, your technical operations team should refer to this documentation when the team are designing a custom migration process for your service.</p>
-      </strong>
-    </div>
+<%= warning_text('These instructions assume that you are using the GOV.UK PaaS to launch a new service and your subdomains are not already delivering a service. <br><br> If this is not the case and you are migrating an existing service, your technical operations team should refer to this documentation when the team are designing a custom migration process for your service.') %>
 
 You have now set up the custom domain. Next, you should [map a subdomain to your app](#map-a-subdomain-route-to-your-app).
 
@@ -215,13 +204,7 @@ Your app is now ready to receive requests through the subdomain.
 
 ### Remove a custom domain from your cdn-route service
 
-<div class="govuk-warning-text">
-  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-  <strong class="govuk-warning-text__text">
-    <span class="govuk-warning-text__assistive">Warning</span>
-    <p>Removing the domain results in the service provided by the app on that domain becoming unavailable.</p>
-  </strong>
-</div>
+<%= warning_text('Removing the domain results in the service provided by the app on that domain becoming unavailable.') %>
 
 1. Your org manager should check if any apps are using a custom domain before removing that domain:
 
@@ -309,15 +292,9 @@ Once you have removed the custom domain(s) from your cdn-route service, you shou
 - delete or amend the subdomain's CNAME so that it does not point to the GOV.UK PaaS
 - delete the subdomain's TXT record you created when you configured the subdomain to work with the GOV.UK PaaS
 
-<div class="govuk-warning-text">
-  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-  <strong class="govuk-warning-text__text">
-    <span class="govuk-warning-text__assistive">Warning</span>
-      <p>Do not stop your domains' DNS records from pointing towards the GOV.UK PaaS before you have removed those custom domain(s) from your cdn-route service.</p>
-      <p>If you do, all of your domains' TLS certificates will fail to renew without warning at some point over the next 90 days.</p>
-      <p>Your users may not be able to use your service.</p>
-  </strong>
-</div>
+<br>
+
+<%= warning_text('Do not stop your domains` DNS records from pointing towards the GOV.UK PaaS before you have removed those custom domain(s) from your cdn-route service. <br><br> If you do, all of your domains` TLS certificates will fail to renew without warning at some point over the next 90 days. Your users may not be able to use your service.') %>
 
 ## Configuring your custom domain
 
