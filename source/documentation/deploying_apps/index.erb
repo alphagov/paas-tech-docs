@@ -144,7 +144,7 @@ where:
 - `ENVIRONMENT_VARIABLE_NAME` is the [environment variable](#environment-variables) your public app reads (for example `PRIVATE_APP_URL`)
 - `PRIVATE_APPNAME` is the name of your private app
 
-<%= warning_text('When an app is accessed via the `*.apps.internal` DNS name (ie. by another app), the DNS resolution is case-sensitive. An app with the FQDN `test.apps.internal` can only be accessed as `test.apps.internal`: `TesT.apps.InternaL` will not be resolveable.') %>
+<%= warning_text('When an app accesses a private app using the `*.apps.internal` DNS, this DNS must exactly match the route defined in the private app manifest. This includes capitalisation. <br><br> For example, a public app tries to access a private app that has the route `test.apps.internal`. If the public app uses `TesT.apps.InternaL`, this will cause an error.') %>
 
 ### Create a network policy
 
