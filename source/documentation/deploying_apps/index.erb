@@ -144,6 +144,8 @@ where:
 - `ENVIRONMENT_VARIABLE_NAME` is the [environment variable](#environment-variables) your public app reads (for example `PRIVATE_APP_URL`)
 - `PRIVATE_APPNAME` is the name of your private app
 
+<%= warning_text('When an app is accessed via the `*.apps.internal` DNS name (ie. by another app), the DNS resolution is case-sensitive. An app with the FQDN `test.apps.internal` can only be accessed as `test.apps.internal`: `TesT.apps.InternaL` will not be resolveable.') %>
+
 ### Create a network policy
 
 By default, Cloud Foundry apps do not accept internal connections from other apps.
