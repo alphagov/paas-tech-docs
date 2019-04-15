@@ -2,7 +2,7 @@
 
 Redis is an open source in-memory data store that can be used as a database cache or message broker.
 
-## Set up the service
+<h2 id="set-up-the-service">Set up the service</h2>
 
 ### Set up a Redis service
 
@@ -159,7 +159,7 @@ PONG
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
-## Remove the service
+<h2 id="remove-the-service">Remove the service</h2>
 
 ### Unbind a Redis service from your app
 
@@ -189,7 +189,7 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
-## Maintaining the service
+<h2 id="maintaining-the-service">Maintaining the service</h2>
 
 ### Data classification
 
