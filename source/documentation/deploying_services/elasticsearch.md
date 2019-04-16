@@ -6,7 +6,7 @@ This implementation of Elasticsearch is a request-only private beta trial versio
 
 Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) [external link] backing service such as [PostgreSQL](/deploying_services/postgresql/#postgresql) or [MySQL](/deploying_services/mysql/#mysql) would better meet your needs.
 
-## Set up the service
+<h2 id="set-up-the-service">Set up the service</h2>
 
 ### Set up an Elasticsearch service
 
@@ -128,7 +128,7 @@ Alternatively, you can manually bind your service instance to your app.
 
 Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
 
-## Amend the service
+<h2 id="amend-the-service">Amend the service</h2>
 
 ### Upgrade Elasticsearch service plan
 
@@ -146,7 +146,7 @@ cf update-service my-elasticsearch-service -p small-ha-6.x
 
 The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
 
-## Remove the service
+<h2 id="remove-the-service">Remove the service</h2>
 
 ### Unbind an Elasticsearch service from your app
 
@@ -180,7 +180,7 @@ cf delete-service my-es-service
 
 Enter `yes` when asked for confirmation.
 
-## Maintaining the service
+<h2 id="maintaining-the-service">Maintaining the service</h2>
 
 ### Data classification
 

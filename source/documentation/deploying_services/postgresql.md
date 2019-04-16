@@ -2,7 +2,7 @@
 
 PostgreSQL is an object-relational database management system. It is open source and designed to be extensible.
 
-## Set up the service
+<h2 id="set-up-the-service">Set up the service</h2>
 
 ### Set up a PostgreSQL service
 
@@ -143,7 +143,7 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
 
-## Amend the service
+<h2 id="amend-the-service">Amend the service</h2>
 
 ### Import and export bulk data to and from a PostgreSQL database
 
@@ -438,7 +438,7 @@ where:
 Refer to the documentation on [restoring a PostgreSQL service snapshot](#restoring-a-postgresql-service-snapshot) for more information.
 
 
-## Remove the service
+<h2 id="remove-the-service">Remove the service</h2>
 
 ### Unbind a PostgreSQL service from your app
 
@@ -468,7 +468,7 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 Type `yes` when asked for confirmation.
 
-## Maintaining the service
+<h2 id="maintaining-the-service">Maintaining the service</h2>
 
 ### Data classification
 
