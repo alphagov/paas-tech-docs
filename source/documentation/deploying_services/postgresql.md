@@ -293,7 +293,62 @@ GOV.UK PaaS supports the following optional extensions, but they are not enabled
 
 |Extension|PostgreSQL version|
 |:---|:---|
+|address_standardizer_data_us|9.5, 10|
+|address_standardizer|9.5, 10|
+|bloom|9.5, 10|
+|btree_gin|9.5, 10|
+|btree_gist|9.5, 10|
+|chkpass|9.5, 10|
+|cube|9.5, 10|
+|dblink|9.5, 10|
+|dict_int|9.5, 10|
+|dict_xsyn|9.5, 10|
+|earthdistance|9.5, 10|
+|fuzzystrmatch|9.5, 10|
+|hstore_plperl|9.5, 10|
+|hstore|9.5, 10|
+|intagg|9.5, 10|
+|intarray|9.5, 10|
+|ip4r|9.5, 10|
+|isn|9.5, 10|
+|libprotobuf|10|
+|log_fdw|9.5, 10|
+|ltree|9.5, 10|
+|orafce|10|
+|pageinspect|10|
+|pg_buffercache|9.5, 10|
+|pg_freespacemap|9.5, 10|
+|pg_hint_plan|9.5, 10|
+|pg_prewarm|9.5, 10|
+|pg_repack|10|
+|pg_similarity|10|
 |pg_stat_statements|9.5, 10|
+|pg_trgm|9.5, 10|
+|pg_visibility|9.5, 10|
+|pgaudit|9.5, 10|
+|pgcrypto|9.5, 10|
+|pglogical|10|
+|pgrouting|10|
+|pgrowlocks|9.5, 10|
+|pgstattuple|9.5, 10|
+|plcoffee|9.5, 10|
+|plls|9.5, 10|
+|plperl|9.5, 10|
+|plpgsql|9.5, 10|
+|pltcl|9.5, 10|
+|plv8|9.5, 10|
+|postgis_tiger_geocoder|9.5, 10|
+|postgis_topology|9.5, 10|
+|postgres_fdw|9.5, 10|
+|postgresql-hll|10|
+|prefix|10|
+|sslinfo|9.5, 10|
+|tablefunc|9.5, 10|
+|test_parser|9.5, 10|
+|tsearch2|9.5, 10|
+|tsm_system_rows|9.5, 10|
+|tsm_system_time|9.5, 10|
+|unaccent|9.5, 10|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
