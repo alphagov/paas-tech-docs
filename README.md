@@ -41,16 +41,6 @@ the page.
 
 The sections in the documentation are controlled by the use of markdown headers, *not* the file structure.
 
-Avoid editing any of the following:
-
-+ source/images/*
-+ source/javascripts/*
-+ source/layouts/*
-+ source/stylesheets/*
-+ source/favicon.ico
-
-as this will make it a lot harder to stay up to date with any changes made to the template.
-
 Images to be included in the docs are kept in `source/documentation/figures`
 
 In order to configure some aspects of layout, like the header, edit ``config/tech-docs.yml``.
