@@ -8,6 +8,7 @@ In Cloud Foundry, backing and routing services are referred to as ‘services’
 - [MySQL](mysql/#mysql)
 - [Redis](redis/#redis)
 - [Elasticsearch](elasticsearch/#elasticsearch)
+- [Amazon S3](s3/#amazon-s3)
 
 ## Data security classification
 
