@@ -4,7 +4,7 @@ ifdef VERBOSE
 VERBOSE_FLAG:=--verbose
 endif
 
-LINKCHECKER := linkchecker --ignore-url=^mailto: -f ./.linkchecker.rc $(VERBOSE_FLAG)
+LINKCHECKER := linkchecker --no-warnings --ignore-url=^mailto: -f ./.linkchecker.rc $(VERBOSE_FLAG)
 SERVER_PORT?=4567
 
 .PHONY: help
