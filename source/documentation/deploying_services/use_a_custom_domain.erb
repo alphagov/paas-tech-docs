@@ -22,6 +22,9 @@ You must configure the cdn-route service to use a subdomain. If you configure th
 
 Once you create a CDN service instance, you cannot update or delete the instance until you have completed the setup process. If you make a mistake that breaks the configuration, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to delete the service instance.
 
+<%= warning_text('The cdn-route service automatically caches responses from custom domains. <br><br> When you want to change the response from your custom domain, you must set a Cache-Control response header to specify that the cdn-route service should cache responses for a finite amount of time.') %>
+
+
 ## Set up the service
 
 ### Set up a cdn-route service with one or more custom domains
