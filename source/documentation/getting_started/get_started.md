@@ -32,17 +32,19 @@ GOV.UK PaaS is hosted on [Cloud Foundry](https://www.cloudfoundry.org/) [externa
 
 You can sign in to Cloud Foundry using either your [GOV.UK PaaS account information](get_started.html#get-an-account) or the single sign-on function.
 
+Single sign-on is only available to users within the Government Digital Service (GDS)
+
 ### Use your GOV.UK PaaS account
 
 The default method to sign in to Cloud Foundry is to use your [GOV.UK PaaS account](get_started.html#get-an-account) information.
 
-1. If your org is hosted in the London region, run the following in the command line:
+1. If your org is hosted in London, run the following in the command line:
 
     ```
     cf login -a api.london.cloud.service.gov.uk -u USERNAME
     ```
 
-    If your org is hosted in the Ireland region, run:
+    If your org is hosted in Ireland, run:
 
     ```
     cf login -a api.cloud.service.gov.uk -u USERNAME
@@ -52,21 +54,21 @@ The default method to sign in to Cloud Foundry is to use your [GOV.UK PaaS accou
 
 1. Enter your GOV.UK PaaS account password.
 
-When you are signed in, run `cf` in the command line to see all available commands.
+When you have signed in, run `cf` in the command line to see all available commands.
 
 ### Use the single sign-on function
 
-To use the single sign-on function, you must have a `@digital.cabinet-office.gov.uk` email address.
+Single sign-on is only available to users within the Government Digital Service (GDS).
 
-You must contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to ask us to enable the single sign-on function for you.
+If you work at GDS, contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) so we can enable the single sign-on function for you.
 
-1. If your org is hosted in the London region, run the following in the command line:
+1. Once you have access to SSO and if your org is hosted in London, run the following in the command line:
 
     ```
     cf login -a api.london.cloud.service.gov.uk --sso
     ```
 
-    If your org is hosted in the Ireland region, run:
+    If your org is hosted in Ireland, run:
 
     ```
     cf login -a api.cloud.service.gov.uk --sso
@@ -76,11 +78,11 @@ You must contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-of
 
 1. Go to the URL and select the __Sign in using the GOV.UK PaaS internal account login__ button.
 
-1. On the Google sign in page, select your `@digital.cabinet-office.gov.uk` email address.
+1. On the __Sign in with Google__ page, select your `@digital.cabinet-office.gov.uk` email address.
 
-1. Copy the temporary authentication code and paste it into the command line.
+1. Copy the temporary authentication code into the command line.
 
-When you are signed in, run `cf` in the command line to see all available commands.
+When you have signed in, run `cf` in the command line to see all available commands.
 
 ## Deploy a test static HTML page
 
