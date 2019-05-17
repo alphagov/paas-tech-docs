@@ -50,7 +50,7 @@ The default method to sign in to Cloud Foundry is to use your [GOV.UK PaaS accou
 
     `USERNAME` is your personal GOV.UK PaaS account email address.
 
-1. Enter the GOV.UK PaaS account password you set during the sign up process.
+1. Enter your GOV.UK PaaS account password.
 
 When you are signed in, run `cf` in the command line to see all available commands.
 
