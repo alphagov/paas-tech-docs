@@ -17,7 +17,7 @@ You should focus on how the tool encrypts and protects any sensitive information
 
 ## Configure your CI tool accounts
 
-You should request one or more dedicated PaaS user accounts for use by your CI tool.
+You should create one or more dedicated PaaS user accounts for use by your CI tool.
 
 Use a different account for each [space](/orgs_spaces_users.html#spaces) you want to deploy your app to using your CI tool.
 
