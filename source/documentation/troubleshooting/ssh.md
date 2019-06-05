@@ -24,7 +24,7 @@ SSH is enabled by default. In most cases, you will find that you can SSH directl
 
     You need to run this every time you start an SSH session.
 
-    For more information, see the Cloud Foundry documentation on [SSH Session Environment](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html#ssh-env) [external link].
+    For more information, refer to the [Cloud Foundry documentation on SSH Session Environment](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html#ssh-env).
 
 3. When you're finished using SSH, use `exit` to end the session.
 
@@ -231,4 +231,4 @@ You should consider disabling SSH where it is not needed. For example, if you ho
 
 ### More about using SSH
 
-See the Cloud Foundry documentation on [Accessing Apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html) [external link].
+Refer to the [Cloud Foundry documentation on Accessing Apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html).

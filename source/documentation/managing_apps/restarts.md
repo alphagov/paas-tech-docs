@@ -15,9 +15,9 @@ If your app has more than one instance, the running instances will not restart a
 
 For more information, refer to the Cloud Foundry documentation on how:
 
-- to configure Cloud Foundry for [high availability](https://docs.cloudfoundry.org/concepts/high-availability.html#cf-ha) [external link]
-- Cloud Foundry moves your app instances between servers [(evacuations)](https://docs.cloudfoundry.org/devguide/deploy-apps/app-lifecycle.html#evacuation) [external link]
-- Cloud Foundry requests a shutdown of your app instance [(shutdowns)](https://docs.cloudfoundry.org/devguide/deploy-apps/app-lifecycle.html#shutdown) [external link]
+- to configure Cloud Foundry for [high availability](https://docs.cloudfoundry.org/concepts/high-availability.html#cf-ha)
+- Cloud Foundry moves your app instances between servers using [evacuations](https://docs.cloudfoundry.org/devguide/deploy-apps/app-lifecycle.html#evacuation)
+- Cloud Foundry requests a [shutdown of your app instance](https://docs.cloudfoundry.org/devguide/deploy-apps/app-lifecycle.html#shutdown)
 
 ### 404s after commands that restart your app
 
@@ -32,4 +32,4 @@ Commands known to do this are:
 
 We are working on a fix to prevent this happening.
 
-Until this fix is live, you should use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) [external link]. This is where you have two versions of an app, one that is 'live' and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to help this process. We recommend the [cf-blue-green-deploy](https://github.com/bluemixgaragelondon/cf-blue-green-deploy) [external link] plugin.
+Until this fix is live, you should use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html). This is where you have two versions of an app, one that is 'live' and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to help this process. We recommend the [cf-blue-green-deploy](https://github.com/bluemixgaragelondon/cf-blue-green-deploy) plugin.

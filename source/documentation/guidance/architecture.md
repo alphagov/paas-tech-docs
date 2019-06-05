@@ -20,7 +20,7 @@ Your app must follow these practices to work on the Cloud Foundry technology whi
 
 We have summarised the practices in the table below, and noted the relevance of each principle to GOV.UK PaaS.
 
-Visit the [12factor.net website](https://12factor.net/) [external link] to further ensure your application supports these practices.
+Visit the [12factor.net website](https://12factor.net/) to further ensure your application supports these practices.
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
@@ -36,7 +36,7 @@ Visit the [12factor.net website](https://12factor.net/) [external link] to furth
 |Concurrency  | Ensure all your processes (e.g. web requests or API calls) are running separately so your application can scale easily.  | Cloud Foundry expects applications to behave according to this principle. To increase the number of processes running, use the ```cf scale``` command.|
 |Disposability  | You should be able to rapidly release new code. Also, applications should be able to start back up fast and cleanly following shut down.  | Cloud Foundry expects applications to follow this principle.|
 |Development/Production parity  | Applications should be rapidly deployed from their development environment to production.  To ensure this rapid deployment, keep a developer’s environment similar to that of production (for example both environments should use the same backing services).  | CF helps you achieve this development/production parity by letting you create and deploy similar services for development, test and production environments|
-|Logs  | Maintain and archive log files so you have visibility of how your application works over time.  |Cloud Foundry [describes how to log files here](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html) [external link].|
-|Administrative processes  |Run one-off administrative processes (for example running analytics) in your production environment. You can run administrative processes as [tasks](https://docs.cloudfoundry.org/devguide/using-tasks.html) [external link] in Cloud Foundry. |  |
+|Logs  | Maintain and archive log files so you have visibility of how your application works over time.  |Cloud Foundry has [documentation on logging files](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html).|
+|Administrative processes  |Run one-off administrative processes (for example running analytics) in your production environment. You can run administrative processes as [tasks](https://docs.cloudfoundry.org/devguide/using-tasks.html) in Cloud Foundry. |  |
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>

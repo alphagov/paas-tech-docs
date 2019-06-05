@@ -16,7 +16,7 @@ To deploy an app using a Docker image stored in Docker Trusted Registry (DTR) vi
 
 ``cf push myapp --docker-image MY-PRIVATE-REGISTRY.DOMAIN:5000/image/name:tag``
 
-To deploy an app using a Docker image stored in a registry that requires authentication, follow the [Cloud Foundry Docker image documentation instructions](https://docs.cloudfoundry.org/devguide/deploy-apps/push-docker.html#private-repo) [external link].
+To deploy an app using a Docker image stored in a registry that requires authentication, follow the [Cloud Foundry Docker image documentation instructions](https://docs.cloudfoundry.org/devguide/deploy-apps/push-docker.html#private-repo).
 
 You might notice that the staging process is simplified when deploying from a Docker image - this is because there is no need to build the app from the pushed code using a buildpack. Also, the buildpack for apps deployed from a Docker image will be reported as `unknown` in the app information (``cf app <myapp>``).
 

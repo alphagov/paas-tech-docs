@@ -4,7 +4,7 @@ Tenants may wish to apply some processing to requests before they reach an appli
 
 If you need to run a private app that can only be accessed by other apps in the same space, you should refer to the documentation on [private apps](/deploying_apps.html#deploying-private-apps).
 
-Cloud Foundry allows the tenants to bind [application routes](/deploying_apps.html#names-routes-and-domains) to [route services](https://docs.cloudfoundry.org/services/route-services.html) [external link]. A route service acts as a full proxy. Once it is bound to a route, the platform routing layer will send every request for that route to the route service endpoint. The route service can then process the incoming request, proxy it back to the original application, and finally process the response request before returning it to the original client.
+Cloud Foundry allows the tenants to bind [application routes](/deploying_apps.html#names-routes-and-domains) to [route services](https://docs.cloudfoundry.org/services/route-services.html). A route service acts as a full proxy. Once it is bound to a route, the platform routing layer will send every request for that route to the route service endpoint. The route service can then process the incoming request, proxy it back to the original application, and finally process the response request before returning it to the original client.
 
 Using route services has some consequences to be aware of:
 
@@ -14,7 +14,7 @@ Using route services has some consequences to be aware of:
 
 ## User-provided route services
 
-Tenants can define their own route service instance by using a [user-provided service instance](https://docs.cloudfoundry.org/devguide/services/user-provided.html) [external link] that points to any HTTPS service. This endpoint must fulfill the following requirements:
+Tenants can define their own route service instance by using a [user-provided service instance](https://docs.cloudfoundry.org/devguide/services/user-provided.html) that points to any HTTPS service. This endpoint must fulfill the following requirements:
 
 - It must be a HTTPS endpoint with a valid certificate.
 - It can be a application running in the platform itself or an external service on the Internet.
@@ -83,13 +83,13 @@ The route service must proxy back the request to the application route defined i
 
 ![Route service request life cycle](/images/route-service.png)
 
-You can refer to the [Cloud Foundry documentation](https://docs.cloudfoundry.org/services/route-services.html#service-instance-responsibilities), [example route services](https://docs.cloudfoundry.org/services/route-services.html#examples), and [tutorial](https://docs.cloudfoundry.org/services/route-services.html#tutorial) [external links] to learn more about how to implement route services.
+You can refer to the [Cloud Foundry documentation on route services](https://docs.cloudfoundry.org/services/route-services.html) for more information.
 
 ### Example: Route service to add authentication
 
 In the following example we will add a route service to provide basic HTTP authentication to the bound routes. This can be used to restrict access to a beta application.
 
-An example of such a route service application code can be found in [cf basic auth route service](https://github.com/alext/cf_basic_auth_route_service) [external link].
+An example of such a route service application code can be found in the [Cloud Foundry basic auth route service](https://github.com/alext/cf_basic_auth_route_service).
 Please note this is a proof-of-concept and is not intended to run in production.
 
 We will deploy it as an app in the platform itself. Then we will bind this route service to an app named `myapp`, deployed in the London region and therefore accessible via https://myapp.london.cloudapps.digital.

@@ -24,21 +24,21 @@ cf events APP_NAME
 
 ## Set up the Logit log management service
 
-By default, Cloud Foundry streams a limited amount of logs to your terminal for a defined time. You can use a commercial log management service to keep more logging information for longer. This section describes how to set up the [Logit log management service](https://logit.io/) [external link].
+By default, Cloud Foundry streams a limited amount of logs to your terminal for a defined time. You can use a commercial log management service to keep more logging information for longer. This section describes how to set up the [Logit log management service](https://logit.io/).
 
 ### Prerequisites
 
 Before you set up Logit, you must:
 
 - [deploy your app on Cloud Foundry](https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-apps)
-- [have a Logit account](https://logit.io/) [external link]
+- [have a Logit account](https://logit.io/)
 - [set up Cloud Foundry](https://docs.cloud.service.gov.uk/get_started.html#set-up-command-line)
 
 ### Configure logstash filters
 
-You must set up [logstash](https://www.elastic.co/products/logstash) [external link] to process the Cloud Foundry logs into separate [Gorouter](https://docs.cloudfoundry.org/concepts/architecture/router.html) [external link] and app log types.
+You must set up [logstash](https://www.elastic.co/products/logstash) to process the Cloud Foundry logs into separate [Gorouter](https://docs.cloudfoundry.org/concepts/architecture/router.html) and app log types.
 
-1. Go to your Logit dashboard. For the Logit ELK stack you want to use, select __Settings__. 
+1. Go to your Logit dashboard. For the Logit ELK stack you want to use, select __Settings__.
 1. On the __Stack options__ menu, select __Logstash Filters__.
 1. Go to the __Logstash Filters__ page, and replace the code there with the following logstash filter code:
 
@@ -150,14 +150,14 @@ Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailt
 By default, Logit allows anyone on the internet to send logs to your ELK stack. You can set up Logit to make sure that your ELK stack only receives logs from GOV.UK PaaS.
 
 1. Contact GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for a list of syslog drain egress IP addresses.
-1. Send these IP addresses to Logit support at [https://logit.io/contact-us](https://logit.io/contact-us) [external link] and ask that your ELK stack only receives log messages from these addresses.
+1. Send these IP addresses to Logit support at [https://logit.io/contact-us](https://logit.io/contact-us) and ask that your ELK stack only receives log messages from these addresses.
 
 ### Further information
 
 Refer to the Cloud Foundry documentation for more information on:
 
-- [streaming application logs to log management services](https://docs.cloudfoundry.org/devguide/services/log-management.html) [external link]
-- [configuring other commercial log management services](https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html) [external link]
-- [the log format](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html) [external link]
-- [viewing your application's logs](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html#view) [external link]
-- [troubleshooting application deployment and health](https://docs.cloudfoundry.org/devguide/deploy-apps/troubleshoot-app-health.html) [external link]
+- [streaming application logs to log management services](https://docs.cloudfoundry.org/devguide/services/log-management.html)
+- [configuring other commercial log management services](https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html)
+- [the log format](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html)
+- [viewing your application's logs](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html#view)
+- [troubleshooting application deployment and health](https://docs.cloudfoundry.org/devguide/deploy-apps/troubleshoot-app-health.html)

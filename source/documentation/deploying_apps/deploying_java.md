@@ -1,12 +1,13 @@
 ## Deploy a Java app
 
-This section covers how to deploy a Java application to GOV.UK PaaS using the [Java buildpack](https://github.com/cloudfoundry/java-buildpack) [external link].
+This section covers how to deploy a Java application to GOV.UK PaaS using the [Java buildpack](https://github.com/cloudfoundry/java-buildpack).
 
 ### Deploying a JAR file
 
-If your java application can be packaged as a [self-executable JAR](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-java_main.md) [external link] then deployment can be as simple as using `cf push -p [your-app].jar [your-app-name]`.
+If your java application can be packaged as a [self-executable JAR file](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-java_main.md)  then deployment can be as simple as using `cf push -p [your-app].jar [your-app-name]`.
 
-This example will walk through creating a simple "Hello World" application that embeds the popular ([Jetty](http://www.eclipse.org/jetty/)) [external link] webserver.
+This example will walk through creating a simple "Hello World" application that embeds the popular [Jetty webserver](http://www.eclipse.org/jetty/).
+s
 The instructions assume you have already carried out the setup process explained in the [Get started](/get_started.html#get-started) section.
 
 1. Create a directory for your Java application:
@@ -102,7 +103,7 @@ env:
 ```
 Note that you do **not** need to deploy Tomcat along with your application. The Java buildpack will run the servlet 2 and 3 web applications.
 
-For more configuration options see [Tomcat Container](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-tomcat.md) [external link].
+For more configuration options, refer to the [Tomcat Container documentation](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-tomcat.md).
 
 ### Specify a Java version
 
@@ -116,14 +117,14 @@ The `+` in this example means it will use the latest point release available.
 
 ### Deploying other JVM-based applications
 
-The Java buildpack supports running any JVM-based applications (such as Scala, Clojure etc.) with little or zero additional configuration. For detailed examples of deploying applications using other frameworks and JVM-based languages:
+The Java buildpack supports running any JVM-based applications (such as Scala, Clojure etc.) with little or zero additional configuration. For more information, refer to the following examples of deploying applications using other frameworks and JVM-based languages:
 
-* [Embedded web server](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-embedded-web-server.md) [external link]
-* [Grails](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-grails.md) [external link]
-* [Groovy](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-groovy.md) [external link]
-* [Java Main](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-java_main.md) [external link]
-* [Play Framework](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-play_framework.md) [external link]
-* [Servlet](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-servlet.md) [external link]
-* [Spring Boot CLI](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-spring_boot_cli.md) [external link]
-* [Cloud Foundry Java Buildpack documentation](https://github.com/cloudfoundry/java-buildpack/blob/master/README.md) [external link]
-* [Cloud Foundry tips for java developers](https://docs.cloudfoundry.org/buildpacks/java/java-tips.html) [external link] for more information.
+* [Embedded web server](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-embedded-web-server.md)
+* [Grails](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-grails.md)
+* [Groovy](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-groovy.md)
+* [Java Main](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-java_main.md)
+* [Play Framework](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-play_framework.md)
+* [Servlet](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-servlet.md)
+* [Spring Boot CLI](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-spring_boot_cli.md)
+* [Cloud Foundry Java Buildpack documentation](https://github.com/cloudfoundry/java-buildpack/blob/master/README.md)
+* [Cloud Foundry tips for java developers](https://docs.cloudfoundry.org/buildpacks/java/java-tips.html)  for more information.

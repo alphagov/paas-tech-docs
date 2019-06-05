@@ -4,7 +4,7 @@
 
 Cloud Foundry uses buildpacks to provide runtime and framework support for applications in different languages (for example ensuring your app code has both the Ruby runtime and the  Rails framework available to help it run). GOV.UK PaaS supports both standard and custom buildpacks:
 
-- [standard buildpacks](https://docs.cloudfoundry.org/buildpacks/#system-buildpacks) [external link] are buildpacks for common languages and frameworks that are supported by Cloud Foundry. You can check the installed buildpacks and their versions by running `cf buildpacks`.
+- [standard buildpacks](https://docs.cloudfoundry.org/buildpacks/#system-buildpacks) are buildpacks for common languages and frameworks that are supported by Cloud Foundry. You can check the installed buildpacks and their versions by running `cf buildpacks`.
 - custom buildpacks are developed by the wider community to enable hosting of applications in additional languages or frameworks
 - Docker images are a packaging format, and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks
 
@@ -30,7 +30,7 @@ You should tell Cloud Foundry which version of your app's language to use in the
 
 If you specify an exact version, you must update this version when the GOV.UK PaaS team update the language's buildpack. Your app will fail to start if the language version it relies on is not supported by the latest language buildpack.
 
-If you specify a major or a minor version, your app will automatically upgrade to use a more recent version of its language when the GOV.UK PaaS team updates the buildpack. The major or minor version must still be live for this upgrade to work. However, if there is a breaking change between language versions, your app may not behave as expected or even fail. 
+If you specify a major or a minor version, your app will automatically upgrade to use a more recent version of its language when the GOV.UK PaaS team updates the buildpack. The major or minor version must still be live for this upgrade to work. However, if there is a breaking change between language versions, your app may not behave as expected or even fail.
 
 You should always check the GOV.UK PaaS announcements email for information on which language versions are in the latest language buildpacks.
 

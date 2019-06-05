@@ -1,6 +1,6 @@
 ## Deploy a Ruby on Rails app
 
-This section explains minimal steps for deploying a basic Rails app. For full details of how to deploy Ruby on Rails apps, see the official Cloud Foundry guide [Getting Started Deploying Ruby on Rails Apps](http://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html) [external link].
+This section explains minimal steps for deploying a basic Rails app. Refer to the [Cloud Foundry guide to deploying Ruby on Rails apps](http://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html) for more information.
 
 > If your app requires a [backing service](/deploying_services/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
@@ -133,7 +133,7 @@ You should tell Cloud Foundry which version of Ruby your app uses in the Ruby bu
 
 Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
 
-Refer to the Cloud Foundry documentation for more information on how to [specify a Ruby version](https://docs.cloudfoundry.org/buildpacks/ruby/index.html#runtime) [external link].
+Refer to the [Cloud Foundry documentation on specifying a Ruby version](https://docs.cloudfoundry.org/buildpacks/ruby/index.html#runtime) for more information.
 
 ### Web servers
 
@@ -142,7 +142,7 @@ to spin up the application. In Rails 4 and below, this will use WEBrick as the w
 server. In Rails 5 and above, the default is
 [puma](http://guides.rubyonrails.org/getting_started.html#starting-up-the-web-server).
 
-You may want to use a different web server in production. See the Cloud Foundry docs for [more information on configuring a production server](https://docs.cloudfoundry.org/buildpacks/prod-server.html) [external link].
+You may want to use a different web server in production. See the [Cloud Foundry documentation on configuring a production server](https://docs.cloudfoundry.org/buildpacks/prod-server.html) for more information.
 
 
 ### Troubleshooting asset precompilation
@@ -151,5 +151,5 @@ By default, the Rails buildpack performs asset precompilation during the staging
 most Rails apps, but it won't work for those which need to connect to services (such as the database)
 during asset compilation. (For an example, see [MyUSA issue #636](https://github.com/18F/myusa/issues/636))
 
-There are multiple potential solutions for this. For more advice, see
-[the Cloud Foundry document on the subject](https://docs.cloudfoundry.org/buildpacks/ruby/ruby-tips.html#precompile) [external link].
+There are multiple potential solutions for this. Refer to the
+[Cloud Foundry documentation on asset precompilation](https://docs.cloudfoundry.org/buildpacks/ruby/ruby-tips.html#precompile) for more information.

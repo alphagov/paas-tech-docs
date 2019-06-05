@@ -48,4 +48,4 @@ This command increases the disc space limit for an app to 512 megabytes:
 
 ### More about scaling
 
-For more details, see [Scaling an Application Using cf scale](http://docs.cloudfoundry.org/devguide/deploy-apps/cf-scale.html) [external link] in the Cloud Foundry docs.
+For more details, refer to the [Cloud Foundry documentation on using `cf scale` to scale an app](http://docs.cloudfoundry.org/devguide/deploy-apps/cf-scale.html) in the Cloud Foundry docs.
