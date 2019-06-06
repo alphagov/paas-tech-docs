@@ -60,7 +60,7 @@ When you have signed in, run `cf` in the command line to see all available comma
 
 Single sign-on is only available to users within the Government Digital Service (GDS).
 
-If you work at GDS, contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) so we can enable the single sign-on function for you.
+If you work at GDS, you can enable single sign-on for your account via the GOV.UK PaaS admin tool.
 
 1. Once you have access to SSO and if your org is hosted in London, run the following in the command line:
 
