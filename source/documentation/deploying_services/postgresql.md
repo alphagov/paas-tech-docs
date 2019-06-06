@@ -498,7 +498,7 @@ We recommend you use a high availability plan (`HA`) for your PostgreSQL apps. T
 
 When you use a high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.
 
-Refer to the [Amazon RDS documentation on the failover process](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) for more information.
+Refer to the [Amazon RDS documentation on the failover process](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) for more information.
 
 You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to arrange for us to trigger a failover for you.
 
