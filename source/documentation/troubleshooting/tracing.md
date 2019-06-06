@@ -2,7 +2,7 @@
 
 The Cloud Foundry router automatically adds Zipkin-compatible headers to the incoming HTTP requests so you can match those with your application's responses.
 
-> Zipkin is a tracing system that enables app developers to troubleshoot failures or latency issues. Zipkin provides the ability to trace requests and responses across distributed systems. See [Zipkin.io](https://zipkin.io) [external link] for more information.
+> Zipkin is a tracing system that enables app developers to troubleshoot failures or latency issues. Zipkin provides the ability to trace requests and responses across distributed systems. See [Zipkin.io](https://zipkin.io) for more information.
 
 To trace app requests and responses in Cloud Foundry, apps must also log Zipkin headers.
 

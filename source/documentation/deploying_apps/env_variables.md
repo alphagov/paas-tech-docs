@@ -1,6 +1,6 @@
 ## Environment variables
 
-You must store all configuration information for your app as environment variables. 
+You must store all configuration information for your app as environment variables.
 
 This could include:
 
@@ -33,7 +33,7 @@ cf set-env APP_NAME VARIABLE value
 
 System-provided environment variables tell you about configuration details handled by the PaaS, for example:
 
-- the port on which the app is listening 
+- the port on which the app is listening
 - the maximum memory each app instance can use
 - the external IP address of the app instance
 
@@ -85,4 +85,4 @@ Here is an example of the structure of the information contained in `VCAP_SERVIC
 }
 ```
 
-Refer to the [Cloud Foundry Environment Variables documentation](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) [external link] for a full list of environment variables.
+Refer to the [Cloud Foundry documentation on environment variables documentation](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) for more information.

@@ -94,7 +94,7 @@ You must bind your app to the Redis service so you can access the cache from the
 
 This binds your app to a service instance called `my-redis-service`.
 
-Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+Refer to the [Cloud Foundry documentation on deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) for more information.
 
 #### Use the cf bind-service command
 
@@ -116,7 +116,7 @@ Alternatively, you can manually bind your service instance to your app.
 
 ### Connect to a Redis service from your app
 
-Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) [external link] connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
+Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
 Your app should parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to make a secure connection to Redis.
 
@@ -130,7 +130,7 @@ We have created the [Conduit](/guidance.html#conduit) plugin to simplify the pro
 
 You must:
 
-- install the Redis CLI tool on your local machine (this is included in the [standard Redis installation](https://redis.io/download) [external link])
+- install the Redis CLI tool on your local machine (this is included in the [standard Redis installation](https://redis.io/download))
 - [log into Cloud Foundry](/get_started.html#set-up-command-line)
 - [target the space](/deploying_apps.html#set-a-target) where your Redis service instance is located
 
@@ -150,14 +150,14 @@ You must:
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
-You have now connected your local machine to your Redis service instance using Conduit. You can test this connection with the Redis [PING command](https://redis.io/commands/ping) [external link]:
+You have now connected your local machine to your Redis service instance using Conduit. You can test this connection with the Redis [PING command](https://redis.io/commands/ping):
 
 ```
 127.0.0.1:7081> PING
 PONG
 ```
 
-Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
+Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
 
 <h2 id="remove-the-service">Remove the service</h2>
 
@@ -220,7 +220,7 @@ One of your Org Managers must contact us at [gov-uk-paas-support@digital.cabinet
 
 #### High availability
 
-If you use a high availability service plan, Amazon ElastiCache for Redis provides a hot standby service for [failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html) [external link].
+If you use a high availability service plan, Amazon ElastiCache for Redis provides a hot standby service for [failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html).
 
 If you don't have a high availability service plan, you will lose data during a service instance failure. Before deciding which service plan to use, you should assess your data and what type of plan you need.
 
@@ -230,11 +230,11 @@ If you don't have a high availability service plan, you will lose data during a 
 
 Every Redis service has a maintenance window of Sunday 11pm to Monday 1:30am UTC every week. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you require a different maintenance window.
 
-For more information on maintenance times, refer to the [Amazon ElastiCache maintenance window documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/VersionManagement.MaintenanceWindow.html) [external link].
+For more information on maintenance times, refer to the [Amazon ElastiCache maintenance window documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/VersionManagement.MaintenanceWindow.html).
 
 #### Redis service backup
 
-The data stored within any Redis service instance you create is backed up using the Amazon ElastiCache backup system. Backups are taken every day between 2am and 5am UTC. Data is retained for 7 days, and stored in [Amazon S3](https://aws.amazon.com/s3/) [external link].
+The data stored within any Redis service instance you create is backed up using the Amazon ElastiCache backup system. Backups are taken every day between 2am and 5am UTC. Data is retained for 7 days, and stored in [Amazon S3](https://aws.amazon.com/s3/).
 
 To restore from the latest backup of your Redis service instance, create a new service instance by running the following code:
 
@@ -246,7 +246,7 @@ where `PLAN` is the name of the service plan, `NEW_SERVICE_NAME` is the name of 
 
 To restore from an older backup, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-For more details about how the backup system works, see the [Amazon's ElastiCache backups documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/backups-automatic.html) [external link].
+For more details about how the backup system works, see the [Amazon's ElastiCache backups documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/backups-automatic.html).
 
 ### Redis key eviction policy
 
@@ -279,7 +279,7 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance and 
 cf update-service my-redis-service -c '{"maxmemory_policy": "volatile-ttl"}'
 ```
 
-Refer to the [Redis LRU cache documentation](https://redis.io/topics/lru-cache) [external link] for more information.
+Refer to the [Redis LRU cache documentation](https://redis.io/topics/lru-cache) for more information.
 
 ### Further information
 

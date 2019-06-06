@@ -8,14 +8,14 @@ Before using the Travis CI tool, you should assess how it encrypts and protects 
 
 Before setting up Travis CI, you must have:
 
-- a [Github](https://github.com/) [external link] account
+- a [Github](https://github.com/) account
 - admin access to the GitHub repository that hosts your app
-- the latest version of [Ruby](https://www.ruby-lang.org/en/downloads/) [external link] installed
+- the latest version of [Ruby](https://www.ruby-lang.org/en/downloads/) installed
 - set your app's [`name`](/deploying_apps.html#names-routes-and-domains) in the app's `manifest.yml` file
 
 ### Set up account
 
-1. Register for a [Travis account](https://travis-ci.org) [external link].
+1. Register for a [Travis account](https://travis-ci.org).
 1. Link your Travis account to your Github repo.
 1. Select the repositories you want Travis to manage.
 
@@ -66,6 +66,6 @@ You can now build and deploy the app.
 1. Commit the `travis.yml` to GitHub. Travis CI uses this file to automatically build and deploy your app.
 1. View your live app at `https://NAME.APP_DOMAIN`, where:
   - [`NAME`](/deploying_apps.html#names-routes-and-domains) is the name of your app in the `manifest.yml` file
-  - [`APP_DOMAIN`](/orgs_spaces_users.html#regions) is the domain your app is hosted in 
+  - [`APP_DOMAIN`](/orgs_spaces_users.html#regions) is the domain your app is hosted in
 
-For more information on how to use Travis CI, refer to the [Travis CI documentation](https://docs.travis-ci.com) [external link].
+For more information on how to use Travis CI, refer to the [Travis CI documentation](https://docs.travis-ci.com).

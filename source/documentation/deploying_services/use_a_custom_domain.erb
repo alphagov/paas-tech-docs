@@ -360,11 +360,11 @@ Custom domains are configured by our cdn-route service which uses a CloudFront d
 
 ### Caching
 
-CloudFront uses your app's `Cache-Control` or `Expires` HTTP headers to determine [how long to cache content](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) [external link]. If your app does not provide these headers, CloudFront will use a default timeout of 24 hours. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
+CloudFront uses your app's `Cache-Control` or `Expires` HTTP headers to determine [how long to cache content](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html). If your app does not provide these headers, CloudFront will use a default timeout of 24 hours. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
 
 While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV.UK PaaS support](https://www.cloud.service.gov.uk/support) can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).
 
-You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) [external link] for more detail. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
+You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation on headers and distributions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) for more information. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
 
 ### Authentication
 
@@ -372,5 +372,7 @@ Cookie headers are forwarded to your app by default, so cookie-based authenticat
 
 ### Further information
 
-* The CloudFront documentation on headers can be found [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior) [external link]
-* The CloudFront documentation on cookies can be found [here](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html) [external link]
+Refer to the CloudFront documentation on:
+
+* [HTTP request headers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior)
+* [caching content based on cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)

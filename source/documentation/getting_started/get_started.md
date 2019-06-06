@@ -20,13 +20,15 @@ Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailt
 
 GOV.UK PaaS is hosted on [Cloud Foundry](https://www.cloudfoundry.org/) [external link]. You must use the Cloud Foundry command line interface (CLI) to manage your apps hosted on the GOV.UK PaaS. To set it up:
 
-1. Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli#downloads) [external link] for your platform.
+1. Download and install the [Cloud Foundry CLI](https://github.com/cloudfoundry/cli#downloads) for your platform.
 
 2. To check that it is installed correctly, run `cf -v` in the command line.
 
     If it has installed correctly, you will receive the `cf version X.X.X…` confirmation message.
 
-    Depending on your network configuration, you might need to set an [`HTTP_PROXY` environment variable](https://docs.cloudfoundry.org/cf-cli/http-proxy.html) [external link] for the CLI to connect. Contact your network administrator for your configuration settings.
+Depending on your network configuration, you might need to set an `HTTP_PROXY` environment variable for the CLI to connect. Contact your network administrator for your configuration settings.
+
+Refer to the Cloud Foundry documentation on [using the Cloud Foundry CLI with a proxy server](https://docs.cloudfoundry.org/cf-cli/http-proxy.html) for more information.
 
 ## Sign in to Cloud Foundry
 

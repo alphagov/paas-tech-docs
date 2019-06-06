@@ -1,6 +1,6 @@
 ## Deploy a Django app
 
-This section explains how to deploy an app using the Django framework. You may also need to refer to the [Cloud Foundry documentation about the Python buildpack](https://docs.cloudfoundry.org/buildpacks/python/index.html) [external link].
+This section explains how to deploy an app using the Django framework. You may also need to refer to the [Cloud Foundry documentation about the Python buildpack](https://docs.cloudfoundry.org/buildpacks/python/index.html).
 
 > If your app requires a [backing service](/deploying_services/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
@@ -23,7 +23,7 @@ Before deploying a Django app, you must:
 
     Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
 
-    Refer to the Cloud Foundry documentation for more information on how to [specify a Python version](https://docs.cloudfoundry.org/buildpacks/python/index.html#runtime) [external link].
+    For more information, refer to the [Cloud Foundry documentation on specifying a Python version](https://docs.cloudfoundry.org/buildpacks/python/index.html#runtime).
 
 4. Make sure you have all the required modules for your project installed into your virtual environment (including Django).
 

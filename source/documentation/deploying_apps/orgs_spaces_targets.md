@@ -2,7 +2,7 @@
 
 ### Organisations
 
-Your tenant account belongs to at least one **organisation** ("org" for short) within the PaaS. This typically represents the real-world organisation, department or team you work for. Your co-workers' tenant accounts will belong to the same org. 
+Your tenant account belongs to at least one **organisation** ("org" for short) within the PaaS. This typically represents the real-world organisation, department or team you work for. Your co-workers' tenant accounts will belong to the same org.
 
 Typically a team has a single organisation, but you can have more than one.
 
@@ -64,7 +64,7 @@ If your account does not have the Org Manager role and you need to create a new 
 
 As an Org Manager, you can use:
 
-``cf create-space SPACENAME -o ORGNAME`` 
+``cf create-space SPACENAME -o ORGNAME``
 
 to create a new space. You will then need to grant access to any tenant accounts who should be able to use that space.
 
@@ -84,7 +84,4 @@ For example, say you had just created a space called ``test`` within your org ca
 
 ``cf set-space-role ana@example.com acme test SpaceDeveloper``
 
-
-### Learning more
-
-See the Cloud Foundry documentation on [Orgs, Spaces, Roles, and Permissions](https://docs.cloudfoundry.org/concepts/roles.html) [external link] for more details.
+See the [Cloud Foundry documentation on Orgs, Spaces, Roles, and Permissions](https://docs.cloudfoundry.org/concepts/roles.html) for more information.

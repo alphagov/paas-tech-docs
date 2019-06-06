@@ -1,6 +1,6 @@
 ## Connect a PHP app to PostgreSQL or MySQL
 
-If your PHP app uses a PostgreSQL or MySQL database, it must connect to that database securely using SSL. 
+If your PHP app uses a PostgreSQL or MySQL database, it must connect to that database securely using SSL.
 
 > These instructions assume that your app uses the PHP Data Objects (PDO) library to connect to either a MySQL or PostgreSQL backing service database.
 
@@ -14,7 +14,7 @@ extension=openssl.so
 
 You should use this method instead of the now-deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
-You can find more information about how to configure the PHP buildpack at the [PHP buildpack configuration documentation](https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html) [external link].
+You can find more information about how to configure the PHP buildpack at the [PHP buildpack configuration documentation](https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html).
 
 Refer to the code below for examples on how to connect your app to MySQL or PostgreSQL.
 
@@ -57,7 +57,7 @@ try {
 
 ## Connect Drupal to MySQL
 
-If your Drupal app uses MySQL, it must connect to the database securely using SSL. You must configure Drupal to use a SSL connection by: 
+If your Drupal app uses MySQL, it must connect to the database securely using SSL. You must configure Drupal to use a SSL connection by:
 
 - enabling required PHP extensions
 - setting up the database connection
@@ -74,7 +74,7 @@ If your Drupal app uses MySQL, it must connect to the database securely using SS
     ```
 You should use this method instead of the now-deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
-You can find more information about how to configure the PHP buildpack at the [PHP buildpack configuration documentation](https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html) [external link].
+You can find more information about how to configure the PHP buildpack at the [PHP buildpack configuration documentation](https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html).
 
 ### Set up the database connection
 
@@ -100,7 +100,7 @@ $databases['default']['default'] = array(
 
 ## Connect Wordpress to MySQL
 
-Your Wordpress app must connect to MySQL securely using SSL. You must configure Wordpress to use a SSL connection by: 
+Your Wordpress app must connect to MySQL securely using SSL. You must configure Wordpress to use a SSL connection by:
 
 - enabling required PHP extensions
 - setting up the database connection
@@ -117,7 +117,7 @@ extension=openssl.so
 ```
 You should use this method instead of the deprecated method of defining PHP extensions in the `.bp-config/options.json` buildpack config file.
 
-You can find more information about how to configure the PHP buildpack at the [PHP buildpack configuration documentation](https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html) [external link].
+You can find more information about how to configure the PHP buildpack at the [PHP buildpack configuration documentation](https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html).
 
 ### Set up the database connection
 
@@ -157,4 +157,3 @@ if ( WP_DEBUG ) {
 }
 [...]
 ```
-

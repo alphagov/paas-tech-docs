@@ -94,7 +94,7 @@ You must bind your app to the MySQL service so you can access the database from 
 
 This binds your app to a service instance called `my-ms-service`.
 
-Refer to the Cloud Foundry documentation on [deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) [external link] for more information.
+Refer to the [Cloud Foundry documentation on deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) for more information.
 
 #### Use the cf bind-service command
 
@@ -116,7 +116,7 @@ Alternatively, you can manually bind your service instance to your app.
 
 ### Connect to a MySQL service from your app
 
-Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) [external link] connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
+Your app must make a [Transport Layer Security (TLS)](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
@@ -140,7 +140,7 @@ cf conduit SERVICE_NAME -- mysql
 
 where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
-Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) [external link] for more information on how to use the plugin.
+Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
 
 <h2 id="amend-the-service">Amend the service</h2>
 
@@ -150,7 +150,7 @@ Run `cf conduit --help` for more options, and refer to the [Conduit readme file]
 
 You must:
 
-- install and configure the [MySQL command line (CLI) tools](https://dev.mysql.com/downloads/utilities/) [external link] on your local machine (configuration options vary depending on operating system and version)
+- install and configure the [MySQL command line (CLI) tools](https://dev.mysql.com/downloads/utilities/) on your local machine (configuration options vary depending on operating system and version)
 - [log into Cloud Foundry](/get_started.html#set-up-command-line)
 - [create the new PaaS-hosted MySQL database](/deploying_services/mysql/#set-up-a-mysql-service)
 - [target the space](/deploying_apps.html#set-a-target) where your new database is located
@@ -238,7 +238,7 @@ You cannot currently downgrade your service plan.
 
 ### Reboot a MySQL service instance
 
-You can [reboot your MySQL service instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html) [external link] to:
+You can [reboot your MySQL service instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html) to:
 
 - try to fix a problem with your service instance
 - test how your app behaves during a service instance failure
@@ -261,7 +261,7 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
 #### Force a failover
 
-If you have a [highly available service instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) [external link], you can force a [failover](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) [external link] when you reboot that service instance. You can use this to test how your app behaves when a failover happens.
+If you have a [highly available service instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html), you can force a [failover](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) when you reboot that service instance. You can use this to test how your app behaves when a failover happens.
 
 Run the following to reboot your highly available service and force a failover:
 
@@ -327,11 +327,11 @@ All plans have encryption at rest unless stated otherwise. This means that both 
 
 #### High availability plans - MySQL
 
-We recommend you use a high availability plan (`HA`) for your MySQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See [Amazon's SLA](https://aws.amazon.com/rds/sla/) [external link] for details.
+We recommend you use a high availability plan (`HA`) for your MySQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details.
 
 When you use a high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.
 
-Refer to the [Amazon RDS documentation on the failover process](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) [external link] for more information.
+Refer to the [Amazon RDS documentation on the failover process](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) for more information.
 
 You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to arrange for us to trigger a failover for you.
 
@@ -339,7 +339,7 @@ You should test how your app deals with a failover to make sure you are benefiti
 
 Amazon RDS has the capability to provide a read-only copy of your database known as a read replica. This can be useful for performance, availability or security reasons.
 
-Refer to the [Amazon RDS documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) [external link] for more information.
+Refer to the [Amazon RDS documentation on read replicas](https://aws.amazon.com/rds/details/read-replicas/) for more information.
 
 GOV.UK PaaS doesn't currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
 
@@ -363,7 +363,7 @@ where `SERVICE_NAME` is a unique, descriptive name for this service instance, fo
 cf update-service my-ms-service -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
 ```
 
-For more information on maintenance times, refer to the [Amazon RDS Maintenance documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html) [external link].
+For more information on maintenance times, refer to the [Amazon RDS maintenance documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html).
 
 #### Queue a plan migration - MySQL
 
@@ -395,4 +395,4 @@ To arrange a manual restore, contact us at [gov-uk-paas-support@digital.cabinet-
 
 Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.
 
-For more details about how the RDS backup system works, see [Amazon's DB Instance Backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html) [external link].
+For more details about how the RDS backup system works, see [Amazon's DB instance backups documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html).

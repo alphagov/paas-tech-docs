@@ -34,7 +34,7 @@ The `cf push` command can both create a new app and push a new version of an exi
 
 Your app should now be live at your [app domain](/orgs_spaces_users.html#regions).
 
-Refer to the Cloud Foundry documentation on [Deploying with Application Manifests](http://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html) [external link] for more information on the options available when you deploy an app.
+Refer to the [Cloud Foundry documentation on deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html) for more information on the options available when you deploy an app.
 
 Refer to the [production checklist](deploying_apps.html#production-checklist) if your app is a production app.
 
@@ -94,7 +94,7 @@ If you need to restrict access to a public app, you should refer to the document
 
 ### Specify a private route in the private app's manifest
 
-Cloud Foundry uses [routes](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes) [external link] to send requests to apps.
+Cloud Foundry uses routes to send requests to apps.
 
 You must specify a private route in the private app's manifest to tell Cloud Foundry that this app should not be accessible from the internet.
 
@@ -113,6 +113,8 @@ If the private app was previously a public app, you must also run the following 
 ```
 cf unmap-route PRIVATE_APPNAME DOMAIN --hostname HOSTNAME
 ```
+
+Refer to the [Cloud Foundry documentation on routes](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes) for more information.
 
 ### Set the private app URL in the public app's manifest
 
@@ -148,7 +150,7 @@ where:
 
 By default, Cloud Foundry apps do not accept internal connections from other apps.
 
-You must create a [network policy](http://cli.cloudfoundry.org/en-US/cf/add-network-policy.html) [external link] to allow the public app to connect to the private app.
+You must create a [network policy](https://cli.cloudfoundry.org/en-US/cf/add-network-policy.html) to allow the public app to connect to the private app.
 
 1. [Push](/deploying_apps.html#deploying-public-apps) both the public and private apps.
 1. Run the following in the command line to create the network policy:

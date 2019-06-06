@@ -4,7 +4,7 @@
 
 The GOV.UK PaaS is hosted in 2 independent regions, London and Ireland.
 
-GOV.UK PaaS accounts, credentials and resources belong to a single region. 
+GOV.UK PaaS accounts, credentials and resources belong to a single region.
 
 If you have a London region account, your app domain is `APPNAME.london.cloudapps.digital`.
 
@@ -62,7 +62,7 @@ Although there are multiple roles, the 6 most common are:
 - Space manager
 - Space auditor
 
-Refer to the [Cloud Foundry documentation on roles and permissions](https://docs.cloudfoundry.org/concepts/roles.html#roles) [external link] for more information.
+Refer to the [Cloud Foundry documentation on roles and permissions](https://docs.cloudfoundry.org/concepts/roles.html#roles) for more information.
 
 ### Org manager
 
@@ -164,7 +164,7 @@ For example, to grant ana@example.com the space developer role in the test space
 cf set-space-role ana@example.com acme test SpaceDeveloper
 ```
 
-Refer to the [Cloud Foundry reference guide on `cf set-space-role`](https://cli.cloudfoundry.org/en-US/cf/set-space-role.html) [external link] for a complete list of roles.
+Refer to the [Cloud Foundry reference guide on `cf set-space-role`](https://cli.cloudfoundry.org/en-US/cf/set-space-role.html) for a complete list of roles.
 
 ### Remove users from a space
 
@@ -197,7 +197,7 @@ For example, to remove ana@example.com's space developer role from the sandbox s
 cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
 ```
 
-Refer to the [Cloud Foundry reference guide on `cf unset-space-role`](https://cli.cloudfoundry.org/en-US/cf/unset-space-role.html) [external link] for a complete list of roles.
+Refer to the [Cloud Foundry reference guide on `cf unset-space-role`](https://cli.cloudfoundry.org/en-US/cf/unset-space-role.html) for a complete list of roles.
 
 ### Invite users to an org
 
@@ -244,7 +244,7 @@ If the user still needs access to GOV.UK PaaS to work on other projects, nothing
 
 If the user no longer needs access to GOV.UK PaaS, then your org manager must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to ask us to delete the user account.
 
-Refer to the [Cloud Foundry documentation on creating and managing users with the CLI](https://docs.cloudfoundry.org/adminguide/cli-user-management.html) [external link] for more information.
+Refer to the [Cloud Foundry documentation on creating and managing users with the CLI](https://docs.cloudfoundry.org/adminguide/cli-user-management.html) for more information.
 
 ### View bills
 

@@ -4,16 +4,16 @@
 
 Cloud Foundry provides time series data known as metrics for each instance of your PaaS app. You can receive, store and view this data in a monitoring system of your choice by deploying either the:
 
-- [`paas-prometheus-exporter`](https://github.com/alphagov/paas-prometheus-exporter) app to collect and display metrics in the [Prometheus format](https://prometheus.io/docs/introduction/overview) [external links]
-- [`paas-metric-exporter`](https://github.com/alphagov/paas-metric-exporter) app to push metrics data in the [StatsD format](https://github.com/etsy/statsd/wiki) [external links]
+- [`paas-prometheus-exporter`](https://github.com/alphagov/paas-prometheus-exporter) app to collect and display metrics in the [Prometheus format](https://prometheus.io/docs/introduction/overview)
+- [`paas-metric-exporter`](https://github.com/alphagov/paas-metric-exporter) app to push metrics data in the [StatsD format](https://github.com/etsy/statsd/wiki)
 
-You can also view all metrics in a one-off snapshot by installing the Cloud Foundry CLI [log cache plug-in](https://github.com/cloudfoundry/log-cache-cli#installing-plugin) [external link].
+You can also view all metrics in a one-off snapshot by installing the [Cloud Foundry CLI log cache plug-in](https://github.com/cloudfoundry/log-cache-cli#installing-plugin).
 
 ### Use the PaaS Prometheus exporter app
 
 The PaaS Prometheus exporter collects metrics from your apps and any backing services configured to send metrics to the PaaS.
 
-To use the PaaS Prometheus exporter, deploy it as an app on the GOV.UK PaaS. Refer to the [PaaS Prometheus exporter readme documentation](https://github.com/alphagov/paas-prometheus-exporter/blob/master/README.md) [external link] for more information on supported metrics.
+To use the PaaS Prometheus exporter, deploy it as an app on the GOV.UK PaaS. Refer to the [PaaS Prometheus exporter readme documentation](https://github.com/alphagov/paas-prometheus-exporter/blob/master/README.md) for more information on supported metrics.
 
 #### Prerequisites
 
@@ -29,7 +29,7 @@ We recommend this GOV.UK PaaS account:
 
 #### Set up the app
 
-1. Clone the [PaaS Prometheus exporter repository](https://github.com/alphagov/paas-prometheus-exporter) [external link].
+1. Clone the [PaaS Prometheus exporter repository](https://github.com/alphagov/paas-prometheus-exporter).
 
 1. [Push the PaaS Prometheus exporter app](/deploying_apps.html#deploying-public-apps) to Cloud Foundry without starting the app:
 
@@ -57,7 +57,7 @@ We recommend this GOV.UK PaaS account:
 
 	You should use the `cf set-env` command for these mandatory variables as they contain secret information, and this method will keep them secure.
 
-	You can also set environment variables by changing the manifest file. You should do this for optional environment variables that do not contain secret information. Refer to the [PaaS Prometheus exporter repository](https://github.com/alphagov/paas-prometheus-exporter) [external link] for more information.
+	You can also set environment variables by changing the manifest file. You should do this for optional environment variables that do not contain secret information. Refer to the [PaaS Prometheus exporter repository](https://github.com/alphagov/paas-prometheus-exporter) for more information.
 
 1. Start the PaaS Prometheus exporter app:
 
@@ -85,11 +85,11 @@ If you want to add authentication to the app and endpoint, refer to the document
 
 ### Metrics exporter app with StatsD
 
-To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter readme documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) [external link] for more information on supported metrics.
+To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter readme documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) for more information on supported metrics.
 
 Before you set up the metrics exporter app, you will need:
 
-- a monitoring system to store the metrics with an accompanying [StatsD](https://github.com/etsy/statsd/wiki) [external link] endpoint set up
+- a monitoring system to store the metrics with an accompanying [StatsD](https://github.com/etsy/statsd/wiki) endpoint set up
 - a live Cloud Foundry account assigned to the orgs and spaces you want to receive metrics on
 
 We recommend that this Cloud Foundry account:

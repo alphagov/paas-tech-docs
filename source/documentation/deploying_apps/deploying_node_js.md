@@ -1,6 +1,6 @@
 ## Deploy a Node.js app
 
-This section covers how to deploy a basic Node.js application to GOV.UK PaaS. See the Cloud Foundry [Tips for Node.js Applications](http://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] for more details.
+This section covers how to deploy a basic Node.js application to GOV.UK PaaS. Refer to the [Cloud Foundry tips for Node.js applications](https://docs.cloudfoundry.org/buildpacks/node/node-tips.html) for more information.
 
 > If your app requires a [backing service](/deploying_services/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
@@ -60,7 +60,7 @@ This is the code for the example app we are going to use. It is a basic web serv
 
   If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run `cf push --no-start APPNAME`, then when you are ready to start the app, run `cf start APPNAME`.
 
-See [Tips for Node.js Applications](https://docs.cloudfoundry.org/buildpacks/node/node-tips.html) [external link] in the Cloud Foundry documentation for more information.
+Refer to the [Cloud Foundry tips for Node.js applications](https://docs.cloudfoundry.org/buildpacks/node/node-tips.html) for more information.
 
 ### PostgreSQL setup with Node.js
 
@@ -95,10 +95,10 @@ Then in your app, you can easily get configuration information for backing servi
 
 Replace "SERVICE NAME" in the above code with the exact name of the PostgreSQL service you created. The ``getServiceURL`` function returns a connection string which includes the username and password required to connect to the database.
 
-Further information can be found in:
+Further information can be found in the:
 
-- the Cloud Foundry [community `cf env` page](https://github.com/cloudfoundry-community/node-cfenv/blob/master/README.md) [external link]
-- the Cloud Foundry [documentation on environment variables](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) [external link]
+- [Cloud Foundry community `cf env` page](https://github.com/cloudfoundry-community/node-cfenv/blob/master/README.md)
+- the [Cloud Foundry documentation on environment variables](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html)
 
 You should also remember to include dependencies for any service bindings in ``package.json``.
 
@@ -116,4 +116,4 @@ You should tell Cloud Foundry which version of Node.js your app uses in the Node
 
 Refer to the documentation on [buildpack language version updates](deploying_apps.html#buildpack-language-version-updates) for more information.
 
-Refer to the Cloud Foundry documentation for more information on how to [specify a Node.js version](https://docs.cloudfoundry.org/buildpacks/node/index.html#runtime) [external link].
+Refer to the Cloud Foundry documentation on [specifying a Node.js version](https://docs.cloudfoundry.org/buildpacks/node/index.html#runtime) for more information.
