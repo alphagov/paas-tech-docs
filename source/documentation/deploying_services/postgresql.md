@@ -530,7 +530,7 @@ where `SERVICE_NAME` is a unique, descriptive name for this service instance, fo
 cf update-service my-pg-service -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
 ```
 
-For more information on maintenance times, refer to the [Amazon RDS Maintenance documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html).
+For more information on maintenance times, refer to the [Amazon RDS Maintenance documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html).
 
 #### Queue a plan migration - PostgreSQL
 
