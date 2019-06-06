@@ -566,7 +566,7 @@ There are two ways you can restore data to an earlier state:
 
 Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.
 
-For more details about how the RDS backup system works, see [Amazon's DB instance backups documentation](http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html).
+For more details about how the RDS backup system works, see [Amazon's DB instance backups documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html).
 
 #### Restoring a PostgreSQL service snapshot
 
