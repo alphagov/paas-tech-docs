@@ -60,7 +60,7 @@ This is the code for the example app we are going to use. It is a basic web serv
 
   If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run `cf push --no-start APPNAME`, then when you are ready to start the app, run `cf start APPNAME`.
 
-Refer to the [Cloud Foundry tips for Node.js applications](http://docs.cloudfoundry.org/buildpacks/node/node-tips.html) for more information.
+Refer to the [Cloud Foundry tips for Node.js applications](https://docs.cloudfoundry.org/buildpacks/node/node-tips.html) for more information.
 
 ### PostgreSQL setup with Node.js
 
