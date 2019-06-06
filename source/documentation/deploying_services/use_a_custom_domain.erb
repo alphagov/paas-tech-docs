@@ -364,7 +364,7 @@ CloudFront uses your app's `Cache-Control` or `Expires` HTTP headers to determin
 
 While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV.UK PaaS support](https://www.cloud.service.gov.uk/support) can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).
 
-You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation on headers and distributions](http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) for more information. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
+You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation on headers and distributions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) for more information. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
 
 ### Authentication
 
