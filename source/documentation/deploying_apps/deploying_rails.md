@@ -1,6 +1,6 @@
 ## Deploy a Ruby on Rails app
 
-This section explains minimal steps for deploying a basic Rails app. Refer to the [Cloud Foundry guide to deploying Ruby on Rails apps](http://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html) for more information.
+This section explains minimal steps for deploying a basic Rails app. Refer to the [Cloud Foundry guide to deploying Ruby on Rails apps](https://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html) for more information.
 
 > If your app requires a [backing service](/deploying_services/#deploy-a-backing-or-routing-service), it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.
 
