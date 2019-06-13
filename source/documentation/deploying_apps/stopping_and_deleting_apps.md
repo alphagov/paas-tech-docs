@@ -1,46 +1,56 @@
-## Stopping and deleting apps
+## Stopping and starting apps
 
-It’s important to know that when you perform a ``cf push`` command, there are three things that happen on the platform:
+Run the following in the command line to temporarily stop your app and free up memory from your [quota](/managing_apps.html#quotas):
 
-1. your code is uploaded, after which a buildpack converts it to a single container, called a 'droplet', that can be run on PaaS as an app
-2. the droplet is used to start the requested number of instances of that app
-3. a route is created, connecting your app to the internet
+```
+cf stop APP_NAME
+```
 
-When deleting apps you need to remember aspects 1 and 3.
+Users visiting your app's URL will get the error:
 
-Databases, CDNs and other services have a different lifecycle and need to be removed separately.
+```
+404 Not Found: Requested route ('APP_NAME.APP_DOMAIN') does not exist.
+```
 
-### Stopping and starting apps
-If you temporarily want to stop your app, freeing up memory from your quota, you can use the command
+Databases and other provisioned services will still be running, and GOV.UK PaaS will charge you for any paid plans or services.
 
-``cf stop [appname]``
+Run the following to restart a stopped app:
 
-This will stop the app running (although databases and other provisioned services will still be running and chargeable). Users visiting your app's URL will get the error ``404 Not Found: Requested route ('[appname].[app domain]') does not exist.``
+```
+cf start APP_NAME
+```
 
-You can start a stopped app with
+## Deleting apps
 
-``cf start [appname]``
+<%= warning_text('Deleting an app is irreversible.') %>
 
-### Deleting apps
+You should run `cf target` to check which [org](/orgs_spaces_users.html#organisations) and [space](/orgs_spaces_users.html#spaces) you are in before you delete an app.
 
-**BEFORE YOU START: This is irreversible. We strongly recommend running the ``cf target`` command before you start: check you *are* where you think you are, and working on what you think you are working on.**
+Run the following to delete an app:
 
-If you want to remove your app completely it’s tempting to jump in with the ``cf delete`` command, but there are a few things to beware of:
+```
+cf delete -r APPNAME
+```
 
-* Services that are used by apps do not automatically get deleted, and would still be chargeable
-* Routes between the internet and your apps need to be explicitly removed.
+### Deleting app routes
 
-If you have a simple app without any services the best way to delete it is
+Run the following to delete an app and that app’s [routes](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes) at the same time:
 
-``cf delete -r [APPNAME]``
+```
+cf delete -r APPNAME
+```
 
-which will delete the app and its routes in one go. If your app does have services, please [delete them first](/deploying_apps.html#delete-a-service-instance).
+You can delete an app’s routes separately.
 
-If you accidentally delete your app without the ``-r`` option, you can delete the route manually. First confirm the details of the orphaned route by typing the ``cf routes`` command, to get a list of all active routes in the current space. This will list the space, the hostname, the [app domain](/orgs_spaces_users.html#regions), port, path, type and any bound apps or services. You will see your hostname listed but without an associated app. Use this information to populate the following command:
+1. Run `cf routes` to get a list of all active routes in the current space. This command will also list information about the routes, including hostname and [app domain](/orgs_spaces_users.html#regions).
 
-``cf delete-route [domain name] --hostname [hostname]``
+1. Run the following to delete the app’s routes:
 
-### Delete a service instance
+    ```
+    cf delete-route DOMAIN_NAME --hostname HOSTNAME
+    ```
+
+### Deleting a service instance
 
 You must unbind a service instance from any apps it is bound to before you can delete that service instance. Note:
 
@@ -58,12 +68,11 @@ You must unbind a service instance from any apps it is bound to before you can d
 1. Run the following to unbind a service instance:
 
     ```
-    cf unbind-service APPLICATION SERVICE_NAME
+    cf unbind-service APP_NAME SERVICE_NAME
     ```
-    where APPLICATION is the name of a deployed instance of your app (exactly as specified in your manifest or push command) and SERVICE_NAME is a unique descriptive name for this service instance, for example:
+    where:
 
-    ```
-    cf unbind-service my-app mystuff
-    ```
+    - `APP_NAME` is the name of a deployed instance of your app exactly as specified in your manifest or push command
+    - `SERVICE_NAME` is a unique descriptive name for this service instance
 
 1. Run ``cf delete-service SERVICE_NAME`` to delete that service instance.
