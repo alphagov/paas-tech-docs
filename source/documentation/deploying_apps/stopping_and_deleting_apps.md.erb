@@ -29,7 +29,7 @@ You should run `cf target` to check which [org](/orgs_spaces_users.html#organisa
 Run the following to delete an app:
 
 ```
-cf delete -r APPNAME
+cf delete APPNAME
 ```
 
 ### Deleting app routes
@@ -57,7 +57,7 @@ You must unbind a service instance from any apps it is bound to before you can d
 - you do not need to delete an app's service instances before you can delete that app
 - a service instance can be bound to more than one app
 
-1. Run `cf services` to see all service instances in your targeted space. You will see the output as per this example:
+1. Run `cf services` to see all service instances in your targeted space. Example output:
 
     ```
     name      service    plan    bound apps    last operation
