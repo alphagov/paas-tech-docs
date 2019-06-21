@@ -1,4 +1,4 @@
-## Deploy a Docker image (experimental)
+## Deploy a Docker image
 
 This section explains how to deploy an app from a Docker image. The role of the Docker image is to serve as a packaging format and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks. Configuration via manifest.yml also stays the same, albeit you should not specify buildpack. If you do, it will be ignored, which can create some confusion to anyone reading the manifest. Our platform currently supports deploying from the following:
 
@@ -37,12 +37,6 @@ Deploying, scaling, restarting or restaging an app using a Docker image are all 
 Note that Cloud Foundry can restart your application due to circumstances outside of your direct control, such as platform scaling or deployments, or failure of the underlying hardware platform.
 
 If Cloud Foundry attempts to pull the image from the registry when the registry is not available, your application instance will fail to start, and you will receive a `Failed to create container` message. Once the Docker registry is available again, you will be able to re-deploy, restart or restage your app as required.
-
-### Experimental feature
-
-Please note that this is currently only an experimental feature, meaning you can potentially encounter some unexpected behaviour or glitches. It is also possible that we might turn the feature off in the future. It should not be used in live services at this stage.
-
-Lastly, our support for this functionality has lower priority than usual requests, so it is possible that responses to your queries regarding this will take a bit longer. However we are turning on this feature in order get feedback from service teams, so please contact support with any comments or to talk about use in production systems.
 
 ### Applying security updates
 
