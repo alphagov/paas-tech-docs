@@ -2,7 +2,7 @@
 
 ## Responsibility model
 
-Your responsibilities differ depending on whether you use a [standard buildpack](/deploying_apps.html#buildpacks), [custom buildpack](/deploying_apps.html#how-to-use-custom-buildpacks) or [Docker image](/deploying_apps.html#deploy-a-docker-image-experimental) to deploy your app.
+Your responsibilities differ depending on whether you use a [standard buildpack](/deploying_apps.html#buildpacks), [custom buildpack](/deploying_apps.html#how-to-use-custom-buildpacks) or [Docker image](/deploying_apps.html#deploy-a-docker-image) to deploy your app.
 
 <div class="table-container">
   <table>
@@ -105,7 +105,7 @@ Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-
 
 ### Docker images
 
-You are responsible for your Docker container and custom image. Learn about this [experimental feature](/deploying_apps.html#monitoring-apps-deploy-a-docker-image-experimental).
+You are responsible for your Docker container and custom image. Refer to the [documentation on deploying a Docker image](/deploying_apps.html#deploy-a-docker-image) for more information.
 
 
 ### Custom buildpacks compared to Docker images
@@ -120,4 +120,4 @@ Custom buildpacks provide some advantages over choosing a Docker solution:
 Docker images also provide some advantages over custom buildpacks:
 
 - the same image can be run locally on developer machines, or on any Linux-based machine
-- exactly the same Docker image can be promoted between environments as an immutable asset, rather than being rebuilt each time (CF support for this is still experimental)
+- exactly the same Docker image can be promoted between environments as an immutable asset, rather than being rebuilt each time
