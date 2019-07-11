@@ -40,6 +40,6 @@ If Cloud Foundry attempts to pull the image from the registry when the registry 
 
 ### Applying security updates
 
-When your app is built with a standard buildpack, you are responsible only for the code of your app. The platform provides both the buildpacks and also a safe and secure root filesystem (`cflinuxfs2`). Buildpack based apps never have root access in their container, which adds another layer of security. We do periodically apply security and functionality updates to the buildpacks, container root FS and the platform itself.
+When your app is built with a standard buildpack, you are responsible only for the code of your app. The platform provides both the buildpacks and also a safe and secure root filesystem (`cflinuxfs3`). Buildpack based apps never have root access in their container, which adds another layer of security. We do periodically apply security and functionality updates to the buildpacks, container root FS and the platform itself.
 
 When your app is deployed from Docker image, responsibility for the root filesystem and for the complete build of your app shifts to you. You need to ensure proper measures are applied to make your app and root image safe and with the latest security updates. We recommend you use one of the major and well supported linux distributions as your base container. This way you will be able to build an image with latest security patches easily.

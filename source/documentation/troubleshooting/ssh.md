@@ -51,7 +51,7 @@ instances: 3/3
 usage: 64M x 3 instances
 urls: exampleapp.london.cloudapps.digital
 last uploaded: Wed Dec 21 13:56:24 UTC 2016
-stack: cflinuxfs2
+stack: cflinuxfs3
 buildpack: staticfile_buildpack
 
 .   state     since                    cpu    memory        disk         details
