@@ -34,8 +34,6 @@ Refer to the Cloud Foundry documentation on [using the Cloud Foundry CLI with a 
 
 You can sign in to Cloud Foundry using either your [GOV.UK PaaS account information](get_started.html#get-an-account) or the single sign-on function.
 
-Single sign-on is only available to users within the Government Digital Service (GDS)
-
 ### Use your GOV.UK PaaS account
 
 The default method to sign in to Cloud Foundry is to use your [GOV.UK PaaS account](get_started.html#get-an-account) information.
@@ -60,17 +58,21 @@ When you have signed in, run `cf` in the command line to see all available comma
 
 ### Use the single sign-on function
 
-Single sign-on is only available to users within the Government Digital Service (GDS).
+You can sign in to Cloud Foundry using the single sign-on function. Using single sign-on makes managing your security, onboarding and leaving processes simpler.
 
-If you work at GDS, you can enable single sign-on for your account via the GOV.UK PaaS admin tool.
+Single sign-on is only available to GOV.UK PaaS users with either a [Google account](https://myaccount.google.com/intro) or a [Microsoft account](https://account.microsoft.com/account).
 
-1. Once you have access to SSO and if your org is hosted in London, run the following in the command line:
+The email attached to your GOV.UK PaaS account must be the same as the email attached to your Google or Microsoft account.
+
+1. Enable single sign-on using the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/) (requires sign in).
+
+1. If your org is in London, run the following in the command line:
 
     ```
     cf login -a api.london.cloud.service.gov.uk --sso
     ```
 
-    If your org is hosted in Ireland, run:
+    If your org is in Ireland, run:
 
     ```
     cf login -a api.cloud.service.gov.uk --sso
@@ -78,9 +80,11 @@ If you work at GDS, you can enable single sign-on for your account via the GOV.U
 
     This will give you a URL where you can generate a temporary authentication code.
 
-1. Go to the URL and select the __Sign in using the GOV.UK PaaS internal account login__ button.
+1. Go to the URL and select __Continue__ under either __Google__ or __Microsoft__.
 
-1. On the __Sign in with Google__ page, select your `@digital.cabinet-office.gov.uk` email address.
+1. On the __Sign in__ page, enter or select your email address.
+
+1. Enter your password and, if applicable, 2-step verification code.
 
 1. Copy the temporary authentication code into the command line.
 
