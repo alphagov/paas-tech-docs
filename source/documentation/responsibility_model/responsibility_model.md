@@ -6,10 +6,7 @@ When you use the GOV.UK PaaS to host your app, both you and the GOV.UK PaaS have
 - [custom](#custom-buildpack-responsibilities) buildpack
 - [Docker image](#docker-image-responsibilities)
 
-Regardless of which buildpack or Docker image you use, the GOV.UK PaaS team is always responsible for:
-
-- keeping the infrastructure your app runs on secure
-- providing secure app runtimes
+Regardless of which buildpack or Docker image you use, the GOV.UK PaaS team is always responsible for keeping the infrastructure your app runs on secure.
 
 ## Standard buildpack responsibilities
 
