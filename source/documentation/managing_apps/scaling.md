@@ -20,7 +20,7 @@ For example, run the following command to set the number of app instances to 5:
 
 ``cf scale APPNAME -i 5``
 
-You can also use the manifest to set the number of instances that will start when you [push the app](/deploying_apps.html#deploying-public-apps]:
+You can also use the manifest to set the number of instances that will start when you [push the app](deploying_apps.html#deploying-public-apps):
 
 ```
 ---
