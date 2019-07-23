@@ -1,10 +1,10 @@
-# Responsibility model
+# Know your responsibilities
 
-When you use the GOV.UK PaaS to host your app, both you and the GOV.UK PaaS have responsibilities. These responsibilities change depending on whether you deploy your app using a:
+When you use the GOV.UK PaaS to host your app, both you and the GOV.UK PaaS team have responsibilities. These responsibilities change depending on whether you deploy your app using a:
 
-- [standard](#standard-buildpack-responsibilities) buildpack
-- [custom](#custom-buildpack-responsibilities) buildpack
-- [Docker image](#docker-image-responsibilities)
+- standard buildpack
+- custom buildpack
+- Docker image
 
 Regardless of which buildpack or Docker image you use, the GOV.UK PaaS team is always responsible for keeping the infrastructure your app runs on secure.
 
@@ -12,45 +12,45 @@ Regardless of which buildpack or Docker image you use, the GOV.UK PaaS team is a
 
 GOV.UK PaaS provides a set of [standard buildpacks](/deploying_apps.html#buildpacks). If you're new to working in the cloud or have a small development team, we recommend using a standard buildpack to deploy your app. This maximises the support you receive from GOV.UK PaaS.
 
-If you use a standard buildpack, you are responsible for:
+If you use a standard buildpack, you’re responsible for:
 
 - keeping your app secure
 - making sure your app works with new buildpack versions
 - redeploying your app so your app uses the latest version of the standard buildpack
 
-The GOV.UK PaaS team is responsible for providing:
+The GOV.UK PaaS team is responsible for providing updates and security patches for the:
 
-- security patches for the build environment
+- build environment
 - language runtime
 - base operating system libraries
-- the Linux kernel
+- Linux kernel
 
 ## Custom buildpack responsibilities
 
 A standard buildpack may not work for your app, for example if you want to use a language GOV.UK PaaS does not support. You can use a [custom buildpack](/deploying_apps.html#how-to-use-custom-buildpacks) to deploy your app instead of a standard buildpack.
 
-If you use a custom buildpack, you are responsible for:
+If you use a custom buildpack, you’re responsible for:
 
 - keeping your app secure
 - your custom buildpack's security, including your app's build environment and language runtime
 - making sure your app works with new operating system versions
 - redeploying your app so your app uses the latest operating system libraries
 
-The GOV.UK PaaS team is responsible for providing:
+The GOV.UK PaaS team is responsible for providing updates and security patches for the:
 
-- security patches for the base operating system libraries
-- the Linux kernel
+- base operating system libraries
+- Linux kernel
 
 ## Docker image responsibilities
 
-You can use a [Docker image](/deploying_apps.html#deploy-a-docker-image) to deploy your app instead of a buildpack. You can do this if you were already running your app in a Docker image and are migrating your app to the GOV.UK PaaS.
+You can use a [Docker image](/deploying_apps.html#deploy-a-docker-image) to deploy your app instead of a buildpack. You can do this if you are already running your app in a Docker image and are migrating your app to the GOV.UK PaaS.
 
-If you use a Docker image, you are responsible for:
+If you use a Docker image, you’re responsible for:
 
 - keeping your app secure
 - your Docker image's security, including your app's build environment, language runtime and operating system
 
-The GOV.UK PaaS team is responsible for providing security patches for the Linux kernel.
+The GOV.UK PaaS team is responsible for providing updates and security patches for the Linux kernel.
 
 ## Custom buildpacks compared to Docker images
 
