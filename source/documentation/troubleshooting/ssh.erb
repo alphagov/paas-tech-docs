@@ -8,6 +8,10 @@ If you do run commands which will change the container temporarily, it's a good 
 
 SSH is enabled by default. In most cases, you will find that you can SSH directly to your app's container.
 
+<br>
+
+<%= warning_text('If you are using v3 of the Cloud Foundry API, you must run cf v3-ssh instead of cf ssh') %>
+
 1. Run:
 
     ```
@@ -85,7 +89,7 @@ To enable local port forwarding, you can use the parameter `-L`:
 cf ssh APPNAME -L LOCALPORT:REMOTEHOST:REMOTEPORT
 ```
 
-This will forward the `LOCALPORT` port on the local system to the given `REMOTEHOST` host and `REMOTEPORT` port on the application container side.  
+This will forward the `LOCALPORT` port on the local system to the given `REMOTEHOST` host and `REMOTEPORT` port on the application container side.
 
 Whenever a connection is made to this port, the connection is forwarded over the secure SSH channel, and a connection is made to the host and port `REMOTEHOST:REMOTEPORT` from the remote application container.
 
