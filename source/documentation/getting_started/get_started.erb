@@ -202,7 +202,8 @@ If you are using [v2 of the Cloud Foundry API](https://github.com/cloudfoundry/c
     applications:
     - name: APPNAME
       memory: 64M
-      buildpack: staticfile_buildpack
+      buildpacks:
+      - staticfile_buildpack
     ```
 
     where `APPNAME` is the unique name for your app. You can run `cf apps` to see apps which already exist.
