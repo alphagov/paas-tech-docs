@@ -34,8 +34,6 @@ Refer to the Cloud Foundry documentation on [using the Cloud Foundry CLI with a 
 
 You can sign in to Cloud Foundry using either your [GOV.UK PaaS account information](get_started.html#get-an-account) or the single sign-on function.
 
-Single sign-on is only available to users within the Government Digital Service (GDS)
-
 ### Use your GOV.UK PaaS account
 
 The default method to sign in to Cloud Foundry is to use your [GOV.UK PaaS account](get_started.html#get-an-account) information.
@@ -58,33 +56,50 @@ The default method to sign in to Cloud Foundry is to use your [GOV.UK PaaS accou
 
 When you have signed in, run `cf` in the command line to see all available commands.
 
-### Use the single sign-on function
+### Use single sign-on 
 
-Single sign-on is only available to users within the Government Digital Service (GDS).
+You can sign in to Cloud Foundry using the single sign-on function. 
 
-If you work at GDS, you can enable single sign-on for your account via the GOV.UK PaaS admin tool.
+Using single sign-on makes managing your security, joining and leaving processes simpler by reducing the number of passwords or accounts you have to manage.
 
-1. Once you have access to SSO and if your org is hosted in London, run the following in the command line:
+You must have either a [Google](https://myaccount.google.com/intro) or [Microsoft](https://account.microsoft.com/account) email address to use single sign-on. The email address must be the same as the one you use to sign into your GOV.UK PaaS account.
+
+#### Enable single sign-on
+
+1. Sign into the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/). 
+
+1. Select __Set up Google/Microsoft single sign-on__ and then select __Activate Google/Microsoft single sign-on__.
+
+1. Get a URL to generate a temporary authentication code. If your org is hosted in [London](orgs_spaces_users.html#regions), run the following in the command line:
 
     ```
     cf login -a api.london.cloud.service.gov.uk --sso
     ```
 
-    If your org is hosted in Ireland, run:
+    If your org is hosted in [Ireland](orgs_spaces_users.html#regions), run:
 
     ```
     cf login -a api.cloud.service.gov.uk --sso
     ```
 
-    This will give you a URL where you can generate a temporary authentication code.
+1. Go to the URL and select __Continue__ under either __Google__ or __Microsoft__.
 
-1. Go to the URL and select the __Sign in using the GOV.UK PaaS internal account login__ button.
+1. On the __Sign in__ page, enter or select your email address.
 
-1. On the __Sign in with Google__ page, select your `@digital.cabinet-office.gov.uk` email address.
+1. Enter your password and, if applicable, the 2-step verification code to generate a temporary authentication code.
 
-1. Copy the temporary authentication code into the command line.
+1. Copy the generated temporary authentication code into the command line.
 
-When you have signed in, run `cf` in the command line to see all available commands.
+When you have signed in, you will see code similar to the following:
+
+```
+API endpoint:   https://api.london.cloud.service.gov.uk (API version: 2.136.0)
+User:           john.smith@digital.cabinet-office.gov.uk
+Org:            hmrc-prod
+Space:          sandbox
+
+```
+
 
 ## Deploy a test static HTML page
 
