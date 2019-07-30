@@ -161,7 +161,7 @@ cf add-network-policy PUBLIC_APPNAME --destination-app PRIVATE_APPNAME --protoco
 
 #### Recreate the network policy (optional)
 
-If you are using [version 2.0 of the Cloud Foundry API](https://github.com/cloudfoundry/cloud_controller_ng/tree/master/docs/v2) and a [blue-green deployment tool](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html).
+If you are using [version 2.0 of the Cloud Foundry API](https://github.com/cloudfoundry/cloud_controller_ng/tree/master/docs/v2) and a [blue-green deployment tool](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) to reduce downtime, you must recreate the network policy every time you push your apps.
 
 This is because every time you push your apps, the blue-green deployment creates a new version of the public app, so the network policy will no longer work.
 
