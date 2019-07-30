@@ -22,6 +22,10 @@ To see your organisation quota, run the command:
 
 where YOURORG is your organisation's name. (If you don't know the name, you can use ``cf orgs`` to find out).
 
+To see all quotas available on the GOV.UK PaaS, run the command:
+
+``cf quotas``
+
 ### Quota limits
 
 If a new application `push` would exceed your organization's quota, the request will fail with status code `400` and a message describing the limit that would be exceeded.
@@ -81,11 +85,11 @@ The application cannot access more than the specified amount of memory.
 		urls:
 		last uploaded: Wed Jul 22 20:09:56 UTC 2015
 
-		     state     since                    cpu    memory          disk          
-		#0   running   2015-07-30 05:58:11 PM   0.0%   94.6M of 128M   80.4M of 128M      
+		     state     since                    cpu    memory          disk
+		#0   running   2015-07-30 05:58:11 PM   0.0%   94.6M of 128M   80.4M of 128M
 
 
 - Any application which exceeds its memory quota will be automatically restarted. Use `cf events APPNAME` to look for 'out of memory' crashes.
 
-		... description   
+		... description
 		... index: 0, reason: CRASHED, exit_description: out of memory, exit_status: 255
