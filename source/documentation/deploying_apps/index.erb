@@ -159,7 +159,18 @@ You must create a [network policy](https://cli.cloudfoundry.org/en-US/cf/add-net
 cf add-network-policy PUBLIC_APPNAME --destination-app PRIVATE_APPNAME --protocol tcp --port 8080
 ```
 
-Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any further questions.
+#### Recreate the network policy
+
+You must recreate the network policy every time you push your app if you’re using both:
+
+- [version 2 of the Cloud Foundry API](https://github.com/cloudfoundry/cloud_controller_ng/tree/master/docs/v2)
+- a [blue-green deployment tool](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) to reduce downtime
+
+This is because every time you push your app, the blue-green deployment tool creates a new version of the public app. The existing network policy will then no longer work.
+
+[Version 3 of the Cloud Foundry API](https://github.com/cloudfoundry/cloud_controller_ng/tree/master/docs/v3) deploys your app with zero downtime. You do not need to recreate the network policy every time you push your app.
+
+Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
 ## Data security classification
 
