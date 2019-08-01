@@ -86,15 +86,15 @@ If you work at GDS, you can enable single sign-on for your account via the GOV.U
 
 When you have signed in, run `cf` in the command line to see all available commands.
 
-## Deploy a test static HTML page using Cloud Foundry API v2
+## Deploy a test static HTML page
 
 You can practice deploying an app by deploying a test static HTML page.
 
-The following instructions tell you how to deploy a static HTML page using [v2 of the Cloud Foundry API](https://github.com/cloudfoundry/cloud_controller_ng/tree/master/docs/v2).
+You can use [version 2](get_started.html#use-cloud-foundry-api-version-2) or [version 3](get_started.html#use-cloud-foundry-api-version-3) of the Cloud Foundry API.
 
-If you are using [v3 of the Cloud Foundry API](https://github.com/cloudfoundry/cloud_controller_ng/tree/master/docs/v3), refer to the documentation on [deploying a test static HTML page using Cloud Foundry API v3](get_started.html#deploy-a-test-static-html-page-using-cloud-foundry-api-v3).
+If you're not sure which version of the Cloud Foundry API to use, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-If you are not sure which version of the Cloud Foundry API to use, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+### Use Cloud Foundry API version 2
 
 1. To deploy an app, you must select a [target](deploying_apps.html#set-a-target). This is a combination of an [organisation](/orgs_spaces_users.html#organisations) and a [space](/orgs_spaces_users.html#spaces).
 
@@ -128,7 +128,8 @@ If you are not sure which version of the Cloud Foundry API to use, contact us at
     applications:
     - name: APPNAME
       memory: 64M
-      buildpack: staticfile_buildpack
+      buildpacks:
+      - staticfile_buildpack
     ```
 
     where `APPNAME` is the unique name for your app. You can run `cf apps` to see apps which already exist.
@@ -143,23 +144,17 @@ If you are not sure which version of the Cloud Foundry API to use, contact us at
 
 The static HTML page is now available at your [app domain](/orgs_spaces_users.html#regions).
 
-For a production app, you should read the [production checklist](deploying_apps.html#production-checklist).
+For a production app, you should follow the [production checklist](deploying_apps.html#production-checklist).
 
-## Deploy a test static HTML page using Cloud Foundry API v3
+### Use Cloud Foundry API version 3
 
-You can practice deploying an app by deploying a test static HTML page.
-
-The following instructions tell you how to deploy a static HTML page using [v3 of the Cloud Foundry API](https://github.com/cloudfoundry/cloud_controller_ng/tree/master/docs/v3). This version of the API allows you to push an app with no downtime without needing to use a [blue-green deployment tool](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html).
+Version 3 allows you to push an app with no downtime without having to use a [blue-green deployment tool](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html).
 
 <br>
 
-<%= warning_text('Cloud Foundry API v3 is still in beta.') %>
+<%= warning_text('Version 3 of the Cloud Foundry API is still in beta.') %>
 
-Refer to the [Cloud Foundry documentation on the limitations of the v3 API](https://docs.cloudfoundry.org/devguide/deploy-apps/rolling-deploy.html#limitations) for more information.
-
-If you are using [v2 of the Cloud Foundry API](https://github.com/cloudfoundry/cloud_controller_ng/tree/master/docs/v2), refer to the documentation on [deploying a test static HTML page using Cloud Foundry API v2](get_started.html#deploy-a-test-static-html-page-using-cloud-foundry-api-v2).
-
-If you are not sure which version of the Cloud Foundry API to use, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+Refer to the [Cloud Foundry documentation on the limitations of API version 3](https://docs.cloudfoundry.org/devguide/deploy-apps/rolling-deploy.html#limitations) for more information.
 
 1. To deploy an app, you must select a [target](deploying_apps.html#set-a-target). This is a combination of an [organisation](/orgs_spaces_users.html#organisations) and a [space](/orgs_spaces_users.html#spaces).
 
@@ -209,9 +204,9 @@ If you are not sure which version of the Cloud Foundry API to use, contact us at
     cf v3-create-app APPNAME
     ```
 
-    APPNAME is the unique name for your app that you specified in the manifest file.
+    `APPNAME` is the unique name for your app that you specified in the manifest file.
 
-    If you have an existing Cloud Foundry API v2 app and want to upgrade this app to use v3, you do not need to do this step.
+    You only need to run this command if you’re creating a new app that uses version 3 of the API.
 
 5.  Apply your created manifest file to your app:
 
@@ -228,6 +223,6 @@ If you are not sure which version of the Cloud Foundry API to use, contact us at
 
 The static HTML page is now available at your [app domain](/orgs_spaces_users.html#regions).
 
-For a production app, you should read the [production checklist](deploying_apps.html#production-checklist).
+For a production app, you should follow the [production checklist](deploying_apps.html#production-checklist) to deploy that app.
 
-Refer to the [Cloud Foundry documentation on rolling app deployments](https://docs.cloudfoundry.org/devguide/deploy-apps/rolling-deploy.html) for more information on v3 of the Cloud Foundry API.
+Refer to the [Cloud Foundry documentation on rolling app deployments](https://docs.cloudfoundry.org/devguide/deploy-apps/rolling-deploy.html) for more information on version 3 of the Cloud Foundry API.
