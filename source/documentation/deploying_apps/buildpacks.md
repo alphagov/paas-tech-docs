@@ -12,7 +12,7 @@ Cloud Foundry uses buildpacks to provide runtime and framework support for appli
 
 We recommend using the standard buildpacks to maximise the support you will receive from GOV.UK PaaS. Using a custom buildpack or Docker image will mean additional setup and maintenance costs.
 
-Your responsibilities change depending on whether you use a standard buildpack, custom buildpack or a Docker image. Refer to the [responsibility model guidance](guidance.html#guidance-2-responsibility-model) for further information.
+Your responsibilities change depending on whether you use a standard buildpack, custom buildpack or a Docker image. Refer to the [documentation on knowing your responsibilities](responsibility_model.html#know-your-responsibilities) for further information.
 
 ### Buildpack language version updates
 
