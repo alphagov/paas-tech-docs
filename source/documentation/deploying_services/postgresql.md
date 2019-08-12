@@ -494,7 +494,7 @@ All plans have encryption at rest unless stated otherwise. This means that both 
 
 #### High availability plans - PostgreSQL
 
-We recommend you use a high availability plan (`HA`) for your PostgreSQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details.
+We recommend you use a high availability plan (`HA`) for your PostgreSQL services. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details.
 
 When you use a high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.
 
