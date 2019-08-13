@@ -364,10 +364,10 @@ CloudFront uses your app's `Cache-Control` or `Expires` HTTP headers to determin
 
 If your app does not provide these headers, CloudFront will use the configured default time-to-live. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.
 
-The default time-to-live is set upon creation and is:
+When you create your CDN distribution, CloudFront sets the default time-to-live for your CDN-route service at:
 
-- 24 hours if your CDN distribution was created before 2019-08-12
-- 0 seconds if your CDN distribution was created after 2019-08-12
+- 24 hours if you created your CDN distribution before 2019-08-12
+- 0 seconds if you created your CDN distribution after 2019-08-12
 
 While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV.UK PaaS support](https://www.cloud.service.gov.uk/support) can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).
 
