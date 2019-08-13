@@ -137,15 +137,9 @@ You can associate up to 100 subdomains with a single cdn-route service instance.
     ```
     cf update-service custom-domains-production \
       -c '{"domain": "www.example.com,www.example.net,www.example.org"}'
-    ```
+      ```
 
-    If you have previously customised the [cookies](#disabling-forwarding-cookies) or the [headers](#forwarding-headers) forwarded by your cdn-route service, you must include those as configuration parameters in the `cf update-service` command. For example:
-
-    ```
-    cf update-service custom-domains-production \
-      -c '{"domain": "www.example.com,www.example.net,www.example.org",
-           "cookies": false, "headers": ["Accept", "Authorization"]}'
-    ```
+<%= warning_text('Whenever you update the "domain" configuration parameter you must update your DNS records, regardless of whether the value has changed.') %>
 
 1. Get the DNS information required to configure your subdomain:
 
@@ -277,14 +271,6 @@ cf update-service custom-domains-production \
     -c '{"domain": "www.example.net,www.example.org"}'
 ```
 
-If you have previously customised the [cookies](#disabling-forwarding-cookies) or the [headers](#forwarding-headers) forwarded by your cdn-route service, you must include those as configuration parameters in the `cf update-service` command. For example:
-
-```
-cf update-service custom-domains-production \
-  -c '{"domain": "www.example.net,www.example.org",
-        "cookies": false, "headers": ["Accept", "Authorization"]}'
-```
-
 #### Changing your custom domain's DNS records
 
 Once you have removed the custom domain(s) from your cdn-route service, you should delete any associated DNS records. This stops the removed domains' DNS records from pointing towards the GOV.UK PaaS. You should:
@@ -304,7 +290,7 @@ By default cookies are forwarded to your app. You can disable this by setting th
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "www.example.com", "cookies": false}'
+    -c '{"cookies": false}'
 ```
 See the [More about how the CDN works](/deploying_services/use_a_custom_domain/#more-about-how-custom-domains-work) section for details.
 
@@ -314,14 +300,14 @@ By default, our service broker configures the CDN to only forward the `Host` hea
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "www.example.com", "headers": ["Accept", "Authorization"]}'
+    -c '{"headers": ["Accept", "Authorization"]}'
 ```
 
 You can supply up to nine headers. If you need to allow more headers you will have to forward all headers:
 
 ```bash
 cf update-service my-cdn-route \
-    -c '{"domain": "www.example.com", "headers": ["*"]}'
+    -c '{"headers": ["*"]}'
 ```
 
 Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](/deploying_services/use_a_custom_domain/#more-about-how-custom-domains-work) section for details.
