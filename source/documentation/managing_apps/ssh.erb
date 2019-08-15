@@ -88,7 +88,7 @@ The `cf ssh` command supports [local port forwarding](https://en.wikipedia.org/w
 To enable local port forwarding, you can use the parameter `-L`:
 
 ```
-cf ssh APPNAME -L LOCALPORT:REMOTEHOST:REMOTEPORT
+cf ssh APPNAME -T -L LOCALPORT:REMOTEHOST:REMOTEPORT
 ```
 
 This will forward the `LOCALPORT` port on the local system to the given `REMOTEHOST` host and `REMOTEPORT` port on the application container side.
@@ -135,7 +135,7 @@ For example, you can connect directly to the PostgreSQL service bound to an appl
  2. Create a SSH tunnel using the local port 6666:
 
     ```
-    cf ssh myapp -L 6666:HOST:PORT
+    cf ssh myapp -T -L 6666:HOST:PORT
     ```
 
     where HOST and PORT are the values you found in the previous step.
