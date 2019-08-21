@@ -3,4 +3,401 @@ title: "GOV.UK Platform as a Service Technical Documentation"
 weight: 10
 ---
 
-<%= partial 'documentation/index' %>
+<hr>
+
+# GOV.UK Platform-as-a-Service
+
+## Bring your own metrics
+
+GOV.UK PaaS offers out of the box metrics and logging which are available using
+the [web user interface](https://admin.tlwr.dev.cloudpipeline.digital).
+
+The metrics and logging solutions provided as a service by GOV.UK PaaS do not
+cover all use cases, for instance custom application metrics, or service
+specific alerting.
+
+This tutorial will show you how to deploy a monitoring and logging stack to the
+GOV.UK PaaS, using the following open source tools:
+
+- Prometheus
+- Grafana
+- Alertmanager
+- InfluxDB
+- Fluent Bit
+
+### Technology overview
+
+#### Prometheus
+
+[Prometheus](https://prometheus.io) is monitoring system which describes itself
+as:
+
+> Prometheus, a Cloud Native Computing Foundation project, is a systems and
+service monitoring system. It collects metrics from configured targets at given
+intervals, evaluates rule expressions, displays the results, and can trigger
+alerts if some condition is observed to be true.
+
+Prometheus is responsible for collecting application container metrics and
+backing service metrics exposed by GOV.UK PaaS, and custom application metrics
+exposed by your application.
+
+Prometheus is also responsible for triggering alerts when certain criteria are
+met. For more information about Prometheus, please refer to [the Prometheus
+documentation](https://prometheus.io/docs/introduction/overview/).
+
+#### Alertmanager
+
+Alertmanager is a tool for receiving alerts raised by Prometheus and routing
+them to the correct destination, based on a configurable set of rules. Alert
+destinations could be a on-call response paging system, or a ticketing system's
+queue.
+
+For more information please refer to [the Alertmanager
+documentation](https://prometheus.io/docs/alerting/alertmanager/).
+
+#### Grafana
+
+[Grafana](https://grafana.com/grafana) is a visualisation tool which describes itself as:
+
+> Grafana allows you to query, visualize, alert on and understand your metrics
+no matter where they are stored. Create, explore, and share dashboards with
+your team and foster a data driven culture.
+
+Grafana is the interface through which you will be able to query and explore
+your metrics and logs.
+
+For more information please refer to [the Grafana
+documentation](https://grafana.com/docs/).
+
+#### InfluxDB
+
+InfluxDB is an open source time-series database that is available through the
+GOV.UK PaaS marketplace, and hosted by our service provider
+[Aiven.io](https://www.aiven.io).
+
+InfluxDB describes itself as:
+
+> InfluxDB is a time series database designed to handle high write and query
+loads.  It is designed to handle high write and query loads and provides a
+SQL-like query language called InfluxQL for interacting with data.
+
+For more information please refer to [the InfluxDB
+documentation](https://docs.influxdata.com/influxdb/).
+
+#### Fluent Bit
+
+Fluent Bit describes itself as:
+
+> an open source and multi-platform Log Processor and Forwarder which allows
+you to collect data/logs from different sources, unify and send them to
+multiple destinations. It's fully compatible with Docker and Kubernetes
+environments.
+
+Fluent Bit is responsible for sending application logs to InfluxDB, so your
+logs and metrics are stored in the same place, and queryable in the same way.
+
+### Architecture
+
+_An image showing the architecture of an observability stack
+hosted on GOV.UK PaaS_
+
+Prometheus will be an application hosted directly on GOV.UK PaaS. It will be
+configured as a stateless application, and it will delegate the long-term
+storage of metrics to InfluxDB. Prometheus will send any alerts that are fired
+to Alertmanager.
+
+Alertmanager is responsible for sending the alert to the configured
+destination, and is also an application hosted on GOV.UK PaaS.
+
+Grafana is configured to query Prometheus and InfluxDB. It can query Prometheus
+for metrics using PromQL, the Prometheus query language. It can also query
+InfluxDB using PromQL, or InfluxQL, depending on your query language
+preference. Grafana also queries InfluxDB directly in order to fetch and
+visualise logs.
+
+### Deploying the stack
+
+#### Create the GOV.UK PaaS space
+
+In order to keep things organised we will create a separate space where our
+monitoring stack will live. This simplifies operations, and billing.
+
+Create a space using the CF CLI:
+
+```
+cf create-space monitoring
+```
+
+#### Provision InfluxDB
+
+InfluxDB is available through the GOV.UK PaaS marketplace, as supplied by
+[aiven.io](https://aiven.io).
+
+For pricing details please see [the pricing
+calculator](https://admin.tlwr.dev.cloudpipeline.digital/calculator).
+
+Provision an InfluxDB instance using the CF CLI:
+
+```
+cf create-service influxdb small observe-db
+```
+
+#### Deploy Alertmanager
+
+Alertmanager will be deployed as a GOV.UK PaaS application, using the following
+application manifest:
+
+```
+# manifest.yml
+applications:
+  - name: alertmanager
+    buildpacks:
+      - alertmanager_buildpack
+```
+
+When pushing the Alertmanager as an application, you can also configure it by
+putting configuration in a file called `alertmanager.yml` that is in the same
+directly as `manifest.yml` when pushing the application. The following is an
+example configuration file:
+
+```
+# alertmanager.yml
+global:
+  slack_api_url: 'https://slack.com/webhook-secret-goes-here'
+
+route:
+  group_by: ['alertname', 'cluster', 'service']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 3h 
+
+- source_match:
+    severity: 'critical'
+  target_match:
+    severity: 'warning'
+
+
+receivers:
+- name: 'operations-slack'
+  slack_config:
+  - to: 'team-X+alerts@example.org'
+    icon_emoji: ':fire:'
+    text: everything is :fine:
+    channel: #operations
+```
+
+Once deployed, Alertmanager will be reachable on
+[https://alertmanager.tlwr.dev.cloudpipelineapps.digital](https://alertmanager.tlwr.dev.cloudpipelineapps.digital).
+
+Deploy Alertmanager:
+
+```
+$ pwd
+/tmp/example/alertmanager
+$ ls .
+manifest.yml alertmanager.yml
+$ cf push
+...
+$ echo done
+```
+
+#### Deploy Prometheus
+
+Prometheus will be deployed as a GOV.UK PaaS application, using the following
+application manifest:
+
+```
+# manifest.yml
+applications:
+  - name: prometheus
+
+    buildpacks:
+      - prometheus_buildpack
+
+    services:
+      - observe-db
+```
+
+Like Alertmanager, Prometheus can be configured using a configuration file
+colocated with the application manifest called `prometheus.yml`. The following
+is an example configuration file, which assumes you have deployed the [paas-prometheus-exporter](https://docs.cloud.service.gov.uk/monitoring_apps.html#metrics) on [https://paas-exporter.tlwr.dev.cloudpipelineapps.digital](https://paas-exporter.tlwr.dev.cloudpipelineapps.digital).
+
+```
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+- job_name: paas-exporter
+  scheme: https
+  static_configs:
+    - targets: [paas-exporter.tlwr.dev.cloudpipelineappsapps.digital]
+
+alerting:
+  alertmanagers:
+    static_configs:
+    - targets: [alertmanager.tlwr.dev.cloudpipelineappsapps.digital]
+```
+
+The Prometheus buildpack looks at the services to which the app is bound, and
+automatically adds the necessary `remote_read` and `remote_write` configuration
+needed to persist Prometheus metrics in InfluxDB.
+
+The Prometheus buildpack can also be pushed with an `alerts.yml` file which configures alerts registered in Prometheus.
+
+Once deployed, Prometheus will be reachable on
+[https://prometheus.tlwr.dev.cloudpipelineapps.digital](https://prometheus.tlwr.dev.cloudpipelineapps.digital).
+
+Deploy Prometheus:
+
+```
+$ pwd
+/tmp/example/prometheus
+$ ls .
+manifest.yml prometheus.yml
+$ cf push
+...
+$ echo done
+```
+
+#### Deploy Grafana
+
+Grafana will be deployed as a GOV.UK PaaS application, using the following
+application manifest:
+
+```
+# manifest.yml
+applications:
+  - name: grafana
+
+    buildpacks:
+      - grafana_buildpack
+
+    services:
+      - observe-db
+      - my-amazon-s3-bucket
+
+    env:
+      PROMETHEUS_URLS: https://prometheus.tlwr.dev.cloudpipelineapps.digital
+      ROOT_URL: https://grafana.tlwr.dev.cloudpipelineapps.digital
+```
+
+Deploy Grafana:
+
+```
+$ pwd
+/tmp/example/grafana
+$ ls .
+manifest.yml config.ini
+$ cf push
+...
+$ echo done
+```
+
+The Grafana buildpack looks at the services to which the app is bound, and
+automatically adds any InfluxDB, or Elasticsearch services as Grafana
+datasources.
+
+The Grafana buildpack can configure Grafana to be made stateful using a bound
+Postgres service.
+
+The Grafana buildpack can configure Grafana to use a bound public S3 bucket for
+image storage.
+
+
+Like Alertmanager and Prometheus, Grafana can be configured using a
+configuration file colocated with the application manifest called
+`grafana.init`. The configuration file can interpolate environment variables
+using `{{ENVIRONMENT_VARIABLE_NAME}} syntax.
+
+An example `config.ini` is as follows:
+
+```
+[server]
+http_port = {{PORT}}
+protocol = https
+root_url = {{ROOT_URL}}
+```
+
+Once deployed, Grafana will be reachable on
+[https://grafana.tlwr.dev.cloudpipelineapps.digital](https://grafana.tlwr.dev.cloudpipelineapps.digital).
+
+Deploy Grafana:
+
+```
+$ pwd
+/tmp/example/grafana
+$ ls .
+manifest.yml config.ini
+$ cf push
+...
+$ echo done
+```
+
+#### Deploy Fluent Bit
+
+Fluent Bit is deployed as a sidecar process to your application, this means you
+will have another process running in every application container, which will
+ship logs to InfluxDB.
+
+In order to achieve this, you must modify your existing application manifest.
+
+If you had the following manifest for deploying a ruby application:
+
+```
+applications:
+  - name: my-ruby-app
+
+    buildpacks:
+      - ruby_buildpack
+
+    services:
+      - app-db
+```
+
+You would:
+
+- Add `fluentbit_buildpack` to the list of buildpacks, it must not be last
+- Add the `observe-db` created earlier to the services section
+- Add a sidecars section which starts Fluent Bit on application launch
+
+```
+applications:
+  - name: my-ruby-app
+
+    buildpacks:
+      - fluentbit_buildpack
+      - ruby_buildpack
+
+    services:
+      - app-db
+      - observe-db
+
+    sidecars:
+      - name: config-server
+        command: './fluent-bit-buildpack-launcher'
+        process_types:
+          - web
+```
+
+Once your application is redeployed, your logs will be forwarded to your
+InfluxDB database, and will be queryable in Grafana in the Explore pane:
+[https://grafana.tlwr.dev.cloudpipelineapps.digital/explore](https://grafana.tlwr.dev.cloudpipelineapps.digital/explore).
+
+## High availability
+
+The best way to make this monitoring stack highly available is to have:
+
+- Two separate InfluxDB services
+- Two separate Prometheis applications bound to separate InfluxDB instances
+- Two Grafanas bound to BOTH Prometheis and InfluxDB instances
+- Three Alertmanager's in a mesh
+
+More information about high availability can be found in a follow up tutorial.
+
+## Conclusion
+
+In this tutorial you've set up a monitoring stack using Prometheus,
+Alertmanager, Grafana, InfluxDB, and Fluent Bit. You've reconfigured your to
+application forward logs to InfluxDB which you can query in Grafana. You've
+configured Prometheus to collect metrics from GOV.UK PaaS, and forward them to
+InfluxDB, which you can query in Grafana.
