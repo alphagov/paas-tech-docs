@@ -74,23 +74,27 @@ A possible exception to this is if your org is mature and has pre-existing space
 * Instances will be restarted if they [exceed memory limits](managing_apps.html#quotas).
 * Your application should write all its log messages to `STDOUT`/`STDERR`, rather than a log file.
 
-
 ## Deploying private apps
 
-You can deploy apps so they are not publicly accessible to everyone through the internet.
+By default, all apps you deploy on Cloud Foundry are [publicly accessible](deploying_apps.html#deploying-public-apps) to everyone through the internet.
 
-The simplest use case is that you have 2 apps to deploy:
+If you do not want your apps to be publicly accessible, you must deploy your apps on the `apps.internal` domain. Two common use cases for this are that you want to:
+
+- deploy a task scheduling app on the GOV.UK PaaS that does not need to be publicly accessible
+- test a beta version of an app in your production environment that only your team can access
+
+If you need to restrict access to a public app, for example to whitelist IPs, you should refer to the documentation on [route services](/deploying_services/route_services/#route-services).
+
+The following use case is that you have 2 apps to deploy:
 
 - a public app for your end users to interact with
 - a private app that the public app can securely connect to, but which is not accessible from the internet
 
 To achieve this, you must:
 
-- specify the private route in the private app's manifest
-- set the private app URL as an [environment variable](/deploying_apps.html#environment-variables) in the public app's manifest
-- create a network policy to allow the apps to connect with each other
-
-If you need to restrict access to a public app, you should refer to the documentation on [route services](/deploying_services/route_services/#route-services).
+- [specify the private route](deploying_apps.html#specify-a-private-route-in-the-private-app-39-s-manifest) in the private app's manifest
+- [set the private app URL](/deploying_apps.html#set-the-private-app-url-in-the-public-app-39-s-manifest) as an [environment variable](/deploying_apps.html#environment-variables) in the public app's manifest
+- [create a network policy](/deploying_apps.html#create-a-network-policy) to allow the apps to connect with each other
 
 ### Specify a private route in the private app's manifest
 
@@ -119,10 +123,6 @@ Refer to the [Cloud Foundry documentation on routes](https://docs.cloudfoundry.o
 ### Set the private app URL in the public app's manifest
 
 The public app must read the private app URL from an [environment variable](/deploying_apps.html#environment-variables) in the public app's manifest.
-
-<br>
-
-<%= warning_text('Connections between public and private apps are not encrypted by default. If you need encrypted connections between your apps, it is your responsibility to implement this.') %>
 
 You must set:
 
