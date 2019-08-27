@@ -80,10 +80,7 @@ By default, all apps you deploy on Cloud Foundry are [publicly accessible](deplo
 
 If you need to restrict access to a public app, for example to whitelist IPs, you should refer to the documentation on [route services](/deploying_services/route_services/#route-services).
 
-If you do not want your apps to be publicly accessible at all, you must deploy your apps on the `apps.internal` domain. Two common use cases for this are that you want to:
-
-- deploy a task scheduling app on the GOV.UK PaaS that does not need to be publicly accessible
-- test a beta version of an app in your production environment that only your team can access
+If you do not want your apps to be publicly accessible at all, you must deploy your apps on the `apps.internal` domain. A common use case for this is that you have multiple micro-services that make up an overall app, and those micro-services must only be accessible by other micro-services in the app.
 
 The following use case is that you have 2 apps to deploy:
 
