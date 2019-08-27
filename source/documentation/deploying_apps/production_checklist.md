@@ -2,10 +2,12 @@
 
 Before you deploy an app to a production environment, you must:
 
-- [get a domain from GOV.UK](https://www.gov.uk/service-manual/technology/get-a-domain-name) for your service and set the [DNS records required by your cdn-route service](https://docs.cloud.service.gov.uk/deploying_services/use_a_custom_domain/#set-up-a-cdn-route-service-with-one-or-more-custom-domains) on the GOV.UK PaaS
-- build your app in line with the [12-factor app principles](https://docs.cloud.service.gov.uk/architecture.html#12-factor-application-principles)
+- if you are a central government service using the GOV.UK domain, [get a domain from GOV.UK](https://www.gov.uk/service-manual/technology/get-a-domain-name) for your service and set the [DNS records required by your cdn-route service](/deploying_services/use_a_custom_domain/#set-up-a-cdn-route-service-with-one-or-more-custom-domains)
+- if you are using your own content distribution network (CDN), [set up a domain by configuring your CDN](/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn)
+- build your app in line with the [12-factor app principles](/architecture.html#12-factor-application-principles)
 - use a separate staging environment to test your app (refer to the [case studies on managing orgs, users and spaces](https://docs.cloud.service.gov.uk/orgs_spaces_users.html#case-studies) for more information)
 - [configure an `http` health check](https://docs.cloudfoundry.org/devguide/deploy-apps/healthchecks.html) to allow Cloud Foundry to detect and attempt to replace unhealthy app instances
+
 
 When you deploy an app to a production environment, you should:
 
