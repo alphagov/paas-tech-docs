@@ -1,9 +1,17 @@
 ## Production checklist
 
-Before deploying an app for production use, check the following:
+Before you deploy an app to a production environment, you must:
 
-1. If your app uses a [backing service](/deploying_services/#deploy-a-backing-or-routing-service), make sure that you have selected the high-availability plan for the service instance.
-1. You have [a domain name](https://www.gov.uk/service-manual/technology/get-a-domain-name) for your service.
-1. You are running more than one instance of the app to ensure availability. Use ``cf scale APPNAME -i INSTANCES`` or amend the manifest file to add more running instances; see [Scaling](/managing_apps.html#scaling) for more information.
-1. You are prepared to use a [blue-green deployment process](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) for when the app needs to be updated or restarted (this avoids problems due to a known issue with the PaaS that can generate transient 404 errors).
-1. You have configured a [health check](https://docs.cloudfoundry.org/devguide/deploy-apps/healthchecks.html) by setting `health-check-type` to `http` and setting `health-check-http-endpoint` to an appropriate endpoint for your app.
+- if you are a central government service using the GOV.UK domain, [get a domain from GOV.UK](https://www.gov.uk/service-manual/technology/get-a-domain-name) for your service and set the [DNS records required by your cdn-route service](/deploying_services/use_a_custom_domain/#set-up-a-cdn-route-service-with-one-or-more-custom-domains)
+- if you are using your own content distribution network (CDN), [set up a domain by configuring your CDN](/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn)
+- build your app in line with the [12-factor app principles](/architecture.html#12-factor-application-principles)
+- use a separate staging environment to test your app (refer to the [case studies on managing orgs, users and spaces](https://docs.cloud.service.gov.uk/orgs_spaces_users.html#case-studies) for more information)
+- [configure an `http` health check](https://docs.cloudfoundry.org/devguide/deploy-apps/healthchecks.html) to allow Cloud Foundry to detect and attempt to replace unhealthy app instances
+
+
+When you deploy an app to a production environment, you should:
+
+- use version 3 of the Cloud Foundry API to [zero-downtime deploy your app](https://docs.cloud.service.gov.uk/get_started.html#use-cloud-foundry-api-version-3)
+- use the [blue/green deployer plugin for Cloud Foundry](https://github.com/bluemixgaragelondon/cf-blue-green-deploy) to minimise app downtime if you are using version 2 of the Cloud Foundry API
+- [run more than one instance of your app](/managing_apps.html#scaling) to make sure your app is always available
+- select a high-availability plan for your app's [backing service](/deploying_services/#deploy-a-backing-or-routing-service) if your app uses a backing service
