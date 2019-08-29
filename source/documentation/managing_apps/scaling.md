@@ -27,7 +27,7 @@ applications:
    instances: 2
 ```
 
-For a [production](/deploying_apps.html#production-checklist) app, you should always run more than one instance.
+ You should always run more than one instance when [deploying an app to production](/deploying_apps.html#deploy-an-app-to-production).
 
 ### Increasing memory or disk space
 
