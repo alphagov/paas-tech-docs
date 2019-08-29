@@ -58,7 +58,7 @@ To deploy a Rails app that doesn't require a backing service:
 
 Your app should now be available at your [app domain](/orgs_spaces_users.html#regions).
 
-For a production app, you should read the [production checklist](/deploying_apps.html#production-checklist).
+For a production app, you should refer to the [documentation on deploying an app to production](/deploying_apps.html#deploy-an-app-to-production).
 
 ### Deploying with a PostgreSQL database
 
@@ -125,7 +125,7 @@ These instructions are for deploying a Rails app with a PostgreSQL database, and
 
 Your app should now be available at your [app domain](/orgs_spaces_users.html#regions).
 
-For a production app, you should read the [production checklist](/deploying_apps.html#production-checklist).
+For a production app, you should refer to the [documentation on deploying an app to production](/deploying_apps.html#deploy-an-app-to-production).
 
 ### Specify a Ruby version
 
