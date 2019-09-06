@@ -278,8 +278,6 @@ Once you have removed the custom domain(s) from your cdn-route service, you shou
 - delete or amend the subdomain's CNAME so that it does not point to the GOV.UK PaaS
 - delete the subdomain's TXT record you created when you configured the subdomain to work with the GOV.UK PaaS
 
-<br>
-
 <%= warning_text('Do not stop your domains` DNS records from pointing towards the GOV.UK PaaS before you have removed those custom domain(s) from your cdn-route service. <br><br> If you do, all of your domains` TLS certificates will fail to renew without warning at some point over the next 90 days. Your users may not be able to use your service.') %>
 
 ## Configuring your custom domain
