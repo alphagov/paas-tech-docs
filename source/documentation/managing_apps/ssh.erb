@@ -2,13 +2,15 @@
 
 ## Connecting with SSH
 
-When you deploy an app to GOV.UK PaaS, it runs in a container, which is like a lightweight Linux virtual machine. Each app runs in its own isolated container.
+When you deploy an app to GOV.UK PaaS, it runs in an isolated [container](https://www.cloudfoundry.org/containers/).
 
-Sometimes, it can be useful to connect directly to the container with SSH. You would usually only do this to get information for troubleshooting purposes, for example, if you can't work out what is happening with your app using the `cf logs` and `cf events` commands described in the [Logs](/monitoring_apps.html#logs) section.
+You can connect directly to an app’s container using SSH. XYZ enables SSH by default. A common use case for this is that you cannot troubleshoot your app using [`cf logs` and `cf events`](/monitoring_apps.html#logs).
 
-If you do run commands which will change the container temporarily, it's a good idea to restart the app afterwards.
+If you do run commands which will change the container temporarily, you should then restart the app.
 
-SSH is enabled by default. In most cases, you will find that you can SSH directly to your app's container.
+In most cases, you will find that you can SSH directly to your app's container.
+
+You must have installed the Cloud Foundry Command Line Interface (CLI) for SSH to work.
 
 <%= warning_text('If you are using v3 of the Cloud Foundry API, you must run cf v3-ssh instead of cf ssh') %>
 
@@ -20,68 +22,59 @@ SSH is enabled by default. In most cases, you will find that you can SSH directl
 
     where `APPNAME` is the name of the app.
 
-2. For some tasks to work, you need to set up the interactive SSH session to match the buildpack environment. To do this, run:
+2. For some tasks to work, you must set up the interactive SSH session to match the buildpack environment. To do this, run the following script inside the container when you start a new SSH session:
 
     ```
     /tmp/lifecycle/shell
     ```
 
-    You need to run this every time you start an SSH session.
+3. When you're finished using SSH, run `exit` to end the session.
 
-    For more information, refer to the [Cloud Foundry documentation on SSH Session Environment](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html#ssh-env).
+For more information, refer to the [Cloud Foundry documentation on SSH session environment](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html#ssh-env).
 
-3. When you're finished using SSH, use `exit` to end the session.
+### Handshake failure error
 
-If you get an error like this:
+If you get the following error, see the [documentation on enabling SSH for an app](/troubleshooting.html#enabling-ssh-for-an-app):
 
 ```
 FAILED
 Error opening SSH connection: ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
 ```
 
-go to the section below on [Enabling SSH for an app](/troubleshooting.html#enabling-ssh-for-an-app).
-
-Note that you do not need to generate any SSH keys. The `cf` CLI tool handles authentication for you.
+You do not need to generate any SSH keys. The Cloud Foundry CLI handles authentication for you.
 
 ### Connecting with multiple instances
 
-You may be running multiple instances of an app (created using `cf scale` or ``instances:`` in the manifest).
+If you are running [multiple instances](/managing_apps.html#scaling) of an app, you can SSH to a specific instance.
 
-In this situation, each instance has a numerical instance index to distinguish it. You can see this in this example of the output of ``cf app exampleapp``:
+Each instance of an app has an attached number.
 
-```
-requested state: started
-instances: 3/3
-usage: 64M x 3 instances
-urls: exampleapp.london.cloudapps.digital
-last uploaded: Wed Dec 21 13:56:24 UTC 2016
-stack: cflinuxfs3
-buildpack: staticfile_buildpack
+1. Run `cf app APPNAME` to see the app instance numbers in the output. For example:
 
-.   state     since                    cpu    memory        disk         details
-0   running   2016-12-21 02:27:11 PM   3.0%   7.1M of 64M   6.8M of 1G
-1   running   2016-12-21 02:44:46 PM   1.0%   3.5M of 64M   6.8M of 1G
-2   running   2016-12-21 02:44:46 PM   1.0%   3.5M of 64M   6.8M of 1G
-```
-This example assumes that `exampleapp` is hosted in the [London region](orgs_spaces_users.html#regions).
+    ```
+    requested state: started
+    instances: 3/3
+    usage: 64M x 3 instances
+    urls: APPNAME.london.cloudapps.digital
+    last uploaded: Wed Dec 21 13:56:24 UTC 2016
+    stack: cflinuxfs3
+    buildpack: staticfile_buildpack
 
-There are 3 instances, with instance indexes from 0 to 2.
+    .   state     since                    cpu    memory        disk         details
+    0   running   2016-12-21 02:27:11 PM   3.0%   7.1M of 64M   6.8M of 1G
+    1   running   2016-12-21 02:44:46 PM   1.0%   3.5M of 64M   6.8M of 1G
+    2   running   2016-12-21 02:44:46 PM   1.0%   3.5M of 64M   6.8M of 1G
+    ```
 
-If you have multiple instances like this and use `cf-ssh`, you will be connected to the app with an instance index of 0.
+1. Run `cf ssh --app-instance-index APP_INSTANCE_NUMBER` to connect to a specific instance.
 
-You can connect to a particular instance. For example, if you want to connect to instance 2, you can do this:
-
-```
-cf ssh --app-instance-index 2
-```
+For example, `cf ssh --app-instance-index 2` connects to the last app instance in the example.
 
 ### Creating TCP tunnels with SSH
 
-You can use the [Conduit plugin](/guidance.html#conduit) to connect your local system to your remote backing service instance. If you instead want to manually create a TCP tunnel with SSH, refer to this section.
+You can manually create a TCP tunnel with SSH to connect your local machine to your remote backing service instance.
 
 The `cf ssh` command supports [local port forwarding](https://en.wikipedia.org/wiki/Port_forwarding#Local_port_forwarding), which allows you to create tunnels from your local system to the application instance container. This is useful when you want to connect from your local system to a backing service that is only accessible from an app running on GOV.UK PaaS.
-
-**Note**: Versions 6.24 and 6.25 of the `cf` command line client have a bug that means it's not possible to send more than 2GB of data through an SSH tunnel to a Cloud Foundry application. This bug has been fixed in version 6.26 of the client.
 
 To enable local port forwarding, you can use the parameter `-L`:
 
@@ -157,13 +150,15 @@ For example, you can connect directly to the PostgreSQL service bound to an appl
     pg_dump postgres://USERNAME:PASSWORD@localhost:6666/DATABASE_NAME > db.dump
     ```
 
+You can also use the [Conduit plugin](/guidance.html#conduit) to connect your local system to your remote backing service instance.
+
 ### SSH permissions
 
-SSH can be either enabled or disabled independently for each **space** and **app**.
+You can enable and disable SSH independently for each space and app.
 
-SSH must be enabled for *both* the space *and* the app before it will work. For example, if you have an app where SSH is enabled, but it is deployed to a space where SSH is disabled, SSH won't work.
+You must enable SSH for both the space and the app before it will work.
 
-All new apps and spaces start out with SSH enabled.
+All new apps and spaces have SSH enabled by default.
 
 ### Enabling SSH for an app
 
@@ -177,24 +172,13 @@ cf ssh-enabled APPNAME
 
 where `APPNAME` is the name of the app.
 
-If you get a message like:
-
-```
-ssh support is disabled for APPNAME
-```
-
-you need to enable SSH for the app by running:
+If you get a message stating that SSH support is disabled for that app, you need to enable SSH for the app by running:
 
 ```
 cf enable-ssh APPNAME
 ```
 
-If you are running multiple instances of an app (created with `cf scale` or with ``instances:`` in the manifest), the ``enable-ssh`` command will affect all of them.
-
-You do not need a special account permission level to enable SSH for an app. The default `SpaceDeveloper` role allows you to do this.
-
-If SSH is already enabled, or enabling it still doesn't make SSH work, go to [Enabling SSH for a space](/troubleshooting.html#enabling-ssh-for-a-space) below.
-
+If you are running multiple instances of an app (created with `cf scale` or with `instances:` in the manifest), the ``enable-ssh`` command affects all running instances of an app.
 
 ### Enabling SSH for a space
 
