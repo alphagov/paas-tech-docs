@@ -6,11 +6,11 @@ When you deploy an app to GOV.UK PaaS, that app runs in a [container](https://ww
 
 If you use a [standard buildpack](responsibility_model.html#standard-buildpack-responsibilities), you can connect directly to an app’s container using SSH.
 
-Connecting using SSH gives you higher-level permissions to change an app's container than running [`cf logs` and `cf events`](/monitoring_apps.html#logs) on that container.
+Connecting using SSH gives you higher-level access to change an app's container compared to running [`cf logs` and `cf events`](/monitoring_apps.html#logs) on that container.
 
 If you make changes to your app's container during an SSH session, these changes are not permanent and are specific to that app instance. You must push a new version of your app to make any permanent changes to your app.
 
-To connect to an app's container using SSH to work, you must:
+To connect to an app's container using SSH, you must:
 
 - install the [Cloud Foundry Command Line Interface (CLI)](https://github.com/cloudfoundry/cli)
 - set up the [correct SSH permissions](#manage-ssh-permissions) on the app and the space the app is in
@@ -28,6 +28,8 @@ To connect to an app's container using SSH to work, you must:
     ```
     cf ssh APPNAME
     ```
+
+    You do not need to generate any SSH keys. The Cloud Foundry CLI handles authentication for you.
 
 2. To match your SSH environment to your app's environment, run the following from within your SSH session shell:
 
@@ -50,8 +52,6 @@ unable to authenticate, attempted methods [none password],
 no supported methods remain
 ```
 
-You do not need to generate any SSH keys. The Cloud Foundry CLI handles authentication for you.
-
 ### Connecting to multiple instances
 
 If you are running [multiple instances](/managing_apps.html#scaling) of an app, you can connect to a specific app instance using SSH.
@@ -64,7 +64,7 @@ Each instance of an app has an attached number.
     requested state: started
     instances: 3/3
     usage: 64M x 3 instances
-    urls: APPNAME.london.cloudapps.digital
+    urls: myapp.london.cloudapps.digital
     last uploaded: Wed Dec 21 13:56:24 UTC 2016
     stack: cflinuxfs3
     buildpack: staticfile_buildpack
@@ -75,9 +75,9 @@ Each instance of an app has an attached number.
     2   running   2016-12-21 02:44:46 PM   1.0%   3.5M of 64M   6.8M of 1G
     ```
 
-1. Run `cf ssh --app-instance-index APP_INSTANCE_NUMBER` to connect to a specific instance.
+1. Run `cf ssh -i APP_INSTANCE_NUMBER APPNAME` to connect to a specific instance.
 
-    For example, `cf ssh --app-instance-index 2` connects to the last app instance in the example.
+    For example, `cf ssh -i 2 myapp` connects to the last app instance in the example.
 
 ### Connect to a non-publicly available backing service
 
@@ -91,7 +91,7 @@ If you do not want to use Conduit, you can manually create an SSH tunnel to conn
 
 The `cf ssh` command supports local port forwarding, which allows you to create tunnels from your local system to the app instance container.
 
-The following example shows you how to connect to a PostgreSQL service bound to your app using SSH.
+The following example shows you how to connect to a PostgreSQL service bound to your app using an SSH tunnel.
 
 1. Run `cf env APPNAME` to show all environment variables for your app. Example output:
 
@@ -124,7 +124,8 @@ The following example shows you how to connect to a PostgreSQL service bound to 
     - PostgreSQL `"password:`
     - database `"name":`
 
-1. Create a local SSH tunnel between local port 6666 and your app's remote host and port:
+1. Create an SSH tunnel between your local port 6666 and your backing service's remote host and port:
+
 
     ```
     cf ssh myapp -T -L 6666:HOST:PORT
