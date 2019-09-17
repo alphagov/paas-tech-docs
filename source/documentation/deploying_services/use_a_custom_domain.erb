@@ -45,7 +45,7 @@ Once you create a CDN service instance, you cannot update or delete the instance
 1. Create an instance of the cdn-route service:
 
     ```
-    cf create-service cdn-route cdn-route SERVICE_INSTANCE
+    cf create-service cdn-route cdn-route SERVICE_INSTANCE \
     -c '{"domain": "SUBDOMAIN_LIST"}'
     ```
 
