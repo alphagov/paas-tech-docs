@@ -34,8 +34,6 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 
     <div style="height:1px;font-size:1px;">&nbsp;</div>
 
-    You should use the Elasticsearch 6.x plan, unless there are compatibility issues between Elasticsearch 6.x and your app.
-
     All high availability (`ha`) plans are suitable for production.
 
     You should check the size of the available plans against your service needs.
