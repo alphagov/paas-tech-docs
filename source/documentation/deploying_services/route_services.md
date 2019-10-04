@@ -89,7 +89,7 @@ You can refer to the [Cloud Foundry documentation on route services](https://doc
 
 In the following example we will add a route service to provide basic HTTP authentication to the bound routes. This can be used to restrict access to a beta application.
 
-An example of such a route service application code can be found in the [Cloud Foundry basic auth route service](https://github.com/alext/cf_basic_auth_route_service).
+An example of such a route service application code can be found in the [Cloud Foundry basic auth route service](https://github.com/alphagov/paas-cf_basic_auth_route_service).
 Please note this is a proof-of-concept and is not intended to run in production.
 
 We will deploy it as an app in the platform itself. Then we will bind this route service to an app named `myapp`, deployed in the London region and therefore accessible via https://myapp.london.cloudapps.digital.
@@ -98,8 +98,8 @@ We will deploy it as an app in the platform itself. Then we will bind this route
    Do not start it yet, as we need to configure it first.
 
     ```
-    git clone https://github.com/alext/cf_basic_auth_route_service
-    cd cf_basic_auth_route_service
+    git clone https://github.com/alphagov/paas-cf_basic_auth_route_service
+    cd paas-cf_basic_auth_route_service
     cf push my-basic-auth-service-app --no-start
     ```
 
