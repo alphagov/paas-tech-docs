@@ -290,7 +290,7 @@ By default cookies are forwarded to your app. You can disable this by setting th
 cf update-service my-cdn-route \
     -c '{"cookies": false}'
 ```
-See the [More about how the CDN works](/deploying_services/use_a_custom_domain/#more-about-how-custom-domains-work) section for details.
+See the [How custom domains work](/deploying_services/use_a_custom_domain/#how-custom-domains-work) section for details.
 
 ### Forwarding headers
 
@@ -308,7 +308,7 @@ cf update-service my-cdn-route \
     -c '{"headers": ["*"]}'
 ```
 
-Note that forwarding headers has a negative impact on cacheability. See the [More about how the CDN works](/deploying_services/use_a_custom_domain/#more-about-how-custom-domains-work) section for details.
+Note that forwarding headers has a negative impact on cacheability. See the [How custom domains work](/deploying_services/use_a_custom_domain/#how-custom-domains-work) section for details.
 
 ### Troubleshooting custom domains
 
