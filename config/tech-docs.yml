@@ -32,4 +32,9 @@ multipage_nav: true
 # Enable collapsible navigation in the sidebar
 collapsible_nav: true
 
+# Enable search
 enable_search: true
+
+# Show a block at the bottom of the page that links to the page source, so readers can easily contribute back to the documentation.
+show_contribution_banner: true
+github_repo: alphagov/paas-tech-docs/
