@@ -1,6 +1,6 @@
 ## Deploy an app to production
 
-To deploy an app to a production environment, your department, agency or team must have a [paid account](/get_started.html#trial-accounts) with the GOV.UK PaaS. 
+To deploy an app to a production environment, your department, agency or team must have a [paid account](/get_started.html#trial-and-paid-accounts) with the GOV.UK PaaS. 
 
 Before you deploy an app to a production environment, you must set up a domain.
 
