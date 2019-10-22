@@ -85,7 +85,7 @@ The route service must proxy back the request to the application route defined i
 
 You can refer to the [Cloud Foundry documentation on route services](https://docs.cloudfoundry.org/services/route-services.html) for more information.
 
-### Example: Route service to add authentication
+### Example: Route service to add username and password authentication
 
 In the following example we will add a route service to provide basic HTTP authentication to the bound routes. This can be used to restrict access to a beta application.
 
