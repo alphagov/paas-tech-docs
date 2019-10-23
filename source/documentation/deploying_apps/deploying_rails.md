@@ -30,7 +30,8 @@ To deploy a Rails app that doesn't require a backing service:
         applications:
         - name: my-rails-app
           memory: 256M
-          buildpack: ruby_buildpack
+          buildpacks:
+            - ruby_buildpack
 
     Replace ``my-rails-app`` with a unique name for your app. (You can use ``cf apps`` to see apps which already exist).
 
@@ -78,7 +79,8 @@ These instructions are for deploying a Rails app with a PostgreSQL database, and
         applications:
         - name: my-rails-app
           memory: 256M
-          buildpack: ruby_buildpack
+          buildpacks:
+            - ruby_buildpack
 
     Replace ``my-rails-app`` with a unique name for your app. (You can use ``cf apps`` to see apps which already exist).
 

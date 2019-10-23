@@ -56,7 +56,8 @@ Each instance of an app has an index number. Cloud Foundry assigns index numbers
     urls: myapp.london.cloudapps.digital
     last uploaded: Wed Dec 21 13:56:24 UTC 2016
     stack: cflinuxfs3
-    buildpack: staticfile_buildpack
+    buildpacks:
+      - staticfile_buildpack
 
     .   state     since                    cpu    memory        disk         details
     0   running   2016-12-21 02:27:11 PM   3.0%   7.1M of 64M   6.8M of 1G
