@@ -131,7 +131,7 @@ We will deploy it as an app in the platform itself. Then we will bind this route
 
 ### Example: Route service to add IP address authentication
 
-GDS maintains an [example nginx app](https://github.com/alphagov/re-paas-ip-safelist-service) which you can use as a route service to add IP address authentication.
+GDS maintains an [example nginx app](https://github.com/alphagov/paas-ip-authentication-route-service) which you can use as a route service to add IP address authentication.
 This ensures that only HTTP requests originating from a trusted set of IP addresses can access your app.
 
 This example app uses the `X-Forwarded-For` header added by the GOV.UK PaaS routers to HTTP requests originating from outside the platform.
