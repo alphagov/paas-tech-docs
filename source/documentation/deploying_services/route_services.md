@@ -85,7 +85,7 @@ The route service must proxy back the request to the application route defined i
 
 You can refer to the [Cloud Foundry documentation on route services](https://docs.cloudfoundry.org/services/route-services.html) for more information.
 
-### Example: Route service to add authentication
+### Example: Route service to add username and password authentication
 
 In the following example we will add a route service to provide basic HTTP authentication to the bound routes. This can be used to restrict access to a beta application.
 
@@ -128,3 +128,53 @@ We will deploy it as an app in the platform itself. Then we will bind this route
     ```
 
     The application in https://myapp.london.cloudapps.digital will now ask for basic HTTP authentication, with login `myuser` and password `pass1234`.
+
+### Example: Route service to add IP address authentication
+
+GDS maintains an [example nginx app](https://github.com/alphagov/re-paas-ip-safelist-service) which you can use as a route service to add IP address authentication.
+This ensures that only HTTP requests originating from a trusted set of IP addresses can access your app.
+
+This example app uses the `X-Forwarded-For` header added by the GOV.UK PaaS routers to HTTP requests originating from outside the platform.
+
+Using an IP address to authenticate HTTP requests is not sufficient as a standalone authentication mechanism.
+You should use other authentication and authorization methods in your apps.
+
+#### Using the `X-Forwarded-For` header
+
+The `X-Forwarded-For` header is useful for working out the source IP address of the originating HTTP request, and can be used for authentication, or analytics.
+
+The GOV.UK PaaS routers set headers in one of the 2 following formats, depending on the router type:
+
+- `X-Forwarded-For: SOURCE-IP-ADDRESSES, ROUTER-LOOPBACK-IP-ADDRESS`
+- `X-Forwarded-For: SOURCE-IP-ADDRESSES, ROUTER-INTERNAL-IP-ADDRESS`
+
+where:
+
+- `SOURCE-IP-ADDRESSES` are the source IP addresses of the original request
+- `ROUTER-LOOPBACK-IP-ADDRESS` is the loopback IP address of the router handling the request
+- `ROUTER-INTERNAL-IP-ADDRESS` is the internal IP address of the router handling the request
+
+For example:
+
+- `X-Forwarded-For: 208.80.152.201, 127.0.0.1`
+- `X-Forwarded-For: 208.80.152.201, 10.0.0.49`
+
+If you are using the `X-Forwarded-For` header for IP address authentication, then you should trust the following CIDR ranges to set the `X-Forwarded-For` header:
+
+- `10.0.0.0/8`
+- `127.0.0.1/32`
+
+#### Proxied requests
+
+If the `X-Forwarded-For` header is already set when the router receives the request, then the router appends the source IP address of the request and router's IP address to the header.
+
+For example:
+
+- an HTTP request sent from `208.80.152.201` to the router has the header `X-Forwarded-For: 1.2.3.4`
+- the router loopback IP address is `127.0.0.1`
+- the router internal IP address is `10.0.0.49`
+
+Depending on the router type, the `X-Forwarded-For` header presented to your app will be either:
+
+- `X-Forwarded-For: 1.2.3.4, 208.80.152.201, 127.0.0.1`
+- `X-Forwarded-For: 1.2.3.4, 208.80.152.201, 10.0.0.49`
