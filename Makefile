@@ -17,7 +17,7 @@ dependencies: ## Install dependencies
 	bundle install
 
 .PHONY: build
-build: dependencies ## Builds the project
+build: ## Builds the project
 	@echo "Run middleman..."
 	bundle exec middleman build $(VERBOSE_FLAG)
 	@echo "Copy additional files..."
