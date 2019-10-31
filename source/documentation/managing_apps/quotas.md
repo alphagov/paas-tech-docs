@@ -20,7 +20,31 @@ To see your organisation quota, run the command:
 
 ``cf org YOURORG``
 
-where YOURORG is your organisation's name. (If you don't know the name, you can use ``cf orgs`` to find out).
+where YOURORG is your organisations's name. (If you don't know the name, you can use ``cf orgs`` to find out). This will produce an output which includes the name of the org's current quota:
+
+```
+name:                  YOURORG
+domains:               my.domain,
+**quota:                 medium**
+spaces:                space1, space2
+isolation segments:
+```
+
+To see the details of that quota, run:
+
+``cf quota QUOTA``
+
+where QUOTA is the name of the quota that GOV.UK PaaS has assigned to your org.
+
+```
+Total Memory           60G
+Instance Memory        unlimited
+Routes                 1000
+Services               20
+Paid service plans     allowed
+App instance limit     unlimited
+Reserved Route Ports   0
+```
 
 To see all quotas available on the GOV.UK PaaS, run the command:
 
