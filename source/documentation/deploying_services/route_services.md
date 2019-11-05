@@ -143,26 +143,14 @@ You should use other authentication and authorization methods in your apps.
 
 The `X-Forwarded-For` header is useful for working out the source IP address of the originating HTTP request, and can be used for authentication, or analytics.
 
-The GOV.UK PaaS routers set headers in one of the 2 following formats, depending on the router type:
-
-- `X-Forwarded-For: SOURCE-IP-ADDRESSES, ROUTER-LOOPBACK-IP-ADDRESS`
-- `X-Forwarded-For: SOURCE-IP-ADDRESSES, ROUTER-INTERNAL-IP-ADDRESS`
-
-where:
+The GOV.UK PaaS routers set headers in the following format: `X-Forwarded-For: SOURCE-IP-ADDRESSES, ROUTER-INTERNAL-IP-ADDRESS`, where:
 
 - `SOURCE-IP-ADDRESSES` are the source IP addresses of the original request
-- `ROUTER-LOOPBACK-IP-ADDRESS` is the loopback IP address of the router handling the request
 - `ROUTER-INTERNAL-IP-ADDRESS` is the internal IP address of the router handling the request
 
-For example:
+For example: `X-Forwarded-For: 208.80.152.201, 10.0.0.49`
 
-- `X-Forwarded-For: 208.80.152.201, 127.0.0.1`
-- `X-Forwarded-For: 208.80.152.201, 10.0.0.49`
-
-If you are using the `X-Forwarded-For` header for IP address authentication, then you should trust the following CIDR ranges to set the `X-Forwarded-For` header:
-
-- `10.0.0.0/8`
-- `127.0.0.1/32`
+If you are using the `X-Forwarded-For` header for IP address authentication, then you should trust the CIDR range `10.0.0.0/8` to set the `X-Forwarded-For` header.
 
 #### Proxied requests
 
@@ -174,7 +162,4 @@ For example:
 - the router loopback IP address is `127.0.0.1`
 - the router internal IP address is `10.0.0.49`
 
-Depending on the router type, the `X-Forwarded-For` header presented to your app will be either:
-
-- `X-Forwarded-For: 1.2.3.4, 208.80.152.201, 127.0.0.1`
-- `X-Forwarded-For: 1.2.3.4, 208.80.152.201, 10.0.0.49`
+The `X-Forwarded-For` header presented to your app will be: `X-Forwarded-For: 1.2.3.4, 208.80.152.201, 10.0.0.49`
