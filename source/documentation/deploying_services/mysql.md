@@ -313,7 +313,7 @@ Each service in the marketplace has multiple plans that vary by availability and
 
 #### Paid plans - MySQL
 
-Some service plans are paid and we can potentially bill you based on your service usage.
+Some service plans are paid and we will bill you based on your service usage.
 
 New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/managing_apps.html#quotas) settings.
 
