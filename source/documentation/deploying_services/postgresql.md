@@ -279,9 +279,9 @@ The following extensions are always enabled for PostgreSQL service instances:
 
 |Extension|PostgreSQL version|
 |:---|:---|
-|uuid-ossp|9.5, 10|
-|postgis|9.5, 10|
-|citext|10|
+|uuid-ossp|9.5, 10, 11|
+|postgis|9.5, 10, 11|
+|citext|10, 11|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
@@ -293,62 +293,64 @@ GOV.UK PaaS supports the following optional extensions, but they are not enabled
 
 |Extension|PostgreSQL version|
 |:---|:---|
-|address_standardizer_data_us|9.5, 10|
-|address_standardizer|9.5, 10|
-|bloom|9.5, 10|
-|btree_gin|9.5, 10|
-|btree_gist|9.5, 10|
+|address_standardizer|9.5, 10, 11|
+|address_standardizer_data_us|9.5, 10, 11|
+|bloom|9.5, 10, 11|
+|btree_gin|9.5, 10, 11|
+|btree_gist|9.5, 10, 11|
 |chkpass|9.5, 10|
-|cube|9.5, 10|
-|dblink|9.5, 10|
-|dict_int|9.5, 10|
-|dict_xsyn|9.5, 10|
-|earthdistance|9.5, 10|
-|fuzzystrmatch|9.5, 10|
-|hstore_plperl|9.5, 10|
-|hstore|9.5, 10|
-|intagg|9.5, 10|
-|intarray|9.5, 10|
-|ip4r|9.5, 10|
-|isn|9.5, 10|
-|libprotobuf|10|
-|log_fdw|9.5, 10|
-|ltree|9.5, 10|
-|orafce|10|
-|pageinspect|10|
-|pg_buffercache|9.5, 10|
-|pg_freespacemap|9.5, 10|
-|pg_hint_plan|9.5, 10|
-|pg_prewarm|9.5, 10|
-|pg_repack|10|
-|pg_similarity|10|
-|pg_stat_statements|9.5, 10|
-|pg_trgm|9.5, 10|
-|pg_visibility|9.5, 10|
-|pgaudit|9.5, 10|
-|pgcrypto|9.5, 10|
-|pglogical|10|
-|pgrouting|10|
-|pgrowlocks|9.5, 10|
-|pgstattuple|9.5, 10|
-|plcoffee|9.5, 10|
-|plls|9.5, 10|
-|plperl|9.5, 10|
-|plpgsql|9.5, 10|
-|pltcl|9.5, 10|
-|plv8|9.5, 10|
-|postgis_tiger_geocoder|9.5, 10|
-|postgis_topology|9.5, 10|
-|postgres_fdw|9.5, 10|
-|postgresql-hll|10|
-|prefix|10|
-|sslinfo|9.5, 10|
-|tablefunc|9.5, 10|
-|test_parser|9.5, 10|
+|cube|9.5, 10, 11|
+|dblink|9.5, 10, 11|
+|dict_int|9.5, 10, 11|
+|dict_xsyn|9.5, 10, 11|
+|earthdistance|9.5, 10, 11|
+|fuzzystrmatch|9.5, 10, 11|
+|hstore|9.5, 10, 11|
+|hstore_plperl|9.5, 10, 11|
+|intagg|9.5, 10, 11|
+|intarray|9.5, 10, 11|
+|ip4r|9.5, 10, 11|
+|isn|9.5, 10, 11|
+|libprotobuf|10, 11|
+|log_fdw|9.5, 10, 11|
+|ltree|9.5, 10, 11|
+|orafce|10, 11|
+|pageinspect|10, 11|
+|pg_buffercache|9.5, 10, 11|
+|pg_freespacemap|9.5, 10, 11|
+|pg_hint_plan|9.5, 10, 11|
+|pg_prewarm|9.5, 10, 11|
+|pg_repack|10, 11|
+|pg_similarity|10, 11|
+|pg_stat_statements|9.5, 10, 11|
+|pgtap|11|
+|pg_transport|11|
+|pg_trgm|9.5, 10, 11|
+|pg_visibility|9.5, 10, 11|
+|pgaudit|9.5, 10, 11|
+|pgcrypto|9.5, 10, 11|
+|pglogical|10, 11|
+|pgrouting|10, 11|
+|pgrowlocks|9.5, 10, 11|
+|pgstattuple|9.5, 10, 11|
+|plcoffee|9.5, 10, 11|
+|plls|9.5, 10, 11|
+|plperl|9.5, 10, 11|
+|plpgsql|9.5, 10, 11|
+|pltcl|9.5, 10, 11|
+|plv8|9.5, 10, 11|
+|postgis_tiger_geocoder|9.5, 10, 11|
+|postgis_topology|9.5, 10, 11|
+|postgres_fdw|9.5, 10, 11|
+|postgresql-hll|10, 11|
+|prefix|10, 11|
+|sslinfo|9.5, 10, 11|
+|tablefunc|9.5, 10, 11|
+|test_parser|9.5, 10, 11|
 |tsearch2|9.5, 10|
-|tsm_system_rows|9.5, 10|
-|tsm_system_time|9.5, 10|
-|unaccent|9.5, 10|
+|tsm_system_rows|9.5, 10, 11|
+|tsm_system_time|9.5, 10, 11|
+|unaccent|9.5, 10, 11|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
