@@ -17,9 +17,11 @@ To set up a Redis service:
     Here is an example of the output you will see (the exact service plans will vary):
 
     ```
-    service plan            description                                                               free or paid
-    tiny-3.2                568MB RAM, single node, no failover, daily backups                        free
-    medium-ha-3.2           6.37GB RAM, highly-available, daily backups                               paid
+    service plan         description                                                                                        free or paid
+    tiny-3.2             568MB RAM, single node, no failover, daily backups (for instances created after 21/1/2019)         free
+    tiny-ha-3.2          1.5GB RAM, highly-available, daily backups                                                         paid
+    small-ha-3.2         3GB RAM, highly-available, daily backups                                                           paid
+    medium-ha-3.2        6.37GB RAM, highly-available, daily backups                                                        paid
     ```
 
     Refer to the [Redis service plans](/deploying_services/redis/#redis-service-plans) section of the documentation for more information.
@@ -159,6 +161,24 @@ PONG
 
 Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
 
+<h2 id="amend-the-service">Amend the service</h2>
+
+### Upgrade Redis service plan
+
+You can upgrade your plan using the `cf update-service` command. Run the following in the command line:
+
+```
+cf update-service SERVICE_NAME -p NEW_PLAN_NAME
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
+
+```
+cf update-service my-redis-service -p medium-ha-3.2
+```
+
+The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
+
 <h2 id="remove-the-service">Remove the service</h2>
 
 ### Unbind a Redis service from your app
@@ -197,28 +217,17 @@ You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to 
 
 ### Redis service plans
 
-There are two service plans currently available for the Redis service:
+Each service in the marketplace has multiple plans that vary by availability and storage capacity.
 
-- `tiny-3.2`
-- `medium-ha-3.2`
+#### Paid plans - Redis
 
-Do not use the `tiny-clustered-3.2` service plan for new service instances as we have deprecated this plan.
+Some service plans are paid and we will bill you based on your service usage.
 
-Both service plans include encryption at rest of the database storage. This means both the data on the disk and in snapshots is encrypted.
+New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/#quotas) settings.
 
-Amazon ElastiCache for Redis backs up both service plans every day.
+If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/orgs_spaces_users.html#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
 
-You can [vertically scale](/managing_apps.html#scaling) or upgrade your service plan.
-
-#### Billing
-
-If your org is in its trial period, you can use the `tiny-3.2` service plan for free.
-
-Trial orgs cannot access paid service plans by default. If paid service plans are not enabled, when you try to use a paid service plan, you will receive an error stating “service instance cannot be created because paid service plans are not allowed”.
-
-One of your Org Managers must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid service plans.
-
-#### High availability
+#### High availability plans - Redis
 
 If you use a high availability service plan, Amazon ElastiCache for Redis provides a hot standby service for [failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html).
 
@@ -233,6 +242,8 @@ Every Redis service has a maintenance window of Sunday 11pm to Monday 1:30am UTC
 For more information on maintenance times, refer to the [Amazon ElastiCache maintenance window documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/VersionManagement.MaintenanceWindow.html).
 
 #### Redis service backup
+
+All service plans are backed up every day.
 
 The data stored within any Redis service instance you create is backed up using the Amazon ElastiCache backup system. Backups are taken every day between 2am and 5am UTC. Data is retained for 7 days, and stored in [Amazon S3](https://aws.amazon.com/s3/).
 
