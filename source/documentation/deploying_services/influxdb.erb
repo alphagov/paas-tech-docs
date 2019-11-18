@@ -5,9 +5,9 @@ that allows you to store, index, and search time series data.
 
 <%= warning_text('InfluxDB is in private beta.') %>
 
-If you would like to try InfluxDB while the service is in private-beta, you
+If you want to try InfluxDB, you
 must [contact support](https://www.cloud.service.gov.uk/support)
-to ask the GOV.UK PaaS team to enable your access to InfluxDB.
+to ask the GOV.UK PaaS team to enable your access.
 
 <h2 id="set-up-the-service">Set up the service</h2>
 
@@ -30,7 +30,7 @@ to ask the GOV.UK PaaS team to enable your access to InfluxDB.
 
     Currently, there is only one plan available for InfluxDB: `tiny-1.x`.
 
-    If the GOV.UK PaaS team have not enabled your access to InfluxDB, you will see:
+    If the GOV.UK PaaS team has not enabled your access to InfluxDB, you will see:
 
     ```
     Service offering 'influxdb' not found.
@@ -115,7 +115,7 @@ Alternatively, you can manually bind your service instance to your app.
 
 
     where:
-      - `APP_NAME` is the exact name of a deployed instance of your application
+      - `APP_NAME` is the exact name of a deployed instance of your app
       - `SERVICE_NAME` is the name of the service instance you created
 
     For example:
@@ -127,20 +127,16 @@ Alternatively, you can manually bind your service instance to your app.
 
 1. Deploy your app in line with your normal deployment process.
 
-Refer to the [Cloud Foundry documentation on deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) for more information.
-
-<% 'TODO when we have more InfluxDB plans, we should have a section called "Amend the service" wherein we discuss upgrading' %>
-
 <h2 id="use-the-service">Use the service</h2>
 
 ### Read and write data to InfluxDB
 
 When you create an InfluxDB service instance, the service broker automatically
-creates a database called `defaultdb`. The `defaultdb` database is the only
-database within the InfluxDB service instance that you have permissions to use.
+creates a database called `defaultdb`.
 
-When reading from and writing to InfluxDB you must specify the database as
-`defaultdb`.
+`defaultdb` is the only database within the InfluxDB service instance that you have permissions to use.
+
+When reading from and writing to InfluxDB you must specify the database as `defaultdb`.
 
 If you are using the
 [InfluxDB HTTP API](https://docs.influxdata.com/influxdb/v1.7/tools/api/)
@@ -153,25 +149,20 @@ you must specify the database as `defaultdb` using your library's configuration.
 
 ### Using InfluxDB with Prometheus
 
-[Prometheus](https://prometheus.io)
-is an open source tool for collecting metrics.
+[Prometheus](https://prometheus.io) is an open source tool for collecting metrics.
 
-Prometheus is by default, a stateful application relying on local storage.
-You cannot run stateful applications using local storage on GOV.UK PaaS.
+Prometheus is, by default, a stateful app that relies on local storage. You cannot run stateful apps using local storage on GOV.UK PaaS.
 
-If you want to store metrics using Prometheus that persist between app
-restarts, you can configure Prometheus to delegate storage of metrics to
-InfluxDB.
+Without local storage, Prometheus metrics will not persist after the Prometheus app [restarts](/managing_apps.html#app-restarts). To store Prometheus metrics for longer, you configure Prometheus to send metrics to InfluxDB for storage.
 
-To do this you configure Prometheus using the
-[`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)
+1. Run Prometheus as an app on GOV.UK PaaS and [bind that app to an InfluxDB service instance](#bind-an-influxdb-service-to-your-apps).
+
+1. Check the Prometheus [`VCAP_SERVICES` environment variable](/deploying_apps.html#environment-variables) for the `remote_read` and `remote_write` configuration.
+
+1. Amend the [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)
 and
 [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)
-sections in the `prometheus.yml` configuration file.
-
-When you run Prometheus as an app on GOV.UK PaaS and bind that app to an
-InfluxDB service instance, the `VCAP_SERVICES` environment variable will
-contain the relevant `remote_read` and `remote_write` Prometheus configuration.
+sections in the `prometheus.yml` configuration file in line with the `VCAP_SERVICES` environment variable.
 
 <h2 id="remove-the-service">Remove the service</h2>
 
@@ -225,7 +216,7 @@ You can store data classified up to Official on the GOV.UK PaaS. Refer to the [d
 [Aiven](https://aiven.io)
 automatically backs up all data stored within any InfluxDB service you create.
 
-Backups are taken every 12 hours, and Aiven retains 2 backups at a time.
+Aiven takes backups every 12 hours and retains 2 backups at a time.
 
 To restore data to an earlier state, you can visit the
 [GOV.UK PaaS support page](https://www.cloud.service.gov.uk/support)
