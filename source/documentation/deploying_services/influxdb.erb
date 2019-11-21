@@ -1,13 +1,10 @@
 <h1 id="influxdb">InfluxDB (private beta)</h1>
 
-[InfluxDB](https://www.influxdata.com/) is an open source time series database
-that allows you to store, index, and search time series data.
+[InfluxDB](https://www.influxdata.com/) is an open source time series database that allows you to store, index and search time series data.
 
 <%= warning_text('InfluxDB is in private beta.') %>
 
-If you want to try InfluxDB, you
-must [contact support](https://www.cloud.service.gov.uk/support)
-to ask the GOV.UK PaaS team to enable your access.
+To try InfluxDB, you must [contact support]() to [ask the GOV.UK PaaS team](https://www.cloud.service.gov.uk/support) to enable your access.
 
 <h2 id="set-up-the-service">Set up the service</h2>
 
@@ -30,14 +27,14 @@ to ask the GOV.UK PaaS team to enable your access.
 
     Currently, there is only one plan available for InfluxDB: `tiny-1.x`.
 
-    If the GOV.UK PaaS team has not enabled your access to InfluxDB, you will see:
+    If the GOV.UK PaaS team has not enabled your access to InfluxDB, you’ll see:
 
     ```
     Service offering 'influxdb' not found.
     FAILED
     ```
 
-2. Run the following to create a service instance:
+2. Create a service instance:
 
     ```
     cf create-service influxdb tiny-1.x SERVICE_NAME
@@ -83,29 +80,19 @@ to ask the GOV.UK PaaS team to enable your access.
     updated:   2019-11-18T10:21:35Z
     ```
 
-### Bind an InfluxDB service to your apps
+### Bind an InfluxDB service to your apps using an app manifest
 
-To access the database from the app, you must bind your app to the InfluxDB service.
+You must bind your app to the InfluxDB service to access the InfluxDB database from your app.
 
-1. Use the [app's manifest](/deploying_apps.html#deploying-public-apps) to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:
-
-    ```
-    --
-    applications:
-      - name: my-app
-        services:
-        - my-influxdb-service
-    ```
+1. Use the [app's manifest](/deploying_apps.html#deploying-public-apps) to bind the app to the service instance. It will bind automatically when you next deploy your app.
 
 1. Deploy your app in line with your normal deployment process.
 
-This binds your app to a service instance called `my-influxdb-service`.
-
 Refer to the [Cloud Foundry documentation on deploying with app manifests](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block) for more information.
 
-#### Use the cf bind-service command
+### Bind an InfluxDB service to your apps using cf bind-service
 
-Alternatively, you can manually bind your service instance to your app.
+If your app does not have a manifest file, you can manually bind your service instance to your app.
 
 1. Run the following:
 
@@ -131,21 +118,15 @@ Alternatively, you can manually bind your service instance to your app.
 
 ### Read and write data to InfluxDB
 
-When you create an InfluxDB service instance, the service broker automatically
-creates a database called `defaultdb`.
+When you create an InfluxDB service instance, the service broker automatically creates a database called `defaultdb`.
 
-`defaultdb` is the only database within the InfluxDB service instance that you have permissions to use.
+`defaultdb` is the only database within the InfluxDB service instance you have permissions to use. If you try to read or write data to another database, you will get an error message.
 
 When reading from and writing to InfluxDB you must specify the database as `defaultdb`.
 
-If you are using the
-[InfluxDB HTTP API](https://docs.influxdata.com/influxdb/v1.7/tools/api/)
-directly, you must specify the database using the `db` query parameter.
-For example, `db=defaultdb`.
+If you’re using the [InfluxDB HTTP API](https://docs.influxdata.com/influxdb/v1.7/tools/api/) directly, you must specify the database using the `db` query parameter. For example, `db=defaultdb`.
 
-If you are using
-[an API client library](https://docs.influxdata.com/influxdb/v1.7/tools/api_client_libraries/),
-you must specify the database as `defaultdb` using your library's configuration.
+If you’re using an [API client library](https://docs.influxdata.com/influxdb/v1.7/tools/api_client_libraries/), you must specify the database as `defaultdb` using your library's configuration.
 
 ### Using InfluxDB with Prometheus
 
@@ -153,22 +134,17 @@ you must specify the database as `defaultdb` using your library's configuration.
 
 Prometheus is, by default, a stateful app that relies on local storage. You cannot run stateful apps using local storage on GOV.UK PaaS.
 
-Without local storage, Prometheus metrics will not persist after the Prometheus app [restarts](/managing_apps.html#app-restarts). To store Prometheus metrics for longer, you configure Prometheus to send metrics to InfluxDB for storage.
+Without local storage, Prometheus metrics will not persist after the Prometheus [app restarts](/managing_apps.html#app-restarts). To store Prometheus metrics for longer, you configure Prometheus to send metrics to InfluxDB for storage.
 
 1. Run Prometheus as an app on GOV.UK PaaS and [bind that app to an InfluxDB service instance](#bind-an-influxdb-service-to-your-apps).
 
-1. Check the Prometheus [`VCAP_SERVICES` environment variable](/deploying_apps.html#environment-variables) for the `remote_read` and `remote_write` configuration.
-
-1. Amend the [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read)
-and
-[`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write)
-sections in the `prometheus.yml` configuration file in line with the `VCAP_SERVICES` environment variable.
+1. the `prometheus.yml` configuration file, make sure the [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read) and [`remote_write`]((https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write) sections match the same sections in the `VCAP_SERVICES` environment variable.
 
 <h2 id="remove-the-service">Remove the service</h2>
 
 ### Unbind an InfluxDB service from your app
 
-You must unbind the InfluxDB service before you can delete it. Run the following in the command line:
+You must unbind the InfluxDB service before you can delete it:
 
 ```
 cf unbind-service APP_NAME SERVICE_NAME
@@ -185,13 +161,11 @@ For example:
 cf unbind-service my-app my-influxdb-service
 ```
 
-If you unbind your services from your app but do not delete them,
-the services will persist even after you have deleted your app,
-and you can re-bind or re-connect to them in future.
+If you unbind your service from your app but do not delete it, the service will persist even after you have deleted your app. You can re-bind or re-connect to it in future.
 
 ### Delete an InfluxDB service
 
-Once you have unbound the InfluxDB service from your app, you can delete the service. Run the following in the command line:
+Once you have unbound the InfluxDB service from your app, you can delete the service:
 
 ```
 cf delete-service SERVICE_NAME
@@ -203,7 +177,7 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance. For
 cf delete-service my-influxdb-service
 ```
 
-Enter `yes` when asked for confirmation.
+<%= warning_text('Deleting the InfluxDB service also deletes your InfluxDB data. This includes any backups that Aiven has taken.') %>
 
 <h2 id="maintaining-the-service">Maintaining the service</h2>
 
@@ -213,18 +187,8 @@ You can store data classified up to Official on the GOV.UK PaaS. Refer to the [d
 
 ### InfluxDB backups
 
-[Aiven](https://aiven.io)
-automatically backs up all data stored within any InfluxDB service you create.
+[Aiven](https://aiven.io) automatically backs up all data stored within any InfluxDB service you create.
 
-Aiven takes backups every 12 hours and retains 2 backups at a time.
+Aiven takes backups every 12 hours and keeps 2 backups at a time.
 
-To restore data to an earlier state, you can visit the
-[GOV.UK PaaS support page](https://www.cloud.service.gov.uk/support)
-or contact us at
-[gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
-
-### Further information
-
-Refer to the
-[InfluxDB documentation](https://docs.influxdata.com/influxdb/v1.7/)
-for more information.
+To restore data to an earlier state, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
