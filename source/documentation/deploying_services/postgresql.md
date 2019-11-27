@@ -2,6 +2,8 @@
 
 PostgreSQL is an object-relational database management system. It is open source and designed to be extensible.
 
+You can access [metrics for this backing service](monitoring_apps.html#backing-service-metrics).
+
 <h2 id="set-up-the-service">Set up the service</h2>
 
 ### Set up a PostgreSQL service

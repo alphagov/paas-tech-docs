@@ -1,6 +1,6 @@
 # Monitoring apps
 
-## Metrics
+## App metrics
 
 Cloud Foundry provides time series data known as metrics for each instance of your PaaS app. You can receive, store and view this data in a monitoring system of your choice by deploying either the:
 
@@ -123,3 +123,84 @@ If you are not receiving any metrics, check the [logs](/monitoring_apps.html#log
 ### More about monitoring
 
 For more information about monitoring apps, see [Monitoring the status of your service](https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service) on the Service Manual.
+
+## Backing service metrics
+
+If you use the [PostgreSQL](deploying_services/postgresql/#postgresql), [MySQL](deploying_services/mysql/#mysql) or [Redis](deploying_services/redis/#redis) backing service, you can view metrics on those backing services in the GOV.UK PaaS admin tool.
+
+When you create your backing service instance and bind an app to that backing service, you can access that backing service's metrics for that app. Your backing service plan does not affect which metrics you can view.
+
+You can view metrics up to 60 calendar days before today's date. You can select any date range within this time period.
+
+Backing services are attached to a [space](orgs_spaces_users.html#spaces) within an [org](orgs_spaces_users.html#organisations). You must be able to view a space in the GOV.UK PaaS admin tool to view metrics for backing services in that space.
+
+1. Sign into the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Select the __Organisation__ and __Space__.
+1. Select the __Backing services__ tab and select your backing service.
+1. Select the __Metrics__ tab.
+
+### Metrics definitions - PostgreSQL and MySQL
+
+PostgreSQL and MySQL are relational database management systems.
+
+#### Free disk space
+
+How much hard disk space your database has remaining. Your database will stop working if it runs out of disk space. Upgrade your service plan to get more disk space.
+
+#### CPU utilisation
+
+How much computational work your database is doing. If you think your CPU utilisation is too high, you can optimise your database queries or upgrade your service plan.
+
+#### Open connections
+
+How many open connections there are to your database. Unexpectedly high values may indicate problems with your apps' connection management, or that you need to upgrade your service plan. Unexpectedly low values may indicate the database is unavailable, or that your apps cannot connect to the database.
+
+#### Available Memory
+
+How much memory the virtual machine your database is running on has remaining. Unexpectedly low values may indicate you need to optimise your database queries or upgrade your service plan.
+
+#### Read and write operations per second
+
+How many read and write operations per second (IOPS) your database is performing per second. Databases have a limit of 3 IOPS per gigabyte of database hard disk size. For example, a 100 gigabyte database has a 300 IOPS limit. If your database is close to its IOPS limit, you can upgrade your service plan.
+
+See the [documentation on Amazon RDS database instance storage](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#CHAP_Storage.IO.Credits) for more information.
+
+### Metrics definitions - Redis
+
+Redis is an open source in-memory data store.
+
+#### CPU utilisation
+
+How much computational work your Redis service instance is doing. If you think your CPU utilisation is too high, you can optimise your database queries or upgrade your service plan.
+
+#### Memory used
+
+How much memory your Redis service instance is using to run itself and to store your app data. Memory limit is pre-set based on service plan and you cannot change this memory limit. If your service instance reaches its memory limit, it will start [evicting data keys](monihttps://redis.io/topics/lru-cache). This may indicate that you need to review the size of the data you're storing, or that you need to upgrade your service plan.
+
+#### Swap memory used
+
+If your Redis service instance is running low on memory, it will start to swap memory onto the hard disk. To reduce memory swapping, you can reduce the number of apps using your service instance or upgrade your service plan.
+
+#### Key evictions
+
+Your Redis service instance will delete or [evict keys](https://redis.io/topics/lru-cache) when it reaches its memory limit. Memory limit is pre-set based on service plan and you cannot change this memory limit.
+
+Redis instances on the GOV.UK PaaS use the [volatile-lru policy](https://redis.io/topics/lru-cache#eviction-policies). This means Redis instances can only evict keys that have an expire set or expiry date. Your Redis service instance will try to evict less recently used keys first. If your service instance cannot evict any keys, it will return errors when executing commands that increase memory use. Upgrade your service plan to reduce key eviction.
+
+Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to find out your plan's memory limit.
+
+#### Open connections
+
+How many open connections there are to your Redis service instance. Unexpectedly high values may indicate problems with your apps' connection management, or that you need to upgrade your service plan. Unexpectedly low values may indicate that your service instance is unavailable.
+
+#### Cache hits and misses
+
+The number of successful and unsuccessful Redis key lookups. If the number of cache misses is higher than the number of cache hits, this could indicate an issue with your app implementation.
+
+#### Item count
+
+The number of items in Redis.
+
+#### Network bytes in and out
+
+The number of bytes Redis has received and sent.
