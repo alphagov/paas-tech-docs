@@ -128,7 +128,7 @@ For more information about monitoring apps, see [Monitoring the status of your s
 
 If you use the [PostgreSQL](deploying_services/postgresql/#postgresql), [MySQL](deploying_services/mysql/#mysql) or [Redis](deploying_services/redis/#redis) backing service, you can view metrics on those backing services in the GOV.UK PaaS admin tool.
 
-When you create your backing service instance and bind an app to that backing service, you can access that backing service's metrics for that app. Your backing service plan does not affect which metrics you can view.
+When you create your backing service instance, you can access its metrics with no additional work. Your backing service plan does not affect which metrics you can view.
 
 You can view metrics up to 60 calendar days before today's date. You can select any date range within this time period.
 
@@ -157,11 +157,11 @@ How many open connections there are to your database. Unexpectedly high values m
 
 #### Available Memory
 
-How much memory the virtual machine your database is running on has remaining. Unexpectedly low values may indicate you need to optimise your database queries or upgrade your service plan.
+How much memory the virtual machine your database is running on has remaining. Persistently low values may indicate you need to optimise your database queries or upgrade your service plan.
 
 #### Read and write operations per second
 
-How many read and write operations per second (IOPS) your database is performing per second. Databases have a limit of 3 IOPS per gigabyte of database hard disk size. For example, a 100 gigabyte database has a 300 IOPS limit. If your database is close to its IOPS limit, you can upgrade your service plan.
+How many read and write operations per second (IOPS) your database is performing per second. Databases have a limit of 3 IOPS per gigabyte of database hard disk space. This limit applies to the sum of the read and write operations. For example, a 100 gigabyte database has a 300 IOPS limit. If your database is close to its IOPS limit, you can upgrade your service plan.
 
 See the [documentation on Amazon RDS database instance storage](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#CHAP_Storage.IO.Credits) for more information.
 
@@ -171,21 +171,21 @@ Redis is an open source in-memory data store.
 
 #### CPU utilisation
 
-How much computational work your Redis service instance is doing. If you think your CPU utilisation is too high, you can optimise your database queries or upgrade your service plan.
+How much computational work your Redis service instance is doing. If you think your CPU utilisation is too high, you can optimise how you read data from and write data to Redis, or upgrade your service plan.
 
 #### Memory used
 
-How much memory your Redis service instance is using to run itself and to store your app data. Memory limit is pre-set based on service plan and you cannot change this memory limit. If your service instance reaches its memory limit, it will start [evicting data keys](monihttps://redis.io/topics/lru-cache). This may indicate that you need to review the size of the data you're storing, or that you need to upgrade your service plan.
+How much memory your Redis service instance is using to run itself and to store your app data. Memory limit is pre-set based on service plan and you cannot change this memory limit. If your service instance reaches its memory limit, it will start [evicting data keys](https://redis.io/topics/lru-cache). This may indicate that you need to review the size of the data you're storing, or that you need to upgrade your service plan.
 
 #### Swap memory used
 
-If your Redis service instance is running low on memory, it will start to swap memory onto the hard disk. To reduce memory swapping, you can reduce the number of apps using your service instance or upgrade your service plan.
+If your Redis service instance is running low on memory, it will start to swap memory onto the hard disk. To reduce memory swapping, you can reduce the amount of memory your apps use or upgrade your service plan.
 
 #### Key evictions
 
-Your Redis service instance will delete or [evict keys](https://redis.io/topics/lru-cache) when it reaches its memory limit. Memory limit is pre-set based on service plan and you cannot change this memory limit.
+Your Redis service instance will delete or [evict keys](https://redis.io/topics/lru-cache) when the instance reaches its memory limit. Memory limit is pre-set based on service plan and you cannot change this memory limit.
 
-Redis instances on the GOV.UK PaaS use the [volatile-lru policy](https://redis.io/topics/lru-cache#eviction-policies). This means Redis instances can only evict keys that have an expire set or expiry date. Your Redis service instance will try to evict less recently used keys first. If your service instance cannot evict any keys, it will return errors when executing commands that increase memory use. Upgrade your service plan to reduce key eviction.
+Redis instances on the GOV.UK PaaS use the [volatile-lru policy](https://redis.io/topics/lru-cache#eviction-policies). This means Redis instances can only evict keys that have a set expiry time. Your Redis service instance will try to evict less recently used keys first. If your service instance cannot evict any keys, it will return errors when executing commands that increase memory use. Upgrade your service plan to reduce key eviction.
 
 Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to find out your plan's memory limit.
 
