@@ -179,7 +179,7 @@ How much memory your Redis service instance is using to run itself and to store 
 
 #### Swap memory used
 
-If your Redis service instance is running low on memory, it will start to swap memory onto the hard disk. To reduce memory swapping, you can reduce the amount of memory your apps use or upgrade your service plan.
+If your Redis service instance is running low on memory, it will start to swap memory onto the hard disk. To reduce memory swapping, you can reduce the amount of memory your Redis service instance uses or upgrade your service plan.
 
 #### Key evictions
 
