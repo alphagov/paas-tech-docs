@@ -39,7 +39,7 @@ For example, this command increases the available memory for an app to 1 gigabyt
 
 This command increases the disk space limit for an app to 512 megabytes:
 
-``cf scale myApp -k 512M``
+``cf scale APPNAME -k 512M``
 
 
 ### Further information
