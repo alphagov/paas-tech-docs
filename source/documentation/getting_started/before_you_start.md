@@ -7,14 +7,5 @@ To be hosted on GOV.UK PaaS, your app must:
 
 - follow the [twelve-factor application principles](architecture.html#12-factor-application-principles); this will be true if your app has been written so it can deploy to another PaaS like Heroku
 - [store data classified up to ‘official’](deploying_apps.html#data-security-classification); your app cannot store data classified as 'secret' or 'top secret'
-- be built using a [supported buildpack](deploying_apps.html#buildpacks) or written in one of these languages:
-    - Go
-    - Nodejs
-    - Java
-    - PHP
-    - Python
-    - Ruby
-    - static HTML/CSS/Javascript site
-    - .NET Core
 
 [Cloud Foundry buildpacks](deploying_apps.html#buildpacks) provide runtime and framework support for your application. For most languages, you will need to provide configuration files to describe your app’s dependencies. Most buildpacks will support a limited range of versions of the language.
