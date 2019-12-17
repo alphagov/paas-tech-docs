@@ -133,7 +133,7 @@ You must set up [logstash](https://www.elastic.co/products/logstash) to process 
     $ cf bind-service APP_NAME logit-ssl-drain
     ```
 
-1. Restage your app by running:
+1. Restage your app by running, note that this will cause app downtime:
 
     ```
     $ cf restage APP_NAME
