@@ -1,37 +1,24 @@
 # Managing custom domains using the cdn-route service
 
-You can run your app on a custom domain instead of the default domain of `NAME.cloudapps.digital`.
+Apps on GOV.UK PaaS are given a domain of `APP_NAME.london.cloudapps.digital` by default. This is OK to use within your team and for development. However, you shouldn’t use it for a live, public service. This guide will help you to use a custom domain instead.
 
-You should use a subdomain instead of an apex domain. For example, you should use `www.example.com` instead of `example.com`.
+## Register a domain name
 
-Once you have chosen a domain, you must:
+If you don’t already have a custom domain name to use then your first step is to obtain one. If you’re running a government service you may want [a service.gov.uk domain](https://www.gov.uk/service-manual/technology/get-a-domain-name). If you’re running another type of government website you may want [a gov.uk domain](https://www.gov.uk/apply-for-and-manage-a-gov-uk-domain-name).
 
-- register that domain with your organisation's preferred domain registrar
-- use your organisation's preferred domain name system (DNS) provider to host DNS
-- manage the domain's TLS certificates
-- route requests to GOV.UK PaaS
-- cache responses (optional)
+GOV.UK PaaS does not provide domain registration or DNS hosting. Your organisation may already have preferred providers.
 
-GOV.UK PaaS does not provide domain registration or DNS hosting. Use your organisation's preferred registrar and DNS provider.
+## Using your domain name with GOV.UK PaaS
 
-You can use either the GOV.UK PaaS [cdn-route service](https://github.com/alphagov/paas-cdn-broker) or use a commercial content distribution network (CDN) to manage TLS and route requests to GOV.UK PaaS.
+Once you have a domain name you need to route requests to GOV.UK PaaS. You can do this using a cdn-route service managed by GOV.UK PaaS. Alternatively you can [configure an existing CDN provider](/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn).
 
-This content explains how to use the cdn-route service to set up a CDN.
+A CDN service will make your app available on your chosen domain through HTTPS. GOV.UK PaaS redirects non-secure HTTP requests to a secure version of your app.
 
-With the CDN in place, your app will be available on your chosen domain through HTTPS. GOV.UK PaaS redirects non-secure HTTP requests to a secure version of your app.
+## Set up the GOV.UK PaaS cdn-route service
 
-Once you create a CDN service instance, you cannot update or delete the instance until you have completed the setup process. If you break the configuration, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to delete the service instance.
+Once you’ve started setting up a cdn-route service instance, you cannot update or delete the instance until you’ve completed the setup process. If you encounter problems, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-## Set up the service
-
-Before you start setting up your service, you must be able to set the following DNS records for your domain:
-
-- a TXT DNS record so that the cdn-route service can issue a TLS certificate
-- a CNAME DNS record to route requests to your app on GOV.UK PaaS
-
-The [documentation on setting up a cdn-route service](#set-up-a-cdn-route-service-with-one-or-more-custom-domains) tells you how to get this information.
-
-How you set DNS records depends on your DNS provider.
+Before you start setting up your service, you must be able to set TXT and CNAME DNS records for your domain within 24 hours. This can be done via your DNS provider.
 
 ### Set up a cdn-route service with one or more custom domains
 
