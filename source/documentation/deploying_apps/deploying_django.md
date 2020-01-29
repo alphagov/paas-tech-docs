@@ -87,7 +87,8 @@ Before deploying a Django app, you must:
         applications:
         - name: my-app
           memory: 512M
-          buildpack: python_buildpack
+          buildpacks:
+          - python_buildpack
 
     where `my-django-app` is the name that will be used for the app within GOV.UK PaaS.
 

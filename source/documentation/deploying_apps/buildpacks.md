@@ -52,7 +52,8 @@ You can set application attribute options in a manifest.yml file in the director
 ```
 ---
   ...
-  buildpack: buildpack_URL
+  buildpacks:
+  - buildpack_URL
 ```
 
 >Command line options override the manifest; the option that overrides the custom buildpack attribute is `-b`.
