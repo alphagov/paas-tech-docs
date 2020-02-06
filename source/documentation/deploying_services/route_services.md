@@ -19,7 +19,7 @@ Tenants can define their own route service instance by using a [user-provided se
 - It must be a HTTPS endpoint with a valid certificate.
 - It can be a application running in the platform itself or an external service on the Internet.
 - It must be reachable from the platform (ie. not blocked by a firewall or in a private network).
-- It must implement the [route service protocol](/deploying_services/route_services/#implementing-a-route-service)
+- It must implement the [route service protocol](/deploying_services/route_services/#implement-a-route-service)
 
 This is how you define an user-provided route service instance and map it to the route of your app:
 
@@ -69,7 +69,7 @@ This is how you define an user-provided route service instance and map it to the
 
     ``502 Bad Gateway: Registered endpoint failed to handle the request.``
 
-    If you get this error, double check that the endpoint is working and reachable from the platform, that it is using a valid SSL certificate, that responds timely and that it implements the [route service protocol](/deploying_services/route_services/#implementing-a-route-service).
+    If you get this error, double check that the endpoint is working and reachable from the platform, that it is using a valid SSL certificate, that responds timely and that it implements the [route service protocol](/deploying_services/route_services/#implement-a-route-service).
 
 ## Implement a route service
 
