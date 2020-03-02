@@ -34,7 +34,6 @@ If you use a custom buildpack, you’re responsible for:
 - keeping your app secure
 - your custom buildpack's security, including your app's build environment and language runtime
 - making sure your app works with new operating system versions
-- redeploying your app so your app uses the latest operating system libraries
 
 The GOV.UK PaaS team is responsible for providing updates and security patches for the:
 
@@ -56,8 +55,8 @@ The GOV.UK PaaS team is responsible for providing updates and security patches f
 
 Custom buildpacks have the following advantages over Docker images:
 
+- the GOV.UK PaaS team can deploy security fixes to the operating system without your team's involvement
 - custom buildpacks provide a standard way of building and staging apps
-- custom buildpacks do not depend on a Docker registry such as [Docker Hub](https://hub.docker.com/) being available
 - there is a large variety of open source custom buildpacks so your deployment pipeline does not need to include Docker image creation
 - buildpacks are designed for 12-factor apps whereas some Docker images may contain databases or other forms of storage that should be provisioned as an external backing service
 
