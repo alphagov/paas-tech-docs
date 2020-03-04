@@ -193,6 +193,34 @@ Backups are taken every 2 hours. Data is retained for:
 
 To restore data to an earlier state, you can visit the [GOV.UK PaaS support page](https://www.cloud.service.gov.uk/support) or contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
+### View your Elasticsearch data using Kibana
+
+Aiven provide a Kibana user interface through which you can explore the data in your Elasticsearch. You can access Kibana using the following instructions:
+
+1. Run the following to get some valid credentials for your Elasticsearch:
+
+    ```sh
+    cf create-service-key NAME_OF_YOUR_ELASTICSEARCH creds-for-kibana
+
+    cf service-key NAME_OF_YOUR_ELASTICSEARCH creds-for-kibana
+    ```
+
+    That outputs a hostname, username and password that you will use later.
+
+2. Set up an SSH tunnel to your target Elasticsearch:
+
+    ```sh
+    cf ssh -L 4430:HOSTNAME_FROM_STEP_1:443 NAME_OF_AN_APP_YOU_CAN_SSH_TO
+    ```
+
+    Elasticsearch instances are only accessible from the PaaS. This sets up a tunnel so that you can get access, similar to how we use [conduit](https://github.com/alphagov/paas-cf-conduit) elsewhere.
+
+3. Access Kibana via your browser by going to [https://localhost:4430](https://localhost:4430).
+   When prompted for credentials, provide the username and password from step 1.
+   If you see a blank page then make sure your browser url is using `https` and not `http`.
+
+4. To clean up when you are done, `CTRL+C` the `cf ssh` session from step 2 and run `cf delete-service-key NAME_OF_YOUR_ELASTICSEARCH creds-for-kibana`.
+
 ### Further information
 
 Refer to the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) for more information.
