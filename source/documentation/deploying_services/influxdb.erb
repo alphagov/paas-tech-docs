@@ -1,16 +1,12 @@
-<h1 id="influxdb">InfluxDB (private beta)</h1>
+<h1 id="influxdb">InfluxDB</h1>
 
 [InfluxDB](https://www.influxdata.com/) is an open source time series database that allows you to store, index and search time series data.
-
-<%= warning_text('InfluxDB is in private beta.') %>
-
-To try InfluxDB, you must [contact support]() to [ask the GOV.UK PaaS team](https://www.cloud.service.gov.uk/support) to enable your access.
 
 <h2 id="set-up-the-service">Set up the service</h2>
 
 ### Set up an InfluxDB service
 
-1. Check whether you have access to InfluxDB by running:
+1. List the plans available for InfluxDB by running:
 
     ```
     cf marketplace -s influxdb
@@ -21,18 +17,11 @@ To try InfluxDB, you must [contact support]() to [ask the GOV.UK PaaS team](http
 
     ```
     service plan   description                                                                            free or paid
-    tiny-1.x       NOT Highly Available, 1 dedicated VM, 2 CPU per VM, 4GB RAM per VM, 16GB disk space.   paid
+    tiny-1.x       NOT Highly Available, 1 dedicated VM, 2 CPU per VM, 4GB RAM per VM, 16GB disk space.   free
     ```
 
 
     Currently, there is only one plan available for InfluxDB: `tiny-1.x`.
-
-    If the GOV.UK PaaS team has not enabled your access to InfluxDB, you’ll see:
-
-    ```
-    Service offering 'influxdb' not found.
-    FAILED
-    ```
 
 2. Create a service instance:
 
