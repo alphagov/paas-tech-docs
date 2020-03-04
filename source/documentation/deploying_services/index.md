@@ -9,7 +9,7 @@ In Cloud Foundry, backing and routing services are referred to as ‘services’
 - [Redis](redis/#redis)
 - [Elasticsearch](elasticsearch/#elasticsearch)
 - [Amazon S3](s3/#amazon-s3)
-- [InfluxDB (private beta)](influxdb/#influxdb)
+- [InfluxDB](influxdb/#influxdb)
 
 ## Data security classification
 
