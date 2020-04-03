@@ -626,3 +626,16 @@ To restore from a snapshot:
   * You cannot restore from a service instance that has been deleted
   * You must use the same service plan for the copy as for the original service instance
   * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your PostgreSQL instance from a local machine using Conduit](/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine).
+
+By default, the database is restored to the most recent snapshot.
+If you need to restore to a snapshot before a certain date and time,
+you can use the `restore_from_latest_snapshot_before` parameter.
+
+For example:
+
+```
+cf create-service postgres small-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_latest_snapshot_before": "2020-04-01 13:00:00"}'
+```
+
+will create a new database from the most recent snapshot created before April
+1st 2020 13:00 UTC.
