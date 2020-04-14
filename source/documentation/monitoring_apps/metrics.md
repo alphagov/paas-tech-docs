@@ -218,4 +218,4 @@ you can view logs for those backing services in the GOV.UK PaaS admin tool.
 1. Select the __Logs__ tab.
 1. To download the logs, click the name of the log file
 
-These metrics are provided directly by the backing service provider.
+These logs are provided directly by the backing service provider.
