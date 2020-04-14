@@ -2,7 +2,7 @@
 
 MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is backed by Oracle.
 
-You can access [metrics for this backing service](/monitoring_apps.html#backing-service-metrics).
+You can access [metrics and logs for this backing service](/monitoring_apps.html#backing-service-metrics).
 
 <h2 id="set-up-the-service">Set up the service</h2>
 
