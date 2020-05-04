@@ -27,6 +27,7 @@ There are a few more specifics about Docker image support in Cloud Foundry:
 * Buildpack based apps use bash to execute the app start command (`bash -c <command>`), but Docker image based apps use sh (`sh -c <command>`) - as bash presence cannot be assumed in your Docker image.
 * Privileged container mode is not supported. Features depending on this will not work.
 * Only registries that use Docker Registry API V2 are supported.
+* Images are cached based on tag. Using a tag like `latest` when doing quick iterations can result in errors. To prevent this, tags should be unique. For example, the time the image was created, or a git commit hash.
 
 Your responsibilities change if you use a Docker image instead of a buildpack. Refer to the [responsibility model guidance](/guidance.html#responsibility-model) for further information.
 
