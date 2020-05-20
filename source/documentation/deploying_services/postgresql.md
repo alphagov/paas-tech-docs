@@ -165,7 +165,7 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
 1. Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:
 
     ```
-    pg_dump --host HOST_NAME --file DATA_FILE_NAME DATABASE_NAME
+    pg_dump --host HOST_NAME --file DATA_FILE_NAME --no-acl --no-owner DATABASE_NAME
     ```
 
     where:
