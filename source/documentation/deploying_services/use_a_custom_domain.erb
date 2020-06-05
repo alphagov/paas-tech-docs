@@ -449,6 +449,113 @@ The above example configures the CDN route to have a default time-to-live of 15 
 
 Cookie headers are forwarded to your app by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services/use_a_custom_domain/#forwarding-headers).
 
+## You may need to make a DNS change
+
+GOV.UK Platform as a Service (PaaS) is changing certificate provider. We’re switching from Let’s Encrypt to Amazon AWS Certificate Manager (ACM) because:
+
+- the current version of [Automatic Certificate Management Environment](https://en.wikipedia.org/wiki/Automated_Certificate_Management_Environment) (ACME) API  will soon become deprecated
+- the latest version has a more stringent DNS challenge process, which could result in changes taking longer to implement
+- ACM allows for longer times to update your DNS records compared to ACME v2
+- PaaS has an Enterprise Support Agreement with AWS
+
+PaaS provides certificates for apps which use  *.cloudapps.digital or *.london.cloudapps.digital domains and have already undertaken the migration. You do not need to take any action if your apps use these domains.
+
+If you use a custom domain, you have an individual certificate that validates the TLS connection. Let’s Encrypt creates the certificate automatically and validates your ownership of the domain through a series of DNS challenges. Due to the migration to ACM, you need to update your DNS records by 31 August 2020 to pass ACM’s DNS challenges and prevent your certificate from expiring.
+
+PaaS cannot make this change for you as we do not have any access to your DNS record management.
+
+There is no end user impact whilst making these changes.
+
+If you do not update your DNS records, your app functioning under your custom domain will no longer have a valid certificate and will display an ‘untrusted site’ warning to your end users in their browser. This will decrease trust in your brand and may result in wider impacts if you have layers of trust occurring between different apps, such as API access.
+
+
+## Making changes to your DNS records
+
+If you manage your DNS yourselves:
+
+1. Run the cf update service command with the current list of domains.
+1. Run `cf service SERVICE_INSTANCE` to obtain the new records.
+
+    Example output:
+
+    ```
+    status:    update in progress
+    message:   Provisioning in progress.
+
+    Create the following CNAME records to direct traffic from your domains to your CDN route
+    www.example.com => d3j6yjt78pkdqf.cloudfront.net
+    www.example.org => d3j6yjt78pkdqf.cloudfront.net
+
+    To validate ownership of the domain, set the following DNS records
+    For domain www.example.com, set DNS record
+
+        Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+        Type:  CNAME
+        Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.com: PENDING_VALIDATION
+
+    For domain www.example.org, set DNS record
+
+        Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
+        Type:  CNAME
+        Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+    Current validation status of www.example.org: PENDING_VALIDATION
+
+    started:   2020-06-05T09:28:34Z
+    updated:   2020-06-05T09:29:44Z
+    ```
+
+1. Update the DNS records in your DNS providers console / config management tool.
+
+
+If someone else manages your DNS, contact your provider to organise a date for your switch-over. Make sure that you agree a quick turnaround time with your provider, ideally within one working day.
+
+1. Run the cf update service command with the current list of domains.
+1. Run `cf service SERVICE_INSTANCE` to obtain the new records.
+
+    Example output:
+
+    ```
+    status:    update in progress
+    message:   Provisioning in progress.
+
+    Create the following CNAME records to direct traffic from your domains to your CDN route
+    www.example.com => d3j6yjt78pkdqf.cloudfront.net
+    www.example.org => d3j6yjt78pkdqf.cloudfront.net
+
+    To validate ownership of the domain, set the following DNS records
+    For domain www.example.com, set DNS record
+
+        Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+        Type:  CNAME
+        Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.com: PENDING_VALIDATION
+
+    For domain www.example.org, set DNS record
+
+        Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
+        Type:  CNAME
+        Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+    Current validation status of www.example.org: PENDING_VALIDATION
+
+    started:   2020-06-05T09:28:34Z
+    updated:   2020-06-05T09:29:44Z
+    ```
+
+1. Provide the DNS records to your DNS provider.
+
+
+Everybody who does it within the next month will receive a photo of a duck as thanks. The rubber duck is our team mascot. It represents good teamwork and happy developers.
+
+
 ### Further information
 
 See the GOV.UK guidance on:
