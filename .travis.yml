@@ -11,4 +11,4 @@ before_install:
   - pip install --user -r requirements.txt
 
 script:
-  - make test
+  - RUBYOPT="-W0" make test
