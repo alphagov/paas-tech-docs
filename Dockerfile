@@ -1,7 +1,7 @@
-FROM ruby:2.5-alpine
+FROM ruby:2.7-alpine
 
-ENV RUNTIME_PACKAGES "python git nodejs make"
-ENV DEV_PACKAGES "py-pip python-dev musl-dev gcc ruby-dev g++ zlib-dev libffi-dev"
+ENV RUNTIME_PACKAGES "python3 git nodejs make"
+ENV DEV_PACKAGES "py-pip python3-dev musl-dev gcc ruby-dev g++ zlib-dev libffi-dev"
 COPY requirements.txt /tmp/requirements.txt
 COPY Gemfile /tmp/Gemfile
 COPY Gemfile.lock /tmp/Gemfile.lock
