@@ -460,6 +460,8 @@ GOV.UK Platform as a Service (PaaS) is changing certificate provider. We’re sw
 
 PaaS provides certificates for apps which use  *.cloudapps.digital or *.london.cloudapps.digital domains and have already undertaken the migration. You do not need to take any action if your apps use these domains.
 
+You will only need to make changes if your service was last updated before 2020-06-08 at 1200.
+	
 If you use a custom domain, you have an individual certificate that validates the TLS connection. Let’s Encrypt creates the certificate automatically and validates your ownership of the domain through a series of DNS challenges. Due to the migration to ACM, you need to update your DNS records by 31 August 2020 to pass ACM’s DNS challenges and prevent your certificate from expiring.
 
 PaaS cannot make this change for you as we do not have any access to your DNS record management.
@@ -473,7 +475,13 @@ If you do not update your DNS records, your app functioning under your custom do
 
 If you manage your DNS yourselves:
 
+1. Run `cf service SERVICE_INSTANCE` to discover the current list of domains for the service instance
 1. Run the cf update service command with the current list of domains.
+
+    ```
+    cf update-service SERVICE_INSTANCE -c '{"domain": "domain1.com,domain2.com"}'
+    ```
+
 1. Run `cf service SERVICE_INSTANCE` to obtain the new records.
 
     Example output:
