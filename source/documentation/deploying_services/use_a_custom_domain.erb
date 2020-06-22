@@ -374,7 +374,7 @@ See the [How custom domains work](/deploying_services/use_a_custom_domain/#how-c
 
 ### Forwarding headers
 
-By default, our service broker configures the CDN to only forward the `Host` header to your app. You can safelist extra headers; in this example you can safelist the `Accept` and `Authorization` headers:
+By default, our service broker configures the CDN to only forward the `Host` header to your app. You can forward additional headers; in this example you can additionally forward the `Accept` and `Authorization` headers:
 
 ```bash
 cf update-service my-cdn-route \
