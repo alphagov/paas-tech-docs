@@ -181,7 +181,7 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
-> You can only use [certain PostgreSQL extensions](/deploying_services/postgresql/#postgresql-extensions-whitelist).
+> You can only use [certain PostgreSQL extensions](/deploying_services/postgresql/#add-or-remove-extensions-for-a-postgresql-service-instance).
 
 #### PaaS to PaaS
 
