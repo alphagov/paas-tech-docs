@@ -46,7 +46,7 @@ You must set up [logstash](https://www.elastic.co/products/logstash) to process 
     filter {
         grok {
             # attempt to parse syslog lines
-            match => { "message" => "%{SYSLOG5424PRI}%{NONNEGINT:syslog_ver} +(?:%{TIMESTAMP_ISO8601:syslog_timestamp}|-) +(?:%{HOSTNAME:syslog_host}|-) +(?:%{NOTSPACE:syslog_app}|-) +(?:%{NOTSPACE:syslog_proc}|-) +(?:%{WORD:syslog_msgid}|-) +(?:%{SYSLOG5424SD:syslog_sd}|-|) +%{GREEDYDATA:syslog_msg}" }
+            match => { "message" => "(%{NONNEGINT:message_length} )?%{SYSLOG5424PRI}%{NONNEGINT:syslog_ver} (?:%{TIMESTAMP_ISO8601:syslog_timestamp}|-) +%{DATA:syslog_host} +%{UUID:cf_app_guid} +\[%{DATA:syslog_proc}\] +%{GREEDYDATA:syslog_msg}" }
             # if successful, save original `@timestamp` and `host` fields created by logstash
             add_field => [ "received_at", "%{@timestamp}" ]
             add_field => [ "received_from", "%{host}" ]
