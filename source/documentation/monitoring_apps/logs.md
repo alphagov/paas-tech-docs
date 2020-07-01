@@ -92,6 +92,14 @@ You must set up [logstash](https://www.elastic.co/products/logstash) to process 
                 value_split => ":"
                 remove_field => "router_keys"
             }
+
+            mutate {
+              convert => {
+                "[router][response_time]" => "float"
+                "[router][gorouter_time]" => "float"
+                "[router][app_index]" => "integer"
+              }
+            }
         }
 
         # Application logs
