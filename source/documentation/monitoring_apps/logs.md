@@ -43,6 +43,7 @@ You must set up [logstash](https://www.elastic.co/products/logstash) to process 
 1. Go to the __Logstash Filters__ page, and replace the code there with the following logstash filter code:
 
     ```
+    # updated 2020-07-01
     filter {
         grok {
             # attempt to parse syslog lines
