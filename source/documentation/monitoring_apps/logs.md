@@ -43,14 +43,23 @@ You must set up [logstash](https://www.elastic.co/products/logstash) to process 
 1. Go to the __Logstash Filters__ page, and replace the code there with the following logstash filter code:
 
     ```
+    # updated 2020-07-01
     filter {
         grok {
             # attempt to parse syslog lines
-            match => { "message" => "%{SYSLOG5424PRI}%{NONNEGINT:syslog_ver} +(?:%{TIMESTAMP_ISO8601:syslog_timestamp}|-) +(?:%{HOSTNAME:syslog_host}|-) +(?:%{NOTSPACE:syslog_app}|-) +(?:%{NOTSPACE:syslog_proc}|-) +(?:%{WORD:syslog_msgid}|-) +(?:%{SYSLOG5424SD:syslog_sd}|-|) +%{GREEDYDATA:syslog_msg}" }
+            match => { "message" => "(%{NONNEGINT:message_length} )?%{SYSLOG5424PRI}%{NONNEGINT:syslog_ver} (?:%{TIMESTAMP_ISO8601:syslog_timestamp}|-) +%{DATA:syslog_host} +%{UUID:cf_app_guid} +\[%{DATA:syslog_proc}\] +- +(\[tags@%{NONNEGINT} +%{DATA:cf_tags}\])? +%{GREEDYDATA:syslog_msg}" }
             # if successful, save original `@timestamp` and `host` fields created by logstash
             add_field => [ "received_at", "%{@timestamp}" ]
             add_field => [ "received_from", "%{host}" ]
             tag_on_failure => ["_syslogparsefailure"]
+        }
+
+        if [cf_tags] {
+          kv {
+            source => "cf_tags"
+            target => "cf_tags"
+            value_split => "="
+          }
         }
 
         # parse the syslog pri field into severity/facility
@@ -83,6 +92,14 @@ You must set up [logstash](https://www.elastic.co/products/logstash) to process 
                 target => "router"
                 value_split => ":"
                 remove_field => "router_keys"
+            }
+
+            mutate {
+              convert => {
+                "[router][response_time]" => "float"
+                "[router][gorouter_time]" => "float"
+                "[router][app_index]" => "integer"
+              }
             }
         }
 
