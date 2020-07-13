@@ -31,11 +31,11 @@ You can now share instances of the following services between organisations and 
 
 Using the [Cloud Foundry Command Line Interface](https://docs.cloudfoundry.org/cf-cli/) (cf CLI), enter the `cf create-service` command to create a service: 
 
-	 ```
+```
 cf create-service SERVICE PLAN SERVICE_INSTANCE
 ```
 	
-	For example:
+For example:
 
 ```
 cf create-service postgres tiny-unencrypted-11 postgres-db
@@ -44,21 +44,23 @@ cf create-service postgres tiny-unencrypted-11 postgres-db
 
 Share the service instance with another space:
 
- ```
+```
 cf share-service SERVICE_INSTANCE -s OTHER_SPACE [-o OTHER_ORG]
 ```
 
 For example:
 
-```cf share-service postgres-db -s team-b
+```
+cf share-service postgres-db -s team-b
 ```
 
 Check the previous command worked by entering:
 
-	```
+```
 cf service SERVICE_INSTANCE`
-	```
-	For example:
+```
+
+For example:
 
 ```
 cf service postgres-db
@@ -71,6 +73,7 @@ shared with spaces:
 org         space    bindings
 demo-org   team-b   0
 ```
+
 
 
 ## Data security classification
