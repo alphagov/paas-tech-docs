@@ -57,7 +57,7 @@ cf share-service postgres-db -s team-b
 Check the previous command worked by entering:
 
 ```
-cf service SERVICE_INSTANCE`
+cf service SERVICE_INSTANCE
 ```
 
 For example:
