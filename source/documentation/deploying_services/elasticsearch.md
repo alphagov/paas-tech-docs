@@ -191,7 +191,7 @@ Backups are taken every 2 hours. Data is retained for:
 - 2 days if you have a `tiny` plan
 - 14 days if you have a `small`, `medium` or `large` plan
 
-To restore data to an earlier state, you can visit the [GOV.UK PaaS support page](https://www.cloud.service.gov.uk/support) or contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
+To restore data to an earlier state, you can visit the [GOV.UK PaaS support page](https://admin.london.cloud.service.gov.uk/support) or contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 ### View your Elasticsearch data using Kibana
 
