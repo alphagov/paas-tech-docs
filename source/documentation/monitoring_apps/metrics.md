@@ -13,7 +13,7 @@ You can also view all metrics in a one-off snapshot by installing the [Cloud Fou
 
 The PaaS Prometheus exporter collects metrics from your apps and any backing services configured to send metrics to the PaaS.
 
-To use the PaaS Prometheus exporter, deploy it as an app on the GOV.UK PaaS. Refer to the [PaaS Prometheus exporter readme documentation](https://github.com/alphagov/paas-prometheus-exporter/blob/master/README.md) for more information on supported metrics.
+To use the PaaS Prometheus exporter, deploy it as an app on the GOV.UK PaaS. Refer to the [PaaS Prometheus exporter README documentation](https://github.com/alphagov/paas-prometheus-exporter/blob/master/README.md) for more information on supported metrics.
 
 #### Prerequisites
 
@@ -85,7 +85,7 @@ If you want to add authentication to the app and endpoint, refer to the document
 
 ### Metrics exporter app with StatsD
 
-To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter readme documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) for more information on supported metrics.
+To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter README documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) for more information on supported metrics.
 
 Before you set up the metrics exporter app, you will need:
 
