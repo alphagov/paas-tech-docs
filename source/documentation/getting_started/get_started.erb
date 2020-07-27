@@ -12,7 +12,7 @@ By default, the GOV.UK PaaS team creates new accounts in the London region unles
 
 To provide you with an account, we need to store some personal data about you. Please see our [privacy notice](https://www.cloud.service.gov.uk/privacy-notice) for details.
 
-Once you have a personal account, you can access the GOV.UK PaaS admin tool for either the [London](https://admin.london.cloud.service.gov.uk/) or the [Ireland](https://admin.cloud.service.gov.uk/) region (requires sign in). This tool allows you to view and manage your [orgs](/orgs_spaces_users.html#organisations), [spaces](/orgs_spaces_users.html#spaces) and [users](/orgs_spaces_users.html#users-and-user-roles) without using the command line. Your level of access depends on your user role permissions.
+Once you have a personal account, you can access the GOV.UK PaaS admin tool for either the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/) (requires sign in). This tool allows you to view and manage your [orgs](/orgs_spaces_users.html#organisations), [spaces](/orgs_spaces_users.html#spaces) and [users](/orgs_spaces_users.html#users-and-user-roles) without using the command line. Your level of access depends on your user role permissions.
 
 Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
@@ -86,17 +86,17 @@ You must have a [Google](https://myaccount.google.com/intro) email address to us
 
 #### Enable single sign-on
 
-1. Sign into the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign into the GOV.UK PaaS admin tool for the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
 
 1. Select __Set up Google single sign-on__ and then select __Activate Google single sign-on__.
 
-1. Get a URL to generate a temporary authentication code. If your org is hosted in [London](orgs_spaces_users.html#regions), run the following in the command line:
+1. Get a URL to generate a temporary authentication code. If your org is hosted in the [London region](orgs_spaces_users.html#regions), run the following in the command line:
 
     ```
     cf login -a api.london.cloud.service.gov.uk --sso
     ```
 
-    If your org is hosted in [Ireland](orgs_spaces_users.html#regions), run:
+    If your org is hosted in the [Ireland region](orgs_spaces_users.html#regions), run:
 
     ```
     cf login -a api.cloud.service.gov.uk --sso
