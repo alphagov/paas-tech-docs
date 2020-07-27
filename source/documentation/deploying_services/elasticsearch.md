@@ -213,7 +213,7 @@ Aiven provide a Kibana user interface through which you can explore the data in 
     cf ssh -L 4430:HOSTNAME_FROM_STEP_1:443 NAME_OF_AN_APP_YOU_CAN_SSH_TO
     ```
 
-    Elasticsearch instances are only accessible from the PaaS. This sets up a tunnel so that you can get access, similar to how we use [conduit](https://github.com/alphagov/paas-cf-conduit) elsewhere.
+    Elasticsearch instances are only accessible from the PaaS. This sets up a tunnel so that you can get access, similar to how we use [Conduit](https://github.com/alphagov/paas-cf-conduit) elsewhere.
 
 3. Access Kibana via your browser by going to [https://localhost:4430](https://localhost:4430).
    When prompted for credentials, provide the username and password from step 1.
