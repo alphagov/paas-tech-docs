@@ -100,7 +100,7 @@ If you need to use a specific version of Tomcat you can set the environment vari
 env:
   JBP_CONFIG_TOMCAT: '{ tomcat: { version: 8.0.+ } }'
 ```
-Note that you do **not** need to deploy Tomcat along with your application. The Java buildpack will run the servlet 2 and 3 web applications.
+Note that you do not need to deploy Tomcat along with your application. The Java buildpack will run the servlet 2 and 3 web applications.
 
 For more configuration options, refer to the [Tomcat Container documentation](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-tomcat.md).
 
