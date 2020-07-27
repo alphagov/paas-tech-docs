@@ -122,7 +122,7 @@ Your app must make a [Transport Layer Security (TLS)](https://en.wikipedia.org/w
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [Logs](/monitoring_apps.html#logs) for details.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [logs](/monitoring_apps.html#logs) for details.
 
 Refer to the Guidance section for information on how to securely connect either a [Drupal app](/guidance.html#connect-drupal-to-mysql) or a [Wordpress app](/guidance.html#connect-wordpress-to-mysql) to MySQL using SSL.
 
@@ -142,7 +142,7 @@ cf conduit SERVICE_NAME -- mysql
 
 where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
-Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
+Run `cf conduit --help` for more options, and refer to the [Conduit README file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
 
 <h2 id="amend-the-service">Amend the service</h2>
 
@@ -329,7 +329,7 @@ All plans have encryption at rest unless stated otherwise. This means that both 
 
 #### High availability plans - MySQL
 
-We recommend you use a high availability plan (`HA`) for your MySQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details.
+We recommend you use a high availability (`HA`) plan for your MySQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details.
 
 When you use a high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.
 
