@@ -134,7 +134,7 @@ Backing services instances exist in a [space](orgs_spaces_users.html#spaces) wit
 
 ### View backing service metrics
 
-1. Sign into the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign into the GOV.UK PaaS admin tool for the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
 1. Select the __Organisation__ and __Space__.
 1. Select the __Backing services__ tab and select your backing service.
 1. Select the __Metrics__ tab.
@@ -212,7 +212,7 @@ you can view logs for those backing services in the GOV.UK PaaS admin tool.
 
 ### View backing service logs
 
-1. Sign into the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign into the GOV.UK PaaS admin tool for the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
 1. Select the __Organisation__ and __Space__.
 1. Select the __Backing services__ tab and select your backing service.
 1. Select the __Logs__ tab.
