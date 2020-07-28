@@ -8,13 +8,13 @@ Your organisation will be assigned a quota based on your stated needs. This will
 
 Your quota sets the following:
 
-+ **RAM**: The amount of RAM available to your applications. The application also has a compute share derived from its memory limit.
++ RAM: The amount of RAM available to your applications. The application also has a compute share derived from its memory limit.
 
-+ **Service instances**: The number of service instances available to your organization.
++ Service instances: The number of service instances available to your organization.
 
-+ **Paid services**: Whether or not paid [services](/deploying_services/#deploy-a-backing-or-routing-service) are available. ``postgres`` is a paid service.
++ Paid services: Whether or not paid [services](/deploying_services/#deploy-a-backing-or-routing-service) are available. ``postgres`` is a paid service.
 
-+ **Routes**: The number of routes available to your applications (hostname and domain pairs where an application that exposes a listening port can be reached).
++ Routes: The number of routes available to your applications (hostname and domain pairs where an application that exposes a listening port can be reached).
 
 To see your organisation quota, run the command:
 
@@ -25,7 +25,7 @@ where YOURORG is your organisations's name. (If you don't know the name, you can
 ```
 name:                  YOURORG
 domains:               my.domain,
-**quota:                 medium**
+quota:                 medium
 spaces:                space1, space2
 isolation segments:
 ```
