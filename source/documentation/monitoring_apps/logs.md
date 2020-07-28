@@ -36,7 +36,7 @@ Before you set up Logit, you must:
 
 ### Configure logstash filters
 
-You must set up [logstash](https://www.elastic.co/products/logstash) to process the Cloud Foundry logs into separate [Gorouter](https://docs.cloudfoundry.org/concepts/architecture/router.html) and app log types.
+You must set up [Logstash](https://www.elastic.co/products/logstash) to process the Cloud Foundry logs into separate [Gorouter](https://docs.cloudfoundry.org/concepts/architecture/router.html) and app log types.
 
 1. Go to your Logit dashboard. For the Logit ELK stack you want to use, select __Settings__.
 1. On the __Stack options__ menu, select __Logstash Filters__.
