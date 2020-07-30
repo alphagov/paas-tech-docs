@@ -263,7 +263,7 @@ There are other ways to structure orgs and spaces, and you can change your exist
 
 ### Model 1
 
-In this example model, an org represents a service or service team within a government department or business area. Each org has multiple spaces. Spaces represent environments such as development, staging or production. These spaces host apps.
+In this example model, an org represents a service or service team within a government department or business area. Each org has multiple spaces. Spaces represent environments such as development, sandbox, staging or production or can represent different applications. These spaces host apps and backing services.
 
 Departments or government teams that use this structure include:
 
@@ -282,7 +282,7 @@ However, there is no reuse of orgs and spaces in this structure, which incurs a 
 
 ### Model 2
 
-In this example, an org represents an environment such as development, staging or production. Each org has multiple spaces. Spaces represent services or service teams within a government department or business area. These spaces host apps.
+In this example, an org represents an environment such as development, sandbox, staging or production. Each org has multiple spaces. Spaces represent services or service teams within a government department or business area. These spaces host apps and backing services.
 
 Departments that use this structure include the Department for International Trade.
 
