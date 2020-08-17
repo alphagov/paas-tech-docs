@@ -144,13 +144,13 @@ per instance before the user experience becomes slow, and the app unreliable.
 
 This policy will scale your app:
 
-  * adding one instance if the average number of external HTTP requests per second per instance is greater than 90
-  * removing one instance if the average number of external HTTP requests per second per instance is less than 90
+  * adding one instance if the average number of external HTTP requests per second per instance is greater than 90 for 60 seconds
+  * removing one instance if the average number of external HTTP requests per second per instance is less than 90 for 60 seconds
 
 This policy will ensure:
 
   * there are never more than 6 instances of your app
-  * there is never fewer than 3 instance of your app
+  * there are never fewer than 3 instances of your app
 
 This policy will avoid scaling multiple times within a 60 second period.
 
@@ -207,8 +207,8 @@ but does not receive much traffic otherwise.
 
 This policy uses the same scaling rules as the previous example:
 
-  * adding one instance if the average number of external HTTP requests per second per instance is greater than 90
-  * removing one instance if the average number of external HTTP requests per second per instance is less than 90
+  * adding one instance if the average number of external HTTP requests per second per instance is greater than 90 for 60 seconds
+  * removing one instance if the average number of external HTTP requests per second per instance is less than 90 for 60 seconds
 
 This policy will ensure:
 
@@ -261,8 +261,8 @@ month, but does not receive much traffic otherwise.
 
 This policy uses the same scaling rules as the previous example:
 
-  * adding one instance if the average number of external HTTP requests per second per instance is greater than 90
-  * removing one instance if the average number of external HTTP requests per second per instance is less than 90
+  * adding one instance if the average number of external HTTP requests per second per instance is greater than 90 for 60 seconds
+  * removing one instance if the average number of external HTTP requests per second per instance is less than 90 for 60 seconds
 
 This policy will ensure:
 
@@ -271,9 +271,9 @@ This policy will ensure:
 
 ### Tips for autoscaling policies
 
-* Ensure that schedules should not overlap
+* Ensure that schedules do not overlap
 * Small changes in scale which occur more often are better than large, infrequent changes
-* Ensure your autoscaling policies are simple
+* Keep your autoscaling policies simple
 * If your app should be highly available, ensure `instance_min_count` is at least 3
 
 ### Further information
