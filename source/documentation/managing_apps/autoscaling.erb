@@ -27,6 +27,10 @@ There are two limits which you can apply to an autoscaling policy:
 * `instance_max_count` - maximum number of instances to run
 * `instance_min_count` - minimum number of instances to run
 
+The maximum value for `instance_max_count` is determined by your [quota](#quotas).
+
+The minimum value for `instance_min_count` is 1.
+
 ### Metrics
 
 You can scale your app based on some provided metrics:
