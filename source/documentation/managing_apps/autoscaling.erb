@@ -70,12 +70,12 @@ on GitHub.
    <li>removing one instance if CPU usage is less than 50% for 120 seconds</li>
    </ul></p><p>It will ensure:<ul>
    <li>there are never more than 5 instances of your app</li>
-   <li>there is never fewer than 1 instance of your app</li>
+   <li>there are never fewer than 3 instances of your app</li>
    <li>scaling does not occur multiple times within a 60 second period</li>
    </ul></p><p><!-- this was hard to do, refactorer beware -->
    Create the following policy in a file called <code>policy.json</code>:
    <div class="highlight"><pre class="highlight"><code>{
-      "instance_min_count": 1,
+      "instance_min_count": 3,
       "instance_max_count": 5,
       "scaling_rules": [
         {
