@@ -47,25 +47,31 @@ on GitHub.
 
 ### Example
 
-1. Deploy your app, where `APPNAME` is the name of your application:
+1. Ensure the autoscaling CLI plugin is installed:
+
+    ```
+    cf install-plugin -r CF-Community app-autoscaler-plugin
+    ```
+
+2. Deploy your app, where `APPNAME` is the name of your application:
 
     ```
     cf push APPNAME
     ```
 
-2. Create an autoscaler service to scale your app:
+3. Create an autoscaler service to scale your app:
 
     ```
     cf create-service autoscaler autoscaler-free-plan scale-APPNAME
     ```
 
-3. Bind the autoscaler service to your app:
+4. Bind the autoscaler service to your app:
 
     ```
     cf bind-service APPNAME scale-APPNAME
     ```
 
-4. <p>Create an autoscaling policy, the following policy will scale your app:<ul>
+5. <p>Create an autoscaling policy, the following policy will scale your app:<ul>
    <li>adding one instance if CPU usage is greater than 50% for 120 seconds</li>
    <li>removing one instance if CPU usage is less than 50% for 120 seconds</li>
    </ul></p><p>It will ensure:<ul>
@@ -98,13 +104,13 @@ on GitHub.
    }
    </code></pre></div></p>
 
-5. Apply the autoscaling policy to your app:
+6. Apply the autoscaling policy to your app:
 
     ```
     cf apply-autoscaling-policy APPNAME policy.json
     ```
 
-6. Observe the app scaling automatically:
+7. Observe the app scaling automatically:
 
     ```
     cf autoscaling-history APPNAME
