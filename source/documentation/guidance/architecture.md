@@ -37,6 +37,6 @@ Visit the [12factor.net website](https://12factor.net/) to further ensure your a
 |Disposability  | You should be able to rapidly release new code. Also, applications should be able to start back up fast and cleanly following shut down.  | Cloud Foundry expects applications to follow this principle.|
 |Development/Production parity  | Applications should be rapidly deployed from their development environment to production.  To ensure this rapid deployment, keep a developer’s environment similar to that of production (for example both environments should use the same backing services).  | CF helps you achieve this development/production parity by letting you create and deploy similar services for development, test and production environments|
 |Logs  | Maintain and archive log files so you have visibility of how your application works over time.  |Cloud Foundry has [documentation on logging files](https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html).|
-|Administrative processes  |Run one-off administrative processes (for example running analytics) in your production environment. You can run administrative processes as [tasks in Cloud Foundry](https://docs.cloudfoundry.org/devguide/using-tasks.html). |  |
+|Administrative processes  |Run one-off administrative processes (for example running analytics) in your production environment. | You can run administrative processes as [tasks in Cloud Foundry](https://docs.cloudfoundry.org/devguide/using-tasks.html). |
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
