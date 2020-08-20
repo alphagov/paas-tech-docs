@@ -116,7 +116,7 @@ The `+` in this example means it will use the latest point release available.
 
 ### Deploying other JVM-based applications
 
-The Java buildpack supports running any JVM-based applications (such as Scala, Clojure etc.) with little or zero additional configuration. For more information, refer to the following examples of deploying applications using other frameworks and JVM-based languages:
+The Java buildpack supports running any JVM-based applications (such as Scala or Clojure) with little or zero additional configuration. For more information, refer to the following examples of deploying applications using other frameworks and JVM-based languages:
 
 * [Embedded web server](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-embedded-web-server.md)
 * [Grails](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-grails.md)

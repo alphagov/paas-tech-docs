@@ -36,7 +36,7 @@ You can now go on to either:
 
 Before you set up custom scripts, make sure you first [set up the credentials plugin](/using_ci.html#setting-up-the-credentials-plugin).
 
-Note that using the custom scripts approach exposes the password via the process command line, so it can be read by other processes running on the same machine. If this risk is not acceptable, please use the Cloud Foundry plugin described below. The Cloud Foundry project is aware of the problem and we expect they will provide a more secure login mechanism soon.
+Note that using the custom scripts approach exposes the password through the process command line, so it can be read by other processes running on the same machine. If this risk is not acceptable, please use the Cloud Foundry plugin described below. The Cloud Foundry project is aware of the problem and we expect they will provide a more secure login mechanism soon.
 
 The custom scripts approach needs the Jenkins credentials binding plugin. To install it manually:
 
