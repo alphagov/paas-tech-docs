@@ -1,7 +1,7 @@
 ## Autoscaling
 
-Apps can be configured to dynamically scale in and out using autoscaling
-policies.
+Apps can be configured to dynamically increase or decrease the number of
+running instances using autoscaling.
 
 Scaling your app to fewer instances can reduce the cost during periods of low
 usage,
@@ -118,7 +118,7 @@ on GitHub.
 
 ### Example policies
 
-#### Scale out when throughput increases
+#### Scale when throughput increases or decreases
 
 Imagine you have an app which can handle approximately 100 requests per second
 per instance before the user experience becomes slow, and the app unreliable.
@@ -160,7 +160,7 @@ This policy will ensure:
 
 This policy will avoid scaling multiple times within a 60 second period.
 
-#### Scale out during the day
+#### Scale during the day
 
 Imagine you have an app which is used frequently during daytime working hours,
 but does not receive much traffic otherwise.
@@ -222,7 +222,7 @@ This policy will ensure:
   * there are between 4 and 8 instances during working hours on other weekdays
   * there are between 2 and 4 instances otherwise
 
-#### Scale out during the month
+#### Scale during the month
 
 Imagine you have an app which is used frequently during the first week of the
 month, but does not receive much traffic otherwise.
