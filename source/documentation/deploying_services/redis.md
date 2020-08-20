@@ -233,7 +233,7 @@ If paid plans are not enabled, when you try to use a paid service you will recei
 
 If you use a high availability service plan, Amazon ElastiCache for Redis provides a hot standby service for [failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html).
 
-If you don't have a high availability service plan, you will lose data during a service instance failure. Before deciding which service plan to use, you should assess your data and what type of plan you need.
+If you do not have a high availability service plan, you will lose data during a service instance failure. Before deciding which service plan to use, you should assess your data and what type of plan you need.
 
 ### Redis maintenance & backups
 

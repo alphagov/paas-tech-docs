@@ -27,7 +27,7 @@ Although a single page of HTML is generated, the markdown is spread across
 multiple files to make it easier to manage. They can be found in
 `source/documentation`.
 
-A new markdown file isn't automatically included in the generated output. If you
+A new markdown file is not automatically included in the generated output. If you
 add a new markdown file at the location `source/documentation/agile/scrum.md`,
 the following snippet in `source/index.html.md.erb` will include it in the
 generated output.
@@ -50,7 +50,7 @@ In order to configure some aspects of layout, like the header, edit ``config/tec
 Whilst writing documentation, you can run a middleman server to preview how the
 published version will look in the browser.
 
-The preview is only available on your own computer. Others won't be able to
+The preview is only available on your own computer. Others will not be able to
 access it if they are given the link.
 
 Type the following to start the server:

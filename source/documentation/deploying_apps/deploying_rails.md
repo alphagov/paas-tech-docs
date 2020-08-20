@@ -16,7 +16,7 @@ It's also important to realise that if you deploy an app using the same name and
 
 ### Deploying an app
 
-To deploy a Rails app that doesn't require a backing service:
+To deploy a Rails app that does not require a backing service:
 
 1. Put the code for your Rails app into a local directory (for example, by checking it out of version control).
 
@@ -150,7 +150,7 @@ You may want to use a different web server in production. See the [Cloud Foundry
 ### Troubleshooting asset precompilation
 
 By default, the Rails buildpack performs asset precompilation during the staging phase. This is fine for
-most Rails apps, but it won't work for those which need to connect to services (such as the database)
+most Rails apps, but it will not work for those which need to connect to services (such as the database)
 during asset compilation. (For an example, see [MyUSA issue #636](https://github.com/18F/myusa/issues/636))
 
 There are multiple potential solutions for this. Refer to the

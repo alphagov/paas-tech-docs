@@ -6,7 +6,7 @@ This section explains how to deploy an app from a Docker image. The role of the 
 * [Docker Trusted Registry](https://docs.docker.com/datacenter/dtr/2.1/guides/) [external page] servers
 * Docker registries that require authentication
 
-Pushing local Docker images isn't supported.
+Pushing local Docker images is not supported.
 
 To deploy an app using a Docker image stored in Docker Hub via CF cli:
 
