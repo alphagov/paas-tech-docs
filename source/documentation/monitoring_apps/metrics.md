@@ -13,7 +13,7 @@ You can also view all metrics in a one-off snapshot by installing the [Cloud Fou
 
 The PaaS Prometheus exporter collects metrics from your apps and any backing services configured to send metrics to the PaaS.
 
-To use the PaaS Prometheus exporter, deploy it as an app on the GOV.UK PaaS. Refer to the [PaaS Prometheus exporter readme documentation](https://github.com/alphagov/paas-prometheus-exporter/blob/master/README.md) for more information on supported metrics.
+To use the PaaS Prometheus exporter, deploy it as an app on the GOV.UK PaaS. Refer to the [PaaS Prometheus exporter README documentation](https://github.com/alphagov/paas-prometheus-exporter/blob/master/README.md) for more information on supported metrics.
 
 #### Prerequisites
 
@@ -85,7 +85,7 @@ If you want to add authentication to the app and endpoint, refer to the document
 
 ### Metrics exporter app with StatsD
 
-To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter readme documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) for more information on supported metrics.
+To use the metrics exporter, you deploy it as an app on PaaS. Refer to the [metrics exporter README documentation](https://github.com/alphagov/paas-metric-exporter/blob/master/README.md) for more information on supported metrics.
 
 Before you set up the metrics exporter app, you will need:
 
@@ -134,7 +134,7 @@ Backing services instances exist in a [space](orgs_spaces_users.html#spaces) wit
 
 ### View backing service metrics
 
-1. Sign into the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign into the GOV.UK PaaS admin tool for the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
 1. Select the __Organisation__ and __Space__.
 1. Select the __Backing services__ tab and select your backing service.
 1. Select the __Metrics__ tab.
@@ -212,7 +212,7 @@ you can view logs for those backing services in the GOV.UK PaaS admin tool.
 
 ### View backing service logs
 
-1. Sign into the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign into the GOV.UK PaaS admin tool for the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
 1. Select the __Organisation__ and __Space__.
 1. Select the __Backing services__ tab and select your backing service.
 1. Select the __Logs__ tab.

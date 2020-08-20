@@ -125,7 +125,7 @@ Your app must make a [Transport Layer Security (TLS)](https://en.wikipedia.org/w
 
 GOV.UK PaaS will automatically parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to get details of the service and then set the `DATABASE_URL` variable to the first database found.
 
-If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [Logs](/monitoring_apps.html#logs) for details.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a PostgreSQL service from your local machine
 
@@ -143,7 +143,7 @@ cf conduit SERVICE_NAME -- psql
 
 where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
-Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
+Run `cf conduit --help` for more options, and refer to the [Conduit README file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
 
 <h2 id="amend-the-service">Amend the service</h2>
 
@@ -181,7 +181,7 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
-> You can only use [certain PostgreSQL extensions](/deploying_services/postgresql/#postgresql-extensions-whitelist).
+> You can only use [certain PostgreSQL extensions](/deploying_services/postgresql/#add-or-remove-extensions-for-a-postgresql-service-instance).
 
 #### PaaS to PaaS
 
@@ -488,7 +488,7 @@ Some service plans are paid and we will bill you based on your service usage.
 
 New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/#quotas) settings.
 
-If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/orgs_spaces_users.html#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
+If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [org managers](/orgs_spaces_users.html#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
 
 There is a free plan available with limited storage which should only be used for development or testing, but not production.
 
@@ -498,7 +498,7 @@ All plans have encryption at rest unless stated otherwise. This means that both 
 
 #### High availability plans - PostgreSQL
 
-We recommend you use a high availability plan (`HA`) for your PostgreSQL services. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See [Amazon's SLA](https://aws.amazon.com/rds/sla/) for details.
+We recommend you use a high availability (`HA`) plan for your PostgreSQL services. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See [Amazon's Service Level Agreement (SLA)](https://aws.amazon.com/rds/sla/) for details.
 
 When you use a high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.
 

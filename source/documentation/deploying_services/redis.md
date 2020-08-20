@@ -124,7 +124,7 @@ Your app must make a [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Securit
 
 Your app should parse the ``VCAP_SERVICES`` [environment variable](/deploying_apps.html#system-provided-environment-variables) to make a secure connection to Redis.
 
-If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [Logs](/monitoring_apps.html#logs) for details.
+If your app writes database connection errors to `STDOUT` or `STDERR`, you can view recent errors with `cf logs APP_NAME --recent`. See the section on [logs](/monitoring_apps.html#logs) for details.
 
 ### Connect to a Redis service instance from your local machine
 
@@ -161,7 +161,7 @@ You have now connected your local machine to your Redis service instance using C
 PONG
 ```
 
-Run `cf conduit --help` for more options, and refer to the [Conduit readme file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
+Run `cf conduit --help` for more options, and refer to the [Conduit README file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
 
 <h2 id="amend-the-service">Amend the service</h2>
 
@@ -227,7 +227,7 @@ Some service plans are paid and we will bill you based on your service usage.
 
 New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/#quotas) settings.
 
-If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/orgs_spaces_users.html#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
+If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [org managers](/orgs_spaces_users.html#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
 
 #### High availability plans - Redis
 

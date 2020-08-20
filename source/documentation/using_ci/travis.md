@@ -8,7 +8,7 @@ Before using the Travis CI tool, you should assess how it encrypts and protects 
 
 Before setting up Travis CI, you must have:
 
-- a [Github](https://github.com/) account
+- a [GitHub](https://github.com/) account
 - admin access to the GitHub repository that hosts your app
 - the latest version of [Ruby](https://www.ruby-lang.org/en/downloads/) installed
 - set your app's [`name`](/deploying_apps.html#names-routes-and-domains) in the app's `manifest.yml` file
@@ -16,7 +16,7 @@ Before setting up Travis CI, you must have:
 ### Set up account
 
 1. Register for a [Travis account](https://travis-ci.org).
-1. Link your Travis account to your Github repo.
+1. Link your Travis account to your GitHub repo.
 1. Select the repositories you want Travis to manage.
 
 ### Set up Travis using the gem

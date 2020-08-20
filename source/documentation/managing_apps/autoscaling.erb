@@ -1,0 +1,288 @@
+## Autoscaling
+
+Apps can be configured to dynamically increase or decrease the number of
+running instances using autoscaling.
+
+Scaling your app to fewer instances can reduce the cost during periods of low
+usage,
+eg at night.
+
+Scaling your app based on throughput or average latency can improve the user
+experience of your app during periods of high traffic,
+eg before a submission deadline.
+
+### Scaling methods
+
+There are two ways of scaling:
+
+1. `schedules` - scale apps based on time of day and day of week or month
+1. `scaling_rules` - scale apps based on metrics, eg average latency
+
+Schedules and scaling rules can be used at the same time, or on their own.
+
+### Limits
+
+There are two limits which you can apply to an autoscaling policy:
+
+* `instance_max_count` - maximum number of instances to run
+* `instance_min_count` - minimum number of instances to run
+
+The maximum value for `instance_max_count` is determined by your [quota](#quotas).
+
+The minimum value for `instance_min_count` is 1.
+
+### Metrics
+
+You can scale your app based on some provided metrics:
+
+* `memoryused` - how many megabytes of memory an app instance is using
+* `memoryutil` - percentage of memory utilization where `50` is 50%
+* `cpu` - percentage of CPU utilization where `100` is 100% of a single CPU
+* `responsetime` - average time in milliseconds an app instance takes to respond to external HTTP requests
+* `throughput` - number of external HTTP requests processed per second
+
+You can also scale your app based on custom metrics, please refer to the
+[app-autoscaler user guide](https://github.com/cloudfoundry/app-autoscaler/blob/df1c9a05a00d927b69d2fbf885f32e0b4f228359/docs/Readme.md#auto-scale-your-application-with-custom-metrics)
+on GitHub.
+
+### Example
+
+1. Ensure the autoscaling CLI plugin is installed:
+
+    ```
+    cf install-plugin -r CF-Community app-autoscaler-plugin
+    ```
+
+2. Deploy your app, where `APPNAME` is the name of your application:
+
+    ```
+    cf push APPNAME
+    ```
+
+3. Create an autoscaler service to scale your app:
+
+    ```
+    cf create-service autoscaler autoscaler-free-plan scale-APPNAME
+    ```
+
+4. Bind the autoscaler service to your app:
+
+    ```
+    cf bind-service APPNAME scale-APPNAME
+    ```
+
+5. <p>Create an autoscaling policy, the following policy will scale your app:<ul>
+   <li>adding one instance if CPU usage is greater than 50% for 120 seconds</li>
+   <li>removing one instance if CPU usage is less than 50% for 120 seconds</li>
+   </ul></p><p>It will ensure:<ul>
+   <li>there are never more than 5 instances of your app</li>
+   <li>there are never fewer than 3 instances of your app</li>
+   <li>scaling does not occur multiple times within a 60 second period</li>
+   </ul></p><p><!-- this was hard to do, refactorer beware -->
+   Create the following policy in a file called <code>policy.json</code>:
+   <div class="highlight"><pre class="highlight"><code>{
+      "instance_min_count": 3,
+      "instance_max_count": 5,
+      "scaling_rules": [
+        {
+          "metric_type": "cpu",
+          "breach_duration_secs": 120,
+          "threshold": 50,
+          "operator": "<",
+          "cool_down_secs": 60,
+          "adjustment": "-1"
+        },
+        {
+          "metric_type": "cpu",
+          "breach_duration_secs": 120,
+          "threshold": 50,
+          "operator": ">=",
+          "cool_down_secs": 60,
+          "adjustment": "+1"
+        }
+      ]
+   }
+   </code></pre></div></p>
+
+6. Attach the autoscaling policy to your app:
+
+    ```
+    cf attach-autoscaling-policy APPNAME policy.json
+    ```
+
+7. Observe the app scaling automatically:
+
+    ```
+    cf autoscaling-history APPNAME
+    ```
+
+### Example policies
+
+#### Scale when throughput increases or decreases
+
+Imagine you have an app which can handle approximately 100 requests per second
+per instance before the user experience becomes slow, and the app unreliable.
+
+```
+{
+  "instance_min_count": 3,
+  "instance_max_count": 9,
+  "scaling_rules": [
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": "<",
+      "cool_down_secs": 60,
+      "adjustment": "-1"
+    },
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": ">=",
+      "cool_down_secs": 60,
+      "adjustment": "+1"
+    }
+  ]
+}
+```
+
+This policy will scale your app:
+
+  * adding one instance if the average number of external HTTP requests per second per instance is greater than 90 for 60 seconds
+  * removing one instance if the average number of external HTTP requests per second per instance is less than 90 for 60 seconds
+
+This policy will ensure:
+
+  * there are never more than 6 instances of your app
+  * there are never fewer than 3 instances of your app
+
+This policy will avoid scaling multiple times within a 60 second period.
+
+#### Scale during the day
+
+Imagine you have an app which is used frequently during daytime working hours,
+but does not receive much traffic otherwise.
+
+```
+{
+  "instance_min_count": 2,
+  "instance_max_count": 4,
+  "scaling_rules": [
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": "<",
+      "cool_down_secs": 60,
+      "adjustment": "-1"
+    },
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": ">=",
+      "cool_down_secs": 60,
+      "adjustment": "+1"
+    }
+  ],
+  "schedules": {
+    "timezone": "Europe/London",
+    "recurring_schedule": [
+      {
+        "start_time": "08:00",
+        "end_time": "18:00",
+        "days_of_week": [1, 2, 4, 5],
+        "instance_min_count": 4,
+        "instance_max_count": 8,
+        "initial_min_instance_count": 4
+      },
+      {
+        "start_time": "08:00",
+        "end_time": "18:00",
+        "days_of_week": [3],
+        "instance_min_count": 6,
+        "instance_max_count": 10,
+        "initial_min_instance_count": 6
+      }
+    ]
+  }
+}
+```
+
+This policy uses the same scaling rules as the previous example:
+
+  * adding one instance if the average number of external HTTP requests per second per instance is greater than 90 for 60 seconds
+  * removing one instance if the average number of external HTTP requests per second per instance is less than 90 for 60 seconds
+
+This policy will ensure:
+
+  * there are between 6 and 10 instances during Wednesday working hours
+  * there are between 4 and 8 instances during working hours on other weekdays
+  * there are between 2 and 4 instances otherwise
+
+#### Scale during the month
+
+Imagine you have an app which is used frequently during the first week of the
+month, but does not receive much traffic otherwise.
+
+```
+{
+  "instance_min_count": 2,
+  "instance_max_count": 4,
+  "scaling_rules": [
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": "<",
+      "cool_down_secs": 60,
+      "adjustment": "-1"
+    },
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": ">=",
+      "cool_down_secs": 60,
+      "adjustment": "+1"
+    }
+  ],
+  "schedules": {
+    "timezone": "Europe/London",
+    "recurring_schedule": [
+      {
+        "start_time": "06:00",
+        "end_time": "22:00",
+        "days_of_month": [1, 2, 3, 4, 5, 6, 7],
+        "instance_min_count": 6,
+        "instance_max_count": 10,
+        "initial_min_instance_count": 6
+      }
+    ]
+  }
+}
+```
+
+This policy uses the same scaling rules as the previous example:
+
+  * adding one instance if the average number of external HTTP requests per second per instance is greater than 90 for 60 seconds
+  * removing one instance if the average number of external HTTP requests per second per instance is less than 90 for 60 seconds
+
+This policy will ensure:
+
+  * there are between 6 and 10 instances during daylight hours of the first week of the month
+  * there are between 2 and 4 instances otherwise
+
+### Tips for autoscaling policies
+
+* Ensure that schedules do not overlap
+* Small changes in scale which occur more often are better than large, infrequent changes
+* Keep your autoscaling policies simple
+* If your app should be highly available, ensure `instance_min_count` is at least 3
+
+### Further information
+
+Refer to the
+[app-autoscaler user guide](https://github.com/cloudfoundry/app-autoscaler/blob/df1c9a05a00d927b69d2fbf885f32e0b4f228359/docs/Readme.md) on GitHub.

@@ -11,6 +11,71 @@ In Cloud Foundry, backing and routing services are referred to as ‘services’
 - [Amazon S3](s3/#amazon-s3)
 - [InfluxDB](influxdb/#influxdb)
 
+## Sharing service instances 
+
+It’s normally only possible to bind applications to service instances in the same space. Sharing a service instance means applications in one space can bind to service instances in another space, either in the same organisation or in a different one.  Sharing a service instance between spaces allows applications in different spaces to share services such as databases. 
+See the [Cloud Foundry documentation on sharing service instances](https://docs.cloudfoundry.org/devguide/services/sharing-instances.html) for more information.
+
+### Set up sharing service instances
+
+You can now share instances of the following services between organisations and spaces:
+
+* Amazon S3
+* Elasticsearch
+* InfluxDB
+* MySQL
+* PostgreSQL
+* Redis
+
+
+
+Using the [Cloud Foundry Command Line Interface](https://docs.cloudfoundry.org/cf-cli/) (cf CLI), enter the `cf create-service` command to create a service: 
+
+```
+cf create-service SERVICE PLAN SERVICE_INSTANCE
+```
+	
+For example:
+
+```
+cf create-service postgres tiny-unencrypted-11 postgres-db
+```
+
+
+Share the service instance with another space:
+
+```
+cf share-service SERVICE_INSTANCE -s OTHER_SPACE [-o OTHER_ORG]
+```
+
+For example:
+
+```
+cf share-service postgres-db -s team-b
+```
+
+Check the previous command worked by entering:
+
+```
+cf service SERVICE_INSTANCE
+```
+
+For example:
+
+```
+cf service postgres-db
+```
+
+If you’ve correctly set up the sharing of the service instance, you should see the following text in the output:
+
+```
+shared with spaces:
+org         space    bindings
+demo-org   team-b   0
+```
+
+
+
 ## Data security classification
 
 You can store data classified up to ‘official’ on the GOV.UK PaaS.
