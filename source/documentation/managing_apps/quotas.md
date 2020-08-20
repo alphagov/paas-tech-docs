@@ -20,7 +20,7 @@ To see your organisation quota, run the command:
 
 ``cf org YOURORG``
 
-where YOURORG is your organisations's name. (If you don't know the name, you can use ``cf orgs`` to find out). This will produce an output which includes the name of the org's current quota:
+where YOURORG is your organisations's name. (If you do not know the name, you can use ``cf orgs`` to find out). This will produce an output which includes the name of the org's current quota:
 
 ```
 name:                  YOURORG
