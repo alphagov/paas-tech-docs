@@ -8,7 +8,7 @@ Cloud Foundry allows the tenants to bind [application routes](/deploying_apps.ht
 
 Using route services has some consequences to be aware of:
 
-- Every request will include additional latency as it will be proxied via the Routing Service.
+- Every request will include additional latency as it will be proxied through the Routing Service.
 - The route service will be able to access all the request content in clear.
 - The route service would become a critical point of failure, and if it is not available, the application will not be available for the end users.
 
@@ -92,7 +92,7 @@ In the following example we will add a route service to provide basic HTTP authe
 An example of such a route service application code can be found in the [Cloud Foundry basic auth route service](https://github.com/alphagov/paas-cf_basic_auth_route_service).
 Please note this is a proof-of-concept and is not intended to run in production.
 
-We will deploy it as an app in the platform itself. Then we will bind this route service to an app named `myapp`, deployed in the London region and therefore accessible via https://myapp.london.cloudapps.digital.
+We will deploy it as an app in the platform itself. Then we will bind this route service to an app named `myapp`, deployed in the London region and therefore accessible at https://myapp.london.cloudapps.digital.
 
 1. Deploy the route service as [any other other application](/deploying_apps.html#deploying-apps).
    Do not start it yet, as we need to configure it first.
@@ -105,7 +105,7 @@ We will deploy it as an app in the platform itself. Then we will bind this route
 
     Note: You might want to change `my-basic-auth-service-app` with a different name to avoid conflicts with other tenants' apps.
 
-2. This example route service can only authenticate one user with fixed username and password. Choose any value for username and password then pass them to the application via environment variables `AUTH_USERNAME` and `AUTH_PASSWORD`. Finally the route service can be started:
+2. This example route service can only authenticate one user with fixed username and password. Choose any value for username and password then pass them to the application using environment variables `AUTH_USERNAME` and `AUTH_PASSWORD`. Finally the route service can be started:
 
     ```
     cf set-env my-basic-auth-service-app AUTH_USERNAME myuser

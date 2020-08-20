@@ -1,6 +1,6 @@
 ## Deploy a Docker image
 
-This section explains how to deploy an app from a Docker image. The role of the Docker image is to serve as a packaging format and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks. Configuration via manifest.yml also stays the same, albeit you should not specify buildpack. If you do, it will be ignored, which can create some confusion to anyone reading the manifest. Our platform currently supports deploying from the following:
+This section explains how to deploy an app from a Docker image. The role of the Docker image is to serve as a packaging format and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks. Configuration using manifest.yml also stays the same, albeit you should not specify buildpack. If you do, it will be ignored, which can create some confusion to anyone reading the manifest. Our platform currently supports deploying from the following:
 
 * Docker Hub
 * [Docker Trusted Registry](https://docs.docker.com/datacenter/dtr/2.1/guides/) [external page] servers
@@ -8,11 +8,11 @@ This section explains how to deploy an app from a Docker image. The role of the 
 
 Pushing local Docker images is not supported.
 
-To deploy an app using a Docker image stored in Docker Hub via CF cli:
+To deploy an app using a Docker image stored in Docker Hub using CF cli:
 
 ``cf push myapp --docker-image dockerhuborg/app_image:tag``
 
-To deploy an app using a Docker image stored in Docker Trusted Registry (DTR) via CF cli:
+To deploy an app using a Docker image stored in Docker Trusted Registry (DTR) using CF cli:
 
 ``cf push myapp --docker-image MY-PRIVATE-REGISTRY.DOMAIN:5000/image/name:tag``
 

@@ -75,7 +75,7 @@ Changes to the `tech-docs.yml` file require stopping and restarting the server t
 ## Running tests
 
 This repo is configured in Travis to run a link-checker over the generated docs
-to find any broken links etc. If you want to run this locally, do the
+to find any broken links and so on. If you want to run this locally, do the
 following:
 
 ```
