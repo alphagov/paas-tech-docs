@@ -119,6 +119,18 @@ Alternatively, you can manually bind your service instance to your app.
 
 1. Deploy your app in line with your normal deployment process.
 
+### Bind your app with a read-only user
+You can also bind your service instance with a read-only user to your app.
+
+Run the following:
+```
+cf bind-service APP_NAME SERVICE_NAME -c '{"read_only": true}'
+```
+where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
+```
+cf bind-service my-app my-pg-service -c '{"read_only": true}'
+```
+
 ### Connect to a PostgreSQL service from your app
 
 Your app must make a [Transport Layer Security (TLS)](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
