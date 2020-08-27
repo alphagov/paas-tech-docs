@@ -123,13 +123,16 @@ Alternatively, you can manually bind your service instance to your app.
 You can also bind your service instance with a read-only user to your app.
 
 1. Run the following:
-```
-cf bind-service APP_NAME SERVICE_NAME -c '{"read_only": true}'
-```
-where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
-```
-cf bind-service my-app my-pg-service -c '{"read_only": true}'
-```
+
+    ```
+    cf bind-service APP_NAME SERVICE_NAME -c '{"read_only": true}'
+    ```
+
+    where `APP_NAME` is the exact name of a deployed instance of your application and `SERVICE_NAME` is the name of the service instance you created. For example:
+
+    ```
+    cf bind-service my-app my-pg-service -c '{"read_only": true}'
+    ```
 
 2. Deploy your app in line with your normal deployment process.
 
