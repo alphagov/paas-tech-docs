@@ -86,17 +86,17 @@ You must have either a [Google](https://myaccount.google.com/intro) or [Microsof
 
 #### Enable single sign-on
 
-1. Sign into the GOV.UK PaaS admin tool for [London](https://admin.london.cloud.service.gov.uk/) or [Ireland](https://admin.cloud.service.gov.uk/).
+1. Sign into the GOV.UK PaaS admin tool for the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
 
 1. Select __Set up Google/Microsoft single sign-on__ and then select __Activate Google/Microsoft single sign-on__.
 
-1. Get a URL to generate a temporary authentication code. If your org is hosted in [London](orgs_spaces_users.html#regions), run the following in the command line:
+1. Get a URL to generate a temporary authentication code. If your org is hosted in the London region, run the following in the command line:
 
     ```
     cf login -a api.london.cloud.service.gov.uk --sso
     ```
 
-    If your org is hosted in [Ireland](orgs_spaces_users.html#regions), run:
+    If your org is hosted in the Ireland region, run:
 
     ```
     cf login -a api.cloud.service.gov.uk --sso
