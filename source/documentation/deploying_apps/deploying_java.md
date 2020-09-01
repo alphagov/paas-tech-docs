@@ -4,7 +4,7 @@ This section covers how to deploy a Java application to GOV.UK PaaS using the [J
 
 ### Deploying a JAR file
 
-If your java application can be packaged as a [self-executable JAR file](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-java_main.md)  then deployment can be as simple as using `cf push -p [your-app].jar [your-app-name]`.
+If your java application can be packaged as a [self-executable JAR file](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-java_main.md) then you can deploy it using `cf push -p [your-app].jar [your-app-name]`.
 
 This example will walk through creating a simple "Hello World" application that embeds the popular [Jetty webserver](https://www.eclipse.org/jetty/).
 The instructions assume you have already carried out the setup process explained in the [Get started](/get_started.html#get-started) section.
@@ -100,7 +100,7 @@ If you need to use a specific version of Tomcat you can set the environment vari
 env:
   JBP_CONFIG_TOMCAT: '{ tomcat: { version: 8.0.+ } }'
 ```
-Note that you do **not** need to deploy Tomcat along with your application. The Java buildpack will run the servlet 2 and 3 web applications.
+Note that you do not need to deploy Tomcat along with your application. The Java buildpack will run the servlet 2 and 3 web applications.
 
 For more configuration options, refer to the [Tomcat Container documentation](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-tomcat.md).
 
@@ -116,7 +116,7 @@ The `+` in this example means it will use the latest point release available.
 
 ### Deploying other JVM-based applications
 
-The Java buildpack supports running any JVM-based applications (such as Scala, Clojure etc.) with little or zero additional configuration. For more information, refer to the following examples of deploying applications using other frameworks and JVM-based languages:
+The Java buildpack supports running any JVM-based applications (such as Scala or Clojure) with little or zero additional configuration. For more information, refer to the following examples of deploying applications using other frameworks and JVM-based languages:
 
 * [Embedded web server](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-embedded-web-server.md)
 * [Grails](https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-grails.md)

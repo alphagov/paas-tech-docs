@@ -84,7 +84,7 @@ In your ``package.json`` file, you would specify ``cfenv`` as a dependency:
         }
 
 
-Then in your app, you can easily get configuration information for backing services. This is an example of how to connect to a PostgreSQL service.
+Then in your app, you can get configuration information for backing services. This is an example of how to connect to a PostgreSQL service.
 
         var cfenv = require("cfenv");
         var pg = require('pg');

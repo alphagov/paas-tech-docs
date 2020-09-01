@@ -18,7 +18,7 @@ A CDN service will make your app available on your chosen domain through HTTPS. 
 
 Once you have started setting up a cdn-route service instance, you cannot update or delete the instance until you have completed the setup process. If you encounter problems, email GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
-Before you start setting up your service, you must be able to set TXT and CNAME DNS records for your domain within 24 hours. This can be done via your DNS provider.
+Before you start setting up your service, you must be able to set TXT and CNAME DNS records for your domain within 24 hours. This can be done through your DNS provider.
 
 ### Set up a cdn-route service with one or more custom domains
 
@@ -64,32 +64,92 @@ Before you start setting up your service, you must be able to set TXT and CNAME 
     Example output:
 
     ```
-    Last Operation
-    Status: create in progress
-    Message: Provisioning in progress
-             [www.example.com,www.example.net => london.cloudapps.digital];
-             CNAME or ALIAS domain www.example.com,www.example.net to
-             d3nrs0916m1mk2.cloudfront.net and create TXT record(s):
-    name: _acme-challenge.www.example.com.,
-          value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
-    name: _acme-challenge.www.example.net.,
-          value: 4W9jHJIhnfDnWBBAENph6Qr8aeoSV7FzDiEDL-s-o4Q, ttl: 120
+    status:    Create in progress
+    message:   Provisioning in progress.
+
+    Create the following CNAME records to direct traffic from your domains to your CDN route
+    www.example.com => d3j6yjt78pkdqf.cloudfront.net
+    www.example.net => d3j6yjt78pkdqf.cloudfront.net
+
+    To validate ownership of the domain, set the following DNS records
+    For domain www.example.com, set DNS record
+
+        Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+        Type:  CNAME
+        Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.com: PENDING_VALIDATION
+
+    For domain www.example.net, set DNS record
+
+        Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.net.
+        Type:  CNAME
+        Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.net: PENDING_VALIDATION
+
+    started:   2020-06-05T09:28:34Z
+    updated:   2020-06-05T09:29:44Z
     ```
 
-1. Create TXT records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.
+1. Create CNAME records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.
 
-    In the example, you would create 2 `TXT` records for your subdomains:
+    In the example, you would create 2 `CNAME` records for your subdomains:
 
     ```
-    - _acme-challenge.www.example.com with a value of ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E
-    - _acme-challenge.www.example.net with a value of 4W9jHJIhnfDnWBBAENph6Qr8aeoSV7FzDiEDL-s-o4Qs
+    - _83878ed284b0b5fcaa3e99a618432ac8.www.example.com. with a value of _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws
+    - _87fa63d9b29059b0649695eec2cd0fbe.www.example.net with a value of _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws
     ```
 
 1. Create one CNAME record for each subdomain using the DNS information. This routes requests to your service.
 
     You should not create CNAME records until your cdn-route service instance has been created. Run `cf service SERVICE_INSTANCE` to check the status of your service instance. If the service has been created, the service status will say `Create succeeded`.
 
+    ```
+    cf service SERVICE_INSTANCE
+    ```
+
+    Example output:
+
+    ```
+    status:    Create succeeded
+    message:   Service instance provisioned [www.example.com,www.example.net => cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
+
+    Create the following CNAME records to direct traffic from your domains to your CDN route
+    www.example.com => d3j6yjt78pkdqf.cloudfront.net
+    www.example.net => d3j6yjt78pkdqf.cloudfront.net
+
+    To validate ownership of the domain, set the following DNS records
+    For domain www.example.com, set DNS record
+
+        Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+        Type:  CNAME
+        Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.com: SUCCESS
+
+    For domain www.example.net, set DNS record
+
+        Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.net.
+        Type:  CNAME
+        Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.net: SUCCESS
+
+    started:   2020-06-05T09:28:34Z
+    updated:   2020-06-05T09:29:44Z
+    ```
+
     In the example, you would create 2 `CNAME` records in your DNS provider for `www.example.com` and `www.example.net`. Each `CNAME` record would point the associated subdomain to `d3nrs0916m1mk2.cloudfront.net`.
+
+    ```
+    - www.example.com with a value of d3j6yjt78pkdqf.cloudfront.net
+    - www.example.net with a value of d3j6yjt78pkdqf.cloudfront.net
+    ```
 
 You have now set up the custom domain. Next, you should [map a subdomain to your app](#map-a-subdomain-route-to-your-app).
 
@@ -113,7 +173,7 @@ If you have set up a custom domain using the cdn-route service and you want to s
 
     ```
     message: Service instance provisioned [www.example.com,www.example.net =>
-             london.cloudapps.digital]; CDN domain d3nrs0916m1mk2.cloudfront.net
+             cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
     ```
 
     In the example, there are 2 custom domains: `www.example.com` and `www.example.net`.
@@ -146,29 +206,55 @@ If you have set up a custom domain using the cdn-route service and you want to s
     Example output:
 
     ```
-    Last Operation
-    Status: update in progress
-    Message: Update in progress
-             [www.example.com,www.example.net,www.example.org => london.cloudapps.digital];
-             CNAME or ALIAS domain www.example.com,www.example.net,www.example.org to
-             d3nrs0916m1mk2.cloudfront.net and create TXT record(s):
-    name: _acme-challenge.www.example.com.,
-          value: ngd2suc9gwUnH3btm7N6hSU7sBbNp-qYtSPYyny325E, ttl: 120
-    name: _acme-challenge.www.example.net.,
-          value: 4W9jHJIhnfDnWBBAENph6Qr8aeoSV7FzDiEDL-s-o4Q, ttl: 120
-    name: _acme-challenge.www.example.org.,
-          value: 534fgHjJIfnfDnIHKAENph6GVU8aeoSV7FzDEDL-s4H, ttl: 120
+    status:    Update in progress
+    message:   Update in progress [www.example.com,www.example.net,www.example.org => cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
+
+    Create the following CNAME records to direct traffic from your domains to your CDN route
+    www.example.com => d3j6yjt78pkdqf.cloudfront.net
+    www.example.net => d3j6yjt78pkdqf.cloudfront.net
+    www.example.org => d3j6yjt78pkdqf.cloudfront.net
+
+    To validate ownership of the domain, set the following DNS records
+    For domain www.example.com, set DNS record
+
+        Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+        Type:  CNAME
+        Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.com: SUCCESS
+
+    For domain www.example.net, set DNS record
+
+        Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.net.
+        Type:  CNAME
+        Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.net: SUCCESS
+
+    For domain www.example.org, set DNS record
+
+        Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
+        Type:  CNAME
+        Value:  _3504d2f46bb9307ea3a529c0e7593f32.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.org: PENDING_VALIDATION
+
+    started:   2020-06-05T09:28:34Z
+    updated:   2020-06-05T09:29:44Z
     ```
 
-1. Create TXT records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.
+1. Create CNAME records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.
 
-    In the example, you would create a single `TXT` record for your new domain of `_acme-challenge.www.example.org.` with a value of `534fgHjJIfnfDnIHKAENph6GVU8aeoSV7FzDEDL-s4H`.
+    In the example, you would create a single `CNAME` record for your new domain of `_87fa63d9b29059b0649695eec2cd0fbe.www.example.org.` with a value of `_3504d2f46bb9307ea3a529c0e7593f32.tfmgdnztqk.acm-validations.aws`.
 
 1. Create a CNAME record for the new subdomain using the DNS information. This routes requests to your service.
 
-    You should not create CNAME records until your cdn-route service instance has finished updating. Run `cf service SERVICE_INSTANCE` to check the status of your service instance. If the update has finished, the service status will say `Update succeeded`.
+    You should not create CNAME records until your cdn-route service instance has finished updating. Run `cf service SERVICE_INSTANCE` to check the status of your service instance. If the update has finished, the validation status will say `Current validation status of www.example.org: SUCCESS`.
 
-    In the example, you would create a `CNAME` record in your DNS provider pointing `www.example.org` to `d3nrs0916m1mk2.cloudfront.net.`
+    In the example, you would create a `CNAME` record in your DNS provider pointing `www.example.org` to `d3j6yjt78pkdqf.cloudfront.net.`
 
 You have now added a custom domain to your existing cdn-route service. Next, you should [map a subdomain to your app](#mapping-a-subdomain-route-to-your-app).
 
@@ -228,7 +314,7 @@ Your app can now receive requests through the subdomain.
 
     ```
     message: Service instance provisioned [www.example.com,www.example.net =>
-             london.cloudapps.digital]; CDN domain d3nrs0916m1mk2.cloudfront.net
+             cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
     ```
     In the example, there are 2 custom domains: `www.example.com` and `www.example.net`.
 
@@ -288,7 +374,7 @@ See the [How custom domains work](/deploying_services/use_a_custom_domain/#how-c
 
 ### Forwarding headers
 
-By default, our service broker configures the CDN to only forward the `Host` header to your app. You can whitelist extra headers; in this example you can whitelist the `Accept` and `Authorization` headers:
+By default, our service broker configures the CDN to only forward the `Host` header to your app. You can forward additional headers; in this example you can additionally forward the `Accept` and `Authorization` headers:
 
 ```bash
 cf update-service my-cdn-route \
@@ -308,7 +394,7 @@ Note that forwarding headers has a negative impact on cacheability. See the [How
 
 #### Service creation timescales
 
-Service creation usually takes approximately one hour. Whilst a service is being created, you will see the status "create in progress" reported from commands like `cf service`. If it has not finished after 2 hours, we recommend that you check your DNS setup to make sure you completed the CNAME record creation correctly (see step seven). If this does not solve the issue, you may need to [contact support](https://www.cloud.service.gov.uk/support).
+Service creation usually takes approximately one hour. Whilst a service is being created, you will see the status "create in progress" reported from commands like `cf service`. If it has not finished after 2 hours, we recommend that you check your DNS setup to make sure you completed the CNAME record creation correctly (see step seven). If this does not solve the issue, you may need to [contact support](https://admin.london.cloud.service.gov.uk/support).
 
 #### CloudFront timescales for serving your origin from all locations
 
@@ -330,6 +416,7 @@ Server error, status code: 409, error code: 60016, message: An operation for ser
 
 This happens because you cannot do anything to a service instance while it's in a pending state. A CDN service instance stays pending until it detects the CNAME or ALIAS record. If this causes a problem for you, [contact support](https://www.cloud.service.gov.uk/support) to ask us to manually delete the pending instance.
 
+
 ## How custom domains work
 
 ### Overview
@@ -347,7 +434,7 @@ When you create your CDN distribution, CloudFront sets the default time-to-live 
 - 24 hours if you created your CDN distribution before 2019-08-12
 - 0 seconds if you created your CDN distribution after 2019-08-12
 
-While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV.UK PaaS support](https://www.cloud.service.gov.uk/support) can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).
+While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, [GOV.UK PaaS support](https://admin.london.cloud.service.gov.uk/support) can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).
 
 You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See [CloudFront's documentation on headers and distributions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web) for more information. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.
 
@@ -362,6 +449,121 @@ The above example configures the CDN route to have a default time-to-live of 15 
 ### Authentication
 
 Cookie headers are forwarded to your app by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on [Forwarding Headers](/deploying_services/use_a_custom_domain/#forwarding-headers).
+
+## You may need to make a DNS change
+
+GOV.UK Platform as a Service (PaaS) is changing certificate provider. We’re switching from Let’s Encrypt to Amazon AWS Certificate Manager (ACM) because:
+
+- the current version of [Automatic Certificate Management Environment](https://en.wikipedia.org/wiki/Automated_Certificate_Management_Environment) (ACME) API  will soon become deprecated
+- the latest version has a more stringent DNS challenge process, which could result in changes taking longer to implement
+- ACM allows for longer times to update your DNS records compared to ACME v2
+- PaaS has an Enterprise Support Agreement with AWS
+
+PaaS provides certificates for apps which use  *.cloudapps.digital or *.london.cloudapps.digital domains and have already undertaken the migration. You do not need to take any action if your apps use these domains.
+
+You will only need to make changes if your service was last updated before 2020-06-08 at 1200.
+	
+If you use a custom domain, you have an individual certificate that validates the TLS connection. Let’s Encrypt creates the certificate automatically and validates your ownership of the domain through a series of DNS challenges. Due to the migration to ACM, you need to update your DNS records by 31 August 2020 to pass ACM’s DNS challenges and prevent your certificate from expiring.
+
+PaaS cannot make this change for you as we do not have any access to your DNS record management.
+
+There is no end user impact whilst making these changes.
+
+If you do not update your DNS records, your app functioning under your custom domain will no longer have a valid certificate and will display an ‘untrusted site’ warning to your end users in their browser. This will decrease trust in your brand and may result in wider impacts if you have layers of trust occurring between different apps, such as API access.
+
+
+## Making changes to your DNS records
+
+If you manage your DNS yourselves:
+
+1. Run `cf service SERVICE_INSTANCE` to discover the current list of domains for the service instance
+1. Run the cf update service command with the current list of domains.
+
+    ```
+    cf update-service SERVICE_INSTANCE -c '{"domain": "domain1.com,domain2.com"}'
+    ```
+
+1. Run `cf service SERVICE_INSTANCE` to obtain the new records.
+
+    Example output:
+
+    ```
+    status:    update in progress
+    message:   Provisioning in progress.
+
+    Create the following CNAME records to direct traffic from your domains to your CDN route
+    www.example.com => d3j6yjt78pkdqf.cloudfront.net
+    www.example.org => d3j6yjt78pkdqf.cloudfront.net
+
+    To validate ownership of the domain, set the following DNS records
+    For domain www.example.com, set DNS record
+
+        Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+        Type:  CNAME
+        Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.com: PENDING_VALIDATION
+
+    For domain www.example.org, set DNS record
+
+        Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
+        Type:  CNAME
+        Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+    Current validation status of www.example.org: PENDING_VALIDATION
+
+    started:   2020-06-05T09:28:34Z
+    updated:   2020-06-05T09:29:44Z
+    ```
+
+1. Update the DNS records in your DNS providers console / config management tool.
+
+
+If someone else manages your DNS, contact your provider to organise a date for your switch-over. Make sure that you agree a quick turnaround time with your provider, ideally within one working day.
+
+1. Run the cf update service command with the current list of domains.
+1. Run `cf service SERVICE_INSTANCE` to obtain the new records.
+
+    Example output:
+
+    ```
+    status:    update in progress
+    message:   Provisioning in progress.
+
+    Create the following CNAME records to direct traffic from your domains to your CDN route
+    www.example.com => d3j6yjt78pkdqf.cloudfront.net
+    www.example.org => d3j6yjt78pkdqf.cloudfront.net
+
+    To validate ownership of the domain, set the following DNS records
+    For domain www.example.com, set DNS record
+
+        Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+        Type:  CNAME
+        Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+        Current validation status of www.example.com: PENDING_VALIDATION
+
+    For domain www.example.org, set DNS record
+
+        Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
+        Type:  CNAME
+        Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+        TTL:   86400
+
+    Current validation status of www.example.org: PENDING_VALIDATION
+
+    started:   2020-06-05T09:28:34Z
+    updated:   2020-06-05T09:29:44Z
+    ```
+
+1. Provide the DNS records to your DNS provider.
+
+
+Everybody who does it within the next month will receive a photo of a duck as thanks. The rubber duck is our team mascot. It represents good teamwork and happy developers.
+
 
 ### Further information
 
