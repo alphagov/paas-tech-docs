@@ -18,8 +18,8 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 
     ```
     service plan   description                                                          free or paid
-    small-ha-6.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.     paid
-    large-ha-6.x   3 dedicated VMs, 2 CPU per VM, 15GB RAM per VM, 1050GB disk space.   paid
+    small-ha-7.x   3 dedicated VMs, 1 CPU per VM, 4GB RAM per VM, 240GB disk space.     paid
+    large-ha-7.x   3 dedicated VMs, 2 CPU per VM, 15GB RAM per VM, 1050GB disk space.   paid
     ```
 
     The following table explains the syntax in this output:
@@ -48,7 +48,7 @@ Before using Elasticsearch as your primary data store, you should assess if an [
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf create-service elasticsearch small-ha-6.x my-es-service
+    cf create-service elasticsearch small-ha-7.x my-es-service
     ```
 
     It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:
@@ -69,7 +69,7 @@ Before using Elasticsearch as your primary data store, you should assess if an [
     name:            my-es-service
     service:         elasticsearch
     tags:
-    plan:            small-ha-6.x
+    plan:            small-ha-7.x
     description:     Elasticsearch instances provisioned via Aiven
     documentation:
     dashboard:
@@ -137,7 +137,7 @@ cf update-service SERVICE_NAME -p NEW_PLAN_NAME
 where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
 
 ```sh
-cf update-service my-elasticsearch-service -p small-ha-6.x
+cf update-service my-elasticsearch-service -p small-ha-7.x
 ```
 
 The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
