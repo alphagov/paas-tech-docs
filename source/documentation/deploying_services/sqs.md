@@ -230,6 +230,53 @@ If you unbind the SQS queue from your app but do not delete the queue, that
 queue will persist even after you delete your app. You can re-bind or
 re-connect to the queue in future.
 
+### Updating an AWS SQS queue
+
+#### Setting a message retention period
+
+Messages that have not been consumed by your application will eventually expire
+and be removed from the queue.
+
+The default rention period is 4 days.
+The maximum allowed retention period is 14days.
+
+To configure the time that messages are kept on the queue we can update the
+service, specifying the period in seconds:
+
+```
+cf update-service SERVICE_NAME -c '{"message_retention_period": 345600}'
+```
+
+where `SERVICE_NAME` is the descriptive name for this SQS queue and `345600` is
+a period in seconds to retain messages for.
+
+#### Configuring a dead-letter queue
+
+Sometimes, your application may not be able to process a message from your
+primary queue. When this happends it is useful to move messages onto a
+secondary queue so they can investigated later without interfering with the
+correct operation of your primary queue.
+
+When your service is configured in this pattern we call the secondary queue a
+"dead-letter" queue. To setup this pattern we can configure the number of times
+a message is allowed to appear on the primary queue before it is redirected to
+the secondary queue.
+
+Run:
+
+```
+cf update-service SERVICE_NAME -c '{"redrive_max_receive_count": 3}'
+```
+
+where `SERVICE_NAME` is the descriptive name for this SQS queue and `3` is the
+number of attempts a message should have on the primary queue before being
+redirected to the secondary queue.
+
+When you bind an app to an AWS SQS queue service instance, you will find credentials for two unique queue urls:
+
+- `primary_queue_url` is the URL for the main queue
+- `secondary_queue_url` is the URL for the secondary queue, now configured as a dead-letter queue
+
 ### Delete an SQS queue
 
 Run the following in the command line to delete the SQS queue:
