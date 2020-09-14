@@ -9,11 +9,12 @@ In Cloud Foundry, backing and routing services are referred to as ‘services’
 - [Redis](redis/#redis)
 - [Elasticsearch](elasticsearch/#elasticsearch)
 - [Amazon S3](s3/#amazon-s3)
+- [Amazon SQS](sqs/#amazon-sqs)
 - [InfluxDB](influxdb/#influxdb)
 
-## Sharing service instances 
+## Sharing service instances
 
-It’s normally only possible to bind applications to service instances in the same space. Sharing a service instance means applications in one space can bind to service instances in another space, either in the same organisation or in a different one.  Sharing a service instance between spaces allows applications in different spaces to share services such as databases. 
+It’s normally only possible to bind applications to service instances in the same space. Sharing a service instance means applications in one space can bind to service instances in another space, either in the same organisation or in a different one.  Sharing a service instance between spaces allows applications in different spaces to share services such as databases.
 See the [Cloud Foundry documentation on sharing service instances](https://docs.cloudfoundry.org/devguide/services/sharing-instances.html) for more information.
 
 ### Set up sharing service instances
@@ -21,6 +22,7 @@ See the [Cloud Foundry documentation on sharing service instances](https://docs.
 You can now share instances of the following services between organisations and spaces:
 
 * Amazon S3
+* Amazon SQS
 * Elasticsearch
 * InfluxDB
 * MySQL
@@ -29,12 +31,12 @@ You can now share instances of the following services between organisations and 
 
 
 
-Using the [Cloud Foundry Command Line Interface](https://docs.cloudfoundry.org/cf-cli/) (cf CLI), enter the `cf create-service` command to create a service: 
+Using the [Cloud Foundry Command Line Interface](https://docs.cloudfoundry.org/cf-cli/) (cf CLI), enter the `cf create-service` command to create a service:
 
 ```
 cf create-service SERVICE PLAN SERVICE_INSTANCE
 ```
-	
+
 For example:
 
 ```
