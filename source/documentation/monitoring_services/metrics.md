@@ -79,3 +79,13 @@ The number of items in Redis.
 #### Network bytes in and out
 
 The number of bytes Redis has received and sent.
+
+## Exporting backing service metrics to Prometheus
+
+If you are an advanced user you may want to export backing service metrics into your own system. To help you do this we can export your backing service metrics in Prometheus format.
+
+Postgres and MySQL metrics are exported by the [PaaS Prometheus exporter](/monitoring_apps.html#use-the-paas-prometheus-exporter-app).
+
+Elasticsearch and Redis metrics can be exported on request. Please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk)
+
+In theory it is possible to run [Prometheus](https://prometheus.io) on the GOV.UK PaaS. By default Prometheus stores data on-disk, but our apps do not have persistent storage. Instead Prometheus can be configured to store data in our [InfluxDB backing service](/deploying_services/influxdb/). We have not tested this in production but would be eager to hear results.
