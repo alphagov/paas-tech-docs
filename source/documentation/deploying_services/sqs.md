@@ -187,7 +187,7 @@ Messages that have not been consumed by your application will eventually expire
 and be removed from the queue.
 
 The default rention period is 4 days.
-The maximum allowed retention period is 14days.
+The maximum allowed retention period is 14 days.
 
 To configure the time that messages are kept on the queue we can update the
 service, specifying the period in seconds:
@@ -197,6 +197,87 @@ cf update-service SERVICE_NAME -c '{"message_retention_period": 345600}'
 ```
 
 where `SERVICE_NAME` is the descriptive name for this SQS queue and `345600` is
+a period in seconds to retain messages for. This parameter can also be passed at
+service creation time.
+
+#### Setting a message delay
+
+The time in seconds for which the delivery of all messages in the queue is delayed.
+
+The default delay is 0 seconds.
+The maximum allowed delay is 15 minutes (900 seconds).
+
+To configure the time that messages are delayed we can update the
+service, specifying the period in seconds:
+
+```
+cf update-service SERVICE_NAME -c '{"delay_seconds": 600}'
+```
+
+where `SERVICE_NAME` is the descriptive name for this SQS queue and `600` is
+a period in seconds to delay messages for. This parameter can also be passed at
+service creation time.
+
+#### Setting a maximum message size
+
+The limit of how many bytes that a message can contain before Amazon SQS rejects it.
+
+The minimum maximum message size is 1,204 bytes (1 KiB).
+The maximum and default maximum message size is 262,144 bytes (256 KiB).
+
+To configure the maximum message size for the queue we can update the
+service, specifying the size in bytes:
+
+```
+cf update-service SERVICE_NAME -c '{"maximum_message_size": 245600}'
+```
+
+where `SERVICE_NAME` is the descriptive name for this SQS queue and `245600` is
+a size in bytes to allow on the queue. This parameter can also be passed at
+service creation time.
+
+#### Setting a receive message wait time
+
+Specifies the duration, in seconds, that the ReceiveMessage action call waits until
+a message is in the queue in order to include it in the response, rather than
+returning an empty response if a message isn't yet available.
+
+The minimum receive message wait time is 0 seconds.
+The maximum receive message wait time is 20 seconds.
+
+Short polling is used as the default or when you specify 0 for this property.
+For more information, see the [Amazon SQS Long Poll documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html).
+
+To configure the receive wait time for the queue we can update the
+service, specifying the period in seconds:
+
+```
+cf update-service SERVICE_NAME -c '{"receive_message_wait_time_seconds": 20}'
+```
+
+where `SERVICE_NAME` is the descriptive name for this SQS queue and `20` is
+a period in seconds to wait for messages for. This parameter can also be passed at
+service creation time.
+
+#### Setting a message visibility timeout
+
+The length of time during which a message will be unavailable after a message is
+delivered from the queue. This blocks other components from receiving the same
+message and gives the initial component time to process and delete the message
+from the queue.
+
+The minimum visibility timeout is 0 seconds.
+The default visibility timeout is 30 seconds.
+The maximum visibility timeout is 12 hours (43,200 seconds).
+
+To configure the visibility timeout for the queue we can update the
+service, specifying the period in seconds:
+
+```
+cf update-service SERVICE_NAME -c '{"visibility_timeout": 34560}'
+```
+
+where `SERVICE_NAME` is the descriptive name for this SQS queue and `34560` is
 a period in seconds to retain messages for. This parameter can also be passed at
 service creation time.
 
