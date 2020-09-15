@@ -197,7 +197,8 @@ cf update-service SERVICE_NAME -c '{"message_retention_period": 345600}'
 ```
 
 where `SERVICE_NAME` is the descriptive name for this SQS queue and `345600` is
-a period in seconds to retain messages for. This parameter can also be passed at service creation time.
+a period in seconds to retain messages for. This parameter can also be passed at
+service creation time.
 
 #### Configuring a dead-letter queue
 
@@ -219,7 +220,8 @@ cf update-service SERVICE_NAME -c '{"redrive_max_receive_count": 3}'
 
 where `SERVICE_NAME` is the descriptive name for this SQS queue and `3` is the
 number of attempts a message should have on the primary queue before being
-redirected to the secondary queue. This parameter can also be passed at service creation time.
+redirected to the secondary queue. This parameter can also be passed at service
+creation time.
 
 When you bind an app to an AWS SQS queue service instance, you will find credentials for two unique queue urls:
 
