@@ -1,6 +1,6 @@
 # Amazon SQS
 
-Amazon SQS provides data object storage through a web service interface.
+Amazon SQS provides "Standard" (at-least-once delivery, best-effort ordering) and First-In-First-Out queues.
 
 To provide any feedback on this feature, contact the GOV.UK PaaS team at
 [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
@@ -20,12 +20,12 @@ which means that each message is delivered at least once.
 - `fifo` (first-in-first-out) plans configure queues that provide [exactly-once
 processing](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing),
 which means that each message is delivered once and remains available until a
-consumer processes it and deletes
+consumer processes it and deletes it.
 
 AWS SQS queues can be configured to move messages that can not be successfully
 processed by your application on a secondary queue, known as a dead-letter
-queue, letting you isolate  problematic messages to determine why their
-processing doe not succeed.
+queue, letting you isolate problematic messages to determine why their
+processing did not succeed.
 
 #### Provision a standard AWS SQS queue
 
@@ -39,7 +39,7 @@ Run the following in the command line to provision a Standard AWS SQS queue:
 cf create-service aws-sqs-queue standard SERVICE_NAME
 ```
 
-It will take between 1 and 5 minuites to set up the service instance. To check
+It will take between 1 and 5 minutes to set up the service instance. To check
 its progress run:
 
 ```
@@ -82,7 +82,7 @@ Run the following to bind an SQS queue to your app:
 cf bind-service APP_NAME SERVICE_NAME
 ```
 
-It will take between 1 and 5 minuites to setting the binding. To check its progress, run:
+It will take between 1 and 5 minutes to set up the binding. To check its progress, run:
 
 ```
 cf service SERVICE_NAME
@@ -285,7 +285,7 @@ Run the following in the command line to delete the SQS queue:
 cf delete-service SERVICE_NAME
 ```
 
-It can take between 1 and 5 minuites to delete the service instance. To check
+It can take between 1 and 5 minutes to delete the service instance. To check
 its progress, run:
 
 ```
@@ -293,4 +293,3 @@ cf service SERVICE_NAME
 ```
 
 where `SERVICE_NAME` is a unique descriptive name for this SQS queue.
-
