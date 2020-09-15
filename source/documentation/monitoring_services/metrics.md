@@ -1,12 +1,10 @@
-## Backing service metrics
+## View backing service metrics
 
 If you use the [PostgreSQL](deploying_services/postgresql/#postgresql), [MySQL](deploying_services/mysql/#mysql), [Redis](deploying_services/redis/#redis) or [Elasticsearch](deploying_services/elasticsearch/) backing services, you can view metrics for those backing services in the GOV.UK PaaS admin tool.
 
 When you create your backing service instance, you can access the service instance’s metrics with no extra work. Your backing service plan does not affect which metrics you can view. You can view metrics for any date range within the last year.
 
 Backing services instances exist in a [space](orgs_spaces_users.html#spaces) within an [org](orgs_spaces_users.html#organisations). You must be able to view a space in the GOV.UK PaaS admin tool to view metrics for backing service instances in that space.
-
-### View backing service metrics
 
 1. Sign into the GOV.UK PaaS admin tool for the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
 1. Select the __Organisation__ and __Space__.
