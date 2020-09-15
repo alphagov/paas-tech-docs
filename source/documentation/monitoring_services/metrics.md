@@ -1,6 +1,6 @@
 ## Backing service metrics
 
-If you use the [PostgreSQL](deploying_services/postgresql/#postgresql), [MySQL](deploying_services/mysql/#mysql) or [Redis](deploying_services/redis/#redis) backing services, you can view metrics for those backing services in the GOV.UK PaaS admin tool.
+If you use the [PostgreSQL](deploying_services/postgresql/#postgresql), [MySQL](deploying_services/mysql/#mysql), [Redis](deploying_services/redis/#redis) or [Elasticsearch](deploying_services/elasticsearch/) backing services, you can view metrics for those backing services in the GOV.UK PaaS admin tool.
 
 When you create your backing service instance, you can access the service instance’s metrics with no extra work. Your backing service plan does not affect which metrics you can view. You can view metrics for any date range within the last year.
 
