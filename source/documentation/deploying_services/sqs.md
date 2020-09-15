@@ -143,7 +143,11 @@ An example `VCAP_SERVICES` environment variable:
 
 You must pass credentials from your `VCAP_SERVICES` environment variable to
 your AWS software development kit (SDK). Use the appropriate [Amazon SDK
-documentation](https://aws.amazon.com/developer/tools/#sdks) to do this.
+documentation](https://aws.amazon.com/developer/tools/#sdks), and extract the
+credentials from VCAP_SERVICES to provide to the SDK. This can usually be done
+either by setting AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION etc.
+environment variables, or by providing the SDK with the right static credentials
+function call or data as part of your app.
 
 You should use the provided `primary_queue_url` in AWS API calls to make use of
 the queue.
