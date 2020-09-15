@@ -2,7 +2,7 @@
 
 Redis is an open source in-memory data store that can be used as a database cache or message broker.
 
-You can access [metrics for this backing service](/monitoring_apps.html#backing-service-metrics).
+You can access [metrics for this backing service](/monitoring_services.html).
 
 <h2 id="set-up-the-service">Set up the service</h2>
 
