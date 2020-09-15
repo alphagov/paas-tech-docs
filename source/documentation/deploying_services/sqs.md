@@ -105,10 +105,6 @@ applications:
   - SERVICE_NAME
 ```
 
-By default, you can only [connect to an SQS queue from your GOV.UK PaaS-hosted app](#connect-to-an-sqs-queue-from-your-app).
-
-To [connect to an SQS queue from outside the GOV.UK PaaS](#connect-to-an-sqs-queue-from-outside-of-the-gov-uk-paas), you must create a service key.
-
 ### Connect to an SQS queue from your app
 
 Restart your app to populate your `VCAP_SERVICES` [environment variable](/deploying_apps.html#system-provided-environment-variables)
@@ -155,57 +151,6 @@ the queue.
 Your app may also connect to a second, separate, queue using the `secondary_queue_url`
 value, however we recommend ignoring this value unless you are configuring a
 dead-letter queue. See [configuring a dead letter queue][].
-
-### Connect to an SQS queue from outside of the GOV.UK PaaS
-
-To connect to an SQS queue from outside of the GOV.UK PaaS, you must create a
-service key and credentials that allow external access to the queue.
-
-1. Create a service key and credentials to allow external access:
-
-    ```
-    cf create-service-key SERVICE_NAME SERVICE_KEY
-    ```
-
-    where:
-
-    - `SERVICE_NAME` is the unique descriptive name for the SQS queue
-    - `SERVICE_KEY` is a unique descriptive name for the service key
-
-1. Get the service key credentials:
-
-    ```
-    cf service-key SERVICE_NAME SERVICE_KEY
-    ```
-
-    You will see output similar to the following:
-
-    ```
-    {
-     "aws_access_key_id": "AWS_ACCESS_KEY",
-     "aws_region": "AWS_REGION",
-     "aws_secret_access_key": "AWS_SECRET_ACCESS_KEY",
-     "primary_queue_url": "PRIMARY_QUEUE_URL"
-    }
-    ```
-
-    Use these credentials to connect to the SQS queue from outside of the GOV.UK PaaS.
-
-#### Listing and revoking service keys
-
-You can list all service keys for a service by running the following:
-
-```
-cf service-keys SERVICE_NAME
-```
-
-These credentials persist and do not get automatically deleted when you sign
-out of the GOV.UK PaaS. If you do not need these credentials, you should delete
-them by running:
-
-```
-cf delete-service-key MY_SERVICE MY_KEY
-```
 
 ### Unbind an SQS queue from your app
 
