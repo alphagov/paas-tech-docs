@@ -152,7 +152,7 @@ documentation](https://aws.amazon.com/developer/tools/#sdks) to do this.
 You should use the provided `primary_queue_url` in AWS API calls to make use of
 the queue.
 
-Your app may also connect to a second isolated queue using the `secondary_queue_url`
+Your app may also connect to a second, separate, queue using the `secondary_queue_url`
 value, however we recommend ignoring this value unless you are configuring a
 dead-letter queue. See [configuring a dead letter queue][].
 
@@ -248,7 +248,7 @@ cf update-service SERVICE_NAME -c '{"message_retention_period": 345600}'
 ```
 
 where `SERVICE_NAME` is the descriptive name for this SQS queue and `345600` is
-a period in seconds to retain messages for.
+a period in seconds to retain messages for. This parameter can also be passed at service creation time.
 
 #### Configuring a dead-letter queue
 
@@ -270,12 +270,12 @@ cf update-service SERVICE_NAME -c '{"redrive_max_receive_count": 3}'
 
 where `SERVICE_NAME` is the descriptive name for this SQS queue and `3` is the
 number of attempts a message should have on the primary queue before being
-redirected to the secondary queue.
+redirected to the secondary queue. This parameter can also be passed at service creation time.
 
 When you bind an app to an AWS SQS queue service instance, you will find credentials for two unique queue urls:
 
 - `primary_queue_url` is the URL for the main queue
-- `secondary_queue_url` is the URL for the secondary queue, now configured as a dead-letter queue
+- `secondary_queue_url` is the URL for the secondary queue, now acting as a dead-letter queue
 
 ### Delete an SQS queue
 
