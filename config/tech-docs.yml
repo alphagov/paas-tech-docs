@@ -15,6 +15,8 @@ header_links:
   Roadmap: https://github.com/alphagov/paas-roadmap/projects/1
   Documentation: /
   Support: https://admin.london.cloud.service.gov.uk/support
+footer_links:
+  Technical Documentation Accessibility: /accessibility.html
 
 # Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
 ga_tracking_id: 
