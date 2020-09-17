@@ -166,6 +166,12 @@ cf conduit SERVICE_NAME -- psql
 
 where `SERVICE_NAME` is a unique descriptive name for this service instance.
 
+Conduit can be used with a `read-only` binding using the `-c` flag:
+
+```
+cf conduit SERVICE_NAME -c '{"read_only": true}' -- psql
+```
+
 Run `cf conduit --help` for more options, and refer to the [Conduit README file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
 
 <h2 id="amend-the-service">Amend the service</h2>
