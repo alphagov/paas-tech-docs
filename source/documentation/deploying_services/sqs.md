@@ -93,8 +93,24 @@ where:
 - `APP_NAME` is the name of a deployed instance of your app, as specified in your app's manifest or push command
 - `SERVICE_NAME` is a unique descriptive name for this SQS queue
 
+When binding an SQS service to your app, you have the option of retricting the
+queue permissions given to that app. You can control this using `bind-service`'s `-c`
+flag to set the bind parameters `access_policy` json key, for example:
+
+```
+cf bind-service APP_NAME SERVICE_NAME -c '{"access_policy": "consumer"}'
+```
+
+The currently supported `access_policy` values are:
+
+- `full`, the default, full access permissions
+- `producer` is appropriate for an app which will be sending messages to the queue,
+  but doesn't need to be able to read or delete messages.
+- 'consumer' is appropriate for apps which will be reading and possibly deleting messages,
+  but don't need to be able to send messages to the queue.
+
 You can use the [app's manifest](https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-public-apps)
-to bind an SQS queue to the app with default read and write permissions only.
+to bind an SQS queue to the app (with default `full` permissions only).
 It will bind automatically when you next deploy your app. An example manifest:
 
 ```
