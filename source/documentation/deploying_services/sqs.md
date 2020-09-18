@@ -106,7 +106,7 @@ The currently supported `access_policy` values are:
 - `full`, the default, full access permissions
 - `producer` is appropriate for an app which will be sending messages to the queue,
   but doesn't need to be able to read or delete messages.
-- 'consumer' is appropriate for apps which will be reading and possibly deleting messages,
+- `consumer` is appropriate for apps which will be reading and possibly deleting messages,
   but don't need to be able to send messages to the queue.
 
 You can use the [app's manifest](https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-public-apps)
