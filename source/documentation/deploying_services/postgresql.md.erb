@@ -136,6 +136,12 @@ You can also bind your service instance with a read-only user to your app.
 
 2. Deploy your app in line with your normal deployment process.
 
+<%= warning_text('By default Postgres uses a schema called "public", on which all permissions are granted to all.') %>
+
+We disable use of the public schema to read-only users via an event trigger. As
+a precaution, if you are very concerned about permissions, you should create a
+new schema and use it, instead of relying on the default "public" schema.
+
 ### Connect to a PostgreSQL service from your app
 
 Your app must make a [Transport Layer Security (TLS)](https://en.wikipedia.org/wiki/Transport_Layer_Security) connection to the service. Some libraries use TLS by default, but others will need to be manually configured.
@@ -159,6 +165,12 @@ cf conduit SERVICE_NAME -- psql
 ```
 
 where `SERVICE_NAME` is a unique descriptive name for this service instance.
+
+Conduit can be used with a `read-only` binding using the `-c` flag:
+
+```
+cf conduit SERVICE_NAME -c '{"read_only": true}' -- psql
+```
 
 Run `cf conduit --help` for more options, and refer to the [Conduit README file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
 
