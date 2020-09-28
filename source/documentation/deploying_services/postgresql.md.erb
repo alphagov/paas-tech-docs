@@ -174,6 +174,17 @@ cf conduit SERVICE_NAME -c '{"read_only": true}' -- psql
 
 Run `cf conduit --help` for more options, and refer to the [Conduit README file](https://github.com/alphagov/paas-cf-conduit/blob/master/README.md) for more information on how to use the plugin.
 
+The `read_only` flag is a new feature and may require one-time user action to
+work with databases that were created before the feature was introduced.
+
+If you encounter an error message like `ERROR:  permission denied for table
+my_table` when running `SELECT * FROM my_table` from a read-only conduit, then
+you should run `SELECT make_readable_generic()` from a non-read-only conduit.
+
+Permissions are automatically converged for read-only users when database
+objects are created, for example `CREATE TABLE my_table`, so the above action
+may not be necessary.
+
 <h2 id="amend-the-service">Amend the service</h2>
 
 ### Import and export bulk data to and from a PostgreSQL database
