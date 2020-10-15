@@ -85,4 +85,4 @@ Here is an example of the structure of the information contained in `VCAP_SERVIC
 }
 ```
 
-Refer to the [Cloud Foundry documentation on environment variables documentation](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) for more information.
+Refer to the [Cloud Foundry documentation on environment variables](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html) for more information.
