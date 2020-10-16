@@ -266,6 +266,17 @@ The plan upgrade will start immediately and finish within an hour. You can check
 
 You can also [queue a plan upgrade](/deploying_services/postgresql/#queue-a-plan-migration-postgresql) to happen during a maintenance window to minimise service interruption.
 
+Amazon automatically patch your database during the configured maintenance
+window.
+Updates are usually released more regularly than they are automatically
+applied.
+You can use the `update_minor_version_to_latest` configuration
+parameter to update your database to the latest available minor version:
+
+```
+cf update-service SERVICE_NAME -c '{"update_minor_version_to_latest": true}'
+```
+
 #### Different encryption type
 
 You cannot upgrade your service plan using the `cf update-service` command if the new plan uses a different encryption type to your current plan.
