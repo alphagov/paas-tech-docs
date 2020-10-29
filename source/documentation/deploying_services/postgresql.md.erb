@@ -613,11 +613,9 @@ Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is reta
 
 There are two ways you can restore data to an earlier state:
 
-1. You can restore to the latest snapshot yourself. See [Restoring a PostgreSQL service snapshot](/deploying_services/postgresql/#restoring-a-postgresql-service-snapshot) for details.
+1. You can restore to the latest snapshot yourself. Refer to [Restoring a PostgreSQL service snapshot](/deploying_services/postgresql/#restoring-a-postgresql-service-snapshot) for details.
 
-1. We can manually restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Data can be restored to a new PostgreSQL service instance running in parallel, or it can replace the existing service instance.
-
-    To arrange a manual restore, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). We will need approval from your organization manager if restoring will involve overwriting data.
+1. You can restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Refer to [Restoring a PostgreSQL service from a point in time](/deploying_services/postgresql/#restoring-a-postgresql-service-from-a-point-in-time) for details.
 
 Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.
 
@@ -690,3 +688,78 @@ cf create-service postgres small-9.5 my-pg-service-copy  -c '{"restore_from_late
 
 will create a new database from the most recent snapshot created before April
 1st 2020 13:00 UTC.
+
+#### Restoring a PostgreSQL service from a point in time
+
+You can create a copy of any existing PostgreSQL service instance using the
+write-ahead log of the RDS instance.  The database generates write-ahead log
+checkpoints during normal use and stores them every 5 minutes. You can restore
+to a point in time with a resolution of 1 second.
+
+To restore from a point in time:
+
+ 1. Get the global unique identifier (GUID) of the existing instance by running the following code in the command line:
+
+    ```
+    cf service SERVICE_NAME --guid
+    ```
+
+    where `SERVICE_NAME` is the name of the PostgreSQL service instance you want to copy. For example:
+
+    ```
+    cf service my-pg-service --guid
+    ```
+
+    This returns a `GUID` in the format `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`, for example `32938730-e603-44d6-810e-b4f12d7d109e`.
+
+ 2. Trigger the creation of a new service based on the snapshot by running:
+
+    ```
+    cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_point_in_time_of": "GUID"}'
+    ```
+
+    where `PLAN` is the plan used in the original instance (you can find this out by running `cf service SERVICE_NAME`), and `NEW_SERVICE_NAME` is a unique, descriptive name for this new instance. For example:
+
+    ```
+    cf create-service postgres large-11 my-pg-service-copy  -c '{"restore_from_point_in_time_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
+    ```
+
+ 3. It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:
+
+    ```
+    cf service NEW_SERVICE_NAME
+    ```
+
+    for example:
+
+    ```
+    cf service my-pg-service-copy
+    ```
+
+ 4. The new instance is set up when the `cf service NEW_SERVICE_NAME` command returns a `create succeeded` status. See [Set up a PostgreSQL service](/deploying_services/postgresql/#set-up-a-postgresql-service) for more details.
+
+ This feature has the following limitations:
+
+  * You cannot restore from a service instance that has been deleted
+  * You must use the same service plan for the copy as for the original service
+  instance
+  * You cannot restore to a point in time prior to the oldest snapshot (7 days ago)
+  * You must create the new service instance in the same organisation and space
+  as the original. This is to prevent unauthorised access to data between
+  spaces. If you need to copy data to a different organisation and/or space,
+  you can [connect to your PostgreSQL instance from a local machine using
+  Conduit](/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine).
+
+By default, the database is restored to the most recent point in time
+checkpoint available.
+If you need to restore to a particular point in time,
+you can use the `restore_from_point_in_time_of` parameter.
+
+For example:
+
+```
+cf create-service postgres large-11 my-pg-service-copy  -c '{"restore_from_point_in_time_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_point_in_time_before": "2020-10-27 13:00:00"}'
+```
+
+will create a new database from the write-ahead logs before October 27th 2020
+13:00 UTC.
