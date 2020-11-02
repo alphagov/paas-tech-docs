@@ -3,7 +3,7 @@
 Amazon Simple Queue Service (SQS) offers a durable hosted queue that lets you
 build decoupled distributed software components.
 
-To provide any feedback on this feature, contact the GOV.UK PaaS team at
+This is a beta service which is currently in a testing phase. If you would like to test the service, contact the GOV.UK PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). 
 [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk).
 
 <h2 id="set-up-the-service">Set up the service</h2>
