@@ -70,9 +70,11 @@ You must set up [Logstash](https://www.elastic.co/products/logstash) to process 
 
         # Cloud Foundry passes the app name, space and organisation in the syslog_host
         # Filtering them into separate fields makes it easier to query multiple apps in a single Kibana instance
-        dissect {
-            mapping => { "syslog_host" => "%{[cf][org]}.%{[cf][space]}.%{[cf][app]}" }
-            tag_on_failure => ["_sysloghostdissectfailure"]
+        if [syslog_host] {
+            dissect {
+                mapping => { "syslog_host" => "%{[cf][org]}.%{[cf][space]}.%{[cf][app]}" }
+                tag_on_failure => ["_sysloghostdissectfailure"]
+            }
         }
 
         # Cloud Foundry gorouter logs
