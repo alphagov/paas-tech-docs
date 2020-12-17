@@ -1,6 +1,6 @@
 ## Deploy an app to production
 
-To deploy an app to a production environment, your department, agency or team must have a [paid account](/get_started.html#trial-and-paid-accounts) with the GOV.UK PaaS. 
+To deploy an app to a production environment, your department, agency or team must have a [paid account](/get_started.html#trial-and-paid-accounts) with the GOV.UK PaaS.
 
 Before you deploy an app to a production environment, you must set up a domain.
 
@@ -16,7 +16,6 @@ You must also:
 
 When you deploy an app to a production environment, you should:
 
-- use version 3 of the Cloud Foundry API to [zero-downtime deploy your app](/get_started.html#use-cloud-foundry-api-version-3)
-- use the [blue/green deployer plugin for Cloud Foundry](https://github.com/bluemixgaragelondon/cf-blue-green-deploy) to minimise app downtime if you are using version 2 of the Cloud Foundry API
+- [use zero downtime, rolling deploys](/get_started.html#deploying-with-zero-downtime)
 - [run more than one instance of your app](/managing_apps.html#scaling) to make sure your app is always available
 - select a high-availability plan for your app's [backing service](/deploying_services/#deploy-a-backing-or-routing-service) if your app uses a backing service
