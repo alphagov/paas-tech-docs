@@ -12,24 +12,20 @@ If you make changes to your app's container during an SSH session, these changes
 
 Before you connect to an app's container using SSH, you must:
 
-- install the [Cloud Foundry Command Line Interface (CLI)](https://github.com/cloudfoundry/cli)
+- install the [Cloud Foundry Command Line Interface (CLI)](https://github.com/cloudfoundry/cli/wiki/V7-CLI-Installation-Guide)
 - set up the [correct SSH permissions](#manage-ssh-permissions) on the app and the space the app is in
 
-1. If you’re using version 3 of the Cloud Foundry API, run the following to start an SSH session:
-
-    ```
-    cf v3-ssh APPNAME
-    ```
-
-    where `APPNAME` is the name of the app.
-
-    If you are using version 2 of the Cloud Foundry API, run:
+1. Run the following to start an SSH session:
 
     ```
     cf ssh APPNAME
     ```
 
+    where `APPNAME` is the name of the app.
+
     The Cloud Foundry CLI will generate SSH keys for you.
+
+    <%= warning_text('If you are using Cloud Foundry CLI version 6, run `cf v3-ssh APPNAME') %>
 
 2. To match your SSH environment to your app's environment, run the following from within your SSH session shell:
 
