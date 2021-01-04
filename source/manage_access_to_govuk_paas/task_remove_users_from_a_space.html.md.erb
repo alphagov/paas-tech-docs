@@ -1,0 +1,36 @@
+---
+title: "Task: Remove users from a space"
+weight: 40
+---
+# Task: Remove users from a space
+
+When a team member leaves or stops working on a project, the org manager should revoke that team member’s access rights.
+
+The org manager can use the GOV.UK PaaS admin tool to remove all of the team member’s user roles within the team’s spaces.
+
+1. Sign in to the GOV.UK PaaS admin tool for either the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
+1. Select the appropriate org.
+1. Select __View and manage team members__.
+1. Select the appropriate user.
+1. Change the user’s space roles and select __Save role changes__.
+
+Alternatively, the org manager can run the following in the command line:
+
+```
+cf unset-space-role USERNAME ORGNAME SPACE ROLE
+```
+
+where:
+
+- `USERNAME` is the email address the user signs in with when using the command line client
+- `ORGNAME` is the name of the org
+- `SPACE` is the name of the space
+- `ROLE` is the user role granted to the user of the email address in the `USERNAME` field
+
+For example, to remove ana@example.com's space developer role from the sandbox space within the acme org, the org manager would run:
+
+```
+cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
+```
+
+Refer to the [Cloud Foundry reference guide on `cf unset-space-role`](https://cli.cloudfoundry.org/en-US/cf/unset-space-role.html) for a complete list of roles.

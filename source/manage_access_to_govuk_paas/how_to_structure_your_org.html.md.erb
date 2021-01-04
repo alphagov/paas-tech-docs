@@ -1,0 +1,39 @@
+---
+title: "How to structure your org"
+weight: 21
+---
+
+# How to structure your org
+
+There are a few ways to structure your orgs and spaces in CloudFoundry. This section summarises 2 common models.
+
+There are other ways to structure orgs and spaces, and you can change your existing structure to suit the project you’re working on.
+
+### Model 1
+
+In this example model, an org represents a service or service team within a government department or business area. Each org has multiple spaces. Spaces represent environments such as development, sandbox, staging or production or can represent different applications. These spaces host apps and backing services.
+
+Departments or government teams that use this structure include:
+
+- Department for Business, Energy and Industrial Strategy
+- GDS Digital Marketplace
+
+![Diagram showing model 1 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-1.png)
+
+This model has the following advantages:
+
+- it is easy to manage user permissions within each org because spaces that require higher permissions (such as staging or production) are already separated from other spaces that do not have as high a requirement
+- developers that do not have security clearances yet can have their access restricted if necessary
+- each org represents a business area which makes billing administration simple
+
+However, there is no reuse of orgs and spaces in this structure, which incurs a time and resource cost.
+
+### Model 2
+
+In this example, an org represents an environment such as development, sandbox, staging or production. Each org has multiple spaces. Spaces represent services or service teams within a government department or business area. These spaces host apps and backing services.
+
+Departments that use this structure include the Department for International Trade.
+
+![Diagram showing model 2 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-2.png)
+
+This model makes it easier to control resources and spending between different environments.
