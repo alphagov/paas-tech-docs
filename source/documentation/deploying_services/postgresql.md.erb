@@ -333,7 +333,7 @@ The following extensions are always enabled for PostgreSQL service instances:
 |Extension|PostgreSQL version|
 |:---|:---|
 |uuid-ossp|9.5, 10, 11|
-|postgis|9.5, 10, 11|
+|postgis|10, 11|
 |citext|10, 11|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
@@ -392,6 +392,7 @@ GOV.UK PaaS supports the following optional extensions, but they are not enabled
 |plpgsql|9.5, 10, 11|
 |pltcl|9.5, 10, 11|
 |plv8|9.5, 10, 11|
+|postgis|9.5, 10, 11|
 |postgis_tiger_geocoder|9.5, 10, 11|
 |postgis_topology|9.5, 10, 11|
 |postgres_fdw|9.5, 10, 11|
@@ -532,6 +533,8 @@ You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to 
 ### PostgreSQL plans
 
 Each service in the marketplace has multiple plans that vary by availability and storage capacity.
+
+You can view available plans through the Cloud Foundry command line interface, or via [the GOV.UK PaaS admin marketplace](https://admin.london.cloud.service.gov.uk/marketplace).
 
 #### Paid plans - PostgreSQL
 
