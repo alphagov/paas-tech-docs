@@ -82,6 +82,8 @@ If you need to restrict access to a public app, for example to implement basic a
 
 If you do not want your apps to be publicly accessible at all, you must deploy your apps on the `apps.internal` domain. A common use case for this is that you have multiple micro-services that make up an overall app, and those micro-services must only be accessible by other micro-services in the app.
 
+Private apps can communicate over any TCP-based protocol. If you wish to use TLS, you are responsible for the keys, certificates, protocol versions, and ciphers involved.
+
 The following use case is that you have 2 apps to deploy:
 
 - a public app for your end users to interact with
@@ -141,7 +143,7 @@ where:
 
 - `PUBLIC_APPNAME` is the name of your public app
 - `ENVIRONMENT_VARIABLE_NAME` is the [environment variable](#environment-variables) your public app reads (for example `PRIVATE_APP_URL`)
-- `PRIVATE_APPNAME` is the name of your private app
+- `PRIVATE_APPNAME` is the name of your private app.
 
 ### Create a network policy
 
