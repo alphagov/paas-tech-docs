@@ -831,4 +831,4 @@ You can use the same `cf update-service` command to upgrade your PostgreSQL vers
 After this command is finished, you can use the command `cf service <your-db-service-instance-name>` to confirm that the database upgraded successfully to the right version.
 
 ### Application and database availability during upgrade
-During both upgrade runs, any applications using this database instance might experience a connectivity problem to the database. You should plan appropriately for this event.
+Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can [queue the change to begin during a maintenance window] (https://docs.cloud.service.gov.uk/deploying_services/postgresql/#queue-a-plan-migration-postgresql).
