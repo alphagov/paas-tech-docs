@@ -769,7 +769,7 @@ will create a new database from the write-ahead logs before October 27th 2020
 
 ## Upgrading from Postgres 9.5
 
-*Note: unfortunately, there is no straight path from RDS PostgreSQL 9.5 to RDS PostgreSQL 12, if you will attempt to perform such an upgrade you will get the following error message:*
+Unfortunately, there is no straight path from RDS PostgreSQL 9.5 to RDS PostgreSQL 12. If you attempt to perform such an upgrade, you will get the following error message:
 
 ```
 $cf update-service accounts-db -p tiny-unencrypted-12
@@ -780,7 +780,7 @@ $
 ```
 
 #### Upgrade to PostgreSQL 10
-To resolve this issue, first you should upgrade your PostgreSQL 9.5 database to PostgreSQL 10 and then to PostgreSQL 12.
+To upgrade from Postgres 9.5, first you should upgrade your PostgreSQL 9.5 database to PostgreSQL 10.
 
 ```
 $ cf update-service accounts-db -p tiny-unencrypted-10
@@ -790,8 +790,8 @@ OK
 Update in progress. Use 'cf services' or 'cf service accounts-db' to check operation status.
 ```
 
-Once the update will finish, you will have your database upgraded to version 10.
-To verify that the database was upgraded successfully to the right version - you could use the `cf service <your-db-service-instance-name>` command to show the details:
+When the update process finishes, your database will be upgraded to version 10.
+To confirm that the database upgraded successfully to the right version, use the `cf service <your-db-service-instance-name>` command to show the details:
 
 ```
 $cf service accounts-db
@@ -824,9 +824,11 @@ $
 ```
 
 #### Upgrade to PostgreSQL 12
-After that, you can use the same`cf update-service` command to upgrade your PostgreSQL version 10 database to version 12 - i.e.: `$ cf update-service accounts-db -p tiny-unencrypted-12`
+You can use the same `cf update-service` command to upgrade your PostgreSQL version 10 database to version 12:
+    
+    `$ cf update-service accounts-db -p tiny-unencrypted-12`
 
-After this command is finished, you can verify that upgrade was successful in the same manner as you did for version 10.
+After this command is finished, you can use the command `cf service <your-db-service-instance-name>` to confirm that the database upgraded successfully to the right version.
 
-### Application and Database availability during upgrade
-During the both upgrade runs, your applications that are using this database instance might experience a connectivity problem to the database, hence you should plan appropriately for this event.
+### Application and database availability during upgrade
+Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can [queue the change to begin during a maintenance window] (https://docs.cloud.service.gov.uk/deploying_services/postgresql/#queue-a-plan-migration-postgresql).
