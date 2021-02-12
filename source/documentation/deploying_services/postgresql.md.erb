@@ -441,7 +441,7 @@ where:
 - `SERVICE_NAME` is a unique descriptive name for this service instance
 - `EXTENSION_1...N` are the names of the optional extensions you want to enable
 
-For example, your PostgreSQL service instance is named `my-pg-service` and has 3 mandatory extensions enabled, `uuid-ossp`, `postgis` and `citext`. Run the following to enable `pg_stat_statements`:
+For example, your PostgreSQL service instance is named `my-pg-service` and has 2 mandatory extensions enabled, `uuid-ossp` and `citext`. Run the following to enable `pg_stat_statements`:
 
 ```
 cf update-service my-pg-service -c '{"enable_extensions": ["pg_stat_statements"], "reboot": true}'
