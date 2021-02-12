@@ -1,0 +1,40 @@
+---
+title: "Task: Remove a user from an org"
+weight: 40
+---
+# Task: Remove users from an org
+
+When a team member leaves or stops working on a project, their org manager must [remove all of that team member’s user roles from the team’s spaces](orgs_spaces_users.html#remove-users-from-a-space).
+
+If the leaving team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must also remove that team member’s user role from the team’s org.
+
+1. Sign in to the GOV.UK PaaS admin tool for either the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
+1. Select the appropriate org.
+1. Select __View and manage team members__.
+1. Select the appropriate user.
+1. Select __Remove user from Organisation__.
+1. To confirm, select __Yes, remove from organisation__.
+
+Alternatively, the other org manager or the GOV.UK PaaS team can run the following in the command line:
+
+```
+cf unset-org-role USERNAME ORGNAME ROLE
+```
+
+where:
+
+- `USERNAME` is the email address the user logs in with when using the command line client
+- `ORGNAME` is the name of the org
+- `ROLE` is the user role granted to the user of the email address in the `USERNAME` field
+
+For example, to remove ana@example.com's org manager role from the acme org, either the other org manager or the GOV.UK PaaS team should run:
+
+```
+cf unset-org-role ana@example.com acme OrgManager
+```
+
+If the user still needs access to GOV.UK PaaS to work on other projects, nothing else needs to change.
+
+If the user no longer needs access to GOV.UK PaaS, then your org manager must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to ask us to delete the user account.
+
+Refer to the [Cloud Foundry documentation on creating and managing users with the CLI](https://docs.cloudfoundry.org/adminguide/cli-user-management.html) for more information.

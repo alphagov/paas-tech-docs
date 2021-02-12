@@ -1,0 +1,50 @@
+---
+title: "Task: Create a new space"
+weight: 40
+---
+
+# Task: Create a new space
+
+Org managers can create spaces.
+
+Run the following to create a new space:
+
+```
+cf create-space SPACE -o ORGNAME
+```
+
+where `SPACE` is the name of the space, and `ORGNAME` is the name of the org.
+
+You can then add users to that space.
+
+### Add users to a space
+
+After a user has been added to an org, org managers can use the GOV.UK PaaS admin tool for the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/) (requires sign in) to grant a user access to a space by assigning a role to that user.
+
+1. Sign in to the GOV.UK PaaS admin tool for either the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/).
+1. Select the appropriate org.
+1. Select __View and manage team members__.
+1. Select __Invite a new team member__.
+1. Complete the form and select __Send invitation__.
+
+
+Alternatively, the org manager can run the following in the command line:
+
+```
+cf set-space-role USERNAME ORGNAME SPACE ROLE
+```
+
+where:
+
+- `USERNAME` is the email address the user signs in with when using the command line client
+- `ORGNAME` is the name of the org
+- `SPACE` is the name of the space
+- `ROLE` is the user role you are granting to the user of the email address in the `USERNAME` field
+
+For example, to grant ana@example.com the space developer role in the test space within the acme org, the org manager would run:
+
+```
+cf set-space-role ana@example.com acme test SpaceDeveloper
+```
+
+Refer to the [Cloud Foundry reference guide on `cf set-space-role`](https://cli.cloudfoundry.org/en-US/cf/set-space-role.html) for a complete list of roles.
