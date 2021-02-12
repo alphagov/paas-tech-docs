@@ -333,7 +333,6 @@ The following extensions are always enabled for PostgreSQL service instances:
 |Extension|PostgreSQL version|
 |:---|:---|
 |uuid-ossp|9.5, 10, 11|
-|postgis|10, 11|
 |citext|10, 11|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
@@ -825,7 +824,7 @@ $
 
 #### Upgrade to PostgreSQL 12
 You can use the same `cf update-service` command to upgrade your PostgreSQL version 10 database to version 12:
-    
+
     `$ cf update-service accounts-db -p tiny-unencrypted-12`
 
 After this command is finished, you can use the command `cf service <your-db-service-instance-name>` to confirm that the database upgraded successfully to the right version.
