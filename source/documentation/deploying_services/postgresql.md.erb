@@ -766,40 +766,39 @@ cf create-service postgres large-11 my-pg-service-copy  -c '{"restore_from_point
 will create a new database from the write-ahead logs before October 27th 2020
 13:00 UTC.
 
-## Upgrading from Postgres 9.5
+## Upgrading major versions of Postgres
 
-Unfortunately, there is no straight path from RDS PostgreSQL 9.5 to RDS PostgreSQL 12. If you attempt to perform such an upgrade, you will get the following error message:
+You can upgrade from one major version to the next by performing a plan upgrade.
 
-```
-$cf update-service accounts-db -p tiny-unencrypted-12
-Updating service instance accounts-db as <REDACTED>@digital.cabinet-office.gov.uk...
-FAILED
-Server error, status code: 502, error code: 10001, message: Service broker error: InvalidParameterCombination: RDS does not support creating a DB instance with the following combination: DBInstanceClass=db.t3.micro, Engine=postgres, EngineVersion=9.5.23, LicenseModel=postgresql-license. For supported combinations of instance class and database engine version, see the documentation.
-$
-```
+There are two constraints on major version changes:
 
-#### Upgrade to PostgreSQL 10
-To upgrade from Postgres 9.5, first you should upgrade your PostgreSQL 9.5 database to PostgreSQL 10.
+1. You cannot downgrade
+1. You can only upgrade 1 major version at a time. E.g. 10 to 11, not 10 to 12.
+
+
+To perform the plan upgrade, run the following code at the command line:
 
 ```
-$ cf update-service accounts-db -p tiny-unencrypted-10
+$cf update-service SERVICE_NAME -p PLAN_NAME
 Updating service instance accounts-db as <REDACTED>@digital.cabinet-office.gov.uk...
 OK
 
-Update in progress. Use 'cf services' or 'cf service accounts-db' to check operation status.
+Update in progress. Use 'cf services' or 'cf service SERVICE_NAME' to check operation status.
 ```
 
-When the update process finishes, your database will be upgraded to version 10.
-To confirm that the database upgraded successfully to the right version, use the `cf service <your-db-service-instance-name>` command to show the details:
+Where `SERVICE_NAME` is the name of the Postgres service instance being upgraded, and `PLAN_NAME` is the name of the plan it should be upgraded to.
+
+When the update process finishes, your database will be upgraded to the version named in the plan.
+To confirm that the database upgraded successfully to the right version, use the `cf service SERVICE_NAME` command to show the details:
 
 ```
-$cf service accounts-db
-Showing info of service accounts-db in org <redacted> / space <redacted> as <redacted>@digital.cabinet-office.gov.uk...
+$cf service SERVICE_NAME
+Showing info of service SERVICE_NAME in org <redacted> / space <redacted> as <redacted>@digital.cabinet-office.gov.uk...
 
-name:             accounts-db
+name:             SERVICE_NAME
 service:          postgres
 tags:
-plan:             tiny-unencrypted-10
+plan:             PLAN_NAME
 description:      AWS RDS PostgreSQL service
 documentation:    https://docs.cloud.service.gov.uk/deploying_services/postgresql/
 dashboard:
@@ -807,7 +806,7 @@ service broker:   rds-broker
 
 This service is not currently shared.
 
-Showing status of last operation from service accounts-db...
+Showing status of last operation from service SERVICE_NAME...
 
 status:    update succeeded
 message:   DB Instance 'rdsbroker-<redacted>' status is 'available'
@@ -816,18 +815,11 @@ updated:   2020-12-04T13:06:23Z
 
 bound apps:
 name            binding name   status             message
-paas-accounts                  create succeeded
+APP_NAME                       create succeeded
 
 Upgrades are not supported by this broker.
 $
 ```
-
-#### Upgrade to PostgreSQL 12
-You can use the same `cf update-service` command to upgrade your PostgreSQL version 10 database to version 12:
-
-    `$ cf update-service accounts-db -p tiny-unencrypted-12`
-
-After this command is finished, you can use the command `cf service <your-db-service-instance-name>` to confirm that the database upgraded successfully to the right version.
 
 ### Application and database availability during upgrade
 Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can [queue the change to begin during a maintenance window] (https://docs.cloud.service.gov.uk/deploying_services/postgresql/#queue-a-plan-migration-postgresql).
