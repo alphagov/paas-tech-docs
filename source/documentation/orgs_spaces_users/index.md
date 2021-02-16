@@ -14,7 +14,7 @@ If you have an Ireland region account, your app domain is `APPNAME.cloudapps.dig
 
 An organisation, or org, represents a group of users, applications and environments. Each org shares the same resource, quota and custom domain.
 
-The GOV.UK PaaS team creates new orgs in the London region unless you request otherwise. We assign at least one [org manager](orgs_spaces_users.html#org-manager) to new orgs. You can request your first org on the [GOV.UK PaaS signup page](https://www.cloud.service.gov.uk/signup).
+The GOV.UK PaaS team creates new orgs in the London region unless you request otherwise. We assign at least one [org manager](orgs_spaces_users.html#org-manager) to new orgs. You can request your first org on the [GOV.UK PaaS support page](https://admin.london.cloud.service.gov.uk/support/sign-up).
 
 To request additional orgs, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) and tell us who the org manager(s) should be and the name of one of your existing orgs.
 
