@@ -270,7 +270,7 @@ Departments or government teams that use this structure include:
 - Department for Business, Energy and Industrial Strategy
 - GDS Digital Marketplace
 
-![Diagram showing model 1 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-1.png)
+![Diagram showing model 1 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-1.svg)
 
 This model has the following advantages:
 
