@@ -81,7 +81,7 @@ A route service can be implemented as a HTTPS application that will receive all 
 
 The route service must proxy back the request to the application route defined in header `X-CF-Forwarded-Url` within 60 seconds, otherwise the request will be refused. In addition, the total time to process the request and send a response back must be within 900 seconds.
 
-![Route service request life cycle](/images/route-service.png)
+![Route service request life cycle](/images/route-service.svg)
 
 You can refer to the [Cloud Foundry documentation on route services](https://docs.cloudfoundry.org/services/route-services.html) for more information.
 
