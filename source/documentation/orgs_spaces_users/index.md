@@ -39,7 +39,7 @@ To see the spaces you can access in your current org, you can either:
 
 [Org managers](orgs_spaces_users.html#org-manager) can create new spaces within an org.
 
-![Diagram showing an org that contains multiple spaces](/documentation/figures/orgs-spaces.png)
+![Diagram showing an org that contains multiple spaces](/documentation/figures/orgs-spaces.svg)
 
 Refer to the [case studies](orgs_spaces_users.html#case-studies) documentation for information on common structures for orgs, spaces and apps.
 
