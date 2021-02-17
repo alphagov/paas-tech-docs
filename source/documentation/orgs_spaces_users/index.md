@@ -286,6 +286,6 @@ In this example, an org represents an environment such as development, sandbox, 
 
 Departments that use this structure include the Department for International Trade.
 
-![Diagram showing model 2 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-2.png)
+![Diagram showing model 2 of orgs, spaces and apps](/documentation/figures/orgs-spaces-model-2.svg)
 
 This model makes it easier to control resources and spending between different environments.
