@@ -1,14 +1,28 @@
-<h2 id="view-backing-service-metrics">View backing service metrics</h2><p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a>, <a href="deploying_services/mysql/#mysql">MySQL</a>, <a href="deploying_services/redis/#redis">Redis</a> or <a href="deploying_services/elasticsearch/">Elasticsearch</a> backing services, you can view metrics for those backing services in the GOV.UK PaaS admin tool.</p>
+<h2 id="view-backing-service-metrics">View backing service metrics</h2>
+
+<p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a>, <a href="deploying_services/mysql/#mysql">MySQL</a>, <a href="deploying_services/redis/#redis">Redis</a> or <a href="deploying_services/elasticsearch/">Elasticsearch</a> backing services, you can view metrics for those backing services in the GOV.UK PaaS admin tool.</p>
+
 <p>When you create your backing service instance, you can access the service instance’s metrics with no extra work. Your backing service plan does not affect which metrics you can view. You can view metrics for any date range within the last year.</p>
+
 <p>Backing services instances exist in a <a href="orgs_spaces_users.html#spaces">space</a> within an <a href="orgs_spaces_users.html#organisations">org</a>. You must be able to view a space in the GOV.UK PaaS admin tool to view metrics for backing service instances in that space.</p>
 
 <ol>
-<li>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
-<li>Select the <strong>Organisation</strong> and <strong>Space</strong>.</li>
-<li>Select the <strong>Backing services</strong> tab and select your backing service.</li>
-<li>Select the <strong>Metrics</strong> tab.</li>
+  <li><p>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li><p>Select the <strong>Organisation</strong> and <strong>Space</strong>.</p>
+  </li>
+  <li><p>Select the <strong>Backing services</strong> tab and select your backing service.</p>
+  </li>
+  <li><p>Select the <strong>Metrics</strong> tab.</p>
+  </li>
 </ol>
-<h2 id="exporting-backing-service-metrics-to-prometheus">Exporting backing service metrics to Prometheus</h2><p>If you are an advanced user you may want to export backing service metrics into your own system. To help you do this we can export your backing service metrics in Prometheus format.</p>
+
+<h2 id="exporting-backing-service-metrics-to-prometheus">Exporting backing service metrics to Prometheus</h2>
+
+<p>If you are an advanced user you may want to export backing service metrics into your own system. To help you do this we can export your backing service metrics in Prometheus format.</p>
+
 <p>Postgres and MySQL metrics can be exported using <a href="/monitoring_apps.html#use-the-paas-prometheus-exporter-app">the PaaS Prometheus exporter</a>.</p>
-<p>Elasticsearch and Redis metrics can be exported on request. Please contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a></p>
+
+<p>Elasticsearch and Redis metrics can be exported on request. Please contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a></p>
+
 <p>In theory it is possible to run <a href="https://prometheus.io">Prometheus</a> on the GOV.UK PaaS. By default Prometheus stores data on-disk, but our apps do not have persistent storage. Instead Prometheus can be configured to store data in our <a href="/deploying_services/influxdb/">InfluxDB backing service</a>. We have not tested this in production but would be eager to hear results.</p>

@@ -1,14 +1,30 @@
-<h2 id="technology">Technology</h2><p>GOV.UK PaaS uses Cloud Foundry and Amazon Web Services (AWS).</p>
-<h3 id="cloud-foundry">Cloud Foundry</h3><p>The PaaS platform is built using the open source <a href="https://www.cloudfoundry.org/">Cloud Foundry</a> project. Multiple open source products were evaluated before Cloud Foundry was selected as the best fit for PaaS.</p>
+<h2 id="technology">Technology</h2>
+
+<p>GOV.UK PaaS uses Cloud Foundry and Amazon Web Services (AWS).</p>
+
+<h3 id="cloud-foundry">Cloud Foundry</h3>
+
+<p>The PaaS platform is built using the open source <a href="https://www.cloudfoundry.org/">Cloud Foundry</a> project. Multiple open source products were evaluated before Cloud Foundry was selected as the best fit for PaaS.</p>
+
 <p>We chose Cloud Foundry due to its maturity and because it offered:</p>
 
 <ul>
-<li>  a selection of user permissions</li>
-<li>  support for a wide variety of languages and frameworks through buildpacks</li>
-<li>  a very active community</li>
-<li>  an ability to scale easily, performing well under heavy load</li>
+  <li><p>a selection of user permissions</p>
+  </li>
+  <li><p>support for a wide variety of languages and frameworks through buildpacks</p>
+  </li>
+  <li><p>a very active community</p>
+  </li>
+  <li><p>an ability to scale easily, performing well under heavy load</p>
+  </li>
 </ul>
+
 <p>For more information on why we chose Cloud Foundry, <a href="https://governmentasaplatform.blog.gov.uk/2015/12/17/choosing-cloudfoundry/">read our blog post</a>.</p>
+
 <p>GOV.UK PaaS addresses common usability, security, compliance and scalability concerns experienced by government development teams. This makes the platform a superior option to your development team deploying their own version of the Cloud Foundry software, where they’d need to address cloud security implications and build a continuous integration pipeline.</p>
-<h3 id="amazon-web-services">Amazon Web Services</h3><p>Currently GOV.UK PaaS runs on <a href="https://aws.amazon.com/">Amazon Web Services</a>. As a tenant, you do not have to interact with AWS directly; all interactions required to deploy and manage your service are carried out through Cloud Foundry commands.</p>
+
+<h3 id="amazon-web-services">Amazon Web Services</h3>
+
+<p>Currently GOV.UK PaaS runs on <a href="https://aws.amazon.com/">Amazon Web Services</a>. As a tenant, you do not have to interact with AWS directly; all interactions required to deploy and manage your service are carried out through Cloud Foundry commands.</p>
+
 <p>The platform may change cloud provider in the future, depending on cost.  Your interface to the PaaS will always remain the same, no matter which provider is in use.</p>

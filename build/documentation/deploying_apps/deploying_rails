@@ -1,84 +1,163 @@
-<h2 id="deploy-a-ruby-on-rails-app">Deploy a Ruby on Rails app</h2><p>This section explains minimal steps for deploying a basic Rails app. Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html">Cloud Foundry guide to deploying Ruby on Rails apps</a> for more information.</p>
+<h2 id="deploy-a-ruby-on-rails-app">Deploy a Ruby on Rails app</h2>
+
+<p>This section explains minimal steps for deploying a basic Rails app. Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html">Cloud Foundry guide to deploying Ruby on Rails apps</a> for more information.</p>
 
 <blockquote>
 <p>If your app requires a <a href="/deploying_services/#deploy-a-backing-or-routing-service">backing service</a>, it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.</p>
 </blockquote>
+
 <p>These steps assume you have already carried out the setup process explained in the <a href="/get_started.html#get-started">Get started</a> section.</p>
+
 <p>When you deploy an app, you must select a combination of an organisation and a space. This is called the <a href="/deploying_apps.html#set-a-target"><strong>target</strong></a>.</p>
+
 <p>We have provided a <code>sandbox</code> space for you to use for learning about the PaaS. You may want to target the sandbox while you are testing by running:</p>
+
 <p><code>cf target -s sandbox</code></p>
-<p>It&rsquo;s also important to realise that if you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team.</p>
-<h3 id="deploying-an-app">Deploying an app</h3><p>To deploy a Rails app that does not require a backing service:</p>
+
+<p>It's also important to realise that if you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team.</p>
+
+<h3 id="deploying-an-app">Deploying an app</h3>
+
+<p>To deploy a Rails app that does not require a backing service:</p>
 
 <ol>
-<li><p>Put the code for your Rails app into a local directory (for example, by checking it out of version control).</p></li>
-<li><p><a href="/deploying_apps.html#excluding-files">Exclude files ignored by Git</a>.</p></li>
-<li><p>If you&rsquo;re using Rails 4, <a href="https://github.com/heroku/rails_12factor#install">add the <code>rails_12factor</code> gem</a> for better logging. Rails 5 has this functionality built in by default.</p></li>
-<li><p>Create a manifest.yml file in the folder where you checked out your app.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: my-rails-app
-  memory: 256M
-  buildpacks:
-  - ruby_buildpack
-</code></pre></div><p>Replace <code>my-rails-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+  <li>
+<p>Put the code for your Rails app into a local directory (for example, by checking it out of version control).</p>
+  </li>
+  <li>
+<p><a href="/deploying_apps.html#excluding-files">Exclude files ignored by Git</a>.</p>
+  </li>
+  <li>
+<p>If you're using Rails 4, <a href="https://github.com/heroku/rails_12factor#install">add the <code>rails_12factor</code> gem</a> for better logging. Rails 5 has this functionality built in by default.</p>
+  </li>
+  <li>
+<p>Create a manifest.yml file in the folder where you checked out your app.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: my-rails-app
+   memory: 256M
+   buildpacks:
+   - ruby_buildpack
+</code></pre></div>
+<p>Replace <code>my-rails-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+
 <p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p>
-<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code>ruby_buildpack</code>.</p></li>
-<li><p>Upload and start the application by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf push APPNAME
-</code></pre></div><p>from the directory which contains all the code and configuration files for your app.</p>
-<p>If you do not specify a name for the app after the <code>cf push</code> command, the name from the manifest file is used.</p></li>
-<li><p>Set any additional <a href="/deploying_apps.html#environment-variables">environment variables</a> required by your app. For example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf set-env APPNAME VARIABLE `value`
-</code></pre></div><p>where VARIABLE is a unique name for the variable, and <code>value</code> is the value to set.</p></li>
+
+<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code>ruby_buildpack</code>.</p>
+  </li>
+  <li>
+<p>Upload and start the application by running:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf push APPNAME
+</code></pre></div>
+<p>from the directory which contains all the code and configuration files for your app.</p>
+
+<p>If you do not specify a name for the app after the <code>cf push</code> command, the name from the manifest file is used.</p>
+  </li>
+  <li>
+<p>Set any additional <a href="/deploying_apps.html#environment-variables">environment variables</a> required by your app. For example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf set-env APPNAME VARIABLE `value`
+</code></pre></div>
+<p>where VARIABLE is a unique name for the variable, and <code>value</code> is the value to set.</p>
+  </li>
 </ol>
+
 <p>Your app should now be available at your <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+
 <p>For a production app, you should refer to the <a href="/deploying_apps.html#deploy-an-app-to-production">documentation on deploying an app to production</a>.</p>
-<h3 id="deploying-with-a-postgresql-database">Deploying with a PostgreSQL database</h3><p>These instructions are for deploying a Rails app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<h3 id="deploying-with-a-postgresql-database">Deploying with a PostgreSQL database</h3>
+
+<p>These instructions are for deploying a Rails app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
 <p>The Cloud Foundry buildpack for Ruby automatically gets the details of the first available PostgreSQL service from the <code>VCAP_SERVICES</code> environment variable and sets the Ruby <code>DATABASE_URL</code> environment variable accordingly. Ensure that your app is configured to use <code>DATABASE_URL</code> to set its database configuration when deployed to the PaaS.</p>
 
 <ol>
-<li><p>Put the code for your Rails app into a local directory (for example, by checking it out of version control).</p></li>
-<li><p>If you are using Git, you may wish to <a href="/deploying_apps.html#excluding-files">exclude files ignored by Git</a>.</p></li>
-<li><p>If you&rsquo;re using Rails 4, <a href="https://github.com/heroku/rails_12factor#install">add the <code>rails_12factor</code> gem</a> for better logging. Rails 5 has this functionality built in by default.</p></li>
-<li><p>Create a manifest.yml file in the directory where you checked out your app.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: my-rails-app
-  memory: 256M
-  buildpacks:
-  - ruby_buildpack
-</code></pre></div><p>Replace <code>my-rails-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+  <li>
+<p>Put the code for your Rails app into a local directory (for example, by checking it out of version control).</p>
+  </li>
+  <li>
+<p>If you are using Git, you may wish to <a href="/deploying_apps.html#excluding-files">exclude files ignored by Git</a>.</p>
+  </li>
+  <li>
+<p>If you're using Rails 4, <a href="https://github.com/heroku/rails_12factor#install">add the <code>rails_12factor</code> gem</a> for better logging. Rails 5 has this functionality built in by default.</p>
+  </li>
+  <li>
+<p>Create a manifest.yml file in the directory where you checked out your app.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: my-rails-app
+   memory: 256M
+   buildpacks:
+   - ruby_buildpack
+</code></pre></div>
+<p>Replace <code>my-rails-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+
 <p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p>
-<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code>ruby_buildpack</code>.</p></li>
-<li><p>Upload the app without starting it using this command:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf push --no-start APPNAME
-</code></pre></div><p>from the directory which contains all the code and configuration files for your app.</p>
-<p>If you do not specify a name for the app after the <code>cf push</code> command, the name from the manifest file is used.</p></li>
-<li><p>Set any additional <a href="/deploying_apps.html#environment-variables">environment variables</a> required by your app. For example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf set-env APPNAME VARIABLE `value`
-</code></pre></div><p>where VARIABLE is a unique name for the variable, and <code>value</code> is the value to set.</p></li>
-<li><p><a href="/deploying_services/postgresql/#set-up-a-postgresql-service">Create a PostgreSQL backing service (if required)</a> and <a href="/deploying_services/postgresql/#bind-a-postgresql-service-to-your-app">bind it to your app</a>.</p>
+
+<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code>ruby_buildpack</code>.</p>
+  </li>
+  <li>
+<p>Upload the app without starting it using this command:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf push --no-start APPNAME
+</code></pre></div>
+<p>from the directory which contains all the code and configuration files for your app.</p>
+
+<p>If you do not specify a name for the app after the <code>cf push</code> command, the name from the manifest file is used.</p>
+  </li>
+  <li>
+<p>Set any additional <a href="/deploying_apps.html#environment-variables">environment variables</a> required by your app. For example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf set-env APPNAME VARIABLE `value`
+</code></pre></div>
+<p>where VARIABLE is a unique name for the variable, and <code>value</code> is the value to set.</p>
+  </li>
+  <li>
+<p><a href="/deploying_services/postgresql/#set-up-a-postgresql-service">Create a PostgreSQL backing service (if required)</a> and <a href="/deploying_services/postgresql/#bind-a-postgresql-service-to-your-app">bind it to your app</a>.</p>
+
 <p>To enable Rails support for database migrations, you may wish to create a <code>Procfile</code> in the same directory as your <code>manifest.yml</code> and <code>Gemfile</code>. The <code>Procfile</code> is a way to specify commands to be run when deploying your app.</p>
+
 <p>This is a minimal example of the <code>Procfile</code> content for <em>Rails 5.0</em>:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>web: rake db:migrate &amp;&amp; bin/rails server
-</code></pre></div></li>
-<li><p>Start your app by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf start APPNAME
-</code></pre></div></li>
+
+<div class="highlight"><pre class="highlight plaintext"><code> web: rake db:migrate &amp;&amp; bin/rails server
+</code></pre></div>  </li>
+  <li>
+<p>Start your app by running:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf start APPNAME
+</code></pre></div>  </li>
 </ol>
+
 <p>Your app should now be available at your <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+
 <p>For a production app, you should refer to the <a href="/deploying_apps.html#deploy-an-app-to-production">documentation on deploying an app to production</a>.</p>
-<h3 id="specify-a-ruby-version">Specify a Ruby version</h3><p>You should tell Cloud Foundry which version of Ruby your app uses in the Ruby buildpack.</p>
+
+<h3 id="specify-a-ruby-version">Specify a Ruby version</h3>
+
+<p>You should tell Cloud Foundry which version of Ruby your app uses in the Ruby buildpack.</p>
+
 <p>Refer to the documentation on <a href="deploying_apps.html#buildpack-language-version-updates">buildpack language version updates</a> for more information.</p>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/ruby/index.html#runtime">Cloud Foundry documentation on specifying a Ruby version</a> for more information.</p>
-<h3 id="web-servers">Web servers</h3><p>By default, the Cloud Foundry Ruby buildpack <a href="https://github.com/cloudfoundry/ruby-buildpack/blob/1f0ac3ce10866390d161c3f27e71d64890859454/lib/language_pack/rails4.rb#L27">runs <code>bin/rails server</code></a>
-to spin up the application. In Rails 4 and below, this will use WEBrick as the web
-server. In Rails 5 and above, the default is
+
+<h3 id="web-servers">Web servers</h3>
+
+<p>By default, the Cloud Foundry Ruby buildpack <a href="https://github.com/cloudfoundry/ruby-buildpack/blob/1f0ac3ce10866390d161c3f27e71d64890859454/lib/language_pack/rails4.rb#L27">runs <code>bin/rails server</code></a><br />
+to spin up the application. In Rails 4 and below, this will use WEBrick as the web<br />
+server. In Rails 5 and above, the default is<br />
 <a href="http://guides.rubyonrails.org/getting_started.html#starting-up-the-web-server">puma</a>.</p>
+
 <p>You may want to use a different web server in production. See the <a href="https://docs.cloudfoundry.org/buildpacks/prod-server.html">Cloud Foundry documentation on configuring a production server</a> for more information.</p>
-<h3 id="troubleshooting-asset-precompilation">Troubleshooting asset precompilation</h3><p>By default, the Rails buildpack performs asset precompilation during the staging phase. This is fine for
-most Rails apps, but it will not work for those which need to connect to services (such as the database)
+
+<h3 id="troubleshooting-asset-precompilation">Troubleshooting asset precompilation</h3>
+
+<p>By default, the Rails buildpack performs asset precompilation during the staging phase. This is fine for<br />
+most Rails apps, but it will not work for those which need to connect to services (such as the database)<br />
 during asset compilation. (For an example, see <a href="https://github.com/18F/myusa/issues/636">MyUSA issue #636</a>)</p>
-<p>There are multiple potential solutions for this. Refer to the
+
+<p>There are multiple potential solutions for this. Refer to the<br />
 <a href="https://docs.cloudfoundry.org/buildpacks/ruby/ruby-tips.html#precompile">Cloud Foundry documentation on asset precompilation</a> for more information.</p>

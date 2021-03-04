@@ -1,11 +1,21 @@
-<h2 id="backing-service-logs">Backing service logs</h2><p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a> or <a href="deploying_services/mysql/#mysql">MySQL</a> backing services,
+<h2 id="backing-service-logs">Backing service logs</h2>
+
+<p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a> or <a href="deploying_services/mysql/#mysql">MySQL</a> backing services,<br />
 you can view logs for those backing services in the GOV.UK PaaS admin tool.</p>
+
 <h3 id="view-backing-service-logs">View backing service logs</h3>
+
 <ol>
-<li>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
-<li>Select the <strong>Organisation</strong> and <strong>Space</strong>.</li>
-<li>Select the <strong>Backing services</strong> tab and select your backing service.</li>
-<li>Select the <strong>Logs</strong> tab.</li>
-<li>To download the logs, click the name of the log file</li>
+  <li><p>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li><p>Select the <strong>Organisation</strong> and <strong>Space</strong>.</p>
+  </li>
+  <li><p>Select the <strong>Backing services</strong> tab and select your backing service.</p>
+  </li>
+  <li><p>Select the <strong>Logs</strong> tab.</p>
+  </li>
+  <li><p>To download the logs, click the name of the log file</p>
+  </li>
 </ol>
+
 <p>These logs are provided directly by the backing service provider.</p>

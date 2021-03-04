@@ -122,7 +122,7 @@
               <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
                       <ul>
   <li>
-    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+    <a href="/#govuk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
   </li>
 </ul>
 <ul>
@@ -231,7 +231,7 @@
         <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
       </li>
       <li>
-        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+        <a href="/deploying_apps.html#deploy-a-nodejs-app"><span>Deploy a Node.js app</span></a>
       </li>
       <li>
         <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
@@ -433,10 +433,10 @@
         <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-govuk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-govuk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
       </li>
       <li>
         <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
@@ -505,7 +505,7 @@
         <a href="/monitoring_apps.html#app-metrics"><span>App metrics</span></a>
       </li>
       <li>
-        <a href="/monitoring_apps.html#monitoring-apps-more-about-monitoring"><span>More about monitoring</span></a>
+        <a href="/monitoring_apps.html#more-about-monitoring"><span>More about monitoring</span></a>
       </li>
       <li>
         <a href="/monitoring_apps.html#logs"><span>Logs</span></a>
@@ -537,10 +537,10 @@
 </ul>
 <ul>
   <li>
-    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <a href="/architecture.html#govuk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
     <ul>
       <li>
-        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+        <a href="/architecture.html#characteristics-of-govuk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
       </li>
       <li>
         <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
@@ -600,33 +600,65 @@
 
         <div class="app-pane__content toc-open-disabled">
           <main id="content" class="technical-documentation" data-module="anchored-headings">
-            <p><h1 id="monitoring-backing-services">Monitoring backing services</h1><p>If you use backing services provided by PaaS then you are likely to want to see information on their performance. We expose logs and metrics in the GOV.UK PaaS admin tool. For advanced users we can also export metrics to a Prometheus instance you run.</p></p>
-<p><h2 id="view-backing-service-metrics">View backing service metrics</h2><p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a>, <a href="deploying_services/mysql/#mysql">MySQL</a>, <a href="deploying_services/redis/#redis">Redis</a> or <a href="deploying_services/elasticsearch/">Elasticsearch</a> backing services, you can view metrics for those backing services in the GOV.UK PaaS admin tool.</p>
+            <h1 id="monitoring-backing-services">Monitoring backing services</h1>
+
+<p>If you use backing services provided by PaaS then you are likely to want to see information on their performance. We expose logs and metrics in the GOV.UK PaaS admin tool. For advanced users we can also export metrics to a Prometheus instance you run.</p>
+
+<h2 id="view-backing-service-metrics">View backing service metrics</h2>
+
+<p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a>, <a href="deploying_services/mysql/#mysql">MySQL</a>, <a href="deploying_services/redis/#redis">Redis</a> or <a href="deploying_services/elasticsearch/">Elasticsearch</a> backing services, you can view metrics for those backing services in the GOV.UK PaaS admin tool.</p>
+
 <p>When you create your backing service instance, you can access the service instance’s metrics with no extra work. Your backing service plan does not affect which metrics you can view. You can view metrics for any date range within the last year.</p>
-<p>Backing services instances exist in a <a href="/orgs_spaces_users.html#spaces">space</a> within an <a href="/orgs_spaces_users.html#organisations">org</a>. You must be able to view a space in the GOV.UK PaaS admin tool to view metrics for backing service instances in that space.</p></p>
+
+<p>Backing services instances exist in a <a href="/orgs_spaces_users.html#spaces">space</a> within an <a href="/orgs_spaces_users.html#organisations">org</a>. You must be able to view a space in the GOV.UK PaaS admin tool to view metrics for backing service instances in that space.</p>
 
 <ol>
-<li>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
-<li>Select the <strong>Organisation</strong> and <strong>Space</strong>.</li>
-<li>Select the <strong>Backing services</strong> tab and select your backing service.</li>
-<li>Select the <strong>Metrics</strong> tab.</li>
+  <li><p>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li><p>Select the <strong>Organisation</strong> and <strong>Space</strong>.</p>
+  </li>
+  <li><p>Select the <strong>Backing services</strong> tab and select your backing service.</p>
+  </li>
+  <li><p>Select the <strong>Metrics</strong> tab.</p>
+  </li>
 </ol>
-<p><h2 id="exporting-backing-service-metrics-to-prometheus">Exporting backing service metrics to Prometheus</h2><p>If you are an advanced user you may want to export backing service metrics into your own system. To help you do this we can export your backing service metrics in Prometheus format.</p>
+
+<h2 id="exporting-backing-service-metrics-to-prometheus">Exporting backing service metrics to Prometheus</h2>
+
+<p>If you are an advanced user you may want to export backing service metrics into your own system. To help you do this we can export your backing service metrics in Prometheus format.</p>
+
 <p>Postgres and MySQL metrics can be exported using <a href="/monitoring_apps.html#use-the-paas-prometheus-exporter-app">the PaaS Prometheus exporter</a>.</p>
-<p>Elasticsearch and Redis metrics can be exported on request. Please contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a></p>
-<p>In theory it is possible to run <a href="https://prometheus.io">Prometheus</a> on the GOV.UK PaaS. By default Prometheus stores data on-disk, but our apps do not have persistent storage. Instead Prometheus can be configured to store data in our <a href="/deploying_services/influxdb/">InfluxDB backing service</a>. We have not tested this in production but would be eager to hear results.</p></p>
-<p><h2 id="backing-service-logs">Backing service logs</h2><p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a> or <a href="deploying_services/mysql/#mysql">MySQL</a> backing services,
+
+<p>Elasticsearch and Redis metrics can be exported on request. Please contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a></p>
+
+<p>In theory it is possible to run <a href="https://prometheus.io">Prometheus</a> on the GOV.UK PaaS. By default Prometheus stores data on-disk, but our apps do not have persistent storage. Instead Prometheus can be configured to store data in our <a href="/deploying_services/influxdb/">InfluxDB backing service</a>. We have not tested this in production but would be eager to hear results.</p>
+
+<h2 id="backing-service-logs">Backing service logs</h2>
+
+<p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a> or <a href="deploying_services/mysql/#mysql">MySQL</a> backing services,<br />
 you can view logs for those backing services in the GOV.UK PaaS admin tool.</p>
+
 <h3 id="view-backing-service-logs">View backing service logs</h3>
+
 <ol>
-<li>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
-<li>Select the <strong>Organisation</strong> and <strong>Space</strong>.</li>
-<li>Select the <strong>Backing services</strong> tab and select your backing service.</li>
-<li>Select the <strong>Logs</strong> tab.</li>
-<li>To download the logs, click the name of the log file</li>
+  <li><p>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li><p>Select the <strong>Organisation</strong> and <strong>Space</strong>.</p>
+  </li>
+  <li><p>Select the <strong>Backing services</strong> tab and select your backing service.</p>
+  </li>
+  <li><p>Select the <strong>Logs</strong> tab.</p>
+  </li>
+  <li><p>To download the logs, click the name of the log file</p>
+  </li>
 </ol>
-<p>These logs are provided directly by the backing service provider.</p></p>
-<p><h2 id="more-about-monitoring">More about monitoring</h2><p>To learn how to monitor your apps, see our <a href="/monitoring_apps.html">documentation on monitoring apps</a>.</p></p>
+
+<p>These logs are provided directly by the backing service provider.</p>
+
+<h2 id="more-about-monitoring">More about monitoring</h2>
+
+<p>To learn how to monitor your apps, see our <a href="/monitoring_apps.html">documentation on monitoring apps</a>.</p>
+
 
             
           </main>

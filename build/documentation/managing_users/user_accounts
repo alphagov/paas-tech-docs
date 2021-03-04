@@ -1,21 +1,51 @@
-<h1 id="managing-users">Managing users</h1><h2 id="user-management-overview">User management overview</h2><p>GOV.UK PaaS relies on the Cloud Foundry user management system to determine what each individual tenant user account can do.</p>
-<p>Note that the &ldquo;users&rdquo; we&rsquo;re talking about here are members of your team who use the command-line tool to manage apps on the PaaS, <strong>not</strong> the end users of your apps.</p>
-<p>In this section, we&rsquo;ll cover the most common roles and describe what they mean for how you use the PaaS.</p>
+<h1 id="managing-users">Managing users</h1>
+
+<h2 id="user-management-overview">User management overview</h2>
+
+<p>GOV.UK PaaS relies on the Cloud Foundry user management system to determine what each individual tenant user account can do.</p>
+
+<p>Note that the "users" we're talking about here are members of your team who use the command-line tool to manage apps on the PaaS, <strong>not</strong> the end users of your apps.</p>
+
+<p>In this section, we'll cover the most common roles and describe what they mean for how you use the PaaS.</p>
+
 <p>Refer to <a href="https://docs.cloudfoundry.org/concepts/roles.html">the Cloud Foundry documentation on roles</a> for more information.</p>
-<h2 id="user-roles">User roles</h2><p>There are multiple <strong>roles</strong> that a user can have. These are always defined in relation to an <a href="/#organisations">organisation</a> or a <a href="/#spaces">space</a>. A user can have different roles in different orgs or spaces. A user can have more than one role within the same org or space.</p>
+
+<h2 id="user-roles">User roles</h2>
+
+<p>There are multiple <strong>roles</strong> that a user can have. These are always defined in relation to an <a href="/#organisations">organisation</a> or a <a href="/#spaces">space</a>. A user can have different roles in different orgs or spaces. A user can have more than one role within the same org or space.</p>
+
 <p>To find out details of the users in an organisation and their roles, run:</p>
+
 <p><code>cf org-users ORGNAME</code></p>
+
 <p>where <code>ORGNAME</code> is the name of the organisation; use <code>cf orgs</code> to find out the names of organisations you can access.</p>
-<h3 id="space-developer">Space Developer</h3><p>This role applies within a particular space.</p>
+
+<h3 id="space-developer">Space Developer</h3>
+<p>This role applies within a particular space.</p>
+
 <p>A Space Developer can push, start and stop apps, and create and bind services. This is the default role for a user who is not a manager.</p>
+
 <p>For example, suppose you have <code>testing</code> and <code>production</code> spaces. You choose to grant a new junior developer the Space Developer role in the <code>testing</code> space, but no role in the <code>production</code> space. As a result, the developer can change apps in <code>testing</code>, but cannot do anything in <code>production</code>.</p>
-<h3 id="space-manager">Space Manager</h3><p>This role applies within a particular space.</p>
+
+<h3 id="space-manager">Space Manager</h3>
+<p>This role applies within a particular space.</p>
+
 <p>A Space Manager can grant user roles within the space, and change properties of the space, such as the name. Being a Space Manager does not grant the ability to change apps or services, so you need the Space Developer role as well if you want to be able to do both things.</p>
+
 <p>For example, suppose you have a senior developer who manages junior developers who work in your <code>testing</code> space, and also needs to change apps in both <code>testing</code> and <code>production</code> spaces. You choose to grant the senior developer the Space Manager role in the <code>testing</code> space, and the Space Developer role in both <code>testing</code> and <code>production</code>. As a result, the developer can add users to <code>testing</code> but not to <code>production</code>, and can change apps in both spaces.</p>
-<h3 id="org-manager">Org Manager</h3><p>This role applies to a particular organisation. Typically, each team only has one organisation, but you can have more than one.</p>
+
+<h3 id="org-manager">Org Manager</h3>
+<p>This role applies to a particular organisation. Typically, each team only has one organisation, but you can have more than one.</p>
+
 <p>An Org Manager can create/delete spaces and edit user roles. See the sections on <a href="/#managing-spaces">Managing spaces</a> and <a href="/#granting-access">Granting access</a> for details.</p>
+
 <p>As an Org Manager, you have responsibilities related to adding and removing users: see the section on <a href="/#user-lifecycle">User lifecycle</a>.</p>
+
 <p>As part of our onboarding process, we will create an account with the Org Manager role. We recommend you have at least two people who are Org Managers, in case one is unavailable. The Org Managers would typically be senior staff: for example, you might choose to grant the role to your technical architect and a lead developer.</p>
+
 <p>We will treat your Org Managers as our primary contacts for support issues. They will need to approve changes like adding new users, setting quotas and enabling paid services.</p>
-<p>If you need the Org Manager role to be added to a user account, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
-<h3 id="space-auditor">Space Auditor</h3><p>Space Auditors can view spaces but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.</p>
+
+<p>If you need the Org Manager role to be added to a user account, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
+<h3 id="space-auditor">Space Auditor</h3>
+<p>Space Auditors can view spaces but cannot edit them. This role is useful for viewing app data without modifying it, for example, monitoring time-series metrics data.</p>

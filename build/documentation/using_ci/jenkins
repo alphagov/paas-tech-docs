@@ -1,46 +1,82 @@
-<h2 id="push-an-app-with-jenkins">Push an app with Jenkins</h2><p>There are two main approaches to pushing applications to GOV.UK PaaS with <a href="https://jenkins.io/">Jenkins</a>:</p>
+<h2 id="push-an-app-with-jenkins">Push an app with Jenkins</h2>
+
+<p>There are two main approaches to pushing applications to GOV.UK PaaS with <a href="https://jenkins.io/">Jenkins</a>:</p>
 
 <ol>
-<li>Use custom scripts (allows full scripting of deployments)</li>
-<li>Use the Cloud Foundry plugin for Jenkins (less flexible, relies on application manifest for configuration)</li>
+  <li><p>Use custom scripts (allows full scripting of deployments)</p>
+  </li>
+  <li><p>Use the Cloud Foundry plugin for Jenkins (less flexible, relies on application manifest for configuration)</p>
+  </li>
 </ol>
+
 <p>Both approaches require you to set up the credentials plugin first.</p>
-<h3 id="set-up-dedicated-accounts">Set up dedicated accounts</h3><p>CI systems should not use normal user accounts. Find out more about <a href="/using_ci.html#configure-your-ci-tool-accounts">configuring your CI tool accounts</a> in PaaS.</p>
-<h3 id="setting-up-the-credentials-plugin">Setting up the credentials plugin</h3><p>To install the credentials plugin manually:</p>
+
+<h3 id="set-up-dedicated-accounts">Set up dedicated accounts</h3>
+
+<p>CI systems should not use normal user accounts. Find out more about <a href="/using_ci.html#configure-your-ci-tool-accounts">configuring your CI tool accounts</a> in PaaS.</p>
+
+<h3 id="setting-up-the-credentials-plugin">Setting up the credentials plugin</h3>
+
+<p>To install the credentials plugin manually:</p>
 
 <ol>
-<li>In the Jenkins web interface, click on <strong>Manage Jenkins</strong>, then <strong>Manage Plugins</strong>.</li>
-<li>Click on the <strong>Installed</strong> tab and check if &ldquo;Credentials Plugin&rdquo; is listed. If it&rsquo;s listed, skip the next step.</li>
-<li>Click on the <strong>Available</strong> tab and find &ldquo;Credentials Plugin&rdquo;. Check the box to select the plugin, then click either <strong>Install without restart</strong> or <strong>Download now and install after restart</strong> at the bottom of the interface.</li>
+  <li><p>In the Jenkins web interface, click on <strong>Manage Jenkins</strong>, then <strong>Manage Plugins</strong>.</p>
+  </li>
+  <li><p>Click on the <strong>Installed</strong> tab and check if "Credentials Plugin" is listed. If it's listed, skip the next step.</p>
+  </li>
+  <li><p>Click on the <strong>Available</strong> tab and find "Credentials Plugin". Check the box to select the plugin, then click either <strong>Install without restart</strong> or <strong>Download now and install after restart</strong> at the bottom of the interface.</p>
+  </li>
 </ol>
+
 <p>Once the plugin is installed, you will see a <strong>Credentials</strong> link in the left-hand navigation menu.</p>
+
 <p>Now you can add credentials for the Cloud Foundry user you will be using to push apps from Jenkins.</p>
 
 <ol>
-<li>Click on <strong>Credentials</strong>, then <strong>System</strong>. By default, you will see a &lsquo;Global credentials (unrestricted)&rsquo; domain. You should set up a different domain for each deployment target/PaaS user account.</li>
-<li>Click <strong>Add domain</strong> and enter a name and description, then click <strong>Save</strong>.</li>
-<li>Click <strong>Add credentials</strong> and enter the PaaS user account credentials. The kind of credentials is &lsquo;Username with password&rsquo;, which is typically selected by default.</li>
+  <li><p>Click on <strong>Credentials</strong>, then <strong>System</strong>. By default, you will see a 'Global credentials (unrestricted)' domain. You should set up a different domain for each deployment target/PaaS user account.</p>
+  </li>
+  <li><p>Click <strong>Add domain</strong> and enter a name and description, then click <strong>Save</strong>.</p>
+  </li>
+  <li><p>Click <strong>Add credentials</strong> and enter the PaaS user account credentials. The kind of credentials is 'Username with password', which is typically selected by default.</p>
+  </li>
 </ol>
+
 <p>You can now go on to either:</p>
 
 <ul>
-<li><a href="/using_ci.html#setting-up-custom-scripts">set up custom scripts</a> <em>or</em></li>
-<li><a href="/using_ci.html#setting-up-the-cloud-foundry-jenkins-plugin">set up the Cloud Foundry plugin</a></li>
+  <li><p><a href="/using_ci.html#setting-up-custom-scripts">set up custom scripts</a> <em>or</em></p>
+  </li>
+  <li><p><a href="/using_ci.html#setting-up-the-cloud-foundry-jenkins-plugin">set up the Cloud Foundry plugin</a></p>
+  </li>
 </ul>
-<h3 id="setting-up-custom-scripts">Setting up custom scripts</h3><p>Before you set up custom scripts, make sure you first <a href="/using_ci.html#setting-up-the-credentials-plugin">set up the credentials plugin</a>.</p>
+
+<h3 id="setting-up-custom-scripts">Setting up custom scripts</h3>
+
+<p>Before you set up custom scripts, make sure you first <a href="/using_ci.html#setting-up-the-credentials-plugin">set up the credentials plugin</a>.</p>
+
 <p>Note that using the custom scripts approach exposes the password through the process command line, so it can be read by other processes running on the same machine. If this risk is not acceptable, please use the Cloud Foundry plugin described below. The Cloud Foundry project is aware of the problem and we expect they will provide a more secure login mechanism soon.</p>
+
 <p>The custom scripts approach needs the Jenkins credentials binding plugin. To install it manually:</p>
 
 <ol>
-<li>In the Jenkins web interface, click on <strong>Manage Jenkins</strong>, then <strong>Manage Plugins</strong>.</li>
-<li>Click on the <strong>Available</strong> tab and find &ldquo;Credentials Binding Plugin&rdquo;. Check the box to select the plugin, then click either <strong>Install without restart</strong> or <strong>Download now and install after restart</strong> at the bottom of the interface.</li>
-<li>In your build configuration, select the <strong>Use secret text(s) or file(s)</strong> checkbox in the &ldquo;Build Environment&rdquo; section.</li>
-<li>Click on the <strong>Add</strong> drop down menu and select <strong>Username and password (separated)</strong>.</li>
-<li>Choose your variable names and select the user whose credentials will be used.</li>
+  <li><p>In the Jenkins web interface, click on <strong>Manage Jenkins</strong>, then <strong>Manage Plugins</strong>.</p>
+  </li>
+  <li><p>Click on the <strong>Available</strong> tab and find "Credentials Binding Plugin". Check the box to select the plugin, then click either <strong>Install without restart</strong> or <strong>Download now and install after restart</strong> at the bottom of the interface.</p>
+  </li>
+  <li><p>In your build configuration, select the <strong>Use secret text(s) or file(s)</strong> checkbox in the "Build Environment" section.</p>
+  </li>
+  <li><p>Click on the <strong>Add</strong> drop down menu and select <strong>Username and password (separated)</strong>.</p>
+  </li>
+  <li><p>Choose your variable names and select the user whose credentials will be used.</p>
+  </li>
 </ol>
+
 <p>Once this is set up, any shell scripts you configure in Jenkins will have the credentials available as environment variables.</p>
+
 <p>To protect these credentials and prevent them leaking to other Jenkins jobs, we suggest you set your <code>CF_HOME</code> to a temporary directory.</p>
-<p>A basic &lsquo;execute shell&rsquo; buildstep would look like this:</p>
+
+<p>A basic 'execute shell' buildstep would look like this:</p>
+
 <div class="highlight"><pre class="highlight shell"><code><span class="c"># Set CF_HOME in a temp dir so that jobs do not share or overwrite each others' credentials.</span>
 <span class="nb">export </span><span class="nv">CF_HOME</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">mktemp</span> <span class="nt">-d</span><span class="si">)</span><span class="s2">"</span>
 <span class="nb">trap</span> <span class="s1">'rm -r $CF_HOME'</span> EXIT
@@ -58,22 +94,37 @@ cf push
 
 <span class="c"># Destroy token</span>
 cf <span class="nb">logout</span>
-</code></pre></div><h3 id="setting-up-the-cloud-foundry-jenkins-plugin">Setting up the Cloud Foundry Jenkins plugin</h3><p>Using the Cloud Foundry plugin only allows Jenkins to push your application to GOV.UK PaaS as a post-build action: the equivalent of doing a <code>cf login</code> followed by a <code>cf push</code>. There is little scope for configuration beyond using the application manifest.</p>
+</code></pre></div>
+<h3 id="setting-up-the-cloud-foundry-jenkins-plugin">Setting up the Cloud Foundry Jenkins plugin</h3>
+
+<p>Using the Cloud Foundry plugin only allows Jenkins to push your application to GOV.UK PaaS as a post-build action: the equivalent of doing a <code>cf login</code> followed by a <code>cf push</code>. There is little scope for configuration beyond using the application manifest.</p>
+
 <p>Before you do these steps, make sure you first <a href="/using_ci.html#setting-up-the-credentials-plugin">set up the credentials plugin</a>.</p>
+
 <p>To install the Cloud Foundry plugin manually:</p>
 
 <ol>
-<li>In the Jenkins web interface, click on <strong>Manage Jenkins</strong>, then <strong>Manage Plugins</strong>.</li>
-<li>Click on the <strong>Available</strong> tab and find &ldquo;Cloud Foundry Plugin&rdquo;. Check the box to select the plugin, then click either <strong>Install without restart</strong> or <strong>Download now and install after restart</strong> at the bottom of the interface.</li>
+  <li><p>In the Jenkins web interface, click on <strong>Manage Jenkins</strong>, then <strong>Manage Plugins</strong>.</p>
+  </li>
+  <li><p>Click on the <strong>Available</strong> tab and find "Cloud Foundry Plugin". Check the box to select the plugin, then click either <strong>Install without restart</strong> or <strong>Download now and install after restart</strong> at the bottom of the interface.</p>
+  </li>
 </ol>
-<p>An extra post-build action called &ldquo;Push to Cloud Foundry&rdquo; is now available in the dropdown menu when you configure a job.</p>
+
+<p>An extra post-build action called "Push to Cloud Foundry" is now available in the dropdown menu when you configure a job.</p>
 
 <ol>
-<li>In your job&rsquo;s configuration, click the <strong>Add post-build action</strong> dropdown menu and select <strong>Push to Cloud Foundry</strong>.</li>
-<li>In the <strong>Target</strong> field, enter either <code>https://api.cloud.service.gov.uk</code> for the Ireland region, or <code>https://api.london.cloud.service.gov.uk</code> for the London region.</li>
-<li>In <strong>Credentials</strong>, select the user you created using the credentials plugin.</li>
-<li>Enter your organisation and the space the application will be deployed to. See <a href="/orgs_spaces_users.html#managing-organisations-spaces-and-users">Managing orgs, spaces and users</a> for more details about organisations and spaces. You do not need to tick &ldquo;Allow self-signed certificate&rdquo; or &ldquo;Reset app if already exists&rdquo;.</li>
-<li>The rest of the fields can be left with their default values. The plugin expects you to have a manifest file called <code>manifest.yml</code> in the root of the application folder. If you do not, you can provide the path to the application manifest, or enter a manifest configuration directly into the plugin.</li>
-<li>Click <strong>Save</strong>.</li>
+  <li><p>In your job's configuration, click the <strong>Add post-build action</strong> dropdown menu and select <strong>Push to Cloud Foundry</strong>.</p>
+  </li>
+  <li><p>In the <strong>Target</strong> field, enter either <code>https://api.cloud.service.gov.uk</code> for the Ireland region, or <code>https://api.london.cloud.service.gov.uk</code> for the London region.</p>
+  </li>
+  <li><p>In <strong>Credentials</strong>, select the user you created using the credentials plugin.</p>
+  </li>
+  <li><p>Enter your organisation and the space the application will be deployed to. See <a href="/orgs_spaces_users.html#managing-organisations-spaces-and-users">Managing orgs, spaces and users</a> for more details about organisations and spaces. You do not need to tick "Allow self-signed certificate" or "Reset app if already exists".</p>
+  </li>
+  <li><p>The rest of the fields can be left with their default values. The plugin expects you to have a manifest file called <code>manifest.yml</code> in the root of the application folder. If you do not, you can provide the path to the application manifest, or enter a manifest configuration directly into the plugin.</p>
+  </li>
+  <li><p>Click <strong>Save</strong>.</p>
+  </li>
 </ol>
-<p>Further information can be found on the <a href="https://wiki.jenkins-ci.org/display/JENKINS/Cloud+Foundry+Plugin">Cloud Foundry plugin&rsquo;s wiki page</a>.</p>
+
+<p>Further information can be found on the <a href="https://wiki.jenkins-ci.org/display/JENKINS/Cloud+Foundry+Plugin">Cloud Foundry plugin's wiki page</a>.</p>

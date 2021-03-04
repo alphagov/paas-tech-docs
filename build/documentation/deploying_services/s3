@@ -1,50 +1,92 @@
-<h1 id="amazon-s3">Amazon S3</h1><p>Amazon S3 provides data object storage through a web service interface.</p>
-<p>To provide any feedback on this feature, contact the GOV.UK PaaS team at
-<a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+<h1 id="amazon-s3">Amazon S3</h1>
+
+<p>Amazon S3 provides data object storage through a web service interface.</p>
+
+<p>To provide any feedback on this feature, contact the GOV.UK PaaS team at<br />
+<a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
 
 <h2 id="set-up-the-service">Set up the service</h2>
-<h3 id="provision-an-amazon-web-service-s3-bucket">Provision an Amazon Web Service S3 bucket</h3><p>Creating a service instance provisions an Amazon Web Service (AWS) Simple Storage Service (S3) bucket.</p>
+
+<h3 id="provision-an-amazon-web-service-s3-bucket">Provision an Amazon Web Service S3 bucket</h3>
+
+<p>Creating a service instance provisions an Amazon Web Service (AWS) Simple Storage Service (S3) bucket.</p>
+
 <p>The name of the service overall is <code>aws-s3-bucket</code>. There’s one type of plan available for the service named <code>default</code>. This plan has unlimited data, storage, and resources.</p>
+
 <p>S3 buckets can be either private or public:</p>
 
 <ul>
-<li>private S3 buckets are only accessible using apps that you bind to that bucket</li>
-<li>files in public S3 buckets can be downloaded by anyone with the URL for those files</li>
+  <li><p>private S3 buckets are only accessible using apps that you bind to that bucket</p>
+  </li>
+  <li><p>files in public S3 buckets can be downloaded by anyone with the URL for those files</p>
+  </li>
 </ul>
+
 <p>AWS encrypts S3 buckets using <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html">Amazon S3-managed encryption keys</a>. You do not have to enable this encryption because it is enabled by default.</p>
-<h4 id="provision-a-private-aws-s3-bucket">Provision a private AWS S3 bucket</h4><p>Run the following in the command line to provision a private AWS S3 bucket:</p>
+
+<h4 id="provision-a-private-aws-s3-bucket">Provision a private AWS S3 bucket</h4>
+
+<p>Run the following in the command line to provision a private AWS S3 bucket:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf create-service aws-s3-bucket default SERVICE_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this S3 bucket.</p>
-<h4 id="provision-a-public-aws-s3-bucket">Provision a public AWS S3 bucket</h4><p>Public S3 buckets can be useful for tasks such as:</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this S3 bucket.</p>
+
+<h4 id="provision-a-public-aws-s3-bucket">Provision a public AWS S3 bucket</h4>
+
+<p>Public S3 buckets can be useful for tasks such as:</p>
 
 <ul>
-<li>storing static objects that you do not want to include with your app</li>
-<li>hosting <code>404</code> error pages that work independently of your app</li>
+  <li><p>storing static objects that you do not want to include with your app</p>
+  </li>
+  <li><p>hosting <code>404</code> error pages that work independently of your app</p>
+  </li>
 </ul>
+
 <p>Run the following in the command line to provision a public AWS S3 bucket:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf create-service aws-s3-bucket default SERVICE_NAME -c '{"public_bucket":true}'
 </code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this S3 bucket.</p>
-<h3 id="bind-an-aws-s3-bucket-to-your-app">Bind an AWS S3 bucket to your app</h3><p>You must bind the S3 bucket to your app so you can get credentials to use the <a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/">AWS S3 API</a> to read from and write to the bucket.</p>
+
+<h3 id="bind-an-aws-s3-bucket-to-your-app">Bind an AWS S3 bucket to your app</h3>
+
+<p>You must bind the S3 bucket to your app so you can get credentials to use the <a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/">AWS S3 API</a> to read from and write to the bucket.</p>
+
 <p>You can bind an S3 bucket using the command line or the manifest file. You must use the command line when you want to specify permissions for the bucket.</p>
+
 <p>Run the following to bind the S3 bucket to your app:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf bind-service APP_NAME SERVICE_NAME -c '{"permissions": "PERMISSION"}'
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>APP_NAME</code> is the name of a deployed instance of your app, as specified in your app&rsquo;s manifest or push command</li>
-<li><code>SERVICE_NAME</code> is a unique descriptive name for this S3 bucket</li>
-<li><code>PERMISSION</code> is the permission level and can be either <code>read-write</code> or <code>read-only</code></li>
+  <li><p><code>APP_NAME</code> is the name of a deployed instance of your app, as specified in your app's manifest or push command</p>
+  </li>
+  <li><p><code>SERVICE_NAME</code> is a unique descriptive name for this S3 bucket</p>
+  </li>
+  <li><p><code>PERMISSION</code> is the permission level and can be either <code>read-write</code> or <code>read-only</code></p>
+  </li>
 </ul>
-<p>You can use the <a href="https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-public-apps">app&rsquo;s manifest</a> to bind an S3 bucket to the app with default read and write permissions only. It will bind automatically when you next deploy your app. An example manifest:</p>
+
+<p>You can use the <a href="https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-public-apps">app's manifest</a> to bind an S3 bucket to the app with default read and write permissions only. It will bind automatically when you next deploy your app. An example manifest:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>--
 applications:
 - name: APP_NAME
   services:
   - SERVICE_NAME
-</code></pre></div><p>By default, you can only <a href="#connect-to-an-s3-bucket-from-your-app">connect to an S3 bucket from your GOV.UK PaaS-hosted app</a>.</p>
+</code></pre></div>
+<p>By default, you can only <a href="#connect-to-an-s3-bucket-from-your-app">connect to an S3 bucket from your GOV.UK PaaS-hosted app</a>.</p>
+
 <p>To <a href="#connect-to-an-s3-bucket-from-outside-of-the-gov-uk-paas">connect to an S3 bucket from outside the GOV.UK PaaS</a>, you must create a service key.</p>
-<h3 id="connect-to-an-s3-bucket-from-your-app">Connect to an S3 bucket from your app</h3><p>Restart your app to populate your <code>VCAP_SERVICES</code> <a href="/deploying_apps.html#system-provided-environment-variables">environment variable</a> with the credentials needed to connect to the S3 bucket.</p>
+
+<h3 id="connect-to-an-s3-bucket-from-your-app">Connect to an S3 bucket from your app</h3>
+
+<p>Restart your app to populate your <code>VCAP_SERVICES</code> <a href="/deploying_apps.html#system-provided-environment-variables">environment variable</a> with the credentials needed to connect to the S3 bucket.</p>
+
 <p>An example <code>VCAP_SERVICES</code> environment variable:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>{
  "VCAP_SERVICES": {
   "aws-s3-bucket": [
@@ -72,106 +114,154 @@ applications:
  }
 }
 </code></pre></div><p>You must pass credentials from your <code>VCAP_SERVICES</code> environment variable to your AWS software development kit (SDK). Use the appropriate <a href="https://aws.amazon.com/developer/tools/#sdks">Amazon SDK documentation</a> to do this.</p>
-<h3 id="connect-to-an-s3-bucket-from-outside-of-the-gov-uk-paas">Connect to an S3 bucket from outside of the GOV.UK PaaS</h3><p>To connect to an S3 bucket from outside of the GOV.UK PaaS, you must create a service key and credentials that allow external access to the bucket.</p>
+
+<h3 id="connect-to-an-s3-bucket-from-outside-of-the-govuk-paas">Connect to an S3 bucket from outside of the GOV.UK PaaS</h3>
+
+<p>To connect to an S3 bucket from outside of the GOV.UK PaaS, you must create a service key and credentials that allow external access to the bucket.</p>
 
 <ol>
-<li><p>Create a service key and credentials to allow external access:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf create-service-key SERVICE_NAME SERVICE_KEY -c '{"allow_external_access": true}'
-</code></pre></div><p>where:</p>
+  <li>
+<p>Create a service key and credentials to allow external access:</p>
 
-<ul>
-<li><code>SERVICE_NAME</code> is the unique descriptive name for the S3 bucket</li>
-<li><code>SERVICE_KEY</code> is a unique descriptive name for the service key</li>
-</ul></li>
-<li><p>Get the service key credentials:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service-key SERVICE_NAME SERVICE_KEY
-</code></pre></div><p>You will see output similar to the following:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>{
- "aws_access_key_id": "AWS_ACCESS_KEY",
- "aws_region": "AWS_REGION",
- "aws_secret_access_key": "AWS_SECRET_ACCESS_KEY",
- "bucket_name": "BUCKET_NAME",
- "deploy_env": ""
-}
-</code></pre></div><p>Use these credentials to connect to the S3 bucket from outside of the GOV.UK PaaS.</p></li>
+<div class="highlight"><pre class="highlight plaintext"><code> cf create-service-key SERVICE_NAME SERVICE_KEY -c '{"allow_external_access": true}'
+</code></pre></div><p>where:</p>
+    <ul>
+      <li><p><code>SERVICE_NAME</code> is the unique descriptive name for the S3 bucket</p>
+      </li>
+      <li><p><code>SERVICE_KEY</code> is a unique descriptive name for the service key</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+<p>Get the service key credentials:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf service-key SERVICE_NAME SERVICE_KEY
+</code></pre></div>
+<p>You will see output similar to the following:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> {
+  "aws_access_key_id": "AWS_ACCESS_KEY",
+  "aws_region": "AWS_REGION",
+  "aws_secret_access_key": "AWS_SECRET_ACCESS_KEY",
+  "bucket_name": "BUCKET_NAME",
+  "deploy_env": ""
+ }
+</code></pre></div>
+<p>Use these credentials to connect to the S3 bucket from outside of the GOV.UK PaaS.</p>
+  </li>
 </ol>
-<h4 id="listing-and-revoking-service-keys">Listing and revoking service keys</h4><p>You can list all service keys for a service by running the following:</p>
+
+<h4 id="listing-and-revoking-service-keys">Listing and revoking service keys</h4>
+
+<p>You can list all service keys for a service by running the following:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf service-keys SERVICE_NAME
-</code></pre></div><p>These credentials persist and do not get automatically deleted when you sign out of the GOV.UK PaaS. If you do not need these credentials, you should delete them by running:</p>
+</code></pre></div>
+<p>These credentials persist and do not get automatically deleted when you sign out of the GOV.UK PaaS. If you do not need these credentials, you should delete them by running:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete-service-key MY_SERVICE MY_KEY
 </code></pre></div>
 <h2 id="use-the-service">Use the service</h2>
+
 <p>You can take different actions on an S3 bucket using the <a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/">AWS S3 API</a>. The actions you can take depend on your permission level for that bucket.</p>
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
+
 <div class="table-container">
         <table>
-          <tr>
-<th style="text-align: left">Description</th>
-<th style="text-align: left">Command</th>
-<th style="text-align: left">Permission</th>
-</tr>
-<tr>
-<td style="text-align: left">Download an object from S3 bucket</td>
-<td style="text-align: left"><code>s3:GetObject</code></td>
-<td style="text-align: left"><code>read-write</code>, <code>read-only</code></td>
-</tr>
-<tr>
-<td style="text-align: left">Upload an object to S3 bucket</td>
-<td style="text-align: left"><code>s3:PutObject</code></td>
-<td style="text-align: left"><code>read-write</code></td>
-</tr>
-<tr>
-<td style="text-align: left">Delete an object from S3 bucket</td>
-<td style="text-align: left"><code>s3:DeleteObject</code></td>
-<td style="text-align: left"><code>read-write</code></td>
-</tr>
-<tr>
-<td style="text-align: left">Get AWS region of S3 bucket</td>
-<td style="text-align: left"><code>s3:GetBucketLocation</code></td>
-<td style="text-align: left"><code>read-write</code>, <code>read-only</code></td>
-</tr>
-<tr>
-<td style="text-align: left">List objects in S3 bucket</td>
-<td style="text-align: left"><code>s3:ListBucket</code></td>
-<td style="text-align: left"><code>read-write</code>, <code>read-only</code></td>
-</tr>
-<tr>
-<td style="text-align: left">Upload a <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html">CORS policy</a></td>
-<td style="text-align: left"><code>s3:PutBucketCORS</code></td>
-<td style="text-align: left"><code>read-write</code></td>
-</tr>
-<tr>
-<td style="text-align: left">Download a <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html">CORS policy</a></td>
-<td style="text-align: left"><code>s3:GetBucketCORS</code></td>
-<td style="text-align: left"><code>read-write</code>, <code>read-only</code></td>
-</tr>
+  <thead>
+    <tr>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Command</th>
+      <th style="text-align: left">Permission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Download an object from S3 bucket</td>
+      <td style="text-align: left"><code>s3:GetObject</code></td>
+      <td style="text-align: left"><code>read-write</code>, <code>read-only</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Upload an object to S3 bucket</td>
+      <td style="text-align: left"><code>s3:PutObject</code></td>
+      <td style="text-align: left"><code>read-write</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Delete an object from S3 bucket</td>
+      <td style="text-align: left"><code>s3:DeleteObject</code></td>
+      <td style="text-align: left"><code>read-write</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Get AWS region of S3 bucket</td>
+      <td style="text-align: left"><code>s3:GetBucketLocation</code></td>
+      <td style="text-align: left"><code>read-write</code>, <code>read-only</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">List objects in S3 bucket</td>
+      <td style="text-align: left"><code>s3:ListBucket</code></td>
+      <td style="text-align: left"><code>read-write</code>, <code>read-only</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Upload a <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html">CORS policy</a></td>
+      <td style="text-align: left"><code>s3:PutBucketCORS</code></td>
+      <td style="text-align: left"><code>read-write</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Download a <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html">CORS policy</a></td>
+      <td style="text-align: left"><code>s3:GetBucketCORS</code></td>
+      <td style="text-align: left"><code>read-write</code>, <code>read-only</code></td>
+    </tr>
+  </tbody>
+</table>
 
-        </table>
       </div>
 <div style="height:1px;font-size:1px;">&nbsp;</div>
-<h3 id="access-objects-in-a-public-aws-s3-bucket">Access objects in a public AWS S3 bucket</h3><p>Once you have uploaded an object to a <a href="#provision-a-public-aws-s3-bucket">public S3 bucket</a>, you can find that object at:</p>
+
+<h3 id="access-objects-in-a-public-aws-s3-bucket">Access objects in a public AWS S3 bucket</h3>
+
+<p>Once you have uploaded an object to a <a href="#provision-a-public-aws-s3-bucket">public S3 bucket</a>, you can find that object at:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>https://BUCKET_NAME.s3.amazonaws.com/KEY
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>BUCKET_NAME</code> is the <code>bucket_name</code> value in the bucket <a href="/deploying_apps.html#system-provided-environment-variables">environment variables</a> </li>
-<li><code>KEY</code> is the key you gave to the object when uploading that object to the bucket</li>
+  <li><p><code>BUCKET_NAME</code> is the <code>bucket_name</code> value in the bucket <a href="/deploying_apps.html#system-provided-environment-variables">environment variables</a></p>
+  </li>
+  <li><p><code>KEY</code> is the key you gave to the object when uploading that object to the bucket</p>
+  </li>
 </ul>
 
 <h2 id="remove-the-service">Remove the service</h2>
-<h3 id="unbind-an-s3-bucket-from-your-app">Unbind an S3 bucket from your app</h3><p>Run the following in the command line to unbind the S3 bucket from the app:</p>
+
+<h3 id="unbind-an-s3-bucket-from-your-app">Unbind an S3 bucket from your app</h3>
+
+<p>Run the following in the command line to unbind the S3 bucket from the app:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service APP_NAME SERVICE_NAME
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>APP_NAME</code> is the name of a deployed instance of your app, as specified in your app&rsquo;s manifest or push command</li>
-<li><code>SERVICE_NAME</code> is a unique descriptive name for this S3 bucket</li>
+  <li><p><code>APP_NAME</code> is the name of a deployed instance of your app, as specified in your app's manifest or push command</p>
+  </li>
+  <li><p><code>SERVICE_NAME</code> is a unique descriptive name for this S3 bucket</p>
+  </li>
 </ul>
+
 <p>If you unbind the S3 bucket from your app but do not delete the bucket, that bucket will persist even after you delete your app. You can re-bind or re-connect to the bucket in future.</p>
-<h3 id="delete-an-s3-bucket">Delete an S3 bucket</h3><p>You must delete all objects from the S3 bucket before you can delete the bucket itself.</p>
+
+<h3 id="delete-an-s3-bucket">Delete an S3 bucket</h3>
+
+<p>You must delete all objects from the S3 bucket before you can delete the bucket itself.</p>
+
 <p>You must have read and write permissions for an S3 bucket to delete objects from that bucket.</p>
+
 <p>Use the <a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/">AWS S3 API</a> to delete objects from the bucket.</p>
+
 <p>Run the following in the command line to delete the S3 bucket:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete-service SERVICE_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this S3 bucket.</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this S3 bucket.</p>

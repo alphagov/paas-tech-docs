@@ -1,5 +1,9 @@
-<h2 id="redirecting-all-traffic">Redirecting all traffic</h2><p>If a site moves to a different domain name, you can use a simple static site with a custom <code>nginx.conf</code>
+
+<h2 id="redirecting-all-traffic">Redirecting all traffic</h2>
+
+<p>If a site moves to a different domain name, you can use a simple static site with a custom <code>nginx.conf</code><br />
 file to redirect all traffic from the old domain to the new domain. Example <code>nginx.conf</code> site for <code>NEW_DOMAIN_NAME</code>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>worker_processes 1;
 daemon off;
 
@@ -13,6 +17,8 @@ http {
     return 301 $scheme://NEW_DOMAIN_NAME$request_uri;
   }
 }
-</code></pre></div><p>Deploy your application to <code>NEW_DOMAIN_NAME</code> and then <code>cf push</code> a simple static site with that <code>nginx.conf</code>
+</code></pre></div>
+<p>Deploy your application to <code>NEW_DOMAIN_NAME</code> and then <code>cf push</code> a simple static site with that <code>nginx.conf</code><br />
 configuration to the old domain name. You can see a <a href="https://github.com/18F/c2-redirect">full working example here</a>.</p>
+
 <p>You can read more about <a href="https://github.com/cloudfoundry/staticfile-buildpack#advanced-nginx-configuration">nginx customization</a>.</p>

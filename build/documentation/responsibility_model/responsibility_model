@@ -1,61 +1,107 @@
-<h1 id="know-your-responsibilities">Know your responsibilities</h1><p>When you use the GOV.UK PaaS to host your app, both you and the GOV.UK PaaS team have responsibilities. These responsibilities change depending on whether you deploy your app using a:</p>
+<h1 id="know-your-responsibilities">Know your responsibilities</h1>
+
+<p>When you use the GOV.UK PaaS to host your app, both you and the GOV.UK PaaS team have responsibilities. These responsibilities change depending on whether you deploy your app using a:</p>
 
 <ul>
-<li>standard buildpack</li>
-<li>custom buildpack</li>
-<li>Docker image</li>
+  <li><p>standard buildpack</p>
+  </li>
+  <li><p>custom buildpack</p>
+  </li>
+  <li><p>Docker image</p>
+  </li>
 </ul>
+
 <p>Regardless of which buildpack or Docker image you use, the GOV.UK PaaS team is always responsible for keeping the infrastructure your app runs on secure.</p>
-<h2 id="standard-buildpack-responsibilities">Standard buildpack responsibilities</h2><p>GOV.UK PaaS provides a set of <a href="/deploying_apps.html#buildpacks">standard buildpacks</a>. If you&rsquo;re new to working in the cloud or have a small development team, we recommend using a standard buildpack to deploy your app. This maximises the support you receive from GOV.UK PaaS.</p>
+
+<h2 id="standard-buildpack-responsibilities">Standard buildpack responsibilities</h2>
+
+<p>GOV.UK PaaS provides a set of <a href="/deploying_apps.html#buildpacks">standard buildpacks</a>. If you're new to working in the cloud or have a small development team, we recommend using a standard buildpack to deploy your app. This maximises the support you receive from GOV.UK PaaS.</p>
+
 <p>If you use a standard buildpack, you’re responsible for:</p>
 
 <ul>
-<li>keeping your app secure</li>
-<li>making sure your app works with new buildpack versions</li>
-<li>redeploying your app so your app uses the latest version of the standard buildpack</li>
+  <li><p>keeping your app secure</p>
+  </li>
+  <li><p>making sure your app works with new buildpack versions</p>
+  </li>
+  <li><p>redeploying your app so your app uses the latest version of the standard buildpack</p>
+  </li>
 </ul>
+
 <p>The GOV.UK PaaS team is responsible for providing updates and security patches for the:</p>
 
 <ul>
-<li>build environment</li>
-<li>language runtime</li>
-<li>base operating system libraries</li>
-<li>Linux kernel</li>
+  <li><p>build environment</p>
+  </li>
+  <li><p>language runtime</p>
+  </li>
+  <li><p>base operating system libraries</p>
+  </li>
+  <li><p>Linux kernel</p>
+  </li>
 </ul>
-<h2 id="custom-buildpack-responsibilities">Custom buildpack responsibilities</h2><p>A standard buildpack may not work for your app, for example if you want to use a language GOV.UK PaaS does not support. You can use a <a href="/deploying_apps.html#how-to-use-custom-buildpacks">custom buildpack</a> to deploy your app instead of a standard buildpack.</p>
+
+<h2 id="custom-buildpack-responsibilities">Custom buildpack responsibilities</h2>
+
+<p>A standard buildpack may not work for your app, for example if you want to use a language GOV.UK PaaS does not support. You can use a <a href="/deploying_apps.html#how-to-use-custom-buildpacks">custom buildpack</a> to deploy your app instead of a standard buildpack.</p>
+
 <p>If you use a custom buildpack, you’re responsible for:</p>
 
 <ul>
-<li>keeping your app secure</li>
-<li>your custom buildpack&rsquo;s security, including your app&rsquo;s build environment and language runtime</li>
-<li>making sure your app works with new operating system versions</li>
-<li>redeploying your app so your app uses the latest operating system libraries</li>
+  <li><p>keeping your app secure</p>
+  </li>
+  <li><p>your custom buildpack's security, including your app's build environment and language runtime</p>
+  </li>
+  <li><p>making sure your app works with new operating system versions</p>
+  </li>
+  <li><p>redeploying your app so your app uses the latest operating system libraries</p>
+  </li>
 </ul>
+
 <p>The GOV.UK PaaS team is responsible for providing updates and security patches for the:</p>
 
 <ul>
-<li>base operating system libraries</li>
-<li>Linux kernel</li>
+  <li><p>base operating system libraries</p>
+  </li>
+  <li><p>Linux kernel</p>
+  </li>
 </ul>
-<h2 id="docker-image-responsibilities">Docker image responsibilities</h2><p>You can use a <a href="/deploying_apps.html#deploy-a-docker-image">Docker image</a> to deploy your app instead of a buildpack. You can do this if you are already running your app in a Docker image and are migrating your app to the GOV.UK PaaS.</p>
+
+<h2 id="docker-image-responsibilities">Docker image responsibilities</h2>
+
+<p>You can use a <a href="/deploying_apps.html#deploy-a-docker-image">Docker image</a> to deploy your app instead of a buildpack. You can do this if you are already running your app in a Docker image and are migrating your app to the GOV.UK PaaS.</p>
+
 <p>If you use a Docker image, you’re responsible for:</p>
 
 <ul>
-<li>keeping your app secure</li>
-<li>your Docker image&rsquo;s security, including your app&rsquo;s build environment, language runtime and operating system</li>
+  <li><p>keeping your app secure</p>
+  </li>
+  <li><p>your Docker image's security, including your app's build environment, language runtime and operating system</p>
+  </li>
 </ul>
+
 <p>The GOV.UK PaaS team is responsible for providing updates and security patches for the Linux kernel.</p>
-<h2 id="custom-buildpacks-compared-to-docker-images">Custom buildpacks compared to Docker images</h2><p>Custom buildpacks have the following advantages over Docker images:</p>
+
+<h2 id="custom-buildpacks-compared-to-docker-images">Custom buildpacks compared to Docker images</h2>
+
+<p>Custom buildpacks have the following advantages over Docker images:</p>
 
 <ul>
-<li>custom buildpacks provide a standard way of building and staging apps</li>
-<li>custom buildpacks do not depend on a Docker registry such as <a href="https://hub.docker.com/">Docker Hub</a> being available</li>
-<li>there is a large variety of open source custom buildpacks so your deployment pipeline does not need to include Docker image creation</li>
-<li>buildpacks are designed for 12-factor apps whereas some Docker images may contain databases or other forms of storage that should be provisioned as an external backing service</li>
+  <li><p>custom buildpacks provide a standard way of building and staging apps</p>
+  </li>
+  <li><p>custom buildpacks do not depend on a Docker registry such as <a href="https://hub.docker.com/">Docker Hub</a> being available</p>
+  </li>
+  <li><p>there is a large variety of open source custom buildpacks so your deployment pipeline does not need to include Docker image creation</p>
+  </li>
+  <li><p>buildpacks are designed for 12-factor apps whereas some Docker images may contain databases or other forms of storage that should be provisioned as an external backing service</p>
+  </li>
 </ul>
+
 <p>Docker images have the following advantages over custom buildpacks:</p>
 
 <ul>
-<li>the same Docker image can be run locally on developer machines or on any Linux-based machine</li>
-<li>exactly the same Docker image can be promoted between environments as an immutable asset, rather than being rebuilt each time</li>
+  <li><p>the same Docker image can be run locally on developer machines or on any Linux-based machine</p>
+  </li>
+  <li><p>exactly the same Docker image can be promoted between environments as an immutable asset, rather than being rebuilt each time</p>
+  </li>
 </ul>

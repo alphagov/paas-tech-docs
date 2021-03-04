@@ -1,5 +1,9 @@
-<h2 id="useful-plugins">Useful Plugins</h2><h3 id="conduit">Conduit</h3><p>Conduit enables you to connect from your local system to your remote backing
-service instances. This allows you to use the standard PostgreSQL and MySQL CLI
-tools to easily make backups and interrogate your backing services. For more
-information on how to implement this, check the <a href="https://github.com/alphagov/paas-cf-conduit/blob/master/README.md">Conduit README on
+<h2 id="useful-plugins">Useful Plugins</h2>
+
+<h3 id="conduit">Conduit</h3>
+
+<p>Conduit enables you to connect from your local system to your remote backing<br />
+service instances. This allows you to use the standard PostgreSQL and MySQL CLI<br />
+tools to easily make backups and interrogate your backing services. For more<br />
+information on how to implement this, check the <a href="https://github.com/alphagov/paas-cf-conduit/blob/master/README.md">Conduit README on<br />
 Github</a>.</p>

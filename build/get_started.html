@@ -122,7 +122,7 @@
               <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
                       <ul>
   <li>
-    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+    <a href="/#govuk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
   </li>
 </ul>
 <ul>
@@ -231,7 +231,7 @@
         <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
       </li>
       <li>
-        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+        <a href="/deploying_apps.html#deploy-a-nodejs-app"><span>Deploy a Node.js app</span></a>
       </li>
       <li>
         <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
@@ -433,10 +433,10 @@
         <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-govuk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-govuk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
       </li>
       <li>
         <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
@@ -530,17 +530,17 @@
         <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
       </li>
       <li>
-        <a href="/monitoring_services.html#monitoring-backing-services-more-about-monitoring"><span>More about monitoring</span></a>
+        <a href="/monitoring_services.html#more-about-monitoring"><span>More about monitoring</span></a>
       </li>
     </ul>
   </li>
 </ul>
 <ul>
   <li>
-    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <a href="/architecture.html#govuk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
     <ul>
       <li>
-        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+        <a href="/architecture.html#characteristics-of-govuk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
       </li>
       <li>
         <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
@@ -600,112 +600,216 @@
 
         <div class="app-pane__content toc-open-disabled">
           <main id="content" class="technical-documentation" data-module="anchored-headings">
-            <h1 id="get-started">Get started</h1><h2 id="get-an-account">Get an account</h2><p>Your department, agency or team must have a GOV.UK PaaS account. This account is called an organisation, or <a href="/orgs_spaces_users.html#organisations">org</a>. Sign up for an org account at <a href="https://admin.london.cloud.service.gov.uk/support/sign-up">https://admin.london.cloud.service.gov.uk/support/sign-up</a>.</p>
+            <h1 id="get-started">Get started</h1>
+
+<h2 id="get-an-account">Get an account</h2>
+
+<p>Your department, agency or team must have a GOV.UK PaaS account. This account is called an organisation, or <a href="/orgs_spaces_users.html#organisations">org</a>. Sign up for an org account at <a href="https://admin.london.cloud.service.gov.uk/support/sign-up">https://admin.london.cloud.service.gov.uk/support/sign-up</a>.</p>
+
 <p>Once your department, agency or team has an org account, you will need a personal account. Ask your <a href="/orgs_spaces_users.html#org-manager">org manager</a> to authorise the creation of your personal account.</p>
+
 <p>The GOV.UK PaaS is hosted in 2 independent regions, London and Ireland.</p>
+
 <p>By default, the GOV.UK PaaS team creates new accounts in the London region unless you request otherwise during sign up.</p>
+
 <p>To provide you with an account, we need to store some personal data about you. Please see our <a href="https://www.cloud.service.gov.uk/privacy-notice">privacy notice</a> for details.</p>
+
 <p>Once you have a personal account, you can access the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in). This tool allows you to view and manage your <a href="/orgs_spaces_users.html#organisations">orgs</a>, <a href="/orgs_spaces_users.html#spaces">spaces</a> and <a href="/orgs_spaces_users.html#users-and-user-roles">users</a> without using the command line. Your level of access depends on your user role permissions.</p>
-<p>Contact us by emailing <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> if you have any questions.</p>
-<h3 id="trial-and-paid-accounts">Trial and paid accounts</h3><p>When your department, agency or team first signs up to GOV.UK PaaS, their account can be either a paid account or a free trial account.</p>
+
+<p>Contact us by emailing <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> if you have any questions.</p>
+
+<h3 id="trial-and-paid-accounts">Trial and paid accounts</h3>
+
+<p>When your department, agency or team first signs up to GOV.UK PaaS, their account can be either a paid account or a free trial account.</p>
+
 <p>With a trial account, your department, agency or team can:</p>
 
 <ul>
-<li><a href="/orgs_spaces_users.html#users-and-user-roles">manage users</a></li>
-<li><a href="/orgs_spaces_users.html#spaces">create and manage spaces</a></li>
-<li><a href="/deploying_apps.html#deploying-apps">deploy and run apps</a></li>
-<li><a href="/deploying_services">use backing service free plans</a></li>
+  <li><p><a href="/orgs_spaces_users.html#users-and-user-roles">manage users</a></p>
+  </li>
+  <li><p><a href="/orgs_spaces_users.html#spaces">create and manage spaces</a></p>
+  </li>
+  <li><p><a href="/deploying_apps.html#deploying-apps">deploy and run apps</a></p>
+  </li>
+  <li><p><a href="/deploying_services">use backing service free plans</a></p>
+  </li>
 </ul>
+
 <p>However, your department, agency or team has a limited <a href="/managing_apps.html#quotas">quota</a> of resources, and cannot:</p>
 
 <ul>
-<li>set up <a href="/deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service">custom domains</a></li>
-<li>run <a href="/deploying_apps.html#deploy-an-app-to-production">production apps</a> on the GOV.UK PaaS</li>
+  <li><p>set up <a href="/deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service">custom domains</a></p>
+  </li>
+  <li><p>run <a href="/deploying_apps.html#deploy-an-app-to-production">production apps</a> on the GOV.UK PaaS</p>
+  </li>
 </ul>
+
 <p>To set up custom domains and run production apps, your department, agency or team must have a paid account with GOV.UK PaaS.</p>
-<p>To upgrade your department, agency or team&rsquo;s account from trial to paid, contact us by emailing <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
-<h2 id="set-up-the-cloud-foundry-command-line">Set up the Cloud Foundry command line</h2><p>GOV.UK PaaS is hosted on <a href="https://www.cloudfoundry.org/">Cloud Foundry</a> [external link]. You must use the Cloud Foundry command line interface (CLI) to manage your apps hosted on the GOV.UK PaaS. To set it up:</p>
+
+<p>To upgrade your department, agency or team's account from trial to paid, contact us by emailing <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
+<h2 id="set-up-the-cloud-foundry-command-line">Set up the Cloud Foundry command line</h2>
+
+<p>GOV.UK PaaS is hosted on <a href="https://www.cloudfoundry.org/">Cloud Foundry</a> [external link]. You must use the Cloud Foundry command line interface (CLI) to manage your apps hosted on the GOV.UK PaaS. To set it up:</p>
 
 <ol>
-<li><p>Download and install the <a href="https://github.com/cloudfoundry/cli/wiki/V7-CLI-Installation-Guide">Cloud Foundry CLI version 7</a> for your platform.</p></li>
-<li><p>To check that it is installed correctly, run <code>cf -v</code> in the command line.</p>
-<p>If it has installed correctly, you will receive the <code>cf version X.X.X…</code> confirmation message.</p></li>
+  <li>
+<p>Download and install the <a href="https://github.com/cloudfoundry/cli/wiki/V7-CLI-Installation-Guide">Cloud Foundry CLI version 7</a> for your platform.</p>
+  </li>
+  <li>
+<p>To check that it is installed correctly, run <code>cf -v</code> in the command line.</p>
+
+<p>If it has installed correctly, you will receive the <code>cf version X.X.X…</code> confirmation message.</p>
+  </li>
 </ol>
+
 <p>Depending on your network configuration, you might need to set an <code>HTTP_PROXY</code> environment variable for the CLI to connect. Contact your network administrator for your configuration settings.</p>
+
 <p>Refer to the Cloud Foundry documentation on <a href="https://docs.cloudfoundry.org/cf-cli/http-proxy.html">using the Cloud Foundry CLI with a proxy server</a> for more information.</p>
+
 <p>If you previously installed Cloud Foundry CLI version 6, you should <a href="https://docs.cloudfoundry.org/cf-cli/v7.html">upgrade to Cloud Foundry CLI version 7</a></p>
-<h2 id="sign-in-to-cloud-foundry">Sign in to Cloud Foundry</h2><p>You can sign in to Cloud Foundry using either your <a href="/get_started.html#get-an-account">GOV.UK PaaS account information</a> or the single sign-on function.</p>
-<h3 id="use-your-gov-uk-paas-account">Use your GOV.UK PaaS account</h3><p>The default method to sign in to Cloud Foundry is to use your <a href="/get_started.html#get-an-account">GOV.UK PaaS account</a> information.</p>
+
+<h2 id="sign-in-to-cloud-foundry">Sign in to Cloud Foundry</h2>
+
+<p>You can sign in to Cloud Foundry using either your <a href="/get_started.html#get-an-account">GOV.UK PaaS account information</a> or the single sign-on function.</p>
+
+<h3 id="use-your-govuk-paas-account">Use your GOV.UK PaaS account</h3>
+
+<p>The default method to sign in to Cloud Foundry is to use your <a href="/get_started.html#get-an-account">GOV.UK PaaS account</a> information.</p>
 
 <ol>
-<li><p>If your org is hosted in London, run the following in the command line:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf login -a api.london.cloud.service.gov.uk -u USERNAME
-</code></pre></div><p>If your org is hosted in Ireland, run:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf login -a api.cloud.service.gov.uk -u USERNAME
-</code></pre></div><p><code>USERNAME</code> is your personal GOV.UK PaaS account email address.</p></li>
-<li><p>Enter your GOV.UK PaaS account password.</p></li>
+  <li>
+<p>If your org is hosted in London, run the following in the command line:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf login -a api.london.cloud.service.gov.uk -u USERNAME
+</code></pre></div>
+<p>If your org is hosted in Ireland, run:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf login -a api.cloud.service.gov.uk -u USERNAME
+</code></pre></div>
+<p><code>USERNAME</code> is your personal GOV.UK PaaS account email address.</p>
+  </li>
+  <li>
+<p>Enter your GOV.UK PaaS account password.</p>
+  </li>
 </ol>
+
 <p>When you have signed in, run <code>cf</code> in the command line to see all available commands.</p>
-<h3 id="use-single-sign-on">Use single sign-on</h3><p>You can sign in to Cloud Foundry using the single sign-on function.</p>
+
+<h3 id="use-single-sign-on">Use single sign-on</h3>
+
+<p>You can sign in to Cloud Foundry using the single sign-on function.</p>
+
 <p>Using single sign-on makes managing your security, joining and leaving processes simpler by reducing the number of passwords or accounts you have to manage.</p>
+
 <p>You must have a <a href="https://myaccount.google.com/intro">Google</a> email address to use single sign-on. The email address must be the same as the one you use to sign into your GOV.UK PaaS account.</p>
+
 <h4 id="enable-single-sign-on">Enable single sign-on</h4>
+
 <ol>
-<li><p>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p></li>
-<li><p>Select <strong>Set up Google single sign-on</strong> and then select <strong>Activate Google single sign-on</strong>.</p></li>
-<li><p>Get a URL to generate a temporary authentication code. If your org is hosted in the London region, run the following in the command line:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf login -a api.london.cloud.service.gov.uk --sso
-</code></pre></div><p>If your org is hosted in the Ireland region, run:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf login -a api.cloud.service.gov.uk --sso
-</code></pre></div></li>
-<li><p>Go to the URL and select <strong>Continue</strong> under either <strong>Google</strong>.</p></li>
-<li><p>On the <strong>Sign in</strong> page, enter or select your email address.</p></li>
-<li><p>Enter your password and, if applicable, the 2-step verification code to generate a temporary authentication code.</p></li>
-<li><p>Copy the generated temporary authentication code into the command line.</p></li>
+  <li>
+<p>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li>
+<p>Select <strong>Set up Google single sign-on</strong> and then select <strong>Activate Google single sign-on</strong>.</p>
+  </li>
+  <li>
+<p>Get a URL to generate a temporary authentication code. If your org is hosted in the London region, run the following in the command line:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf login -a api.london.cloud.service.gov.uk --sso
+</code></pre></div>
+<p>If your org is hosted in the Ireland region, run:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf login -a api.cloud.service.gov.uk --sso
+</code></pre></div>  </li>
+  <li>
+<p>Go to the URL and select <strong>Continue</strong> under either <strong>Google</strong>.</p>
+  </li>
+  <li>
+<p>On the <strong>Sign in</strong> page, enter or select your email address.</p>
+  </li>
+  <li>
+<p>Enter your password and, if applicable, the 2-step verification code to generate a temporary authentication code.</p>
+  </li>
+  <li>
+<p>Copy the generated temporary authentication code into the command line.</p>
+  </li>
 </ol>
+
 <p>When you have signed in, you will see code similar to the following:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>API endpoint:   https://api.london.cloud.service.gov.uk (API version: 2.136.0)
 User:           john.smith@digital.cabinet-office.gov.uk
 Org:            hmrc-prod
 Space:          sandbox
 
-</code></pre></div><h3 id="failed-to-sign-in">Failed to sign in</h3><p>If you make too many failed sign in attempts within a short amount of time, Cloud Foundry locks your account. While your account is locked, you cannot sign in.</p>
+</code></pre></div>
+<h3 id="failed-to-sign-in">Failed to sign in</h3>
+
+<p>If you make too many failed sign in attempts within a short amount of time, Cloud Foundry locks your account. While your account is locked, you cannot sign in.</p>
+
 <p>Wait 5 minutes for the account lock to expire before trying to sign into Cloud Foundry again.</p>
+
 <p>Make sure that no automated services, such as Jenkins, are trying to sign into Cloud Foundry using your account when your account is locked.</p>
-<h2 id="deploy-a-test-static-html-page">Deploy a test static HTML page</h2><p>You can practice deploying an app by deploying a test static HTML page.</p>
+
+<h2 id="deploy-a-test-static-html-page">Deploy a test static HTML page</h2>
+
+<p>You can practice deploying an app by deploying a test static HTML page.</p>
 
 <ol>
-<li><p>To deploy an app, you must select a <a href="/deploying_apps.html#set-a-target">target</a>. This is a combination of an <a href="/orgs_spaces_users.html#organisations">organisation</a> and a <a href="/orgs_spaces_users.html#spaces">space</a>.</p>
+  <li>
+<p>To deploy an app, you must select a <a href="/deploying_apps.html#set-a-target">target</a>. This is a combination of an <a href="/orgs_spaces_users.html#organisations">organisation</a> and a <a href="/orgs_spaces_users.html#spaces">space</a>.</p>
+
 <p>All orgs have a sandbox space for you to use when learning about the PaaS. When deploying a test static HTML page, you should target this sandbox space by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf target -o ORGNAME -s sandbox
-</code></pre></div><p>where <code>ORGNAME</code> is your org and <code>sandbox</code> is the name of the sandbox space.</p>
-<p>If you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team or speak to the PaaS team by emailing <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p></li>
-<li><p>In an empty directory, create an <code>index.html</code> file containing the following markup:.</p>
-<div class="highlight"><pre class="highlight html"><code><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Static Site<span class="nt">&lt;/title&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Welcome to the static site!<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div></li>
-<li><p>Create a <code>manifest.yml</code> file in the same directory as the <code>index.html</code> file. The manifest file tells Cloud Foundry what to do with your app.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: APPNAME
-  memory: 64M
-  buildpacks:
-  - staticfile_buildpack
-</code></pre></div><p>where <code>APPNAME</code> is the unique name for your app. You can run <code>cf apps</code> to see apps which already exist.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf target -o ORGNAME -s sandbox
+</code></pre></div>
+<p>where <code>ORGNAME</code> is your org and <code>sandbox</code> is the name of the sandbox space.</p>
+
+<p>If you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team or speak to the PaaS team by emailing <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+  </li>
+  <li>
+<p>In an empty directory, create an <code>index.html</code> file containing the following markup:.</p>
+
+<div class="highlight"><pre class="highlight html"><code> <span class="nt">&lt;html&gt;</span>
+   <span class="nt">&lt;head&gt;</span>
+     <span class="nt">&lt;title&gt;</span>Static Site<span class="nt">&lt;/title&gt;</span>
+   <span class="nt">&lt;/head&gt;</span>
+   <span class="nt">&lt;body&gt;</span>
+     <span class="nt">&lt;p&gt;</span>Welcome to the static site!<span class="nt">&lt;/p&gt;</span>
+   <span class="nt">&lt;/body&gt;</span>
+ <span class="nt">&lt;/html&gt;</span>
+</code></pre></div>  </li>
+  <li>
+<p>Create a <code>manifest.yml</code> file in the same directory as the <code>index.html</code> file. The manifest file tells Cloud Foundry what to do with your app.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: APPNAME
+   memory: 64M
+   buildpacks:
+   - staticfile_buildpack
+</code></pre></div>
+<p>where <code>APPNAME</code> is the unique name for your app. You can run <code>cf apps</code> to see apps which already exist.</p>
+
 <p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p>
-<p>A buildpack provides app framework and runtime support. For example, if your app was written in Ruby, you would use the <code>ruby_buildpack</code>. In this example, we use the <code>staticfile_buildpack</code> for the static HTML page.</p></li>
-<li><p>In the directory where you created the files, run <code>cf push APPNAME</code> to push the static HTML page to the GOV.UK PaaS.</p>
-<p>If you do not specify the app name in <code>cf push</code>, the name specified in the manifest file is used.</p></li>
+
+<p>A buildpack provides app framework and runtime support. For example, if your app was written in Ruby, you would use the <code>ruby_buildpack</code>. In this example, we use the <code>staticfile_buildpack</code> for the static HTML page.</p>
+  </li>
+  <li>
+<p>In the directory where you created the files, run <code>cf push APPNAME</code> to push the static HTML page to the GOV.UK PaaS.</p>
+
+<p>If you do not specify the app name in <code>cf push</code>, the name specified in the manifest file is used.</p>
+  </li>
 </ol>
+
 <p>The static HTML page is now available at your <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+
 <p>For a production app, you should follow the <a href="/deploying_apps.html#deploy-an-app-to-production">documentation on deploying an app to production</a>.</p>
-<h3 id="deploying-with-zero-downtime">Deploying with zero downtime</h3><p>Cloud Foundry supports deploying applications with zero downtime by performing rolling deploys.</p>
+
+<h3 id="deploying-with-zero-downtime">Deploying with zero downtime</h3>
+
+<p>Cloud Foundry supports deploying applications with zero downtime by performing rolling deploys.</p>
 
 <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -716,42 +820,65 @@ applications:
 </div>
 
 <ol>
-<li><p>To deploy an app, you must select a <a href="/deploying_apps.html#set-a-target">target</a>. This is a combination of an <a href="/orgs_spaces_users.html#organisations">organisation</a> and a <a href="/orgs_spaces_users.html#spaces">space</a>.</p>
+  <li>
+<p>To deploy an app, you must select a <a href="/deploying_apps.html#set-a-target">target</a>. This is a combination of an <a href="/orgs_spaces_users.html#organisations">organisation</a> and a <a href="/orgs_spaces_users.html#spaces">space</a>.</p>
+
 <p>All orgs have a sandbox space for you to use when learning about the PaaS. When deploying a test static HTML page, you should target this sandbox space by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf target -o ORGNAME -s sandbox
-</code></pre></div><p>where <code>ORGNAME</code> is your org and <code>sandbox</code> is the name of the sandbox space.</p>
-<p>If you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team or speak to the PaaS team by emailing <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p></li>
-<li><p>In an empty directory, create an <code>index.html</code> file containing the following markup:</p>
-<div class="highlight"><pre class="highlight html"><code><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Static Site<span class="nt">&lt;/title&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Welcome to the static site!<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div></li>
-<li><p>Create a <code>manifest.yml</code> file in the same directory as the <code>index.html</code> file. The manifest file tells Cloud Foundry what to do with your app.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: APPNAME
-  memory: 64M
-  instances: 3
-  buildpacks:
-  - staticfile_buildpack
-</code></pre></div><p>where <code>APPNAME</code> is the unique name for your app. You can run <code>cf apps</code> to see apps which already exist.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf target -o ORGNAME -s sandbox
+</code></pre></div>
+<p>where <code>ORGNAME</code> is your org and <code>sandbox</code> is the name of the sandbox space.</p>
+
+<p>If you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team or speak to the PaaS team by emailing <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+  </li>
+  <li>
+<p>In an empty directory, create an <code>index.html</code> file containing the following markup:</p>
+
+<div class="highlight"><pre class="highlight html"><code> <span class="nt">&lt;html&gt;</span>
+   <span class="nt">&lt;head&gt;</span>
+     <span class="nt">&lt;title&gt;</span>Static Site<span class="nt">&lt;/title&gt;</span>
+   <span class="nt">&lt;/head&gt;</span>
+   <span class="nt">&lt;body&gt;</span>
+     <span class="nt">&lt;p&gt;</span>Welcome to the static site!<span class="nt">&lt;/p&gt;</span>
+   <span class="nt">&lt;/body&gt;</span>
+ <span class="nt">&lt;/html&gt;</span>
+</code></pre></div>  </li>
+  <li>
+<p>Create a <code>manifest.yml</code> file in the same directory as the <code>index.html</code> file. The manifest file tells Cloud Foundry what to do with your app.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: APPNAME
+   memory: 64M
+   instances: 3
+   buildpacks:
+   - staticfile_buildpack
+</code></pre></div>
+<p>where <code>APPNAME</code> is the unique name for your app. You can run <code>cf apps</code> to see apps which already exist.</p>
+
 <p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p>
+
 <p>The <code>instances</code> line tells PaaS how many instances of the app to run.</p>
-<p>A buildpack provides app framework and runtime support. For example, if your app was written in Ruby, you would use the <code>ruby_buildpack</code>. In this example, we use the <code>staticfile_buildpack</code> for the static HTML page.</p></li>
-<li><p>Perform a rolling deployment of your app:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf push APPNAME --strategy rolling
+
+<p>A buildpack provides app framework and runtime support. For example, if your app was written in Ruby, you would use the <code>ruby_buildpack</code>. In this example, we use the <code>staticfile_buildpack</code> for the static HTML page.</p>
+  </li>
+  <li>
+<p>Perform a rolling deployment of your app:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf push APPNAME --strategy rolling
 </code></pre></div><p>The command line will display a message when your app has finished deploying.</p>
-<p>Cloud Foundry will deploy 3 new instances of your application to handle new requests, allow connections to drain
-from the existing instances, and then retire them.</p></li>
+
+<p>Cloud Foundry will deploy 3 new instances of your application to handle new requests, allow connections to drain<br />
+ from the existing instances, and then retire them.</p>
+  </li>
 </ol>
+
 <p>The static HTML page is now available at your <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+
 <p>For a production app, you should follow the <a href="/deploying_apps.html#deploy-an-app-to-production">documentation on deploying an app to production</a>.</p>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/rolling-deploy.html">Cloud Foundry documentation on rolling app deployments</a> for more information.</p>
+
 
             
           </main>

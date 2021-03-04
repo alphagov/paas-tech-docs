@@ -122,7 +122,7 @@
               <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
                       <ul>
   <li>
-    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+    <a href="/#govuk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
   </li>
 </ul>
 <ul>
@@ -231,7 +231,7 @@
         <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
       </li>
       <li>
-        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+        <a href="/deploying_apps.html#deploy-a-nodejs-app"><span>Deploy a Node.js app</span></a>
       </li>
       <li>
         <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
@@ -433,10 +433,10 @@
         <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-govuk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-govuk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
       </li>
       <li>
         <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
@@ -530,17 +530,17 @@
         <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
       </li>
       <li>
-        <a href="/monitoring_services.html#monitoring-backing-services-more-about-monitoring"><span>More about monitoring</span></a>
+        <a href="/monitoring_services.html#more-about-monitoring"><span>More about monitoring</span></a>
       </li>
     </ul>
   </li>
 </ul>
 <ul>
   <li>
-    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <a href="/architecture.html#govuk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
     <ul>
       <li>
-        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+        <a href="/architecture.html#characteristics-of-govuk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
       </li>
       <li>
         <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
@@ -600,69 +600,65 @@
 
         <div class="app-pane__content toc-open-disabled">
           <main id="content" class="technical-documentation" data-module="anchored-headings">
-            <p><h1 id="guidance">Guidance</h1><h2 id="penetration-testing">Penetration testing</h2><p><a href="/responsibility_model.html#know-your-responsibilities">It is your responsibility</a> to penetration test your app to make sure it’s secure. Note that you can only penetration test your app; you cannot penetration test the platform.</p>
-<p>You must send the below information to <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> so that we are aware of your penetration test and can approve it.</p></p>
+            <h1 id="guidance">Guidance</h1>
+
+<h2 id="penetration-testing">Penetration testing</h2>
+
+<p><a href="/responsibility_model.html#know-your-responsibilities">It is your responsibility</a> to penetration test your app to make sure it’s secure. Note that you can only penetration test your app; you cannot penetration test the platform.</p>
+
+<p>You must send the below information to <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> so that we are aware of your penetration test and can approve it.</p>
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
-
-<div class="table-container">
-        <table>
-          <tr>
-<th style="text-align: left">Supplied by penetration tester</th>
-</tr>
-<tr>
-<td style="text-align: left">Tester phone number</td>
-</tr>
-<tr>
-<td style="text-align: left">Emergency email and phone number contact details</td>
-</tr>
-<tr>
-<td style="text-align: left">Will the requests originate from the tester’s office?</td>
-</tr>
-<tr>
-<td style="text-align: left">The origin IPs</td>
-</tr>
-<tr>
-<td style="text-align: left">Peak bandwidth that the tests will consume in gigabits per second</td>
-</tr>
-<tr>
-<td style="text-align: left">Peak number of requests per second the tests will perform</td>
-</tr>
-<tr>
-<td style="text-align: left">Start and end dates and times of the test in the format YYYY-MM-DDTHH:MM:SSZ for example 2017-09-26T09:00:00Z</td>
-</tr>
-<tr>
-<td style="text-align: left">Is it possible to stop the test immediately if there is an issue?</td>
-</tr>
-
-        </table>
-      </div>
-
+<p>|Supplied by penetration tester|<br />
+|:—|<br />
+|Tester phone number|<br />
+|Emergency email and phone number contact details|<br />
+|Will the requests originate from the tester’s office?|<br />
+|The origin IPs|<br />
+|Peak bandwidth that the tests will consume in gigabits per second|<br />
+|Peak number of requests per second the tests will perform|<br />
+|Start and end dates and times of the test in the format YYYY-MM-DDTHH:MM:SSZ for example 2017-09-26T09:00:00Z|<br />
+|Is it possible to stop the test immediately if there is an issue?|</p>
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
 <p>If your request is approved, your penetration test is only authorised for the dates and times you have specified.</p>
 
-<h3 id="further-information">Further information</h3><p>You can find more information on penetration testing in:</p>
+<h3 id="further-information">Further information</h3>
+
+<p>You can find more information on penetration testing in:</p>
 
 <ul>
-<li>the <a href="https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing">Service Manual</a></li>
-<li>the <a href="https://www.ncsc.gov.uk/guidance/penetration-testing">NCSC penetration testing page</a></li>
-<li>the <a href="https://aws.amazon.com/security/penetration-testing/">AWS penetration testing page</a></li>
+  <li><p>the <a href="https://www.gov.uk/service-manual/technology/vulnerability-and-penetration-testing">Service Manual</a></p>
+  </li>
+  <li><p>the <a href="https://www.ncsc.gov.uk/guidance/penetration-testing">NCSC penetration testing page</a></p>
+  </li>
+  <li><p>the <a href="https://aws.amazon.com/security/penetration-testing/">AWS penetration testing page</a></p>
+  </li>
 </ul>
 
-<h2 id="connect-a-php-app-to-postgresql-or-mysql">Connect a PHP app to PostgreSQL or MySQL</h2><p>If your PHP app uses a PostgreSQL or MySQL database, it must connect to that database securely using SSL.</p>
+<h2 id="connect-a-php-app-to-postgresql-or-mysql">Connect a PHP app to PostgreSQL or MySQL</h2>
+
+<p>If your PHP app uses a PostgreSQL or MySQL database, it must connect to that database securely using SSL.</p>
 
 <blockquote>
 <p>These instructions assume that your app uses the PHP Data Objects (PDO) library to connect to either a MySQL or PostgreSQL backing service database.</p>
 </blockquote>
+
 <p>You must configure your app to use a SSL connection by inserting the following code into the <code>config.ini</code> file located within <code>.bp-config/php/php.ini.d/</code>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>extension=pdo.so
 extension=pdo_mysql.so OR pdo_pgsql.so
 extension=openssl.so
-</code></pre></div><p>You should use this method instead of the now-deprecated method of defining PHP extensions in the <code>.bp-config/options.json</code> buildpack config file.</p>
+</code></pre></div>
+<p>You should use this method instead of the now-deprecated method of defining PHP extensions in the <code>.bp-config/options.json</code> buildpack config file.</p>
+
 <p>You can find more information about how to configure the PHP buildpack at the <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html">PHP buildpack configuration documentation</a>.</p>
+
 <p>Refer to the code below for examples on how to connect your app to MySQL or PostgreSQL.</p>
-<h3 id="example-code-mysql">Example code - MySQL</h3><div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
+
+<h3 id="example-code---mysql">Example code - MySQL</h3>
+
+<div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
 $creds = $vcapServices['mysql'][0]['credentials'];
 
 try {
@@ -676,7 +672,10 @@ try {
 } catch(Expection $e) {
   printf("Error: %s\n", $e-&gt;getMessage());
 }
-</code></pre></div><h3 id="example-code-postgresql">Example code - PostgreSQL</h3><div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
+</code></pre></div>
+<h3 id="example-code---postgresql">Example code - PostgreSQL</h3>
+
+<div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
 $creds = $vcapServices['postgres'][0]['credentials'];
 
 try {
@@ -689,26 +688,39 @@ try {
 } catch(Expection $e) {
   printf("Error: %s\n", $e-&gt;getMessage());
 }
-</code></pre></div><h2 id="connect-drupal-to-mysql">Connect Drupal to MySQL</h2><p>If your Drupal app uses MySQL, it must connect to the database securely using SSL. You must configure Drupal to use a SSL connection by:</p>
+</code></pre></div>
+<h2 id="connect-drupal-to-mysql">Connect Drupal to MySQL</h2>
+
+<p>If your Drupal app uses MySQL, it must connect to the database securely using SSL. You must configure Drupal to use a SSL connection by:</p>
 
 <ul>
-<li>enabling required PHP extensions</li>
-<li>setting up the database connection</li>
+  <li><p>enabling required PHP extensions</p>
+  </li>
+  <li><p>setting up the database connection</p>
+  </li>
 </ul>
+
 <h3 id="enable-required-php-extensions">Enable required PHP extensions</h3>
 
 <ol>
-<li>Create a <code>mysql.ini</code> file within <code>.bp-config/php/php.ini.d/</code>.</li>
-<li><p>Add the following code to this .ini file:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>extension=pdo.so
-extension=pdo_mysql.so
-extension=openssl.so
-</code></pre></div><p>You should use this method instead of the now-deprecated method of defining PHP extensions in the <code>.bp-config/options.json</code> buildpack config file.</p></li>
+  <li><p>Create a <code>mysql.ini</code> file within <code>.bp-config/php/php.ini.d/</code>.</p>
+  </li>
+  <li>
+<p>Add the following code to this .ini file:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> extension=pdo.so
+ extension=pdo_mysql.so
+ extension=openssl.so
+</code></pre></div><p>You should use this method instead of the now-deprecated method of defining PHP extensions in the <code>.bp-config/options.json</code> buildpack config file.</p>
+  </li>
 </ol>
 
 <p>You can find more information about how to configure the PHP buildpack at the <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html">PHP buildpack configuration documentation</a>.</p>
 
-<h3 id="set-up-the-database-connection">Set up the database connection</h3><p>Include the following code in your Drupal configuration file, located by default at <code>sites/default/settings.php</code>:</p>
+<h3 id="set-up-the-database-connection">Set up the database connection</h3>
+
+<p>Include the following code in your Drupal configuration file, located by default at <code>sites/default/settings.php</code>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
 $mysqlCreds = $vcapServices['mysql'][0]['credentials'];
 
@@ -724,25 +736,40 @@ $databases['default']['default'] = array(
   // 'collation' =&gt; 'utf8_general_ci', // For Drupal 7 or earlier
   'pdo' =&gt; array(PDO::MYSQL_ATTR_SSL_CAPATH =&gt; '/etc/ssl/certs')
 );
-</code></pre></div><h2 id="connect-wordpress-to-mysql">Connect Wordpress to MySQL</h2><p>Your Wordpress app must connect to MySQL securely using SSL. You must configure Wordpress to use a SSL connection by:</p>
+</code></pre></div>
+<h2 id="connect-wordpress-to-mysql">Connect Wordpress to MySQL</h2>
+
+<p>Your Wordpress app must connect to MySQL securely using SSL. You must configure Wordpress to use a SSL connection by:</p>
 
 <ul>
-<li>enabling required PHP extensions</li>
-<li>setting up the database connection</li>
-<li>patching Wordpress to enable SSL connections</li>
+  <li><p>enabling required PHP extensions</p>
+  </li>
+  <li><p>setting up the database connection</p>
+  </li>
+  <li><p>patching Wordpress to enable SSL connections</p>
+  </li>
 </ul>
-<h3 id="connect-wordpress-to-mysql-enable-required-php-extensions">Enable required PHP extensions</h3>
+
+<h3 id="enable-required-php-extensions-1">Enable required PHP extensions</h3>
 
 <ol>
-<li>Create a <code>mysql.ini</code> file within <code>.bp-config/php/php.ini.d/</code>.</li>
-<li>Add the following code to this .ini file:</li>
+  <li><p>Create a <code>mysql.ini</code> file within <code>.bp-config/php/php.ini.d/</code>.</p>
+  </li>
+  <li><p>Add the following code to this .ini file:</p>
+  </li>
 </ol>
 
 <div class="highlight"><pre class="highlight plaintext"><code>extension=mysqli.so
 extension=openssl.so
-</code></pre></div><p>You should use this method instead of the deprecated method of defining PHP extensions in the <code>.bp-config/options.json</code> buildpack config file.</p>
+</code></pre></div>
+<p>You should use this method instead of the deprecated method of defining PHP extensions in the <code>.bp-config/options.json</code> buildpack config file.</p>
+
 <p>You can find more information about how to configure the PHP buildpack at the <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html">PHP buildpack configuration documentation</a>.</p>
-<h3 id="connect-wordpress-to-mysql-set-up-the-database-connection">Set up the database connection</h3><p>Replace the database configuration code in your <code>wp-config.php</code> file with the following code:</p>
+
+<h3 id="set-up-the-database-connection-1">Set up the database connection</h3>
+
+<p>Replace the database configuration code in your <code>wp-config.php</code> file with the following code:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
 $mysqlCreds = $vcapServices['mysql'][0]['credentials'];
 
@@ -754,7 +781,11 @@ define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);
 define('MYSQL_SSL_CAPATH', "/etc/ssl/certs");
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
-</code></pre></div><h3 id="patch-wordpress-to-enable-ssl-connections">Patch Wordpress to enable SSL connections</h3><p>Insert the following code before the <code>mysqli_real_connect</code> function call in the <code>wp-includes/wp-db.php</code> file:</p>
+</code></pre></div>
+<h3 id="patch-wordpress-to-enable-ssl-connections">Patch Wordpress to enable SSL connections</h3>
+
+<p>Insert the following code before the <code>mysqli_real_connect</code> function call in the <code>wp-includes/wp-db.php</code> file:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>[...]
 
 // Included block start
@@ -768,51 +799,87 @@ if ( WP_DEBUG ) {
 }
 [...]
 </code></pre></div>
-<p><h2 id="isolation-segments">Isolation segments</h2><h3 id="what-isolation-segments-are">What isolation segments are</h3><p>Cells are the underlying servers that build and run your apps.
+<h2 id="isolation-segments">Isolation segments</h2>
+
+<h3 id="what-isolation-segments-are">What isolation segments are</h3>
+
+<p>Cells are the underlying servers that build and run your apps.<br />
 GOV.UK PaaS schedules your apps on a large number of identical cells.</p>
-<p>GOV.UK PaaS has other cells which are slightly different to the regular cells
+
+<p>GOV.UK PaaS has other cells which are slightly different to the regular cells<br />
 on which your apps run. These cells are called isolation segments.</p>
+
 <p>You can specify an isolation segments for a space, or for an organisation.</p>
-<h4 id="apps-within-a-space">Apps within a space</h4><p>When you specify an isolation segment for a space, all apps in
-that space run on the isolation segment&rsquo;s cells, rather than on the normal
+
+<h4 id="apps-within-a-space">Apps within a space</h4>
+
+<p>When you specify an isolation segment for a space, all apps in<br />
+that space run on the isolation segment's cells, rather than on the normal<br />
 cells.</p>
-<h4 id="apps-within-an-organisation">Apps within an organisation</h4><p>When you specify an isolation segment for an organisation, all apps in
-that organisation run on the isolation segment&rsquo;s cells, rather than on the
+
+<h4 id="apps-within-an-organisation">Apps within an organisation</h4>
+
+<p>When you specify an isolation segment for an organisation, all apps in<br />
+that organisation run on the isolation segment's cells, rather than on the<br />
 normal cells.</p>
-<h3 id="what-isolation-segments-are-available">What isolation segments are available</h3><p>We currently offer one isolation segment:</p></p>
+
+<h3 id="what-isolation-segments-are-available">What isolation segments are available</h3>
+
+<p>We currently offer one isolation segment:</p>
 
 <ul>
-<li><code>egress-restricted-1</code></li>
+  <li><p><code>egress-restricted-1</code></p>
+  </li>
 </ul>
-<p><h4 id="egress-restricted">Egress restricted</h4><p>When your apps run in an egress restricted isolation segment, they can:</p></p>
+
+<h4 id="egress-restricted">Egress restricted</h4>
+
+<p>When your apps run in an egress restricted isolation segment, they can:</p>
 
 <ul>
-<li>serve traffic from the internet (if you map a <a href="/deploying_apps.html#names-routes-and-domains">public route</a>)</li>
-<li>serve traffic internally (if you map a <a href="/deploying_apps.html#deploying-private-apps">private route</a>)</li>
-<li>talk to other apps within the platform (if you set up <a href="/deploying_apps.html#create-a-network-policy">network policies</a>)</li>
+  <li><p>serve traffic from the internet (if you map a <a href="/deploying_apps.html#names-routes-and-domains">public route</a>)</p>
+  </li>
+  <li><p>serve traffic internally (if you map a <a href="/deploying_apps.html#deploying-private-apps">private route</a>)</p>
+  </li>
+  <li><p>talk to other apps within the platform (if you set up <a href="/deploying_apps.html#create-a-network-policy">network policies</a>)</p>
+  </li>
 </ul>
 
 <p>However, your apps cannot:</p>
 
 <ul>
-<li>talk to the internet</li>
-<li>make external DNS requests</li>
+  <li><p>talk to the internet</p>
+  </li>
+  <li><p>make external DNS requests</p>
+  </li>
 </ul>
-<p><h3 id="how-you-can-use-isolation-segments">How you can use isolation segments</h3><p>If we have enabled an isolation segment for your organisation, and if you are
-an org manager, you can change how your apps are scheduled using the
+
+<h3 id="how-you-can-use-isolation-segments">How you can use isolation segments</h3>
+
+<p>If we have enabled an isolation segment for your organisation, and if you are<br />
+an org manager, you can change how your apps are scheduled using the<br />
 isolation segment.</p>
-<p>For example, the following commands will create a new space and make sure that any app you push within that space will run on a cell with egress
+
+<p>For example, the following commands will create a new space and make sure that any app you push within that space will run on a cell with egress<br />
 restrictions:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf create-space my-locked-down-space
 cf set-space-isolation-segment my-locked-down-space egress-restricted-1
-</code></pre></div><p>Contact us at
-<a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>
-if you would like us to enable an isolation segment for your organisation.</p></p>
-<p><h2 id="useful-plugins">Useful Plugins</h2><h3 id="conduit">Conduit</h3><p>Conduit enables you to connect from your local system to your remote backing
-service instances. This allows you to use the standard PostgreSQL and MySQL CLI
-tools to easily make backups and interrogate your backing services. For more
-information on how to implement this, check the <a href="https://github.com/alphagov/paas-cf-conduit/blob/master/README.md">Conduit README on
-Github</a>.</p></p>
+</code></pre></div>
+<p>Contact us at<br />
+<a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a><br />
+if you would like us to enable an isolation segment for your organisation.</p>
+
+<h2 id="useful-plugins">Useful Plugins</h2>
+
+<h3 id="conduit">Conduit</h3>
+
+<p>Conduit enables you to connect from your local system to your remote backing<br />
+service instances. This allows you to use the standard PostgreSQL and MySQL CLI<br />
+tools to easily make backups and interrogate your backing services. For more<br />
+information on how to implement this, check the <a href="https://github.com/alphagov/paas-cf-conduit/blob/master/README.md">Conduit README on<br />
+Github</a>.</p>
+
 
             
           </main>

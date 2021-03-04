@@ -1,10 +1,15 @@
-<h2 id="deploy-a-node-js-app">Deploy a Node.js app</h2><p>This section covers how to deploy a basic Node.js application to GOV.UK PaaS. Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/node/node-tips.html">Cloud Foundry tips for Node.js applications</a> for more information.</p>
+<h2 id="deploy-a-nodejs-app">Deploy a Node.js app</h2>
+
+<p>This section covers how to deploy a basic Node.js application to GOV.UK PaaS. Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/node/node-tips.html">Cloud Foundry tips for Node.js applications</a> for more information.</p>
 
 <blockquote>
 <p>If your app requires a <a href="/deploying_services/#deploy-a-backing-or-routing-service">backing service</a>, it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.</p>
 </blockquote>
+
 <p>These instructions assume you have already carried out the setup process explained in the <a href="/get_started.html#get-started">Get started</a> section.</p>
-<p>This is the code for the example app we are going to use. It is a basic web server that responds with a &lsquo;Hello World&rsquo; message.</p>
+
+<p>This is the code for the example app we are going to use. It is a basic web server that responds with a 'Hello World' message.</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>const http = require('http');
 
 const port = process.env.PORT || 3000;
@@ -20,39 +25,66 @@ server.listen(port, () =&gt; {
 });
 </code></pre></div>
 <ol>
-<li><p>Save the code to a new local directory as <code>example.js</code>.</p></li>
-<li><p>Add this <code>manifest.yml</code> file to the same directory:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: my-node-app
-  command: node example.js
-  memory: 256M
-  buildpacks:
-  - nodejs_buildpack
-</code></pre></div><p>Replace <code>my-node-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+  <li>
+<p>Save the code to a new local directory as <code>example.js</code>.</p>
+  </li>
+  <li>
+<p>Add this <code>manifest.yml</code> file to the same directory:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: my-node-app
+   command: node example.js
+   memory: 256M
+   buildpacks:
+   - nodejs_buildpack
+</code></pre></div>
+<p>Replace <code>my-node-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+
 <p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p>
-<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Node.js, you use the <code>nodejs_buildpack</code>.</p></li>
-<li><p>Include an npm <code>package.json</code> file to specify dependencies. The file should also specify a <code>start</code> command used to launch the app.</p>
+
+<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Node.js, you use the <code>nodejs_buildpack</code>.</p>
+  </li>
+  <li>
+<p>Include an npm <code>package.json</code> file to specify dependencies. The file should also specify a <code>start</code> command used to launch the app.</p>
+
 <p>This is a <code>package.json</code> file for our example app:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "name": "example",
-  "version": "0.0.1",
-  "author": "Demo",
-  "engines": {
-    "node": "6.11.x"
-  }
-}
-</code></pre></div><p>The <code>&quot;engines&quot;</code> values specify the versions of Node.js and npm that the PaaS should use to run your app. Note that older versions may not be available: if your version is not supported, you will see an error message when you try to upload and start the app.</p></li>
-<li><p>You can optionally run <code>npm install</code> to preinstall dependencies rather than having them added during the PaaS staging process.</p></li>
-<li><p>Run <code>cf push APPNAME</code> from the top level of the directory which contains all the code and configuration files.</p></li>
+
+<div class="highlight"><pre class="highlight plaintext"><code> {
+   "name": "example",
+   "version": "0.0.1",
+   "author": "Demo",
+   "engines": {
+     "node": "6.11.x"
+   }
+ }
+</code></pre></div>
+<p>The <code>"engines"</code> values specify the versions of Node.js and npm that the PaaS should use to run your app. Note that older versions may not be available: if your version is not supported, you will see an error message when you try to upload and start the app.</p>
+  </li>
+  <li>
+<p>You can optionally run <code>npm install</code> to preinstall dependencies rather than having them added during the PaaS staging process.</p>
+  </li>
+  <li>
+<p>Run <code>cf push APPNAME</code> from the top level of the directory which contains all the code and configuration files.</p>
+  </li>
 </ol>
+
 <p>If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run <code>cf push --no-start APPNAME</code>, then when you are ready to start the app, run <code>cf start APPNAME</code>.</p>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/node/node-tips.html">Cloud Foundry tips for Node.js applications</a> for more information.</p>
-<h3 id="postgresql-setup-with-node-js">PostgreSQL setup with Node.js</h3><p>These instructions are for deploying a Node.js app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<h3 id="postgresql-setup-with-nodejs">PostgreSQL setup with Node.js</h3>
+
+<p>These instructions are for deploying a Node.js app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
 <p>If your app depends on a backing service such as PostgreSQL, it will need to parse the <code>VCAP_SERVICES</code> environment variable to get required details, such as service URLs and credentials.</p>
+
 <p>You must create the service and bind it to your Node.js app as described in the <a href="/deploying_services/postgresql/#postgresql">PostgreSQL</a> section.</p>
+
 <p>You can use the <a href="https://www.npmjs.com/package/cfenv">cfenv</a> module to assist with parsing the environment variables.</p>
+
 <p>In your <code>package.json</code> file, you would specify <code>cfenv</code> as a dependency:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>    {
       // ...
       "dependencies": {
@@ -60,7 +92,9 @@ applications:
         // ...
       }
     }
-</code></pre></div><p>Then in your app, you can get configuration information for backing services. This is an example of how to connect to a PostgreSQL service.</p>
+</code></pre></div>
+<p>Then in your app, you can get configuration information for backing services. This is an example of how to connect to a PostgreSQL service.</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>    var cfenv = require("cfenv");
     var pg = require('pg');
     var appEnv = cfenv.getAppEnv();
@@ -68,14 +102,20 @@ applications:
     var client = new pg.Client(connectionString);
     client.ssl = true;
     client.connect();
-</code></pre></div><p>Replace &ldquo;SERVICE NAME&rdquo; in the above code with the exact name of the PostgreSQL service you created. The <code>getServiceURL</code> function returns a connection string which includes the username and password required to connect to the database.</p>
+</code></pre></div>
+<p>Replace "SERVICE NAME" in the above code with the exact name of the PostgreSQL service you created. The <code>getServiceURL</code> function returns a connection string which includes the username and password required to connect to the database.</p>
+
 <p>Further information can be found in the:</p>
 
 <ul>
-<li><a href="https://github.com/cloudfoundry-community/node-cfenv/blob/master/README.md">Cloud Foundry community <code>cf env</code> page</a></li>
-<li>the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html">Cloud Foundry documentation on environment variables</a></li>
+  <li><p><a href="https://github.com/cloudfoundry-community/node-cfenv/blob/master/README.md">Cloud Foundry community <code>cf env</code> page</a></p>
+  </li>
+  <li><p>the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html">Cloud Foundry documentation on environment variables</a></p>
+  </li>
 </ul>
+
 <p>You should also remember to include dependencies for any service bindings in <code>package.json</code>.</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>{
   // ...
   "dependencies": {
@@ -83,6 +123,11 @@ applications:
     // ...
   }
 }
-</code></pre></div><h3 id="specify-a-node-js-version">Specify a Node.js version</h3><p>You should tell Cloud Foundry which version of Node.js your app uses in the Node.js buildpack.</p>
+</code></pre></div>
+<h3 id="specify-a-nodejs-version">Specify a Node.js version</h3>
+
+<p>You should tell Cloud Foundry which version of Node.js your app uses in the Node.js buildpack.</p>
+
 <p>Refer to the documentation on <a href="deploying_apps.html#buildpack-language-version-updates">buildpack language version updates</a> for more information.</p>
+
 <p>Refer to the Cloud Foundry documentation on <a href="https://docs.cloudfoundry.org/buildpacks/node/index.html#runtime">specifying a Node.js version</a> for more information.</p>

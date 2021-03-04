@@ -1,7 +1,11 @@
-<h2 id="tracing-http-requests">Tracing HTTP requests</h2><p>The Cloud Foundry router automatically adds Zipkin-compatible headers to the incoming HTTP requests so you can match those with your application&rsquo;s responses.</p>
+<h2 id="tracing-http-requests">Tracing HTTP requests</h2>
+
+<p>The Cloud Foundry router automatically adds Zipkin-compatible headers to the incoming HTTP requests so you can match those with your application's responses.</p>
 
 <blockquote>
 <p>Zipkin is a tracing system that enables app developers to troubleshoot failures or latency issues. Zipkin provides the ability to trace requests and responses across distributed systems. See <a href="https://zipkin.io">Zipkin.io</a> for more information.</p>
 </blockquote>
+
 <p>To trace app requests and responses in Cloud Foundry, apps must also log Zipkin headers.</p>
+
 <p>After adding Zipkin HTTP headers to app logs, developers can use <code>cf logs myapp</code> to correlate the trace and span ids logged by the Cloud Foundry router with the trace ids logged by their app. To correlate trace IDs for a request through multiple apps, each app must forward appropriate values for the headers with requests to other applications.</p>

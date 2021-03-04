@@ -122,7 +122,7 @@
               <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
                       <ul>
   <li>
-    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+    <a href="/#govuk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
   </li>
 </ul>
 <ul>
@@ -231,7 +231,7 @@
         <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
       </li>
       <li>
-        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+        <a href="/deploying_apps.html#deploy-a-nodejs-app"><span>Deploy a Node.js app</span></a>
       </li>
       <li>
         <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
@@ -433,10 +433,10 @@
         <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-govuk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-govuk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
       </li>
       <li>
         <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
@@ -530,17 +530,17 @@
         <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
       </li>
       <li>
-        <a href="/monitoring_services.html#monitoring-backing-services-more-about-monitoring"><span>More about monitoring</span></a>
+        <a href="/monitoring_services.html#more-about-monitoring"><span>More about monitoring</span></a>
       </li>
     </ul>
   </li>
 </ul>
 <ul>
   <li>
-    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <a href="/architecture.html#govuk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
     <ul>
       <li>
-        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+        <a href="/architecture.html#characteristics-of-govuk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
       </li>
       <li>
         <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
@@ -600,201 +600,294 @@
 
         <div class="app-pane__content toc-open-disabled">
           <main id="content" class="technical-documentation" data-module="anchored-headings">
-            <h1 id="managing-custom-domains-using-the-cdn-route-service">Managing custom domains using the cdn-route service</h1><p>Apps on GOV.UK PaaS are given a default domain of <code>APP_NAME.london.cloudapps.digital</code> by default. This is OK to use within your team and for development. However, a live service will need likely need its own custom domain name, such as <code>my-service.service.gov.uk</code>. This guide will help you to configure a custom domain.</p>
-<h2 id="register-a-domain-name">Register a domain name</h2><p>If you do not already have a custom domain name to use then your first step is to obtain one. If you are running a government service you can <a href="https://www.gov.uk/service-manual/technology/get-a-domain-name">request a service.gov.uk domain</a>. If you are running another type of government website you can <a href="https://www.gov.uk/apply-for-and-manage-a-gov-uk-domain-name">request a gov.uk domain</a>.</p>
+            <h1 id="managing-custom-domains-using-the-cdn-route-service">Managing custom domains using the cdn-route service</h1>
+
+<p>Apps on GOV.UK PaaS are given a default domain of <code>APP_NAME.london.cloudapps.digital</code> by default. This is OK to use within your team and for development. However, a live service will need likely need its own custom domain name, such as <code>my-service.service.gov.uk</code>. This guide will help you to configure a custom domain.</p>
+
+<h2 id="register-a-domain-name">Register a domain name</h2>
+
+<p>If you do not already have a custom domain name to use then your first step is to obtain one. If you are running a government service you can <a href="https://www.gov.uk/service-manual/technology/get-a-domain-name">request a service.gov.uk domain</a>. If you are running another type of government website you can <a href="https://www.gov.uk/apply-for-and-manage-a-gov-uk-domain-name">request a gov.uk domain</a>.</p>
+
 <p>GOV.UK PaaS does not provide domain registration or DNS hosting. Your organisation may already have preferred providers.</p>
-<h2 id="using-your-domain-name-with-gov-uk-paas">Using your domain name with GOV.UK PaaS</h2><p>Once you have a domain name you need to route requests to GOV.UK PaaS. You can do this using a cdn-route service managed by GOV.UK PaaS. Alternatively you can <a href="/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn">configure an existing CDN provider</a>.</p>
+
+<h2 id="using-your-domain-name-with-govuk-paas">Using your domain name with GOV.UK PaaS</h2>
+
+<p>Once you have a domain name you need to route requests to GOV.UK PaaS. You can do this using a cdn-route service managed by GOV.UK PaaS. Alternatively you can <a href="/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn">configure an existing CDN provider</a>.</p>
+
 <p>A CDN service will make your app available on your chosen domain through HTTPS. GOV.UK PaaS redirects non-secure HTTP requests to a secure version of your app.</p>
-<h2 id="set-up-the-gov-uk-paas-cdn-route-service">Set up the GOV.UK PaaS cdn-route service</h2><p>Once you have started setting up a cdn-route service instance, you cannot update or delete the instance until you have completed the setup process. If you encounter problems, email GOV.UK PaaS support at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<h2 id="set-up-the-govuk-paas-cdn-route-service">Set up the GOV.UK PaaS cdn-route service</h2>
+
+<p>Once you have started setting up a cdn-route service instance, you cannot update or delete the instance until you have completed the setup process. If you encounter problems, email GOV.UK PaaS support at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
 <p>Before you start setting up your service, you must be able to set TXT and CNAME DNS records for your domain within 24 hours. This can be done through your DNS provider.</p>
+
 <h3 id="set-up-a-cdn-route-service-with-one-or-more-custom-domains">Set up a cdn-route service with one or more custom domains</h3>
+
 <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
   <strong class="govuk-warning-text__text">
     <span class="govuk-warning-text__assistive">Warning</span>
-    These instructions assume that you are using GOV.UK PaaS to launch a new service and your subdomains are not already delivering a service. <br><br> If this is not the case and you are migrating an existing service, your technical operations team should refer to this documentation when the team are designing a custom migration process for your service.
+    These instructions assume that you are using GOV.UK PaaS to launch a new service and your subdomains are not already delivering a service. <br /><br /> If this is not the case and you are migrating an existing service, your technical operations team should refer to this documentation when the team are designing a custom migration process for your service.
   </strong>
 </div>
 
 <ol>
-<li><p><a href="/get_started.html#sign-in-to-cloud-foundry">Sign in to Cloud Foundry</a>, and target the space your app is running in:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf target -o ORG_NAME -s SPACE_NAME
-</code></pre></div><p>where:</p>
+  <li>
+<p><a href="/get_started.html#sign-in-to-cloud-foundry">Sign in to Cloud Foundry</a>, and target the space your app is running in:</p>
 
-<ul>
-<li><code>ORG_NAME</code> is the name of your org</li>
-<li><code>SPACE_NAME</code> is the name of your space</li>
-</ul></li>
-<li><p>Create the required domain(s) in your organisation:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf create-domain ORG_NAME APEX_DOMAIN_NAME
-</code></pre></div><p>where <code>APEX_DOMAIN_NAME</code> is the name of the apex domain, for example <code>example.service.gov.uk</code></p></li>
-<li><p>Create an instance of the cdn-route service:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf create-service cdn-route cdn-route SERVICE_INSTANCE \
--c '{"domain": "SUBDOMAIN_LIST"}'
-</code></pre></div><p>where:</p>
+<div class="highlight"><pre class="highlight plaintext"><code> cf target -o ORG_NAME -s SPACE_NAME
+</code></pre></div>
+<p>where:</p>
+    <ul>
+      <li><p><code>ORG_NAME</code> is the name of your org</p>
+      </li>
+      <li><p><code>SPACE_NAME</code> is the name of your space</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+<p>Create the required domain(s) in your organisation:</p>
 
-<ul>
-<li><code>SERVICE_INSTANCE</code> is your chosen name for your service instance</li>
-<li><code>SUBDOMAIN_LIST</code> is a comma-separated list of your subdomain(s), for example <code>www.example.com,www.example.net</code> (do not include a comma after the final subdomain)</li>
-</ul>
-<p>This command includes <code>cdn-route</code> twice because cdn-route is the name of the service and the name of the service plan.</p></li>
-<li><p>Get the DNS information required to configure your subdomain:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_INSTANCE
-</code></pre></div><p>Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>status:    Create in progress
-message:   Provisioning in progress.
+<div class="highlight"><pre class="highlight plaintext"><code> cf create-domain ORG_NAME APEX_DOMAIN_NAME
+</code></pre></div>
+<p>where <code>APEX_DOMAIN_NAME</code> is the name of the apex domain, for example <code>example.service.gov.uk</code></p>
+  </li>
+  <li>
+<p>Create an instance of the cdn-route service:</p>
 
-Create the following CNAME records to direct traffic from your domains to your CDN route
-www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
-www.example.net =&gt; d3j6yjt78pkdqf.cloudfront.net
+<div class="highlight"><pre class="highlight plaintext"><code> cf create-service cdn-route cdn-route SERVICE_INSTANCE \
+ -c '{"domain": "SUBDOMAIN_LIST"}'
+</code></pre></div>
+<p>where:</p>
+    <ul>
+      <li><p><code>SERVICE_INSTANCE</code> is your chosen name for your service instance</p>
+      </li>
+      <li><p><code>SUBDOMAIN_LIST</code> is a comma-separated list of your subdomain(s), for example <code>www.example.com,www.example.net</code> (do not include a comma after the final subdomain)</p>
+      </li>
+    </ul>
 
-To validate ownership of the domain, set the following DNS records
-For domain www.example.com, set DNS record
+<p>This command includes <code>cdn-route</code> twice because cdn-route is the name of the service and the name of the service plan.</p>
+  </li>
+  <li>
+<p>Get the DNS information required to configure your subdomain:</p>
 
-    Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
-    Type:  CNAME
-    Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
-
-    Current validation status of www.example.com: PENDING_VALIDATION
-
-For domain www.example.net, set DNS record
-
-    Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.net.
-    Type:  CNAME
-    Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
-
-    Current validation status of www.example.net: PENDING_VALIDATION
-
-started:   2020-06-05T09:28:34Z
-updated:   2020-06-05T09:29:44Z
-</code></pre></div></li>
-<li><p>Create CNAME records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.</p>
-<p>In the example, you would create 2 <code>CNAME</code> records for your subdomains:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>- _83878ed284b0b5fcaa3e99a618432ac8.www.example.com. with a value of _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws
-- _87fa63d9b29059b0649695eec2cd0fbe.www.example.net with a value of _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws
-</code></pre></div></li>
-<li><p>Create one CNAME record for each subdomain using the DNS information. This routes requests to your service.</p>
-<p>You should not create CNAME records until your cdn-route service instance has been created. Run <code>cf service SERVICE_INSTANCE</code> to check the status of your service instance. If the service has been created, the service status will say <code>Create succeeded</code>.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_INSTANCE
-</code></pre></div><p>Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>status:    Create succeeded
-message:   Service instance provisioned [www.example.com,www.example.net =&gt; cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
-
-Create the following CNAME records to direct traffic from your domains to your CDN route
-www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
-www.example.net =&gt; d3j6yjt78pkdqf.cloudfront.net
-
-To validate ownership of the domain, set the following DNS records
-For domain www.example.com, set DNS record
-
-    Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
-    Type:  CNAME
-    Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
-
-    Current validation status of www.example.com: SUCCESS
-
-For domain www.example.net, set DNS record
-
-    Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.net.
-    Type:  CNAME
-    Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
-
-    Current validation status of www.example.net: SUCCESS
-
-started:   2020-06-05T09:28:34Z
-updated:   2020-06-05T09:29:44Z
-</code></pre></div><p>In the example, you would create 2 <code>CNAME</code> records in your DNS provider for <code>www.example.com</code> and <code>www.example.net</code>. Each <code>CNAME</code> record would point the associated subdomain to <code>d3nrs0916m1mk2.cloudfront.net</code>.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>- www.example.com with a value of d3j6yjt78pkdqf.cloudfront.net
-- www.example.net with a value of d3j6yjt78pkdqf.cloudfront.net
-</code></pre></div></li>
-</ol>
-<p>You have now set up the custom domain. Next, you should <a href="#map-a-subdomain-route-to-your-app">map a subdomain to your app</a>.</p>
-<p>It can take up to one hour for domain setup to finish after you have created the required DNS records. If the process is still incomplete after 2 hours, please refer to the <a href="/deploying_services/use_a_custom_domain/#troubleshooting-custom-domains">troubleshooting</a> section.</p>
-<p>If you have set up a custom domain using the cdn-route service and you want to stop using this custom domain with GOV.UK PaaS, you must <a href="#remove-a-custom-domain-from-your-cdn-route-service">remove the custom domain from your cdn-route service</a>.</p>
-<h2 id="amend-the-service">Amend the service</h2><h3 id="add-a-custom-domain-to-your-existing-cdn-route-service">Add a custom domain to your existing cdn-route service</h3>
-<ol>
-<li><p>Check which custom domains your existing cdn-route service has:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_INSTANCE | grep ^message:
-</code></pre></div><p>where <code>SERVICE_INSTANCE</code> is the name of one of your existing cdn-route service instances.</p>
+<div class="highlight"><pre class="highlight plaintext"><code> cf service SERVICE_INSTANCE
+</code></pre></div>
 <p>Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>message: Service instance provisioned [www.example.com,www.example.net =&gt;
-         cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
-</code></pre></div><p>In the example, there are 2 custom domains: <code>www.example.com</code> and <code>www.example.net</code>.</p></li>
-<li><p>Update your service with the expanded list of custom domains:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_INSTANCE \
--c '{"domain": "EXPANDED_SUBDOMAIN_LIST"}'
-</code></pre></div><p>where <code>EXPANDED_SUBDOMAIN_LIST</code> is the comma-separated list of subdomains.</p>
-<p>For example, your cdn-route service is named <code>custom-domains-production</code> and has 2 custom domains, <code>www.example.com</code> and <code>www.example.net</code>.  Run the following to add <code>www.example.org</code> to the list of custom domains:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf update-service custom-domains-production \
-  -c '{"domain": "www.example.com,www.example.net,www.example.org"}'
-</code></pre></div><p><div class="govuk-warning-text">
-<span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-<strong class="govuk-warning-text__text">
-<span class="govuk-warning-text__assistive">Warning</span>
-Whenever you update the &ldquo;domain&rdquo; configuration parameter you must update your DNS records, regardless of whether the value has changed.
-</strong>
-</div></p></li>
-<li><p>Get the DNS information required to configure your subdomain:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_INSTANCE
-</code></pre></div><p>Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>status:    Update in progress
-message:   Update in progress [www.example.com,www.example.net,www.example.org =&gt; cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
 
-Create the following CNAME records to direct traffic from your domains to your CDN route
-www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
-www.example.net =&gt; d3j6yjt78pkdqf.cloudfront.net
-www.example.org =&gt; d3j6yjt78pkdqf.cloudfront.net
+<div class="highlight"><pre class="highlight plaintext"><code> status:    Create in progress
+ message:   Provisioning in progress.
 
-To validate ownership of the domain, set the following DNS records
-For domain www.example.com, set DNS record
+ Create the following CNAME records to direct traffic from your domains to your CDN route
+ www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
+ www.example.net =&gt; d3j6yjt78pkdqf.cloudfront.net
 
-    Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
-    Type:  CNAME
-    Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
+ To validate ownership of the domain, set the following DNS records
+ For domain www.example.com, set DNS record
 
-    Current validation status of www.example.com: SUCCESS
+     Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+     Type:  CNAME
+     Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
 
-For domain www.example.net, set DNS record
+     Current validation status of www.example.com: PENDING_VALIDATION
 
-    Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.net.
-    Type:  CNAME
-    Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
+ For domain www.example.net, set DNS record
 
-    Current validation status of www.example.net: SUCCESS
+     Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.net.
+     Type:  CNAME
+     Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
 
-For domain www.example.org, set DNS record
+     Current validation status of www.example.net: PENDING_VALIDATION
 
-    Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
-    Type:  CNAME
-    Value:  _3504d2f46bb9307ea3a529c0e7593f32.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
+ started:   2020-06-05T09:28:34Z
+ updated:   2020-06-05T09:29:44Z
+</code></pre></div>  </li>
+  <li>
+<p>Create CNAME records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.</p>
 
-    Current validation status of www.example.org: PENDING_VALIDATION
+<p>In the example, you would create 2 <code>CNAME</code> records for your subdomains:</p>
 
-started:   2020-06-05T09:28:34Z
-updated:   2020-06-05T09:29:44Z
-</code></pre></div></li>
-<li><p>Create CNAME records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.</p>
-<p>In the example, you would create a single <code>CNAME</code> record for your new domain of <code>_87fa63d9b29059b0649695eec2cd0fbe.www.example.org.</code> with a value of <code>_3504d2f46bb9307ea3a529c0e7593f32.tfmgdnztqk.acm-validations.aws</code>.</p></li>
-<li><p>Create a CNAME record for the new subdomain using the DNS information. This routes requests to your service.</p>
-<p>You should not create CNAME records until your cdn-route service instance has finished updating. Run <code>cf service SERVICE_INSTANCE</code> to check the status of your service instance. If the update has finished, the validation status will say <code>Current validation status of www.example.org: SUCCESS</code>.</p>
-<p>In the example, you would create a <code>CNAME</code> record in your DNS provider pointing <code>www.example.org</code> to <code>d3j6yjt78pkdqf.cloudfront.net.</code></p></li>
+<div class="highlight"><pre class="highlight plaintext"><code> - _83878ed284b0b5fcaa3e99a618432ac8.www.example.com. with a value of _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws
+ - _87fa63d9b29059b0649695eec2cd0fbe.www.example.net with a value of _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws
+</code></pre></div>  </li>
+  <li>
+<p>Create one CNAME record for each subdomain using the DNS information. This routes requests to your service.</p>
+
+<p>You should not create CNAME records until your cdn-route service instance has been created. Run <code>cf service SERVICE_INSTANCE</code> to check the status of your service instance. If the service has been created, the service status will say <code>Create succeeded</code>.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf service SERVICE_INSTANCE
+</code></pre></div>
+<p>Example output:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> status:    Create succeeded
+ message:   Service instance provisioned [www.example.com,www.example.net =&gt; cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
+
+ Create the following CNAME records to direct traffic from your domains to your CDN route
+ www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
+ www.example.net =&gt; d3j6yjt78pkdqf.cloudfront.net
+
+ To validate ownership of the domain, set the following DNS records
+ For domain www.example.com, set DNS record
+
+     Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+     Type:  CNAME
+     Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
+
+     Current validation status of www.example.com: SUCCESS
+
+ For domain www.example.net, set DNS record
+
+     Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.net.
+     Type:  CNAME
+     Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
+
+     Current validation status of www.example.net: SUCCESS
+
+ started:   2020-06-05T09:28:34Z
+ updated:   2020-06-05T09:29:44Z
+</code></pre></div>
+<p>In the example, you would create 2 <code>CNAME</code> records in your DNS provider for <code>www.example.com</code> and <code>www.example.net</code>. Each <code>CNAME</code> record would point the associated subdomain to <code>d3nrs0916m1mk2.cloudfront.net</code>.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> - www.example.com with a value of d3j6yjt78pkdqf.cloudfront.net
+ - www.example.net with a value of d3j6yjt78pkdqf.cloudfront.net
+</code></pre></div>  </li>
 </ol>
+
+<p>You have now set up the custom domain. Next, you should <a href="#map-a-subdomain-route-to-your-app">map a subdomain to your app</a>.</p>
+
+<p>It can take up to one hour for domain setup to finish after you have created the required DNS records. If the process is still incomplete after 2 hours, please refer to the <a href="/deploying_services/use_a_custom_domain/#troubleshooting-custom-domains">troubleshooting</a> section.</p>
+
+<p>If you have set up a custom domain using the cdn-route service and you want to stop using this custom domain with GOV.UK PaaS, you must <a href="#remove-a-custom-domain-from-your-cdn-route-service">remove the custom domain from your cdn-route service</a>.</p>
+
+<h2 id="amend-the-service">Amend the service</h2>
+
+<h3 id="add-a-custom-domain-to-your-existing-cdn-route-service">Add a custom domain to your existing cdn-route service</h3>
+
+<ol>
+  <li>
+<p>Check which custom domains your existing cdn-route service has:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf service SERVICE_INSTANCE | grep ^message:
+</code></pre></div>
+<p>where <code>SERVICE_INSTANCE</code> is the name of one of your existing cdn-route service instances.</p>
+
+<p>Example output:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> message: Service instance provisioned [www.example.com,www.example.net =&gt;
+          cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
+</code></pre></div>
+<p>In the example, there are 2 custom domains: <code>www.example.com</code> and <code>www.example.net</code>.</p>
+  </li>
+  <li>
+<p>Update your service with the expanded list of custom domains:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf update-service SERVICE_INSTANCE \
+ -c '{"domain": "EXPANDED_SUBDOMAIN_LIST"}'
+</code></pre></div>
+<p>where <code>EXPANDED_SUBDOMAIN_LIST</code> is the comma-separated list of subdomains.</p>
+
+<p>For example, your cdn-route service is named <code>custom-domains-production</code> and has 2 custom domains, <code>www.example.com</code> and <code>www.example.net</code>.  Run the following to add <code>www.example.org</code> to the list of custom domains:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf update-service custom-domains-production \
+   -c '{"domain": "www.example.com,www.example.net,www.example.org"}'
+</code></pre></div>
+    <div class="govuk-warning-text">
+  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+  <strong class="govuk-warning-text__text">
+ <span class="govuk-warning-text__assistive">Warning</span>
+ Whenever you update the "domain" configuration parameter you must update your DNS records, regardless of whether the value has changed.
+  </strong>
+</div>
+  </li>
+</ol>
+<p>&lt;/div&gt;</p>
+
+<ol>
+  <li>
+<p>Get the DNS information required to configure your subdomain:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf service SERVICE_INSTANCE
+</code></pre></div>
+<p>Example output:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> status:    Update in progress
+ message:   Update in progress [www.example.com,www.example.net,www.example.org =&gt; cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
+
+ Create the following CNAME records to direct traffic from your domains to your CDN route
+ www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
+ www.example.net =&gt; d3j6yjt78pkdqf.cloudfront.net
+ www.example.org =&gt; d3j6yjt78pkdqf.cloudfront.net
+
+ To validate ownership of the domain, set the following DNS records
+ For domain www.example.com, set DNS record
+
+     Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+     Type:  CNAME
+     Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
+
+     Current validation status of www.example.com: SUCCESS
+
+ For domain www.example.net, set DNS record
+
+     Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.net.
+     Type:  CNAME
+     Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
+
+     Current validation status of www.example.net: SUCCESS
+
+ For domain www.example.org, set DNS record
+
+     Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
+     Type:  CNAME
+     Value:  _3504d2f46bb9307ea3a529c0e7593f32.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
+
+     Current validation status of www.example.org: PENDING_VALIDATION
+
+ started:   2020-06-05T09:28:34Z
+ updated:   2020-06-05T09:29:44Z
+</code></pre></div>  </li>
+  <li>
+<p>Create CNAME records using the DNS information. These records validate your subdomain and allow the GOV.UK PaaS team to issue the TLS certificate used to encrypt traffic.</p>
+
+<p>In the example, you would create a single <code>CNAME</code> record for your new domain of <code>_87fa63d9b29059b0649695eec2cd0fbe.www.example.org.</code> with a value of <code>_3504d2f46bb9307ea3a529c0e7593f32.tfmgdnztqk.acm-validations.aws</code>.</p>
+  </li>
+  <li>
+<p>Create a CNAME record for the new subdomain using the DNS information. This routes requests to your service.</p>
+
+<p>You should not create CNAME records until your cdn-route service instance has finished updating. Run <code>cf service SERVICE_INSTANCE</code> to check the status of your service instance. If the update has finished, the validation status will say <code>Current validation status of www.example.org: SUCCESS</code>.</p>
+
+<p>In the example, you would create a <code>CNAME</code> record in your DNS provider pointing <code>www.example.org</code> to <code>d3j6yjt78pkdqf.cloudfront.net.</code></p>
+  </li>
+</ol>
+
 <p>You have now added a custom domain to your existing cdn-route service. Next, you should <a href="#mapping-a-subdomain-route-to-your-app">map a subdomain to your app</a>.</p>
+
 <p>It should take one hour for domain setup to finish after you have created the required DNS records. If the process is still incomplete after 2 hours, please refer to the <a href="/deploying_services/use_a_custom_domain/#troubleshooting-custom-domains">troubleshooting</a> section.</p>
+
 <p>If you have set up a custom domain using the cdn-route service and you want to stop using this custom domain with GOV.UK PaaS, you must <a href="#removing-a-custom-domain-from-your-cdn-route-service">remove the custom domain from your cdn-route service</a>.</p>
-<h3 id="map-a-subdomain-route-to-your-app">Map a subdomain route to your app</h3><p>Mapping a subdomain route to your app makes that app accessible through subdomains.</p>
+
+<h3 id="map-a-subdomain-route-to-your-app">Map a subdomain route to your app</h3>
+
+<p>Mapping a subdomain route to your app makes that app accessible through subdomains.</p>
+
 <p>For each subdomain, map the route to the app:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf map-route APP_NAME --hostname www DOMAIN_NAME
-</code></pre></div><p>where <code>DOMAIN_NAME</code> is the name of the domain.</p>
+</code></pre></div>
+<p>where <code>DOMAIN_NAME</code> is the name of the domain.</p>
+
 <p>Your app can now receive requests through the subdomain.</p>
+
 <h3 id="remove-a-custom-domain-from-your-cdn-route-service">Remove a custom domain from your cdn-route service</h3>
+
 <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
   <strong class="govuk-warning-text__text">
@@ -804,187 +897,307 @@ updated:   2020-06-05T09:29:44Z
 </div>
 
 <ol>
-<li><p>Your org manager should check if any apps are using a custom domain before removing that domain:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf routes --orglevel | grep -we DOMAIN_NAME -e^space
-</code></pre></div><p>Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>space   host     domain        port   path   type   apps     service
-tools   www      DOMAIN_NAME                        app-1
-tools   info     DOMAIN_NAME                        app-2
-</code></pre></div><p>In the example, your org manager must tell the owners of <code>app-1</code> and <code>app-2</code> that you are removing the domain:</p></li>
-<li><p>Remove the custom domain from Cloud Foundry&rsquo;s routing database:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf delete-domain DOMAIN_NAME
-</code></pre></div><p>This also deletes the custom domain from every app using that domain.</p></li>
-<li><p>Check how many custom domains your cdn-route service has:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_INSTANCE | grep ^message:
-</code></pre></div><p>where <code>SERVICE_INSTANCE</code> is the name of one of your existing cdn-route service instances.</p>
+  <li>
+<p>Your org manager should check if any apps are using a custom domain before removing that domain:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf routes --orglevel | grep -we DOMAIN_NAME -e^space
+</code></pre></div>
 <p>Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>message: Service instance provisioned [www.example.com,www.example.net =&gt;
-         cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
+
+<div class="highlight"><pre class="highlight plaintext"><code> space   host     domain        port   path   type   apps     service
+ tools   www      DOMAIN_NAME                        app-1
+ tools   info     DOMAIN_NAME                        app-2
+</code></pre></div><p>In the example, your org manager must tell the owners of <code>app-1</code> and <code>app-2</code> that you are removing the domain:</p>
+  </li>
+  <li>
+<p>Remove the custom domain from Cloud Foundry's routing database:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf delete-domain DOMAIN_NAME
+</code></pre></div><p>This also deletes the custom domain from every app using that domain.</p>
+  </li>
+  <li>
+<p>Check how many custom domains your cdn-route service has:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf service SERVICE_INSTANCE | grep ^message:
+</code></pre></div>
+<p>where <code>SERVICE_INSTANCE</code> is the name of one of your existing cdn-route service instances.</p>
+
+<p>Example output:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> message: Service instance provisioned [www.example.com,www.example.net =&gt;
+          cloudapps.digital]; CDN domain d3j6yjt78pkdqf.cloudfront.net
 </code></pre></div><p>In the example, there are 2 custom domains: <code>www.example.com</code> and <code>www.example.net</code>.</p>
-<p>If you cannot see this output, please contact GOV.UK PaaS support at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk.</a> before proceeding.</p></li>
+
+<p>If you cannot see this output, please contact GOV.UK PaaS support at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">gov-uk-paas-support@digital.cabinet-office.gov.uk.</a> before proceeding.</p>
+  </li>
 </ol>
+
 <p>The next step depends on whether your cdn-route service has one or multiple associated custom domains.</p>
-<h4 id="one-associated-domain">One associated domain</h4><p>If your cdn-route service only has one associated custom domain, you must delete the service and the associated custom domain:</p>
+
+<h4 id="one-associated-domain">One associated domain</h4>
+
+<p>If your cdn-route service only has one associated custom domain, you must delete the service and the associated custom domain:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete-service SERVICE_INSTANCE
-</code></pre></div><p>where <code>SERVICE_INSTANCE</code> is the name of the appropriate cdn-route service instance.</p>
+</code></pre></div>
+<p>where <code>SERVICE_INSTANCE</code> is the name of the appropriate cdn-route service instance.</p>
+
 <p>You have now deleted your custom domain from GOV.UK PaaS. You should next <a href="#changing-your-custom-domain-39-s-dns-records">change or remove the domain’s DNS records</a>.</p>
-<h4 id="multiple-associated-domains">Multiple associated domains</h4><p>If your cdn-route service has multiple associated custom domains, you must update your service with the reduced list of custom domains:</p>
+
+<h4 id="multiple-associated-domains">Multiple associated domains</h4>
+
+<p>If your cdn-route service has multiple associated custom domains, you must update your service with the reduced list of custom domains:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_INSTANCE \
 -c '{"domain": "REDUCED_SUBDOMAIN_LIST"}'
-</code></pre></div><p>For example, your cdn-route service is named <code>custom-domains-production</code> and has 3 custom domains, <code>www.example.com</code>, <code>www.example.net</code> and <code>www.example.org</code>.  Run the following to remove <code>www.example.com</code>:</p>
+</code></pre></div>
+<p>For example, your cdn-route service is named <code>custom-domains-production</code> and has 3 custom domains, <code>www.example.com</code>, <code>www.example.net</code> and <code>www.example.org</code>.  Run the following to remove <code>www.example.com</code>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service custom-domains-production \
     -c '{"domain": "www.example.net,www.example.org"}'
-</code></pre></div><h4 id="changing-your-custom-domain-39-s-dns-records">Changing your custom domain&rsquo;s DNS records</h4><p>Once you have removed the custom domain(s) from your cdn-route service, you should delete any associated DNS records. This stops the removed domains&rsquo; DNS records from pointing towards GOV.UK PaaS. You should:</p>
+</code></pre></div>
+<h4 id="changing-your-custom-domains-dns-records">Changing your custom domain's DNS records</h4>
+
+<p>Once you have removed the custom domain(s) from your cdn-route service, you should delete any associated DNS records. This stops the removed domains' DNS records from pointing towards GOV.UK PaaS. You should:</p>
 
 <ul>
-<li>delete or amend the subdomain&rsquo;s CNAME so that it does not point to GOV.UK PaaS</li>
-<li>delete the subdomain&rsquo;s TXT record you created when you configured the subdomain to work with GOV.UK PaaS</li>
+  <li><p>delete or amend the subdomain's CNAME so that it does not point to GOV.UK PaaS</p>
+  </li>
+  <li><p>delete the subdomain's TXT record you created when you configured the subdomain to work with GOV.UK PaaS</p>
+  </li>
 </ul>
 
 <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
   <strong class="govuk-warning-text__text">
     <span class="govuk-warning-text__assistive">Warning</span>
-    Remove a custom domain from your cdn-route service before removing the DNS records pointing at GOV.UK PaaS. <br><br>Otherwise all of the domains` associated with that cdn-route service will fail to renew their TLS certificates without warning at some point over the next 90 days. Your users may not be able to use your service.
+    Remove a custom domain from your cdn-route service before removing the DNS records pointing at GOV.UK PaaS. <br /><br />Otherwise all of the domains` associated with that cdn-route service will fail to renew their TLS certificates without warning at some point over the next 90 days. Your users may not be able to use your service.
   </strong>
 </div>
-<h2 id="configuring-your-custom-domain">Configuring your custom domain</h2><h3 id="disabling-forwarding-cookies">Disabling forwarding cookies</h3><p>By default cookies are forwarded to your app. You can disable this by setting the <code>cookies</code> parameter to <code>false</code>:</p>
+
+<h2 id="configuring-your-custom-domain">Configuring your custom domain</h2>
+
+<h3 id="disabling-forwarding-cookies">Disabling forwarding cookies</h3>
+
+<p>By default cookies are forwarded to your app. You can disable this by setting the <code>cookies</code> parameter to <code>false</code>:</p>
+
 <div class="highlight"><pre class="highlight shell"><code>cf update-service my-cdn-route <span class="se">\</span>
     <span class="nt">-c</span> <span class="s1">'{"cookies": false}'</span>
 </code></pre></div><p>See the <a href="/deploying_services/use_a_custom_domain/#how-custom-domains-work">How custom domains work</a> section for details.</p>
-<h3 id="forwarding-headers">Forwarding headers</h3><p>By default, our service broker configures the CDN to only forward the <code>Host</code> header to your app. You can forward additional headers; in this example you can additionally forward the <code>Accept</code> and <code>Authorization</code> headers:</p>
+
+<h3 id="forwarding-headers">Forwarding headers</h3>
+
+<p>By default, our service broker configures the CDN to only forward the <code>Host</code> header to your app. You can forward additional headers; in this example you can additionally forward the <code>Accept</code> and <code>Authorization</code> headers:</p>
+
 <div class="highlight"><pre class="highlight shell"><code>cf update-service my-cdn-route <span class="se">\</span>
     <span class="nt">-c</span> <span class="s1">'{"headers": ["Accept", "Authorization"]}'</span>
-</code></pre></div><p>You can supply up to nine headers. If you need to allow more headers you will have to forward all headers:</p>
+</code></pre></div>
+<p>You can supply up to nine headers. If you need to allow more headers you will have to forward all headers:</p>
+
 <div class="highlight"><pre class="highlight shell"><code>cf update-service my-cdn-route <span class="se">\</span>
     <span class="nt">-c</span> <span class="s1">'{"headers": ["*"]}'</span>
-</code></pre></div><p>Note that forwarding headers has a negative impact on cacheability. See the <a href="/deploying_services/use_a_custom_domain/#how-custom-domains-work">How custom domains work</a> section for details.</p>
-<h3 id="troubleshooting-custom-domains">Troubleshooting custom domains</h3><h4 id="service-creation-timescales">Service creation timescales</h4><p>Service creation usually takes approximately one hour. Whilst a service is being created, you will see the status &ldquo;create in progress&rdquo; reported from commands like <code>cf service</code>. If it has not finished after 2 hours, we recommend that you check your DNS setup to make sure you completed the CNAME record creation correctly (see step seven). If this does not solve the issue, you may need to <a href="https://admin.london.cloud.service.gov.uk/support">contact support</a>.</p>
-<h4 id="cloudfront-timescales-for-serving-your-origin-from-all-locations">CloudFront timescales for serving your origin from all locations</h4><p>It may take some time for CloudFront to serve your origin from all locations, because it is a globally distributed network. You can check in advance by sending requests to CloudFront and passing the custom domain in the <code>Host</code> header, using the example below. The CloudFront domain can be found by running <code>cf service my-cdn-route</code>.</p>
+</code></pre></div>
+<p>Note that forwarding headers has a negative impact on cacheability. See the <a href="/deploying_services/use_a_custom_domain/#how-custom-domains-work">How custom domains work</a> section for details.</p>
+
+<h3 id="troubleshooting-custom-domains">Troubleshooting custom domains</h3>
+
+<h4 id="service-creation-timescales">Service creation timescales</h4>
+
+<p>Service creation usually takes approximately one hour. Whilst a service is being created, you will see the status "create in progress" reported from commands like <code>cf service</code>. If it has not finished after 2 hours, we recommend that you check your DNS setup to make sure you completed the CNAME record creation correctly (see step seven). If this does not solve the issue, you may need to <a href="https://admin.london.cloud.service.gov.uk/support">contact support</a>.</p>
+
+<h4 id="cloudfront-timescales-for-serving-your-origin-from-all-locations">CloudFront timescales for serving your origin from all locations</h4>
+
+<p>It may take some time for CloudFront to serve your origin from all locations, because it is a globally distributed network. You can check in advance by sending requests to CloudFront and passing the custom domain in the <code>Host</code> header, using the example below. The CloudFront domain can be found by running <code>cf service my-cdn-route</code>.</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>curl -H "Host: &lt;Custom domain&gt;" https://&lt;CloudFront domain&gt;/
-</code></pre></div><p>When this is working consistently, you can flip your DNS record to start serving content from the CDN. You may still have to wait for up to an hour to make sure the CloudFront distribution is updated everywhere.</p>
-<h4 id="quot-an-operation-for-service-instance-name-is-in-progress-quot">&ldquo;An operation for service instance [name] is in progress&rdquo;</h4><p>You may get the following error message when you try to update or delete a service instance:</p>
+</code></pre></div>
+<p>When this is working consistently, you can flip your DNS record to start serving content from the CDN. You may still have to wait for up to an hour to make sure the CloudFront distribution is updated everywhere.</p>
+
+<h4 id="an-operation-for-service-instance-name-is-in-progress">"An operation for service instance [name] is in progress"</h4>
+
+<p>You may get the following error message when you try to update or delete a service instance:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>Server error, status code: 409, error code: 60016, message: An operation for service instance [name] is in progress.
-</code></pre></div><p>This happens because you cannot do anything to a service instance while it&rsquo;s in a pending state. A CDN service instance stays pending until it detects the CNAME or ALIAS record. If this causes a problem for you, <a href="https://www.cloud.service.gov.uk/support">contact support</a> to ask us to manually delete the pending instance.</p>
-<h2 id="how-custom-domains-work">How custom domains work</h2><h3 id="overview">Overview</h3><p>Custom domains are configured by our cdn-route service which uses a CloudFront distribution to proxy and/or cache requests to your app.</p>
-<h3 id="caching">Caching</h3><p>CloudFront uses your app&rsquo;s <code>Cache-Control</code> or <code>Expires</code> HTTP headers to determine <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html">how long to cache content</a>.</p>
+</code></pre></div>
+<p>This happens because you cannot do anything to a service instance while it's in a pending state. A CDN service instance stays pending until it detects the CNAME or ALIAS record. If this causes a problem for you, <a href="https://www.cloud.service.gov.uk/support">contact support</a> to ask us to manually delete the pending instance.</p>
+
+<h2 id="how-custom-domains-work">How custom domains work</h2>
+
+<h3 id="overview">Overview</h3>
+
+<p>Custom domains are configured by our cdn-route service which uses a CloudFront distribution to proxy and/or cache requests to your app.</p>
+
+<h3 id="caching">Caching</h3>
+
+<p>CloudFront uses your app's <code>Cache-Control</code> or <code>Expires</code> HTTP headers to determine <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html">how long to cache content</a>.</p>
+
 <p>If your app does not provide these headers, CloudFront will use the configured default time-to-live. This can be particularly confusing as different requests might be routed to different CloudFront Edge endpoints.</p>
+
 <p>When you create your CDN distribution, CloudFront sets the default time-to-live for your CDN-route service at:</p>
 
 <ul>
-<li>24 hours if you created your CDN distribution before 2019-08-12</li>
-<li>0 seconds if you created your CDN distribution after 2019-08-12</li>
+  <li><p>24 hours if you created your CDN distribution before 2019-08-12</p>
+  </li>
+  <li><p>0 seconds if you created your CDN distribution after 2019-08-12</p>
+  </li>
 </ul>
+
 <p>While there is no mechanism for GOV.UK PaaS users to trigger a cache clear, <a href="https://admin.london.cloud.service.gov.uk/support">GOV.UK PaaS support</a> can. Cache invalidation is not instantaneous; Amazon recommends expecting a lag time of 10-15 minutes (more if there are many distinct endpoints).</p>
-<p>You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web">CloudFront&rsquo;s documentation on headers and distributions</a> for more information. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.</p>
+
+<p>You can configure CloudFront to forward headers to your app, which causes CloudFront to cache multiple versions of an object based on the values in one or more request headers. See <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web">CloudFront's documentation on headers and distributions</a> for more information. This means the more headers you forward the less caching will take place. Forwarding all headers means no caching will happen.</p>
+
 <p>You can reconfigure the default time-to-live for your CDN route service:</p>
+
 <div class="highlight"><pre class="highlight shell"><code>cf update-service my-cdn-route <span class="nt">-c</span> <span class="s1">'{"default_ttl": 15}'</span>
-</code></pre></div><p>The above example configures the CDN route to have a default time-to-live of 15 seconds.</p>
-<h3 id="authentication">Authentication</h3><p>Cookie headers are forwarded to your app by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on <a href="/deploying_services/use_a_custom_domain/#forwarding-headers">Forwarding Headers</a>.</p>
-<h2 id="you-may-need-to-make-a-dns-change">You may need to make a DNS change</h2><p>GOV.UK Platform as a Service (PaaS) is changing certificate provider. We’re switching from Let’s Encrypt to Amazon AWS Certificate Manager (ACM) because:</p>
+</code></pre></div>
+<p>The above example configures the CDN route to have a default time-to-live of 15 seconds.</p>
+
+<h3 id="authentication">Authentication</h3>
+
+<p>Cookie headers are forwarded to your app by default, so cookie-based authentication will work as expected. Other headers, such as HTTP auth, are stripped by default. If you need a different configuration, see the guidance on <a href="/deploying_services/use_a_custom_domain/#forwarding-headers">Forwarding Headers</a>.</p>
+
+<h2 id="you-may-need-to-make-a-dns-change">You may need to make a DNS change</h2>
+
+<p>GOV.UK Platform as a Service (PaaS) is changing certificate provider. We’re switching from Let’s Encrypt to Amazon AWS Certificate Manager (ACM) because:</p>
 
 <ul>
-<li>the current version of <a href="https://en.wikipedia.org/wiki/Automated_Certificate_Management_Environment">Automatic Certificate Management Environment</a> (ACME) API  will soon become deprecated</li>
-<li>the latest version has a more stringent DNS challenge process, which could result in changes taking longer to implement</li>
-<li>ACM allows for longer times to update your DNS records compared to ACME v2</li>
-<li>PaaS has an Enterprise Support Agreement with AWS</li>
+  <li><p>the current version of <a href="https://en.wikipedia.org/wiki/Automated_Certificate_Management_Environment">Automatic Certificate Management Environment</a> (ACME) API  will soon become deprecated</p>
+  </li>
+  <li><p>the latest version has a more stringent DNS challenge process, which could result in changes taking longer to implement</p>
+  </li>
+  <li><p>ACM allows for longer times to update your DNS records compared to ACME v2</p>
+  </li>
+  <li><p>PaaS has an Enterprise Support Agreement with AWS</p>
+  </li>
 </ul>
+
 <p>PaaS provides certificates for apps which use  *.cloudapps.digital or *.london.cloudapps.digital domains and have already undertaken the migration. You do not need to take any action if your apps use these domains.</p>
+
 <p>You will only need to make changes if your service was last updated before 2020-06-08 at 1200.</p>
+
 <p>If you use a custom domain, you have an individual certificate that validates the TLS connection. Let’s Encrypt creates the certificate automatically and validates your ownership of the domain through a series of DNS challenges. Due to the migration to ACM, you need to update your DNS records by 31 August 2020 to pass ACM’s DNS challenges and prevent your certificate from expiring.</p>
+
 <p>PaaS cannot make this change for you as we do not have any access to your DNS record management.</p>
+
 <p>There is no end user impact whilst making these changes.</p>
+
 <p>If you do not update your DNS records, your app functioning under your custom domain will no longer have a valid certificate and will display an ‘untrusted site’ warning to your end users in their browser. This will decrease trust in your brand and may result in wider impacts if you have layers of trust occurring between different apps, such as API access.</p>
-<h2 id="making-changes-to-your-dns-records">Making changes to your DNS records</h2><p>If you manage your DNS yourselves:</p>
+
+<h2 id="making-changes-to-your-dns-records">Making changes to your DNS records</h2>
+
+<p>If you manage your DNS yourselves:</p>
 
 <ol>
-<li>Run <code>cf service SERVICE_INSTANCE</code> to discover the current list of domains for the service instance</li>
-<li><p>Run the cf update service command with the current list of domains.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_INSTANCE -c '{"domain": "domain1.com,domain2.com"}'
-</code></pre></div></li>
-<li><p>Run <code>cf service SERVICE_INSTANCE</code> to obtain the new records.</p>
+  <li><p>Run <code>cf service SERVICE_INSTANCE</code> to discover the current list of domains for the service instance</p>
+  </li>
+  <li>
+<p>Run the cf update service command with the current list of domains.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf update-service SERVICE_INSTANCE -c '{"domain": "domain1.com,domain2.com"}'
+</code></pre></div>  </li>
+  <li>
+<p>Run <code>cf service SERVICE_INSTANCE</code> to obtain the new records.</p>
+
 <p>Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>status:    update in progress
-message:   Provisioning in progress.
 
-Create the following CNAME records to direct traffic from your domains to your CDN route
-www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
-www.example.org =&gt; d3j6yjt78pkdqf.cloudfront.net
+<div class="highlight"><pre class="highlight plaintext"><code> status:    update in progress
+ message:   Provisioning in progress.
 
-To validate ownership of the domain, set the following DNS records
-For domain www.example.com, set DNS record
+ Create the following CNAME records to direct traffic from your domains to your CDN route
+ www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
+ www.example.org =&gt; d3j6yjt78pkdqf.cloudfront.net
 
-    Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
-    Type:  CNAME
-    Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
+ To validate ownership of the domain, set the following DNS records
+ For domain www.example.com, set DNS record
 
-    Current validation status of www.example.com: PENDING_VALIDATION
+     Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+     Type:  CNAME
+     Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
 
-For domain www.example.org, set DNS record
+     Current validation status of www.example.com: PENDING_VALIDATION
 
-    Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
-    Type:  CNAME
-    Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
+ For domain www.example.org, set DNS record
 
-Current validation status of www.example.org: PENDING_VALIDATION
+     Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
+     Type:  CNAME
+     Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
 
-started:   2020-06-05T09:28:34Z
-updated:   2020-06-05T09:29:44Z
-</code></pre></div></li>
-<li><p>Update the DNS records in your DNS providers console / config management tool.</p></li>
+ Current validation status of www.example.org: PENDING_VALIDATION
+
+ started:   2020-06-05T09:28:34Z
+ updated:   2020-06-05T09:29:44Z
+</code></pre></div>  </li>
+  <li><p>Update the DNS records in your DNS providers console / config management tool.</p>
+  </li>
 </ol>
+
 <p>If someone else manages your DNS, contact your provider to organise a date for your switch-over. Make sure that you agree a quick turnaround time with your provider, ideally within one working day.</p>
 
 <ol>
-<li>Run the cf update service command with the current list of domains.</li>
-<li><p>Run <code>cf service SERVICE_INSTANCE</code> to obtain the new records.</p>
+  <li><p>Run the cf update service command with the current list of domains.</p>
+  </li>
+  <li>
+<p>Run <code>cf service SERVICE_INSTANCE</code> to obtain the new records.</p>
+
 <p>Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>status:    update in progress
-message:   Provisioning in progress.
 
-Create the following CNAME records to direct traffic from your domains to your CDN route
-www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
-www.example.org =&gt; d3j6yjt78pkdqf.cloudfront.net
+<div class="highlight"><pre class="highlight plaintext"><code> status:    update in progress
+ message:   Provisioning in progress.
 
-To validate ownership of the domain, set the following DNS records
-For domain www.example.com, set DNS record
+ Create the following CNAME records to direct traffic from your domains to your CDN route
+ www.example.com =&gt; d3j6yjt78pkdqf.cloudfront.net
+ www.example.org =&gt; d3j6yjt78pkdqf.cloudfront.net
 
-    Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
-    Type:  CNAME
-    Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
+ To validate ownership of the domain, set the following DNS records
+ For domain www.example.com, set DNS record
 
-    Current validation status of www.example.com: PENDING_VALIDATION
+     Name:  _83878ed284b0b5fcaa3e99a618432ac8.www.example.com.
+     Type:  CNAME
+     Value: _5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
 
-For domain www.example.org, set DNS record
+     Current validation status of www.example.com: PENDING_VALIDATION
 
-    Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
-    Type:  CNAME
-    Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
-    TTL:   86400
+ For domain www.example.org, set DNS record
 
-Current validation status of www.example.org: PENDING_VALIDATION
+     Name:  _87fa63d9b29059b0649695eec2cd0fbe.www.example.org.
+     Type:  CNAME
+     Value:  _6504c2f15bb9307ee3a599c0e8193849.tfmgdnztqk.acm-validations.aws.
+     TTL:   86400
 
-started:   2020-06-05T09:28:34Z
-updated:   2020-06-05T09:29:44Z
-</code></pre></div></li>
-<li><p>Provide the DNS records to your DNS provider.</p></li>
+ Current validation status of www.example.org: PENDING_VALIDATION
+
+ started:   2020-06-05T09:28:34Z
+ updated:   2020-06-05T09:29:44Z
+</code></pre></div>  </li>
+  <li><p>Provide the DNS records to your DNS provider.</p>
+  </li>
 </ol>
+
 <p>Everybody who does it within the next month will receive a photo of a duck as thanks. The rubber duck is our team mascot. It represents good teamwork and happy developers.</p>
-<h3 id="further-information">Further information</h3><p>See the GOV.UK guidance on:</p>
+
+<h3 id="further-information">Further information</h3>
+
+<p>See the GOV.UK guidance on:</p>
 
 <ul>
-<li><a href="https://www.gov.uk/service-manual/technology/get-a-domain-name">getting a service domain name</a></li>
-<li><a href="https://www.gov.uk/apply-for-and-manage-a-gov-uk-domain-name">applying for a .gov.uk domain name</a></li>
+  <li><p><a href="https://www.gov.uk/service-manual/technology/get-a-domain-name">getting a service domain name</a></p>
+  </li>
+  <li><p><a href="https://www.gov.uk/apply-for-and-manage-a-gov-uk-domain-name">applying for a .gov.uk domain name</a></p>
+  </li>
 </ul>
+
 <p>See the CloudFront documentation on:</p>
 
 <ul>
-<li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">HTTP request headers</a></li>
-<li><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html">caching content based on cookies</a></li>
+  <li><p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior">HTTP request headers</a></p>
+  </li>
+  <li><p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html">caching content based on cookies</a></p>
+  </li>
 </ul>
+
 
             
           </main>

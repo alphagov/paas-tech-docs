@@ -1,11 +1,21 @@
-<h2 id="stopping-and-starting-apps">Stopping and starting apps</h2><p>Run the following in the command line to temporarily stop your app and free up memory from your <a href="/managing_apps.html#quotas">quota</a>:</p>
+<h2 id="stopping-and-starting-apps">Stopping and starting apps</h2>
+
+<p>Run the following in the command line to temporarily stop your app and free up memory from your <a href="/managing_apps.html#quotas">quota</a>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf stop APP_NAME
-</code></pre></div><p>Users visiting your app&rsquo;s URL will get the error:</p>
+</code></pre></div>
+<p>Users visiting your app's URL will get the error:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>404 Not Found: Requested route ('APP_NAME.APP_DOMAIN') does not exist.
-</code></pre></div><p>Databases and other provisioned services will still be running, and GOV.UK PaaS will charge you for any paid plans or services.</p>
+</code></pre></div>
+<p>Databases and other provisioned services will still be running, and GOV.UK PaaS will charge you for any paid plans or services.</p>
+
 <p>Run the following to restart a stopped app:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf start APP_NAME
-</code></pre></div><h2 id="deleting-apps">Deleting apps</h2>
+</code></pre></div>
+<h2 id="deleting-apps">Deleting apps</h2>
+
 <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
   <strong class="govuk-warning-text__text">
@@ -13,39 +23,65 @@
     Deleting an app is irreversible.
   </strong>
 </div>
+
 <p>You should run <code>cf target</code> to check which <a href="/orgs_spaces_users.html#organisations">org</a> and <a href="/orgs_spaces_users.html#spaces">space</a> you are in before you delete an app.</p>
+
 <p>Run the following to delete an app:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete APPNAME
-</code></pre></div><h3 id="deleting-app-routes">Deleting app routes</h3><p>Run the following to delete an app and that app’s <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes">routes</a> at the same time:</p>
+</code></pre></div>
+<h3 id="deleting-app-routes">Deleting app routes</h3>
+
+<p>Run the following to delete an app and that app’s <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes">routes</a> at the same time:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete -r APPNAME
-</code></pre></div><p>You can delete an app’s routes separately.</p>
+</code></pre></div>
+<p>You can delete an app’s routes separately.</p>
 
 <ol>
-<li><p>Run <code>cf routes</code> to get a list of all active routes in the current space. This command will also list information about the routes, including hostname and <a href="/orgs_spaces_users.html#regions">app domain</a>.</p></li>
-<li><p>Run the following to delete the app’s routes:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf delete-route DOMAIN_NAME --hostname HOSTNAME
-</code></pre></div></li>
+  <li>
+<p>Run <code>cf routes</code> to get a list of all active routes in the current space. This command will also list information about the routes, including hostname and <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+  </li>
+  <li>
+<p>Run the following to delete the app’s routes:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf delete-route DOMAIN_NAME --hostname HOSTNAME
+</code></pre></div>  </li>
 </ol>
-<h3 id="deleting-a-service-instance">Deleting a service instance</h3><p>You must unbind a service instance from any apps it is bound to before you can delete that service instance. Note:</p>
+
+<h3 id="deleting-a-service-instance">Deleting a service instance</h3>
+
+<p>You must unbind a service instance from any apps it is bound to before you can delete that service instance. Note:</p>
 
 <ul>
-<li>you do not need to delete an app&rsquo;s service instances before you can delete that app</li>
-<li>a service instance can be bound to more than one app</li>
+  <li><p>you do not need to delete an app's service instances before you can delete that app</p>
+  </li>
+  <li><p>a service instance can be bound to more than one app</p>
+  </li>
 </ul>
 
 <ol>
-<li><p>Run <code>cf services</code> to see all service instances in your targeted space. Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>name      service    plan    bound apps    last operation
-mystuff   postgres   small   my-app        create succeeded
-mydb      mysql      large   not-my-app    create succeeded
-</code></pre></div></li>
-<li><p>Run the following to unbind a service instance:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service APP_NAME SERVICE_NAME
-</code></pre></div><p>where:</p></li>
-</ol>
-<div class="highlight"><pre class="highlight plaintext"><code>- `APP_NAME` is the name of a deployed instance of your app exactly as specified in your manifest or push command
-- `SERVICE_NAME` is a unique descriptive name for this service instance
-</code></pre></div>
-<ol>
-<li>Run <code>cf delete-service SERVICE_NAME</code> to delete that service instance.</li>
+  <li>
+<p>Run <code>cf services</code> to see all service instances in your targeted space. Example output:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> name      service    plan    bound apps    last operation
+ mystuff   postgres   small   my-app        create succeeded
+ mydb      mysql      large   not-my-app    create succeeded
+</code></pre></div>  </li>
+  <li>
+<p>Run the following to unbind a service instance:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf unbind-service APP_NAME SERVICE_NAME
+</code></pre></div><p>where:</p>
+
+    <ul>
+      <li><p><code>APP_NAME</code> is the name of a deployed instance of your app exactly as specified in your manifest or push command</p>
+      </li>
+      <li><p><code>SERVICE_NAME</code> is a unique descriptive name for this service instance</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+<p>Run <code>cf delete-service SERVICE_NAME</code> to delete that service instance.</p>
+  </li>
 </ol>

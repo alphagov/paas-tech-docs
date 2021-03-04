@@ -1,24 +1,46 @@
-<h2 id="quotas">Quotas</h2><p>Cloud Foundry capacity is managed by quotas. Quotas provide a reservation of application routes, memory, compute power, and service instances which your organization cannot exceed. You can set individual application quotas to control how much of your quota each of your applications can use.</p>
-<h3 id="quota-allocations">Quota allocations</h3><p>Your organisation will be assigned a quota based on your stated needs. This will cover the app instances you run. Backing services do not count towards this quota.</p>
+<h2 id="quotas">Quotas</h2>
+
+<p>Cloud Foundry capacity is managed by quotas. Quotas provide a reservation of application routes, memory, compute power, and service instances which your organization cannot exceed. You can set individual application quotas to control how much of your quota each of your applications can use.</p>
+
+<h3 id="quota-allocations">Quota allocations</h3>
+
+<p>Your organisation will be assigned a quota based on your stated needs. This will cover the app instances you run. Backing services do not count towards this quota.</p>
+
 <p>Your quota sets the following:</p>
 
 <ul>
-<li><p>RAM: The amount of RAM available to your applications. The application also has a compute share derived from its memory limit.</p></li>
-<li><p>Service instances: The number of service instances available to your organization.</p></li>
-<li><p>Paid services: Whether or not paid <a href="/deploying_services/#deploy-a-backing-or-routing-service">services</a> are available. <code>postgres</code> is a paid service.</p></li>
-<li><p>Routes: The number of routes available to your applications (hostname and domain pairs where an application that exposes a listening port can be reached).</p></li>
+  <li>
+<p>RAM: The amount of RAM available to your applications. The application also has a compute share derived from its memory limit.</p>
+  </li>
+  <li>
+<p>Service instances: The number of service instances available to your organization.</p>
+  </li>
+  <li>
+<p>Paid services: Whether or not paid <a href="/deploying_services/#deploy-a-backing-or-routing-service">services</a> are available. <code>postgres</code> is a paid service.</p>
+  </li>
+  <li>
+<p>Routes: The number of routes available to your applications (hostname and domain pairs where an application that exposes a listening port can be reached).</p>
+  </li>
 </ul>
+
 <p>To see your organisation quota, run the command:</p>
+
 <p><code>cf org YOURORG</code></p>
-<p>where YOURORG is your organisations&rsquo;s name. (If you do not know the name, you can use <code>cf orgs</code> to find out). This will produce an output which includes the name of the org&rsquo;s current quota:</p>
+
+<p>where YOURORG is your organisations's name. (If you do not know the name, you can use <code>cf orgs</code> to find out). This will produce an output which includes the name of the org's current quota:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>name:                  YOURORG
 domains:               my.domain,
 quota:                 medium
 spaces:                space1, space2
 isolation segments:
-</code></pre></div><p>To see the details of that quota, run:</p>
+</code></pre></div>
+<p>To see the details of that quota, run:</p>
+
 <p><code>cf quota QUOTA</code></p>
+
 <p>where QUOTA is the name of the quota that GOV.UK PaaS has assigned to your org.</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>Total Memory           60G
 Instance Memory        unlimited
 Routes                 1000
@@ -26,52 +48,89 @@ Services               20
 Paid service plans     allowed
 App instance limit     unlimited
 Reserved Route Ports   0
-</code></pre></div><p>To see all quotas available on the GOV.UK PaaS, run the command:</p>
+</code></pre></div>
+<p>To see all quotas available on the GOV.UK PaaS, run the command:</p>
+
 <p><code>cf quotas</code></p>
-<h3 id="quota-limits">Quota limits</h3><p>If a new application <code>push</code> would exceed your organization&rsquo;s quota, the request will fail with status code <code>400</code> and a message describing the limit that would be exceeded.</p>
+
+<h3 id="quota-limits">Quota limits</h3>
+
+<p>If a new application <code>push</code> would exceed your organization's quota, the request will fail with status code <code>400</code> and a message describing the limit that would be exceeded.</p>
+
 <p><strong>Example:</strong></p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>Creating app APPLICATION in org ORG / space SPACE as USER...
 FAILED
 Server error, status code: 400, error code: 100007, message:
 You have exceeded the memory limit for your organization's quota.
-</code></pre></div><p>In this situation you have three options:</p>
+</code></pre></div>
+<p>In this situation you have three options:</p>
 
 <ol>
-<li>Delete existing resources with <code>cf delete</code>, <code>cf delete-service</code>, <code>cf delete-route</code> or similar commands.</li>
-<li>Reconfigure existing <a href="/managing_apps.html#application-quotas">application quotas</a> and redeploy.</li>
-<li>Request a quota change: contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</li>
+  <li><p>Delete existing resources with <code>cf delete</code>, <code>cf delete-service</code>, <code>cf delete-route</code> or similar commands.</p>
+  </li>
+  <li><p>Reconfigure existing <a href="/managing_apps.html#application-quotas">application quotas</a> and redeploy.</p>
+  </li>
+  <li><p>Request a quota change: contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+  </li>
 </ol>
-<h3 id="application-quotas">Application quotas</h3><p>As a PaaS tenant, you can divide your organization&rsquo;s quota capacity amongst your applications as you see fit, by way of application quotas. Application limits are specified in your application manifest or as <code>cf push</code> command line options.</p>
+
+<h3 id="application-quotas">Application quotas</h3>
+
+<p>As a PaaS tenant, you can divide your organization's quota capacity amongst your applications as you see fit, by way of application quotas. Application limits are specified in your application manifest or as <code>cf push</code> command line options.</p>
+
 <p>Use the following commands to set application quota options (in each pair below, the first is the version to use in the manifest, and the second is the command line version.)</p>
 
 <ul>
-<li><p><code>memory:</code> / <code>-m</code></p>
-<p>Your application&rsquo;s memory limit. An application&rsquo;s compute limit is derived from its memory limit (see <a href="/managing_apps.html#memory-share-and-compute-share">below</a>).</p></li>
-<li><p><code>disk_quota:</code> / <code>-k</code></p>
-<p>The maximum amount of disk space available to your app.</p></li>
-<li><p><code>instances:</code> / <code>-i</code></p>
-<p>Sets the number of application instances to launch. Each additional instance receives the same memory and disk reservation. An application with a manifest specifying <code>memory: 256M</code> and <code>instances: 4</code> would reserve 1GB (256M x 4) total.</p>
-<p>For a production application, you should always launch more than one instance. See <a href="/managing_apps.html#scaling">Scaling</a> for more information.</p></li>
-</ul>
-<h4 id="memory-share-and-compute-share">Memory share and compute share</h4><p>Your application&rsquo;s compute limit is derived from its memory limit. Each application receives a guaranteed compute share equal to its relative share of memory.</p>
-<p>Your application will be guaranteed to receive a portion of the vCPU compute power equal to its portion of memory allocation. In other words, it will receive at least this much vCPU time even if there are other applications competing for time.</p>
-<p>Your application will be offered 100% of the vCPU compute power. If no other applications are running, the app can use all the computer power available.
-If there are other applications competing for time, each application&rsquo;s guaranteed share determines how much time it will receive.</p>
-<p>The application cannot access more than the specified amount of memory.</p>
-<h4 id="application-quota-sizing">Application quota sizing</h4>
-<ul>
-<li><p>The environment default of 512MB <code>memory</code> is sufficient for most applications. Static sites and utility applications such as schedulers or loaders may require less. Use <code>cf app APPNAME</code> to check your application&rsquo;s current memory and compute utilization.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>requested state: started
-instances: 1/1
-usage: 128M x 1 instances
-urls:
-last uploaded: Wed Jul 22 20:09:56 UTC 2015
+  <li>
+<p><code>memory:</code> / <code>-m</code></p>
 
-     state     since                    cpu    memory          disk
-#0   running   2015-07-30 05:58:11 PM   0.0%   94.6M of 128M   80.4M of 128M
-</code></pre></div></li>
-<li><p>Any application which exceeds its memory quota will be automatically restarted. Use <code>cf events APPNAME</code> to look for &lsquo;out of memory&rsquo; crashes.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>... description
-... index: 0, reason: CRASHED, exit_description: out of memory, exit_status: 255
-</code></pre></div></li>
+<p>Your application's memory limit. An application's compute limit is derived from its memory limit (see <a href="/managing_apps.html#memory-share-and-compute-share">below</a>).</p>
+  </li>
+  <li>
+<p><code>disk_quota:</code> / <code>-k</code></p>
+
+<p>The maximum amount of disk space available to your app.</p>
+  </li>
+  <li>
+<p><code>instances:</code> / <code>-i</code></p>
+
+<p>Sets the number of application instances to launch. Each additional instance receives the same memory and disk reservation. An application with a manifest specifying <code>memory: 256M</code> and <code>instances: 4</code> would reserve 1GB (256M x 4) total.</p>
+
+<p>For a production application, you should always launch more than one instance. See <a href="/managing_apps.html#scaling">Scaling</a> for more information.</p>
+  </li>
+</ul>
+
+<h4 id="memory-share-and-compute-share">Memory share and compute share</h4>
+
+<p>Your application's compute limit is derived from its memory limit. Each application receives a guaranteed compute share equal to its relative share of memory.</p>
+
+<p>Your application will be guaranteed to receive a portion of the vCPU compute power equal to its portion of memory allocation. In other words, it will receive at least this much vCPU time even if there are other applications competing for time.</p>
+
+<p>Your application will be offered 100% of the vCPU compute power. If no other applications are running, the app can use all the computer power available.<br />
+If there are other applications competing for time, each application's guaranteed share determines how much time it will receive.</p>
+
+<p>The application cannot access more than the specified amount of memory.</p>
+
+<h4 id="application-quota-sizing">Application quota sizing</h4>
+
+<ul>
+  <li>
+<p>The environment default of 512MB <code>memory</code> is sufficient for most applications. Static sites and utility applications such as schedulers or loaders may require less. Use <code>cf app APPNAME</code> to check your application's current memory and compute utilization.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>  requested state: started
+  instances: 1/1
+  usage: 128M x 1 instances
+  urls:
+  last uploaded: Wed Jul 22 20:09:56 UTC 2015
+
+       state     since                    cpu    memory          disk
+  #0   running   2015-07-30 05:58:11 PM   0.0%   94.6M of 128M   80.4M of 128M
+</code></pre></div>  </li>
+  <li>
+<p>Any application which exceeds its memory quota will be automatically restarted. Use <code>cf events APPNAME</code> to look for 'out of memory' crashes.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>  ... description
+  ... index: 0, reason: CRASHED, exit_description: out of memory, exit_status: 255
+</code></pre></div>  </li>
 </ul>

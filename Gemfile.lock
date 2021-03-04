@@ -13,6 +13,8 @@ PATH
     govuk_tech_docs (2.1.1)
       activesupport
       chronic (~> 0.10.2)
+      kramdown (~> 2.3.0)
+      kramdown-parser-gfm (~> 1.1.0)
       middleman (~> 4.0)
       middleman-autoprefixer (~> 2.10.0)
       middleman-compass (>= 4.0.0)
@@ -23,7 +25,6 @@ PATH
       nokogiri
       openapi3_parser (~> 0.5.0)
       pry
-      redcarpet (~> 3.5.0)
       sass
       sprockets (~> 4.0.0)
 
@@ -84,6 +85,8 @@ GEM
       concurrent-ruby (~> 1.0)
     kramdown (2.3.0)
       rexml
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -162,7 +165,6 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redcarpet (3.5.1)
     rexml (3.2.4)
     rouge (3.26.0)
     ruby-enum (0.9.0)

@@ -122,7 +122,7 @@
               <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
                       <ul>
   <li>
-    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+    <a href="/#govuk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
   </li>
 </ul>
 <ul>
@@ -231,7 +231,7 @@
         <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
       </li>
       <li>
-        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+        <a href="/deploying_apps.html#deploy-a-nodejs-app"><span>Deploy a Node.js app</span></a>
       </li>
       <li>
         <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
@@ -433,10 +433,10 @@
         <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-govuk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-govuk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
       </li>
       <li>
         <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
@@ -530,17 +530,17 @@
         <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
       </li>
       <li>
-        <a href="/monitoring_services.html#monitoring-backing-services-more-about-monitoring"><span>More about monitoring</span></a>
+        <a href="/monitoring_services.html#more-about-monitoring"><span>More about monitoring</span></a>
       </li>
     </ul>
   </li>
 </ul>
 <ul>
   <li>
-    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <a href="/architecture.html#govuk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
     <ul>
       <li>
-        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+        <a href="/architecture.html#characteristics-of-govuk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
       </li>
       <li>
         <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
@@ -600,61 +600,114 @@
 
         <div class="app-pane__content toc-open-disabled">
           <main id="content" class="technical-documentation" data-module="anchored-headings">
-            <p><h1 id="set-up-a-custom-domain-by-configuring-your-own-cdn">Set up a custom domain by configuring your own CDN</h1><p>There are two ways to configure your own CDN:</p></p>
+            <h1 id="set-up-a-custom-domain-by-configuring-your-own-cdn">Set up a custom domain by configuring your own CDN</h1>
+
+<p>There are two ways to configure your own CDN:</p>
 
 <ul>
-<li>use Cloud Foundry commands</li>
-<li>amend HTTP request headers</li>
+  <li><p>use Cloud Foundry commands</p>
+  </li>
+  <li><p>amend HTTP request headers</p>
+  </li>
 </ul>
 
 <p>You should use these methods if you need access to features that are not provided by the <code>cdn-route</code> service. The <a href="/deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service"><code>cdn-route</code></a> section has information on the features provided by the service.</p>
 
-<p>There are many different CDNs available. Contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to discuss best practice for configuring your CDN to work with the PaaS.</p>
-<p><h2 id="use-cloud-foundry-commands">Use Cloud Foundry commands</h2><h3 id="set-up-connection-between-custom-domain-and-cdn">Set up connection between custom domain and CDN</h3>
+<p>There are many different CDNs available. Contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> to discuss best practice for configuring your CDN to work with the PaaS.</p>
+
+<h2 id="use-cloud-foundry-commands">Use Cloud Foundry commands</h2>
+
+<h3 id="set-up-connection-between-custom-domain-and-cdn">Set up connection between custom domain and CDN</h3>
+
 <ol>
-<li><p>Register your custom domain with a domain name registrar.</p></li>
-<li><p>Choose a CDN provider.</p></li>
-<li><p>Set up the connection between your custom domain and the CDN provider, following the CDN provider’s instructions.</p></li>
+  <li>
+<p>Register your custom domain with a domain name registrar.</p>
+  </li>
+  <li>
+<p>Choose a CDN provider.</p>
+  </li>
+  <li>
+<p>Set up the connection between your custom domain and the CDN provider, following the CDN provider’s instructions.</p>
+  </li>
 </ol>
+
 <h3 id="configure-your-custom-domain-in-cloud-foundry">Configure your custom domain in Cloud Foundry</h3>
+
 <ol>
-<li><p>Target the space your application is running in:</p>
-<div class="highlight"><pre class="highlight shell"><code>cf target <span class="nt">-o</span> ORGNAME <span class="nt">-s</span> SPACENAME
-</code></pre></div></li>
-<li><p>Create a domain in your organisation (replace <code>ORGNAME</code> with your org name, and replace <code>example.com</code> with your domain):</p>
-<div class="highlight"><pre class="highlight shell"><code>cf create-domain ORGNAME example.com
-</code></pre></div></li>
-<li><p>Map the subdomain route to your application:</p>
-<div class="highlight"><pre class="highlight shell"><code>cf map-route APPNAME example.com <span class="nt">--hostname</span> www
-</code></pre></div></li>
+  <li>
+<p>Target the space your application is running in:</p>
+
+<div class="highlight"><pre class="highlight shell"><code> cf target <span class="nt">-o</span> ORGNAME <span class="nt">-s</span> SPACENAME
+</code></pre></div>  </li>
+  <li>
+<p>Create a domain in your organisation (replace <code>ORGNAME</code> with your org name, and replace <code>example.com</code> with your domain):</p>
+
+<div class="highlight"><pre class="highlight shell"><code> cf create-domain ORGNAME example.com
+</code></pre></div>  </li>
+  <li>
+<p>Map the subdomain route to your application:</p>
+
+<div class="highlight"><pre class="highlight shell"><code> cf map-route APPNAME example.com <span class="nt">--hostname</span> www
+</code></pre></div>  </li>
 </ol>
-<h3 id="configure-your-cdn">Configure your CDN</h3><p>Configure your CDN to forward HTTPS traffic to the PaaS at your <a href="/orgs_spaces_users.html#regions">app domain</a>, providing a HTTP <code>Host</code> header for your custom domain (for example <code>Host: www.example.com</code>).</p>
+
+<h3 id="configure-your-cdn">Configure your CDN</h3>
+
+<p>Configure your CDN to forward HTTPS traffic to the PaaS at your <a href="/orgs_spaces_users.html#regions">app domain</a>, providing a HTTP <code>Host</code> header for your custom domain (for example <code>Host: www.example.com</code>).</p>
+
 <p>For example, if your app is hosted in the London region, your app domain is <code>london.cloudapps.digital</code>. When your CDN connects to the <code>london.cloudapps.digital</code> server, the server will present a TLS certificate valid only for <code>london.cloudapps.digital</code> and <code>*.london.cloudapps.digital</code>. Your CDN must accept this certificate.</p>
-<h2 id="amend-http-request-headers">Amend HTTP request headers</h2><h3 id="amend-http-request-headers-set-up-connection-between-custom-domain-and-cdn">Set up connection between custom domain and CDN</h3>
+
+<h2 id="amend-http-request-headers">Amend HTTP request headers</h2>
+
+<h3 id="set-up-connection-between-custom-domain-and-cdn-1">Set up connection between custom domain and CDN</h3>
+
 <ol>
-<li><p>Register your custom domain with a domain name registrar.</p></li>
-<li><p>Choose a CDN provider.</p></li>
-<li><p>Set up the connection between your custom domain and the CDN provider, following the CDN provider’s instructions.</p></li>
+  <li>
+<p>Register your custom domain with a domain name registrar.</p>
+  </li>
+  <li>
+<p>Choose a CDN provider.</p>
+  </li>
+  <li>
+<p>Set up the connection between your custom domain and the CDN provider, following the CDN provider’s instructions.</p>
+  </li>
 </ol>
-<h3 id="amend-http-request-headers-configure-your-cdn">Configure your CDN</h3>
+
+<h3 id="configure-your-cdn-1">Configure your CDN</h3>
+
 <ol>
-<li><p>Configure your CDN to forward HTTPS requests from your custom domain to the PaaS at the <code>YOURAPP.APP_DOMAIN</code> domain.</p></li>
-<li><p>Configure your CDN to amend the HTTP requests when it forwards those requests by:</p></li>
-</ol></p>
+  <li>
+<p>Configure your CDN to forward HTTPS requests from your custom domain to the PaaS at the <code>YOURAPP.APP_DOMAIN</code> domain.</p>
+  </li>
+  <li>
+<p>Configure your CDN to amend the HTTP requests when it forwards those requests by:</p>
+  </li>
+</ol>
 
 <ul>
-<li><p>changing the HTTPS request <code>Host</code> header from your custom domain to your app’s domain (for example if your app is hosted in the London region, change <code>Host: www.example.com</code> to <code>Host: YOURAPP.london.cloudapps.digital</code>)</p></li>
-<li><p>adding a <code>X-Forwarded-Host</code> HTTP header containing your custom domain to the HTTPS request (for example <code>X-Forwarded-Host: www.example.com</code>)</p></li>
+  <li>
+<p>changing the HTTPS request <code>Host</code> header from your custom domain to your app’s domain (for example if your app is hosted in the London region, change <code>Host: www.example.com</code> to <code>Host: YOURAPP.london.cloudapps.digital</code>)</p>
+  </li>
+  <li>
+<p>adding a <code>X-Forwarded-Host</code> HTTP header containing your custom domain to the HTTPS request (for example <code>X-Forwarded-Host: www.example.com</code>)</p>
+  </li>
 </ul>
 
 <p>In the above example, the HTTP request header will change from:</p>
-<p><div class="highlight"><pre class="highlight plaintext"><code>GET / HTTP/1.1
+
+<div class="highlight"><pre class="highlight plaintext"><code>GET / HTTP/1.1
 Host: www.example.com
-</code></pre></div><p>to:</p>
+</code></pre></div>
+<p>to:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>GET / HTTP/1.1
 Host: YOURAPP.london.cloudapps.digital
 X-Forwarded-Host: www.example.com
-</code></pre></div><h3 id="configure-your-app">Configure your app</h3><p>Configure your app to obtain its hostname from the <code>X-Forwarded-Host</code> HTTP header.</p></p>
+</code></pre></div>
+<h3 id="configure-your-app">Configure your app</h3>
+
+<p>Configure your app to obtain its hostname from the <code>X-Forwarded-Host</code> HTTP header.</p>
+
 
             
           </main>

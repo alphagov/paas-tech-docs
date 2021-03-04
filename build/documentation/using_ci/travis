@@ -1,61 +1,103 @@
-<h2 id="using-the-travis-ci-tool">Using the Travis CI tool</h2><h3 id="assess-travis">Assess Travis</h3><p>Before using the Travis CI tool, you should assess how it encrypts and protects any sensitive information or secrets such as keys, usernames or passwords, and whether it is suitable for your service.</p>
-<h3 id="prerequisites">Prerequisites</h3><p>Before setting up Travis CI, you must have:</p>
+<h2 id="using-the-travis-ci-tool">Using the Travis CI tool</h2>
+
+<h3 id="assess-travis">Assess Travis</h3>
+
+<p>Before using the Travis CI tool, you should assess how it encrypts and protects any sensitive information or secrets such as keys, usernames or passwords, and whether it is suitable for your service.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>Before setting up Travis CI, you must have:</p>
 
 <ul>
-<li>a <a href="https://github.com/">GitHub</a> account</li>
-<li>admin access to the GitHub repository that hosts your app</li>
-<li>the latest version of <a href="https://www.ruby-lang.org/en/downloads/">Ruby</a> installed</li>
-<li>set your app&rsquo;s <a href="/deploying_apps.html#names-routes-and-domains"><code>name</code></a> in the app&rsquo;s <code>manifest.yml</code> file</li>
+  <li><p>a <a href="https://github.com/">GitHub</a> account</p>
+  </li>
+  <li><p>admin access to the GitHub repository that hosts your app</p>
+  </li>
+  <li><p>the latest version of <a href="https://www.ruby-lang.org/en/downloads/">Ruby</a> installed</p>
+  </li>
+  <li><p>set your app's <a href="/deploying_apps.html#names-routes-and-domains"><code>name</code></a> in the app's <code>manifest.yml</code> file</p>
+  </li>
 </ul>
+
 <h3 id="set-up-account">Set up account</h3>
+
 <ol>
-<li>Register for a <a href="https://travis-ci.org">Travis account</a>.</li>
-<li>Link your Travis account to your GitHub repo.</li>
-<li>Select the repositories you want Travis to manage.</li>
+  <li><p>Register for a <a href="https://travis-ci.org">Travis account</a>.</p>
+  </li>
+  <li><p>Link your Travis account to your GitHub repo.</p>
+  </li>
+  <li><p>Select the repositories you want Travis to manage.</p>
+  </li>
 </ol>
+
 <h3 id="set-up-travis-using-the-gem">Set up Travis using the gem</h3>
-<ol>
-<li>Clone the GitHub repository that hosts your app to your local machine and navigate to the repository folder.</li>
-<li>Run <code>gem install travis  --no-rdoc --no-ri</code> to download the gem.</li>
-<li><p>Run the following code to set up Travis:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>travis setup cloudfoundry
-</code></pre></div></li>
-<li><p>Input the following information when asked:</p>
 
-<ul>
-<li><a href="/using_ci.html#configure-your-ci-tool-accounts">account</a> username and password</li>
-<li>the <a href="/orgs_spaces_users.html#spaces">space</a> and <a href="/orgs_spaces_users.html#organisations">organisation</a> to deploy your app to</li>
-<li>the API endpoint URL: <code>https://api.cloud.service.gov.uk</code> for the Ireland region, or <code>https://api.london.cloud.service.gov.uk</code> for the London region</li>
-</ul></li>
+<ol>
+  <li><p>Clone the GitHub repository that hosts your app to your local machine and navigate to the repository folder.</p>
+  </li>
+  <li><p>Run <code>gem install travis  --no-rdoc --no-ri</code> to download the gem.</p>
+  </li>
+  <li>
+<p>Run the following code to set up Travis:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> travis setup cloudfoundry
+</code></pre></div>  </li>
+  <li><p>Input the following information when asked:</p>
+    <ul>
+      <li><p><a href="/using_ci.html#configure-your-ci-tool-accounts">account</a> username and password</p>
+      </li>
+      <li><p>the <a href="/orgs_spaces_users.html#spaces">space</a> and <a href="/orgs_spaces_users.html#organisations">organisation</a> to deploy your app to</p>
+      </li>
+      <li><p>the API endpoint URL: <code>https://api.cloud.service.gov.uk</code> for the Ireland region, or <code>https://api.london.cloud.service.gov.uk</code> for the London region</p>
+      </li>
+    </ul>
+  </li>
 </ol>
+
 <p>Travis CI encrypts this information into a <code>.travis.yml</code> file.</p>
-<p>You can now <a href="using_ci.html#build-and-deploy-the-app">build and deploy the app</a>.</p>
-<h3 id="set-up-travis-manually">Set up Travis manually</h3>
-<ol>
-<li>Clone the GitHub repository that host your app to your local machine and navigate to the repository folder.</li>
-<li>Create a <code>.travis.yml</code> file.</li>
-<li><p>Add the following code to the <code>.travis.yml</code> file:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>deploy:
-  edge: true
-  provider: cloudfoundry
-  username: USERNAME
-  api: API_ENDPOINT
-  organization: ORGNAME
-  space: SPACENAME
-</code></pre></div></li>
-<li><p>Run the following to write your encrypted credentials to the <code>.travis.yml</code>:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>travis encrypt --add deploy.password
-</code></pre></div></li>
-</ol>
-<p>You can now build and deploy the app.</p>
-<h3 id="build-and-deploy-the-app">Build and deploy the app</h3>
-<ol>
-<li>Commit the <code>travis.yml</code> to GitHub. Travis CI uses this file to automatically build and deploy your app.</li>
-<li>View your live app at <code>https://NAME.APP_DOMAIN</code>, where:
 
-<ul>
-<li><a href="/deploying_apps.html#names-routes-and-domains"><code>NAME</code></a> is the name of your app in the <code>manifest.yml</code> file</li>
-<li><a href="/orgs_spaces_users.html#regions"><code>APP_DOMAIN</code></a> is the domain your app is hosted in</li>
-</ul></li>
+<p>You can now <a href="using_ci.html#build-and-deploy-the-app">build and deploy the app</a>.</p>
+
+<h3 id="set-up-travis-manually">Set up Travis manually</h3>
+
+<ol>
+  <li><p>Clone the GitHub repository that host your app to your local machine and navigate to the repository folder.</p>
+  </li>
+  <li><p>Create a <code>.travis.yml</code> file.</p>
+  </li>
+  <li>
+<p>Add the following code to the <code>.travis.yml</code> file:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> deploy:
+   edge: true
+   provider: cloudfoundry
+   username: USERNAME
+   api: API_ENDPOINT
+   organization: ORGNAME
+   space: SPACENAME
+</code></pre></div>  </li>
+  <li>
+<p>Run the following to write your encrypted credentials to the <code>.travis.yml</code>:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> travis encrypt --add deploy.password
+</code></pre></div>  </li>
 </ol>
+
+<p>You can now build and deploy the app.</p>
+
+<h3 id="build-and-deploy-the-app">Build and deploy the app</h3>
+
+<ol>
+  <li><p>Commit the <code>travis.yml</code> to GitHub. Travis CI uses this file to automatically build and deploy your app.</p>
+  </li>
+  <li><p>View your live app at <code>https://NAME.APP_DOMAIN</code>, where:</p>
+    <ul>
+      <li><p><a href="/deploying_apps.html#names-routes-and-domains"><code>NAME</code></a> is the name of your app in the <code>manifest.yml</code> file</p>
+      </li>
+      <li><p><a href="/orgs_spaces_users.html#regions"><code>APP_DOMAIN</code></a> is the domain your app is hosted in</p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
 <p>For more information on how to use Travis CI, refer to the <a href="https://docs.travis-ci.com">Travis CI documentation</a>.</p>

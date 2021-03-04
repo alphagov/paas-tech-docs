@@ -1,45 +1,88 @@
-<h1 id="deploy-a-backing-or-routing-service">Deploy a backing or routing service</h1><p>Many 12-factor applications rely on backing services such as a database, an email delivery service or a monitoring system. Routing services can be used to proxy and perform preprocessing on application requests such as caching, rate limiting or authentication.</p>
+<h1 id="deploy-a-backing-or-routing-service">Deploy a backing or routing service</h1>
+
+<p>Many 12-factor applications rely on backing services such as a database, an email delivery service or a monitoring system. Routing services can be used to proxy and perform preprocessing on application requests such as caching, rate limiting or authentication.</p>
+
 <p>In Cloud Foundry, backing and routing services are referred to as ‘services’ and are available through the Cloud Foundry <code>cf marketplace</code> command. GOV.UK PaaS enables you to create a backing service and bind it to your app. The available backing services are:</p>
 
 <ul>
-<li><a href="postgresql/#postgresql">PostgreSQL</a></li>
-<li><a href="mysql/#mysql">MySQL</a></li>
-<li><a href="redis/#redis">Redis</a></li>
-<li><a href="elasticsearch/#elasticsearch">Elasticsearch</a></li>
-<li><a href="s3/#amazon-s3">Amazon S3</a></li>
-<li><a href="sqs/#amazon-sqs">Amazon SQS</a></li>
-<li><a href="influxdb/#influxdb">InfluxDB</a></li>
+  <li><p><a href="postgresql/#postgresql">PostgreSQL</a></p>
+  </li>
+  <li><p><a href="mysql/#mysql">MySQL</a></p>
+  </li>
+  <li><p><a href="redis/#redis">Redis</a></p>
+  </li>
+  <li><p><a href="elasticsearch/#elasticsearch">Elasticsearch</a></p>
+  </li>
+  <li><p><a href="s3/#amazon-s3">Amazon S3</a></p>
+  </li>
+  <li><p><a href="sqs/#amazon-sqs">Amazon SQS</a></p>
+  </li>
+  <li><p><a href="influxdb/#influxdb">InfluxDB</a></p>
+  </li>
 </ul>
-<h2 id="sharing-service-instances">Sharing service instances</h2><p>It’s normally only possible to bind applications to service instances in the same space. Sharing a service instance means applications in one space can bind to service instances in another space, either in the same organisation or in a different one.  Sharing a service instance between spaces allows applications in different spaces to share services such as databases.
+
+<h2 id="sharing-service-instances">Sharing service instances</h2>
+
+<p>It’s normally only possible to bind applications to service instances in the same space. Sharing a service instance means applications in one space can bind to service instances in another space, either in the same organisation or in a different one.  Sharing a service instance between spaces allows applications in different spaces to share services such as databases.<br />
 See the <a href="https://docs.cloudfoundry.org/devguide/services/sharing-instances.html">Cloud Foundry documentation on sharing service instances</a> for more information.</p>
-<h3 id="set-up-sharing-service-instances">Set up sharing service instances</h3><p>You can now share instances of the following services between organisations and spaces:</p>
+
+<h3 id="set-up-sharing-service-instances">Set up sharing service instances</h3>
+
+<p>You can now share instances of the following services between organisations and spaces:</p>
 
 <ul>
-<li>Amazon S3</li>
-<li>Amazon SQS</li>
-<li>Elasticsearch</li>
-<li>InfluxDB</li>
-<li>MySQL</li>
-<li>PostgreSQL</li>
-<li>Redis</li>
+  <li><p>Amazon S3</p>
+  </li>
+  <li><p>Amazon SQS</p>
+  </li>
+  <li><p>Elasticsearch</p>
+  </li>
+  <li><p>InfluxDB</p>
+  </li>
+  <li><p>MySQL</p>
+  </li>
+  <li><p>PostgreSQL</p>
+  </li>
+  <li><p>Redis</p>
+  </li>
 </ul>
+
 <p>Using the <a href="https://docs.cloudfoundry.org/cf-cli/">Cloud Foundry Command Line Interface</a> (cf CLI), enter the <code>cf create-service</code> command to create a service:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf create-service SERVICE PLAN SERVICE_INSTANCE
-</code></pre></div><p>For example:</p>
+</code></pre></div>
+<p>For example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres tiny-unencrypted-11 postgres-db
-</code></pre></div><p>Share the service instance with another space:</p>
+</code></pre></div>
+<p>Share the service instance with another space:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf share-service SERVICE_INSTANCE -s OTHER_SPACE [-o OTHER_ORG]
-</code></pre></div><p>For example:</p>
+</code></pre></div>
+<p>For example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf share-service postgres-db -s team-b
-</code></pre></div><p>Check the previous command worked by entering:</p>
+</code></pre></div>
+<p>Check the previous command worked by entering:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_INSTANCE
-</code></pre></div><p>For example:</p>
+</code></pre></div>
+<p>For example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf service postgres-db
-</code></pre></div><p>If you’ve correctly set up the sharing of the service instance, you should see the following text in the output:</p>
+</code></pre></div>
+<p>If you’ve correctly set up the sharing of the service instance, you should see the following text in the output:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>shared with spaces:
 org         space    bindings
 demo-org   team-b   0
-</code></pre></div><h2 id="data-security-classification">Data security classification</h2><p>You can store data classified up to ‘official’ on the GOV.UK PaaS.</p>
+</code></pre></div>
+<h2 id="data-security-classification">Data security classification</h2>
+
+<p>You can store data classified up to ‘official’ on the GOV.UK PaaS.</p>
+
 <p>You cannot store data classified ‘secret‘ or ‘top secret‘ on the GOV.UK PaaS.</p>
+
 <p>Refer to the <a href="https://www.cloud.service.gov.uk/ia">information assurance page</a> for more information on the assurance process.</p>
+
 <p>Refer to the <a href="https://www.gov.uk/government/publications/government-security-classifications">GOV.UK page on government security classifications</a> for more information on these classifications.</p>

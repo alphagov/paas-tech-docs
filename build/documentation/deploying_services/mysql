@@ -1,214 +1,414 @@
-<h1 id="mysql">MySQL</h1><p>MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is backed by Oracle.</p>
+<h1 id="mysql">MySQL</h1>
+
+<p>MySQL is an open source relational database management system that uses Structured Query Language (SQL) and is backed by Oracle.</p>
+
 <p>You can access <a href="/monitoring_services.html">metrics and logs for this backing service</a>.</p>
 
 <h2 id="set-up-the-service">Set up the service</h2>
-<h3 id="set-up-a-mysql-service">Set up a MySQL service</h3><p>To set up a MySQL service:</p>
+
+<h3 id="set-up-a-mysql-service">Set up a MySQL service</h3>
+
+<p>To set up a MySQL service:</p>
 
 <ol>
-<li><p>Run the following code in the command line to see what plans are available for MySQL:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf marketplace -s mysql
-</code></pre></div><p>Here is an example of the output you will see (the exact plans will vary):</p>
-<div class="highlight"><pre class="highlight plaintext"><code>service plan                description                                                                                                                                                       free or paid
-medium-5.7                  100GB Storage, Dedicated Instance. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                                             paid
-medium-ha-5.7               100GB Storage, Dedicated Instance, Highly Available. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                           paid
-</code></pre></div><p>The syntax in this output is explained in the following table:</p>
+  <li>
+<p>Run the following code in the command line to see what plans are available for MySQL:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf marketplace -s mysql
+</code></pre></div>
+<p>Here is an example of the output you will see (the exact plans will vary):</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> service plan                description                                                                                                                                                       free or paid
+ medium-5.7                  100GB Storage, Dedicated Instance. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                                             paid
+ medium-ha-5.7               100GB Storage, Dedicated Instance, Highly Available. MySQL Version 5.7. DB Instance Class: db.m4.large.                                                           paid
+</code></pre></div>
+<p>The syntax in this output is explained in the following table:</p>
+
 <div class="table-container">
-        <table>
-          <tr>
-<th style="text-align: left">Syntax</th>
-<th style="text-align: left">Meaning</th>
-</tr>
-<tr>
-<td style="text-align: left"><code>ha</code></td>
-<td style="text-align: left">High availability</td>
-</tr>
-<tr>
-<td style="text-align: left"><code>X.X</code></td>
-<td style="text-align: left">Version number</td>
-</tr>
-<tr>
-<td style="text-align: left"><code>small / medium / large / xlarge</code></td>
-<td style="text-align: left">Size of instance</td>
-</tr>
+            <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Syntax</th>
+          <th style="text-align: left">Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><code>ha</code></td>
+          <td style="text-align: left">High availability</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>X.X</code></td>
+          <td style="text-align: left">Version number</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>small / medium / large / xlarge</code></td>
+          <td style="text-align: left">Size of instance</td>
+        </tr>
+      </tbody>
+    </table>
 
-        </table>
-      </div><p>More information can be found in the <a href="/deploying_services/mysql/#mysql-plans">MySQL plans</a> section.</p></li>
-<li><p>Run the following code in the command line:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf create-service mysql PLAN SERVICE_NAME
-</code></pre></div><p>where <code>PLAN</code> is the plan you want, and <code>SERVICE_NAME</code> is a unique descriptive name for this service instance. For example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf create-service mysql medium-5.7 my-ms-service
-</code></pre></div><p>You should use a high-availability (<code>ha</code>) encrypted plan for production apps.</p></li>
-<li><p>It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME
-</code></pre></div><p>for example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service my-ms-service
-</code></pre></div><p>The service is set up when the <code>cf service SERVICE_NAME</code> command returns a <code>create succeeded</code> status. Here is an example of the output you will see:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>Service instance: my-ms-service
-Service: mysql
-Bound apps:
-Tags:
-Plan: medium-5.7
-Description: AWS RDS MySQL service
-Documentation url: https://aws.amazon.com/documentation/rds/
-Dashboard:
+      </div>
+<p>More information can be found in the <a href="/deploying_services/mysql/#mysql-plans">MySQL plans</a> section.</p>
+  </li>
+  <li>
+<p>Run the following code in the command line:</p>
 
-Last Operation
-Status: create succeeded
-Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
-Started: 2016-08-23T15:34:41Z
-Updated: 2016-08-23T15:42:02Z
-</code></pre></div></li>
+<div class="highlight"><pre class="highlight plaintext"><code> cf create-service mysql PLAN SERVICE_NAME
+</code></pre></div>
+<p>where <code>PLAN</code> is the plan you want, and <code>SERVICE_NAME</code> is a unique descriptive name for this service instance. For example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf create-service mysql medium-5.7 my-ms-service
+</code></pre></div>
+<p>You should use a high-availability (<code>ha</code>) encrypted plan for production apps.</p>
+  </li>
+  <li>
+<p>It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf service SERVICE_NAME
+</code></pre></div>
+<p>for example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf service my-ms-service
+</code></pre></div>
+<p>The service is set up when the <code>cf service SERVICE_NAME</code> command returns a <code>create succeeded</code> status. Here is an example of the output you will see:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> Service instance: my-ms-service
+ Service: mysql
+ Bound apps:
+ Tags:
+ Plan: medium-5.7
+ Description: AWS RDS MySQL service
+ Documentation url: https://aws.amazon.com/documentation/rds/
+ Dashboard:
+
+ Last Operation
+ Status: create succeeded
+ Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
+ Started: 2016-08-23T15:34:41Z
+ Updated: 2016-08-23T15:42:02Z
+</code></pre></div>  </li>
 </ol>
-<h3 id="bind-a-mysql-service-to-your-app">Bind a MySQL service to your app</h3><p>You must bind your app to the MySQL service so you can access the database from the app.</p>
+
+<h3 id="bind-a-mysql-service-to-your-app">Bind a MySQL service to your app</h3>
+
+<p>You must bind your app to the MySQL service so you can access the database from the app.</p>
 
 <ol>
-<li><p>Use the <a href="/deploying_apps.html#deploying-public-apps">app&rsquo;s manifest</a> to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>--
-applications:
-  - name: my-app
-    services:
-    - my-ms-service
-</code></pre></div></li>
-<li><p>Deploy your app in line with your normal deployment process.</p></li>
+  <li>
+<p>Use the <a href="/deploying_apps.html#deploying-public-apps">app's manifest</a> to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> --
+ applications:
+   - name: my-app
+     services:
+     - my-ms-service
+</code></pre></div>  </li>
+  <li>
+<p>Deploy your app in line with your normal deployment process.</p>
+  </li>
 </ol>
+
 <p>This binds your app to a service instance called <code>my-ms-service</code>.</p>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block">Cloud Foundry documentation on deploying with app manifests</a> for more information.</p>
-<h4 id="use-the-cf-bind-service-command">Use the cf bind-service command</h4><p>Alternatively, you can manually bind your service instance to your app.</p>
+
+<h4 id="use-the-cf-bind-service-command">Use the cf bind-service command</h4>
+
+<p>Alternatively, you can manually bind your service instance to your app.</p>
 
 <ol>
-<li><p>Run the following:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf bind-service APP_NAME SERVICE_NAME
-</code></pre></div><p>where <code>APP_NAME</code> is the exact name of a deployed instance of your application and <code>SERVICE_NAME</code> is the name of the service instance you created. For example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf bind-service my-app my-ms-service
-</code></pre></div></li>
-<li><p>Deploy your app in line with your normal deployment process.</p></li>
+  <li>
+<p>Run the following:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf bind-service APP_NAME SERVICE_NAME
+</code></pre></div>
+<p>where <code>APP_NAME</code> is the exact name of a deployed instance of your application and <code>SERVICE_NAME</code> is the name of the service instance you created. For example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf bind-service my-app my-ms-service
+</code></pre></div>  </li>
+  <li>
+<p>Deploy your app in line with your normal deployment process.</p>
+  </li>
 </ol>
-<h3 id="connect-to-a-mysql-service-from-your-app">Connect to a MySQL service from your app</h3><p>Your app must make a <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">Transport Layer Security (TLS)</a> connection to the service. Some libraries use TLS by default, but others will need to be manually configured.</p>
+
+<h3 id="connect-to-a-mysql-service-from-your-app">Connect to a MySQL service from your app</h3>
+
+<p>Your app must make a <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">Transport Layer Security (TLS)</a> connection to the service. Some libraries use TLS by default, but others will need to be manually configured.</p>
+
 <p>GOV.UK PaaS will automatically parse the <code>VCAP_SERVICES</code> <a href="/deploying_apps.html#system-provided-environment-variables">environment variable</a> to get details of the service and then set the <code>DATABASE_URL</code> variable to the first database found.</p>
+
 <p>If your app writes database connection errors to <code>STDOUT</code> or <code>STDERR</code>, you can view recent errors with <code>cf logs APP_NAME --recent</code>. See the section on <a href="/monitoring_apps.html#logs">logs</a> for details.</p>
+
 <p>Refer to the Guidance section for information on how to securely connect either a <a href="/guidance.html#connect-drupal-to-mysql">Drupal app</a> or a <a href="/guidance.html#connect-wordpress-to-mysql">Wordpress app</a> to MySQL using SSL.</p>
-<h3 id="connect-to-a-mysql-service-from-your-local-machine">Connect to a MySQL service from your local machine</h3><p>We have created the <a href="/guidance.html#conduit">Conduit</a> plugin to simplify the process of connecting your local machine to a MySQL service. To install this plugin, run the following code from the command line:</p>
+
+<h3 id="connect-to-a-mysql-service-from-your-local-machine">Connect to a MySQL service from your local machine</h3>
+
+<p>We have created the <a href="/guidance.html#conduit">Conduit</a> plugin to simplify the process of connecting your local machine to a MySQL service. To install this plugin, run the following code from the command line:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf install-plugin conduit
-</code></pre></div><p>Once the plugin has finished installing, run the following code in the command line to access an SQL shell for your backing service:</p>
+</code></pre></div>
+<p>Once the plugin has finished installing, run the following code in the command line to access an SQL shell for your backing service:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf conduit SERVICE_NAME -- mysql
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance.</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance.</p>
+
 <p>Run <code>cf conduit --help</code> for more options, and refer to the <a href="https://github.com/alphagov/paas-cf-conduit/blob/master/README.md">Conduit README file</a> for more information on how to use the plugin.</p>
 
 <h2 id="amend-the-service">Amend the service</h2>
-<h3 id="import-and-export-bulk-data-to-and-from-a-mysql-database">Import and export bulk data to and from a MySQL database</h3><h4 id="prerequisites">Prerequisites</h4><p>You must:</p>
+
+<h3 id="import-and-export-bulk-data-to-and-from-a-mysql-database">Import and export bulk data to and from a MySQL database</h3>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<p>You must:</p>
 
 <ul>
-<li>install and configure the <a href="https://dev.mysql.com/downloads/utilities/">MySQL command line (CLI) tools</a> on your local machine (configuration options vary depending on operating system and version)</li>
-<li><a href="/get_started.html#set-up-command-line">log into Cloud Foundry</a></li>
-<li><a href="/deploying_services/mysql/#set-up-a-mysql-service">create the new PaaS-hosted MySQL database</a></li>
-<li><a href="/deploying_apps.html#set-a-target">target the space</a> where your new database is located</li>
+  <li><p>install and configure the <a href="https://dev.mysql.com/downloads/utilities/">MySQL command line (CLI) tools</a> on your local machine (configuration options vary depending on operating system and version)</p>
+  </li>
+  <li><p><a href="/get_started.html#set-up-command-line">log into Cloud Foundry</a></p>
+  </li>
+  <li><p><a href="/deploying_services/mysql/#set-up-a-mysql-service">create the new PaaS-hosted MySQL database</a></p>
+  </li>
+  <li><p><a href="/deploying_apps.html#set-a-target">target the space</a> where your new database is located</p>
+  </li>
 </ul>
-<h4 id="non-paas-to-paas">Non-PaaS to PaaS</h4><p>To move data from a non-PaaS MySQL database to a PaaS MySQL database:</p>
+
+<h4 id="non-paas-to-paas">Non-PaaS to PaaS</h4>
+
+<p>To move data from a non-PaaS MySQL database to a PaaS MySQL database:</p>
 
 <ol>
-<li><p>Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>mysqldump --host HOST_NAME --result-file DATA_FILE_NAME DATABASE_NAME
-</code></pre></div><p>where:</p>
+  <li>
+<p>Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:</p>
 
-<ul>
-<li><code>HOST_NAME</code> is the name of your host</li>
-<li><code>DATA_FILE_NAME</code> is the SQL data file</li>
-<li><code>DATABASE_NAME</code> is the name of the non-PaaS source database</li>
-</ul></li>
-<li><p>Use the <a href="/deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine">Conduit plugin</a> to import the data file into the PaaS database by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf conduit SERVICE_NAME -- mysql &lt; DATA_FILE_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance, and <code>DATA_FILE_NAME</code> is the SQL file created in the previous step.</p></li>
+<div class="highlight"><pre class="highlight plaintext"><code> mysqldump --host HOST_NAME --result-file DATA_FILE_NAME DATABASE_NAME
+</code></pre></div>
+<p>where:</p>
+    <ul>
+      <li><p><code>HOST_NAME</code> is the name of your host</p>
+      </li>
+      <li><p><code>DATA_FILE_NAME</code> is the SQL data file</p>
+      </li>
+      <li><p><code>DATABASE_NAME</code> is the name of the non-PaaS source database</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+<p>Use the <a href="/deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine">Conduit plugin</a> to import the data file into the PaaS database by running:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf conduit SERVICE_NAME -- mysql &lt; DATA_FILE_NAME
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance, and <code>DATA_FILE_NAME</code> is the SQL file created in the previous step.</p>
+  </li>
 </ol>
-<h4 id="paas-to-paas">PaaS to PaaS</h4><p>To move data between two PaaS-hosted MySQL databases:</p>
+
+<h4 id="paas-to-paas">PaaS to PaaS</h4>
+
+<p>To move data between two PaaS-hosted MySQL databases:</p>
 
 <ol>
-<li><p>Use the <a href="/deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine">Conduit plugin</a> to connect to the source database and export the data into an SQL file by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf conduit SERVICE_NAME -- mysqldump --result-file DATA_FILE_NAME DATABASE_NAME
-</code></pre></div><p>where:</p>
+  <li>
+<p>Use the <a href="/deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine">Conduit plugin</a> to connect to the source database and export the data into an SQL file by running:</p>
 
-<ul>
-<li><code>SERVICE_NAME</code> is a unique descriptive name for this service instance</li>
-<li><code>DATA_FILE_NAME</code> is the SQL data file name created by the <code>mysqldump</code> command</li>
-<li><code>DATABASE_NAME</code> is the name of the source database (you should get this from the <a href="/deploying_services/mysql/#bind-a-mysql-service-to-your-app"><code>VCAP_SERVICES</code> environment variable</a>)</li>
-</ul></li>
-<li><p>Run the following command to import the data file into the target database:</p>
-<div class="highlight"><pre class="highlight plaintext"><code> cf conduit DESTINATION_SERVICE_NAME -- mysql &lt; DATA_FILE_NAME
-</code></pre></div><p>where <code>DESTINATION_SERVICE_NAME</code> is the name of the target database.</p></li>
+<div class="highlight"><pre class="highlight plaintext"><code> cf conduit SERVICE_NAME -- mysqldump --result-file DATA_FILE_NAME DATABASE_NAME
+</code></pre></div>
+<p>where:</p>
+    <ul>
+      <li><p><code>SERVICE_NAME</code> is a unique descriptive name for this service instance</p>
+      </li>
+      <li><p><code>DATA_FILE_NAME</code> is the SQL data file name created by the <code>mysqldump</code> command</p>
+      </li>
+      <li><p><code>DATABASE_NAME</code> is the name of the source database (you should get this from the <a href="/deploying_services/mysql/#bind-a-mysql-service-to-your-app"><code>VCAP_SERVICES</code> environment variable</a>)</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+<p>Run the following command to import the data file into the target database:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>  cf conduit DESTINATION_SERVICE_NAME -- mysql &lt; DATA_FILE_NAME
+</code></pre></div>
+<p>where <code>DESTINATION_SERVICE_NAME</code> is the name of the target database.</p>
+  </li>
 </ol>
-<p>Contact the PaaS team at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> if you have any questions.</p>
-<h3 id="upgrade-mysql-service-plan">Upgrade MySQL service plan</h3><h4 id="same-encryption-type">Same encryption type</h4><p>If your new plan uses the same encryption type as your current plan, you can upgrade your plan using the <code>cf update-service</code> command. Run the following in the command line:</p>
+
+<p>Contact the PaaS team at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> if you have any questions.</p>
+
+<h3 id="upgrade-mysql-service-plan">Upgrade MySQL service plan</h3>
+
+<h4 id="same-encryption-type">Same encryption type</h4>
+
+<p>If your new plan uses the same encryption type as your current plan, you can upgrade your plan using the <code>cf update-service</code> command. Run the following in the command line:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -p NEW_PLAN_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance, and <code>NEW_PLAN_NAME</code> is the name of your new plan. For example:</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance, and <code>NEW_PLAN_NAME</code> is the name of your new plan. For example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service my-ms-service -p medium-ha-5.7
-</code></pre></div><p>The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running <code>cf services</code>.</p>
+</code></pre></div>
+<p>The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running <code>cf services</code>.</p>
+
 <p>You can also <a href="/deploying_services/mysql/#queue-a-plan-migration-mysql">queue a plan upgrade</a> to happen during a maintenance window to minimise service interruption.</p>
-<h4 id="different-encryption-type">Different encryption type</h4><p>You cannot upgrade your service plan using the <code>cf update-service</code> command if the new plan uses a different encryption type to your current plan.</p>
+
+<h4 id="different-encryption-type">Different encryption type</h4>
+
+<p>You cannot upgrade your service plan using the <code>cf update-service</code> command if the new plan uses a different encryption type to your current plan.</p>
+
 <p>To upgrade, you must set up a new service and migrate your app data.</p>
 
 <ol>
-<li><a href="/deploying_services/mysql/#set-up-a-mysql-service">Set up a new MySQL service</a> with a new plan that has a different encryption type to your current plan.</li>
-<li>Move your app data from the current service to the new service by following the <a href="/deploying_services/mysql/#paas-to-paas">import and export bulk data documentation</a>.</li>
+  <li><p><a href="/deploying_services/mysql/#set-up-a-mysql-service">Set up a new MySQL service</a> with a new plan that has a different encryption type to your current plan.</p>
+  </li>
+  <li><p>Move your app data from the current service to the new service by following the <a href="/deploying_services/mysql/#paas-to-paas">import and export bulk data documentation</a>.</p>
+  </li>
 </ol>
-<h4 id="downgrade-mysql-service-plan">Downgrade MySQL service plan</h4><p>You cannot currently downgrade your service plan.</p>
-<h3 id="reboot-a-mysql-service-instance">Reboot a MySQL service instance</h3><p>You can <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html">reboot your MySQL service instance</a> to:</p>
+
+<h4 id="downgrade-mysql-service-plan">Downgrade MySQL service plan</h4>
+
+<p>You cannot currently downgrade your service plan.</p>
+
+<h3 id="reboot-a-mysql-service-instance">Reboot a MySQL service instance</h3>
+
+<p>You can <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html">reboot your MySQL service instance</a> to:</p>
 
 <ul>
-<li>try to fix a problem with your service instance</li>
-<li>test how your app behaves during a service instance failure</li>
+  <li><p>try to fix a problem with your service instance</p>
+  </li>
+  <li><p>test how your app behaves during a service instance failure</p>
+  </li>
 </ul>
+
 <p>To reboot your service instance, you must have the <a href="/orgs_spaces_users.html#space-developer">space developer</a> role and permissions in the <a href="/orgs_spaces_users.html#spaces">space</a> that hosts your service instance.</p>
+
 <p>Rebooting your service instance will cause a temporary database outage. The length of this outage depends on your service instance’s complexity and configuration.</p>
+
 <p>You should tell your users and your team when a reboot is scheduled.</p>
+
 <p>Run the following in the command line to reboot your service instance:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"reboot": true}'
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance.</p>
-<h4 id="force-a-failover">Force a failover</h4><p>If you have a <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html">highly available service instance</a>, you can force a <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover">failover</a> when you reboot that service instance. You can use this to test how your app behaves when a failover happens.</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance.</p>
+
+<h4 id="force-a-failover">Force a failover</h4>
+
+<p>If you have a <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html">highly available service instance</a>, you can force a <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover">failover</a> when you reboot that service instance. You can use this to test how your app behaves when a failover happens.</p>
+
 <p>Run the following to reboot your highly available service and force a failover:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"reboot": true, "force_failover": true}'
-</code></pre></div><p>When you force a failover, your MySQL database IP address will change. The database&rsquo;s hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.</p>
+</code></pre></div>
+<p>When you force a failover, your MySQL database IP address will change. The database's hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.</p>
 
 <h2 id="remove-the-service">Remove the service</h2>
-<h3 id="unbind-a-mysql-service-from-your-app">Unbind a MySQL service from your app</h3><p>You must unbind the MySQL service before you can delete it. To unbind the MySQL service, run the following code in the command line:</p>
+
+<h3 id="unbind-a-mysql-service-from-your-app">Unbind a MySQL service from your app</h3>
+
+<p>You must unbind the MySQL service before you can delete it. To unbind the MySQL service, run the following code in the command line:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service APPLICATION SERVICE_NAME
-</code></pre></div><p>where <code>APPLICATION</code> is the name of a deployed instance of your application (exactly as specified in your app&rsquo;s <code>manifest.yml</code> file or push command) and <code>SERVICE_NAME</code> is a unique descriptive name for this service instance, for example:</p>
+</code></pre></div>
+<p>where <code>APPLICATION</code> is the name of a deployed instance of your application (exactly as specified in your app's <code>manifest.yml</code> file or push command) and <code>SERVICE_NAME</code> is a unique descriptive name for this service instance, for example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service my-app my-ms-service
-</code></pre></div><p>If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.</p>
-<h3 id="delete-a-mysql-service">Delete a MySQL service</h3><p>Once the MySQL service has been unbound from your app, you can delete it. Run the following code in the command line:</p>
+</code></pre></div>
+<p>If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.</p>
+
+<h3 id="delete-a-mysql-service">Delete a MySQL service</h3>
+
+<p>Once the MySQL service has been unbound from your app, you can delete it. Run the following code in the command line:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete-service SERVICE_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance.</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance.</p>
+
 <p>Type <code>yes</code> when asked for confirmation.</p>
 
 <h2 id="maintaining-the-service">Maintaining the service</h2>
-<h3 id="data-classification">Data classification</h3><p>You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the <a href="/deploying_services/#data-security-classification">data security classification documentation</a> for more information.</p>
-<h3 id="mysql-plans">MySQL plans</h3><p>Each service in the marketplace has multiple plans that vary by availability and storage capacity.</p>
-<h4 id="paid-plans-mysql">Paid plans - MySQL</h4><p>Some service plans are paid and we will bill you based on your service usage.</p>
-<p>New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation&rsquo;s <a href="/managing_apps.html#quotas">quota</a> settings.</p>
-<p>If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your <a href="/orgs_spaces_users.html#org-manager">Org Managers</a> must contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to request that we enable paid services.</p>
+
+<h3 id="data-classification">Data classification</h3>
+
+<p>You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the <a href="/deploying_services/#data-security-classification">data security classification documentation</a> for more information.</p>
+
+<h3 id="mysql-plans">MySQL plans</h3>
+
+<p>Each service in the marketplace has multiple plans that vary by availability and storage capacity.</p>
+
+<h4 id="paid-plans---mysql">Paid plans - MySQL</h4>
+
+<p>Some service plans are paid and we will bill you based on your service usage.</p>
+
+<p>New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's <a href="/managing_apps.html#quotas">quota</a> settings.</p>
+
+<p>If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your <a href="/orgs_spaces_users.html#org-manager">Org Managers</a> must contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> to request that we enable paid services.</p>
+
 <p>There is a free plan available with limited storage which should only be used for development or testing, but not production.</p>
-<h4 id="encrypted-plans-mysql">Encrypted plans - MySQL</h4><p>All plans have encryption at rest unless stated otherwise. This means that both the data on the disk and in snapshots is encrypted.</p>
-<h4 id="high-availability-plans-mysql">High availability plans - MySQL</h4><p>We recommend you use a high availability (<code>HA</code>) plan for your MySQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See <a href="https://aws.amazon.com/rds/sla/">Amazon&rsquo;s SLA</a> for details.</p>
+
+<h4 id="encrypted-plans---mysql">Encrypted plans - MySQL</h4>
+
+<p>All plans have encryption at rest unless stated otherwise. This means that both the data on the disk and in snapshots is encrypted.</p>
+
+<h4 id="high-availability-plans---mysql">High availability plans - MySQL</h4>
+
+<p>We recommend you use a high availability (<code>HA</code>) plan for your MySQL apps. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See <a href="https://aws.amazon.com/rds/sla/">Amazon's SLA</a> for details.</p>
+
 <p>When you use a high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.</p>
+
 <p>Refer to the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover">Amazon RDS documentation on the failover process</a> for more information.</p>
-<p>You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. Contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to arrange for us to trigger a failover for you.</p>
-<h4 id="read-replicas-mysql">Read replicas - MySQL</h4><p>Amazon RDS has the capability to provide a read-only copy of your database known as a read replica. This can be useful for performance, availability or security reasons.</p>
+
+<p>You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. Contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> to arrange for us to trigger a failover for you.</p>
+
+<h4 id="read-replicas---mysql">Read replicas - MySQL</h4>
+
+<p>Amazon RDS has the capability to provide a read-only copy of your database known as a read replica. This can be useful for performance, availability or security reasons.</p>
+
 <p>Refer to the <a href="https://aws.amazon.com/rds/details/read-replicas/">Amazon RDS documentation on read replicas</a> for more information.</p>
-<p>GOV.UK PaaS does not currently support read replicas, but if you think you would find them useful, please contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>, providing details of your use case.</p>
-<h3 id="mysql-maintenance-amp-backups">MySQL maintenance &amp; backups</h3><h4 id="mysql-maintenance-times">MySQL maintenance times</h4><p>Each MySQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. Select a high availability (<code>HA</code>) plan to minimise this downtime. Minor version upgrades (for example from 5.7.1 to 5.7.2) are applied during this maintenance window.</p>
-<p>Contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to find out the default time of your maintenance window. Window start times will vary from 22:00 to 06:00 UTC.</p>
+
+<p>GOV.UK PaaS does not currently support read replicas, but if you think you would find them useful, please contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>, providing details of your use case.</p>
+
+<h3 id="mysql-maintenance--backups">MySQL maintenance &amp; backups</h3>
+
+<h4 id="mysql-maintenance-times">MySQL maintenance times</h4>
+
+<p>Each MySQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. Select a high availability (<code>HA</code>) plan to minimise this downtime. Minor version upgrades (for example from 5.7.1 to 5.7.2) are applied during this maintenance window.</p>
+
+<p>Contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> to find out the default time of your maintenance window. Window start times will vary from 22:00 to 06:00 UTC.</p>
+
 <p>You can set your own maintenance window by running <code>cf update-service</code> in the command line and setting the <code>preferred_maintenance_window</code> custom parameter:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique, descriptive name for this service instance, for example:</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique, descriptive name for this service instance, for example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service my-ms-service -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
-</code></pre></div><p>For more information on maintenance times, refer to the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html">Amazon RDS maintenance documentation</a>.</p>
-<h4 id="queue-a-plan-migration-mysql">Queue a plan migration - MySQL</h4><p>Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can queue the change to begin during a maintenance window by running the following code in the command line:</p>
+</code></pre></div>
+<p>For more information on maintenance times, refer to the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html">Amazon RDS maintenance documentation</a>.</p>
+
+<h4 id="queue-a-plan-migration---mysql">Queue a plan migration - MySQL</h4>
+
+<p>Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can queue the change to begin during a maintenance window by running the following code in the command line:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -p PLAN -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique, descriptive name for this service instance and <code>PLAN</code> is the plan that you are upgrading to, for example:</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique, descriptive name for this service instance and <code>PLAN</code> is the plan that you are upgrading to, for example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service my-ms-service -p medium-5.7 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
-</code></pre></div><p>Passing the <code>preferred_maintenance_window</code> parameter will alter the default maintenance window for any future maintenance events required for the database instance.</p>
+</code></pre></div>
+<p>Passing the <code>preferred_maintenance_window</code> parameter will alter the default maintenance window for any future maintenance events required for the database instance.</p>
+
 <p>You can only migrate your service if the new plan has the <a href="/deploying_services/mysql/#same-encryption-type">same encryption type</a> as your current plan.</p>
-<h4 id="mysql-service-backup">MySQL service backup</h4><p>The data stored within any MySQL service you create is backed up using the standard Amazon RDS backup system if you are using a paid plan. Your data is not backed up if you are using the free plan.</p>
+
+<h4 id="mysql-service-backup">MySQL service backup</h4>
+
+<p>The data stored within any MySQL service you create is backed up using the standard Amazon RDS backup system if you are using a paid plan. Your data is not backed up if you are using the free plan.</p>
+
 <p>Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is retained for 7 days.</p>
+
 <p>We can manually restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Data can be restored to a new MySQL service instance running in parallel, or it can replace the existing service instance.</p>
-<p>To arrange a manual restore, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>. We will need approval from your organization manager if restoring will involve overwriting data.</p>
+
+<p>To arrange a manual restore, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>. We will need approval from your organization manager if restoring will involve overwriting data.</p>
+
 <p>Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.</p>
-<p>For more details about how the RDS backup system works, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html">Amazon&rsquo;s DB instance backups documentation</a>.</p>
+
+<p>For more details about how the RDS backup system works, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html">Amazon's DB instance backups documentation</a>.</p>

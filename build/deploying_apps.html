@@ -122,7 +122,7 @@
               <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
                       <ul>
   <li>
-    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+    <a href="/#govuk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
   </li>
 </ul>
 <ul>
@@ -231,7 +231,7 @@
         <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
       </li>
       <li>
-        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+        <a href="/deploying_apps.html#deploy-a-nodejs-app"><span>Deploy a Node.js app</span></a>
       </li>
       <li>
         <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
@@ -433,10 +433,10 @@
         <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-govuk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-govuk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
       </li>
       <li>
         <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
@@ -530,17 +530,17 @@
         <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
       </li>
       <li>
-        <a href="/monitoring_services.html#monitoring-backing-services-more-about-monitoring"><span>More about monitoring</span></a>
+        <a href="/monitoring_services.html#more-about-monitoring"><span>More about monitoring</span></a>
       </li>
     </ul>
   </li>
 </ul>
 <ul>
   <li>
-    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <a href="/architecture.html#govuk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
     <ul>
       <li>
-        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+        <a href="/architecture.html#characteristics-of-govuk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
       </li>
       <li>
         <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
@@ -600,100 +600,180 @@
 
         <div class="app-pane__content toc-open-disabled">
           <main id="content" class="technical-documentation" data-module="anchored-headings">
-            <h1 id="deploying-apps">Deploying apps</h1><h2 id="deploying-public-apps">Deploying public apps</h2><p>By default, all apps you deploy on Cloud Foundry are publicly accessible to everyone through the internet.</p>
+            <h1 id="deploying-apps">Deploying apps</h1>
+
+<h2 id="deploying-public-apps">Deploying public apps</h2>
+
+<p>By default, all apps you deploy on Cloud Foundry are publicly accessible to everyone through the internet.</p>
+
 <p>The <code>cf push</code> command can both create a new app and push a new version of an existing app.</p>
 
 <ol>
-<li><p>Put your app&rsquo;s code and configuration files in a local directory.</p></li>
-<li><p><a href="/deploying_apps.html#set-a-target">Target</a> the appropriate organisation and space by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf target -o ORG_NAME -s SPACE_NAME
-</code></pre></div><p>where <code>ORG_NAME</code> is the name of the org, and <code>SPACE_NAME</code> is the name of the space.</p></li>
-<li><p>Create a <code>manifest.yml</code> file in the same local directory as your app&rsquo;s code. The manifest file tells Cloud Foundry what to do with your app. An example manifest:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: APP_NAME
-</code></pre></div><p>where <code>APP_NAME</code> is the unique name for your app. You can run <code>cf apps</code> to see apps which already exist.</p></li>
-<li><p>Deploy your app by running the following in the directory which contains your app&rsquo;s code, configuration files, and manifest:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf push
-</code></pre></div></li>
+  <li>
+<p>Put your app's code and configuration files in a local directory.</p>
+  </li>
+  <li>
+<p><a href="/deploying_apps.html#set-a-target">Target</a> the appropriate organisation and space by running:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf target -o ORG_NAME -s SPACE_NAME
+</code></pre></div>
+<p>where <code>ORG_NAME</code> is the name of the org, and <code>SPACE_NAME</code> is the name of the space.</p>
+  </li>
+  <li>
+<p>Create a <code>manifest.yml</code> file in the same local directory as your app's code. The manifest file tells Cloud Foundry what to do with your app. An example manifest:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: APP_NAME
+</code></pre></div>
+<p>where <code>APP_NAME</code> is the unique name for your app. You can run <code>cf apps</code> to see apps which already exist.</p>
+  </li>
+  <li>
+<p>Deploy your app by running the following in the directory which contains your app's code, configuration files, and manifest:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf push
+</code></pre></div>  </li>
 </ol>
+
 <p>Your app should now be live at your <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html">Cloud Foundry documentation on deploying with app manifests</a> for more information on the options available when you deploy an app.</p>
+
 <p>Refer to the <a href="/deploying_apps.html#deploy-an-app-to-production">documentation on deploying an app to production</a> if your app is a production app.</p>
-<h3 id="set-a-target">Set a target</h3><p>To deploy an app, you need to set a target. A target is a combination of an org and a space.</p>
+
+<h3 id="set-a-target">Set a target</h3>
+
+<p>To deploy an app, you need to set a target. A target is a combination of an org and a space.</p>
+
 <p>Run the following to set the target:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf target -o ORG_NAME -s SPACE_NAME
-</code></pre></div><p>where <code>ORG_NAME</code> is the name of the org, and <code>SPACE_NAME</code> is the name of the space.</p>
+</code></pre></div>
+<p>where <code>ORG_NAME</code> is the name of the org, and <code>SPACE_NAME</code> is the name of the space.</p>
+
 <p>The Cloud Foundry client remembers the target until you change it.</p>
+
 <p>You can change space without changing org by running:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf target -s SPACE_NAME
-</code></pre></div><p>You should target the sandbox space while you are testing your app. You can do this by running:</p>
+</code></pre></div>
+<p>You should target the sandbox space while you are testing your app. You can do this by running:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf target -s sandbox
-</code></pre></div><p>You will not normally need to target the sandbox space if you are a new user, as this space is the default for new users.</p>
+</code></pre></div>
+<p>You will not normally need to target the sandbox space if you are a new user, as this space is the default for new users.</p>
+
 <p>A possible exception to this is if your org is mature and has pre-existing spaces; you should check to ensure that you target the appropriate space for testing.</p>
+
 <h3 id="caveats">Caveats</h3>
 <ul>
-<li>Your app should not write to local storage. Cloud Foundry local storage is ephemeral and can be deleted at any time.</li>
-<li>You may need to set environment variables for your app to work. All configuration information should be stored in environment variables, not in the code.</li>
-<li>Instances will be restarted if they <a href="/managing_apps.html#quotas">exceed memory limits</a>.</li>
-<li>Your application should write all its log messages to <code>STDOUT</code>/<code>STDERR</code>, rather than a log file.</li>
+  <li><p>Your app should not write to local storage. Cloud Foundry local storage is ephemeral and can be deleted at any time.</p>
+  </li>
+  <li><p>You may need to set environment variables for your app to work. All configuration information should be stored in environment variables, not in the code.</p>
+  </li>
+  <li><p>Instances will be restarted if they <a href="/managing_apps.html#quotas">exceed memory limits</a>.</p>
+  </li>
+  <li><p>Your application should write all its log messages to <code>STDOUT</code>/<code>STDERR</code>, rather than a log file.</p>
+  </li>
 </ul>
-<h2 id="deploying-private-apps">Deploying private apps</h2><p>By default, all apps you deploy on Cloud Foundry are <a href="/deploying_apps.html#deploying-public-apps">publicly accessible</a> to everyone through the internet.</p>
+
+<h2 id="deploying-private-apps">Deploying private apps</h2>
+
+<p>By default, all apps you deploy on Cloud Foundry are <a href="/deploying_apps.html#deploying-public-apps">publicly accessible</a> to everyone through the internet.</p>
+
 <p>If you need to restrict access to a public app, for example to implement basic authentication, you should refer to the documentation on <a href="/deploying_services/route_services/#route-services">route services</a>.</p>
+
 <p>If you do not want your apps to be publicly accessible at all, you must deploy your apps on the <code>apps.internal</code> domain. A common use case for this is that you have multiple micro-services that make up an overall app, and those micro-services must only be accessible by other micro-services in the app.</p>
+
 <p>Private apps can communicate over any TCP-based protocol. If you wish to use TLS, you are responsible for the keys, certificates, protocol versions, and ciphers involved.</p>
+
 <p>The following use case is that you have 2 apps to deploy:</p>
 
 <ul>
-<li>a public app for your end users to interact with</li>
-<li>a private app that the public app can securely connect to, but which is not accessible from the internet</li>
+  <li><p>a public app for your end users to interact with</p>
+  </li>
+  <li><p>a private app that the public app can securely connect to, but which is not accessible from the internet</p>
+  </li>
 </ul>
+
 <p>To achieve this, you must:</p>
 
 <ul>
-<li><a href="/deploying_apps.html#specify-a-private-route-in-the-private-app-39-s-manifest">specify the private route</a> in the private app&rsquo;s manifest</li>
-<li><a href="/deploying_apps.html#set-the-private-app-url-in-the-public-app-39-s-manifest">set the private app URL</a> as an <a href="/deploying_apps.html#environment-variables">environment variable</a> in the public app&rsquo;s manifest</li>
-<li><a href="/deploying_apps.html#create-a-network-policy">create a network policy</a> to allow the apps to connect with each other</li>
+  <li><p><a href="/deploying_apps.html#specify-a-private-route-in-the-private-app-39-s-manifest">specify the private route</a> in the private app's manifest</p>
+  </li>
+  <li><p><a href="/deploying_apps.html#set-the-private-app-url-in-the-public-app-39-s-manifest">set the private app URL</a> as an <a href="/deploying_apps.html#environment-variables">environment variable</a> in the public app's manifest</p>
+  </li>
+  <li><p><a href="/deploying_apps.html#create-a-network-policy">create a network policy</a> to allow the apps to connect with each other</p>
+  </li>
 </ul>
-<h3 id="specify-a-private-route-in-the-private-app-39-s-manifest">Specify a private route in the private app&rsquo;s manifest</h3><p>Cloud Foundry uses routes to send requests to apps.</p>
-<p>You must specify a private route in the private app&rsquo;s manifest to tell Cloud Foundry that this app should not be accessible from the internet.</p>
-<p>Create the private app&rsquo;s <code>manifest.yml</code> with the following code:</p>
+
+<h3 id="specify-a-private-route-in-the-private-apps-manifest">Specify a private route in the private app's manifest</h3>
+
+<p>Cloud Foundry uses routes to send requests to apps.</p>
+
+<p>You must specify a private route in the private app's manifest to tell Cloud Foundry that this app should not be accessible from the internet.</p>
+
+<p>Create the private app's <code>manifest.yml</code> with the following code:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>---
 applications:
 - name: PRIVATE_APPNAME
   routes:
   - route: PRIVATE_APPNAME.apps.internal
-</code></pre></div><p>If the private app was previously a public app, you must also run the following in the command line to remove the pre-existing public route:</p>
+</code></pre></div>
+<p>If the private app was previously a public app, you must also run the following in the command line to remove the pre-existing public route:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unmap-route PRIVATE_APPNAME DOMAIN --hostname HOSTNAME
-</code></pre></div><p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes">Cloud Foundry documentation on routes</a> for more information.</p>
-<h3 id="set-the-private-app-url-in-the-public-app-39-s-manifest">Set the private app URL in the public app&rsquo;s manifest</h3><p>The public app must read the private app URL from an <a href="/deploying_apps.html#environment-variables">environment variable</a> in the public app&rsquo;s manifest.</p>
+</code></pre></div>
+<p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes">Cloud Foundry documentation on routes</a> for more information.</p>
+
+<h3 id="set-the-private-app-url-in-the-public-apps-manifest">Set the private app URL in the public app's manifest</h3>
+
+<p>The public app must read the private app URL from an <a href="/deploying_apps.html#environment-variables">environment variable</a> in the public app's manifest.</p>
+
 <p>You must set:</p>
 
 <ul>
-<li>the private app URL as a non-secure <code>http</code> URL</li>
-<li>the domain as <code>apps.internal</code></li>
-<li>the URL as port <code>8080</code></li>
+  <li><p>the private app URL as a non-secure <code>http</code> URL</p>
+  </li>
+  <li><p>the domain as <code>apps.internal</code></p>
+  </li>
+  <li><p>the URL as port <code>8080</code></p>
+  </li>
 </ul>
-<p>To do this, create the public app&rsquo;s <code>manifest.yml</code> with the following code:</p>
+
+<p>To do this, create the public app's <code>manifest.yml</code> with the following code:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>---
 applications:
 - name: PUBLIC_APPNAME
   env:
     ENVIRONMENT_VARIABLE_NAME: http://PRIVATE_APPNAME.apps.internal:8080
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>PUBLIC_APPNAME</code> is the name of your public app</li>
-<li><code>ENVIRONMENT_VARIABLE_NAME</code> is the <a href="#environment-variables">environment variable</a> your public app reads (for example <code>PRIVATE_APP_URL</code>)</li>
-<li><code>PRIVATE_APPNAME</code> is the name of your private app</li>
+  <li><p><code>PUBLIC_APPNAME</code> is the name of your public app</p>
+  </li>
+  <li><p><code>ENVIRONMENT_VARIABLE_NAME</code> is the <a href="#environment-variables">environment variable</a> your public app reads (for example <code>PRIVATE_APP_URL</code>)</p>
+  </li>
+  <li><p><code>PRIVATE_APPNAME</code> is the name of your private app</p>
+  </li>
 </ul>
-<h3 id="create-a-network-policy">Create a network policy</h3><p>By default, Cloud Foundry apps do not accept internal connections from other apps.</p>
+
+<h3 id="create-a-network-policy">Create a network policy</h3>
+
+<p>By default, Cloud Foundry apps do not accept internal connections from other apps.</p>
+
 <p>You must create a <a href="https://cli.cloudfoundry.org/en-US/cf/add-network-policy.html">network policy</a> to allow the public app to connect to the private app.</p>
 
 <ol>
-<li><a href="/deploying_apps.html#deploying-public-apps">Push</a> both the public and private apps.</li>
-<li>Run the following in the command line to create the network policy:</li>
+  <li><p><a href="/deploying_apps.html#deploying-public-apps">Push</a> both the public and private apps.</p>
+  </li>
+  <li><p>Run the following in the command line to create the network policy:</p>
+  </li>
 </ol>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf add-network-policy PUBLIC_APPNAME --destination-app PRIVATE_APPNAME --protocol tcp --port 8080
 </code></pre></div>
 <div class="govuk-warning-text">
@@ -703,88 +783,148 @@ applications:
     If you are using Cloud Foundry CLI version 6 and the blue-green deploy plugin, you must recreate the network policy after each deployment
   </strong>
 </div>
-<h2 id="data-security-classification">Data security classification</h2><p>You can store data classified up to ‘official’ on the GOV.UK PaaS.</p>
+
+<h2 id="data-security-classification">Data security classification</h2>
+
+<p>You can store data classified up to ‘official’ on the GOV.UK PaaS.</p>
+
 <p>You cannot store data classified ‘secret‘ or ‘top secret‘ on the GOV.UK PaaS.</p>
+
 <p>Refer to the <a href="https://www.cloud.service.gov.uk/information-assurance/">information assurance page</a> for information on the assurance process.</p>
+
 <p>Learn about <a href="https://www.cloud.service.gov.uk/cloud-security-principles/">How GOV.UK PaaS meets the NCSC Cloud Security Principles</a>.</p>
+
 <p>Refer to the <a href="https://www.gov.uk/government/publications/government-security-classifications">GOV.UK page on government security classifications</a> for more information on these classifications.</p>
-<h2 id="secure-and-non-secure-requests">Secure and non-secure requests</h2><p>Requests could be made to an app&rsquo;s public route over the non-secure <code>http://</code> protocol due to:</p>
+
+<h2 id="secure-and-non-secure-requests">Secure and non-secure requests</h2>
+
+<p>Requests could be made to an app's public route over the non-secure <code>http://</code> protocol due to:</p>
 
 <ul>
-<li>misconfiguration of an app that allows non-encrypted traffic through</li>
-<li>a service linking to the HTTP version of a page by mistake</li>
+  <li><p>misconfiguration of an app that allows non-encrypted traffic through</p>
+  </li>
+  <li><p>a service linking to the HTTP version of a page by mistake</p>
+  </li>
 </ul>
+
 <p>Any requests made to a public app route over the <code>http://</code> protocol will be automatically redirected to the base <code>https://</code> version of that URL. The original query path and query parameters will be removed. This prevents a site from repeatedly redirecting back to the HTTP protocol without the user noticing.</p>
 
-<h2 id="deploy-an-app-to-production">Deploy an app to production</h2><p>To deploy an app to a production environment, your department, agency or team must have a <a href="/get_started.html#trial-and-paid-accounts">paid account</a> with the GOV.UK PaaS.</p>
+<h2 id="deploy-an-app-to-production">Deploy an app to production</h2>
+
+<p>To deploy an app to a production environment, your department, agency or team must have a <a href="/get_started.html#trial-and-paid-accounts">paid account</a> with the GOV.UK PaaS.</p>
+
 <p>Before you deploy an app to a production environment, you must set up a domain.</p>
+
 <p>If you are a central government service using the GOV.UK domain, you must <a href="https://www.gov.uk/service-manual/technology/get-a-domain-name">get a domain from GOV.UK</a> for your service and set the <a href="/deploying_services/use_a_custom_domain/#set-up-a-cdn-route-service-with-one-or-more-custom-domains">DNS records required by your cdn-route service</a>.</p>
+
 <p>If you are using your own content distribution network (CDN), you must <a href="/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn">set up a domain by configuring your CDN</a>.</p>
+
 <p>You must also:</p>
 
 <ul>
-<li>build your app in line with the <a href="/architecture.html#12-factor-application-principles">12-factor app principles</a></li>
-<li>use a separate staging environment to test your app (refer to the <a href="/orgs_spaces_users.html#case-studies">case studies on managing orgs, users and spaces</a> for more information)</li>
-<li><a href="https://docs.cloudfoundry.org/devguide/deploy-apps/healthchecks.html">configure an <code>http</code> health check</a> to allow Cloud Foundry to detect and attempt to replace unhealthy app instances</li>
+  <li><p>build your app in line with the <a href="/architecture.html#12-factor-application-principles">12-factor app principles</a></p>
+  </li>
+  <li><p>use a separate staging environment to test your app (refer to the <a href="/orgs_spaces_users.html#case-studies">case studies on managing orgs, users and spaces</a> for more information)</p>
+  </li>
+  <li><p><a href="https://docs.cloudfoundry.org/devguide/deploy-apps/healthchecks.html">configure an <code>http</code> health check</a> to allow Cloud Foundry to detect and attempt to replace unhealthy app instances</p>
+  </li>
 </ul>
+
 <p>When you deploy an app to a production environment, you should:</p>
 
 <ul>
-<li><a href="/get_started.html#deploying-with-zero-downtime">use zero downtime, rolling deploys</a></li>
-<li><a href="/managing_apps.html#scaling">run more than one instance of your app</a> to make sure your app is always available</li>
-<li>select a high-availability plan for your app&rsquo;s <a href="/deploying_services/#deploy-a-backing-or-routing-service">backing service</a> if your app uses a backing service</li>
+  <li><p><a href="/get_started.html#deploying-with-zero-downtime">use zero downtime, rolling deploys</a></p>
+  </li>
+  <li><p><a href="/managing_apps.html#scaling">run more than one instance of your app</a> to make sure your app is always available</p>
+  </li>
+  <li><p>select a high-availability plan for your app's <a href="/deploying_services/#deploy-a-backing-or-routing-service">backing service</a> if your app uses a backing service</p>
+  </li>
 </ul>
 
-<h2 id="buildpacks">Buildpacks</h2><h3 id="about-buildpacks">About buildpacks</h3><p>Cloud Foundry uses buildpacks to provide runtime and framework support for applications in different languages (for example ensuring your app code has both the Ruby runtime and the  Rails framework available to help it run). GOV.UK PaaS supports both standard and custom buildpacks:</p>
+<h2 id="buildpacks">Buildpacks</h2>
+
+<h3 id="about-buildpacks">About buildpacks</h3>
+
+<p>Cloud Foundry uses buildpacks to provide runtime and framework support for applications in different languages (for example ensuring your app code has both the Ruby runtime and the  Rails framework available to help it run). GOV.UK PaaS supports both standard and custom buildpacks:</p>
 
 <ul>
-<li><a href="https://docs.cloudfoundry.org/buildpacks/#system-buildpacks">standard buildpacks</a> are buildpacks for common languages and frameworks that are supported by Cloud Foundry. You can check the installed buildpacks and their versions by running <code>cf buildpacks</code>.</li>
-<li>custom buildpacks are developed by the wider community to enable hosting of applications in additional languages or frameworks</li>
-<li>Docker images are a packaging format, and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks</li>
+  <li><p><a href="https://docs.cloudfoundry.org/buildpacks/#system-buildpacks">standard buildpacks</a> are buildpacks for common languages and frameworks that are supported by Cloud Foundry. You can check the installed buildpacks and their versions by running <code>cf buildpacks</code>.</p>
+  </li>
+  <li><p>custom buildpacks are developed by the wider community to enable hosting of applications in additional languages or frameworks</p>
+  </li>
+  <li><p>Docker images are a packaging format, and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks</p>
+  </li>
 </ul>
-<h3 id="which-buildpack-should-i-use">Which buildpack should I use?</h3><p>We recommend using the standard buildpacks to maximise the support you will receive from GOV.UK PaaS. Using a custom buildpack or Docker image will mean additional setup and maintenance costs.</p>
+
+<h3 id="which-buildpack-should-i-use">Which buildpack should I use?</h3>
+
+<p>We recommend using the standard buildpacks to maximise the support you will receive from GOV.UK PaaS. Using a custom buildpack or Docker image will mean additional setup and maintenance costs.</p>
+
 <p>Your responsibilities change depending on whether you use a standard buildpack, custom buildpack or a Docker image. Refer to the <a href="/responsibility_model.html#know-your-responsibilities">documentation on knowing your responsibilities</a> for further information.</p>
-<h3 id="buildpack-language-version-updates">Buildpack language version updates</h3><p>You should tell Cloud Foundry which version of your app&rsquo;s language to use in the buildpack. You can specify an exact, minor or major version of the language. For example, with Python:</p>
+
+<h3 id="buildpack-language-version-updates">Buildpack language version updates</h3>
+
+<p>You should tell Cloud Foundry which version of your app's language to use in the buildpack. You can specify an exact, minor or major version of the language. For example, with Python:</p>
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
+
 <div class="table-container">
         <table>
-          <tr>
-<th style="text-align: left">Category</th>
-<th style="text-align: left">Python Example</th>
-</tr>
-<tr>
-<td style="text-align: left">Exact</td>
-<td style="text-align: left"><code>3.5.2</code></td>
-</tr>
-<tr>
-<td style="text-align: left">Minor</td>
-<td style="text-align: left"><code>3.5.x</code></td>
-</tr>
-<tr>
-<td style="text-align: left">Major</td>
-<td style="text-align: left"><code>3.x</code></td>
-</tr>
+  <thead>
+    <tr>
+      <th style="text-align: left">Category</th>
+      <th style="text-align: left">Python Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Exact</td>
+      <td style="text-align: left"><code>3.5.2</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Minor</td>
+      <td style="text-align: left"><code>3.5.x</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Major</td>
+      <td style="text-align: left"><code>3.x</code></td>
+    </tr>
+  </tbody>
+</table>
 
-        </table>
       </div>
 <div style="height:1px;font-size:1px;">&nbsp;</div>
-<p>If you specify an exact version, you must update this version when the GOV.UK PaaS team update the language&rsquo;s buildpack. Your app will fail to start if the language version it relies on is not supported by the latest language buildpack.</p>
+
+<p>If you specify an exact version, you must update this version when the GOV.UK PaaS team update the language's buildpack. Your app will fail to start if the language version it relies on is not supported by the latest language buildpack.</p>
+
 <p>If you specify a major or a minor version, your app will automatically upgrade to use a more recent version of its language when the GOV.UK PaaS team updates the buildpack. The major or minor version must still be live for this upgrade to work. However, if there is a breaking change between language versions, your app may not behave as expected or even fail.</p>
+
 <p>You should always check the GOV.UK PaaS announcements email for information on which language versions are in the latest language buildpacks.</p>
-<h3 id="how-to-use-custom-buildpacks">How to use custom buildpacks</h3><p>There are many application attribute options available when you push an app. You can use the buildpack attribute to specify a custom buildpack for your app through:</p>
+
+<h3 id="how-to-use-custom-buildpacks">How to use custom buildpacks</h3>
+
+<p>There are many application attribute options available when you push an app. You can use the buildpack attribute to specify a custom buildpack for your app through:</p>
 
 <ul>
-<li>specifying the buildpack in the manifest.yml file</li>
-<li>using the command line</li>
+  <li><p>specifying the buildpack in the manifest.yml file</p>
+  </li>
+  <li><p>using the command line</p>
+  </li>
 </ul>
-<h4 id="specifying-buildpacks-in-the-manifest-file">Specifying buildpacks in the manifest file</h4><p>You can set application attribute options in a manifest.yml file in the directory from which you are running the push command. This is done in one of three ways:</p>
+
+<h4 id="specifying-buildpacks-in-the-manifest-file">Specifying buildpacks in the manifest file</h4>
+
+<p>You can set application attribute options in a manifest.yml file in the directory from which you are running the push command. This is done in one of three ways:</p>
 
 <ol>
-<li>By name: MY-BUILDPACK.</li>
-<li>By GitHub URL: https://github.com/cloudfoundry/java-buildpack.git.</li>
-<li>By GitHub URL with a branch or tag: https://github.com/cloudfoundry/java-buildpack.git#v3.3.0 for the v3.3.0 tag.</li>
+  <li><p>By name: MY-BUILDPACK.</p>
+  </li>
+  <li><p>By GitHub URL: https://github.com/cloudfoundry/java-buildpack.git.</p>
+  </li>
+  <li><p>By GitHub URL with a branch or tag: https://github.com/cloudfoundry/java-buildpack.git#v3.3.0 for the v3.3.0 tag.</p>
+  </li>
 </ol>
+
 <div class="highlight"><pre class="highlight plaintext"><code>---
   ...
   buildpacks:
@@ -793,67 +933,112 @@ applications:
 <blockquote>
 <p>Command line options override the manifest; the option that overrides the custom buildpack attribute is <code>-b</code>.</p>
 </blockquote>
-<h4 id="using-the-command-line-to-choose-buildpacks">Using the command line to choose buildpacks</h4><p>Once a custom buildpack has been created, it can be pushed to either a public or private git repository. The repository URL can then be included in the command line to push your app.</p>
+
+<h4 id="using-the-command-line-to-choose-buildpacks">Using the command line to choose buildpacks</h4>
+
+<p>Once a custom buildpack has been created, it can be pushed to either a public or private git repository. The repository URL can then be included in the command line to push your app.</p>
 
 <blockquote>
 <p>If the repository is private, the push command must include https and username/password authentication</p>
 </blockquote>
 
 <ul>
-<li>Public: <code>$ cf push my-new-app -b git://github.com/johndoe/my-buildpack.git</code></li>
-<li>Private: <code>$ cf push my-new-app -b https://username:password@github.com/johndoe/my-buildpack.git</code></li>
+  <li><p>Public: <code>$ cf push my-new-app -b git://github.com/johndoe/my-buildpack.git</code></p>
+  </li>
+  <li><p>Private: <code>$ cf push my-new-app -b https://username:password@github.com/johndoe/my-buildpack.git</code></p>
+  </li>
 </ul>
+
 <p>The app will then be deployed to Cloud Foundry, and the buildpack will be cloned from the repository and applied to the app.</p>
 
 <blockquote>
 <p>If a buildpack is specified using <code>cf push -b</code> the detect step will be skipped and as a result, no buildpack detect scripts will be run.</p>
 </blockquote>
 
-<h2 id="excluding-files">Excluding files</h2><p>Cloud Foundry is not version-control-aware, so <code>cf push</code> will deploy the working state of whatever files you have in that directory. In most cases, you will want to <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/prepare-to-deploy.html#exclude">exclude files</a> ignored by Git. From within your project directory, run</p>
+<h2 id="excluding-files">Excluding files</h2>
+
+<p>Cloud Foundry is not version-control-aware, so <code>cf push</code> will deploy the working state of whatever files you have in that directory. In most cases, you will want to <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/prepare-to-deploy.html#exclude">exclude files</a> ignored by Git. From within your project directory, run</p>
+
 <p><code>
 ln -s .gitignore .cfignore
 </code></p>
+
 <p>and commit the <code>.cfignore</code> to your repository. However, read on if you have a more advanced CF setup.</p>
+
 <p>A couple of important points on the <code>.cfignore</code>:</p>
 
 <ol>
-<li><p>if you have a more advanced app setup and have apps with a <code>path</code> other than the project root (where you run <code>cf push</code> from), you will need an additional <code>.cfignore</code> file located in each app <code>path</code>;</p></li>
-<li><p>also note that more advanced <code>.gitignore</code> syntax, such as the <code>**</code> recursive subdirectory wildcard, are <em>not</em> supported by <code>.cfignore</code>.</p></li>
+  <li>
+<p>if you have a more advanced app setup and have apps with a <code>path</code> other than the project root (where you run <code>cf push</code> from), you will need an additional <code>.cfignore</code> file located in each app <code>path</code>;</p>
+  </li>
+  <li>
+<p>also note that more advanced <code>.gitignore</code> syntax, such as the <code>**</code> recursive subdirectory wildcard, are <em>not</em> supported by <code>.cfignore</code>.</p>
+  </li>
 </ol>
 
-<h2 id="environment-variables">Environment variables</h2><p>You must store all configuration information for your app as environment variables.</p>
+<h2 id="environment-variables">Environment variables</h2>
+
+<p>You must store all configuration information for your app as environment variables.</p>
+
 <p>This could include:</p>
 
 <ul>
-<li>credentials for external services that your app uses, for example a Twitter account</li>
-<li>values that will vary with each deployment of the app, for example the canonical URL</li>
+  <li><p>credentials for external services that your app uses, for example a Twitter account</p>
+  </li>
+  <li><p>values that will vary with each deployment of the app, for example the canonical URL</p>
+  </li>
 </ul>
-<p>To view an app&rsquo;s current environment variables, run <code>cf env APP_NAME</code>.</p>
+
+<p>To view an app's current environment variables, run <code>cf env APP_NAME</code>.</p>
+
 <p>To create or update a variable, run the following:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf set-env APP_NAME ENV_VAR_NAME ENV_VAR_VALUE
-</code></pre></div><p>If you&rsquo;re deploying a pre-existing app, you should check the app&rsquo;s documentation for any environment variables you need to set.</p>
+</code></pre></div>
+<p>If you're deploying a pre-existing app, you should check the app's documentation for any environment variables you need to set.</p>
+
 <p>For example, if the app has these instructions for deploying to Heroku:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>heroku config:set VARIABLE=value
-</code></pre></div><p>then you should run the equivalent command using <code>cf set-env</code>:</p>
+</code></pre></div>
+<p>then you should run the equivalent command using <code>cf set-env</code>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf set-env APP_NAME VARIABLE value
-</code></pre></div><h3 id="system-provided-environment-variables">System-provided environment variables</h3><p>System-provided environment variables tell you about configuration details handled by the PaaS, for example:</p>
+</code></pre></div>
+<h3 id="system-provided-environment-variables">System-provided environment variables</h3>
+
+<p>System-provided environment variables tell you about configuration details handled by the PaaS, for example:</p>
 
 <ul>
-<li>the port on which the app is listening</li>
-<li>the maximum memory each app instance can use</li>
-<li>the external IP address of the app instance</li>
+  <li><p>the port on which the app is listening</p>
+  </li>
+  <li><p>the maximum memory each app instance can use</p>
+  </li>
+  <li><p>the external IP address of the app instance</p>
+  </li>
 </ul>
-<p>Do not attempt to change the values of these system-provided variables using the command line or your app&rsquo;s code.</p>
+
+<p>Do not attempt to change the values of these system-provided variables using the command line or your app's code.</p>
+
 <p><code>VCAP_SERVICES</code> and <code>VCAP_APPLICATION</code> are two important variables for initial setup:</p>
 
 <ul>
-<li><p><code>VCAP_SERVICES</code> contains details, including credentials, of any backing services bound to the app</p></li>
-<li><p><code>VCAP_APPLICATION</code> provides details of the currently running application, for example the language runtime version</p></li>
+  <li>
+<p><code>VCAP_SERVICES</code> contains details, including credentials, of any backing services bound to the app</p>
+  </li>
+  <li>
+<p><code>VCAP_APPLICATION</code> provides details of the currently running application, for example the language runtime version</p>
+  </li>
 </ul>
+
 <p>To see the values of the system-provided variables, run <code>cf env APP_NAME</code>.</p>
+
 <p>If your app connects to a backing service, you may need to have your app parse <code>VCAP_SERVICES</code> to get the credentials and other settings relating to that service and set the appropriate environment variables.</p>
+
 <p>Some buildpacks will do this for you automatically. Refer to the deploy instructions for the language or framework you are using for more information.</p>
+
 <p>Here is an example of the structure of the information contained in <code>VCAP_SERVICES</code>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>{
  "VCAP_SERVICES": {
   "postgres": [
@@ -883,132 +1068,248 @@ ln -s .gitignore .cfignore
   ]
  }
 }
-</code></pre></div><p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html">Cloud Foundry documentation on environment variables</a> for more information.</p>
+</code></pre></div>
+<p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html">Cloud Foundry documentation on environment variables</a> for more information.</p>
 
-<h2 id="names-routes-and-domains">Names, routes and domains</h2><h3 id="app-names-and-domain-hostname-clash">App names and domain hostname clash</h3><p>When you push an app, you have to assign an app name, either in the manifest or using the command line. The app name is also used as the default hostname of the <a href="/orgs_spaces_users.html#regions">app domain</a> where the app will be hosted.</p>
-<p>For example, if you push an app called <code>myapp</code>in the London region, the PaaS tries to host it at <code>myapp.london.cloudapps.digital</code>. This is done using Cloud Foundry&rsquo;s <strong>route</strong> functions.</p>
+<h2 id="names-routes-and-domains">Names, routes and domains</h2>
+
+<h3 id="app-names-and-domain-hostname-clash">App names and domain hostname clash</h3>
+
+<p>When you push an app, you have to assign an app name, either in the manifest or using the command line. The app name is also used as the default hostname of the <a href="/orgs_spaces_users.html#regions">app domain</a> where the app will be hosted.</p>
+
+<p>For example, if you push an app called <code>myapp</code>in the London region, the PaaS tries to host it at <code>myapp.london.cloudapps.digital</code>. This is done using Cloud Foundry's <strong>route</strong> functions.</p>
+
 <p>The <a href="/orgs_spaces_users.html#regions">app domain</a> is shared across all PaaS tenants within a region. in this example, if another tenant is using <code>myapp.cloudapps.digital</code> in the Ireland region, and you try to push an app called <code>myapp</code> to the same region, you will receive an error like this:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>Using route myapp.london.cloudapps.digital
 Binding myapp.london.cloudapps.digital to myapp...
 FAILED
 The route myapp.london.cloudapps.digital is already in use.
-</code></pre></div><p>This will also happen if there is an app with the same name within your own organisation, but in a different space.</p>
+</code></pre></div>
+<p>This will also happen if there is an app with the same name within your own organisation, but in a different space.</p>
+
 <p>There are a few possible solutions to this problem:</p>
 
 <ol>
-<li><p>Minimise the chance of name clash by the way you name your apps; incorporate the name of your team, department or service to produce names that are unlikely to clash with other PaaS tenants. For example, if you work for the Ministry of Peace, instead of <code>myapp</code>, you could use <code>minipeace-myapp</code>.</p>
-<p>If you run different versions of an app in different spaces, you will also need to name them differently: for example, you might have <code>minipeace-myapp-dev</code>, <code>minipeace-myapp-test</code>, <code>minipeace-myapp-production</code> and so on.</p></li>
-<li><p>Manually specify a hostname that is different from the app name. You can do this as a command line option when you push:</p>
+  <li>
+<p>Minimise the chance of name clash by the way you name your apps; incorporate the name of your team, department or service to produce names that are unlikely to clash with other PaaS tenants. For example, if you work for the Ministry of Peace, instead of <code>myapp</code>, you could use <code>minipeace-myapp</code>.</p>
+
+<p>If you run different versions of an app in different spaces, you will also need to name them differently: for example, you might have <code>minipeace-myapp-dev</code>, <code>minipeace-myapp-test</code>, <code>minipeace-myapp-production</code> and so on.</p>
+  </li>
+  <li>
+<p>Manually specify a hostname that is different from the app name. You can do this as a command line option when you push:</p>
+
 <p><code>cf push myapp -n HOSTNAME</code></p>
-<p>or with a line in the app&rsquo;s <code>manifest.yml</code> file:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-    ...
-    host: HOSTNAME
-</code></pre></div><p>You will still need to pick a hostname that is not in use.</p>
-<p>This solution means you can change the hostname while keeping the app name the same. This is more flexible, but means you need to keep track of both a hostname and an app name for each app. It could potentially make it easier to deploy to the wrong target.</p></li>
-<li><p>Use the <code>random-route</code> option. This appends a couple of random words to the hostname, to avoid clashes. For example, if your app is hosted in the London region and you run:</p>
+
+<p>or with a line in the app's <code>manifest.yml</code> file:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+     ...
+     host: HOSTNAME
+</code></pre></div>
+<p>You will still need to pick a hostname that is not in use.</p>
+
+<p>This solution means you can change the hostname while keeping the app name the same. This is more flexible, but means you need to keep track of both a hostname and an app name for each app. It could potentially make it easier to deploy to the wrong target.</p>
+  </li>
+  <li>
+<p>Use the <code>random-route</code> option. This appends a couple of random words to the hostname, to avoid clashes. For example, if your app is hosted in the London region and you run:</p>
+
 <p><code>cf push myapp --random-route</code></p>
+
 <p>the app will be hosted at something like <code>https://myapp-mummifying-giraffe.london.cloudapps.digital</code>.</p>
-<p>You can also specify this in your app&rsquo;s <code>manifest.yml</code> file:</p>
+
+<p>You can also specify this in your app's <code>manifest.yml</code> file:</p>
+
 <p><code>random-route: true</code></p>
-<p>This is a convenient way to avoid clashes automatically. The disadvantage is that if your end users can see the resulting URLs, they may find the random words strange.</p></li>
+
+<p>This is a convenient way to avoid clashes automatically. The disadvantage is that if your end users can see the resulting URLs, they may find the random words strange.</p>
+  </li>
 </ol>
-<h3 id="custom-domains">Custom domains</h3><p>In production, you will probably want your app to be available through your own url (for example, <code>yourapp.service.gov.uk</code>). Refer to <a href="deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service">managing custom domains using the cdn-route service</a> to see how to set this up.</p>
 
-<h2 id="deploy-a-static-html-page">Deploy a static HTML page</h2><p>Refer to the <a href="/get_started.html#deploy-a-test-static-html-page">Deploy a test static HTML section</a> of the documentation.</p>
+<h3 id="custom-domains">Custom domains</h3>
 
-<h2 id="deploy-a-ruby-on-rails-app">Deploy a Ruby on Rails app</h2><p>This section explains minimal steps for deploying a basic Rails app. Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html">Cloud Foundry guide to deploying Ruby on Rails apps</a> for more information.</p>
+<p>In production, you will probably want your app to be available through your own url (for example, <code>yourapp.service.gov.uk</code>). Refer to <a href="deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service">managing custom domains using the cdn-route service</a> to see how to set this up.</p>
+
+<h2 id="deploy-a-static-html-page">Deploy a static HTML page</h2>
+
+<p>Refer to the <a href="/get_started.html#deploy-a-test-static-html-page">Deploy a test static HTML section</a> of the documentation.</p>
+
+<h2 id="deploy-a-ruby-on-rails-app">Deploy a Ruby on Rails app</h2>
+
+<p>This section explains minimal steps for deploying a basic Rails app. Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html">Cloud Foundry guide to deploying Ruby on Rails apps</a> for more information.</p>
 
 <blockquote>
 <p>If your app requires a <a href="/deploying_services/#deploy-a-backing-or-routing-service">backing service</a>, it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.</p>
 </blockquote>
+
 <p>These steps assume you have already carried out the setup process explained in the <a href="/get_started.html#get-started">Get started</a> section.</p>
+
 <p>When you deploy an app, you must select a combination of an organisation and a space. This is called the <a href="/deploying_apps.html#set-a-target"><strong>target</strong></a>.</p>
+
 <p>We have provided a <code>sandbox</code> space for you to use for learning about the PaaS. You may want to target the sandbox while you are testing by running:</p>
+
 <p><code>cf target -s sandbox</code></p>
-<p>It&rsquo;s also important to realise that if you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team.</p>
-<h3 id="deploying-an-app">Deploying an app</h3><p>To deploy a Rails app that does not require a backing service:</p>
+
+<p>It's also important to realise that if you deploy an app using the same name and target as an existing app, the original will be replaced. If you are not sure about where to deploy your app, consult the rest of your team.</p>
+
+<h3 id="deploying-an-app">Deploying an app</h3>
+
+<p>To deploy a Rails app that does not require a backing service:</p>
 
 <ol>
-<li><p>Put the code for your Rails app into a local directory (for example, by checking it out of version control).</p></li>
-<li><p><a href="/deploying_apps.html#excluding-files">Exclude files ignored by Git</a>.</p></li>
-<li><p>If you&rsquo;re using Rails 4, <a href="https://github.com/heroku/rails_12factor#install">add the <code>rails_12factor</code> gem</a> for better logging. Rails 5 has this functionality built in by default.</p></li>
-<li><p>Create a manifest.yml file in the folder where you checked out your app.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: my-rails-app
-  memory: 256M
-  buildpacks:
-  - ruby_buildpack
-</code></pre></div><p>Replace <code>my-rails-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+  <li>
+<p>Put the code for your Rails app into a local directory (for example, by checking it out of version control).</p>
+  </li>
+  <li>
+<p><a href="/deploying_apps.html#excluding-files">Exclude files ignored by Git</a>.</p>
+  </li>
+  <li>
+<p>If you're using Rails 4, <a href="https://github.com/heroku/rails_12factor#install">add the <code>rails_12factor</code> gem</a> for better logging. Rails 5 has this functionality built in by default.</p>
+  </li>
+  <li>
+<p>Create a manifest.yml file in the folder where you checked out your app.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: my-rails-app
+   memory: 256M
+   buildpacks:
+   - ruby_buildpack
+</code></pre></div>
+<p>Replace <code>my-rails-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+
 <p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p>
-<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code>ruby_buildpack</code>.</p></li>
-<li><p>Upload and start the application by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf push APPNAME
-</code></pre></div><p>from the directory which contains all the code and configuration files for your app.</p>
-<p>If you do not specify a name for the app after the <code>cf push</code> command, the name from the manifest file is used.</p></li>
-<li><p>Set any additional <a href="/deploying_apps.html#environment-variables">environment variables</a> required by your app. For example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf set-env APPNAME VARIABLE `value`
-</code></pre></div><p>where VARIABLE is a unique name for the variable, and <code>value</code> is the value to set.</p></li>
+
+<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code>ruby_buildpack</code>.</p>
+  </li>
+  <li>
+<p>Upload and start the application by running:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf push APPNAME
+</code></pre></div>
+<p>from the directory which contains all the code and configuration files for your app.</p>
+
+<p>If you do not specify a name for the app after the <code>cf push</code> command, the name from the manifest file is used.</p>
+  </li>
+  <li>
+<p>Set any additional <a href="/deploying_apps.html#environment-variables">environment variables</a> required by your app. For example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf set-env APPNAME VARIABLE `value`
+</code></pre></div>
+<p>where VARIABLE is a unique name for the variable, and <code>value</code> is the value to set.</p>
+  </li>
 </ol>
+
 <p>Your app should now be available at your <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+
 <p>For a production app, you should refer to the <a href="/deploying_apps.html#deploy-an-app-to-production">documentation on deploying an app to production</a>.</p>
-<h3 id="deploying-with-a-postgresql-database">Deploying with a PostgreSQL database</h3><p>These instructions are for deploying a Rails app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<h3 id="deploying-with-a-postgresql-database">Deploying with a PostgreSQL database</h3>
+
+<p>These instructions are for deploying a Rails app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
 <p>The Cloud Foundry buildpack for Ruby automatically gets the details of the first available PostgreSQL service from the <code>VCAP_SERVICES</code> environment variable and sets the Ruby <code>DATABASE_URL</code> environment variable accordingly. Ensure that your app is configured to use <code>DATABASE_URL</code> to set its database configuration when deployed to the PaaS.</p>
 
 <ol>
-<li><p>Put the code for your Rails app into a local directory (for example, by checking it out of version control).</p></li>
-<li><p>If you are using Git, you may wish to <a href="/deploying_apps.html#excluding-files">exclude files ignored by Git</a>.</p></li>
-<li><p>If you&rsquo;re using Rails 4, <a href="https://github.com/heroku/rails_12factor#install">add the <code>rails_12factor</code> gem</a> for better logging. Rails 5 has this functionality built in by default.</p></li>
-<li><p>Create a manifest.yml file in the directory where you checked out your app.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: my-rails-app
-  memory: 256M
-  buildpacks:
-  - ruby_buildpack
-</code></pre></div><p>Replace <code>my-rails-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+  <li>
+<p>Put the code for your Rails app into a local directory (for example, by checking it out of version control).</p>
+  </li>
+  <li>
+<p>If you are using Git, you may wish to <a href="/deploying_apps.html#excluding-files">exclude files ignored by Git</a>.</p>
+  </li>
+  <li>
+<p>If you're using Rails 4, <a href="https://github.com/heroku/rails_12factor#install">add the <code>rails_12factor</code> gem</a> for better logging. Rails 5 has this functionality built in by default.</p>
+  </li>
+  <li>
+<p>Create a manifest.yml file in the directory where you checked out your app.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: my-rails-app
+   memory: 256M
+   buildpacks:
+   - ruby_buildpack
+</code></pre></div>
+<p>Replace <code>my-rails-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+
 <p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p>
-<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code>ruby_buildpack</code>.</p></li>
-<li><p>Upload the app without starting it using this command:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf push --no-start APPNAME
-</code></pre></div><p>from the directory which contains all the code and configuration files for your app.</p>
-<p>If you do not specify a name for the app after the <code>cf push</code> command, the name from the manifest file is used.</p></li>
-<li><p>Set any additional <a href="/deploying_apps.html#environment-variables">environment variables</a> required by your app. For example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf set-env APPNAME VARIABLE `value`
-</code></pre></div><p>where VARIABLE is a unique name for the variable, and <code>value</code> is the value to set.</p></li>
-<li><p><a href="/deploying_services/postgresql/#set-up-a-postgresql-service">Create a PostgreSQL backing service (if required)</a> and <a href="/deploying_services/postgresql/#bind-a-postgresql-service-to-your-app">bind it to your app</a>.</p>
+
+<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Ruby, you use the <code>ruby_buildpack</code>.</p>
+  </li>
+  <li>
+<p>Upload the app without starting it using this command:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf push --no-start APPNAME
+</code></pre></div>
+<p>from the directory which contains all the code and configuration files for your app.</p>
+
+<p>If you do not specify a name for the app after the <code>cf push</code> command, the name from the manifest file is used.</p>
+  </li>
+  <li>
+<p>Set any additional <a href="/deploying_apps.html#environment-variables">environment variables</a> required by your app. For example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf set-env APPNAME VARIABLE `value`
+</code></pre></div>
+<p>where VARIABLE is a unique name for the variable, and <code>value</code> is the value to set.</p>
+  </li>
+  <li>
+<p><a href="/deploying_services/postgresql/#set-up-a-postgresql-service">Create a PostgreSQL backing service (if required)</a> and <a href="/deploying_services/postgresql/#bind-a-postgresql-service-to-your-app">bind it to your app</a>.</p>
+
 <p>To enable Rails support for database migrations, you may wish to create a <code>Procfile</code> in the same directory as your <code>manifest.yml</code> and <code>Gemfile</code>. The <code>Procfile</code> is a way to specify commands to be run when deploying your app.</p>
+
 <p>This is a minimal example of the <code>Procfile</code> content for <em>Rails 5.0</em>:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>web: rake db:migrate &amp;&amp; bin/rails server
-</code></pre></div></li>
-<li><p>Start your app by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf start APPNAME
-</code></pre></div></li>
+
+<div class="highlight"><pre class="highlight plaintext"><code> web: rake db:migrate &amp;&amp; bin/rails server
+</code></pre></div>  </li>
+  <li>
+<p>Start your app by running:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf start APPNAME
+</code></pre></div>  </li>
 </ol>
+
 <p>Your app should now be available at your <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+
 <p>For a production app, you should refer to the <a href="/deploying_apps.html#deploy-an-app-to-production">documentation on deploying an app to production</a>.</p>
-<h3 id="specify-a-ruby-version">Specify a Ruby version</h3><p>You should tell Cloud Foundry which version of Ruby your app uses in the Ruby buildpack.</p>
+
+<h3 id="specify-a-ruby-version">Specify a Ruby version</h3>
+
+<p>You should tell Cloud Foundry which version of Ruby your app uses in the Ruby buildpack.</p>
+
 <p>Refer to the documentation on <a href="/deploying_apps.html#buildpack-language-version-updates">buildpack language version updates</a> for more information.</p>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/ruby/index.html#runtime">Cloud Foundry documentation on specifying a Ruby version</a> for more information.</p>
-<h3 id="web-servers">Web servers</h3><p>By default, the Cloud Foundry Ruby buildpack <a href="https://github.com/cloudfoundry/ruby-buildpack/blob/1f0ac3ce10866390d161c3f27e71d64890859454/lib/language_pack/rails4.rb#L27">runs <code>bin/rails server</code></a>
-to spin up the application. In Rails 4 and below, this will use WEBrick as the web
-server. In Rails 5 and above, the default is
+
+<h3 id="web-servers">Web servers</h3>
+
+<p>By default, the Cloud Foundry Ruby buildpack <a href="https://github.com/cloudfoundry/ruby-buildpack/blob/1f0ac3ce10866390d161c3f27e71d64890859454/lib/language_pack/rails4.rb#L27">runs <code>bin/rails server</code></a><br />
+to spin up the application. In Rails 4 and below, this will use WEBrick as the web<br />
+server. In Rails 5 and above, the default is<br />
 <a href="http://guides.rubyonrails.org/getting_started.html#starting-up-the-web-server">puma</a>.</p>
+
 <p>You may want to use a different web server in production. See the <a href="https://docs.cloudfoundry.org/buildpacks/prod-server.html">Cloud Foundry documentation on configuring a production server</a> for more information.</p>
-<h3 id="troubleshooting-asset-precompilation">Troubleshooting asset precompilation</h3><p>By default, the Rails buildpack performs asset precompilation during the staging phase. This is fine for
-most Rails apps, but it will not work for those which need to connect to services (such as the database)
+
+<h3 id="troubleshooting-asset-precompilation">Troubleshooting asset precompilation</h3>
+
+<p>By default, the Rails buildpack performs asset precompilation during the staging phase. This is fine for<br />
+most Rails apps, but it will not work for those which need to connect to services (such as the database)<br />
 during asset compilation. (For an example, see <a href="https://github.com/18F/myusa/issues/636">MyUSA issue #636</a>)</p>
-<p>There are multiple potential solutions for this. Refer to the
+
+<p>There are multiple potential solutions for this. Refer to the<br />
 <a href="https://docs.cloudfoundry.org/buildpacks/ruby/ruby-tips.html#precompile">Cloud Foundry documentation on asset precompilation</a> for more information.</p>
 
-<h2 id="deploy-a-node-js-app">Deploy a Node.js app</h2><p>This section covers how to deploy a basic Node.js application to GOV.UK PaaS. Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/node/node-tips.html">Cloud Foundry tips for Node.js applications</a> for more information.</p>
+<h2 id="deploy-a-nodejs-app">Deploy a Node.js app</h2>
+
+<p>This section covers how to deploy a basic Node.js application to GOV.UK PaaS. Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/node/node-tips.html">Cloud Foundry tips for Node.js applications</a> for more information.</p>
 
 <blockquote>
 <p>If your app requires a <a href="/deploying_services/#deploy-a-backing-or-routing-service">backing service</a>, it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.</p>
 </blockquote>
+
 <p>These instructions assume you have already carried out the setup process explained in the <a href="/get_started.html#get-started">Get started</a> section.</p>
-<p>This is the code for the example app we are going to use. It is a basic web server that responds with a &lsquo;Hello World&rsquo; message.</p>
+
+<p>This is the code for the example app we are going to use. It is a basic web server that responds with a 'Hello World' message.</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>const http = require('http');
 
 const port = process.env.PORT || 3000;
@@ -1024,39 +1325,66 @@ server.listen(port, () =&gt; {
 });
 </code></pre></div>
 <ol>
-<li><p>Save the code to a new local directory as <code>example.js</code>.</p></li>
-<li><p>Add this <code>manifest.yml</code> file to the same directory:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: my-node-app
-  command: node example.js
-  memory: 256M
-  buildpacks:
-  - nodejs_buildpack
-</code></pre></div><p>Replace <code>my-node-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+  <li>
+<p>Save the code to a new local directory as <code>example.js</code>.</p>
+  </li>
+  <li>
+<p>Add this <code>manifest.yml</code> file to the same directory:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: my-node-app
+   command: node example.js
+   memory: 256M
+   buildpacks:
+   - nodejs_buildpack
+</code></pre></div>
+<p>Replace <code>my-node-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+
 <p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p>
-<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Node.js, you use the <code>nodejs_buildpack</code>.</p></li>
-<li><p>Include an npm <code>package.json</code> file to specify dependencies. The file should also specify a <code>start</code> command used to launch the app.</p>
+
+<p>A buildpack provides any framework and runtime support required by an app. In this case, because the app is written in Node.js, you use the <code>nodejs_buildpack</code>.</p>
+  </li>
+  <li>
+<p>Include an npm <code>package.json</code> file to specify dependencies. The file should also specify a <code>start</code> command used to launch the app.</p>
+
 <p>This is a <code>package.json</code> file for our example app:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "name": "example",
-  "version": "0.0.1",
-  "author": "Demo",
-  "engines": {
-    "node": "6.11.x"
-  }
-}
-</code></pre></div><p>The <code>&quot;engines&quot;</code> values specify the versions of Node.js and npm that the PaaS should use to run your app. Note that older versions may not be available: if your version is not supported, you will see an error message when you try to upload and start the app.</p></li>
-<li><p>You can optionally run <code>npm install</code> to preinstall dependencies rather than having them added during the PaaS staging process.</p></li>
-<li><p>Run <code>cf push APPNAME</code> from the top level of the directory which contains all the code and configuration files.</p></li>
+
+<div class="highlight"><pre class="highlight plaintext"><code> {
+   "name": "example",
+   "version": "0.0.1",
+   "author": "Demo",
+   "engines": {
+     "node": "6.11.x"
+   }
+ }
+</code></pre></div>
+<p>The <code>"engines"</code> values specify the versions of Node.js and npm that the PaaS should use to run your app. Note that older versions may not be available: if your version is not supported, you will see an error message when you try to upload and start the app.</p>
+  </li>
+  <li>
+<p>You can optionally run <code>npm install</code> to preinstall dependencies rather than having them added during the PaaS staging process.</p>
+  </li>
+  <li>
+<p>Run <code>cf push APPNAME</code> from the top level of the directory which contains all the code and configuration files.</p>
+  </li>
 </ol>
+
 <p>If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run <code>cf push --no-start APPNAME</code>, then when you are ready to start the app, run <code>cf start APPNAME</code>.</p>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/buildpacks/node/node-tips.html">Cloud Foundry tips for Node.js applications</a> for more information.</p>
-<h3 id="postgresql-setup-with-node-js">PostgreSQL setup with Node.js</h3><p>These instructions are for deploying a Node.js app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<h3 id="postgresql-setup-with-nodejs">PostgreSQL setup with Node.js</h3>
+
+<p>These instructions are for deploying a Node.js app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
 <p>If your app depends on a backing service such as PostgreSQL, it will need to parse the <code>VCAP_SERVICES</code> environment variable to get required details, such as service URLs and credentials.</p>
+
 <p>You must create the service and bind it to your Node.js app as described in the <a href="/deploying_services/postgresql/#postgresql">PostgreSQL</a> section.</p>
+
 <p>You can use the <a href="https://www.npmjs.com/package/cfenv">cfenv</a> module to assist with parsing the environment variables.</p>
+
 <p>In your <code>package.json</code> file, you would specify <code>cfenv</code> as a dependency:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>    {
       // ...
       "dependencies": {
@@ -1064,7 +1392,9 @@ applications:
         // ...
       }
     }
-</code></pre></div><p>Then in your app, you can get configuration information for backing services. This is an example of how to connect to a PostgreSQL service.</p>
+</code></pre></div>
+<p>Then in your app, you can get configuration information for backing services. This is an example of how to connect to a PostgreSQL service.</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>    var cfenv = require("cfenv");
     var pg = require('pg');
     var appEnv = cfenv.getAppEnv();
@@ -1072,14 +1402,20 @@ applications:
     var client = new pg.Client(connectionString);
     client.ssl = true;
     client.connect();
-</code></pre></div><p>Replace &ldquo;SERVICE NAME&rdquo; in the above code with the exact name of the PostgreSQL service you created. The <code>getServiceURL</code> function returns a connection string which includes the username and password required to connect to the database.</p>
+</code></pre></div>
+<p>Replace "SERVICE NAME" in the above code with the exact name of the PostgreSQL service you created. The <code>getServiceURL</code> function returns a connection string which includes the username and password required to connect to the database.</p>
+
 <p>Further information can be found in the:</p>
 
 <ul>
-<li><a href="https://github.com/cloudfoundry-community/node-cfenv/blob/master/README.md">Cloud Foundry community <code>cf env</code> page</a></li>
-<li>the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html">Cloud Foundry documentation on environment variables</a></li>
+  <li><p><a href="https://github.com/cloudfoundry-community/node-cfenv/blob/master/README.md">Cloud Foundry community <code>cf env</code> page</a></p>
+  </li>
+  <li><p>the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html">Cloud Foundry documentation on environment variables</a></p>
+  </li>
 </ul>
+
 <p>You should also remember to include dependencies for any service bindings in <code>package.json</code>.</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>{
   // ...
   "dependencies": {
@@ -1087,232 +1423,389 @@ applications:
     // ...
   }
 }
-</code></pre></div><h3 id="specify-a-node-js-version">Specify a Node.js version</h3><p>You should tell Cloud Foundry which version of Node.js your app uses in the Node.js buildpack.</p>
+</code></pre></div>
+<h3 id="specify-a-nodejs-version">Specify a Node.js version</h3>
+
+<p>You should tell Cloud Foundry which version of Node.js your app uses in the Node.js buildpack.</p>
+
 <p>Refer to the documentation on <a href="/deploying_apps.html#buildpack-language-version-updates">buildpack language version updates</a> for more information.</p>
+
 <p>Refer to the Cloud Foundry documentation on <a href="https://docs.cloudfoundry.org/buildpacks/node/index.html#runtime">specifying a Node.js version</a> for more information.</p>
 
-<h2 id="deploy-a-django-app">Deploy a Django app</h2><p>This section explains how to deploy an app using the Django framework. You may also need to refer to the <a href="https://docs.cloudfoundry.org/buildpacks/python/index.html">Cloud Foundry documentation about the Python buildpack</a>.</p>
+<h2 id="deploy-a-django-app">Deploy a Django app</h2>
+
+<p>This section explains how to deploy an app using the Django framework. You may also need to refer to the <a href="https://docs.cloudfoundry.org/buildpacks/python/index.html">Cloud Foundry documentation about the Python buildpack</a>.</p>
 
 <blockquote>
 <p>If your app requires a <a href="/deploying_services/#deploy-a-backing-or-routing-service">backing service</a>, it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.</p>
 </blockquote>
+
 <p>Before deploying a Django app, you must:</p>
 
 <ul>
-<li>log into your <a href="/get_started.html#get-an-account">PaaS account</a></li>
-<li>set up the <a href="/get_started.html#set-up-command-line">Cloud Foundry command line</a></li>
-<li><a href="/deploying_apps.html#set-a-target">target</a> the appropriate space</li>
+  <li><p>log into your <a href="/get_started.html#get-an-account">PaaS account</a></p>
+  </li>
+  <li><p>set up the <a href="/get_started.html#set-up-command-line">Cloud Foundry command line</a></p>
+  </li>
+  <li><p><a href="/deploying_apps.html#set-a-target">target</a> the appropriate space</p>
+  </li>
 </ul>
 
 <ol>
-<li><p>Put the code for your Django app into a local directory (for example, by checking it out of version control).</p></li>
-<li><p>If you are using Git, add <code>*.pyc</code> and <code>local_settings.py</code> to your <code>.gitignore</code> file, then
-<a href="/deploying_apps.html#excluding-files">exclude files ignored by Git</a> so Cloud Foundry will ignore them too.</p></li>
-<li><p>Run <code>cf buildpacks</code> in the command line to check the version of the Python buildpack.</p></li>
-<li><p>Go to the <a href="https://github.com/cloudfoundry/python-buildpack/releases">Python buildpack page on GitHub</a> to check which versions of Python are currently included in the Python buildpack.</p></li>
-<li><p>Tell Cloud Foundry which version of Python to use by creating a <code>runtime.txt</code> file in the root of the local directory. This step is optional.</p>
+  <li>
+<p>Put the code for your Django app into a local directory (for example, by checking it out of version control).</p>
+  </li>
+  <li>
+<p>If you are using Git, add <code>*.pyc</code> and <code>local_settings.py</code> to your <code>.gitignore</code> file, then<br />
+<a href="/deploying_apps.html#excluding-files">exclude files ignored by Git</a> so Cloud Foundry will ignore them too.</p>
+  </li>
+  <li>
+<p>Run <code>cf buildpacks</code> in the command line to check the version of the Python buildpack.</p>
+  </li>
+  <li>
+<p>Go to the <a href="https://github.com/cloudfoundry/python-buildpack/releases">Python buildpack page on GitHub</a> to check which versions of Python are currently included in the Python buildpack.</p>
+  </li>
+  <li>
+<p>Tell Cloud Foundry which version of Python to use by creating a <code>runtime.txt</code> file in the root of the local directory. This step is optional.</p>
+
 <p>Refer to the documentation on <a href="/deploying_apps.html#buildpack-language-version-updates">buildpack language version updates</a> for more information.</p>
-<p>For more information, refer to the <a href="https://docs.cloudfoundry.org/buildpacks/python/index.html#runtime">Cloud Foundry documentation on specifying a Python version</a>.</p></li>
-<li><p>Make sure you have all the required modules for your project installed into your virtual environment (including Django).</p></li>
-<li><p>Generate a <code>requirements.txt</code> file if your project doesn&rsquo;t already have one by running <code>pip freeze &gt; requirements.txt</code> in the root of the local folder.
-Add the following lines to the <code>requirements.txt</code> file.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>whitenoise==1.0.6  #manages static assets
-waitress==0.8.9 #a pure python WSGI server that is a replacement for gunicorn
-</code></pre></div></li>
-<li><p>Edit your <code>wsgi.py</code> file.</p>
+
+<p>For more information, refer to the <a href="https://docs.cloudfoundry.org/buildpacks/python/index.html#runtime">Cloud Foundry documentation on specifying a Python version</a>.</p>
+  </li>
+  <li>
+<p>Make sure you have all the required modules for your project installed into your virtual environment (including Django).</p>
+  </li>
+  <li>
+<p>Generate a <code>requirements.txt</code> file if your project doesn't already have one by running <code>pip freeze &gt; requirements.txt</code> in the root of the local folder.<br />
+ Add the following lines to the <code>requirements.txt</code> file.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> whitenoise==1.0.6  #manages static assets
+ waitress==0.8.9 #a pure python WSGI server that is a replacement for gunicorn
+</code></pre></div>  </li>
+  <li>
+<p>Edit your <code>wsgi.py</code> file.</p>
+
 <p>When you create a Django project, a default <code>wsgi.py</code> file should be created for you in the project folder. Excluding the opening comments, the default <code>wsgi.py</code> looks like this:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PROJECTNAME.settings")
 
-from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
-</code></pre></div><p>You&rsquo;ll need to add a few lines to import the <code>whitenoise</code> package and wrap the middleware around the WSGI application so that all static files are served using whitenoise. Edit your <code>wsgi.py</code> to:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>import os
-from django.core.wsgi import get_wsgi_application
+<div class="highlight"><pre class="highlight plaintext"><code> import os
+ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PROJECTNAME.settings")
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PROJECTNAME.settings")
-# important that the whitenoise import is after the line above
-from whitenoise.django import DjangoWhiteNoise
+ from django.core.wsgi import get_wsgi_application
+ application = get_wsgi_application()
+</code></pre></div>
+<p>You'll need to add a few lines to import the <code>whitenoise</code> package and wrap the middleware around the WSGI application so that all static files are served using whitenoise. Edit your <code>wsgi.py</code> to:</p>
 
-application = get_wsgi_application()
-application = DjangoWhiteNoise(application)
-</code></pre></div><p>The order here is important. The <code>DJANGO_SETTINGS_MODULE</code> environment variable must be set before importing <code>DjangoWhiteNoise</code>.</p></li>
-<li><p>You should now tell Django where to look for static files. In <code>settings.py</code> within the project folder, add these lines below the <code>import os</code> statement.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+<div class="highlight"><pre class="highlight plaintext"><code> import os
+ from django.core.wsgi import get_wsgi_application
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATIC_URL = '/static/'
-</code></pre></div><p>In this case, the STATIC_ROOT variable tells Django to look for static files in a directory called <code>static</code> inside the project folder, and the STATIC_URL variable sets the path where those files will be served.</p>
+ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PROJECTNAME.settings")
+ # important that the whitenoise import is after the line above
+ from whitenoise.django import DjangoWhiteNoise
+
+ application = get_wsgi_application()
+ application = DjangoWhiteNoise(application)
+</code></pre></div>
+<p>The order here is important. The <code>DJANGO_SETTINGS_MODULE</code> environment variable must be set before importing <code>DjangoWhiteNoise</code>.</p>
+  </li>
+  <li>
+<p>You should now tell Django where to look for static files. In <code>settings.py</code> within the project folder, add these lines below the <code>import os</code> statement.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+ STATIC_URL = '/static/'
+</code></pre></div>
+<p>In this case, the STATIC_ROOT variable tells Django to look for static files in a directory called <code>static</code> inside the project folder, and the STATIC_URL variable sets the path where those files will be served.</p>
+
 <p>You may need to alter these values depending on how static files are handled in your app.</p>
-<p>If your static files are located across multiple folders, you may need to use the STATICFILES_DIRS variable. See the Django documentation for <a href="https://docs.djangoproject.com/en/1.9/howto/static-files/">full details on managing static files</a>.</p></li>
-<li><p>Create a file called <code>Procfile</code> in the root of your local folder,
+
+<p>If your static files are located across multiple folders, you may need to use the STATICFILES_DIRS variable. See the Django documentation for <a href="https://docs.djangoproject.com/en/1.9/howto/static-files/">full details on managing static files</a>.</p>
+  </li>
+  <li>
+<p>Create a file called <code>Procfile</code> in the root of your local folder,<br />
 and put in it:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>    web: python manage.py migrate &amp;&amp; waitress-serve --port=$PORT PROJECTNAME.wsgi:application
-</code></pre></div><p>The Procfile is a way to specify commands to be run when deploying your app; in this case, for database migration.</p>
-<p><code>PROJECTNAME</code> should be replaced with whatever the name of your WSGI module is. By default, this is the same as the name of your project module, but it may be changed using the DJANGO_SETTINGS_MODULE environment variable. Using this configuration will automatically apply any database migrations.</p></li>
-<li><p>Create a <code>manifest.yml</code> file in the root of your local folder.</p>
-<div class="highlight"><pre class="highlight plaintext"><code>---
-applications:
-- name: my-app
-  memory: 512M
-  buildpacks:
-  - python_buildpack
-</code></pre></div><p>where <code>my-django-app</code> is the name that will be used for the app within GOV.UK PaaS.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code>     web: python manage.py migrate &amp;&amp; waitress-serve --port=$PORT PROJECTNAME.wsgi:application
+</code></pre></div>
+<p>The Procfile is a way to specify commands to be run when deploying your app; in this case, for database migration.</p>
+
+<p><code>PROJECTNAME</code> should be replaced with whatever the name of your WSGI module is. By default, this is the same as the name of your project module, but it may be changed using the DJANGO_SETTINGS_MODULE environment variable. Using this configuration will automatically apply any database migrations.</p>
+  </li>
+  <li>
+<p>Create a <code>manifest.yml</code> file in the root of your local folder.</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> ---
+ applications:
+ - name: my-app
+   memory: 512M
+   buildpacks:
+   - python_buildpack
+</code></pre></div>
+<p>where <code>my-django-app</code> is the name that will be used for the app within GOV.UK PaaS.</p>
+
 <p>Replace <code>my-django-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
-<p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p></li>
-<li><p>If your app requires a database, <a href="/deploying_services/postgresql/#set-up-a-postgresql-service">create a PostgreSQL backing service</a> and <a href="/deploying_services/postgresql/#bind-a-postgresql-service-to-your-app">bind it to your app</a>. Then see the section on <a href="/deploying_apps.html#postgresql-setup-with-django">PostgreSQL setup</a> below.</p></li>
-<li><p>To push your app, do:</p>
+
+<p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p>
+  </li>
+  <li>
+<p>If your app requires a database, <a href="/deploying_services/postgresql/#set-up-a-postgresql-service">create a PostgreSQL backing service</a> and <a href="/deploying_services/postgresql/#bind-a-postgresql-service-to-your-app">bind it to your app</a>. Then see the section on <a href="/deploying_apps.html#postgresql-setup-with-django">PostgreSQL setup</a> below.</p>
+  </li>
+  <li>
+<p>To push your app, do:</p>
+
 <p><code>cf push APPNAME</code></p>
+
 <p>from the directory which contains all the code and configuration files.</p>
-<p>If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run <code>cf push --no-start APPNAME</code>, then when you are ready to start the app, run <code>cf start APPNAME</code>.</p></li>
+
+<p>If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run <code>cf push --no-start APPNAME</code>, then when you are ready to start the app, run <code>cf start APPNAME</code>.</p>
+  </li>
 </ol>
+
 <p>You can now view your app at your <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
-<h3 id="postgresql-setup-with-django">PostgreSQL setup with Django</h3><p>These instructions are for deploying a Django app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<h3 id="postgresql-setup-with-django">PostgreSQL setup with Django</h3>
+
+<p>These instructions are for deploying a Django app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
 <p>Add these lines to your <code>requirements.txt</code>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>psycopg2==2.6.2 #installs the postgres driver
 dj-database-url==0.3.0 #grabs environment variables and dumps them into a Django settings file
-</code></pre></div><p>In your <code>settings.py</code> file, make sure you import the <code>dj_database_url</code> package we added to the <code>requirements.txt</code> file above:</p>
+</code></pre></div>
+<p>In your <code>settings.py</code> file, make sure you import the <code>dj_database_url</code> package we added to the <code>requirements.txt</code> file above:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>    import dj_database_url
-</code></pre></div><p>This package will automatically parse the <code>VCAP_SERVICES</code> environment variable and set DATABASE_URL to the first database found.</p>
-<p>Then you&rsquo;ll need to add a <code>DATABASES</code> setting. It&rsquo;s best to add this to the <code>settings.py</code> file.</p>
+</code></pre></div>
+<p>This package will automatically parse the <code>VCAP_SERVICES</code> environment variable and set DATABASE_URL to the first database found.</p>
+
+<p>Then you'll need to add a <code>DATABASES</code> setting. It's best to add this to the <code>settings.py</code> file.</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>    DATABASES = {}
     DATABASES['default'] =  dj_database_url.config()
-</code></pre></div><p>Your <code>local_settings.py</code> file will override this when you&rsquo;re working locally.</p>
+</code></pre></div>
+<p>Your <code>local_settings.py</code> file will override this when you're working locally.</p>
+
 <p>The <code>Procfile</code> configuration provided in the section above will automatically apply database migrations.</p>
 
-<h2 id="deploy-a-java-app">Deploy a Java app</h2><p>This section covers how to deploy a Java application to GOV.UK PaaS using the <a href="https://github.com/cloudfoundry/java-buildpack">Java buildpack</a>.</p>
-<h3 id="deploying-a-jar-file">Deploying a JAR file</h3><p>If your java application can be packaged as a <a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-java_main.md">self-executable JAR file</a> then you can deploy it using <code>cf push -p [your-app].jar [your-app-name]</code>.</p>
-<p>This example will walk through creating a simple &ldquo;Hello World&rdquo; application that embeds the popular <a href="https://www.eclipse.org/jetty/">Jetty webserver</a>.
+<h2 id="deploy-a-java-app">Deploy a Java app</h2>
+
+<p>This section covers how to deploy a Java application to GOV.UK PaaS using the <a href="https://github.com/cloudfoundry/java-buildpack">Java buildpack</a>.</p>
+
+<h3 id="deploying-a-jar-file">Deploying a JAR file</h3>
+
+<p>If your java application can be packaged as a <a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-java_main.md">self-executable JAR file</a> then you can deploy it using <code>cf push -p [your-app].jar [your-app-name]</code>.</p>
+
+<p>This example will walk through creating a simple "Hello World" application that embeds the popular <a href="https://www.eclipse.org/jetty/">Jetty webserver</a>.<br />
 The instructions assume you have already carried out the setup process explained in the <a href="/get_started.html#get-started">Get started</a> section.</p>
 
 <ol>
-<li><p>Create a directory for your Java application:</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nb">mkdir </span>myapp
-<span class="nb">cd </span>myapp
-</code></pre></div></li>
-<li><p>Download Jetty.</p>
-<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-o</span> ./jetty.jar http://central.maven.org/maven2/org/eclipse/jetty/aggregate/jetty-all/9.4.6.v20170531/jetty-all-9.4.6.v20170531-uber.jar
-</code></pre></div><p>This example uses version 9.4.6; check <a href="http://www.eclipse.org/jetty/download.html">http://www.eclipse.org/jetty/download.html</a> for the latest version of Jetty.</p></li>
-<li><p>Create a <code>App.java</code> file in your application directory. This class will serve as the entry point for your application:</p>
-<div class="highlight"><pre class="highlight java"><code><span class="kn">package</span> <span class="nn">app</span><span class="o">;</span>
+  <li>
+<p>Create a directory for your Java application:</p>
 
-<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.eclipse.jetty.server.Request</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.eclipse.jetty.server.Server</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.eclipse.jetty.server.handler.AbstractHandler</span><span class="o">;</span>
+<div class="highlight"><pre class="highlight shell"><code> <span class="nb">mkdir </span>myapp
+ <span class="nb">cd </span>myapp
+</code></pre></div>  </li>
+  <li>
+<p>Download Jetty.</p>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="kd">extends</span> <span class="nc">AbstractHandler</span>
-<span class="o">{</span>
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handle</span><span class="o">(</span> <span class="nc">String</span> <span class="n">target</span><span class="o">,</span> <span class="nc">Request</span> <span class="n">baseRequest</span><span class="o">,</span> <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span> <span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">,</span> <span class="nc">ServletException</span>
-    <span class="o">{</span>
-           <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html; charset=utf-8"</span><span class="o">);</span>
-           <span class="n">response</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">HttpServletResponse</span><span class="o">.</span><span class="na">SC_OK</span><span class="o">);</span>
-           <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">().</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;h1&gt;Hello World&lt;/h1&gt;"</span><span class="o">);</span>
-           <span class="n">baseRequest</span><span class="o">.</span><span class="na">setHandled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-    <span class="o">}</span>
+<div class="highlight"><pre class="highlight shell"><code> curl <span class="nt">-o</span> ./jetty.jar http://central.maven.org/maven2/org/eclipse/jetty/aggregate/jetty-all/9.4.6.v20170531/jetty-all-9.4.6.v20170531-uber.jar
+</code></pre></div><p>This example uses version 9.4.6; check <a href="http://www.eclipse.org/jetty/download.html">http://www.eclipse.org/jetty/download.html</a> for the latest version of Jetty.</p>
+  </li>
+  <li>
+<p>Create a <code>App.java</code> file in your application directory. This class will serve as the entry point for your application:</p>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">args</span> <span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span>
-    <span class="o">{</span>
-            <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">getenv</span><span class="o">(</span><span class="s">"PORT"</span><span class="o">));</span>
-            <span class="nc">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Server</span><span class="o">(</span><span class="n">port</span><span class="o">);</span>
-            <span class="n">server</span><span class="o">.</span><span class="na">setHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">App</span><span class="o">());</span>
+<div class="highlight"><pre class="highlight java"><code> <span class="kn">package</span> <span class="nn">app</span><span class="o">;</span>
 
-            <span class="n">server</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
-            <span class="n">server</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></li>
-<li><p>Compile your class:</p>
-<div class="highlight"><pre class="highlight shell"><code>javac <span class="nt">-d</span> <span class="nb">.</span> <span class="nt">-cp</span> ./jetty.jar App.java
-</code></pre></div></li>
-<li><p>Combine your class with Jetty to create an executable jar file:</p>
-<div class="highlight"><pre class="highlight shell"><code>jar uvfe ./jetty.jar app.App app/App.class
-</code></pre></div></li>
-<li><p>Push your jar file.</p>
-<div class="highlight"><pre class="highlight shell"><code>cf push your-app-name <span class="nt">-b</span> java_buildpack <span class="nt">-p</span> ./jetty.jar
-</code></pre></div></li>
+ <span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.eclipse.jetty.server.Request</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.eclipse.jetty.server.Server</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.eclipse.jetty.server.handler.AbstractHandler</span><span class="o">;</span>
+
+
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="kd">extends</span> <span class="nc">AbstractHandler</span>
+ <span class="o">{</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handle</span><span class="o">(</span> <span class="nc">String</span> <span class="n">target</span><span class="o">,</span> <span class="nc">Request</span> <span class="n">baseRequest</span><span class="o">,</span> <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span> <span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">,</span> <span class="nc">ServletException</span>
+     <span class="o">{</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html; charset=utf-8"</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">HttpServletResponse</span><span class="o">.</span><span class="na">SC_OK</span><span class="o">);</span>
+            <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">().</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;h1&gt;Hello World&lt;/h1&gt;"</span><span class="o">);</span>
+            <span class="n">baseRequest</span><span class="o">.</span><span class="na">setHandled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">args</span> <span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span>
+     <span class="o">{</span>
+             <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">getenv</span><span class="o">(</span><span class="s">"PORT"</span><span class="o">));</span>
+             <span class="nc">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Server</span><span class="o">(</span><span class="n">port</span><span class="o">);</span>
+             <span class="n">server</span><span class="o">.</span><span class="na">setHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">App</span><span class="o">());</span>
+
+             <span class="n">server</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+             <span class="n">server</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>  </li>
+  <li>
+<p>Compile your class:</p>
+
+<div class="highlight"><pre class="highlight shell"><code> javac <span class="nt">-d</span> <span class="nb">.</span> <span class="nt">-cp</span> ./jetty.jar App.java
+</code></pre></div>  </li>
+  <li>
+<p>Combine your class with Jetty to create an executable jar file:</p>
+
+<div class="highlight"><pre class="highlight shell"><code> jar uvfe ./jetty.jar app.App app/App.class
+</code></pre></div>  </li>
+  <li>
+<p>Push your jar file.</p>
+
+<div class="highlight"><pre class="highlight shell"><code> cf push your-app-name <span class="nt">-b</span> java_buildpack <span class="nt">-p</span> ./jetty.jar
+</code></pre></div>  </li>
 </ol>
+
 <p>You have now deployed your Java application. Your application should now be accessible over HTTPS from the URL provided in the output.</p>
-<p>If your application requires arguments in order to start, you can set the <code>JBP_CONFIG_JAVA_MAIN</code> environment variable. For example to add <code>server</code> and <code>config.yml</code> as arguments for your app, you could add the following to your application&rsquo;s <code>manifest.yml</code>:</p>
+
+<p>If your application requires arguments in order to start, you can set the <code>JBP_CONFIG_JAVA_MAIN</code> environment variable. For example to add <code>server</code> and <code>config.yml</code> as arguments for your app, you could add the following to your application's <code>manifest.yml</code>:</p>
+
 <div class="highlight"><pre class="highlight yaml"><code><span class="na">env</span><span class="pi">:</span>
   <span class="na">JBP_CONFIG_JAVA_MAIN</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{</span><span class="nv"> </span><span class="s">arguments:</span><span class="nv"> </span><span class="s">"server</span><span class="nv"> </span><span class="s">config.yml"</span><span class="nv"> </span><span class="s">}</span>
-</code></pre></div><h3 id="deploying-a-war-file">Deploying a WAR file</h3><p>If your application can be packaged as a <code>.war</code> file you can deploy with the following:</p>
+</code></pre></div>
+<h3 id="deploying-a-war-file">Deploying a WAR file</h3>
+
+<p>If your application can be packaged as a <code>.war</code> file you can deploy with the following:</p>
+
 <div class="highlight"><pre class="highlight shell"><code>cf push your-app-name <span class="nt">-b</span> java_buildpack <span class="nt">-p</span> your-app.war
-</code></pre></div><p>If you need to use a specific version of Tomcat you can set the environment variable <code>JBP_CONFIG_TOMCAT</code>. For example to use Tomcat 8 you could add the following to your application&rsquo;s <code>manifest.yml</code>:</p>
+</code></pre></div>
+<p>If you need to use a specific version of Tomcat you can set the environment variable <code>JBP_CONFIG_TOMCAT</code>. For example to use Tomcat 8 you could add the following to your application's <code>manifest.yml</code>:</p>
+
 <div class="highlight"><pre class="highlight yaml"><code><span class="na">env</span><span class="pi">:</span>
   <span class="na">JBP_CONFIG_TOMCAT</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{</span><span class="nv"> </span><span class="s">tomcat:</span><span class="nv"> </span><span class="s">{</span><span class="nv"> </span><span class="s">version:</span><span class="nv"> </span><span class="s">8.0.+</span><span class="nv"> </span><span class="s">}</span><span class="nv"> </span><span class="s">}'</span>
-</code></pre></div><p>Note that you do not need to deploy Tomcat along with your application. The Java buildpack will run the servlet 2 and 3 web applications.</p>
+</code></pre></div>
+<p>Note that you do not need to deploy Tomcat along with your application. The Java buildpack will run the servlet 2 and 3 web applications.</p>
+
 <p>For more configuration options, refer to the <a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-tomcat.md">Tomcat Container documentation</a>.</p>
-<h3 id="specify-a-java-version">Specify a Java version</h3><p>You can specify the version of the Java Runtime Environment (JRE) by setting the environment variable <code>JBP_CONFIG_OPEN_JDK_JRE</code> in the application&rsquo;s <code>manifest.yml</code>. For example, to use JRE 11:</p>
+
+<h3 id="specify-a-java-version">Specify a Java version</h3>
+
+<p>You can specify the version of the Java Runtime Environment (JRE) by setting the environment variable <code>JBP_CONFIG_OPEN_JDK_JRE</code> in the application's <code>manifest.yml</code>. For example, to use JRE 11:</p>
+
 <div class="highlight"><pre class="highlight yaml"><code>  <span class="na">env</span><span class="pi">:</span>
     <span class="na">JBP_CONFIG_OPEN_JDK_JRE</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{</span><span class="nv"> </span><span class="s">jre:</span><span class="nv"> </span><span class="s">{</span><span class="nv"> </span><span class="s">version:</span><span class="nv"> </span><span class="s">11.+</span><span class="nv"> </span><span class="s">}</span><span class="nv"> </span><span class="s">}'</span>
-</code></pre></div><p>The <code>+</code> in this example means it will use the latest point release available.</p>
-<h3 id="deploying-other-jvm-based-applications">Deploying other JVM-based applications</h3><p>The Java buildpack supports running any JVM-based applications (such as Scala or Clojure) with little or zero additional configuration. For more information, refer to the following examples of deploying applications using other frameworks and JVM-based languages:</p>
+</code></pre></div>
+<p>The <code>+</code> in this example means it will use the latest point release available.</p>
+
+<h3 id="deploying-other-jvm-based-applications">Deploying other JVM-based applications</h3>
+
+<p>The Java buildpack supports running any JVM-based applications (such as Scala or Clojure) with little or zero additional configuration. For more information, refer to the following examples of deploying applications using other frameworks and JVM-based languages:</p>
 
 <ul>
-<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-embedded-web-server.md">Embedded web server</a></li>
-<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-grails.md">Grails</a></li>
-<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-groovy.md">Groovy</a></li>
-<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-java_main.md">Java Main</a></li>
-<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-play_framework.md">Play Framework</a></li>
-<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-servlet.md">Servlet</a></li>
-<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-spring_boot_cli.md">Spring Boot CLI</a></li>
-<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/README.md">Cloud Foundry Java Buildpack documentation</a></li>
-<li><a href="https://docs.cloudfoundry.org/buildpacks/java/java-tips.html">Cloud Foundry tips for java developers</a>  for more information.</li>
+  <li><p><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-embedded-web-server.md">Embedded web server</a></p>
+  </li>
+  <li><p><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-grails.md">Grails</a></p>
+  </li>
+  <li><p><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-groovy.md">Groovy</a></p>
+  </li>
+  <li><p><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-java_main.md">Java Main</a></p>
+  </li>
+  <li><p><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-play_framework.md">Play Framework</a></p>
+  </li>
+  <li><p><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-servlet.md">Servlet</a></p>
+  </li>
+  <li><p><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-spring_boot_cli.md">Spring Boot CLI</a></p>
+  </li>
+  <li><p><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/README.md">Cloud Foundry Java Buildpack documentation</a></p>
+  </li>
+  <li><p><a href="https://docs.cloudfoundry.org/buildpacks/java/java-tips.html">Cloud Foundry tips for java developers</a>  for more information.</p>
+  </li>
 </ul>
 
-<h2 id="deploy-a-net-core-app">Deploy a .NET Core app</h2><p>This section covers how to deploy a .NET Core application to GOV.UK PaaS using the <a href="https://github.com/cloudfoundry/dotnet-core-buildpack">dotnet-core buildpack</a>.</p>
-<h3 id="deploying-an-asp-net-core-web-app">Deploying an ASP.NET Core Web App</h3><p>This example will walk through creating a simple &ldquo;Hello World&rdquo; web application using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/">the <code>dotnet</code> command line interface</a>.
+<h2 id="deploy-a-net-core-app">Deploy a .NET Core app</h2>
+
+<p>This section covers how to deploy a .NET Core application to GOV.UK PaaS using the <a href="https://github.com/cloudfoundry/dotnet-core-buildpack">dotnet-core buildpack</a>.</p>
+
+<h3 id="deploying-an-aspnet-core-web-app">Deploying an ASP.NET Core Web App</h3>
+
+<p>This example will walk through creating a simple "Hello World" web application using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/">the <code>dotnet</code> command line interface</a>.<br />
 The instructions assume you have already carried out the setup process explained in the <a href="/get_started.html#get-started">Get started</a> section.</p>
 
 <ol>
-<li><p>Install the dotnet core command line interface (CLI) tools</p>
-<p>See Microsoft&rsquo;s <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/#installation">documentation for instructions on how to do this</a>.</p></li>
-<li><p>Create a new ASP.NET Core Web App using the dotnet CLI</p>
-<div class="highlight"><pre class="highlight shell"><code>dotnet new webapp <span class="nt">--name</span> your-app-name
-</code></pre></div></li>
-<li><p>Change directory into your new application&rsquo;s directory</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nb">cd </span>your-app-name
-</code></pre></div></li>
-<li><p>Create a manifest to describe how your application should be deployed</p>
-<div class="highlight"><pre class="highlight yaml"><code><span class="nn">---</span>
-<span class="na">applications</span><span class="pi">:</span>
-<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">your-app-name</span>
-  <span class="na">buildpacks</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">dotnet_core_buildpack</span>
-  <span class="na">memory</span><span class="pi">:</span> <span class="s">256M</span>
-</code></pre></div></li>
-<li><p>Pick a version of the .NET framework to target which is supported by the current buildpack</p>
+  <li>
+<p>Install the dotnet core command line interface (CLI) tools</p>
 
-<ol>
-<li>Run <code>cf buildpacks</code> and look at the filename for <code>dotnet_core_buildpack</code> to work out the version (for example, if the filename was <code>dotnet-core-buildpack-cflinuxfs3-v2.3.2.zip</code> the version of the buildpack would be <code>v2.3.2</code>).</li>
-<li>Visit the buildpack&rsquo;s releases page, for example <a href="https://github.com/cloudfoundry/dotnet-core-buildpack/releases/tag/v2.3.2">https://github.com/cloudfoundry/dotnet-core-buildpack/releases/tag/v2.3.2</a></li>
-<li>Check the versions of <code>dotnet-sdk</code> supported by the buildpack - you should usually use the latest supported version, for example 3.0.100</li>
-<li>Edit your <code>.csproj</code> file and change the contents of the <code>&lt;TargetFramework&gt;</code> element to the target framework corresponding to the supported framework version (for example, use <code>netcoreapp3.0</code> for a 3.0.x version of <code>dotnet-sdk</code>). See <a href="https://docs.microsoft.com/en-us/dotnet/standard/frameworks#supported-target-framework-versions">Microsoft&rsquo;s documentation on supported target framework versions</a>.</li>
-<li><p>Create a <code>buildpack.yml</code> file to specify which version of the framework the buildpack should use:</p>
-<div class="highlight"><pre class="highlight yaml"><code><span class="nn">---</span>
-<span class="na">dotnet-core</span><span class="pi">:</span>
-  <span class="na">sdk</span><span class="pi">:</span> <span class="s">3.x</span>
-</code></pre></div></li>
-</ol></li>
-<li><p>Push your application to GOV.UK PaaS</p>
-<div class="highlight"><pre class="highlight shell"><code>cf push
-</code></pre></div></li>
+<p>See Microsoft's <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/#installation">documentation for instructions on how to do this</a>.</p>
+  </li>
+  <li>
+<p>Create a new ASP.NET Core Web App using the dotnet CLI</p>
+
+<div class="highlight"><pre class="highlight shell"><code> dotnet new webapp <span class="nt">--name</span> your-app-name
+</code></pre></div>  </li>
+  <li>
+<p>Change directory into your new application's directory</p>
+
+<div class="highlight"><pre class="highlight shell"><code> <span class="nb">cd </span>your-app-name
+</code></pre></div>  </li>
+  <li>
+<p>Create a manifest to describe how your application should be deployed</p>
+
+<div class="highlight"><pre class="highlight yaml"><code> <span class="s">---</span>
+ <span class="s">applications</span><span class="pi">:</span>
+ <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">your-app-name</span>
+   <span class="na">buildpacks</span><span class="pi">:</span>
+   <span class="pi">-</span> <span class="s">dotnet_core_buildpack</span>
+   <span class="na">memory</span><span class="pi">:</span> <span class="s">256M</span>
+</code></pre></div>  </li>
+  <li>
+<p>Pick a version of the .NET framework to target which is supported by the current buildpack</p>
+
+    <ol>
+      <li>
+<p>Run <code>cf buildpacks</code> and look at the filename for <code>dotnet_core_buildpack</code> to work out the version (for example, if the filename was <code>dotnet-core-buildpack-cflinuxfs3-v2.3.2.zip</code> the version of the buildpack would be <code>v2.3.2</code>).</p>
+      </li>
+      <li>
+<p>Visit the buildpack's releases page, for example <a href="https://github.com/cloudfoundry/dotnet-core-buildpack/releases/tag/v2.3.2">https://github.com/cloudfoundry/dotnet-core-buildpack/releases/tag/v2.3.2</a></p>
+      </li>
+      <li>
+<p>Check the versions of <code>dotnet-sdk</code> supported by the buildpack - you should usually use the latest supported version, for example 3.0.100</p>
+      </li>
+      <li>
+<p>Edit your <code>.csproj</code> file and change the contents of the <code>&lt;TargetFramework&gt;</code> element to the target framework corresponding to the supported framework version (for example, use <code>netcoreapp3.0</code> for a 3.0.x version of <code>dotnet-sdk</code>). See <a href="https://docs.microsoft.com/en-us/dotnet/standard/frameworks#supported-target-framework-versions">Microsoft's documentation on supported target framework versions</a>.</p>
+      </li>
+      <li>
+<p>Create a <code>buildpack.yml</code> file to specify which version of the framework the buildpack should use:</p>
+
+<div class="highlight"><pre class="highlight yaml"><code> <span class="s">---</span>
+ <span class="s">dotnet-core</span><span class="pi">:</span>
+   <span class="na">sdk</span><span class="pi">:</span> <span class="s">3.x</span>
+</code></pre></div>      </li>
+    </ol>
+  </li>
+  <li>
+<p>Push your application to GOV.UK PaaS</p>
+
+<div class="highlight"><pre class="highlight shell"><code> cf push
+</code></pre></div>  </li>
 </ol>
+
 <p>You have now deployed your .NET core application. Your application should now be accessible over HTTPS from the URL provided in the output.</p>
 
-<h2 id="stopping-and-starting-apps">Stopping and starting apps</h2><p>Run the following in the command line to temporarily stop your app and free up memory from your <a href="/managing_apps.html#quotas">quota</a>:</p>
+<h2 id="stopping-and-starting-apps">Stopping and starting apps</h2>
+
+<p>Run the following in the command line to temporarily stop your app and free up memory from your <a href="/managing_apps.html#quotas">quota</a>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf stop APP_NAME
-</code></pre></div><p>Users visiting your app&rsquo;s URL will get the error:</p>
+</code></pre></div>
+<p>Users visiting your app's URL will get the error:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>404 Not Found: Requested route ('APP_NAME.APP_DOMAIN') does not exist.
-</code></pre></div><p>Databases and other provisioned services will still be running, and GOV.UK PaaS will charge you for any paid plans or services.</p>
+</code></pre></div>
+<p>Databases and other provisioned services will still be running, and GOV.UK PaaS will charge you for any paid plans or services.</p>
+
 <p>Run the following to restart a stopped app:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf start APP_NAME
-</code></pre></div><h2 id="deleting-apps">Deleting apps</h2>
+</code></pre></div>
+<h2 id="deleting-apps">Deleting apps</h2>
 
 <div class="govuk-warning-text">
   <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -1327,46 +1820,74 @@ The instructions assume you have already carried out the setup process explained
 <p>Run the following to delete an app:</p>
 
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete APPNAME
-</code></pre></div><h3 id="deleting-app-routes">Deleting app routes</h3><p>Run the following to delete an app and that app’s <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes">routes</a> at the same time:</p>
+</code></pre></div>
+<h3 id="deleting-app-routes">Deleting app routes</h3>
+
+<p>Run the following to delete an app and that app’s <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes">routes</a> at the same time:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete -r APPNAME
-</code></pre></div><p>You can delete an app’s routes separately.</p>
+</code></pre></div>
+<p>You can delete an app’s routes separately.</p>
 
 <ol>
-<li><p>Run <code>cf routes</code> to get a list of all active routes in the current space. This command will also list information about the routes, including hostname and <a href="/orgs_spaces_users.html#regions">app domain</a>.</p></li>
-<li><p>Run the following to delete the app’s routes:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf delete-route DOMAIN_NAME --hostname HOSTNAME
-</code></pre></div></li>
+  <li>
+<p>Run <code>cf routes</code> to get a list of all active routes in the current space. This command will also list information about the routes, including hostname and <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+  </li>
+  <li>
+<p>Run the following to delete the app’s routes:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf delete-route DOMAIN_NAME --hostname HOSTNAME
+</code></pre></div>  </li>
 </ol>
-<h3 id="deleting-a-service-instance">Deleting a service instance</h3><p>You must unbind a service instance from any apps it is bound to before you can delete that service instance. Note:</p>
+
+<h3 id="deleting-a-service-instance">Deleting a service instance</h3>
+
+<p>You must unbind a service instance from any apps it is bound to before you can delete that service instance. Note:</p>
 
 <ul>
-<li>you do not need to delete an app&rsquo;s service instances before you can delete that app</li>
-<li>a service instance can be bound to more than one app</li>
+  <li><p>you do not need to delete an app's service instances before you can delete that app</p>
+  </li>
+  <li><p>a service instance can be bound to more than one app</p>
+  </li>
 </ul>
 
 <ol>
-<li><p>Run <code>cf services</code> to see all service instances in your targeted space. Example output:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>name      service    plan    bound apps    last operation
-mystuff   postgres   small   my-app        create succeeded
-mydb      mysql      large   not-my-app    create succeeded
-</code></pre></div></li>
-<li><p>Run the following to unbind a service instance:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service APP_NAME SERVICE_NAME
-</code></pre></div><p>where:</p></li>
-</ol>
-<div class="highlight"><pre class="highlight plaintext"><code>- `APP_NAME` is the name of a deployed instance of your app exactly as specified in your manifest or push command
-- `SERVICE_NAME` is a unique descriptive name for this service instance
-</code></pre></div>
+  <li>
+<p>Run <code>cf services</code> to see all service instances in your targeted space. Example output:</p>
 
-<ol>
-<li>Run <code>cf delete-service SERVICE_NAME</code> to delete that service instance.</li>
+<div class="highlight"><pre class="highlight plaintext"><code> name      service    plan    bound apps    last operation
+ mystuff   postgres   small   my-app        create succeeded
+ mydb      mysql      large   not-my-app    create succeeded
+</code></pre></div>  </li>
+  <li>
+<p>Run the following to unbind a service instance:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf unbind-service APP_NAME SERVICE_NAME
+</code></pre></div><p>where:</p>
+
+    <ul>
+      <li><p><code>APP_NAME</code> is the name of a deployed instance of your app exactly as specified in your manifest or push command</p>
+      </li>
+      <li><p><code>SERVICE_NAME</code> is a unique descriptive name for this service instance</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+<p>Run <code>cf delete-service SERVICE_NAME</code> to delete that service instance.</p>
+  </li>
 </ol>
-<p><h2 id="deploy-a-docker-image">Deploy a Docker image</h2><p>This section explains how to deploy an app from a Docker image. The role of the Docker image is to serve as a packaging format and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks. Configuration using manifest.yml also stays the same, albeit you should not specify buildpack. If you do, it will be ignored, which can create some confusion to anyone reading the manifest. Our platform currently supports deploying from the following:</p></p>
+
+<h2 id="deploy-a-docker-image">Deploy a Docker image</h2>
+
+<p>This section explains how to deploy an app from a Docker image. The role of the Docker image is to serve as a packaging format and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks. Configuration using manifest.yml also stays the same, albeit you should not specify buildpack. If you do, it will be ignored, which can create some confusion to anyone reading the manifest. Our platform currently supports deploying from the following:</p>
 
 <ul>
-<li>Docker Hub</li>
-<li><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/">Docker Trusted Registry</a> [external page] servers</li>
-<li>Docker registries that require authentication</li>
+  <li><p>Docker Hub</p>
+  </li>
+  <li><p><a href="https://docs.docker.com/datacenter/dtr/2.1/guides/">Docker Trusted Registry</a> [external page] servers</p>
+  </li>
+  <li><p>Docker registries that require authentication</p>
+  </li>
 </ul>
 
 <p>Pushing local Docker images is not supported.</p>
@@ -1386,20 +1907,36 @@ mydb      mysql      large   not-my-app    create succeeded
 <p>There are a few more specifics about Docker image support in Cloud Foundry:</p>
 
 <ul>
-<li>Local storage in each container instance is ephemeral. Every container launch will start with unmodified image.</li>
-<li>Traffic will be routed to the lowest exposed port (by <code>EXPOSE</code> command in Dockerfile). The PORT environment variable will be also set to this number.</li>
-<li>Buildpack based apps use bash to execute the app start command (<code>bash -c &lt;command&gt;</code>), but Docker image based apps use sh (<code>sh -c &lt;command&gt;</code>) - as bash presence cannot be assumed in your Docker image.</li>
-<li>Privileged container mode is not supported. Features depending on this will not work.</li>
-<li>Only registries that use Docker Registry API V2 are supported.</li>
-<li>Images are cached based on tag. Using a tag like <code>latest</code> when doing quick iterations can result in errors. To prevent this, tags should be unique. For example, the time the image was created, or a git commit hash.</li>
+  <li><p>Local storage in each container instance is ephemeral. Every container launch will start with unmodified image.</p>
+  </li>
+  <li><p>Traffic will be routed to the lowest exposed port (by <code>EXPOSE</code> command in Dockerfile). The PORT environment variable will be also set to this number.</p>
+  </li>
+  <li><p>Buildpack based apps use bash to execute the app start command (<code>bash -c &lt;command&gt;</code>), but Docker image based apps use sh (<code>sh -c &lt;command&gt;</code>) - as bash presence cannot be assumed in your Docker image.</p>
+  </li>
+  <li><p>Privileged container mode is not supported. Features depending on this will not work.</p>
+  </li>
+  <li><p>Only registries that use Docker Registry API V2 are supported.</p>
+  </li>
+  <li><p>Images are cached based on tag. Using a tag like <code>latest</code> when doing quick iterations can result in errors. To prevent this, tags should be unique. For example, the time the image was created, or a git commit hash.</p>
+  </li>
 </ul>
 
 <p>Your responsibilities change if you use a Docker image instead of a buildpack. Refer to the <a href="/guidance.html#responsibility-model">responsibility model guidance</a> for further information.</p>
-<p><h3 id="docker-registry-availability-requirements">Docker Registry Availability Requirements</h3><p>Deploying, scaling, restarting or restaging an app using a Docker image are all dependent on the Docker registry being available, because these actions require pulling the image from the registry.</p>
+
+<h3 id="docker-registry-availability-requirements">Docker Registry Availability Requirements</h3>
+
+<p>Deploying, scaling, restarting or restaging an app using a Docker image are all dependent on the Docker registry being available, because these actions require pulling the image from the registry.</p>
+
 <p>Note that Cloud Foundry can restart your application due to circumstances outside of your direct control, such as platform scaling or deployments, or failure of the underlying hardware platform.</p>
+
 <p>If Cloud Foundry attempts to pull the image from the registry when the registry is not available, your application instance will fail to start, and you will receive a <code>Failed to create container</code> message. Once the Docker registry is available again, you will be able to re-deploy, restart or restage your app as required.</p>
-<h3 id="applying-security-updates">Applying security updates</h3><p>When your app is built with a standard buildpack, you are responsible only for the code of your app. The platform provides both the buildpacks and also a safe and secure root filesystem (<code>cflinuxfs3</code>). Buildpack based apps never have root access in their container, which adds another layer of security. We do periodically apply security and functionality updates to the buildpacks, container root FS and the platform itself.</p>
-<p>When your app is deployed from Docker image, responsibility for the root filesystem and for the complete build of your app shifts to you. You need to ensure proper measures are applied to make your app and root image safe and with the latest security updates. We recommend you use one of the major and well supported linux distributions as your base container. This way you will be able to build an image with latest security patches.</p></p>
+
+<h3 id="applying-security-updates">Applying security updates</h3>
+
+<p>When your app is built with a standard buildpack, you are responsible only for the code of your app. The platform provides both the buildpacks and also a safe and secure root filesystem (<code>cflinuxfs3</code>). Buildpack based apps never have root access in their container, which adds another layer of security. We do periodically apply security and functionality updates to the buildpacks, container root FS and the platform itself.</p>
+
+<p>When your app is deployed from Docker image, responsibility for the root filesystem and for the complete build of your app shifts to you. You need to ensure proper measures are applied to make your app and root image safe and with the latest security updates. We recommend you use one of the major and well supported linux distributions as your base container. This way you will be able to build an image with latest security patches.</p>
+
 
             
           </main>

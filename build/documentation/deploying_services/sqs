@@ -1,71 +1,117 @@
-<h1 id="amazon-sqs">Amazon SQS</h1><p>Amazon Simple Queue Service (SQS) offers a durable hosted queue that lets you
+<h1 id="amazon-sqs">Amazon SQS</h1>
+
+<p>Amazon Simple Queue Service (SQS) offers a durable hosted queue that lets you<br />
 build decoupled distributed software components.</p>
-<p>This is a beta service which is currently in a testing phase. If you would like to test the service, contact the GOV.UK PaaS team at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<p>This is a beta service which is currently in a testing phase. If you would like to test the service, contact the GOV.UK PaaS team at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
 
 <h2 id="set-up-the-service">Set up the service</h2>
-<h3 id="provision-an-amazon-web-service-sqs-queue">Provision an Amazon Web Service SQS queue</h3><p>Creating a service instance provisions an Amazon Web Service (AWS) Simple Queue
+
+<h3 id="provision-an-amazon-web-service-sqs-queue">Provision an Amazon Web Service SQS queue</h3>
+
+<p>Creating a service instance provisions an Amazon Web Service (AWS) Simple Queue<br />
 Service (SQS) queue.</p>
+
 <p>The name of the service overall is <code>aws-sqs-queue</code>.</p>
+
 <p>There are two types of plan available for the service:</p>
 
 <ul>
-<li><code>standard</code>, providing at-least-once delivery,
-where each message is delivered at least once</li>
-<li><code>fifo</code>, for first-in-first-out queues providing <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing">exactly-once processing</a>,
-where each message is delivered once and remains available until a
-consumer processes it and deletes it</li>
+  <li><p><code>standard</code>, providing at-least-once delivery,<br />
+where each message is delivered at least once</p>
+  </li>
+  <li><p><code>fifo</code>, for first-in-first-out queues providing <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing">exactly-once processing</a>,<br />
+where each message is delivered once and remains available until a<br />
+consumer processes it and deletes it</p>
+  </li>
 </ul>
-<p>AWS SQS queues can be configured to move messages that cannot be successfully
-processed by your application on a secondary queue, known as a
-<a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html">dead-letter queue</a>,
+
+<p>AWS SQS queues can be configured to move messages that cannot be successfully<br />
+processed by your application on a secondary queue, known as a<br />
+<a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html">dead-letter queue</a>,<br />
 letting you isolate problematic messages to determine why their processing did not succeed.</p>
-<h4 id="provision-a-standard-aws-sqs-queue">Provision a standard AWS SQS queue</h4><p>Use a standard queue when the order of the items on your queue is not
-important and when your application can tolerate occasional duplication of
+
+<h4 id="provision-a-standard-aws-sqs-queue">Provision a standard AWS SQS queue</h4>
+
+<p>Use a standard queue when the order of the items on your queue is not<br />
+important and when your application can tolerate occasional duplication of<br />
 messages.</p>
+
 <p>Run the following in the command line to provision a standard AWS SQS queue:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf create-service aws-sqs-queue standard SERVICE_NAME
-</code></pre></div><p>It will take between 1 and 5 minutes to set up the service instance. To check
+</code></pre></div>
+<p>It will take between 1 and 5 minutes to set up the service instance. To check<br />
 its progress run:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue.</p>
-<h4 id="provision-a-fifo-aws-sqs-queue">Provision a FIFO AWS SQS queue</h4><p>Use a FIFO (first-in-first-out) queue when the order of operations and events
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue.</p>
+
+<h4 id="provision-a-fifo-aws-sqs-queue">Provision a FIFO AWS SQS queue</h4>
+
+<p>Use a FIFO (first-in-first-out) queue when the order of operations and events<br />
 is critical, or where duplicates cannot be tolerated.</p>
+
 <p>Run the following in the command line to provision a FIFO AWS SQS queue:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf create-service aws-sqs-queue fifo SERVICE_NAME
-</code></pre></div><p>It will take between 1 and 5 minutes to set up the service instance. To check
+</code></pre></div>
+<p>It will take between 1 and 5 minutes to set up the service instance. To check<br />
 its progress run:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue.</p>
-<h3 id="bind-an-aws-sqs-queue-to-your-app">Bind an AWS SQS queue to your app</h3><p>You must bind the SQS queue to your app so you can get credentials to use the
-<a href="https://docs.aws.amazon.com/cli/latest/reference/sqs/">AWS SQS API</a> to read
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue.</p>
+
+<h3 id="bind-an-aws-sqs-queue-to-your-app">Bind an AWS SQS queue to your app</h3>
+
+<p>You must bind the SQS queue to your app so you can get credentials to use the<br />
+<a href="https://docs.aws.amazon.com/cli/latest/reference/sqs/">AWS SQS API</a> to read<br />
 from and write to the queue.</p>
+
 <p>You can bind an SQS queue using the command line or the manifest file.</p>
+
 <p>Run the following to bind an SQS queue to your app:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf bind-service APP_NAME SERVICE_NAME
-</code></pre></div><p>It will take between 1 and 5 minutes to set up the binding. To check its progress, run:</p>
+</code></pre></div>
+<p>It will take between 1 and 5 minutes to set up the binding. To check its progress, run:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>APP_NAME</code> is the name of a deployed instance of your app, as specified in your app&rsquo;s manifest or push command</li>
-<li><code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue</li>
+  <li><p><code>APP_NAME</code> is the name of a deployed instance of your app, as specified in your app's manifest or push command</p>
+  </li>
+  <li><p><code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue</p>
+  </li>
 </ul>
-<p>When binding an SQS service to your app, you have the option of restricting the
-queue permissions given to that app. You can control this using <code>bind-service</code>&lsquo;s <code>-c</code>
+
+<p>When binding an SQS service to your app, you have the option of restricting the<br />
+queue permissions given to that app. You can control this using <code>bind-service</code>'s <code>-c</code><br />
 flag to set the bind parameters <code>access_policy</code> JSON key, for example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf bind-service APP_NAME SERVICE_NAME -c '{"access_policy": "consumer"}'
-</code></pre></div><p>The currently supported <code>access_policy</code> values are:</p>
+</code></pre></div>
+<p>The currently supported <code>access_policy</code> values are:</p>
 
 <ul>
-<li><code>full</code>, which means the default, full access permissions</li>
-<li><code>producer</code>, which is appropriate for an app that will be sending messages to the queue,
-but does not need to be able to read or delete messages</li>
-<li><code>consumer</code>, which is appropriate for an app that will be reading and possibly deleting messages,
-but does not need to be able to send messages to the queue</li>
+  <li><p><code>full</code>, which means the default, full access permissions</p>
+  </li>
+  <li><p><code>producer</code>, which is appropriate for an app that will be sending messages to the queue,<br />
+but does not need to be able to read or delete messages</p>
+  </li>
+  <li><p><code>consumer</code>, which is appropriate for an app that will be reading and possibly deleting messages,<br />
+but does not need to be able to send messages to the queue</p>
+  </li>
 </ul>
-<p>You can use the <a href="https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-public-apps">app&rsquo;s manifest</a>
-to bind an SQS queue to the app (with default <code>full</code> permissions only).
+
+<p>You can use the <a href="https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-public-apps">app's manifest</a><br />
+to bind an SQS queue to the app (with default <code>full</code> permissions only).<br />
 It will bind automatically when you next deploy your app. An example manifest:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>--
 applications:
 - name: APP_NAME
@@ -73,9 +119,14 @@ applications:
   - SERVICE_NAME
 </code></pre></div>
 <h2 id="use-the-service">Use the service</h2>
-<h3 id="connect-to-an-sqs-queue-from-your-app">Connect to an SQS queue from your app</h3><p>Restart your app to populate your <code>VCAP_SERVICES</code> <a href="/deploying_apps.html#system-provided-environment-variables">environment variable</a>
+
+<h3 id="connect-to-an-sqs-queue-from-your-app">Connect to an SQS queue from your app</h3>
+
+<p>Restart your app to populate your <code>VCAP_SERVICES</code> <a href="/deploying_apps.html#system-provided-environment-variables">environment variable</a><br />
 with the credentials needed to connect to the SQS queue.</p>
+
 <p>An example <code>VCAP_SERVICES</code> environment variable:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>{
  "VCAP_SERVICES": {
   "aws-sqs-queue": [
@@ -102,112 +153,180 @@ with the credentials needed to connect to the SQS queue.</p>
   ]
  }
 }
-</code></pre></div><p>You must pass credentials from your <code>VCAP_SERVICES</code> environment variable to
-your AWS software development kit (SDK). Use the appropriate <a href="https://aws.amazon.com/developer/tools/#sdks">Amazon SDK
-documentation</a>, and extract the
-credentials from VCAP_SERVICES to provide to the SDK. You can usually do this
-either by setting environment variables such as <code>AWS_ACCESS_KEY_ID</code>,
-<code>AWS_SECRET_ACCESS_KEY</code> or <code>AWS_REGION</code>, or by providing the SDK with the right
+</code></pre></div>
+<p>You must pass credentials from your <code>VCAP_SERVICES</code> environment variable to<br />
+your AWS software development kit (SDK). Use the appropriate <a href="https://aws.amazon.com/developer/tools/#sdks">Amazon SDK<br />
+documentation</a>, and extract the<br />
+credentials from VCAP_SERVICES to provide to the SDK. You can usually do this<br />
+either by setting environment variables such as <code>AWS_ACCESS_KEY_ID</code>,<br />
+<code>AWS_SECRET_ACCESS_KEY</code> or <code>AWS_REGION</code>, or by providing the SDK with the right<br />
 static credentials function call or data as part of your app.</p>
-<p>You should use the provided <code>primary_queue_url</code> in AWS API calls to make use of
+
+<p>You should use the provided <code>primary_queue_url</code> in AWS API calls to make use of<br />
 the queue.</p>
-<p>Your app may also connect to a second, separate, queue using the <code>secondary_queue_url</code>
-value, but we recommend ignoring this value unless you are configuring a
+
+<p>Your app may also connect to a second, separate, queue using the <code>secondary_queue_url</code><br />
+value, but we recommend ignoring this value unless you are configuring a<br />
 dead-letter queue. See <a href="#configuring-a-dead-letter-queue">configuring a dead letter queue</a>.</p>
 
 <h2 id="amend-the-service">Amend the service</h2>
-<h3 id="updating-an-aws-sqs-queue">Updating an AWS SQS queue</h3><h4 id="setting-a-message-retention-period">Setting a message retention period</h4><p>Messages that have not been consumed by your application will eventually expire
+
+<h3 id="updating-an-aws-sqs-queue">Updating an AWS SQS queue</h3>
+
+<h4 id="setting-a-message-retention-period">Setting a message retention period</h4>
+
+<p>Messages that have not been consumed by your application will eventually expire<br />
 and be removed from the queue.</p>
-<p>The default retention period is 4 days.
+
+<p>The default retention period is 4 days.<br />
 The maximum allowed retention period is 14 days.</p>
-<p>To configure the time that messages are kept on the queue, we can update the
+
+<p>To configure the time that messages are kept on the queue, we can update the<br />
 service, specifying the period in seconds:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"message_retention_period": 345600}'
-</code></pre></div><p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>345600</code> is
-the message retention period in seconds. You can also pass this parameter at
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>345600</code> is<br />
+the message retention period in seconds. You can also pass this parameter at<br />
 service creation time.</p>
-<h4 id="setting-a-message-delay">Setting a message delay</h4><p>The time in seconds for which the delivery of all messages in the queue is delayed.</p>
-<p>The default delay is 0 seconds.
+
+<h4 id="setting-a-message-delay">Setting a message delay</h4>
+
+<p>The time in seconds for which the delivery of all messages in the queue is delayed.</p>
+
+<p>The default delay is 0 seconds.<br />
 The maximum allowed delay is 15 minutes (900 seconds).</p>
-<p>To configure the time that messages are delayed we can update the
+
+<p>To configure the time that messages are delayed we can update the<br />
 service, specifying the period in seconds:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"delay_seconds": 600}'
-</code></pre></div><p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>600</code> is
-the message delay period in seconds. You can also pass this parameter at
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>600</code> is<br />
+the message delay period in seconds. You can also pass this parameter at<br />
 service creation time.</p>
-<h4 id="setting-a-maximum-message-size">Setting a maximum message size</h4><p>The limit of how many bytes that a message can contain before Amazon SQS rejects it.</p>
-<p>The minimum maximum message size is 1,204 bytes (1 KiB).
+
+<h4 id="setting-a-maximum-message-size">Setting a maximum message size</h4>
+
+<p>The limit of how many bytes that a message can contain before Amazon SQS rejects it.</p>
+
+<p>The minimum maximum message size is 1,204 bytes (1 KiB).<br />
 The maximum and default maximum message size is 262,144 bytes (256 KiB).</p>
-<p>To configure the maximum message size for the queue we can update the
+
+<p>To configure the maximum message size for the queue we can update the<br />
 service, specifying the size in bytes:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"maximum_message_size": 245600}'
-</code></pre></div><p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>245600</code> is
-a size in bytes to allow on the queue. You can also pass this parameter at
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>245600</code> is<br />
+a size in bytes to allow on the queue. You can also pass this parameter at<br />
 service creation time.</p>
-<h4 id="setting-a-receive-message-wait-time">Setting a receive message wait time</h4><p>Specifies the duration, in seconds, that the ReceiveMessage action call waits until
-a message is in the queue in order to include it in the response, rather than
+
+<h4 id="setting-a-receive-message-wait-time">Setting a receive message wait time</h4>
+
+<p>Specifies the duration, in seconds, that the ReceiveMessage action call waits until<br />
+a message is in the queue in order to include it in the response, rather than<br />
 returning an empty response if a message is not yet available.</p>
-<p>The minimum receive message wait time is 0 seconds.
+
+<p>The minimum receive message wait time is 0 seconds.<br />
 The maximum receive message wait time is 20 seconds.</p>
-<p>Short polling is used as the default or when you specify 0 for this property.
+
+<p>Short polling is used as the default or when you specify 0 for this property.<br />
 For more information, see the <a href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html">Amazon SQS Long Poll documentation</a>.</p>
-<p>To configure the receive wait time for the queue we can update the
+
+<p>To configure the receive wait time for the queue we can update the<br />
 service, specifying the period in seconds:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"receive_message_wait_time_seconds": 20}'
-</code></pre></div><p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>20</code> is
-a period in seconds to wait for messages for. You can also pass this parameter at
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>20</code> is<br />
+a period in seconds to wait for messages for. You can also pass this parameter at<br />
 service creation time.</p>
-<h4 id="setting-a-message-visibility-timeout">Setting a message visibility timeout</h4><p>The length of time during which a message will be unavailable after a message is
-delivered from the queue. This blocks other components from receiving the same
-message and gives the initial component time to process and delete the message
+
+<h4 id="setting-a-message-visibility-timeout">Setting a message visibility timeout</h4>
+
+<p>The length of time during which a message will be unavailable after a message is<br />
+delivered from the queue. This blocks other components from receiving the same<br />
+message and gives the initial component time to process and delete the message<br />
 from the queue.</p>
-<p>The minimum visibility timeout is 0 seconds.
-The default visibility timeout is 30 seconds.
+
+<p>The minimum visibility timeout is 0 seconds.<br />
+The default visibility timeout is 30 seconds.<br />
 The maximum visibility timeout is 12 hours (43,200 seconds).</p>
-<p>To configure the visibility timeout for the queue we can update the
+
+<p>To configure the visibility timeout for the queue we can update the<br />
 service, specifying the period in seconds:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"visibility_timeout": 34560}'
-</code></pre></div><p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>34560</code> is
-the message retention period in seconds. You can also pass this parameter at
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>34560</code> is<br />
+the message retention period in seconds. You can also pass this parameter at<br />
 service creation time.</p>
-<h4 id="configuring-a-dead-letter-queue">Configuring a dead-letter queue</h4><p>Sometimes, your application may not be able to process a message from your
-primary queue. When this happens it is useful to move messages onto a
-secondary queue so they can be investigated later without interfering with the
+
+<h4 id="configuring-a-dead-letter-queue">Configuring a dead-letter queue</h4>
+
+<p>Sometimes, your application may not be able to process a message from your<br />
+primary queue. When this happens it is useful to move messages onto a<br />
+secondary queue so they can be investigated later without interfering with the<br />
 correct operation of your primary queue.</p>
-<p>When your service is configured in this pattern we call the secondary queue a
-&ldquo;dead-letter&rdquo; queue. To set up this pattern we can configure the number of times
-a message is allowed to appear on the primary queue before it is redirected to
+
+<p>When your service is configured in this pattern we call the secondary queue a<br />
+"dead-letter" queue. To set up this pattern we can configure the number of times<br />
+a message is allowed to appear on the primary queue before it is redirected to<br />
 the secondary queue.</p>
+
 <p>Run:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"redrive_max_receive_count": 3}'
-</code></pre></div><p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>3</code> is the
-number of attempts a message should have on the primary queue before being
-redirected to the secondary queue. You can also pass this parameter at service
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is the descriptive name for this SQS queue and <code>3</code> is the<br />
+number of attempts a message should have on the primary queue before being<br />
+redirected to the secondary queue. You can also pass this parameter at service<br />
 creation time.</p>
+
 <p>When you bind an app to an AWS SQS queue service instance, you will find credentials for two unique queue URLs:</p>
 
 <ul>
-<li><code>primary_queue_url</code> is the URL for the main queue</li>
-<li><code>secondary_queue_url</code> is the URL for the secondary queue, now acting as a dead-letter queue</li>
+  <li><p><code>primary_queue_url</code> is the URL for the main queue</p>
+  </li>
+  <li><p><code>secondary_queue_url</code> is the URL for the secondary queue, now acting as a dead-letter queue</p>
+  </li>
 </ul>
 
 <h2 id="remove-the-service">Remove the service</h2>
-<h3 id="unbind-an-sqs-queue-from-your-app">Unbind an SQS queue from your app</h3><p>Run the following in the command line to unbind the SQS queue from the app:</p>
+
+<h3 id="unbind-an-sqs-queue-from-your-app">Unbind an SQS queue from your app</h3>
+
+<p>Run the following in the command line to unbind the SQS queue from the app:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service APP_NAME SERVICE_NAME
-</code></pre></div><p>It can take between 1 and 5 minutes to remove the binding. To check its progress, run:</p>
+</code></pre></div>
+<p>It can take between 1 and 5 minutes to remove the binding. To check its progress, run:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>APP_NAME</code> is the name of a deployed instance of your app, as specified in your app&rsquo;s manifest or push command</li>
-<li><code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue</li>
+  <li><p><code>APP_NAME</code> is the name of a deployed instance of your app, as specified in your app's manifest or push command</p>
+  </li>
+  <li><p><code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue</p>
+  </li>
 </ul>
-<p>If you unbind the SQS queue from your app but do not delete the queue, that
-queue will persist even after you delete your app. You can re-bind or
+
+<p>If you unbind the SQS queue from your app but do not delete the queue, that<br />
+queue will persist even after you delete your app. You can re-bind or<br />
 re-connect to the queue in future.</p>
-<h3 id="deleting-an-sqs-queue">Deleting an SQS queue</h3><p>Run the following in the command line to delete the SQS queue:</p>
+
+<h3 id="deleting-an-sqs-queue">Deleting an SQS queue</h3>
+
+<p>Run the following in the command line to delete the SQS queue:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete-service SERVICE_NAME
-</code></pre></div><p>It can take between 1 and 5 minutes to delete the service instance. To check
+</code></pre></div>
+<p>It can take between 1 and 5 minutes to delete the service instance. To check<br />
 its progress, run:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue.</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this SQS queue.</p>

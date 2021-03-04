@@ -1,9 +1,18 @@
-<h2 id="port-environment-variable-error">PORT environment variable error</h2><p>The PORT environment variable is system-provided, and you should not attempt to set it yourself.</p>
+<h2 id="port-environment-variable-error">PORT environment variable error</h2>
+
+<p>The PORT environment variable is system-provided, and you should not attempt to set it yourself.</p>
+
 <p>If you are trying to set any environment variable and you get an error like this:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>FAILED Server error, status code: 400, error code: 100001, message: The app is invalid: environment_variables cannot set PORT
-</code></pre></div><p>the cause is that the value of PORT has been changed from the system-provided value.</p>
+</code></pre></div>
+<p>the cause is that the value of PORT has been changed from the system-provided value.</p>
+
 <p>Running these commands should fix the problem:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unset-env myapp PORT
 cf restage myapp
-</code></pre></div><p>where <code>myapp</code> is the name of the affected app instance.</p>
+</code></pre></div>
+<p>where <code>myapp</code> is the name of the affected app instance.</p>
+
 <p>Make sure that the app does not attempt to set the PORT variable.</p>

@@ -1,8 +1,15 @@
-<h1 id="before-you-start">Before you start</h1><p>Before it can start using the platform, your department, agency or team must accept the Terms of Use during account activation.</p>
+
+<h1 id="before-you-start">Before you start</h1>
+
+<p>Before it can start using the platform, your department, agency or team must accept the Terms of Use during account activation.</p>
+
 <p>To be hosted on GOV.UK PaaS, your app must:</p>
 
 <ul>
-<li>follow the <a href="architecture.html#12-factor-application-principles">twelve-factor application principles</a>; this will be true if your app has been written so it can deploy to another PaaS like Heroku</li>
-<li><a href="deploying_apps.html#data-security-classification">store data classified up to ‘official’</a>; your app cannot store data classified as &lsquo;secret&rsquo; or &lsquo;top secret&rsquo;</li>
+  <li><p>follow the <a href="architecture.html#12-factor-application-principles">twelve-factor application principles</a>; this will be true if your app has been written so it can deploy to another PaaS like Heroku</p>
+  </li>
+  <li><p><a href="deploying_apps.html#data-security-classification">store data classified up to ‘official’</a>; your app cannot store data classified as 'secret' or 'top secret'</p>
+  </li>
 </ul>
+
 <p><a href="deploying_apps.html#buildpacks">Cloud Foundry buildpacks</a> provide runtime and framework support for your application. For most languages, you will need to provide configuration files to describe your app’s dependencies. Most buildpacks will support a limited range of versions of the language.</p>

@@ -1,146 +1,201 @@
-<h2 id="logs">Logs</h2><p>Cloud Foundry and apps running on Cloud Foundry generate logs using <a href="https://docs.cloudfoundry.org/loggregator/architecture.html">Loggregator</a> [external link] and stream them to your terminal. You should consult your logs if your app is failing to deploy or crashing, and it&rsquo;s not clear why.</p>
+<h2 id="logs">Logs</h2>
+
+<p>Cloud Foundry and apps running on Cloud Foundry generate logs using <a href="https://docs.cloudfoundry.org/loggregator/architecture.html">Loggregator</a> [external link] and stream them to your terminal. You should consult your logs if your app is failing to deploy or crashing, and it's not clear why.</p>
+
 <p>Your app must write to <code>stdout</code> or <code>stderr</code> instead of a log file for its logs to be included in the Loggregator stream.</p>
+
 <p>Run <code>cf logs</code> in the command line to stream all logs from each Cloud Foundry service involved in your app deployment:</p>
+
 <div class="highlight"><pre class="highlight shell"><code>cf logs APP_NAME
-</code></pre></div><p>Run <code>cf logs</code> with the <code>--recent</code> flag to stream only the most recent logs:</p>
+</code></pre></div>
+<p>Run <code>cf logs</code> with the <code>--recent</code> flag to stream only the most recent logs:</p>
+
 <div class="highlight"><pre class="highlight shell"><code>cf logs APP_NAME <span class="nt">--recent</span>
-</code></pre></div><p>You can also run <code>cf events</code> to see all recent app events, such as when an app starts, stops, restarts, or crashes (including error codes):</p>
+</code></pre></div>
+<p>You can also run <code>cf events</code> to see all recent app events, such as when an app starts, stops, restarts, or crashes (including error codes):</p>
+
 <div class="highlight"><pre class="highlight shell"><code>cf events APP_NAME
-</code></pre></div><h2 id="set-up-the-logit-log-management-service">Set up the Logit log management service</h2><p>By default, Cloud Foundry streams a limited amount of logs to your terminal for a defined time. You can use a commercial log management service to keep more logging information for longer. This section describes how to set up the <a href="https://logit.io/">Logit log management service</a>.</p>
-<h3 id="prerequisites">Prerequisites</h3><p>Before you set up Logit, you must:</p>
+</code></pre></div>
+<h2 id="set-up-the-logit-log-management-service">Set up the Logit log management service</h2>
+
+<p>By default, Cloud Foundry streams a limited amount of logs to your terminal for a defined time. You can use a commercial log management service to keep more logging information for longer. This section describes how to set up the <a href="https://logit.io/">Logit log management service</a>.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>Before you set up Logit, you must:</p>
 
 <ul>
-<li><a href="https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-apps">deploy your app on Cloud Foundry</a></li>
-<li><a href="https://logit.io/">have a Logit account</a></li>
-<li><a href="https://docs.cloud.service.gov.uk/get_started.html#set-up-command-line">set up Cloud Foundry</a></li>
+  <li><p><a href="https://docs.cloud.service.gov.uk/deploying_apps.html#deploying-apps">deploy your app on Cloud Foundry</a></p>
+  </li>
+  <li><p><a href="https://logit.io/">have a Logit account</a></p>
+  </li>
+  <li><p><a href="https://docs.cloud.service.gov.uk/get_started.html#set-up-command-line">set up Cloud Foundry</a></p>
+  </li>
 </ul>
-<h3 id="configure-logstash-filters">Configure logstash filters</h3><p>You must set up <a href="https://www.elastic.co/products/logstash">Logstash</a> to process the Cloud Foundry logs into separate <a href="https://docs.cloudfoundry.org/concepts/architecture/router.html">Gorouter</a> and app log types.</p>
+
+<h3 id="configure-logstash-filters">Configure logstash filters</h3>
+
+<p>You must set up <a href="https://www.elastic.co/products/logstash">Logstash</a> to process the Cloud Foundry logs into separate <a href="https://docs.cloudfoundry.org/concepts/architecture/router.html">Gorouter</a> and app log types.</p>
 
 <ol>
-<li>Go to your Logit dashboard. For the Logit ELK stack you want to use, select <strong>Settings</strong>.</li>
-<li>On the <strong>Stack options</strong> menu, select <strong>Logstash Filters</strong>.</li>
-<li><p>Go to the <strong>Logstash Filters</strong> page, and replace the code there with the following logstash filter code:</p>
-<div class="highlight"><pre class="highlight plaintext"><code># updated 2020-07-01
-filter {
-    grok {
-        # attempt to parse syslog lines
-        match =&gt; { "message" =&gt; "(%{NONNEGINT:message_length} )?%{SYSLOG5424PRI}%{NONNEGINT:syslog_ver} (?:%{TIMESTAMP_ISO8601:syslog_timestamp}|-) +%{DATA:syslog_host} +%{UUID:cf_app_guid} +\[%{DATA:syslog_proc}\] +- +(\[tags@%{NONNEGINT} +%{DATA:cf_tags}\])? +%{GREEDYDATA:syslog_msg}" }
-        # if successful, save original `@timestamp` and `host` fields created by logstash
-        add_field =&gt; [ "received_at", "%{@timestamp}" ]
-        add_field =&gt; [ "received_from", "%{host}" ]
-        tag_on_failure =&gt; ["_syslogparsefailure"]
-    }
+  <li><p>Go to your Logit dashboard. For the Logit ELK stack you want to use, select <strong>Settings</strong>.</p>
+  </li>
+  <li><p>On the <strong>Stack options</strong> menu, select <strong>Logstash Filters</strong>.</p>
+  </li>
+  <li>
+<p>Go to the <strong>Logstash Filters</strong> page, and replace the code there with the following logstash filter code:</p>
 
-    if [cf_tags] {
-      kv {
-        source =&gt; "cf_tags"
-        target =&gt; "cf_tags"
-        value_split =&gt; "="
-      }
-    }
+<div class="highlight"><pre class="highlight plaintext"><code> # updated 2020-07-01
+ filter {
+     grok {
+         # attempt to parse syslog lines
+         match =&gt; { "message" =&gt; "(%{NONNEGINT:message_length} )?%{SYSLOG5424PRI}%{NONNEGINT:syslog_ver} (?:%{TIMESTAMP_ISO8601:syslog_timestamp}|-) +%{DATA:syslog_host} +%{UUID:cf_app_guid} +\[%{DATA:syslog_proc}\] +- +(\[tags@%{NONNEGINT} +%{DATA:cf_tags}\])? +%{GREEDYDATA:syslog_msg}" }
+         # if successful, save original `@timestamp` and `host` fields created by logstash
+         add_field =&gt; [ "received_at", "%{@timestamp}" ]
+         add_field =&gt; [ "received_from", "%{host}" ]
+         tag_on_failure =&gt; ["_syslogparsefailure"]
+     }
 
-    # parse the syslog pri field into severity/facility
-    syslog_pri { syslog_pri_field_name =&gt; 'syslog5424_pri' }
+     if [cf_tags] {
+       kv {
+         source =&gt; "cf_tags"
+         target =&gt; "cf_tags"
+         value_split =&gt; "="
+       }
+     }
 
-    # replace @timestamp field with the one from syslog
-    date { match =&gt; [ "syslog_timestamp", "ISO8601" ] }
+     # parse the syslog pri field into severity/facility
+     syslog_pri { syslog_pri_field_name =&gt; 'syslog5424_pri' }
 
-    # Cloud Foundry passes the app name, space and organisation in the syslog_host
-    # Filtering them into separate fields makes it easier to query multiple apps in a single Kibana instance
-    if [syslog_host] {
-        dissect {
-            mapping =&gt; { "syslog_host" =&gt; "%{[cf][org]}.%{[cf][space]}.%{[cf][app]}" }
-            tag_on_failure =&gt; ["_sysloghostdissectfailure"]
-        }
-    }
+     # replace @timestamp field with the one from syslog
+     date { match =&gt; [ "syslog_timestamp", "ISO8601" ] }
 
-    # Cloud Foundry gorouter logs
-    if [syslog_proc] =~ "RTR" {
-        mutate { replace =&gt; { "type" =&gt; "gorouter" } }
-        grok {
-            match =&gt; { "syslog_msg" =&gt; "%{HOSTNAME:[access][host]} - \[%{TIMESTAMP_ISO8601:router_timestamp}\] \"%{WORD:[access][method]} %{NOTSPACE:[access][url]} HTTP/%{NUMBER:[access][http_version]}\" %{NONNEGINT:[access][response_code]:int} %{NONNEGINT:[access][body_received][bytes]:int} %{NONNEGINT:[access][body_sent][bytes]:int} %{QUOTEDSTRING:[access][referrer]} %{QUOTEDSTRING:[access][agent]} \"%{HOSTPORT:[access][remote_ip_and_port]}\" \"%{HOSTPORT:[access][upstream_ip_and_port]}\" %{GREEDYDATA:router_keys}" }
-            tag_on_failure =&gt; ["_routerparsefailure"]
-            add_tag =&gt; ["gorouter"]
-        }
-        # replace @timestamp field with the one from router access log
-        date {
-            match =&gt; [ "router_timestamp", "ISO8601" ]
-        }
-        kv {
-            source =&gt; "router_keys"
-            target =&gt; "router"
-            value_split =&gt; ":"
-            remove_field =&gt; "router_keys"
-        }
+     # Cloud Foundry passes the app name, space and organisation in the syslog_host
+     # Filtering them into separate fields makes it easier to query multiple apps in a single Kibana instance
+     if [syslog_host] {
+         dissect {
+             mapping =&gt; { "syslog_host" =&gt; "%{[cf][org]}.%{[cf][space]}.%{[cf][app]}" }
+             tag_on_failure =&gt; ["_sysloghostdissectfailure"]
+         }
+     }
 
-        mutate {
-          convert =&gt; {
-            "[router][response_time]" =&gt; "float"
-            "[router][gorouter_time]" =&gt; "float"
-            "[router][app_index]" =&gt; "integer"
-          }
-        }
-    }
+     # Cloud Foundry gorouter logs
+     if [syslog_proc] =~ "RTR" {
+         mutate { replace =&gt; { "type" =&gt; "gorouter" } }
+         grok {
+             match =&gt; { "syslog_msg" =&gt; "%{HOSTNAME:[access][host]} - \[%{TIMESTAMP_ISO8601:router_timestamp}\] \"%{WORD:[access][method]} %{NOTSPACE:[access][url]} HTTP/%{NUMBER:[access][http_version]}\" %{NONNEGINT:[access][response_code]:int} %{NONNEGINT:[access][body_received][bytes]:int} %{NONNEGINT:[access][body_sent][bytes]:int} %{QUOTEDSTRING:[access][referrer]} %{QUOTEDSTRING:[access][agent]} \"%{HOSTPORT:[access][remote_ip_and_port]}\" \"%{HOSTPORT:[access][upstream_ip_and_port]}\" %{GREEDYDATA:router_keys}" }
+             tag_on_failure =&gt; ["_routerparsefailure"]
+             add_tag =&gt; ["gorouter"]
+         }
+         # replace @timestamp field with the one from router access log
+         date {
+             match =&gt; [ "router_timestamp", "ISO8601" ]
+         }
+         kv {
+             source =&gt; "router_keys"
+             target =&gt; "router"
+             value_split =&gt; ":"
+             remove_field =&gt; "router_keys"
+         }
 
-    # Application logs
-    if [syslog_proc] =~ "APP" {
-        json {
-            source =&gt; "syslog_msg"
-            add_tag =&gt; ["app"]
-        }
-    }
+         mutate {
+           convert =&gt; {
+             "[router][response_time]" =&gt; "float"
+             "[router][gorouter_time]" =&gt; "float"
+             "[router][app_index]" =&gt; "integer"
+           }
+         }
+     }
 
-    # User agent parsing
-    if [access][agent] {
-        useragent {
-            source =&gt; "[access][agent]"
-            target =&gt; "[access][user_agent]"
-        }
-    }
+     # Application logs
+     if [syslog_proc] =~ "APP" {
+         json {
+             source =&gt; "syslog_msg"
+             add_tag =&gt; ["app"]
+         }
+     }
 
-    if !("_syslogparsefailure" in [tags]) {
-        # if we successfully parsed syslog, replace the message and source_host fields
-        mutate {
-            rename =&gt; [ "syslog_host", "source_host" ]
-            rename =&gt; [ "syslog_msg", "message" ]
-        }
-    }
-}
-</code></pre></div></li>
-<li><p>Select <strong>Validate</strong>.</p></li>
-<li><p>Select <strong>Apply</strong> once the code is valid. If this is not possible, check you have copied the code correctly or contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> .</p></li>
-<li><p>Go back to the Logit dashboard once the following message appears: “Filters have been applied to logstash, logstash will be restarted, this may take up to 2 minutes”.</p></li>
+     # User agent parsing
+     if [access][agent] {
+         useragent {
+             source =&gt; "[access][agent]"
+             target =&gt; "[access][user_agent]"
+         }
+     }
+
+     if !("_syslogparsefailure" in [tags]) {
+         # if we successfully parsed syslog, replace the message and source_host fields
+         mutate {
+             rename =&gt; [ "syslog_host", "source_host" ]
+             rename =&gt; [ "syslog_msg", "message" ]
+         }
+     }
+ }
+</code></pre></div>  </li>
+  <li><p>Select <strong>Validate</strong>.</p>
+  </li>
+  <li><p>Select <strong>Apply</strong> once the code is valid. If this is not possible, check you have copied the code correctly or contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> .</p>
+  </li>
+  <li><p>Go back to the Logit dashboard once the following message appears: “Filters have been applied to logstash, logstash will be restarted, this may take up to 2 minutes”.</p>
+  </li>
 </ol>
+
 <h3 id="configure-app">Configure app</h3>
-<ol>
-<li>Select <strong>Settings</strong> for the stack you want to use.</li>
-<li>On the <strong>Stack options</strong> menu, select <strong>Logstash Inputs</strong>.</li>
-<li>Note your <strong>Stack Logstash endpoint</strong> and <strong>TCP-SSL port</strong>.</li>
-<li><p>Run the following in the command line to create the log drain service in Cloud Foundry:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>$ cf create-user-provided-service logit-ssl-drain -l syslog-tls://ENDPOINT:PORT
-</code></pre></div></li>
-<li><p>Bind the service to your app by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>$ cf bind-service APP_NAME logit-ssl-drain
-</code></pre></div></li>
-<li><p>Restage your app by running, note that this will cause app downtime:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>$ cf restage APP_NAME
-</code></pre></div></li>
-<li><p>Select <strong>Access Kibana</strong> on the <strong>Stack options</strong> menu and check that you can see the logs in Kibana.</p></li>
-</ol>
-<p>Once you confirm that the logs are draining correctly, you have successfully set up Logit.</p>
-<p>Contact us by emailing <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> if the logs are not draining correctly or if you have any questions.</p>
-<h3 id="enable-security-for-your-elk-stack">Enable security for your ELK stack</h3><p>By default, Logit allows anyone on the internet to send logs to your ELK stack. You can set up Logit to make sure that your ELK stack only receives logs from GOV.UK PaaS.</p>
 
 <ol>
-<li>Contact GOV.UK PaaS support at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> for a list of syslog drain egress IP addresses.</li>
-<li>Send these IP addresses to Logit support at <a href="https://logit.io/contact-us">https://logit.io/contact-us</a> and ask that your ELK stack only receives log messages from these addresses.</li>
+  <li><p>Select <strong>Settings</strong> for the stack you want to use.</p>
+  </li>
+  <li><p>On the <strong>Stack options</strong> menu, select <strong>Logstash Inputs</strong>.</p>
+  </li>
+  <li><p>Note your <strong>Stack Logstash endpoint</strong> and <strong>TCP-SSL port</strong>.</p>
+  </li>
+  <li>
+<p>Run the following in the command line to create the log drain service in Cloud Foundry:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> $ cf create-user-provided-service logit-ssl-drain -l syslog-tls://ENDPOINT:PORT
+</code></pre></div>  </li>
+  <li>
+<p>Bind the service to your app by running:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> $ cf bind-service APP_NAME logit-ssl-drain
+</code></pre></div>  </li>
+  <li>
+<p>Restage your app by running, note that this will cause app downtime:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> $ cf restage APP_NAME
+</code></pre></div>  </li>
+  <li><p>Select <strong>Access Kibana</strong> on the <strong>Stack options</strong> menu and check that you can see the logs in Kibana.</p>
+  </li>
 </ol>
-<h3 id="further-information">Further information</h3><p>Refer to the Cloud Foundry documentation for more information on:</p>
+
+<p>Once you confirm that the logs are draining correctly, you have successfully set up Logit.</p>
+
+<p>Contact us by emailing <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> if the logs are not draining correctly or if you have any questions.</p>
+
+<h3 id="enable-security-for-your-elk-stack">Enable security for your ELK stack</h3>
+
+<p>By default, Logit allows anyone on the internet to send logs to your ELK stack. You can set up Logit to make sure that your ELK stack only receives logs from GOV.UK PaaS.</p>
+
+<ol>
+  <li><p>Contact GOV.UK PaaS support at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> for a list of syslog drain egress IP addresses.</p>
+  </li>
+  <li><p>Send these IP addresses to Logit support at <a href="https://logit.io/contact-us">https://logit.io/contact-us</a> and ask that your ELK stack only receives log messages from these addresses.</p>
+  </li>
+</ol>
+
+<h3 id="further-information">Further information</h3>
+
+<p>Refer to the Cloud Foundry documentation for more information on:</p>
 
 <ul>
-<li><a href="https://docs.cloudfoundry.org/devguide/services/log-management.html">streaming application logs to log management services</a></li>
-<li><a href="https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html">configuring other commercial log management services</a></li>
-<li><a href="https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html">the log format</a></li>
-<li><a href="https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html#view">viewing your application&rsquo;s logs</a></li>
-<li><a href="https://docs.cloudfoundry.org/devguide/deploy-apps/troubleshoot-app-health.html">troubleshooting application deployment and health</a></li>
+  <li><p><a href="https://docs.cloudfoundry.org/devguide/services/log-management.html">streaming application logs to log management services</a></p>
+  </li>
+  <li><p><a href="https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html">configuring other commercial log management services</a></p>
+  </li>
+  <li><p><a href="https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html">the log format</a></p>
+  </li>
+  <li><p><a href="https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html#view">viewing your application's logs</a></p>
+  </li>
+  <li><p><a href="https://docs.cloudfoundry.org/devguide/deploy-apps/troubleshoot-app-health.html">troubleshooting application deployment and health</a></p>
+  </li>
 </ul>

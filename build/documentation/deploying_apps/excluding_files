@@ -1,11 +1,20 @@
-<h2 id="excluding-files">Excluding files</h2><p>Cloud Foundry is not version-control-aware, so <code>cf push</code> will deploy the working state of whatever files you have in that directory. In most cases, you will want to <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/prepare-to-deploy.html#exclude">exclude files</a> ignored by Git. From within your project directory, run</p>
+<h2 id="excluding-files">Excluding files</h2>
+
+<p>Cloud Foundry is not version-control-aware, so <code>cf push</code> will deploy the working state of whatever files you have in that directory. In most cases, you will want to <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/prepare-to-deploy.html#exclude">exclude files</a> ignored by Git. From within your project directory, run</p>
+
 <p><code>
 ln -s .gitignore .cfignore
 </code></p>
+
 <p>and commit the <code>.cfignore</code> to your repository. However, read on if you have a more advanced CF setup.</p>
+
 <p>A couple of important points on the <code>.cfignore</code>:</p>
 
 <ol>
-<li><p>if you have a more advanced app setup and have apps with a <code>path</code> other than the project root (where you run <code>cf push</code> from), you will need an additional <code>.cfignore</code> file located in each app <code>path</code>;</p></li>
-<li><p>also note that more advanced <code>.gitignore</code> syntax, such as the <code>**</code> recursive subdirectory wildcard, are <em>not</em> supported by <code>.cfignore</code>.</p></li>
+  <li>
+<p>if you have a more advanced app setup and have apps with a <code>path</code> other than the project root (where you run <code>cf push</code> from), you will need an additional <code>.cfignore</code> file located in each app <code>path</code>;</p>
+  </li>
+  <li>
+<p>also note that more advanced <code>.gitignore</code> syntax, such as the <code>**</code> recursive subdirectory wildcard, are <em>not</em> supported by <code>.cfignore</code>.</p>
+  </li>
 </ol>

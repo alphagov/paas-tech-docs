@@ -122,7 +122,7 @@
               <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
                       <ul>
   <li>
-    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+    <a href="/#govuk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
   </li>
 </ul>
 <ul>
@@ -231,7 +231,7 @@
         <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
       </li>
       <li>
-        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+        <a href="/deploying_apps.html#deploy-a-nodejs-app"><span>Deploy a Node.js app</span></a>
       </li>
       <li>
         <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
@@ -433,10 +433,10 @@
         <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-govuk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-govuk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
       </li>
       <li>
         <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
@@ -530,17 +530,17 @@
         <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
       </li>
       <li>
-        <a href="/monitoring_services.html#monitoring-backing-services-more-about-monitoring"><span>More about monitoring</span></a>
+        <a href="/monitoring_services.html#more-about-monitoring"><span>More about monitoring</span></a>
       </li>
     </ul>
   </li>
 </ul>
 <ul>
   <li>
-    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <a href="/architecture.html#govuk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
     <ul>
       <li>
-        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+        <a href="/architecture.html#characteristics-of-govuk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
       </li>
       <li>
         <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
@@ -601,25 +601,45 @@
         <div class="app-pane__content toc-open-disabled">
           <main id="content" class="technical-documentation" data-module="anchored-headings">
             <h1 id="troubleshooting">Troubleshooting</h1>
-<p><h2 id="postgresql-connection-problems">PostgreSQL connection problems</h2><p>If you are having trouble connecting your app to a PostgreSQL database, follow the steps below. You can also apply these instructions to <a href="/deploying_services/#deploy-a-backing-or-routing-service">other backing services</a>. If you require more guidance for other supported backing services, contact us at gov-uk-paas-support@digital.cabinet-office.gov.uk.</p></p>
+
+<h2 id="postgresql-connection-problems">PostgreSQL connection problems</h2>
+
+<p>If you are having trouble connecting your app to a PostgreSQL database, follow the steps below. You can also apply these instructions to <a href="/deploying_services/#deploy-a-backing-or-routing-service">other backing services</a>. If you require more guidance for other supported backing services, contact us at gov-uk-paas-support@digital.cabinet-office.gov.uk.</p>
 
 <ol>
-<li>Ensure your app is making a <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a> connection to the PostgreSQL service.</li>
-<li>Use <code>cf service SERVICE_INSTANCE</code> to check that the service is bound to the app.</li>
-<li>Use <code>cf env APPNAME</code> to see the app&rsquo;s environment variables and confirm that there is a <code>VCAP_SERVICES={&quot;postgres&quot;:</code> section, indicating the app has correctly received the environment variables.</li>
-<li>Make sure your app writes database connection errors to <code>STDOUT</code> or <code>STDERR</code>, then look for recent errors with <code>cf logs APPNAME --recent</code>.</li>
-<li>If restarting the app does not make it connect, try <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/start-restart-restage.html#restage">restaging</a> the app with <code>cf restage APPNAME</code>.</li>
+  <li><p>Ensure your app is making a <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a> connection to the PostgreSQL service.</p>
+  </li>
+  <li><p>Use <code>cf service SERVICE_INSTANCE</code> to check that the service is bound to the app.</p>
+  </li>
+  <li><p>Use <code>cf env APPNAME</code> to see the app's environment variables and confirm that there is a <code>VCAP_SERVICES={"postgres":</code> section, indicating the app has correctly received the environment variables.</p>
+  </li>
+  <li><p>Make sure your app writes database connection errors to <code>STDOUT</code> or <code>STDERR</code>, then look for recent errors with <code>cf logs APPNAME --recent</code>.</p>
+  </li>
+  <li><p>If restarting the app does not make it connect, try <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/start-restart-restage.html#restage">restaging</a> the app with <code>cf restage APPNAME</code>.</p>
+  </li>
 </ol>
-<p><h2 id="pushing-apps-fails-on-windows-line-endings-issue">Pushing apps fails on Windows (line endings issue)</h2><p>We are aware of some cases where pushing an app can fail if you are pushing from a Windows machine that has saved project files with Windows-style (CRLF) line endings.</p>
+
+<h2 id="pushing-apps-fails-on-windows-line-endings-issue">Pushing apps fails on Windows (line endings issue)</h2>
+
+<p>We are aware of some cases where pushing an app can fail if you are pushing from a Windows machine that has saved project files with Windows-style (CRLF) line endings.</p>
+
 <p>This happens because some buildpacks do not interpret the CRLF line endings correctly. This is an example of an error arising from an executable script with CRLF line endings when using the Ruby buildpack:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>2016-12-02T06:03:25.95-0800 [APP/PROC/WEB/0]ERR /usr/bin/env: ruby
 2016-12-02T06:03:25.95-0800 [APP/PROC/WEB/0]ERR : No such file or directory
 2016-12-02T06:03:25.95-0800 [APP/PROC/WEB/0]OUT Exit status 127
-</code></pre></div><p>Similar problems may happen in other buildpacks. If you find that pushing an app from Windows is failing, try making sure that files in your project are being saved with Unix-style LF line endings, not Windows-style CRLF line endings. Most text editors aimed at developers allow you to change the line ending style.</p>
-<p>If you are working with a Git repository, disable Git&rsquo;s <code>autocrlf</code> setting:</p>
+</code></pre></div>
+<p>Similar problems may happen in other buildpacks. If you find that pushing an app from Windows is failing, try making sure that files in your project are being saved with Unix-style LF line endings, not Windows-style CRLF line endings. Most text editors aimed at developers allow you to change the line ending style.</p>
+
+<p>If you are working with a Git repository, disable Git's <code>autocrlf</code> setting:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>git config --global core.autocrlf false
-</code></pre></div><p>then clone the repository again.</p></p>
-<p><h2 id="tracing-http-requests">Tracing HTTP requests</h2><p>The Cloud Foundry router automatically adds Zipkin-compatible headers to the incoming HTTP requests so you can match those with your application&rsquo;s responses.</p></p>
+</code></pre></div>
+<p>then clone the repository again.</p>
+
+<h2 id="tracing-http-requests">Tracing HTTP requests</h2>
+
+<p>The Cloud Foundry router automatically adds Zipkin-compatible headers to the incoming HTTP requests so you can match those with your application's responses.</p>
 
 <blockquote>
 <p>Zipkin is a tracing system that enables app developers to troubleshoot failures or latency issues. Zipkin provides the ability to trace requests and responses across distributed systems. See <a href="https://zipkin.io">Zipkin.io</a> for more information.</p>
@@ -628,9 +648,15 @@
 <p>To trace app requests and responses in Cloud Foundry, apps must also log Zipkin headers.</p>
 
 <p>After adding Zipkin HTTP headers to app logs, developers can use <code>cf logs myapp</code> to correlate the trace and span ids logged by the Cloud Foundry router with the trace ids logged by their app. To correlate trace IDs for a request through multiple apps, each app must forward appropriate values for the headers with requests to other applications.</p>
-<p><h2 id="forgotten-passwords">Forgotten passwords</h2><p>If you believe you have forgotten your GOV.UK PaaS credentials, you can request a password reset using the links below:</p>
+
+<h2 id="forgotten-passwords">Forgotten passwords</h2>
+
+<p>If you believe you have forgotten your GOV.UK PaaS credentials, you can request a password reset using the links below:</p>
+
 <p><a href="https://admin.london.cloud.service.gov.uk/password/request-reset">Reset your password - London Accounts</a></p>
-<p><a href="https://admin.cloud.service.gov.uk/password/request-reset">Reset your password - Ireland Accounts</a></p></p>
+
+<p><a href="https://admin.cloud.service.gov.uk/password/request-reset">Reset your password - Ireland Accounts</a></p>
+
 
             
           </main>

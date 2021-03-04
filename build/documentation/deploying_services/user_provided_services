@@ -1,3 +1,8 @@
-<h1 id="user-provided-backing-services">User-provided backing services</h1><p>You can use backing services that are not available in the Cloud Foundry marketplace by using a <a href="https://docs.cloudfoundry.org/devguide/services/user-provided.html">user-provided service instance</a>.</p>
+<h1 id="user-provided-backing-services">User-provided backing services</h1>
+
+<p>You can use backing services that are not available in the Cloud Foundry marketplace by using a <a href="https://docs.cloudfoundry.org/devguide/services/user-provided.html">user-provided service instance</a>.</p>
+
 <p>User-provided backing service instances have the same functionality as backing service instances available in the marketplace.</p>
-<p>If you need a particular backing service that we do not support, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<p>If you need a particular backing service that we do not support, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+

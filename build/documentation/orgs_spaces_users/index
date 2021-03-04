@@ -1,172 +1,349 @@
-<h1 id="managing-organisations-spaces-and-users">Managing organisations, spaces and users</h1><h2 id="regions">Regions</h2><p>The GOV.UK PaaS is hosted in 2 independent regions, London and Ireland.</p>
+<h1 id="managing-organisations-spaces-and-users">Managing organisations, spaces and users</h1>
+
+<h2 id="regions">Regions</h2>
+
+<p>The GOV.UK PaaS is hosted in 2 independent regions, London and Ireland.</p>
+
 <p>GOV.UK PaaS accounts, credentials and resources belong to a single region.</p>
+
 <p>If you have a London region account, your app domain is <code>APPNAME.london.cloudapps.digital</code>.</p>
+
 <p>If you have an Ireland region account, your app domain is <code>APPNAME.cloudapps.digital</code>.</p>
-<h2 id="organisations">Organisations</h2><p>An organisation, or org, represents a group of users, applications and environments. Each org shares the same resource, quota and custom domain.</p>
+
+<h2 id="organisations">Organisations</h2>
+
+<p>An organisation, or org, represents a group of users, applications and environments. Each org shares the same resource, quota and custom domain.</p>
+
 <p>The GOV.UK PaaS team creates new orgs in the London region unless you request otherwise. We assign at least one <a href="orgs_spaces_users.html#org-manager">org manager</a> to new orgs. You can request your first org on the <a href="https://admin.london.cloud.service.gov.uk/support/sign-up">GOV.UK PaaS support page</a>.</p>
-<p>To request additional orgs, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> and tell us who the org manager(s) should be and the name of one of your existing orgs.</p>
+
+<p>To request additional orgs, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> and tell us who the org manager(s) should be and the name of one of your existing orgs.</p>
+
 <p>Run <code>cf orgs</code> to list the orgs your user account can access.</p>
+
 <p>To see <a href="managing_apps.html#quotas">quota</a> information about an org, you can select the appropriate org using the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in), and check the <strong>Memory</strong> total in the top right corner of the screen. The amount of information you can see depends on your user role within the org. For example, org managers can see all quota information, whereas space developers can only see information on spaces that they are members of.</p>
+
 <p>You can also run <code>cf org ORGNAME</code> to see <a href="managing_apps.html#quotas">quota</a> information about an org, where <code>ORGNAME</code> is the name of the org.</p>
-<p>Your user account will be initially assigned to one org by the PaaS team and then you can choose to belong to additional orgs. You can contact <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to request more orgs.</p>
-<h2 id="spaces">Spaces</h2><p>An org is divided into one or more spaces. A space is a shared location for developing, deploying and running apps and backing services.</p>
+
+<p>Your user account will be initially assigned to one org by the PaaS team and then you can choose to belong to additional orgs. You can contact <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> to request more orgs.</p>
+
+<h2 id="spaces">Spaces</h2>
+
+<p>An org is divided into one or more spaces. A space is a shared location for developing, deploying and running apps and backing services.</p>
+
 <p>For example, you might have separate spaces for the development and production versions of your app. When we set up your org, we create a default sandbox space you can use for experimenting with the PaaS.</p>
+
 <p>To see the spaces you can access in your current org, you can either:</p>
 
 <ul>
-<li>run <code>cf spaces</code> in the command line</li>
-<li>sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> and select the appropriate org</li>
+  <li><p>run <code>cf spaces</code> in the command line</p>
+  </li>
+  <li><p>sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> and select the appropriate org</p>
+  </li>
 </ul>
+
 <p><a href="orgs_spaces_users.html#org-manager">Org managers</a> can create new spaces within an org.</p>
+
 <p><a href="/documentation/figures/orgs-spaces.svg" rel="noopener noreferrer"><img src="/documentation/figures/orgs-spaces.svg" alt="Diagram showing an org that contains multiple spaces" /></a></p>
+
 <p>Refer to the <a href="orgs_spaces_users.html#case-studies">case studies</a> documentation for information on common structures for orgs, spaces and apps.</p>
-<h2 id="users-and-user-roles">Users and user roles</h2><p>Users are members of your team who can access or manage apps and backing services on the PaaS.</p>
+
+<h2 id="users-and-user-roles">Users and user roles</h2>
+
+<p>Users are members of your team who can access or manage apps and backing services on the PaaS.</p>
+
 <p>Users are assigned roles which have different permissions for accessing and managing orgs and spaces. A user can have one or multiple roles within the same or different orgs and spaces.</p>
-<p>To see a list of users and their roles in your org, you can view the appropriate org&rsquo;s <strong>Members</strong> screen in the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in). Your user account must have the <a href="orgs_spaces_users.html#org-manager">org manager role</a> or the <a href="orgs_spaces_users.html#org-auditor">org auditor role</a> to see this information in the admin tool.</p>
+
+<p>To see a list of users and their roles in your org, you can view the appropriate org's <strong>Members</strong> screen in the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in). Your user account must have the <a href="orgs_spaces_users.html#org-manager">org manager role</a> or the <a href="orgs_spaces_users.html#org-auditor">org auditor role</a> to see this information in the admin tool.</p>
+
 <p>You can also run <code>cf org-users ORGNAME</code> to see a list of users and their roles in your org, where <code>ORGNAME</code> is the name of the org.</p>
+
 <p>Although there are multiple roles, the 6 most common are:</p>
 
 <ul>
-<li>Org manager</li>
-<li>Org auditor</li>
-<li>Billing manager</li>
-<li>Space developer</li>
-<li>Space manager</li>
-<li>Space auditor</li>
+  <li><p>Org manager</p>
+  </li>
+  <li><p>Org auditor</p>
+  </li>
+  <li><p>Billing manager</p>
+  </li>
+  <li><p>Space developer</p>
+  </li>
+  <li><p>Space manager</p>
+  </li>
+  <li><p>Space auditor</p>
+  </li>
 </ul>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/concepts/roles.html#roles">Cloud Foundry documentation on roles and permissions</a> for more information.</p>
-<h3 id="org-manager">Org manager</h3><p>This role applies within an org.</p>
+
+<h3 id="org-manager">Org manager</h3>
+
+<p>This role applies within an org.</p>
+
 <p>Every org must have at least one org manager. Org managers are primary contacts for the org.</p>
+
 <p>Org managers manage spaces, users and user roles, and approve org changes such as requesting new quotas and enabling paid services.</p>
+
 <p>Org managers can use the GOV.UK PaaS admin tool to invite new users to an org, without needing to contact the GOV.UK PaaS team. This is possible for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in).</p>
+
 <p>We create at least one user account with the org manager role as part of your onboarding process. We recommend you have at least 2 org managers in case one is unavailable.</p>
-<p>If you need the org manager role added to a user account, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
-<h3 id="org-auditor">Org auditor</h3><p>This role applies within an org.</p>
+
+<p>If you need the org manager role added to a user account, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
+<h3 id="org-auditor">Org auditor</h3>
+
+<p>This role applies within an org.</p>
+
 <p>Org auditors can view user account information and org <a href="managing_apps.html#quotas">quota</a> information, but cannot edit that information.</p>
-<h3 id="billing-manager">Billing manager</h3><p>This role applies within an org.</p>
+
+<h3 id="billing-manager">Billing manager</h3>
+
+<p>This role applies within an org.</p>
+
 <p>Billing managers create and manage billing account and payment information. They can also view users and roles using the command line, or the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in).</p>
+
 <p>You should assign a billing manager to your org before your service moves to production. We will send all payment requests to the billing manager. An org manager can also be a billing manager.</p>
-<p>Contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> if you have any questions.</p>
-<h3 id="space-developer">Space developer</h3><p>This role applies within a space.</p>
+
+<p>Contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> if you have any questions.</p>
+
+<h3 id="space-developer">Space developer</h3>
+
+<p>This role applies within a space.</p>
+
 <p>A space developer can deploy, run and manage apps, and create and bind services. This is the default role for any user who is not assigned a manager role.</p>
+
 <p>For example, a space developer granted access to the testing space only can change apps in this space. However, that developer cannot do anything in the production space because they do not have access to this space.</p>
-<h3 id="space-manager">Space manager</h3><p>This role applies within a space.</p>
+
+<h3 id="space-manager">Space manager</h3>
+
+<p>This role applies within a space.</p>
+
 <p>A space manager grants user roles within a space and can change space properties using the command line. A space manager cannot deploy, run, or manage apps or services.</p>
+
 <p>For example, a team member needs to change apps in both the testing and production spaces, and manage users in the testing space. The org manager grants this team member the space manager role in the testing space, and the space developer role in both the testing and production spaces. That team member can add users to testing but not to production (as a space manager), and can change apps in both spaces (as a space developer).</p>
-<h3 id="space-auditor">Space auditor</h3><p>This role applies within a space.</p>
+
+<h3 id="space-auditor">Space auditor</h3>
+
+<p>This role applies within a space.</p>
+
 <p>Space auditors can view apps, users and resources used within a space using the command line, but cannot edit them. This role is useful for viewing app data without modifying it.</p>
-<h2 id="manage-orgs-spaces-and-user-roles">Manage orgs, spaces and user roles</h2><p>There are several common tasks to manage spaces and user roles.</p>
-<h3 id="create-a-new-space">Create a new space</h3><p>Org managers can create spaces.</p>
+
+<h2 id="manage-orgs-spaces-and-user-roles">Manage orgs, spaces and user roles</h2>
+
+<p>There are several common tasks to manage spaces and user roles.</p>
+
+<h3 id="create-a-new-space">Create a new space</h3>
+
+<p>Org managers can create spaces.</p>
+
 <p>Run the following to create a new space:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf create-space SPACE -o ORGNAME
-</code></pre></div><p>where <code>SPACE</code> is the name of the space, and <code>ORGNAME</code> is the name of the org.</p>
+</code></pre></div>
+<p>where <code>SPACE</code> is the name of the space, and <code>ORGNAME</code> is the name of the org.</p>
+
 <p>You can then add users to that space.</p>
-<h3 id="add-users-to-a-space">Add users to a space</h3><p>After a user has been added to an org, org managers can use the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in) to grant a user access to a space by assigning a role to that user.</p>
+
+<h3 id="add-users-to-a-space">Add users to a space</h3>
+
+<p>After a user has been added to an org, org managers can use the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in) to grant a user access to a space by assigning a role to that user.</p>
 
 <ol>
-<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
-<li>Select the appropriate org.</li>
-<li>Select <strong>View and manage team members</strong>.</li>
-<li>Select <strong>Invite a new team member</strong>.</li>
-<li>Complete the form and select <strong>Send invitation</strong>.</li>
+  <li><p>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li><p>Select the appropriate org.</p>
+  </li>
+  <li><p>Select <strong>View and manage team members</strong>.</p>
+  </li>
+  <li><p>Select <strong>Invite a new team member</strong>.</p>
+  </li>
+  <li><p>Complete the form and select <strong>Send invitation</strong>.</p>
+  </li>
 </ol>
+
 <p>Alternatively, the org manager can run the following in the command line:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf set-space-role USERNAME ORGNAME SPACE ROLE
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>USERNAME</code> is the email address the user signs in with when using the command line client</li>
-<li><code>ORGNAME</code> is the name of the org</li>
-<li><code>SPACE</code> is the name of the space</li>
-<li><code>ROLE</code> is the user role you are granting to the user of the email address in the <code>USERNAME</code> field</li>
+  <li><p><code>USERNAME</code> is the email address the user signs in with when using the command line client</p>
+  </li>
+  <li><p><code>ORGNAME</code> is the name of the org</p>
+  </li>
+  <li><p><code>SPACE</code> is the name of the space</p>
+  </li>
+  <li><p><code>ROLE</code> is the user role you are granting to the user of the email address in the <code>USERNAME</code> field</p>
+  </li>
 </ul>
+
 <p>For example, to grant ana@example.com the space developer role in the test space within the acme org, the org manager would run:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf set-space-role ana@example.com acme test SpaceDeveloper
-</code></pre></div><p>Refer to the <a href="https://cli.cloudfoundry.org/en-US/cf/set-space-role.html">Cloud Foundry reference guide on <code>cf set-space-role</code></a> for a complete list of roles.</p>
-<h3 id="remove-users-from-a-space">Remove users from a space</h3><p>When a team member leaves or stops working on a project, the org manager should revoke that team member’s access rights.</p>
+</code></pre></div>
+<p>Refer to the <a href="https://cli.cloudfoundry.org/en-US/cf/set-space-role.html">Cloud Foundry reference guide on <code>cf set-space-role</code></a> for a complete list of roles.</p>
+
+<h3 id="remove-users-from-a-space">Remove users from a space</h3>
+
+<p>When a team member leaves or stops working on a project, the org manager should revoke that team member’s access rights.</p>
+
 <p>The org manager can use the GOV.UK PaaS admin tool to remove all of the team member’s user roles within the team’s spaces.</p>
 
 <ol>
-<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
-<li>Select the appropriate org.</li>
-<li>Select <strong>View and manage team members</strong>.</li>
-<li>Select the appropriate user.</li>
-<li>Change the user’s space roles and select <strong>Save role changes</strong>.</li>
+  <li><p>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li><p>Select the appropriate org.</p>
+  </li>
+  <li><p>Select <strong>View and manage team members</strong>.</p>
+  </li>
+  <li><p>Select the appropriate user.</p>
+  </li>
+  <li><p>Change the user’s space roles and select <strong>Save role changes</strong>.</p>
+  </li>
 </ol>
+
 <p>Alternatively, the org manager can run the following in the command line:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unset-space-role USERNAME ORGNAME SPACE ROLE
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>USERNAME</code> is the email address the user signs in with when using the command line client</li>
-<li><code>ORGNAME</code> is the name of the org</li>
-<li><code>SPACE</code> is the name of the space</li>
-<li><code>ROLE</code> is the user role granted to the user of the email address in the <code>USERNAME</code> field</li>
+  <li><p><code>USERNAME</code> is the email address the user signs in with when using the command line client</p>
+  </li>
+  <li><p><code>ORGNAME</code> is the name of the org</p>
+  </li>
+  <li><p><code>SPACE</code> is the name of the space</p>
+  </li>
+  <li><p><code>ROLE</code> is the user role granted to the user of the email address in the <code>USERNAME</code> field</p>
+  </li>
 </ul>
-<p>For example, to remove ana@example.com&rsquo;s space developer role from the sandbox space within the acme org, the org manager would run:</p>
+
+<p>For example, to remove ana@example.com's space developer role from the sandbox space within the acme org, the org manager would run:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
-</code></pre></div><p>Refer to the <a href="https://cli.cloudfoundry.org/en-US/cf/unset-space-role.html">Cloud Foundry reference guide on <code>cf unset-space-role</code></a> for a complete list of roles.</p>
-<h3 id="invite-users-to-an-org">Invite users to an org</h3><p>Org managers can use the GOV.UK PaaS admin tool to invite users to their org when they join their team.</p>
+</code></pre></div>
+<p>Refer to the <a href="https://cli.cloudfoundry.org/en-US/cf/unset-space-role.html">Cloud Foundry reference guide on <code>cf unset-space-role</code></a> for a complete list of roles.</p>
+
+<h3 id="invite-users-to-an-org">Invite users to an org</h3>
+
+<p>Org managers can use the GOV.UK PaaS admin tool to invite users to their org when they join their team.</p>
 
 <ol>
-<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
-<li>Select the appropriate org.</li>
-<li>Select <strong>View and manage team members</strong>.</li>
-<li>Select <strong>Invite a new team member</strong>.</li>
-<li>Complete the form and select <strong>Send invitation</strong>.</li>
+  <li><p>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li><p>Select the appropriate org.</p>
+  </li>
+  <li><p>Select <strong>View and manage team members</strong>.</p>
+  </li>
+  <li><p>Select <strong>Invite a new team member</strong>.</p>
+  </li>
+  <li><p>Complete the form and select <strong>Send invitation</strong>.</p>
+  </li>
 </ol>
-<h3 id="remove-users-from-an-org">Remove users from an org</h3><p>When a team member leaves or stops working on a project, their org manager must <a href="orgs_spaces_users.html#remove-users-from-a-space">remove all of that team member’s user roles from the team’s spaces</a>.</p>
+
+<h3 id="remove-users-from-an-org">Remove users from an org</h3>
+
+<p>When a team member leaves or stops working on a project, their org manager must <a href="orgs_spaces_users.html#remove-users-from-a-space">remove all of that team member’s user roles from the team’s spaces</a>.</p>
+
 <p>If the leaving team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must also remove that team member’s user role from the team’s org.</p>
 
 <ol>
-<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
-<li>Select the appropriate org.</li>
-<li>Select <strong>View and manage team members</strong>.</li>
-<li>Select the appropriate user.</li>
-<li>Select <strong>Remove user from Organisation</strong>.</li>
-<li>To confirm, select <strong>Yes, remove from organisation</strong>.</li>
+  <li><p>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li><p>Select the appropriate org.</p>
+  </li>
+  <li><p>Select <strong>View and manage team members</strong>.</p>
+  </li>
+  <li><p>Select the appropriate user.</p>
+  </li>
+  <li><p>Select <strong>Remove user from Organisation</strong>.</p>
+  </li>
+  <li><p>To confirm, select <strong>Yes, remove from organisation</strong>.</p>
+  </li>
 </ol>
+
 <p>Alternatively, the other org manager or the GOV.UK PaaS team can run the following in the command line:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unset-org-role USERNAME ORGNAME ROLE
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>USERNAME</code> is the email address the user logs in with when using the command line client</li>
-<li><code>ORGNAME</code> is the name of the org</li>
-<li><code>ROLE</code> is the user role granted to the user of the email address in the <code>USERNAME</code> field</li>
+  <li><p><code>USERNAME</code> is the email address the user logs in with when using the command line client</p>
+  </li>
+  <li><p><code>ORGNAME</code> is the name of the org</p>
+  </li>
+  <li><p><code>ROLE</code> is the user role granted to the user of the email address in the <code>USERNAME</code> field</p>
+  </li>
 </ul>
-<p>For example, to remove ana@example.com&rsquo;s org manager role from the acme org, either the other org manager or the GOV.UK PaaS team should run:</p>
+
+<p>For example, to remove ana@example.com's org manager role from the acme org, either the other org manager or the GOV.UK PaaS team should run:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unset-org-role ana@example.com acme OrgManager
-</code></pre></div><p>If the user still needs access to GOV.UK PaaS to work on other projects, nothing else needs to change.</p>
-<p>If the user no longer needs access to GOV.UK PaaS, then your org manager must contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to ask us to delete the user account.</p>
+</code></pre></div>
+<p>If the user still needs access to GOV.UK PaaS to work on other projects, nothing else needs to change.</p>
+
+<p>If the user no longer needs access to GOV.UK PaaS, then your org manager must contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a> to ask us to delete the user account.</p>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/adminguide/cli-user-management.html">Cloud Foundry documentation on creating and managing users with the CLI</a> for more information.</p>
-<h3 id="view-bills">View bills</h3><p><a href="/orgs_spaces_users.html#org-manager">Org managers</a> and <a href="/orgs_spaces_users.html#billing-manager">billing managers</a> can use the GOV.UK PaaS admin tool to view current or past bills within an org.</p>
+
+<h3 id="view-bills">View bills</h3>
+
+<p><a href="/orgs_spaces_users.html#org-manager">Org managers</a> and <a href="/orgs_spaces_users.html#billing-manager">billing managers</a> can use the GOV.UK PaaS admin tool to view current or past bills within an org.</p>
 
 <ol>
-<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
-<li>Select the appropriate org.</li>
-<li>Select <strong>Billing</strong>.</li>
-<li>View your bills. You can filter the bills shown by <strong>Month</strong>, <strong>Space</strong>, or <strong>Services and apps</strong>.</li>
+  <li><p>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</p>
+  </li>
+  <li><p>Select the appropriate org.</p>
+  </li>
+  <li><p>Select <strong>Billing</strong>.</p>
+  </li>
+  <li><p>View your bills. You can filter the bills shown by <strong>Month</strong>, <strong>Space</strong>, or <strong>Services and apps</strong>.</p>
+  </li>
 </ol>
-<h2 id="case-studies">Case studies</h2><p>This section summarises 2 common models for orgs and spaces.</p>
+
+<h2 id="case-studies">Case studies</h2>
+
+<p>This section summarises 2 common models for orgs and spaces.</p>
+
 <p>There are other ways to structure orgs and spaces, and you can change your existing structure to suit the project you’re working on.</p>
-<h3 id="model-1">Model 1</h3><p>In this example model, an org represents a service or service team within a government department or business area. Each org has multiple spaces. Spaces represent environments such as development, sandbox, staging or production or can represent different applications. These spaces host apps and backing services.</p>
+
+<h3 id="model-1">Model 1</h3>
+
+<p>In this example model, an org represents a service or service team within a government department or business area. Each org has multiple spaces. Spaces represent environments such as development, sandbox, staging or production or can represent different applications. These spaces host apps and backing services.</p>
+
 <p>Departments or government teams that use this structure include:</p>
 
 <ul>
-<li>Department for Business, Energy and Industrial Strategy</li>
-<li>GDS Digital Marketplace</li>
+  <li><p>Department for Business, Energy and Industrial Strategy</p>
+  </li>
+  <li><p>GDS Digital Marketplace</p>
+  </li>
 </ul>
+
 <p><a href="/documentation/figures/orgs-spaces-model-1.svg" rel="noopener noreferrer"><img src="/documentation/figures/orgs-spaces-model-1.svg" alt="Diagram showing model 1 of orgs, spaces and apps" /></a></p>
+
 <p>This model has the following advantages:</p>
 
 <ul>
-<li>it is easy to manage user permissions within each org because spaces that require higher permissions (such as staging or production) are already separated from other spaces that do not have as high a requirement</li>
-<li>developers that do not have security clearances yet can have their access restricted if necessary</li>
-<li>each org represents a business area which makes billing administration simple</li>
+  <li><p>it is easy to manage user permissions within each org because spaces that require higher permissions (such as staging or production) are already separated from other spaces that do not have as high a requirement</p>
+  </li>
+  <li><p>developers that do not have security clearances yet can have their access restricted if necessary</p>
+  </li>
+  <li><p>each org represents a business area which makes billing administration simple</p>
+  </li>
 </ul>
+
 <p>However, there is no reuse of orgs and spaces in this structure, which incurs a time and resource cost.</p>
-<h3 id="model-2">Model 2</h3><p>In this example, an org represents an environment such as development, sandbox, staging or production. Each org has multiple spaces. Spaces represent services or service teams within a government department or business area. These spaces host apps and backing services.</p>
+
+<h3 id="model-2">Model 2</h3>
+
+<p>In this example, an org represents an environment such as development, sandbox, staging or production. Each org has multiple spaces. Spaces represent services or service teams within a government department or business area. These spaces host apps and backing services.</p>
+
 <p>Departments that use this structure include the Department for International Trade.</p>
+
 <p><a href="/documentation/figures/orgs-spaces-model-2.svg" rel="noopener noreferrer"><img src="/documentation/figures/orgs-spaces-model-2.svg" alt="Diagram showing model 2 of orgs, spaces and apps" /></a></p>
+
 <p>This model makes it easier to control resources and spending between different environments.</p>

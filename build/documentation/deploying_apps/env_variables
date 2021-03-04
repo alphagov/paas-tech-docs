@@ -1,36 +1,66 @@
-<h2 id="environment-variables">Environment variables</h2><p>You must store all configuration information for your app as environment variables.</p>
+<h2 id="environment-variables">Environment variables</h2>
+
+<p>You must store all configuration information for your app as environment variables.</p>
+
 <p>This could include:</p>
 
 <ul>
-<li>credentials for external services that your app uses, for example a Twitter account</li>
-<li>values that will vary with each deployment of the app, for example the canonical URL</li>
+  <li><p>credentials for external services that your app uses, for example a Twitter account</p>
+  </li>
+  <li><p>values that will vary with each deployment of the app, for example the canonical URL</p>
+  </li>
 </ul>
-<p>To view an app&rsquo;s current environment variables, run <code>cf env APP_NAME</code>.</p>
+
+<p>To view an app's current environment variables, run <code>cf env APP_NAME</code>.</p>
+
 <p>To create or update a variable, run the following:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf set-env APP_NAME ENV_VAR_NAME ENV_VAR_VALUE
-</code></pre></div><p>If you&rsquo;re deploying a pre-existing app, you should check the app&rsquo;s documentation for any environment variables you need to set.</p>
+</code></pre></div>
+<p>If you're deploying a pre-existing app, you should check the app's documentation for any environment variables you need to set.</p>
+
 <p>For example, if the app has these instructions for deploying to Heroku:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>heroku config:set VARIABLE=value
-</code></pre></div><p>then you should run the equivalent command using <code>cf set-env</code>:</p>
+</code></pre></div>
+<p>then you should run the equivalent command using <code>cf set-env</code>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf set-env APP_NAME VARIABLE value
-</code></pre></div><h3 id="system-provided-environment-variables">System-provided environment variables</h3><p>System-provided environment variables tell you about configuration details handled by the PaaS, for example:</p>
+</code></pre></div>
+<h3 id="system-provided-environment-variables">System-provided environment variables</h3>
+
+<p>System-provided environment variables tell you about configuration details handled by the PaaS, for example:</p>
 
 <ul>
-<li>the port on which the app is listening</li>
-<li>the maximum memory each app instance can use</li>
-<li>the external IP address of the app instance</li>
+  <li><p>the port on which the app is listening</p>
+  </li>
+  <li><p>the maximum memory each app instance can use</p>
+  </li>
+  <li><p>the external IP address of the app instance</p>
+  </li>
 </ul>
-<p>Do not attempt to change the values of these system-provided variables using the command line or your app&rsquo;s code.</p>
+
+<p>Do not attempt to change the values of these system-provided variables using the command line or your app's code.</p>
+
 <p><code>VCAP_SERVICES</code> and <code>VCAP_APPLICATION</code> are two important variables for initial setup:</p>
 
 <ul>
-<li><p><code>VCAP_SERVICES</code> contains details, including credentials, of any backing services bound to the app</p></li>
-<li><p><code>VCAP_APPLICATION</code> provides details of the currently running application, for example the language runtime version</p></li>
+  <li>
+<p><code>VCAP_SERVICES</code> contains details, including credentials, of any backing services bound to the app</p>
+  </li>
+  <li>
+<p><code>VCAP_APPLICATION</code> provides details of the currently running application, for example the language runtime version</p>
+  </li>
 </ul>
+
 <p>To see the values of the system-provided variables, run <code>cf env APP_NAME</code>.</p>
+
 <p>If your app connects to a backing service, you may need to have your app parse <code>VCAP_SERVICES</code> to get the credentials and other settings relating to that service and set the appropriate environment variables.</p>
+
 <p>Some buildpacks will do this for you automatically. Refer to the deploy instructions for the language or framework you are using for more information.</p>
+
 <p>Here is an example of the structure of the information contained in <code>VCAP_SERVICES</code>:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>{
  "VCAP_SERVICES": {
   "postgres": [
@@ -60,4 +90,5 @@
   ]
  }
 }
-</code></pre></div><p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html">Cloud Foundry documentation on environment variables</a> for more information.</p>
+</code></pre></div>
+<p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html">Cloud Foundry documentation on environment variables</a> for more information.</p>

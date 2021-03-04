@@ -1,116 +1,194 @@
-<h1 id="monitoring-apps">Monitoring apps</h1><h2 id="app-metrics">App metrics</h2><p>Cloud Foundry provides time series data known as metrics for each instance of your PaaS app. You can receive, store and view this data in a monitoring system of your choice by deploying either the:</p>
+<h1 id="monitoring-apps">Monitoring apps</h1>
+
+<h2 id="app-metrics">App metrics</h2>
+
+<p>Cloud Foundry provides time series data known as metrics for each instance of your PaaS app. You can receive, store and view this data in a monitoring system of your choice by deploying either the:</p>
 
 <ul>
-<li><a href="https://github.com/alphagov/paas-prometheus-exporter"><code>paas-prometheus-exporter</code></a> app to collect and display metrics in the <a href="https://prometheus.io/docs/introduction/overview">Prometheus format</a></li>
-<li><a href="https://github.com/alphagov/paas-metric-exporter"><code>paas-metric-exporter</code></a> app to push metrics data in the <a href="https://github.com/etsy/statsd/wiki">StatsD format</a></li>
+  <li><p><a href="https://github.com/alphagov/paas-prometheus-exporter"><code>paas-prometheus-exporter</code></a> app to collect and display metrics in the <a href="https://prometheus.io/docs/introduction/overview">Prometheus format</a></p>
+  </li>
+  <li><p><a href="https://github.com/alphagov/paas-metric-exporter"><code>paas-metric-exporter</code></a> app to push metrics data in the <a href="https://github.com/etsy/statsd/wiki">StatsD format</a></p>
+  </li>
 </ul>
+
 <p>You can also view all metrics in a one-off snapshot by installing the <a href="https://github.com/cloudfoundry/log-cache-cli#installing-plugin">Cloud Foundry CLI log cache plug-in</a>.</p>
-<h3 id="use-the-paas-prometheus-exporter-app">Use the PaaS Prometheus exporter app</h3><p>The PaaS Prometheus exporter collects metrics from your apps and any backing services configured to send metrics to the PaaS.</p>
+
+<h3 id="use-the-paas-prometheus-exporter-app">Use the PaaS Prometheus exporter app</h3>
+
+<p>The PaaS Prometheus exporter collects metrics from your apps and any backing services configured to send metrics to the PaaS.</p>
+
 <p>To use the PaaS Prometheus exporter, deploy it as an app on the GOV.UK PaaS. Refer to the <a href="https://github.com/alphagov/paas-prometheus-exporter/blob/master/README.md">PaaS Prometheus exporter README documentation</a> for more information on supported metrics.</p>
-<h4 id="prerequisites">Prerequisites</h4><p>Before you set up the PaaS Prometheus exporter app, you’ll need a:</p>
+
+<h4 id="prerequisites">Prerequisites</h4>
+
+<p>Before you set up the PaaS Prometheus exporter app, you’ll need a:</p>
 
 <ul>
-<li>Prometheus service to request or ‘scrape’, store and expose metrics from a metrics endpoint</li>
-<li>live <a href="https://docs.cloud.service.gov.uk/get_started.html#get-an-account">GOV.UK PaaS account</a> assigned to the orgs and spaces you want to receive metrics on</li>
+  <li><p>Prometheus service to request or ‘scrape’, store and expose metrics from a metrics endpoint</p>
+  </li>
+  <li><p>live <a href="https://docs.cloud.service.gov.uk/get_started.html#get-an-account">GOV.UK PaaS account</a> assigned to the orgs and spaces you want to receive metrics on</p>
+  </li>
 </ul>
+
 <p>We recommend this GOV.UK PaaS account:</p>
 
 <ul>
-<li>uses the <a href="/orgs_spaces_users.html#space-auditor"><code>SpaceAuditor</code> role</a> as this role has the minimum permissions needed to meet the requirements of the PaaS Prometheus exporter app</li>
-<li>is separate to your primary GOV.UK PaaS account</li>
+  <li><p>uses the <a href="/orgs_spaces_users.html#space-auditor"><code>SpaceAuditor</code> role</a> as this role has the minimum permissions needed to meet the requirements of the PaaS Prometheus exporter app</p>
+  </li>
+  <li><p>is separate to your primary GOV.UK PaaS account</p>
+  </li>
 </ul>
-<h4 id="set-up-the-app">Set up the app</h4>
-<ol>
-<li><p>Clone the <a href="https://github.com/alphagov/paas-prometheus-exporter">PaaS Prometheus exporter repository</a>.</p></li>
-<li><p><a href="/deploying_apps.html#deploying-public-apps">Push the PaaS Prometheus exporter app</a> to Cloud Foundry without starting the app:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf push --no-start prometheus-exporter --hostname prometheus-exporter-ORGNAME
-</code></pre></div><p>where <code>ORGNAME</code> is the name of your org. For example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf push --no-start prometheus-exporter --hostname prometheus-exporter-exampleorg
-</code></pre></div><p>Running this command deploys the PaaS Prometheus exporter app to <code>https://prometheus-exporter-exampleorg.cloudapps.digital</code> without starting the app.</p>
-<p>Refer to the <a href="/deploying_apps.html#app-names-and-domain-hostname-clash">app names and domain hostnames documentation</a> for more information on how to avoid duplicating existing app names.</p></li>
-<li><p>Set the following mandatory environment variables in the PaaS Prometheus exporter app by running <code>cf set-env prometheus-exporter NAME VALUE</code>:</p>
-<div class="table-container">
-        <table>
-          <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Value</th>
-</tr>
-<tr>
-<td style="text-align: left"><code>API_ENDPOINT</code></td>
-<td style="text-align: left">- <code>https://api.cloud.service.gov.uk</code> for Ireland<br>- <code>https://api.london.cloud.service.gov.uk</code> for London</td>
-</tr>
-<tr>
-<td style="text-align: left"><code>USERNAME</code></td>
-<td style="text-align: left">Cloud Foundry User</td>
-</tr>
-<tr>
-<td style="text-align: left"><code>PASSWORD</code></td>
-<td style="text-align: left">Cloud Foundry Password</td>
-</tr>
 
-        </table>
-      </div><p>You should use the <code>cf set-env</code> command for these mandatory variables as they contain secret information, and this method will keep them secure.</p>
-<p>You can also set environment variables by changing the manifest file. You should do this for optional environment variables that do not contain secret information. Refer to the <a href="https://github.com/alphagov/paas-prometheus-exporter">PaaS Prometheus exporter repository</a> for more information.</p></li>
-<li><p>Start the PaaS Prometheus exporter app:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf start prometheus-exporter
-</code></pre></div></li>
-<li><p>Configure your Prometheus service&rsquo;s metrics endpoint. The metrics endpoint is the deployed PaaS Prometheus exporter app URL with <code>/metrics</code> added on to the end. For this example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>https://prometheus-exporter-exampleorg.cloudapps.digital/metrics
-</code></pre></div></li>
+<h4 id="set-up-the-app">Set up the app</h4>
+
+<ol>
+  <li>
+<p>Clone the <a href="https://github.com/alphagov/paas-prometheus-exporter">PaaS Prometheus exporter repository</a>.</p>
+  </li>
+  <li>
+<p><a href="/deploying_apps.html#deploying-public-apps">Push the PaaS Prometheus exporter app</a> to Cloud Foundry without starting the app:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf push --no-start prometheus-exporter --hostname prometheus-exporter-ORGNAME
+</code></pre></div>
+<p>where <code>ORGNAME</code> is the name of your org. For example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf push --no-start prometheus-exporter --hostname prometheus-exporter-exampleorg
+</code></pre></div>
+<p>Running this command deploys the PaaS Prometheus exporter app to <code>https://prometheus-exporter-exampleorg.cloudapps.digital</code> without starting the app.</p>
+
+<p>Refer to the <a href="/deploying_apps.html#app-names-and-domain-hostname-clash">app names and domain hostnames documentation</a> for more information on how to avoid duplicating existing app names.</p>
+  </li>
+  <li>
+<p>Set the following mandatory environment variables in the PaaS Prometheus exporter app by running <code>cf set-env prometheus-exporter NAME VALUE</code>:</p>
+
+<div class="table-container">
+            <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Name</th>
+          <th style="text-align: left">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><code>API_ENDPOINT</code></td>
+          <td style="text-align: left">- <code>https://api.cloud.service.gov.uk</code> for Ireland<br />- <code>https://api.london.cloud.service.gov.uk</code> for London</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>USERNAME</code></td>
+          <td style="text-align: left">Cloud Foundry User</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>PASSWORD</code></td>
+          <td style="text-align: left">Cloud Foundry Password</td>
+        </tr>
+      </tbody>
+    </table>
+
+      </div>
+<p>You should use the <code>cf set-env</code> command for these mandatory variables as they contain secret information, and this method will keep them secure.</p>
+
+<p>You can also set environment variables by changing the manifest file. You should do this for optional environment variables that do not contain secret information. Refer to the <a href="https://github.com/alphagov/paas-prometheus-exporter">PaaS Prometheus exporter repository</a> for more information.</p>
+  </li>
+  <li>
+<p>Start the PaaS Prometheus exporter app:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf start prometheus-exporter
+</code></pre></div>  </li>
+  <li>
+<p>Configure your Prometheus service's metrics endpoint. The metrics endpoint is the deployed PaaS Prometheus exporter app URL with <code>/metrics</code> added on to the end. For this example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> https://prometheus-exporter-exampleorg.cloudapps.digital/metrics
+</code></pre></div>  </li>
 </ol>
+
 <p>You can now check your Prometheus service to see if you are collecting metrics.</p>
+
 <p>If you do not receiving any metrics, check the PaaS Prometheus exporter app <a href="/monitoring_apps.html#logs">logs</a>.</p>
-<p>If you still need help, contact us by emailing <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
-<h4 id="add-authentication">Add authentication</h4><p>By default, the PaaS Prometheus exporter app and metrics endpoint are publicly accessible to everyone through the internet.</p>
+
+<p>If you still need help, contact us by emailing <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
+<h4 id="add-authentication">Add authentication</h4>
+
+<p>By default, the PaaS Prometheus exporter app and metrics endpoint are publicly accessible to everyone through the internet.</p>
+
 <p>If you want to add authentication to the app and endpoint, refer to the documentation on <a href="https://docs.cloud.service.gov.uk/deploying_services/route_services/#example-route-service-to-add-authentication">adding a route service to provide basic HTTP authentication</a>.</p>
-<h3 id="metrics-exporter-app-with-statsd">Metrics exporter app with StatsD</h3><p>To use the metrics exporter, you deploy it as an app on PaaS. Refer to the <a href="https://github.com/alphagov/paas-metric-exporter/blob/master/README.md">metrics exporter README documentation</a> for more information on supported metrics.</p>
+
+<h3 id="metrics-exporter-app-with-statsd">Metrics exporter app with StatsD</h3>
+
+<p>To use the metrics exporter, you deploy it as an app on PaaS. Refer to the <a href="https://github.com/alphagov/paas-metric-exporter/blob/master/README.md">metrics exporter README documentation</a> for more information on supported metrics.</p>
+
 <p>Before you set up the metrics exporter app, you will need:</p>
 
 <ul>
-<li>a monitoring system to store the metrics with an accompanying <a href="https://github.com/etsy/statsd/wiki">StatsD</a> endpoint set up</li>
-<li>a live Cloud Foundry account assigned to the orgs and spaces you want to receive metrics on</li>
+  <li><p>a monitoring system to store the metrics with an accompanying <a href="https://github.com/etsy/statsd/wiki">StatsD</a> endpoint set up</p>
+  </li>
+  <li><p>a live Cloud Foundry account assigned to the orgs and spaces you want to receive metrics on</p>
+  </li>
 </ul>
+
 <p>We recommend that this Cloud Foundry account:</p>
 
 <ul>
-<li>uses the <a href="/orgs_spaces_users.html#space-auditor"><code>SpaceAuditor</code> role</a> as this role has the minimum permissions needed to meet the requirements of the metrics exporter app</li>
-<li>is separate to your primary Cloud Foundry account</li>
+  <li><p>uses the <a href="/orgs_spaces_users.html#space-auditor"><code>SpaceAuditor</code> role</a> as this role has the minimum permissions needed to meet the requirements of the metrics exporter app</p>
+  </li>
+  <li><p>is separate to your primary Cloud Foundry account</p>
+  </li>
 </ul>
+
 <p>To set up the metrics exporter app:</p>
 
 <ol>
-<li>Clone the <a href="https://github.com/alphagov/paas-metric-exporter">https://github.com/alphagov/paas-metric-exporter</a> repository.</li>
-<li><a href="/deploying_apps.html#deploying-public-apps">Push the metrics exporter app</a> to Cloud Foundry without starting the app by running <code>cf push --no-start metric-exporter</code>.</li>
-<li><p>Set the following mandatory environment variables in the metrics exporter app by running <code>cf set-env metric-exporter NAME VALUE</code>:</p>
-<div class="table-container">
-        <table>
-          <tr>
-<th style="text-align: left">Name</th>
-<th style="text-align: left">Value</th>
-</tr>
-<tr>
-<td style="text-align: left"><code>API_ENDPOINT</code></td>
-<td style="text-align: left">- <code>https://api.cloud.service.gov.uk</code> for Ireland<br>- <code>https://api.london.cloud.service.gov.uk</code> for London</td>
-</tr>
-<tr>
-<td style="text-align: left"><code>STATSD_ENDPOINT</code></td>
-<td style="text-align: left">StatsD endpoint</td>
-</tr>
-<tr>
-<td style="text-align: left"><code>USERNAME</code></td>
-<td style="text-align: left">Cloud Foundry User</td>
-</tr>
-<tr>
-<td style="text-align: left"><code>PASSWORD</code></td>
-<td style="text-align: left">Cloud Foundry Password</td>
-</tr>
+  <li><p>Clone the <a href="https://github.com/alphagov/paas-metric-exporter">https://github.com/alphagov/paas-metric-exporter</a> repository.</p>
+  </li>
+  <li><p><a href="/deploying_apps.html#deploying-public-apps">Push the metrics exporter app</a> to Cloud Foundry without starting the app by running <code>cf push --no-start metric-exporter</code>.</p>
+  </li>
+  <li>
+<p>Set the following mandatory environment variables in the metrics exporter app by running <code>cf set-env metric-exporter NAME VALUE</code>:</p>
 
-        </table>
-      </div><p>You should use the <code>cf set-env</code> command for these mandatory variables as they contain secret information, and this method will keep them secure.</p>
-<p>You can also set environment variables by amending the manifest file. We recommend that you use this method for optional environment variables that do not contain secret information. Refer to the <a href="https://github.com/alphagov/paas-metric-exporter">https://github.com/alphagov/paas-metric-exporter</a> repository for more information.</p></li>
-<li><p>Start the metrics exporter app by running <code>cf start metric-exporter</code>.</p></li>
+<div class="table-container">
+            <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Name</th>
+          <th style="text-align: left">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: left"><code>API_ENDPOINT</code></td>
+          <td style="text-align: left">- <code>https://api.cloud.service.gov.uk</code> for Ireland<br />- <code>https://api.london.cloud.service.gov.uk</code> for London</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>STATSD_ENDPOINT</code></td>
+          <td style="text-align: left">StatsD endpoint</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>USERNAME</code></td>
+          <td style="text-align: left">Cloud Foundry User</td>
+        </tr>
+        <tr>
+          <td style="text-align: left"><code>PASSWORD</code></td>
+          <td style="text-align: left">Cloud Foundry Password</td>
+        </tr>
+      </tbody>
+    </table>
+
+      </div>
+<p>You should use the <code>cf set-env</code> command for these mandatory variables as they contain secret information, and this method will keep them secure.</p>
+
+<p>You can also set environment variables by amending the manifest file. We recommend that you use this method for optional environment variables that do not contain secret information. Refer to the <a href="https://github.com/alphagov/paas-metric-exporter">https://github.com/alphagov/paas-metric-exporter</a> repository for more information.</p>
+  </li>
+  <li><p>Start the metrics exporter app by running <code>cf start metric-exporter</code>.</p>
+  </li>
 </ol>
+
 <p>You can now check your monitoring system to see if you are receiving metrics.</p>
-<p>If you are not receiving any metrics, check the <a href="/monitoring_apps.html#logs">logs</a> for the metrics exporter app. If you still need help, please contact us by emailing <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
-<h2 id="more-about-monitoring">More about monitoring</h2><p>For more information about monitoring apps, see <a href="https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service">Monitoring the status of your service</a> on the Service Manual.</p>
+
+<p>If you are not receiving any metrics, check the <a href="/monitoring_apps.html#logs">logs</a> for the metrics exporter app. If you still need help, please contact us by emailing <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
+<h2 id="more-about-monitoring">More about monitoring</h2>
+
+<p>For more information about monitoring apps, see <a href="https://www.gov.uk/service-manual/technology/monitoring-the-status-of-your-service">Monitoring the status of your service</a> on the Service Manual.</p>
+
 <p>To learn how to monitor your databases, see our <a href="/monitoring_services.html">documentation on monitoring backing services</a>.</p>

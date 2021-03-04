@@ -122,7 +122,7 @@
               <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
                       <ul>
   <li>
-    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+    <a href="/#govuk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
   </li>
 </ul>
 <ul>
@@ -231,7 +231,7 @@
         <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
       </li>
       <li>
-        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+        <a href="/deploying_apps.html#deploy-a-nodejs-app"><span>Deploy a Node.js app</span></a>
       </li>
       <li>
         <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
@@ -433,10 +433,10 @@
         <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-govuk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
       </li>
       <li>
-        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-govuk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
       </li>
       <li>
         <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
@@ -530,17 +530,17 @@
         <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
       </li>
       <li>
-        <a href="/monitoring_services.html#monitoring-backing-services-more-about-monitoring"><span>More about monitoring</span></a>
+        <a href="/monitoring_services.html#more-about-monitoring"><span>More about monitoring</span></a>
       </li>
     </ul>
   </li>
 </ul>
 <ul>
   <li>
-    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <a href="/architecture.html#govuk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
     <ul>
       <li>
-        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+        <a href="/architecture.html#characteristics-of-govuk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
       </li>
       <li>
         <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
@@ -601,98 +601,168 @@
         <div class="app-pane__content toc-open-disabled">
           <main id="content" class="technical-documentation" data-module="anchored-headings">
             <h1 id="influxdb">InfluxDB</h1>
+
 <p><a href="https://www.influxdata.com/">InfluxDB</a> is an open source time series database that allows you to store, index and search time series data.</p>
 
 <h2 id="set-up-the-service">Set up the service</h2>
+
 <h3 id="set-up-an-influxdb-service">Set up an InfluxDB service</h3>
-<ol>
-<li><p>List the plans available for InfluxDB by running:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf marketplace -s influxdb
-</code></pre></div><p>Here is an example of the output you will see:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>service plan   description                                                                            free or paid
-tiny-1.x       NOT Highly Available, 1 dedicated VM, 2 CPU per VM, 4GB RAM per VM, 16GB disk space.   free
-</code></pre></div><p>Currently, there is only one plan available for InfluxDB: <code>tiny-1.x</code>.</p></li>
-<li><p>Create a service instance:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf create-service influxdb tiny-1.x SERVICE_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance. For example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf create-service influxdb tiny-1.x my-influxdb-service
-</code></pre></div><p>It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME
-</code></pre></div><p>for example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf service my-influxdb-service
-</code></pre></div><p>When <code>cf service SERVICE_NAME</code> returns a <code>create succeeded</code> status, you have set up the service instance. An example output could be:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>name:            my-influxdb-service
-service:         influxdb
-tags:
-plan:            tiny-1.x
-description:     InfluxDB instances provisioned via Aiven
-documentation:
-dashboard:
-
-There are no bound apps for this service.
-
-Showing status of last operation from service my-influxdb-service...
-
-status:    create succeeded
-message:   Last operation succeeded
-started:   2019-11-18T10:17:30Z
-updated:   2019-11-18T10:21:35Z
-</code></pre></div></li>
-</ol>
-<h3 id="bind-an-influxdb-service-to-your-apps-using-an-app-manifest">Bind an InfluxDB service to your apps using an app manifest</h3><p>You must bind your app to the InfluxDB service to access the InfluxDB database from your app.</p>
 
 <ol>
-<li><p>Use the <a href="/deploying_apps.html#deploying-public-apps">app&rsquo;s manifest</a> to bind the app to the service instance. It will bind automatically when you next deploy your app.</p></li>
-<li><p>Deploy your app in line with your normal deployment process.</p></li>
+  <li>
+<p>List the plans available for InfluxDB by running:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf marketplace -s influxdb
+</code></pre></div>
+<p>Here is an example of the output you will see:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> service plan   description                                                                            free or paid
+ tiny-1.x       NOT Highly Available, 1 dedicated VM, 2 CPU per VM, 4GB RAM per VM, 16GB disk space.   free
+</code></pre></div>
+<p>Currently, there is only one plan available for InfluxDB: <code>tiny-1.x</code>.</p>
+  </li>
+  <li>
+<p>Create a service instance:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf create-service influxdb tiny-1.x SERVICE_NAME
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance. For example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf create-service influxdb tiny-1.x my-influxdb-service
+</code></pre></div>
+<p>It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf service SERVICE_NAME
+</code></pre></div>
+<p>for example:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf service my-influxdb-service
+</code></pre></div>
+<p>When <code>cf service SERVICE_NAME</code> returns a <code>create succeeded</code> status, you have set up the service instance. An example output could be:</p>
+
+<div class="highlight"><pre class="highlight plaintext"><code> name:            my-influxdb-service
+ service:         influxdb
+ tags:
+ plan:            tiny-1.x
+ description:     InfluxDB instances provisioned via Aiven
+ documentation:
+ dashboard:
+
+ There are no bound apps for this service.
+
+ Showing status of last operation from service my-influxdb-service...
+
+ status:    create succeeded
+ message:   Last operation succeeded
+ started:   2019-11-18T10:17:30Z
+ updated:   2019-11-18T10:21:35Z
+</code></pre></div>  </li>
 </ol>
+
+<h3 id="bind-an-influxdb-service-to-your-apps-using-an-app-manifest">Bind an InfluxDB service to your apps using an app manifest</h3>
+
+<p>You must bind your app to the InfluxDB service to access the InfluxDB database from your app.</p>
+
+<ol>
+  <li>
+<p>Use the <a href="/deploying_apps.html#deploying-public-apps">app's manifest</a> to bind the app to the service instance. It will bind automatically when you next deploy your app.</p>
+  </li>
+  <li>
+<p>Deploy your app in line with your normal deployment process.</p>
+  </li>
+</ol>
+
 <p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block">Cloud Foundry documentation on deploying with app manifests</a> for more information.</p>
-<h3 id="bind-an-influxdb-service-to-your-apps-using-cf-bind-service">Bind an InfluxDB service to your apps using cf bind-service</h3><p>If your app does not have a manifest file, you can manually bind your service instance to your app.</p>
+
+<h3 id="bind-an-influxdb-service-to-your-apps-using-cf-bind-service">Bind an InfluxDB service to your apps using cf bind-service</h3>
+
+<p>If your app does not have a manifest file, you can manually bind your service instance to your app.</p>
 
 <ol>
-<li><p>Run the following:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf bind-service APP_NAME SERVICE_NAME
-</code></pre></div><p>where:</p>
+  <li>
+<p>Run the following:</p>
 
-<ul>
-<li><code>APP_NAME</code> is the exact name of a deployed instance of your app</li>
-<li><code>SERVICE_NAME</code> is the name of the service instance you created</li>
-</ul>
+<div class="highlight"><pre class="highlight plaintext"><code> cf bind-service APP_NAME SERVICE_NAME
+</code></pre></div>
+<p>where:</p>
+    <ul>
+      <li><p><code>APP_NAME</code> is the exact name of a deployed instance of your app</p>
+      </li>
+      <li><p><code>SERVICE_NAME</code> is the name of the service instance you created</p>
+      </li>
+    </ul>
+
 <p>For example:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>cf bind-service my-app my-influxdb-service
-</code></pre></div></li>
-<li><p>Deploy your app in line with your normal deployment process.</p></li>
+
+<div class="highlight"><pre class="highlight plaintext"><code> cf bind-service my-app my-influxdb-service
+</code></pre></div>  </li>
+  <li>
+<p>Deploy your app in line with your normal deployment process.</p>
+  </li>
 </ol>
 
 <h2 id="use-the-service">Use the service</h2>
-<h3 id="read-and-write-data-to-influxdb">Read and write data to InfluxDB</h3><p>When you create an InfluxDB service instance, the service broker automatically creates a database called <code>defaultdb</code>.</p>
+
+<h3 id="read-and-write-data-to-influxdb">Read and write data to InfluxDB</h3>
+
+<p>When you create an InfluxDB service instance, the service broker automatically creates a database called <code>defaultdb</code>.</p>
+
 <p><code>defaultdb</code> is the only database within the InfluxDB service instance you have permissions to use. If you try to read or write data to another database, you will get an error message.</p>
+
 <p>When reading from and writing to InfluxDB you must specify the database as <code>defaultdb</code>.</p>
+
 <p>If you’re using the <a href="https://docs.influxdata.com/influxdb/v1.7/tools/api/">InfluxDB HTTP API</a> directly, you must specify the database using the <code>db</code> query parameter. For example, <code>db=defaultdb</code>.</p>
-<p>If you’re using an <a href="https://docs.influxdata.com/influxdb/v1.7/tools/api_client_libraries/">API client library</a>, you must specify the database as <code>defaultdb</code> using your library&rsquo;s configuration.</p>
-<h3 id="using-influxdb-with-prometheus">Using InfluxDB with Prometheus</h3><p><a href="https://prometheus.io">Prometheus</a> is an open source tool for collecting metrics.</p>
+
+<p>If you’re using an <a href="https://docs.influxdata.com/influxdb/v1.7/tools/api_client_libraries/">API client library</a>, you must specify the database as <code>defaultdb</code> using your library's configuration.</p>
+
+<h3 id="using-influxdb-with-prometheus">Using InfluxDB with Prometheus</h3>
+
+<p><a href="https://prometheus.io">Prometheus</a> is an open source tool for collecting metrics.</p>
+
 <p>Prometheus is, by default, a stateful app that relies on local storage. You cannot run stateful apps using local storage on GOV.UK PaaS.</p>
+
 <p>Without local storage, Prometheus metrics will not persist after the Prometheus <a href="/managing_apps.html#app-restarts">app restarts</a>. To store Prometheus metrics for longer, you configure Prometheus to send metrics to InfluxDB for storage.</p>
 
 <ol>
-<li><p>Run Prometheus as an app on GOV.UK PaaS and <a href="#bind-an-influxdb-service-to-your-apps">bind that app to an InfluxDB service instance</a>.</p></li>
-<li><p>the <code>prometheus.yml</code> configuration file, make sure the <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read"><code>remote_read</code></a> and <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write"><code>remote_write</code></a> sections match the same sections in the <code>VCAP_SERVICES</code> environment variable.</p></li>
+  <li>
+<p>Run Prometheus as an app on GOV.UK PaaS and <a href="#bind-an-influxdb-service-to-your-apps">bind that app to an InfluxDB service instance</a>.</p>
+  </li>
+  <li>
+<p>the <code>prometheus.yml</code> configuration file, make sure the <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read"><code>remote_read</code></a> and <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write"><code>remote_write</code></a> sections match the same sections in the <code>VCAP_SERVICES</code> environment variable.</p>
+  </li>
 </ol>
 
 <h2 id="remove-the-service">Remove the service</h2>
-<h3 id="unbind-an-influxdb-service-from-your-app">Unbind an InfluxDB service from your app</h3><p>You must unbind the InfluxDB service before you can delete it:</p>
+
+<h3 id="unbind-an-influxdb-service-from-your-app">Unbind an InfluxDB service from your app</h3>
+
+<p>You must unbind the InfluxDB service before you can delete it:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service APP_NAME SERVICE_NAME
-</code></pre></div><p>where:</p>
+</code></pre></div>
+<p>where:</p>
 
 <ul>
-<li><code>APP_NAME</code> is your app&rsquo;s deployed instance name as specified in your app&rsquo;s <code>manifest.yml</code> or push command</li>
-<li><code>SERVICE_NAME</code> is a unique descriptive name for this service instance</li>
+  <li><p><code>APP_NAME</code> is your app's deployed instance name as specified in your app's <code>manifest.yml</code> or push command</p>
+  </li>
+  <li><p><code>SERVICE_NAME</code> is a unique descriptive name for this service instance</p>
+  </li>
 </ul>
+
 <p>For example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service my-app my-influxdb-service
-</code></pre></div><p>If you unbind your service from your app but do not delete it, the service will persist even after you have deleted your app. You can re-bind or re-connect to it in future.</p>
-<h3 id="delete-an-influxdb-service">Delete an InfluxDB service</h3><p>Once you have unbound the InfluxDB service from your app, you can delete the service:</p>
+</code></pre></div>
+<p>If you unbind your service from your app but do not delete it, the service will persist even after you have deleted your app. You can re-bind or re-connect to it in future.</p>
+
+<h3 id="delete-an-influxdb-service">Delete an InfluxDB service</h3>
+
+<p>Once you have unbound the InfluxDB service from your app, you can delete the service:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete-service SERVICE_NAME
-</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance. For example:</p>
+</code></pre></div>
+<p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance. For example:</p>
+
 <div class="highlight"><pre class="highlight plaintext"><code>cf delete-service my-influxdb-service
 </code></pre></div>
 <div class="govuk-warning-text">
@@ -704,10 +774,19 @@ updated:   2019-11-18T10:21:35Z
 </div>
 
 <h2 id="maintaining-the-service">Maintaining the service</h2>
-<h3 id="data-classification">Data classification</h3><p>You can store data classified up to Official on the GOV.UK PaaS. Refer to the <a href="/deploying_services/#data-security-classification">data security classification documentation</a> for more information.</p>
-<h3 id="influxdb-backups">InfluxDB backups</h3><p><a href="https://aiven.io">Aiven</a> automatically backs up all data stored within any InfluxDB service you create.</p>
+
+<h3 id="data-classification">Data classification</h3>
+
+<p>You can store data classified up to Official on the GOV.UK PaaS. Refer to the <a href="/deploying_services/#data-security-classification">data security classification documentation</a> for more information.</p>
+
+<h3 id="influxdb-backups">InfluxDB backups</h3>
+
+<p><a href="https://aiven.io">Aiven</a> automatically backs up all data stored within any InfluxDB service you create.</p>
+
 <p>Aiven takes backups every 12 hours and keeps 2 backups at a time.</p>
-<p>To restore data to an earlier state, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+
+<p>To restore data to an earlier state, contact us at <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;">&#103;&#111;&#118;&#045;&#117;&#107;&#045;&#112;&#097;&#097;&#115;&#045;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#100;&#105;&#103;&#105;&#116;&#097;&#108;&#046;&#099;&#097;&#098;&#105;&#110;&#101;&#116;&#045;&#111;&#102;&#102;&#105;&#099;&#101;&#046;&#103;&#111;&#118;&#046;&#117;&#107;</a>.</p>
+
 
             
           </main>
