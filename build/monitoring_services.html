@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en" class="govuk-template no-js">
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Monitoring backing services - Platform as a Service</title>
+
+    <link href="/stylesheets/manifest.css" rel="stylesheet" />
+
+    <link rel="canonical" href="https://docs.cloud.service.gov.uk/monitoring_services.html">
+
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:domain" content="docs.cloud.service.gov.uk" />
+      <meta name="twitter:image" content="https://docs.cloud.service.gov.uk/images/govuk-large.png" />
+      <meta name="twitter:title" content="Monitoring backing services - Platform as a Service" />
+      <meta name="twitter:url" content="https://docs.cloud.service.gov.uk/monitoring_services.html" />
+
+      <meta property="og:image" content="https://docs.cloud.service.gov.uk/images/govuk-large.png" />
+      <meta property="og:site_name" content="Platform as a Service" />
+      <meta property="og:title" content="Monitoring backing services" />
+      <meta property="og:type" content="object" />
+      <meta property="og:url" content="https://docs.cloud.service.gov.uk/monitoring_services.html" />
+
+    
+  </head>
+
+  <body class="govuk-template__body">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <div class="app-pane">
+      <div class="app-pane__header toc-open-disabled">
+        <a href="#content" class="govuk-skip-link">Skip to main content</a>
+
+        <header class="govuk-header app-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-header__container--full-width">
+    <div class="govuk-header__logo">
+      <a href="https://www.cloud.service.gov.uk" class="govuk-header__link govuk-header__link--homepage">
+        <span class="govuk-header__logotype">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            class="govuk-header__logotype-crown"
+            xmlns="http://www.w3.org/2000/svg"
+            viewbox="0 0 132 97"
+            height="30"
+            width="36"
+          >
+            <path
+              fill="currentColor" fill-rule="evenodd"
+              d="M25 30.2c3.5 1.5 7.7-.2 9.1-3.7 1.5-3.6-.2-7.8-3.9-9.2-3.6-1.4-7.6.3-9.1 3.9-1.4 3.5.3 7.5 3.9 9zM9 39.5c3.6 1.5 7.8-.2 9.2-3.7 1.5-3.6-.2-7.8-3.9-9.1-3.6-1.5-7.6.2-9.1 3.8-1.4 3.5.3 7.5 3.8 9zM4.4 57.2c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.5-1.5-7.6.3-9.1 3.8-1.4 3.5.3 7.6 3.9 9.1zm38.3-21.4c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.6-1.5-7.6.3-9.1 3.8-1.3 3.6.4 7.7 3.9 9.1zm64.4-5.6c-3.6 1.5-7.8-.2-9.1-3.7-1.5-3.6.2-7.8 3.8-9.2 3.6-1.4 7.7.3 9.2 3.9 1.3 3.5-.4 7.5-3.9 9zm15.9 9.3c-3.6 1.5-7.7-.2-9.1-3.7-1.5-3.6.2-7.8 3.7-9.1 3.6-1.5 7.7.2 9.2 3.8 1.5 3.5-.3 7.5-3.8 9zm4.7 17.7c-3.6 1.5-7.8-.2-9.2-3.8-1.5-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.3 3.5-.4 7.6-3.9 9.1zM89.3 35.8c-3.6 1.5-7.8-.2-9.2-3.8-1.4-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.4 3.6-.3 7.7-3.9 9.1zM69.7 17.7l8.9 4.7V9.3l-8.9 2.8c-.2-.3-.5-.6-.9-.9L72.4 0H59.6l3.5 11.2c-.3.3-.6.5-.9.9l-8.8-2.8v13.1l8.8-4.7c.3.3.6.7.9.9l-5 15.4v.1c-.2.8-.4 1.6-.4 2.4 0 4.1 3.1 7.5 7 8.1h.2c.3 0 .7.1 1 .1.4 0 .7 0 1-.1h.2c4-.6 7.1-4.1 7.1-8.1 0-.8-.1-1.7-.4-2.4V34l-5.1-15.4c.4-.2.7-.6 1-.9zM66 92.8c16.9 0 32.8 1.1 47.1 3.2 4-16.9 8.9-26.7 14-33.5l-9.6-3.4c1 4.9 1.1 7.2 0 10.2-1.5-1.4-3-4.3-4.2-8.7L108.6 76c2.8-2 5-3.2 7.5-3.3-4.4 9.4-10 11.9-13.6 11.2-4.3-.8-6.3-4.6-5.6-7.9 1-4.7 5.7-5.9 8-.5 4.3-8.7-3-11.4-7.6-8.8 7.1-7.2 7.9-13.5 2.1-21.1-8 6.1-8.1 12.3-4.5 20.8-4.7-5.4-12.1-2.5-9.5 6.2 3.4-5.2 7.9-2 7.2 3.1-.6 4.3-6.4 7.8-13.5 7.2-10.3-.9-10.9-8-11.2-13.8 2.5-.5 7.1 1.8 11 7.3L80.2 60c-4.1 4.4-8 5.3-12.3 5.4 1.4-4.4 8-11.6 8-11.6H55.5s6.4 7.2 7.9 11.6c-4.2-.1-8-1-12.3-5.4l1.4 16.4c3.9-5.5 8.5-7.7 10.9-7.3-.3 5.8-.9 12.8-11.1 13.8-7.2.6-12.9-2.9-13.5-7.2-.7-5 3.8-8.3 7.1-3.1 2.7-8.7-4.6-11.6-9.4-6.2 3.7-8.5 3.6-14.7-4.6-20.8-5.8 7.6-5 13.9 2.2 21.1-4.7-2.6-11.9.1-7.7 8.8 2.3-5.5 7.1-4.2 8.1.5.7 3.3-1.3 7.1-5.7 7.9-3.5.7-9-1.8-13.5-11.2 2.5.1 4.7 1.3 7.5 3.3l-4.7-15.4c-1.2 4.4-2.7 7.2-4.3 8.7-1.1-3-.9-5.3 0-10.2l-9.5 3.4c5 6.9 9.9 16.7 14 33.5 14.8-2.1 30.8-3.2 47.7-3.2z"
+            ></path>
+            <image src="/assets/images/govuk-logotype-crown.png" xlink:href="" class="govuk-header__logotype-crown-fallback-image" width="36" height="32"></image>
+          </svg>
+          <span class="govuk-header__logotype-text">
+            GOV.UK
+          </span>
+        </span>
+        <span class="govuk-header__product-name">
+          Platform as a Service
+        </span>
+      </a>
+    </div>
+    <div class="govuk-header__content">
+      <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+      <nav>
+        <ul id="navigation" class="govuk-header__navigation govuk-header__navigation--end" aria-label="Top Level Navigation">
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://www.cloud.service.gov.uk">About</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://www.cloud.service.gov.uk/get-started">Get started</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://www.cloud.service.gov.uk/features">Features</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://github.com/alphagov/paas-roadmap/projects/1">Roadmap</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="/">Documentation</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://admin.london.cloud.service.gov.uk/support">Support</a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+      </div>
+
+        <div id="toc-heading" class="toc-show fixedsticky">
+          <button type="button" class="toc-show__label js-toc-show" aria-controls="toc">
+            Table of contents <span class="toc-show__icon"></span>
+          </button>
+        </div>
+
+      <div class="app-pane__body" data-module="in-page-navigation">
+          <div class="app-pane__toc">
+            <div class="toc" data-module="table-of-contents" tabindex="-1" aria-label="Table of contents">
+              <div class="search" data-module="search">
+  <form action="https://www.google.co.uk/search" method="get" role="search">
+    <input type="hidden" name="as_sitesearch" value="https://docs.cloud.service.gov.uk"/>
+    <label class="govuk-label search__label" for="search">
+      Search (via Google)
+    </label>
+    <input class="govuk-input govuk-!-margin-bottom-4" id="search" name="q" type="text" aria-controls="search-results" placeholder="Search">
+  </form>
+  <div id="search-results" class="search-results" aria-hidden="true" role="dialog" aria-labelledby="search-results-title">
+    <div class="search-results__inner">
+      <button class="search-results__close">Close<span class="search-results__close-label"> search results</span></button>
+      <h2 id="search-results-title" class="search-results__title" aria-live="polite">Results</h2>
+      <div class="search-results__content"></div>
+    </div>
+  </div>
+</div>
+
+              <button type="button" class="toc__close js-toc-close" aria-controls="toc" aria-label="Hide table of contents"></button>
+              <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
+                      <ul>
+  <li>
+    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/before_you_start.html#before-you-start"><span>Before you start</span></a>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/get_started.html#get-started"><span>Get started</span></a>
+    <ul>
+      <li>
+        <a href="/get_started.html#get-an-account"><span>Get an account</span></a>
+      </li>
+      <li>
+        <a href="/get_started.html#set-up-the-cloud-foundry-command-line"><span>Set up the Cloud Foundry command line</span></a>
+      </li>
+      <li>
+        <a href="/get_started.html#sign-in-to-cloud-foundry"><span>Sign in to Cloud Foundry</span></a>
+      </li>
+      <li>
+        <a href="/get_started.html#deploy-a-test-static-html-page"><span>Deploy a test static HTML page</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/responsibility_model.html#know-your-responsibilities"><span>Know your responsibilities</span></a>
+    <ul>
+      <li>
+        <a href="/responsibility_model.html#standard-buildpack-responsibilities"><span>Standard buildpack responsibilities</span></a>
+      </li>
+      <li>
+        <a href="/responsibility_model.html#custom-buildpack-responsibilities"><span>Custom buildpack responsibilities</span></a>
+      </li>
+      <li>
+        <a href="/responsibility_model.html#docker-image-responsibilities"><span>Docker image responsibilities</span></a>
+      </li>
+      <li>
+        <a href="/responsibility_model.html#custom-buildpacks-compared-to-docker-images"><span>Custom buildpacks compared to Docker images</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/orgs_spaces_users.html#managing-organisations-spaces-and-users"><span>Managing organisations, spaces and users</span></a>
+    <ul>
+      <li>
+        <a href="/orgs_spaces_users.html#regions"><span>Regions</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#organisations"><span>Organisations</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#spaces"><span>Spaces</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#users-and-user-roles"><span>Users and user roles</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#manage-orgs-spaces-and-user-roles"><span>Manage orgs, spaces and user roles</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#case-studies"><span>Case studies</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_apps.html#deploying-apps"><span>Deploying apps</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_apps.html#deploying-public-apps"><span>Deploying public apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploying-private-apps"><span>Deploying private apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#data-security-classification"><span>Data security classification</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#secure-and-non-secure-requests"><span>Secure and non-secure requests</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-an-app-to-production"><span>Deploy an app to production</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#buildpacks"><span>Buildpacks</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#excluding-files"><span>Excluding files</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#environment-variables"><span>Environment variables</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#names-routes-and-domains"><span>Names, routes and domains</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-static-html-page"><span>Deploy a static HTML page</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-java-app"><span>Deploy a Java app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-net-core-app"><span>Deploy a .NET Core app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#stopping-and-starting-apps"><span>Stopping and starting apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deleting-apps"><span>Deleting apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-docker-image"><span>Deploy a Docker image</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/using_ci.html#configuring-a-continuous-integration-ci-tool"><span>Configuring a continuous integration (CI) tool</span></a>
+    <ul>
+      <li>
+        <a href="/using_ci.html#choose-ci-tool"><span>Choose CI tool</span></a>
+      </li>
+      <li>
+        <a href="/using_ci.html#configure-your-ci-tool-accounts"><span>Configure your CI tool accounts</span></a>
+      </li>
+      <li>
+        <a href="/using_ci.html#using-the-travis-ci-tool"><span>Using the Travis CI tool</span></a>
+      </li>
+      <li>
+        <a href="/using_ci.html#push-an-app-with-jenkins"><span>Push an app with Jenkins</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul><li><a href="/deploying_services/"><span>Deploy a backing or routing service</span></a>
+<ul>
+  <li>
+    <a href="/deploying_services/postgresql/#postgresql"><span>PostgreSQL</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/postgresql/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#upgrading-major-versions-of-postgres"><span>Upgrading major versions of Postgres</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/mysql/#mysql"><span>MySQL</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/mysql/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/mysql/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/mysql/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/mysql/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/redis/#redis"><span>Redis</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/redis/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/redis/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/redis/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/redis/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/elasticsearch/#elasticsearch"><span>Elasticsearch</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/elasticsearch/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/elasticsearch/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/elasticsearch/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/elasticsearch/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/sqs/#amazon-sqs"><span>Amazon SQS</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/sqs/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/sqs/#use-the-service"><span>Use the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/sqs/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/sqs/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/s3/#amazon-s3"><span>Amazon S3</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/s3/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/s3/#use-the-service"><span>Use the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/s3/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/influxdb/#influxdb"><span>InfluxDB</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/influxdb/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/influxdb/#use-the-service"><span>Use the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/influxdb/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/influxdb/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/user_provided_services/#user-provided-backing-services"><span>User-provided backing services</span></a>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/route_services/#route-services"><span>Route services</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/route_services/#user-provided-route-services"><span>User-provided route services</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/route_services/#implement-a-route-service"><span>Implement a route service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service"><span>Managing custom domains using the cdn-route service</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#configuring-your-custom-domain"><span>Configuring your custom domain</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#how-custom-domains-work"><span>How custom domains work</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#you-may-need-to-make-a-dns-change"><span>You may need to make a DNS change</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#making-changes-to-your-dns-records"><span>Making changes to your DNS records</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn"><span>Set up a custom domain by configuring your own CDN</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/configure_cdn/#use-cloud-foundry-commands"><span>Use Cloud Foundry commands</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/configure_cdn/#amend-http-request-headers"><span>Amend HTTP request headers</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+</li></ul><ul>
+  <li>
+    <a href="/managing_apps.html#managing-apps"><span>Managing apps</span></a>
+    <ul>
+      <li>
+        <a href="/managing_apps.html#connecting-with-ssh"><span>Connecting with SSH</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#managing-ssh-permissions"><span>Managing SSH permissions</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#scaling"><span>Scaling</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#autoscaling"><span>Autoscaling</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#quotas"><span>Quotas</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#redirecting-all-traffic"><span>Redirecting all traffic</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#app-restarts"><span>App restarts</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/monitoring_apps.html#monitoring-apps"><span>Monitoring apps</span></a>
+    <ul>
+      <li>
+        <a href="/monitoring_apps.html#app-metrics"><span>App metrics</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_apps.html#monitoring-apps-more-about-monitoring"><span>More about monitoring</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_apps.html#logs"><span>Logs</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_apps.html#set-up-the-logit-log-management-service"><span>Set up the Logit log management service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/monitoring_services.html#monitoring-backing-services"><span>Monitoring backing services</span></a>
+    <ul>
+      <li>
+        <a href="/monitoring_services.html#view-backing-service-metrics"><span>View backing service metrics</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_services.html#exporting-backing-service-metrics-to-prometheus"><span>Exporting backing service metrics to Prometheus</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_services.html#more-about-monitoring"><span>More about monitoring</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <ul>
+      <li>
+        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+      </li>
+      <li>
+        <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/guidance.html#guidance"><span>Guidance</span></a>
+    <ul>
+      <li>
+        <a href="/guidance.html#penetration-testing"><span>Penetration testing</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#connect-a-php-app-to-postgresql-or-mysql"><span>Connect a PHP app to PostgreSQL or MySQL</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#connect-drupal-to-mysql"><span>Connect Drupal to MySQL</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#connect-wordpress-to-mysql"><span>Connect Wordpress to MySQL</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#isolation-segments"><span>Isolation segments</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#useful-plugins"><span>Useful Plugins</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/troubleshooting.html#troubleshooting"><span>Troubleshooting</span></a>
+    <ul>
+      <li>
+        <a href="/troubleshooting.html#postgresql-connection-problems"><span>PostgreSQL connection problems</span></a>
+      </li>
+      <li>
+        <a href="/troubleshooting.html#pushing-apps-fails-on-windows-line-endings-issue"><span>Pushing apps fails on Windows (line endings issue)</span></a>
+      </li>
+      <li>
+        <a href="/troubleshooting.html#tracing-http-requests"><span>Tracing HTTP requests</span></a>
+      </li>
+      <li>
+        <a href="/troubleshooting.html#forgotten-passwords"><span>Forgotten passwords</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+              </nav>
+            </div>
+          </div>
+
+        <div class="app-pane__content toc-open-disabled">
+          <main id="content" class="technical-documentation" data-module="anchored-headings">
+            <p><h1 id="monitoring-backing-services">Monitoring backing services</h1><p>If you use backing services provided by PaaS then you are likely to want to see information on their performance. We expose logs and metrics in the GOV.UK PaaS admin tool. For advanced users we can also export metrics to a Prometheus instance you run.</p></p>
+<p><h2 id="view-backing-service-metrics">View backing service metrics</h2><p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a>, <a href="deploying_services/mysql/#mysql">MySQL</a>, <a href="deploying_services/redis/#redis">Redis</a> or <a href="deploying_services/elasticsearch/">Elasticsearch</a> backing services, you can view metrics for those backing services in the GOV.UK PaaS admin tool.</p>
+<p>When you create your backing service instance, you can access the service instance’s metrics with no extra work. Your backing service plan does not affect which metrics you can view. You can view metrics for any date range within the last year.</p>
+<p>Backing services instances exist in a <a href="/orgs_spaces_users.html#spaces">space</a> within an <a href="/orgs_spaces_users.html#organisations">org</a>. You must be able to view a space in the GOV.UK PaaS admin tool to view metrics for backing service instances in that space.</p></p>
+
+<ol>
+<li>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
+<li>Select the <strong>Organisation</strong> and <strong>Space</strong>.</li>
+<li>Select the <strong>Backing services</strong> tab and select your backing service.</li>
+<li>Select the <strong>Metrics</strong> tab.</li>
+</ol>
+<p><h2 id="exporting-backing-service-metrics-to-prometheus">Exporting backing service metrics to Prometheus</h2><p>If you are an advanced user you may want to export backing service metrics into your own system. To help you do this we can export your backing service metrics in Prometheus format.</p>
+<p>Postgres and MySQL metrics can be exported using <a href="/monitoring_apps.html#use-the-paas-prometheus-exporter-app">the PaaS Prometheus exporter</a>.</p>
+<p>Elasticsearch and Redis metrics can be exported on request. Please contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a></p>
+<p>In theory it is possible to run <a href="https://prometheus.io">Prometheus</a> on the GOV.UK PaaS. By default Prometheus stores data on-disk, but our apps do not have persistent storage. Instead Prometheus can be configured to store data in our <a href="/deploying_services/influxdb/">InfluxDB backing service</a>. We have not tested this in production but would be eager to hear results.</p></p>
+<p><h2 id="backing-service-logs">Backing service logs</h2><p>If you use the <a href="deploying_services/postgresql/#postgresql">PostgreSQL</a> or <a href="deploying_services/mysql/#mysql">MySQL</a> backing services,
+you can view logs for those backing services in the GOV.UK PaaS admin tool.</p>
+<h3 id="view-backing-service-logs">View backing service logs</h3>
+<ol>
+<li>Sign into the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
+<li>Select the <strong>Organisation</strong> and <strong>Space</strong>.</li>
+<li>Select the <strong>Backing services</strong> tab and select your backing service.</li>
+<li>Select the <strong>Logs</strong> tab.</li>
+<li>To download the logs, click the name of the log file</li>
+</ol>
+<p>These logs are provided directly by the backing service provider.</p></p>
+<p><h2 id="more-about-monitoring">More about monitoring</h2><p>To learn how to monitor your apps, see our <a href="/monitoring_apps.html">documentation on monitoring apps</a>.</p></p>
+
+            
+          </main>
+
+          <aside>
+              <ul class="contribution-banner">
+                <li><a href="https://github.com/alphagov/paas-tech-docs//blob/master/source/monitoring_services.html.md.erb">View source</a></li>
+                <li><a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk?subject=Problem%20with%20GOV.UK%20PaaS%20technical%20documentation">Report problem</a></li>
+                <li><a href="https://github.com/alphagov/paas-tech-docs/">GitHub Repo</a></li>
+              </ul>
+          </aside>
+
+          <footer class="govuk-footer app-footer" role="contentinfo">
+  <div class="govuk-footer__meta">
+    <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+
+        <ul class="govuk-footer__inline-list">
+            <li class="govuk-footer__inline-list-item">
+              <a class="govuk-footer__link" href="/accessibility.html">Technical Documentation Accessibility</a>
+            </li>
+        </ul>
+
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        class="govuk-footer__licence-logo"
+        xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 0 483.2 195.7"
+        height="17"
+        width="41"
+      >
+        <path
+          fill="currentColor"
+          d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+        />
+      </svg>
+      <span class="govuk-footer__licence-description">
+        All content is available under the
+        <a
+          class="govuk-footer__link"
+          href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+          rel="license"
+        >Open Government Licence v3.0</a>, except where otherwise stated
+      </span>
+    </div>
+    <div class="govuk-footer__meta-item">
+      <a
+        class="govuk-footer__link govuk-footer__copyright-logo"
+        href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+      >© Crown copyright</a>
+    </div>
+  </div>
+</footer>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="/javascripts/application.js"></script>
+  </body>
+</html>

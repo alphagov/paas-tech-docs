@@ -11,7 +11,7 @@
 /.venv
 
 # Ignore the build directory
-/build
+# /build
 
 /vendor
 

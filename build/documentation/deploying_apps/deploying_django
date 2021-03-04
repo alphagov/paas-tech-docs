@@ -1,0 +1,88 @@
+<h2 id="deploy-a-django-app">Deploy a Django app</h2><p>This section explains how to deploy an app using the Django framework. You may also need to refer to the <a href="https://docs.cloudfoundry.org/buildpacks/python/index.html">Cloud Foundry documentation about the Python buildpack</a>.</p>
+
+<blockquote>
+<p>If your app requires a <a href="/deploying_services/#deploy-a-backing-or-routing-service">backing service</a>, it must be able to work with one of the services supported by PaaS. Instructions for deploying both backing service and non-backing service apps are given in this section.</p>
+</blockquote>
+<p>Before deploying a Django app, you must:</p>
+
+<ul>
+<li>log into your <a href="get_started.html#get-an-account">PaaS account</a></li>
+<li>set up the <a href="get_started.html#set-up-command-line">Cloud Foundry command line</a></li>
+<li><a href="deploying_apps.html#set-a-target">target</a> the appropriate space</li>
+</ul>
+
+<ol>
+<li><p>Put the code for your Django app into a local directory (for example, by checking it out of version control).</p></li>
+<li><p>If you are using Git, add <code>*.pyc</code> and <code>local_settings.py</code> to your <code>.gitignore</code> file, then
+<a href="/deploying_apps.html#excluding-files">exclude files ignored by Git</a> so Cloud Foundry will ignore them too.</p></li>
+<li><p>Run <code>cf buildpacks</code> in the command line to check the version of the Python buildpack.</p></li>
+<li><p>Go to the <a href="https://github.com/cloudfoundry/python-buildpack/releases">Python buildpack page on GitHub</a> to check which versions of Python are currently included in the Python buildpack.</p></li>
+<li><p>Tell Cloud Foundry which version of Python to use by creating a <code>runtime.txt</code> file in the root of the local directory. This step is optional.</p>
+<p>Refer to the documentation on <a href="deploying_apps.html#buildpack-language-version-updates">buildpack language version updates</a> for more information.</p>
+<p>For more information, refer to the <a href="https://docs.cloudfoundry.org/buildpacks/python/index.html#runtime">Cloud Foundry documentation on specifying a Python version</a>.</p></li>
+<li><p>Make sure you have all the required modules for your project installed into your virtual environment (including Django).</p></li>
+<li><p>Generate a <code>requirements.txt</code> file if your project doesn&rsquo;t already have one by running <code>pip freeze &gt; requirements.txt</code> in the root of the local folder.
+Add the following lines to the <code>requirements.txt</code> file.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>whitenoise==1.0.6  #manages static assets
+waitress==0.8.9 #a pure python WSGI server that is a replacement for gunicorn
+</code></pre></div></li>
+<li><p>Edit your <code>wsgi.py</code> file.</p>
+<p>When you create a Django project, a default <code>wsgi.py</code> file should be created for you in the project folder. Excluding the opening comments, the default <code>wsgi.py</code> looks like this:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PROJECTNAME.settings")
+
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+</code></pre></div><p>You&rsquo;ll need to add a few lines to import the <code>whitenoise</code> package and wrap the middleware around the WSGI application so that all static files are served using whitenoise. Edit your <code>wsgi.py</code> to:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>import os
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PROJECTNAME.settings")
+# important that the whitenoise import is after the line above
+from whitenoise.django import DjangoWhiteNoise
+
+application = get_wsgi_application()
+application = DjangoWhiteNoise(application)
+</code></pre></div><p>The order here is important. The <code>DJANGO_SETTINGS_MODULE</code> environment variable must be set before importing <code>DjangoWhiteNoise</code>.</p></li>
+<li><p>You should now tell Django where to look for static files. In <code>settings.py</code> within the project folder, add these lines below the <code>import os</code> statement.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_URL = '/static/'
+</code></pre></div><p>In this case, the STATIC_ROOT variable tells Django to look for static files in a directory called <code>static</code> inside the project folder, and the STATIC_URL variable sets the path where those files will be served.</p>
+<p>You may need to alter these values depending on how static files are handled in your app.</p>
+<p>If your static files are located across multiple folders, you may need to use the STATICFILES_DIRS variable. See the Django documentation for <a href="https://docs.djangoproject.com/en/1.9/howto/static-files/">full details on managing static files</a>.</p></li>
+<li><p>Create a file called <code>Procfile</code> in the root of your local folder,
+and put in it:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>    web: python manage.py migrate &amp;&amp; waitress-serve --port=$PORT PROJECTNAME.wsgi:application
+</code></pre></div><p>The Procfile is a way to specify commands to be run when deploying your app; in this case, for database migration.</p>
+<p><code>PROJECTNAME</code> should be replaced with whatever the name of your WSGI module is. By default, this is the same as the name of your project module, but it may be changed using the DJANGO_SETTINGS_MODULE environment variable. Using this configuration will automatically apply any database migrations.</p></li>
+<li><p>Create a <code>manifest.yml</code> file in the root of your local folder.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>---
+applications:
+- name: my-app
+  memory: 512M
+  buildpacks:
+  - python_buildpack
+</code></pre></div><p>where <code>my-django-app</code> is the name that will be used for the app within GOV.UK PaaS.</p>
+<p>Replace <code>my-django-app</code> with a unique name for your app. (You can use <code>cf apps</code> to see apps which already exist).</p>
+<p>The <code>memory</code> line tells the PaaS how much memory to allocate to the app.</p></li>
+<li><p>If your app requires a database, <a href="/deploying_services/postgresql/#set-up-a-postgresql-service">create a PostgreSQL backing service</a> and <a href="/deploying_services/postgresql/#bind-a-postgresql-service-to-your-app">bind it to your app</a>. Then see the section on <a href="/deploying_apps.html#postgresql-setup-with-django">PostgreSQL setup</a> below.</p></li>
+<li><p>To push your app, do:</p>
+<p><code>cf push APPNAME</code></p>
+<p>from the directory which contains all the code and configuration files.</p>
+<p>If you want to upload the app without starting it (for example, if you need to create a PostgreSQL service), run <code>cf push --no-start APPNAME</code>, then when you are ready to start the app, run <code>cf start APPNAME</code>.</p></li>
+</ol>
+<p>You can now view your app at your <a href="/orgs_spaces_users.html#regions">app domain</a>.</p>
+<h3 id="postgresql-setup-with-django">PostgreSQL setup with Django</h3><p>These instructions are for deploying a Django app with a PostgreSQL database, and can be applied to other backing services. If you require more guidance on deploying an app with <a href="/deploying_services/#deploy-a-backing-or-routing-service">other supported backing services</a>, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+<p>Add these lines to your <code>requirements.txt</code>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>psycopg2==2.6.2 #installs the postgres driver
+dj-database-url==0.3.0 #grabs environment variables and dumps them into a Django settings file
+</code></pre></div><p>In your <code>settings.py</code> file, make sure you import the <code>dj_database_url</code> package we added to the <code>requirements.txt</code> file above:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>    import dj_database_url
+</code></pre></div><p>This package will automatically parse the <code>VCAP_SERVICES</code> environment variable and set DATABASE_URL to the first database found.</p>
+<p>Then you&rsquo;ll need to add a <code>DATABASES</code> setting. It&rsquo;s best to add this to the <code>settings.py</code> file.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>    DATABASES = {}
+    DATABASES['default'] =  dj_database_url.config()
+</code></pre></div><p>Your <code>local_settings.py</code> file will override this when you&rsquo;re working locally.</p>
+<p>The <code>Procfile</code> configuration provided in the section above will automatically apply database migrations.</p>

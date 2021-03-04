@@ -1,0 +1,37 @@
+<h2 id="organisations-spaces-amp-targets">Organisations, spaces &amp; targets</h2><h3 id="organisations">Organisations</h3><p>Your tenant account belongs to at least one <strong>organisation</strong> (&ldquo;org&rdquo; for short) within the PaaS. This typically represents the real-world organisation, department or team you work for. Your co-workers&rsquo; tenant accounts will belong to the same org.</p>
+<p>Typically a team has a single organisation, but you can have more than one.</p>
+<p>To list the orgs your account can access, run:</p>
+<p><code>cf orgs</code></p>
+<p>To see details about an org, run:</p>
+<p><code>cf org ORGNAME</code></p>
+<p>where ORGNAME is the name of the org.</p>
+<h3 id="spaces">Spaces</h3><p>Each organisation is divided into one or more <strong>spaces</strong>, which are used to organise app development, deployment, and maintenance. For example, you might have spaces for development and production versions of your app.</p>
+<p><a href="/documentation/figures/org-spaces.png" rel="noopener noreferrer"><img src="/documentation/figures/org-spaces.png" alt="Diagram showing that an organisation contains multiple spaces" /></a></p>
+<p>Different accounts can have different permissions to access each space, which are granted through user roles. For example, you may choose to give a junior developer access to your <code>development</code> space, but not to <code>production</code>. To change which accounts have access, your account needs to have the Org Manager role. See the section on <a href="/#managing-users">Managing users</a> for more about roles.</p>
+<p>When we set up your organisation, we create a default <code>sandbox</code> space you can use for experimenting with the PaaS.</p>
+<p>To see the spaces you can access in your current org, run:</p>
+<p><code>cf spaces</code></p>
+<h3 id="setting-a-target">Setting a target</h3><p>To deploy an app, you need to specify a combination of an organisation and a space: this is called the <strong>target</strong>.</p>
+<p>Set the target with:</p>
+<p><code>cf target -o ORGNAME -s SPACENAME</code></p>
+<p>Once you set the target, the Cloud Foundry client remembers it until you change it.</p>
+<p>You can change space without changing org using:</p>
+<p><code>cf target -s SPACENAME</code></p>
+<p>You should target the sandbox space while you are testing your app. You can do this by running:</p>
+<p><code>cf target -s sandbox</code></p>
+<p>You will not normally need to target the sandbox space if you are a new user, as this space is the default for new users. A possible exception to this is if your organisation is mature and has pre-existing spaces; you should check to ensure that you target the appropriate space for testing.</p>
+<h3 id="managing-spaces">Managing spaces</h3><p>You can create new spaces within an org if your account has the <a href="/#org-manager">Org Manager</a> role. To find out who has that role, run:</p>
+<p><code>cf org-users ORGNAME</code></p>
+<p>where <code>ORGNAME</code> is the name of the org. You will see a list of users and their roles.</p>
+<p>If your account does not have the Org Manager role and you need to create a new space, you should ask a co-worker who is an Org Manager for your organisation.</p>
+<p>As an Org Manager, you can use:</p>
+<p><code>cf create-space SPACENAME -o ORGNAME</code></p>
+<p>to create a new space. You will then need to grant access to any tenant accounts who should be able to use that space.</p>
+<h3 id="granting-access">Granting access</h3><p>You grant access to a space by assigning a role to an account. To assign roles, you need to be an <a href="/#org-manager">Org Manager</a> or <a href="/#space-manager">Space Manager</a>.</p>
+<p>In most cases, the role you will assign is <a href="/#space-developer">Space Developer</a>, which gives the account an ability to deploy and manage apps in the specified space.</p>
+<p>To grant access to a space to another account, run:</p>
+<p><code>cf set-space-role USERNAME ORGNAME SPACENAME ROLE</code></p>
+<p>The <code>USERNAME</code> is the email address the user logs in with when using the command line client.</p>
+<p>For example, say you had just created a space called <code>test</code> within your org called <code>acme</code>, and you wanted your co-worker <code>ana@example.com</code> to be able to use that space as a developer, you would run:</p>
+<p><code>cf set-space-role ana@example.com acme test SpaceDeveloper</code></p>
+<p>See the <a href="https://docs.cloudfoundry.org/concepts/roles.html">Cloud Foundry documentation on Orgs, Spaces, Roles, and Permissions</a> for more information.</p>

@@ -1,0 +1,29 @@
+<h2 id="names-routes-and-domains">Names, routes and domains</h2><h3 id="app-names-and-domain-hostname-clash">App names and domain hostname clash</h3><p>When you push an app, you have to assign an app name, either in the manifest or using the command line. The app name is also used as the default hostname of the <a href="/orgs_spaces_users.html#regions">app domain</a> where the app will be hosted.</p>
+<p>For example, if you push an app called <code>myapp</code>in the London region, the PaaS tries to host it at <code>myapp.london.cloudapps.digital</code>. This is done using Cloud Foundry&rsquo;s <strong>route</strong> functions.</p>
+<p>The <a href="/orgs_spaces_users.html#regions">app domain</a> is shared across all PaaS tenants within a region. in this example, if another tenant is using <code>myapp.cloudapps.digital</code> in the Ireland region, and you try to push an app called <code>myapp</code> to the same region, you will receive an error like this:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>Using route myapp.london.cloudapps.digital
+Binding myapp.london.cloudapps.digital to myapp...
+FAILED
+The route myapp.london.cloudapps.digital is already in use.
+</code></pre></div><p>This will also happen if there is an app with the same name within your own organisation, but in a different space.</p>
+<p>There are a few possible solutions to this problem:</p>
+
+<ol>
+<li><p>Minimise the chance of name clash by the way you name your apps; incorporate the name of your team, department or service to produce names that are unlikely to clash with other PaaS tenants. For example, if you work for the Ministry of Peace, instead of <code>myapp</code>, you could use <code>minipeace-myapp</code>.</p>
+<p>If you run different versions of an app in different spaces, you will also need to name them differently: for example, you might have <code>minipeace-myapp-dev</code>, <code>minipeace-myapp-test</code>, <code>minipeace-myapp-production</code> and so on.</p></li>
+<li><p>Manually specify a hostname that is different from the app name. You can do this as a command line option when you push:</p>
+<p><code>cf push myapp -n HOSTNAME</code></p>
+<p>or with a line in the app&rsquo;s <code>manifest.yml</code> file:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>---
+    ...
+    host: HOSTNAME
+</code></pre></div><p>You will still need to pick a hostname that is not in use.</p>
+<p>This solution means you can change the hostname while keeping the app name the same. This is more flexible, but means you need to keep track of both a hostname and an app name for each app. It could potentially make it easier to deploy to the wrong target.</p></li>
+<li><p>Use the <code>random-route</code> option. This appends a couple of random words to the hostname, to avoid clashes. For example, if your app is hosted in the London region and you run:</p>
+<p><code>cf push myapp --random-route</code></p>
+<p>the app will be hosted at something like <code>https://myapp-mummifying-giraffe.london.cloudapps.digital</code>.</p>
+<p>You can also specify this in your app&rsquo;s <code>manifest.yml</code> file:</p>
+<p><code>random-route: true</code></p>
+<p>This is a convenient way to avoid clashes automatically. The disadvantage is that if your end users can see the resulting URLs, they may find the random words strange.</p></li>
+</ol>
+<h3 id="custom-domains">Custom domains</h3><p>In production, you will probably want your app to be available through your own url (for example, <code>yourapp.service.gov.uk</code>). Refer to <a href="deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service">managing custom domains using the cdn-route service</a> to see how to set this up.</p>

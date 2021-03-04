@@ -1,0 +1,113 @@
+<h2 id="connect-a-php-app-to-postgresql-or-mysql">Connect a PHP app to PostgreSQL or MySQL</h2><p>If your PHP app uses a PostgreSQL or MySQL database, it must connect to that database securely using SSL.</p>
+
+<blockquote>
+<p>These instructions assume that your app uses the PHP Data Objects (PDO) library to connect to either a MySQL or PostgreSQL backing service database.</p>
+</blockquote>
+<p>You must configure your app to use a SSL connection by inserting the following code into the <code>config.ini</code> file located within <code>.bp-config/php/php.ini.d/</code>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>extension=pdo.so
+extension=pdo_mysql.so OR pdo_pgsql.so
+extension=openssl.so
+</code></pre></div><p>You should use this method instead of the now-deprecated method of defining PHP extensions in the <code>.bp-config/options.json</code> buildpack config file.</p>
+<p>You can find more information about how to configure the PHP buildpack at the <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html">PHP buildpack configuration documentation</a>.</p>
+<p>Refer to the code below for examples on how to connect your app to MySQL or PostgreSQL.</p>
+<h3 id="example-code-mysql">Example code - MySQL</h3><div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
+$creds = $vcapServices['mysql'][0]['credentials'];
+
+try {
+  $pdo = new PDO(
+    sprintf('mysql:host=%s;port=%d;dbname=%s', $creds['host'], $creds['port'], $creds['name']),
+    $creds['username'],
+    $creds['password'],
+    array(PDO::MYSQL_ATTR_SSL_CAPATH =&gt; '/etc/ssl/certs')
+  );
+  printf("Result was: %s\n", $pdo-&gt;query('SELECT 1')-&gt;fetchColumn());
+} catch(Expection $e) {
+  printf("Error: %s\n", $e-&gt;getMessage());
+}
+</code></pre></div><h3 id="example-code-postgresql">Example code - PostgreSQL</h3><div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
+$creds = $vcapServices['postgres'][0]['credentials'];
+
+try {
+  $pdo = new PDO(
+    sprintf('pgsql:host=%s;port=%d;dbname=%s', $creds['host'], $creds['port'], $creds['name']),
+    $creds['username'],
+    $creds['password']
+  );
+  printf("Result was: %s\n", $pdo-&gt;query('SELECT 1')-&gt;fetchColumn());
+} catch(Expection $e) {
+  printf("Error: %s\n", $e-&gt;getMessage());
+}
+</code></pre></div><h2 id="connect-drupal-to-mysql">Connect Drupal to MySQL</h2><p>If your Drupal app uses MySQL, it must connect to the database securely using SSL. You must configure Drupal to use a SSL connection by:</p>
+
+<ul>
+<li>enabling required PHP extensions</li>
+<li>setting up the database connection</li>
+</ul>
+<h3 id="enable-required-php-extensions">Enable required PHP extensions</h3>
+<ol>
+<li>Create a <code>mysql.ini</code> file within <code>.bp-config/php/php.ini.d/</code>.</li>
+<li><p>Add the following code to this .ini file:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>extension=pdo.so
+extension=pdo_mysql.so
+extension=openssl.so
+</code></pre></div><p>You should use this method instead of the now-deprecated method of defining PHP extensions in the <code>.bp-config/options.json</code> buildpack config file.</p></li>
+</ol>
+<p>You can find more information about how to configure the PHP buildpack at the <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html">PHP buildpack configuration documentation</a>.</p>
+<h3 id="set-up-the-database-connection">Set up the database connection</h3><p>Include the following code in your Drupal configuration file, located by default at <code>sites/default/settings.php</code>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
+$mysqlCreds = $vcapServices['mysql'][0]['credentials'];
+
+$databases['default']['default'] = array(
+  'driver' =&gt; 'mysql',
+  'database' =&gt; $mysqlCreds['name'],
+  'username' =&gt; $mysqlCreds['username'],
+  'password' =&gt; $mysqlCreds['password'],
+  'host' =&gt; $mysqlCreds['host'],
+  'port' =&gt; $mysqlCreds['port'],
+  'prefix' =&gt; 'drupal_',
+  'collation' =&gt; 'utf8mb4_general_ci', // For Drupal 8
+  // 'collation' =&gt; 'utf8_general_ci', // For Drupal 7 or earlier
+  'pdo' =&gt; array(PDO::MYSQL_ATTR_SSL_CAPATH =&gt; '/etc/ssl/certs')
+);
+</code></pre></div><h2 id="connect-wordpress-to-mysql">Connect Wordpress to MySQL</h2><p>Your Wordpress app must connect to MySQL securely using SSL. You must configure Wordpress to use a SSL connection by:</p>
+
+<ul>
+<li>enabling required PHP extensions</li>
+<li>setting up the database connection</li>
+<li>patching Wordpress to enable SSL connections</li>
+</ul>
+<h3 id="connect-wordpress-to-mysql-enable-required-php-extensions">Enable required PHP extensions</h3>
+<ol>
+<li>Create a <code>mysql.ini</code> file within <code>.bp-config/php/php.ini.d/</code>.</li>
+<li>Add the following code to this .ini file:</li>
+</ol>
+<div class="highlight"><pre class="highlight plaintext"><code>extension=mysqli.so
+extension=openssl.so
+</code></pre></div><p>You should use this method instead of the deprecated method of defining PHP extensions in the <code>.bp-config/options.json</code> buildpack config file.</p>
+<p>You can find more information about how to configure the PHP buildpack at the <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html">PHP buildpack configuration documentation</a>.</p>
+<h3 id="connect-wordpress-to-mysql-set-up-the-database-connection">Set up the database connection</h3><p>Replace the database configuration code in your <code>wp-config.php</code> file with the following code:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>$vcapServices = json_decode(getenv('VCAP_SERVICES'), true);
+$mysqlCreds = $vcapServices['mysql'][0]['credentials'];
+
+define('DB_NAME', $mysqlCreds["name"]);
+define('DB_USER', $mysqlCreds["username"]);
+define('DB_PASSWORD', $mysqlCreds["password"]);
+define('DB_HOST', $mysqlCreds["host"]);
+define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);
+define('MYSQL_SSL_CAPATH', "/etc/ssl/certs");
+define('DB_CHARSET', 'utf8');
+define('DB_COLLATE', '');
+</code></pre></div><h3 id="patch-wordpress-to-enable-ssl-connections">Patch Wordpress to enable SSL connections</h3><p>Insert the following code before the <code>mysqli_real_connect</code> function call in the <code>wp-includes/wp-db.php</code> file:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>[...]
+
+// Included block start
+mysqli_ssl_set($this-&gt;dbh, null, null, null, MYSQL_SSL_CAPATH, null);
+// Included block end
+
+if ( WP_DEBUG ) {
+    mysqli_real_connect( $this-&gt;dbh, $host, $this-&gt;dbuser, $this-&gt;dbpassword, null, $port, $socket, $client_flags );
+} else {
+    @mysqli_real_connect( $this-&gt;dbh, $host, $this-&gt;dbuser, $this-&gt;dbpassword, null, $port, $socket, $client_flags );
+}
+[...]
+</code></pre></div>

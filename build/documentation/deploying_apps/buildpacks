@@ -1,0 +1,73 @@
+<h2 id="buildpacks">Buildpacks</h2><h3 id="about-buildpacks">About buildpacks</h3><p>Cloud Foundry uses buildpacks to provide runtime and framework support for applications in different languages (for example ensuring your app code has both the Ruby runtime and the  Rails framework available to help it run). GOV.UK PaaS supports both standard and custom buildpacks:</p>
+
+<ul>
+<li><a href="https://docs.cloudfoundry.org/buildpacks/#system-buildpacks">standard buildpacks</a> are buildpacks for common languages and frameworks that are supported by Cloud Foundry. You can check the installed buildpacks and their versions by running <code>cf buildpacks</code>.</li>
+<li>custom buildpacks are developed by the wider community to enable hosting of applications in additional languages or frameworks</li>
+<li>Docker images are a packaging format, and the requirements for the app and its runtime environment are the same as for apps deployed using buildpacks</li>
+</ul>
+<h3 id="which-buildpack-should-i-use">Which buildpack should I use?</h3><p>We recommend using the standard buildpacks to maximise the support you will receive from GOV.UK PaaS. Using a custom buildpack or Docker image will mean additional setup and maintenance costs.</p>
+<p>Your responsibilities change depending on whether you use a standard buildpack, custom buildpack or a Docker image. Refer to the <a href="responsibility_model.html#know-your-responsibilities">documentation on knowing your responsibilities</a> for further information.</p>
+<h3 id="buildpack-language-version-updates">Buildpack language version updates</h3><p>You should tell Cloud Foundry which version of your app&rsquo;s language to use in the buildpack. You can specify an exact, minor or major version of the language. For example, with Python:</p>
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+<div class="table-container">
+        <table>
+          <tr>
+<th style="text-align: left">Category</th>
+<th style="text-align: left">Python Example</th>
+</tr>
+<tr>
+<td style="text-align: left">Exact</td>
+<td style="text-align: left"><code>3.5.2</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Minor</td>
+<td style="text-align: left"><code>3.5.x</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Major</td>
+<td style="text-align: left"><code>3.x</code></td>
+</tr>
+
+        </table>
+      </div>
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+<p>If you specify an exact version, you must update this version when the GOV.UK PaaS team update the language&rsquo;s buildpack. Your app will fail to start if the language version it relies on is not supported by the latest language buildpack.</p>
+<p>If you specify a major or a minor version, your app will automatically upgrade to use a more recent version of its language when the GOV.UK PaaS team updates the buildpack. The major or minor version must still be live for this upgrade to work. However, if there is a breaking change between language versions, your app may not behave as expected or even fail.</p>
+<p>You should always check the GOV.UK PaaS announcements email for information on which language versions are in the latest language buildpacks.</p>
+<h3 id="how-to-use-custom-buildpacks">How to use custom buildpacks</h3><p>There are many application attribute options available when you push an app. You can use the buildpack attribute to specify a custom buildpack for your app through:</p>
+
+<ul>
+<li>specifying the buildpack in the manifest.yml file</li>
+<li>using the command line</li>
+</ul>
+<h4 id="specifying-buildpacks-in-the-manifest-file">Specifying buildpacks in the manifest file</h4><p>You can set application attribute options in a manifest.yml file in the directory from which you are running the push command. This is done in one of three ways:</p>
+
+<ol>
+<li>By name: MY-BUILDPACK.</li>
+<li>By GitHub URL: https://github.com/cloudfoundry/java-buildpack.git.</li>
+<li>By GitHub URL with a branch or tag: https://github.com/cloudfoundry/java-buildpack.git#v3.3.0 for the v3.3.0 tag.</li>
+</ol>
+<div class="highlight"><pre class="highlight plaintext"><code>---
+  ...
+  buildpacks:
+  - buildpack_URL
+</code></pre></div>
+<blockquote>
+<p>Command line options override the manifest; the option that overrides the custom buildpack attribute is <code>-b</code>.</p>
+</blockquote>
+<h4 id="using-the-command-line-to-choose-buildpacks">Using the command line to choose buildpacks</h4><p>Once a custom buildpack has been created, it can be pushed to either a public or private git repository. The repository URL can then be included in the command line to push your app.</p>
+
+<blockquote>
+<p>If the repository is private, the push command must include https and username/password authentication</p>
+</blockquote>
+
+<ul>
+<li>Public: <code>$ cf push my-new-app -b git://github.com/johndoe/my-buildpack.git</code></li>
+<li>Private: <code>$ cf push my-new-app -b https://username:password@github.com/johndoe/my-buildpack.git</code></li>
+</ul>
+<p>The app will then be deployed to Cloud Foundry, and the buildpack will be cloned from the repository and applied to the app.</p>
+
+<blockquote>
+<p>If a buildpack is specified using <code>cf push -b</code> the detect step will be skipped and as a result, no buildpack detect scripts will be run.</p>
+</blockquote>

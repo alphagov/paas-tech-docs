@@ -1,0 +1,15 @@
+<h1 id="configuring-a-continuous-integration-ci-tool">Configuring a continuous integration (CI) tool</h1><p>A continuous integration (CI) tool deploys software automatically to help you deliver new features without breaking existing functionality.</p>
+<p>Examples of CI tools include <a href="https://jenkins.io/">Jenkins</a>, <a href="https://travis-ci.com/">Travis</a>, <a href="https://circleci.com/">Circle</a>, and <a href="https://www.jetbrains.com/teamcity/">TeamCity</a>.</p>
+<h2 id="choose-ci-tool">Choose CI tool</h2><p>You should choose a CI tool based on criteria such as:</p>
+
+<ul>
+<li>product features</li>
+<li>support offered</li>
+<li>pricing</li>
+<li>security</li>
+</ul>
+<p>You should focus on how the tool encrypts and protects any sensitive information or secrets such as keys, usernames or passwords. You are responsible for the <a href="https://www.cloud.service.gov.uk/ia">assurance of your own services and information</a>.</p>
+<h2 id="configure-your-ci-tool-accounts">Configure your CI tool accounts</h2><p>You should create one or more dedicated PaaS user accounts for use by your CI tool.</p>
+<p>Use a different account for each <a href="/orgs_spaces_users.html#spaces">space</a> you want to deploy your app to using your CI tool.</p>
+<p>Assign a <a href="https://docs.cloud.service.gov.uk/orgs_spaces_users.html#users-and-user-roles">user role</a> to each of these accounts. These user roles should have the minimum permissions needed for setting up Travis to automatically build and deploy your app.</p>
+<p>The GOV.UK PaaS will lock your credentials if your CI tool makes <a href="/troubleshooting.html#failed-login-rate-limit">multiple failed login attempts in a short period of time</a>.</p>

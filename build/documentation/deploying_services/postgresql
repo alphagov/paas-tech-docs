@@ -1,0 +1,705 @@
+<h1 id="postgresql">PostgreSQL</h1><p>PostgreSQL is an object-relational database management system. It is open source and designed to be extensible.</p>
+<p>You can access <a href="/monitoring_services.html">metrics and logs for this backing service</a>.</p>
+
+<h2 id="set-up-the-service">Set up the service</h2>
+<h3 id="set-up-a-postgresql-service">Set up a PostgreSQL service</h3><p>To set up a PostgreSQL service:</p>
+
+<ol>
+<li><p>Run the following code in the command line to see what plans are available for PostgreSQL:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf marketplace -e postgres
+</code></pre></div><p>Here is an example of the output you will see (the exact plans will vary):</p>
+<div class="highlight"><pre class="highlight plaintext"><code>service plan             description                                                                                                                                                       free or paid
+small-9.5                20GB Storage, Dedicated Instance, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                                           paid
+small-ha-9.5             20GB Storage, Dedicated Instance, Highly Available, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                         paid
+...
+tiny-9.5                 5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.t2.micro.                              free
+</code></pre></div><p>The syntax in this output is explained in the following table:</p>
+<div class="table-container">
+        <table>
+          <tr>
+<th style="text-align: left">Syntax</th>
+<th style="text-align: left">Meaning</th>
+</tr>
+<tr>
+<td style="text-align: left"><code>ha</code></td>
+<td style="text-align: left">High availability</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>X.X</code></td>
+<td style="text-align: left">Version number</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>small / medium / large / xlarge</code></td>
+<td style="text-align: left">Size of instance</td>
+</tr>
+
+        </table>
+      </div><p>More information can be found in the <a href="/deploying_services/postgresql/#postgresql-plans">PostgreSQL plans</a> section.</p></li>
+<li><p>Run the following code in the command line:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres PLAN SERVICE_NAME
+</code></pre></div><p>where <code>PLAN</code> is the plan you want, and <code>SERVICE_NAME</code> is a unique descriptive name for this service instance. For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres small-9.5 my-pg-service
+</code></pre></div><p>You should use a high-availability (<code>ha</code>) encrypted plan for production apps.</p></li>
+<li><p>It will take between 5 and 10 minutes to set up the service instance. To check its progress, run:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME
+</code></pre></div><p>for example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service my-pg-service
+</code></pre></div><p>The service is set up when the <code>cf service SERVICE_NAME</code> command returns a <code>create succeeded</code> status. Here is an example of the output you will see:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>Service instance: my-pg-service
+Service: postgres
+Bound apps:
+Tags:
+Plan: small-9.5
+Description: AWS RDS PostgreSQL service
+Documentation url: https://aws.amazon.com/documentation/rds/
+Dashboard:
+
+Last Operation
+Status: create succeeded
+Message: DB Instance 'rdsbroker-9f053413-97a5-461f-aa41-fe6e29db323e' status is 'available'
+Started: 2016-08-23T15:34:41Z
+Updated: 2016-08-23T15:42:02Z
+</code></pre></div></li>
+</ol>
+<h3 id="bind-a-postgresql-service-to-your-app">Bind a PostgreSQL service to your app</h3><p>You must bind your app to the PostgreSQL service so you can access the database from the app.</p>
+
+<ol>
+<li><p>Use the <a href="/deploying_apps.html#deploying-public-apps">app&rsquo;s manifest</a> to bind the app to the service instance. It will bind automatically when you next deploy your app. An example manifest:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>--
+applications:
+- name: my-app
+  services:
+  - my-pg-service
+</code></pre></div></li>
+<li><p>Deploy your app in line with your normal deployment process.</p></li>
+</ol>
+<p>This binds your app to a service instance called <code>my-pg-service</code>.</p>
+<p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html#services-block">Cloud Foundry documentation on deploying with app manifests</a> for more information.</p>
+<h4 id="use-the-cf-bind-service-command">Use the cf bind-service command</h4><p>Alternatively, you can manually bind your service instance to your app.</p>
+
+<ol>
+<li><p>Run the following:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf bind-service APP_NAME SERVICE_NAME
+</code></pre></div><p>where <code>APP_NAME</code> is the exact name of a deployed instance of your application and <code>SERVICE_NAME</code> is the name of the service instance you created. For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf bind-service my-app my-pg-service
+</code></pre></div></li>
+<li><p>Deploy your app in line with your normal deployment process.</p></li>
+</ol>
+<h3 id="bind-your-app-with-a-read-only-user">Bind your app with a read-only user</h3><p>You can also bind your service instance with a read-only user to your app.</p>
+
+<ol>
+<li><p>Run the following:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf bind-service APP_NAME SERVICE_NAME -c '{"read_only": true}'
+</code></pre></div><p>where <code>APP_NAME</code> is the exact name of a deployed instance of your application and <code>SERVICE_NAME</code> is the name of the service instance you created. For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf bind-service my-app my-pg-service -c '{"read_only": true}'
+</code></pre></div></li>
+<li><p>Deploy your app in line with your normal deployment process.</p></li>
+</ol>
+
+<div class="govuk-warning-text">
+  <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+  <strong class="govuk-warning-text__text">
+    <span class="govuk-warning-text__assistive">Warning</span>
+    By default Postgres uses a schema called &ldquo;public&rdquo;, on which all permissions are granted to all.
+  </strong>
+</div>
+<p>We disable use of the public schema to read-only users via an event trigger. As
+a precaution, if you are very concerned about permissions, you should create a
+new schema and use it, instead of relying on the default &ldquo;public&rdquo; schema.</p>
+<h3 id="connect-to-a-postgresql-service-from-your-app">Connect to a PostgreSQL service from your app</h3><p>Your app must make a <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">Transport Layer Security (TLS)</a> connection to the service. Some libraries use TLS by default, but others will need to be manually configured.</p>
+<p>GOV.UK PaaS will automatically parse the <code>VCAP_SERVICES</code> <a href="/deploying_apps.html#system-provided-environment-variables">environment variable</a> to get details of the service and then set the <code>DATABASE_URL</code> variable to the first database found.</p>
+<p>If your app writes database connection errors to <code>STDOUT</code> or <code>STDERR</code>, you can view recent errors with <code>cf logs APP_NAME --recent</code>. See the section on <a href="/monitoring_apps.html#logs">logs</a> for details.</p>
+<h3 id="connect-to-a-postgresql-service-from-your-local-machine">Connect to a PostgreSQL service from your local machine</h3><p>We have created the <a href="/guidance.html#conduit">Conduit</a> plugin to simplify the process of connecting your local machine to a PostgreSQL service. To install this plugin, run the following code from the command line:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf install-plugin conduit
+</code></pre></div><p>Once the plugin has finished installing, run the following code in the command line to access an SQL shell for your backing service:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf conduit SERVICE_NAME -- psql
+</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance.</p>
+<p>Conduit can be used with a <code>read-only</code> binding using the <code>-c</code> flag:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf conduit SERVICE_NAME -c '{"read_only": true}' -- psql
+</code></pre></div><p>Run <code>cf conduit --help</code> for more options, and refer to the <a href="https://github.com/alphagov/paas-cf-conduit/blob/master/README.md">Conduit README file</a> for more information on how to use the plugin.</p>
+<p>The <code>read_only</code> flag is a new feature and may require one-time user action to
+work with databases that were created before the feature was introduced.</p>
+<p>If you encounter an error message like <code>ERROR:  permission denied for table
+my_table</code> when running <code>SELECT * FROM my_table</code> from a read-only conduit, then
+you should run <code>SELECT make_readable_generic()</code> from a non-read-only conduit.</p>
+<p>Permissions are automatically converged for read-only users when database
+objects are created, for example <code>CREATE TABLE my_table</code>, so the above action
+may not be necessary.</p>
+
+<h2 id="amend-the-service">Amend the service</h2>
+<h3 id="import-and-export-bulk-data-to-and-from-a-postgresql-database">Import and export bulk data to and from a PostgreSQL database</h3><h4 id="prerequisites">Prerequisites</h4><p>You must:</p>
+
+<ul>
+<li>install and configure the <a href="https://postgresapp.com/documentation/cli-tools.html">PostgreSQL command line (CLI) tools</a> on your local machine (configuration options vary depending on operating system and version)</li>
+<li><a href="/get_started.html#set-up-command-line">log into Cloud Foundry</a></li>
+<li><a href="/deploying_services/postgresql/#set-up-a-postgresql-service">create the new PaaS-hosted PostgreSQL database</a></li>
+<li><a href="/deploying_apps.html#set-a-target">target the space</a> where your new database is located</li>
+</ul>
+<h4 id="non-paas-to-paas">Non-PaaS to PaaS</h4><p>To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:</p>
+
+<ol>
+<li><p>Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>pg_dump --host HOST_NAME --file DATA_FILE_NAME DATABASE_NAME
+</code></pre></div><p>where:</p>
+
+<ul>
+<li><code>HOST_NAME</code> is the name of your host</li>
+<li><code>DATA_FILE_NAME</code> is the SQL data file</li>
+<li><code>DATABASE_NAME</code> is the name of the non-PaaS source database</li>
+</ul></li>
+<li><p>Use the <a href="/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine">Conduit plugin</a> to import the data file into the PaaS database by running:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf conduit SERVICE_NAME -- psql &lt; DATA_FILE_NAME
+</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance, and <code>DATA_FILE_NAME</code> is the SQL file created in the previous step.</p></li>
+</ol>
+
+<blockquote>
+<p>You can only use <a href="/deploying_services/postgresql/#add-or-remove-extensions-for-a-postgresql-service-instance">certain PostgreSQL extensions</a>.</p>
+</blockquote>
+<h4 id="paas-to-paas">PaaS to PaaS</h4><p>To move data between two PaaS-hosted PostgreSQL databases:</p>
+
+<ol>
+<li><p>Use the <a href="/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine">Conduit plugin</a> to connect to the source database and export the data into an SQL file by running:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf conduit SERVICE_NAME -- pg_dump --file DATA_FILE_NAME --no-acl --no-owner
+</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance and <code>DATA_FILE_NAME</code> is the SQL data file created by the <code>pg_dump</code> command.</p></li>
+<li><p>Run the following command to import the data file into the target database:</p>
+<div class="highlight"><pre class="highlight plaintext"><code> cf conduit DESTINATION_SERVICE_NAME -- psql &lt; DATA_FILE_NAME
+</code></pre></div><p>where <code>DESTINATION_SERVICE_NAME</code> is the name of the target database.</p></li>
+</ol>
+<p>Contact the PaaS team at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> if you have any questions.</p>
+<h3 id="upgrade-postgresql-service-plan">Upgrade PostgreSQL service plan</h3><h4 id="same-encryption-type">Same encryption type</h4><p>If your new plan uses the same encryption type as your current plan, you can upgrade your plan using the <code>cf update-service</code> command. Run the following in the command line:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -p NEW_PLAN_NAME
+</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance, and <code>NEW_PLAN_NAME</code> is the name of your new plan. For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service my-pg-service -p small-ha-9.5
+</code></pre></div><p>The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running <code>cf services</code>.</p>
+<p>You can also <a href="/deploying_services/postgresql/#queue-a-plan-migration-postgresql">queue a plan upgrade</a> to happen during a maintenance window to minimise service interruption.</p>
+<p>Amazon automatically patch your database during the configured maintenance
+window.
+Updates are usually released more regularly than they are automatically
+applied.
+You can use the <code>update_minor_version_to_latest</code> configuration
+parameter to update your database to the latest available minor version:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"update_minor_version_to_latest": true}'
+</code></pre></div><h4 id="different-encryption-type">Different encryption type</h4><p>You cannot upgrade your service plan using the <code>cf update-service</code> command if the new plan uses a different encryption type to your current plan.</p>
+<p>To upgrade, you must set up a new service and migrate your app data.</p>
+
+<ol>
+<li><a href="/deploying_services/postgresql/#set-up-a-postgresql-service">Set up a new PostgreSQL service</a> with a new plan that has a different encryption type to your current plan.</li>
+<li>Move your app data from the current service to the new service by following the <a href="/deploying_services/postgresql/#paas-to-paas">import and export bulk data documentation</a>.</li>
+</ol>
+<h4 id="downgrade-postgresql-service-plan">Downgrade PostgreSQL service plan</h4><p>You cannot currently downgrade your service plan.</p>
+<h3 id="reboot-a-postgresql-service-instance">Reboot a PostgreSQL service instance</h3><p>You can <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RebootInstance.html">reboot your PostgreSQL service instance</a> to:</p>
+
+<ul>
+<li>try to fix a problem with your service instance</li>
+<li>test how your app behaves during a service instance failure</li>
+</ul>
+<p>To reboot your service instance, you must have the <a href="/orgs_spaces_users.html#space-developer">space developer</a> role and permissions in the <a href="/orgs_spaces_users.html#spaces">space</a> that hosts your service instance.</p>
+<p>Rebooting your service instance will cause a temporary database outage. The length of this outage depends on your service instance’s complexity and configuration.</p>
+<p>You should tell your users and your team when a reboot is scheduled.</p>
+<p>Run the following code in the command line to reboot your service instance:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"reboot": true}'
+</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance.</p>
+<h4 id="force-a-failover">Force a failover</h4><p>If you have a <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html">highly available service instance</a>, you can force a <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover">failover</a> when you reboot that service instance. You can use this to test how your app behaves when a failover happens.</p>
+<p>Run the following code to reboot your highly available service and force a failover:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"reboot": true, "force_failover": true}'
+</code></pre></div><p>When you force a failover, your PostgreSQL database IP address will change. The database&rsquo;s hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.</p>
+<h3 id="add-or-remove-extensions-for-a-postgresql-service-instance">Add or remove extensions for a PostgreSQL service instance</h3><p>The following extensions are always enabled for PostgreSQL service instances:</p>
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+<div class="table-container">
+        <table>
+          <tr>
+<th style="text-align: left">Extension</th>
+<th style="text-align: left">PostgreSQL version</th>
+</tr>
+<tr>
+<td style="text-align: left">uuid-ossp</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">citext</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+
+        </table>
+      </div>
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+<p>You cannot remove these mandatory extensions from a PostgreSQL service instance.</p>
+<p>GOV.UK PaaS supports the following optional extensions, but they are not enabled by default:</p>
+
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+<div class="table-container">
+        <table>
+          <tr>
+<th style="text-align: left">Extension</th>
+<th style="text-align: left">PostgreSQL version</th>
+</tr>
+<tr>
+<td style="text-align: left">address_standardizer</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">address_standardizer_data_us</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">bloom</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">btree_gin</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">btree_gist</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">chkpass</td>
+<td style="text-align: left">9.5, 10</td>
+</tr>
+<tr>
+<td style="text-align: left">cube</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">dblink</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">dict_int</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">dict_xsyn</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">earthdistance</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">fuzzystrmatch</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">hstore</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">hstore_plperl</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">intagg</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">intarray</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">ip4r</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">isn</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">libprotobuf</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">log_fdw</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">ltree</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">orafce</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pageinspect</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_buffercache</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_freespacemap</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_hint_plan</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_prewarm</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_repack</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_similarity</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_stat_statements</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pgtap</td>
+<td style="text-align: left">11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_transport</td>
+<td style="text-align: left">11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_trgm</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pg_visibility</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pgaudit</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pgcrypto</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pglogical</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pgrouting</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pgrowlocks</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pgstattuple</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">plcoffee</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">plls</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">plperl</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">plpgsql</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">pltcl</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">plv8</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">postgis</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">postgis_tiger_geocoder</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">postgis_topology</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">postgres_fdw</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">postgresql-hll</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">prefix</td>
+<td style="text-align: left">10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">sslinfo</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">tablefunc</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">test_parser</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">tsearch2</td>
+<td style="text-align: left">9.5, 10</td>
+</tr>
+<tr>
+<td style="text-align: left">tsm_system_rows</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">tsm_system_time</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+<tr>
+<td style="text-align: left">unaccent</td>
+<td style="text-align: left">9.5, 10, 11, 12</td>
+</tr>
+
+        </table>
+      </div>
+<div style="height:1px;font-size:1px;">&nbsp;</div>
+<p>You can enable or disable optional extensions for a PostgreSQL service instance when:</p>
+
+<ul>
+<li>creating a new service instance</li>
+<li>updating an existing service instance</li>
+<li>restoring a PostgreSQL service instance snapshot</li>
+</ul>
+<h4 id="enable-an-optional-extension-when-creating-a-service-instance">Enable an optional extension when creating a service instance</h4><p>You <a href="#set-up-a-postgresql-service">create a new PostgreSQL service instance</a> by running <code>cf create-service</code>. You can enable optional extensions in this new service instance by running:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
+</code></pre></div><p>where:</p>
+
+<ul>
+<li><code>SERVICE_NAME</code> is a unique descriptive name for this service instance</li>
+<li><code>EXTENSION_1...N</code> are the names of the optional extensions you want to enable</li>
+</ul>
+<h4 id="enable-an-optional-extension-in-an-existing-service-instance">Enable an optional extension in an existing service instance</h4><p>When you enable optional extensions in an existing service instance, you must also reboot that service instance.</p>
+<p>Run the following to enable optional extensions in an existing service instance:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"], "reboot": true}'
+</code></pre></div><p>where:</p>
+
+<ul>
+<li><code>SERVICE_NAME</code> is a unique descriptive name for this service instance</li>
+<li><code>EXTENSION_1...N</code> are the names of the optional extensions you want to enable</li>
+</ul>
+<p>For example, your PostgreSQL service instance is named <code>my-pg-service</code> and has 2 mandatory extensions enabled, <code>uuid-ossp</code> and <code>citext</code>. Run the following to enable <code>pg_stat_statements</code>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service my-pg-service -c '{"enable_extensions": ["pg_stat_statements"], "reboot": true}'
+</code></pre></div><p>Rebooting a service instance will cause some service downtime. The length of this outage depends on your service instance’s complexity and configuration.</p>
+<p>You should schedule this downtime to minimise service disruption. Refer to the <a href="https://docs.cloud.service.gov.uk/deploying_services/postgresql/#reboot-a-postgresql-service-instance">documentation on rebooting a service instance</a> for more information.</p>
+<h4 id="disable-an-optional-extension-in-an-existing-service-instance">Disable an optional extension in an existing service instance</h4><p>When you disable optional extensions in a service instance, you must also reboot that service instance.</p>
+<p>Run the following to disable optional extensions from a service instance:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"disable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"], "reboot": true}'
+</code></pre></div><p>where:</p>
+
+<ul>
+<li><code>SERVICE_NAME</code> is a unique descriptive name for this service instance</li>
+<li><code>EXTENSION_1...N</code> are the names of the optional extensions you want to disable</li>
+</ul>
+<p>For example, your PostgreSQL service instance is named <code>my-pg-service</code> and has the following extensions enabled, <code>uuid-ossp</code>, <code>postgis</code>, <code>citext</code> and <code>pg_stat_statements</code>. Run the following to disable <code>pg_stat_statements</code>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service my-pg-service -c '{"disable_extensions": ["pg_stat_statements"], "reboot": true}'
+</code></pre></div><p>Rebooting a service instance will cause some service downtime. You should schedule this downtime to minimise service disruption. Refer to the <a href="https://docs.cloud.service.gov.uk/deploying_services/postgresql/#reboot-a-postgresql-service-instance">documentation on rebooting a service instance</a> for more information.</p>
+<h4 id="enable-an-optional-extension-when-restoring-a-service-instance">Enable an optional extension when restoring a service instance</h4><p>When you <a href="#restoring-a-postgresql-service-snapshot">restore a PostgreSQL service instance from a snapshot</a>, that restored service instance will include all extensions enabled at time of backup.</p>
+<p>You can also enable optional extensions when restoring a service instance:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID", "enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
+</code></pre></div><p>where:</p>
+
+<ul>
+<li><code>PLAN</code> is the plan used in the original service instance</li>
+<li><code>NEW_SERVICE_NAME</code> is a unique, descriptive name for the restored service instance</li>
+<li><code>GUID</code> is the global unique identifier of the backed up service instance</li>
+<li><code>EXTENSION_1...N</code> are the names of the optional extensions you want to enable</li>
+</ul>
+<p>Refer to the documentation on <a href="#restoring-a-postgresql-service-snapshot">restoring a PostgreSQL service snapshot</a> for more information.</p>
+
+<h2 id="remove-the-service">Remove the service</h2>
+<h3 id="unbind-a-postgresql-service-from-your-app">Unbind a PostgreSQL service from your app</h3><p>You must unbind the PostgreSQL service before you can delete it. To unbind the PostgreSQL service, run the following code in the command line:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service APPLICATION SERVICE_NAME
+</code></pre></div><p>where <code>APPLICATION</code> is the name of a deployed instance of your application (exactly as specified in your app&rsquo;s <code>manifest.yml</code> file or push command) and <code>SERVICE_NAME</code> is a unique descriptive name for this service instance, for example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf unbind-service my-app my-pg-service
+</code></pre></div><p>If you unbind your services from your app but do not delete them, the services will persist even after your app is deleted, and you can re-bind or re-connect to them in future.</p>
+<h3 id="delete-a-postgresql-service">Delete a PostgreSQL service</h3><p>Once the PostgreSQL service has been unbound from your app, you can delete it. Run the following code in the command line:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf delete-service SERVICE_NAME
+</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique descriptive name for this service instance.</p>
+<p>Type <code>yes</code> when asked for confirmation.</p>
+
+<h2 id="maintaining-the-service">Maintaining the service</h2>
+<h3 id="data-classification">Data classification</h3><p>You can store data classified up to ‘official’ on the GOV.UK PaaS. Refer to the <a href="/deploying_services/#data-security-classification">data security classification documentation</a> for more information.</p>
+<h3 id="postgresql-plans">PostgreSQL plans</h3><p>Each service in the marketplace has multiple plans that vary by availability and storage capacity.</p>
+<p>You can view available plans through the Cloud Foundry command line interface, or via <a href="https://admin.london.cloud.service.gov.uk/marketplace">the GOV.UK PaaS admin marketplace</a>.</p>
+<h4 id="paid-plans-postgresql">Paid plans - PostgreSQL</h4><p>Some service plans are paid and we will bill you based on your service usage.</p>
+<p>New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation&rsquo;s <a href="/#quotas">quota</a> settings.</p>
+<p>If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your <a href="/orgs_spaces_users.html#org-manager">org managers</a> must contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to request that we enable paid services.</p>
+<p>There is a free plan available with limited storage which should only be used for development or testing, but not production.</p>
+<h4 id="encrypted-plans-postgresql">Encrypted plans - PostgreSQL</h4><p>All plans have encryption at rest unless stated otherwise. This means that both the data on the disk and in snapshots is encrypted.</p>
+<h4 id="high-availability-plans-postgresql">High availability plans - PostgreSQL</h4><p>We recommend you use a high availability (<code>HA</code>) plan for your PostgreSQL services. These plans use Amazon RDS Multi-AZ instances, which are designed to be 99.95% available. See <a href="https://aws.amazon.com/rds/sla/">Amazon&rsquo;s Service Level Agreement (SLA)</a> for details.</p>
+<p>When you use a high availability plan, Amazon RDS provides a hot standby service for failover in the event that the original service fails.</p>
+<p>Refer to the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover">Amazon RDS documentation on the failover process</a> for more information.</p>
+<p>You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. Contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to arrange for us to trigger a failover for you.</p>
+<h4 id="read-replicas-postgresql">Read replicas - PostgreSQL</h4><p>Amazon RDS has the capability to provide a read-only copy of your database known as a read replica. This can be useful for performance, availability or security reasons.</p>
+<p>Refer to the <a href="https://aws.amazon.com/rds/details/read-replicas/">Amazon RDS documentation on read replicas</a> for more information.</p>
+<p>GOV.UK PaaS does not currently support read replicas, but if you think you would find them useful, please contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>, providing details of your use case.</p>
+<h3 id="postgresql-maintenance-amp-backups">PostgreSQL maintenance &amp; backups</h3><h4 id="postgresql-maintenance-times">PostgreSQL maintenance times</h4><p>Each PostgreSQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. Select a high availability (<code>HA</code>) plan to minimise this downtime. Minor version upgrades (for example from 9.4.1 to 9.4.2) are applied during this maintenance window.</p>
+<p>Contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to find out the default time of your maintenance window. Window start times will vary from 22:00 to 06:00 UTC.</p>
+<p>You can set your own maintenance window by running <code>cf update-service</code> in the command line and setting the <code>preferred_maintenance_window</code> custom parameter:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -c '{"preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
+</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique, descriptive name for this service instance, for example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service my-pg-service -c '{"preferred_maintenance_window": "Tue:04:00-Tue:04:30"}'
+</code></pre></div><p>For more information on maintenance times, refer to the <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html">Amazon RDS Maintenance documentation</a>.</p>
+<h4 id="queue-a-plan-migration-postgresql">Queue a plan migration - PostgreSQL</h4><p>Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can queue the change to begin during a maintenance window by running the following code in the command line:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service SERVICE_NAME -p PLAN -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "START_DAY:START_TIME-END_DAY:END_TIME"}'
+</code></pre></div><p>where <code>SERVICE_NAME</code> is a unique, descriptive name for this service instance and <code>PLAN</code> is the plan that you are upgrading to, for example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf update-service my-pg-service -p small-ha-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
+</code></pre></div><p>Passing the <code>preferred_maintenance_window</code> parameter will alter the default maintenance window for any future maintenance events required for the database instance.</p>
+<p>You can only migrate your service if the new plan has the <a href="/deploying_services/postgresql/#same-encryption-type">same encryption type</a> as your current plan.</p>
+<h4 id="postgresql-service-backup">PostgreSQL service backup</h4><p>The data stored within any PostgreSQL service you create is backed up using the standard Amazon RDS backup system if you are using a paid plan. Your data is not backed up if you are using the free plan.</p>
+<p>Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is retained for 7 days.</p>
+<p>There are two ways you can restore data to an earlier state:</p>
+
+<ol>
+<li><p>You can restore to the latest snapshot. Refer to <a href="/deploying_services/postgresql/#restoring-a-postgresql-service-snapshot">Restoring a PostgreSQL service snapshot</a> for details.</p></li>
+<li><p>You can restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Refer to <a href="/deploying_services/postgresql/#restoring-a-postgresql-service-from-a-point-in-time">Restoring a PostgreSQL service from a point in time</a> for details.</p></li>
+</ol>
+<p>Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.</p>
+<p>For more details about how the RDS backup system works, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html">Amazon&rsquo;s DB instance backups documentation</a>.</p>
+<h4 id="restoring-a-postgresql-service-snapshot">Restoring a PostgreSQL service snapshot</h4><p>You can create a copy of any existing PostgreSQL service instance using the latest snapshot of the RDS instance. These snapshots are taken during <a href="/deploying_services/postgresql/#postgresql-service-backup">the PostgreSQL nightly backups</a>.</p>
+<p>This can be useful if you want to clone a production database to be used for testing or batch processing.</p>
+<p>To restore from a snapshot:</p>
+
+<ol>
+<li><p>Get the global unique identifier (GUID) of the existing instance by running the following code in the command line:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME --guid
+</code></pre></div><p>where <code>SERVICE_NAME</code> is the name of the PostgreSQL service instance you want to copy. For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service my-pg-service --guid
+</code></pre></div><p>This returns a <code>GUID</code> in the format <code>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</code>, for example <code>32938730-e603-44d6-810e-b4f12d7d109e</code>.</p></li>
+<li><p>Trigger the creation of a new service based on the snapshot by running:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID"}'
+</code></pre></div><p>where <code>PLAN</code> is the plan used in the original instance (you can find this out by running <code>cf service SERVICE_NAME</code>), and <code>NEW_SERVICE_NAME</code> is a unique, descriptive name for this new instance. For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres small-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
+</code></pre></div></li>
+<li><p>It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service NEW_SERVICE_NAME
+</code></pre></div><p>for example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service my-pg-service-copy
+</code></pre></div></li>
+<li><p>The new instance is set up when the <code>cf service NEW_SERVICE_NAME</code> command returns a <code>create succeeded</code> status. See <a href="/deploying_services/postgresql/#set-up-a-postgresql-service">Set up a PostgreSQL service</a> for more details.</p></li>
+</ol>
+<p>This feature has the following limitations:</p>
+
+<ul>
+<li>You can only restore the most recent snapshot from the latest nightly backup</li>
+<li>You cannot restore from a service instance that has been deleted</li>
+<li>You must use the same service plan for the copy as for the original service instance</li>
+<li>You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can <a href="/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine">connect to your PostgreSQL instance from a local machine using Conduit</a>.</li>
+</ul>
+<p>By default, the database is restored to the most recent snapshot.
+If you need to restore to a snapshot before a certain date and time,
+you can use the <code>restore_from_latest_snapshot_before</code> parameter.</p>
+<p>For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres small-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_latest_snapshot_before": "2020-04-01 13:00:00"}'
+</code></pre></div><p>will create a new database from the most recent snapshot created before April
+1st 2020 13:00 UTC.</p>
+<h4 id="restoring-a-postgresql-service-from-a-point-in-time">Restoring a PostgreSQL service from a point in time</h4><p>You can create a copy of any existing PostgreSQL service instance using the
+write-ahead log of the RDS instance.  The database generates write-ahead log
+checkpoints during normal use and stores them every 5 minutes. You can restore
+to a point in time with a resolution of 1 second.</p>
+<p>To restore from a point in time:</p>
+
+<ol>
+<li><p>Get the global unique identifier (GUID) of the existing instance by running the following code in the command line:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service SERVICE_NAME --guid
+</code></pre></div><p>where <code>SERVICE_NAME</code> is the name of the PostgreSQL service instance you want to copy. For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service my-pg-service --guid
+</code></pre></div><p>This returns a <code>GUID</code> in the format <code>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</code>, for example <code>32938730-e603-44d6-810e-b4f12d7d109e</code>.</p></li>
+<li><p>Trigger the creation of a new service based on the snapshot by running:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_point_in_time_of": "GUID"}'
+</code></pre></div><p>where <code>PLAN</code> is the plan used in the original instance (you can find this out by running <code>cf service SERVICE_NAME</code>), and <code>NEW_SERVICE_NAME</code> is a unique, descriptive name for this new instance. For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres large-11 my-pg-service-copy  -c '{"restore_from_point_in_time_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
+</code></pre></div></li>
+<li><p>It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service NEW_SERVICE_NAME
+</code></pre></div><p>for example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf service my-pg-service-copy
+</code></pre></div></li>
+<li><p>The new instance is set up when the <code>cf service NEW_SERVICE_NAME</code> command returns a <code>create succeeded</code> status. See <a href="/deploying_services/postgresql/#set-up-a-postgresql-service">Set up a PostgreSQL service</a> for more details.</p></li>
+</ol>
+<p>This feature has the following limitations:</p>
+
+<ul>
+<li>You cannot restore from a service instance that has been deleted</li>
+<li>You must use the same service plan for the copy as for the original service
+instance</li>
+<li>You cannot restore to a point in time prior to the oldest snapshot (7 days ago)</li>
+<li>You must create the new service instance in the same organisation and space
+as the original. This is to prevent unauthorised access to data between
+spaces. If you need to copy data to a different organisation and/or space,
+you can <a href="/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine">connect to your PostgreSQL instance from a local machine using
+Conduit</a>.</li>
+</ul>
+<p>By default, the database is restored to the most recent point in time
+checkpoint available.
+If you need to restore to a particular point in time,
+you can use the <code>restore_from_point_in_time_of</code> parameter.</p>
+<p>For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service postgres large-11 my-pg-service-copy  -c '{"restore_from_point_in_time_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_point_in_time_before": "2020-10-27 13:00:00"}'
+</code></pre></div><p>will create a new database from the write-ahead logs before October 27th 2020
+13:00 UTC.</p>
+<h2 id="upgrading-major-versions-of-postgres">Upgrading major versions of Postgres</h2><p>You can upgrade from one major version to the next by performing a plan upgrade.</p>
+<p>There are two constraints on major version changes:</p>
+
+<ol>
+<li>You cannot downgrade</li>
+<li>You can only upgrade 1 major version at a time. E.g. 10 to 11, not 10 to 12.</li>
+</ol>
+<p>To perform the plan upgrade, run the following code at the command line:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>$cf update-service SERVICE_NAME -p PLAN_NAME
+Updating service instance accounts-db as &lt;REDACTED&gt;@digital.cabinet-office.gov.uk...
+OK
+
+Update in progress. Use 'cf services' or 'cf service SERVICE_NAME' to check operation status.
+</code></pre></div><p>Where <code>SERVICE_NAME</code> is the name of the Postgres service instance being upgraded, and <code>PLAN_NAME</code> is the name of the plan it should be upgraded to.</p>
+<p>When the update process finishes, your database will be upgraded to the version named in the plan.
+To confirm that the database upgraded successfully to the right version, use the <code>cf service SERVICE_NAME</code> command to show the details:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>$cf service SERVICE_NAME
+Showing info of service SERVICE_NAME in org &lt;redacted&gt; / space &lt;redacted&gt; as &lt;redacted&gt;@digital.cabinet-office.gov.uk...
+
+name:             SERVICE_NAME
+service:          postgres
+tags:
+plan:             PLAN_NAME
+description:      AWS RDS PostgreSQL service
+documentation:    https://docs.cloud.service.gov.uk/deploying_services/postgresql/
+dashboard:
+service broker:   rds-broker
+
+This service is not currently shared.
+
+Showing status of last operation from service SERVICE_NAME...
+
+status:    update succeeded
+message:   DB Instance 'rdsbroker-&lt;redacted&gt;' status is 'available'
+started:   2020-12-04T12:58:56Z
+updated:   2020-12-04T13:06:23Z
+
+bound apps:
+name            binding name   status             message
+APP_NAME                       create succeeded
+
+Upgrades are not supported by this broker.
+$
+</code></pre></div><h3 id="application-and-database-availability-during-upgrade">Application and database availability during upgrade</h3><p>Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can <a href="https://docs.cloud.service.gov.uk/deploying_services/postgresql/#queue-a-plan-migration-postgresql">queue the change to begin during a maintenance window</a>.</p>

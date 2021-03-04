@@ -1,0 +1,9 @@
+<h2 id="pushing-apps-fails-on-windows-line-endings-issue">Pushing apps fails on Windows (line endings issue)</h2><p>We are aware of some cases where pushing an app can fail if you are pushing from a Windows machine that has saved project files with Windows-style (CRLF) line endings.</p>
+<p>This happens because some buildpacks do not interpret the CRLF line endings correctly. This is an example of an error arising from an executable script with CRLF line endings when using the Ruby buildpack:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>2016-12-02T06:03:25.95-0800 [APP/PROC/WEB/0]ERR /usr/bin/env: ruby
+2016-12-02T06:03:25.95-0800 [APP/PROC/WEB/0]ERR : No such file or directory
+2016-12-02T06:03:25.95-0800 [APP/PROC/WEB/0]OUT Exit status 127
+</code></pre></div><p>Similar problems may happen in other buildpacks. If you find that pushing an app from Windows is failing, try making sure that files in your project are being saved with Unix-style LF line endings, not Windows-style CRLF line endings. Most text editors aimed at developers allow you to change the line ending style.</p>
+<p>If you are working with a Git repository, disable Git&rsquo;s <code>autocrlf</code> setting:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>git config --global core.autocrlf false
+</code></pre></div><p>then clone the repository again.</p>

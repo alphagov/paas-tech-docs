@@ -1,0 +1,84 @@
+<h2 id="deploy-a-java-app">Deploy a Java app</h2><p>This section covers how to deploy a Java application to GOV.UK PaaS using the <a href="https://github.com/cloudfoundry/java-buildpack">Java buildpack</a>.</p>
+<h3 id="deploying-a-jar-file">Deploying a JAR file</h3><p>If your java application can be packaged as a <a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-java_main.md">self-executable JAR file</a> then you can deploy it using <code>cf push -p [your-app].jar [your-app-name]</code>.</p>
+<p>This example will walk through creating a simple &ldquo;Hello World&rdquo; application that embeds the popular <a href="https://www.eclipse.org/jetty/">Jetty webserver</a>.
+The instructions assume you have already carried out the setup process explained in the <a href="/get_started.html#get-started">Get started</a> section.</p>
+
+<ol>
+<li><p>Create a directory for your Java application:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">mkdir </span>myapp
+<span class="nb">cd </span>myapp
+</code></pre></div></li>
+<li><p>Download Jetty.</p>
+<div class="highlight"><pre class="highlight shell"><code>curl <span class="nt">-o</span> ./jetty.jar http://central.maven.org/maven2/org/eclipse/jetty/aggregate/jetty-all/9.4.6.v20170531/jetty-all-9.4.6.v20170531-uber.jar
+</code></pre></div><p>This example uses version 9.4.6; check <a href="http://www.eclipse.org/jetty/download.html">http://www.eclipse.org/jetty/download.html</a> for the latest version of Jetty.</p></li>
+<li><p>Create a <code>App.java</code> file in your application directory. This class will serve as the entry point for your application:</p>
+<div class="highlight"><pre class="highlight java"><code><span class="kn">package</span> <span class="nn">app</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.eclipse.jetty.server.Request</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.eclipse.jetty.server.Server</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.eclipse.jetty.server.handler.AbstractHandler</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">App</span> <span class="kd">extends</span> <span class="nc">AbstractHandler</span>
+<span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handle</span><span class="o">(</span> <span class="nc">String</span> <span class="n">target</span><span class="o">,</span> <span class="nc">Request</span> <span class="n">baseRequest</span><span class="o">,</span> <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span> <span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">,</span> <span class="nc">ServletException</span>
+    <span class="o">{</span>
+           <span class="n">response</span><span class="o">.</span><span class="na">setContentType</span><span class="o">(</span><span class="s">"text/html; charset=utf-8"</span><span class="o">);</span>
+           <span class="n">response</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">HttpServletResponse</span><span class="o">.</span><span class="na">SC_OK</span><span class="o">);</span>
+           <span class="n">response</span><span class="o">.</span><span class="na">getWriter</span><span class="o">().</span><span class="na">println</span><span class="o">(</span><span class="s">"&lt;h1&gt;Hello World&lt;/h1&gt;"</span><span class="o">);</span>
+           <span class="n">baseRequest</span><span class="o">.</span><span class="na">setHandled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">args</span> <span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span>
+    <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="nc">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">getenv</span><span class="o">(</span><span class="s">"PORT"</span><span class="o">));</span>
+            <span class="nc">Server</span> <span class="n">server</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Server</span><span class="o">(</span><span class="n">port</span><span class="o">);</span>
+            <span class="n">server</span><span class="o">.</span><span class="na">setHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">App</span><span class="o">());</span>
+
+            <span class="n">server</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+            <span class="n">server</span><span class="o">.</span><span class="na">join</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></li>
+<li><p>Compile your class:</p>
+<div class="highlight"><pre class="highlight shell"><code>javac <span class="nt">-d</span> <span class="nb">.</span> <span class="nt">-cp</span> ./jetty.jar App.java
+</code></pre></div></li>
+<li><p>Combine your class with Jetty to create an executable jar file:</p>
+<div class="highlight"><pre class="highlight shell"><code>jar uvfe ./jetty.jar app.App app/App.class
+</code></pre></div></li>
+<li><p>Push your jar file.</p>
+<div class="highlight"><pre class="highlight shell"><code>cf push your-app-name <span class="nt">-b</span> java_buildpack <span class="nt">-p</span> ./jetty.jar
+</code></pre></div></li>
+</ol>
+<p>You have now deployed your Java application. Your application should now be accessible over HTTPS from the URL provided in the output.</p>
+<p>If your application requires arguments in order to start, you can set the <code>JBP_CONFIG_JAVA_MAIN</code> environment variable. For example to add <code>server</code> and <code>config.yml</code> as arguments for your app, you could add the following to your application&rsquo;s <code>manifest.yml</code>:</p>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">env</span><span class="pi">:</span>
+  <span class="na">JBP_CONFIG_JAVA_MAIN</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{</span><span class="nv"> </span><span class="s">arguments:</span><span class="nv"> </span><span class="s">"server</span><span class="nv"> </span><span class="s">config.yml"</span><span class="nv"> </span><span class="s">}</span>
+</code></pre></div><h3 id="deploying-a-war-file">Deploying a WAR file</h3><p>If your application can be packaged as a <code>.war</code> file you can deploy with the following:</p>
+<div class="highlight"><pre class="highlight shell"><code>cf push your-app-name <span class="nt">-b</span> java_buildpack <span class="nt">-p</span> your-app.war
+</code></pre></div><p>If you need to use a specific version of Tomcat you can set the environment variable <code>JBP_CONFIG_TOMCAT</code>. For example to use Tomcat 8 you could add the following to your application&rsquo;s <code>manifest.yml</code>:</p>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">env</span><span class="pi">:</span>
+  <span class="na">JBP_CONFIG_TOMCAT</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{</span><span class="nv"> </span><span class="s">tomcat:</span><span class="nv"> </span><span class="s">{</span><span class="nv"> </span><span class="s">version:</span><span class="nv"> </span><span class="s">8.0.+</span><span class="nv"> </span><span class="s">}</span><span class="nv"> </span><span class="s">}'</span>
+</code></pre></div><p>Note that you do not need to deploy Tomcat along with your application. The Java buildpack will run the servlet 2 and 3 web applications.</p>
+<p>For more configuration options, refer to the <a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/container-tomcat.md">Tomcat Container documentation</a>.</p>
+<h3 id="specify-a-java-version">Specify a Java version</h3><p>You can specify the version of the Java Runtime Environment (JRE) by setting the environment variable <code>JBP_CONFIG_OPEN_JDK_JRE</code> in the application&rsquo;s <code>manifest.yml</code>. For example, to use JRE 11:</p>
+<div class="highlight"><pre class="highlight yaml"><code>  <span class="na">env</span><span class="pi">:</span>
+    <span class="na">JBP_CONFIG_OPEN_JDK_JRE</span><span class="pi">:</span> <span class="s1">'</span><span class="s">{</span><span class="nv"> </span><span class="s">jre:</span><span class="nv"> </span><span class="s">{</span><span class="nv"> </span><span class="s">version:</span><span class="nv"> </span><span class="s">11.+</span><span class="nv"> </span><span class="s">}</span><span class="nv"> </span><span class="s">}'</span>
+</code></pre></div><p>The <code>+</code> in this example means it will use the latest point release available.</p>
+<h3 id="deploying-other-jvm-based-applications">Deploying other JVM-based applications</h3><p>The Java buildpack supports running any JVM-based applications (such as Scala or Clojure) with little or zero additional configuration. For more information, refer to the following examples of deploying applications using other frameworks and JVM-based languages:</p>
+
+<ul>
+<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-embedded-web-server.md">Embedded web server</a></li>
+<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-grails.md">Grails</a></li>
+<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-groovy.md">Groovy</a></li>
+<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-java_main.md">Java Main</a></li>
+<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-play_framework.md">Play Framework</a></li>
+<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-servlet.md">Servlet</a></li>
+<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/docs/example-spring_boot_cli.md">Spring Boot CLI</a></li>
+<li><a href="https://github.com/cloudfoundry/java-buildpack/blob/master/README.md">Cloud Foundry Java Buildpack documentation</a></li>
+<li><a href="https://docs.cloudfoundry.org/buildpacks/java/java-tips.html">Cloud Foundry tips for java developers</a>  for more information.</li>
+</ul>

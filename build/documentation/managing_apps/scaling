@@ -1,0 +1,27 @@
+<h2 id="scaling">Scaling</h2><p>You can manually scale your app to meet increasing demand. You can do this by:</p>
+
+<ul>
+<li>changing the number of app instances running</li>
+<li>increasing memory and disk space allocated to your app</li>
+</ul>
+<p>Your organisation <a href="/managing_apps.html#quotas">quotas</a> limit the resources you can use for each app.</p>
+<h3 id="changing-the-number-of-app-instances">Changing the number of app instances</h3><p>You can change the number of instances of your app running at the same time. Running more than one app instance:</p>
+
+<ul>
+<li>allows your app to handle increased traffic and demand as incoming requests are automatically load-balanced across all instances</li>
+<li>helps maintain high availability and makes it less likely that the failure of a single component will take down your app</li>
+</ul>
+<p>For example, run the following command to set the number of app instances to 5:</p>
+<p><code>cf scale APPNAME -i 5</code></p>
+<p>You can also use the manifest to set the number of instances that will start when you <a href="deploying_apps.html#deploying-public-apps">push the app</a>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>---
+applications:
+- name: APP_NAME
+   instances: 2
+</code></pre></div><p>You should always run more than one instance when <a href="/deploying_apps.html#deploy-an-app-to-production">deploying an app to production</a>.</p>
+<h3 id="increasing-memory-or-disk-space">Increasing memory or disk space</h3><p>You can scale an app vertically by increasing the memory or disk space available to each instance of the app.</p>
+<p>For example, this command increases the available memory for an app to 1 gigabyte:</p>
+<p><code>cf scale APPNAME -m 1G</code></p>
+<p>This command increases the disk space limit for an app to 512 megabytes:</p>
+<p><code>cf scale APPNAME -k 512M</code></p>
+<h3 id="further-information">Further information</h3><p>For more information, refer to the <a href="http://docs.cloudfoundry.org/devguide/deploy-apps/cf-scale.html">Cloud Foundry documentation on using <code>cf scale</code> to scale an app</a> in the Cloud Foundry docs.</p>

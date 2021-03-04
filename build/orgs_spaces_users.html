@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en" class="govuk-template no-js">
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Managing organisations, spaces and users - Platform as a Service</title>
+
+    <link href="/stylesheets/manifest.css" rel="stylesheet" />
+
+    <link rel="canonical" href="https://docs.cloud.service.gov.uk/orgs_spaces_users.html">
+
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:domain" content="docs.cloud.service.gov.uk" />
+      <meta name="twitter:image" content="https://docs.cloud.service.gov.uk/images/govuk-large.png" />
+      <meta name="twitter:title" content="Managing organisations, spaces and users - Platform as a Service" />
+      <meta name="twitter:url" content="https://docs.cloud.service.gov.uk/orgs_spaces_users.html" />
+
+      <meta property="og:image" content="https://docs.cloud.service.gov.uk/images/govuk-large.png" />
+      <meta property="og:site_name" content="Platform as a Service" />
+      <meta property="og:title" content="Managing organisations, spaces and users" />
+      <meta property="og:type" content="object" />
+      <meta property="og:url" content="https://docs.cloud.service.gov.uk/orgs_spaces_users.html" />
+
+    
+  </head>
+
+  <body class="govuk-template__body">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <div class="app-pane">
+      <div class="app-pane__header toc-open-disabled">
+        <a href="#content" class="govuk-skip-link">Skip to main content</a>
+
+        <header class="govuk-header app-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-header__container--full-width">
+    <div class="govuk-header__logo">
+      <a href="https://www.cloud.service.gov.uk" class="govuk-header__link govuk-header__link--homepage">
+        <span class="govuk-header__logotype">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            class="govuk-header__logotype-crown"
+            xmlns="http://www.w3.org/2000/svg"
+            viewbox="0 0 132 97"
+            height="30"
+            width="36"
+          >
+            <path
+              fill="currentColor" fill-rule="evenodd"
+              d="M25 30.2c3.5 1.5 7.7-.2 9.1-3.7 1.5-3.6-.2-7.8-3.9-9.2-3.6-1.4-7.6.3-9.1 3.9-1.4 3.5.3 7.5 3.9 9zM9 39.5c3.6 1.5 7.8-.2 9.2-3.7 1.5-3.6-.2-7.8-3.9-9.1-3.6-1.5-7.6.2-9.1 3.8-1.4 3.5.3 7.5 3.8 9zM4.4 57.2c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.5-1.5-7.6.3-9.1 3.8-1.4 3.5.3 7.6 3.9 9.1zm38.3-21.4c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.6-1.5-7.6.3-9.1 3.8-1.3 3.6.4 7.7 3.9 9.1zm64.4-5.6c-3.6 1.5-7.8-.2-9.1-3.7-1.5-3.6.2-7.8 3.8-9.2 3.6-1.4 7.7.3 9.2 3.9 1.3 3.5-.4 7.5-3.9 9zm15.9 9.3c-3.6 1.5-7.7-.2-9.1-3.7-1.5-3.6.2-7.8 3.7-9.1 3.6-1.5 7.7.2 9.2 3.8 1.5 3.5-.3 7.5-3.8 9zm4.7 17.7c-3.6 1.5-7.8-.2-9.2-3.8-1.5-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.3 3.5-.4 7.6-3.9 9.1zM89.3 35.8c-3.6 1.5-7.8-.2-9.2-3.8-1.4-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.4 3.6-.3 7.7-3.9 9.1zM69.7 17.7l8.9 4.7V9.3l-8.9 2.8c-.2-.3-.5-.6-.9-.9L72.4 0H59.6l3.5 11.2c-.3.3-.6.5-.9.9l-8.8-2.8v13.1l8.8-4.7c.3.3.6.7.9.9l-5 15.4v.1c-.2.8-.4 1.6-.4 2.4 0 4.1 3.1 7.5 7 8.1h.2c.3 0 .7.1 1 .1.4 0 .7 0 1-.1h.2c4-.6 7.1-4.1 7.1-8.1 0-.8-.1-1.7-.4-2.4V34l-5.1-15.4c.4-.2.7-.6 1-.9zM66 92.8c16.9 0 32.8 1.1 47.1 3.2 4-16.9 8.9-26.7 14-33.5l-9.6-3.4c1 4.9 1.1 7.2 0 10.2-1.5-1.4-3-4.3-4.2-8.7L108.6 76c2.8-2 5-3.2 7.5-3.3-4.4 9.4-10 11.9-13.6 11.2-4.3-.8-6.3-4.6-5.6-7.9 1-4.7 5.7-5.9 8-.5 4.3-8.7-3-11.4-7.6-8.8 7.1-7.2 7.9-13.5 2.1-21.1-8 6.1-8.1 12.3-4.5 20.8-4.7-5.4-12.1-2.5-9.5 6.2 3.4-5.2 7.9-2 7.2 3.1-.6 4.3-6.4 7.8-13.5 7.2-10.3-.9-10.9-8-11.2-13.8 2.5-.5 7.1 1.8 11 7.3L80.2 60c-4.1 4.4-8 5.3-12.3 5.4 1.4-4.4 8-11.6 8-11.6H55.5s6.4 7.2 7.9 11.6c-4.2-.1-8-1-12.3-5.4l1.4 16.4c3.9-5.5 8.5-7.7 10.9-7.3-.3 5.8-.9 12.8-11.1 13.8-7.2.6-12.9-2.9-13.5-7.2-.7-5 3.8-8.3 7.1-3.1 2.7-8.7-4.6-11.6-9.4-6.2 3.7-8.5 3.6-14.7-4.6-20.8-5.8 7.6-5 13.9 2.2 21.1-4.7-2.6-11.9.1-7.7 8.8 2.3-5.5 7.1-4.2 8.1.5.7 3.3-1.3 7.1-5.7 7.9-3.5.7-9-1.8-13.5-11.2 2.5.1 4.7 1.3 7.5 3.3l-4.7-15.4c-1.2 4.4-2.7 7.2-4.3 8.7-1.1-3-.9-5.3 0-10.2l-9.5 3.4c5 6.9 9.9 16.7 14 33.5 14.8-2.1 30.8-3.2 47.7-3.2z"
+            ></path>
+            <image src="/assets/images/govuk-logotype-crown.png" xlink:href="" class="govuk-header__logotype-crown-fallback-image" width="36" height="32"></image>
+          </svg>
+          <span class="govuk-header__logotype-text">
+            GOV.UK
+          </span>
+        </span>
+        <span class="govuk-header__product-name">
+          Platform as a Service
+        </span>
+      </a>
+    </div>
+    <div class="govuk-header__content">
+      <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+      <nav>
+        <ul id="navigation" class="govuk-header__navigation govuk-header__navigation--end" aria-label="Top Level Navigation">
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://www.cloud.service.gov.uk">About</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://www.cloud.service.gov.uk/get-started">Get started</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://www.cloud.service.gov.uk/features">Features</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://github.com/alphagov/paas-roadmap/projects/1">Roadmap</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="/">Documentation</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://admin.london.cloud.service.gov.uk/support">Support</a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+      </div>
+
+        <div id="toc-heading" class="toc-show fixedsticky">
+          <button type="button" class="toc-show__label js-toc-show" aria-controls="toc">
+            Table of contents <span class="toc-show__icon"></span>
+          </button>
+        </div>
+
+      <div class="app-pane__body" data-module="in-page-navigation">
+          <div class="app-pane__toc">
+            <div class="toc" data-module="table-of-contents" tabindex="-1" aria-label="Table of contents">
+              <div class="search" data-module="search">
+  <form action="https://www.google.co.uk/search" method="get" role="search">
+    <input type="hidden" name="as_sitesearch" value="https://docs.cloud.service.gov.uk"/>
+    <label class="govuk-label search__label" for="search">
+      Search (via Google)
+    </label>
+    <input class="govuk-input govuk-!-margin-bottom-4" id="search" name="q" type="text" aria-controls="search-results" placeholder="Search">
+  </form>
+  <div id="search-results" class="search-results" aria-hidden="true" role="dialog" aria-labelledby="search-results-title">
+    <div class="search-results__inner">
+      <button class="search-results__close">Close<span class="search-results__close-label"> search results</span></button>
+      <h2 id="search-results-title" class="search-results__title" aria-live="polite">Results</h2>
+      <div class="search-results__content"></div>
+    </div>
+  </div>
+</div>
+
+              <button type="button" class="toc__close js-toc-close" aria-controls="toc" aria-label="Hide table of contents"></button>
+              <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
+                      <ul>
+  <li>
+    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/before_you_start.html#before-you-start"><span>Before you start</span></a>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/get_started.html#get-started"><span>Get started</span></a>
+    <ul>
+      <li>
+        <a href="/get_started.html#get-an-account"><span>Get an account</span></a>
+      </li>
+      <li>
+        <a href="/get_started.html#set-up-the-cloud-foundry-command-line"><span>Set up the Cloud Foundry command line</span></a>
+      </li>
+      <li>
+        <a href="/get_started.html#sign-in-to-cloud-foundry"><span>Sign in to Cloud Foundry</span></a>
+      </li>
+      <li>
+        <a href="/get_started.html#deploy-a-test-static-html-page"><span>Deploy a test static HTML page</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/responsibility_model.html#know-your-responsibilities"><span>Know your responsibilities</span></a>
+    <ul>
+      <li>
+        <a href="/responsibility_model.html#standard-buildpack-responsibilities"><span>Standard buildpack responsibilities</span></a>
+      </li>
+      <li>
+        <a href="/responsibility_model.html#custom-buildpack-responsibilities"><span>Custom buildpack responsibilities</span></a>
+      </li>
+      <li>
+        <a href="/responsibility_model.html#docker-image-responsibilities"><span>Docker image responsibilities</span></a>
+      </li>
+      <li>
+        <a href="/responsibility_model.html#custom-buildpacks-compared-to-docker-images"><span>Custom buildpacks compared to Docker images</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/orgs_spaces_users.html#managing-organisations-spaces-and-users"><span>Managing organisations, spaces and users</span></a>
+    <ul>
+      <li>
+        <a href="/orgs_spaces_users.html#regions"><span>Regions</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#organisations"><span>Organisations</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#spaces"><span>Spaces</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#users-and-user-roles"><span>Users and user roles</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#manage-orgs-spaces-and-user-roles"><span>Manage orgs, spaces and user roles</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#case-studies"><span>Case studies</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_apps.html#deploying-apps"><span>Deploying apps</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_apps.html#deploying-public-apps"><span>Deploying public apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploying-private-apps"><span>Deploying private apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#data-security-classification"><span>Data security classification</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#secure-and-non-secure-requests"><span>Secure and non-secure requests</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-an-app-to-production"><span>Deploy an app to production</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#buildpacks"><span>Buildpacks</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#excluding-files"><span>Excluding files</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#environment-variables"><span>Environment variables</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#names-routes-and-domains"><span>Names, routes and domains</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-static-html-page"><span>Deploy a static HTML page</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-java-app"><span>Deploy a Java app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-net-core-app"><span>Deploy a .NET Core app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#stopping-and-starting-apps"><span>Stopping and starting apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deleting-apps"><span>Deleting apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-docker-image"><span>Deploy a Docker image</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/using_ci.html#configuring-a-continuous-integration-ci-tool"><span>Configuring a continuous integration (CI) tool</span></a>
+    <ul>
+      <li>
+        <a href="/using_ci.html#choose-ci-tool"><span>Choose CI tool</span></a>
+      </li>
+      <li>
+        <a href="/using_ci.html#configure-your-ci-tool-accounts"><span>Configure your CI tool accounts</span></a>
+      </li>
+      <li>
+        <a href="/using_ci.html#using-the-travis-ci-tool"><span>Using the Travis CI tool</span></a>
+      </li>
+      <li>
+        <a href="/using_ci.html#push-an-app-with-jenkins"><span>Push an app with Jenkins</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul><li><a href="/deploying_services/"><span>Deploy a backing or routing service</span></a>
+<ul>
+  <li>
+    <a href="/deploying_services/postgresql/#postgresql"><span>PostgreSQL</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/postgresql/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#upgrading-major-versions-of-postgres"><span>Upgrading major versions of Postgres</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/mysql/#mysql"><span>MySQL</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/mysql/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/mysql/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/mysql/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/mysql/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/redis/#redis"><span>Redis</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/redis/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/redis/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/redis/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/redis/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/elasticsearch/#elasticsearch"><span>Elasticsearch</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/elasticsearch/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/elasticsearch/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/elasticsearch/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/elasticsearch/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/sqs/#amazon-sqs"><span>Amazon SQS</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/sqs/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/sqs/#use-the-service"><span>Use the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/sqs/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/sqs/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/s3/#amazon-s3"><span>Amazon S3</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/s3/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/s3/#use-the-service"><span>Use the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/s3/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/influxdb/#influxdb"><span>InfluxDB</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/influxdb/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/influxdb/#use-the-service"><span>Use the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/influxdb/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/influxdb/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/user_provided_services/#user-provided-backing-services"><span>User-provided backing services</span></a>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/route_services/#route-services"><span>Route services</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/route_services/#user-provided-route-services"><span>User-provided route services</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/route_services/#implement-a-route-service"><span>Implement a route service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service"><span>Managing custom domains using the cdn-route service</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#configuring-your-custom-domain"><span>Configuring your custom domain</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#how-custom-domains-work"><span>How custom domains work</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#you-may-need-to-make-a-dns-change"><span>You may need to make a DNS change</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#making-changes-to-your-dns-records"><span>Making changes to your DNS records</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn"><span>Set up a custom domain by configuring your own CDN</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/configure_cdn/#use-cloud-foundry-commands"><span>Use Cloud Foundry commands</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/configure_cdn/#amend-http-request-headers"><span>Amend HTTP request headers</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+</li></ul><ul>
+  <li>
+    <a href="/managing_apps.html#managing-apps"><span>Managing apps</span></a>
+    <ul>
+      <li>
+        <a href="/managing_apps.html#connecting-with-ssh"><span>Connecting with SSH</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#managing-ssh-permissions"><span>Managing SSH permissions</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#scaling"><span>Scaling</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#autoscaling"><span>Autoscaling</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#quotas"><span>Quotas</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#redirecting-all-traffic"><span>Redirecting all traffic</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#app-restarts"><span>App restarts</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/monitoring_apps.html#monitoring-apps"><span>Monitoring apps</span></a>
+    <ul>
+      <li>
+        <a href="/monitoring_apps.html#app-metrics"><span>App metrics</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_apps.html#more-about-monitoring"><span>More about monitoring</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_apps.html#logs"><span>Logs</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_apps.html#set-up-the-logit-log-management-service"><span>Set up the Logit log management service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/monitoring_services.html#monitoring-backing-services"><span>Monitoring backing services</span></a>
+    <ul>
+      <li>
+        <a href="/monitoring_services.html#view-backing-service-metrics"><span>View backing service metrics</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_services.html#exporting-backing-service-metrics-to-prometheus"><span>Exporting backing service metrics to Prometheus</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_services.html#monitoring-backing-services-more-about-monitoring"><span>More about monitoring</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <ul>
+      <li>
+        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+      </li>
+      <li>
+        <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/guidance.html#guidance"><span>Guidance</span></a>
+    <ul>
+      <li>
+        <a href="/guidance.html#penetration-testing"><span>Penetration testing</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#connect-a-php-app-to-postgresql-or-mysql"><span>Connect a PHP app to PostgreSQL or MySQL</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#connect-drupal-to-mysql"><span>Connect Drupal to MySQL</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#connect-wordpress-to-mysql"><span>Connect Wordpress to MySQL</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#isolation-segments"><span>Isolation segments</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#useful-plugins"><span>Useful Plugins</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/troubleshooting.html#troubleshooting"><span>Troubleshooting</span></a>
+    <ul>
+      <li>
+        <a href="/troubleshooting.html#postgresql-connection-problems"><span>PostgreSQL connection problems</span></a>
+      </li>
+      <li>
+        <a href="/troubleshooting.html#pushing-apps-fails-on-windows-line-endings-issue"><span>Pushing apps fails on Windows (line endings issue)</span></a>
+      </li>
+      <li>
+        <a href="/troubleshooting.html#tracing-http-requests"><span>Tracing HTTP requests</span></a>
+      </li>
+      <li>
+        <a href="/troubleshooting.html#forgotten-passwords"><span>Forgotten passwords</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+              </nav>
+            </div>
+          </div>
+
+        <div class="app-pane__content toc-open-disabled">
+          <main id="content" class="technical-documentation" data-module="anchored-headings">
+            <p><h1 id="managing-organisations-spaces-and-users">Managing organisations, spaces and users</h1><h2 id="regions">Regions</h2><p>The GOV.UK PaaS is hosted in 2 independent regions, London and Ireland.</p>
+<p>GOV.UK PaaS accounts, credentials and resources belong to a single region.</p>
+<p>If you have a London region account, your app domain is <code>APPNAME.london.cloudapps.digital</code>.</p>
+<p>If you have an Ireland region account, your app domain is <code>APPNAME.cloudapps.digital</code>.</p>
+<h2 id="organisations">Organisations</h2><p>An organisation, or org, represents a group of users, applications and environments. Each org shares the same resource, quota and custom domain.</p>
+<p>The GOV.UK PaaS team creates new orgs in the London region unless you request otherwise. We assign at least one <a href="/orgs_spaces_users.html#org-manager">org manager</a> to new orgs. You can request your first org on the <a href="https://admin.london.cloud.service.gov.uk/support/sign-up">GOV.UK PaaS support page</a>.</p>
+<p>To request additional orgs, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> and tell us who the org manager(s) should be and the name of one of your existing orgs.</p>
+<p>Run <code>cf orgs</code> to list the orgs your user account can access.</p>
+<p>To see <a href="/managing_apps.html#quotas">quota</a> information about an org, you can select the appropriate org using the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in), and check the <strong>Memory</strong> total in the top right corner of the screen. The amount of information you can see depends on your user role within the org. For example, org managers can see all quota information, whereas space developers can only see information on spaces that they are members of.</p>
+<p>You can also run <code>cf org ORGNAME</code> to see <a href="/managing_apps.html#quotas">quota</a> information about an org, where <code>ORGNAME</code> is the name of the org.</p>
+<p>Your user account will be initially assigned to one org by the PaaS team and then you can choose to belong to additional orgs. You can contact <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to request more orgs.</p>
+<h2 id="spaces">Spaces</h2><p>An org is divided into one or more spaces. A space is a shared location for developing, deploying and running apps and backing services.</p>
+<p>For example, you might have separate spaces for the development and production versions of your app. When we set up your org, we create a default sandbox space you can use for experimenting with the PaaS.</p>
+<p>To see the spaces you can access in your current org, you can either:</p></p>
+
+<ul>
+<li>run <code>cf spaces</code> in the command line</li>
+<li>sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> and select the appropriate org</li>
+</ul>
+
+<p><a href="/orgs_spaces_users.html#org-manager">Org managers</a> can create new spaces within an org.</p>
+
+<p><a href="/documentation/figures/orgs-spaces.svg" rel="noopener noreferrer"><img src="/documentation/figures/orgs-spaces.svg" alt="Diagram showing an org that contains multiple spaces" /></a></p>
+
+<p>Refer to the <a href="/orgs_spaces_users.html#case-studies">case studies</a> documentation for information on common structures for orgs, spaces and apps.</p>
+<p><h2 id="users-and-user-roles">Users and user roles</h2><p>Users are members of your team who can access or manage apps and backing services on the PaaS.</p>
+<p>Users are assigned roles which have different permissions for accessing and managing orgs and spaces. A user can have one or multiple roles within the same or different orgs and spaces.</p>
+<p>To see a list of users and their roles in your org, you can view the appropriate org&rsquo;s <strong>Members</strong> screen in the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in). Your user account must have the <a href="/orgs_spaces_users.html#org-manager">org manager role</a> or the <a href="/orgs_spaces_users.html#org-auditor">org auditor role</a> to see this information in the admin tool.</p>
+<p>You can also run <code>cf org-users ORGNAME</code> to see a list of users and their roles in your org, where <code>ORGNAME</code> is the name of the org.</p>
+<p>Although there are multiple roles, the 6 most common are:</p></p>
+
+<ul>
+<li>Org manager</li>
+<li>Org auditor</li>
+<li>Billing manager</li>
+<li>Space developer</li>
+<li>Space manager</li>
+<li>Space auditor</li>
+</ul>
+
+<p>Refer to the <a href="https://docs.cloudfoundry.org/concepts/roles.html#roles">Cloud Foundry documentation on roles and permissions</a> for more information.</p>
+<p><h3 id="org-manager">Org manager</h3><p>This role applies within an org.</p>
+<p>Every org must have at least one org manager. Org managers are primary contacts for the org.</p>
+<p>Org managers manage spaces, users and user roles, and approve org changes such as requesting new quotas and enabling paid services.</p>
+<p>Org managers can use the GOV.UK PaaS admin tool to invite new users to an org, without needing to contact the GOV.UK PaaS team. This is possible for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in).</p>
+<p>We create at least one user account with the org manager role as part of your onboarding process. We recommend you have at least 2 org managers in case one is unavailable.</p>
+<p>If you need the org manager role added to a user account, contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</p>
+<h3 id="org-auditor">Org auditor</h3><p>This role applies within an org.</p>
+<p>Org auditors can view user account information and org <a href="/managing_apps.html#quotas">quota</a> information, but cannot edit that information.</p>
+<h3 id="billing-manager">Billing manager</h3><p>This role applies within an org.</p>
+<p>Billing managers create and manage billing account and payment information. They can also view users and roles using the command line, or the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in).</p>
+<p>You should assign a billing manager to your org before your service moves to production. We will send all payment requests to the billing manager. An org manager can also be a billing manager.</p>
+<p>Contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> if you have any questions.</p>
+<h3 id="space-developer">Space developer</h3><p>This role applies within a space.</p>
+<p>A space developer can deploy, run and manage apps, and create and bind services. This is the default role for any user who is not assigned a manager role.</p>
+<p>For example, a space developer granted access to the testing space only can change apps in this space. However, that developer cannot do anything in the production space because they do not have access to this space.</p>
+<h3 id="space-manager">Space manager</h3><p>This role applies within a space.</p>
+<p>A space manager grants user roles within a space and can change space properties using the command line. A space manager cannot deploy, run, or manage apps or services.</p>
+<p>For example, a team member needs to change apps in both the testing and production spaces, and manage users in the testing space. The org manager grants this team member the space manager role in the testing space, and the space developer role in both the testing and production spaces. That team member can add users to testing but not to production (as a space manager), and can change apps in both spaces (as a space developer).</p>
+<h3 id="space-auditor">Space auditor</h3><p>This role applies within a space.</p>
+<p>Space auditors can view apps, users and resources used within a space using the command line, but cannot edit them. This role is useful for viewing app data without modifying it.</p>
+<h2 id="manage-orgs-spaces-and-user-roles">Manage orgs, spaces and user roles</h2><p>There are several common tasks to manage spaces and user roles.</p>
+<h3 id="create-a-new-space">Create a new space</h3><p>Org managers can create spaces.</p>
+<p>Run the following to create a new space:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-space SPACE -o ORGNAME
+</code></pre></div><p>where <code>SPACE</code> is the name of the space, and <code>ORGNAME</code> is the name of the org.</p>
+<p>You can then add users to that space.</p>
+<h3 id="add-users-to-a-space">Add users to a space</h3><p>After a user has been added to an org, org managers can use the GOV.UK PaaS admin tool for the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a> (requires sign in) to grant a user access to a space by assigning a role to that user.</p></p>
+
+<ol>
+<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
+<li>Select the appropriate org.</li>
+<li>Select <strong>View and manage team members</strong>.</li>
+<li>Select <strong>Invite a new team member</strong>.</li>
+<li>Complete the form and select <strong>Send invitation</strong>.</li>
+</ol>
+
+<p>Alternatively, the org manager can run the following in the command line:</p>
+<p><div class="highlight"><pre class="highlight plaintext"><code>cf set-space-role USERNAME ORGNAME SPACE ROLE
+</code></pre></div><p>where:</p></p>
+
+<ul>
+<li><code>USERNAME</code> is the email address the user signs in with when using the command line client</li>
+<li><code>ORGNAME</code> is the name of the org</li>
+<li><code>SPACE</code> is the name of the space</li>
+<li><code>ROLE</code> is the user role you are granting to the user of the email address in the <code>USERNAME</code> field</li>
+</ul>
+
+<p>For example, to grant ana@example.com the space developer role in the test space within the acme org, the org manager would run:</p>
+<p><div class="highlight"><pre class="highlight plaintext"><code>cf set-space-role ana@example.com acme test SpaceDeveloper
+</code></pre></div><p>Refer to the <a href="https://cli.cloudfoundry.org/en-US/cf/set-space-role.html">Cloud Foundry reference guide on <code>cf set-space-role</code></a> for a complete list of roles.</p>
+<h3 id="remove-users-from-a-space">Remove users from a space</h3><p>When a team member leaves or stops working on a project, the org manager should revoke that team member’s access rights.</p>
+<p>The org manager can use the GOV.UK PaaS admin tool to remove all of the team member’s user roles within the team’s spaces.</p></p>
+
+<ol>
+<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
+<li>Select the appropriate org.</li>
+<li>Select <strong>View and manage team members</strong>.</li>
+<li>Select the appropriate user.</li>
+<li>Change the user’s space roles and select <strong>Save role changes</strong>.</li>
+</ol>
+
+<p>Alternatively, the org manager can run the following in the command line:</p>
+<p><div class="highlight"><pre class="highlight plaintext"><code>cf unset-space-role USERNAME ORGNAME SPACE ROLE
+</code></pre></div><p>where:</p></p>
+
+<ul>
+<li><code>USERNAME</code> is the email address the user signs in with when using the command line client</li>
+<li><code>ORGNAME</code> is the name of the org</li>
+<li><code>SPACE</code> is the name of the space</li>
+<li><code>ROLE</code> is the user role granted to the user of the email address in the <code>USERNAME</code> field</li>
+</ul>
+
+<p>For example, to remove ana@example.com&rsquo;s space developer role from the sandbox space within the acme org, the org manager would run:</p>
+<p><div class="highlight"><pre class="highlight plaintext"><code>cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
+</code></pre></div><p>Refer to the <a href="https://cli.cloudfoundry.org/en-US/cf/unset-space-role.html">Cloud Foundry reference guide on <code>cf unset-space-role</code></a> for a complete list of roles.</p>
+<h3 id="invite-users-to-an-org">Invite users to an org</h3><p>Org managers can use the GOV.UK PaaS admin tool to invite users to their org when they join their team.</p></p>
+
+<ol>
+<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
+<li>Select the appropriate org.</li>
+<li>Select <strong>View and manage team members</strong>.</li>
+<li>Select <strong>Invite a new team member</strong>.</li>
+<li>Complete the form and select <strong>Send invitation</strong>.</li>
+</ol>
+<p><h3 id="remove-users-from-an-org">Remove users from an org</h3><p>When a team member leaves or stops working on a project, their org manager must <a href="/orgs_spaces_users.html#remove-users-from-a-space">remove all of that team member’s user roles from the team’s spaces</a>.</p>
+<p>If the leaving team member has an org role such as org manager or billing manager, either the other org manager or the GOV.UK PaaS team must also remove that team member’s user role from the team’s org.</p></p>
+
+<ol>
+<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
+<li>Select the appropriate org.</li>
+<li>Select <strong>View and manage team members</strong>.</li>
+<li>Select the appropriate user.</li>
+<li>Select <strong>Remove user from Organisation</strong>.</li>
+<li>To confirm, select <strong>Yes, remove from organisation</strong>.</li>
+</ol>
+
+<p>Alternatively, the other org manager or the GOV.UK PaaS team can run the following in the command line:</p>
+<p><div class="highlight"><pre class="highlight plaintext"><code>cf unset-org-role USERNAME ORGNAME ROLE
+</code></pre></div><p>where:</p></p>
+
+<ul>
+<li><code>USERNAME</code> is the email address the user logs in with when using the command line client</li>
+<li><code>ORGNAME</code> is the name of the org</li>
+<li><code>ROLE</code> is the user role granted to the user of the email address in the <code>USERNAME</code> field</li>
+</ul>
+
+<p>For example, to remove ana@example.com&rsquo;s org manager role from the acme org, either the other org manager or the GOV.UK PaaS team should run:</p>
+<p><div class="highlight"><pre class="highlight plaintext"><code>cf unset-org-role ana@example.com acme OrgManager
+</code></pre></div><p>If the user still needs access to GOV.UK PaaS to work on other projects, nothing else needs to change.</p>
+<p>If the user no longer needs access to GOV.UK PaaS, then your org manager must contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a> to ask us to delete the user account.</p>
+<p>Refer to the <a href="https://docs.cloudfoundry.org/adminguide/cli-user-management.html">Cloud Foundry documentation on creating and managing users with the CLI</a> for more information.</p>
+<h3 id="view-bills">View bills</h3><p><a href="/orgs_spaces_users.html#org-manager">Org managers</a> and <a href="/orgs_spaces_users.html#billing-manager">billing managers</a> can use the GOV.UK PaaS admin tool to view current or past bills within an org.</p></p>
+
+<ol>
+<li>Sign in to the GOV.UK PaaS admin tool for either the <a href="https://admin.london.cloud.service.gov.uk/">London region</a> or the <a href="https://admin.cloud.service.gov.uk/">Ireland region</a>.</li>
+<li>Select the appropriate org.</li>
+<li>Select <strong>Billing</strong>.</li>
+<li>View your bills. You can filter the bills shown by <strong>Month</strong>, <strong>Space</strong>, or <strong>Services and apps</strong>.</li>
+</ol>
+<p><h2 id="case-studies">Case studies</h2><p>This section summarises 2 common models for orgs and spaces.</p>
+<p>There are other ways to structure orgs and spaces, and you can change your existing structure to suit the project you’re working on.</p>
+<h3 id="model-1">Model 1</h3><p>In this example model, an org represents a service or service team within a government department or business area. Each org has multiple spaces. Spaces represent environments such as development, sandbox, staging or production or can represent different applications. These spaces host apps and backing services.</p>
+<p>Departments or government teams that use this structure include:</p></p>
+
+<ul>
+<li>Department for Business, Energy and Industrial Strategy</li>
+<li>GDS Digital Marketplace</li>
+</ul>
+
+<p><a href="/documentation/figures/orgs-spaces-model-1.svg" rel="noopener noreferrer"><img src="/documentation/figures/orgs-spaces-model-1.svg" alt="Diagram showing model 1 of orgs, spaces and apps" /></a></p>
+
+<p>This model has the following advantages:</p>
+
+<ul>
+<li>it is easy to manage user permissions within each org because spaces that require higher permissions (such as staging or production) are already separated from other spaces that do not have as high a requirement</li>
+<li>developers that do not have security clearances yet can have their access restricted if necessary</li>
+<li>each org represents a business area which makes billing administration simple</li>
+</ul>
+
+<p>However, there is no reuse of orgs and spaces in this structure, which incurs a time and resource cost.</p>
+<p><h3 id="model-2">Model 2</h3><p>In this example, an org represents an environment such as development, sandbox, staging or production. Each org has multiple spaces. Spaces represent services or service teams within a government department or business area. These spaces host apps and backing services.</p>
+<p>Departments that use this structure include the Department for International Trade.</p>
+<p><a href="/documentation/figures/orgs-spaces-model-2.svg" rel="noopener noreferrer"><img src="/documentation/figures/orgs-spaces-model-2.svg" alt="Diagram showing model 2 of orgs, spaces and apps" /></a></p>
+<p>This model makes it easier to control resources and spending between different environments.</p></p>
+
+            
+          </main>
+
+          <aside>
+              <ul class="contribution-banner">
+                <li><a href="https://github.com/alphagov/paas-tech-docs//blob/master/source/orgs_spaces_users.html.md.erb">View source</a></li>
+                <li><a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk?subject=Problem%20with%20GOV.UK%20PaaS%20technical%20documentation">Report problem</a></li>
+                <li><a href="https://github.com/alphagov/paas-tech-docs/">GitHub Repo</a></li>
+              </ul>
+          </aside>
+
+          <footer class="govuk-footer app-footer" role="contentinfo">
+  <div class="govuk-footer__meta">
+    <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+
+        <ul class="govuk-footer__inline-list">
+            <li class="govuk-footer__inline-list-item">
+              <a class="govuk-footer__link" href="/accessibility.html">Technical Documentation Accessibility</a>
+            </li>
+        </ul>
+
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        class="govuk-footer__licence-logo"
+        xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 0 483.2 195.7"
+        height="17"
+        width="41"
+      >
+        <path
+          fill="currentColor"
+          d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+        />
+      </svg>
+      <span class="govuk-footer__licence-description">
+        All content is available under the
+        <a
+          class="govuk-footer__link"
+          href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+          rel="license"
+        >Open Government Licence v3.0</a>, except where otherwise stated
+      </span>
+    </div>
+    <div class="govuk-footer__meta-item">
+      <a
+        class="govuk-footer__link govuk-footer__copyright-logo"
+        href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+      >© Crown copyright</a>
+    </div>
+  </div>
+</footer>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="/javascripts/application.js"></script>
+  </body>
+</html>

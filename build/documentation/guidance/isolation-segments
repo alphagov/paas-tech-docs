@@ -1,0 +1,39 @@
+<h2 id="isolation-segments">Isolation segments</h2><h3 id="what-isolation-segments-are">What isolation segments are</h3><p>Cells are the underlying servers that build and run your apps.
+GOV.UK PaaS schedules your apps on a large number of identical cells.</p>
+<p>GOV.UK PaaS has other cells which are slightly different to the regular cells
+on which your apps run. These cells are called isolation segments.</p>
+<p>You can specify an isolation segments for a space, or for an organisation.</p>
+<h4 id="apps-within-a-space">Apps within a space</h4><p>When you specify an isolation segment for a space, all apps in
+that space run on the isolation segment&rsquo;s cells, rather than on the normal
+cells.</p>
+<h4 id="apps-within-an-organisation">Apps within an organisation</h4><p>When you specify an isolation segment for an organisation, all apps in
+that organisation run on the isolation segment&rsquo;s cells, rather than on the
+normal cells.</p>
+<h3 id="what-isolation-segments-are-available">What isolation segments are available</h3><p>We currently offer one isolation segment:</p>
+
+<ul>
+<li><code>egress-restricted-1</code></li>
+</ul>
+<h4 id="egress-restricted">Egress restricted</h4><p>When your apps run in an egress restricted isolation segment, they can:</p>
+
+<ul>
+<li>serve traffic from the internet (if you map a <a href="/deploying_apps.html#names-routes-and-domains">public route</a>)</li>
+<li>serve traffic internally (if you map a <a href="/deploying_apps.html#deploying-private-apps">private route</a>)</li>
+<li>talk to other apps within the platform (if you set up <a href="/deploying_apps.html#create-a-network-policy">network policies</a>)</li>
+</ul>
+<p>However, your apps cannot:</p>
+
+<ul>
+<li>talk to the internet</li>
+<li>make external DNS requests</li>
+</ul>
+<h3 id="how-you-can-use-isolation-segments">How you can use isolation segments</h3><p>If we have enabled an isolation segment for your organisation, and if you are
+an org manager, you can change how your apps are scheduled using the
+isolation segment.</p>
+<p>For example, the following commands will create a new space and make sure that any app you push within that space will run on a cell with egress
+restrictions:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-space my-locked-down-space
+cf set-space-isolation-segment my-locked-down-space egress-restricted-1
+</code></pre></div><p>Contact us at
+<a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>
+if you would like us to enable an isolation segment for your organisation.</p>

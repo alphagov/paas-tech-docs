@@ -1,0 +1,22 @@
+<h2 id="user-lifecycle">User lifecycle</h2><p>Users will need to be added or removed from GOV.UK PaaS as they join or leave your team.</p>
+<p>The responsibility for managing the user lifecycle is split between GOV.UK PaaS support and the <a href="/#org-manager">Org Managers</a> on your team.</p>
+<p>This section explains what needs to be done to add or delete users.</p>
+<h3 id="adding-users">Adding users</h3><p>User account creation is currently handled by our support team.</p>
+<p>To add a new user to an existing project, have an Org Manager on your team contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>. We&rsquo;ll add the new account and give it access to your <code>sandbox</code> space. An Org Manager will then need to <a href="/#granting-access">grant access</a> to additional spaces.</p>
+<p>If you are looking to start a new project on the platform, please contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>. We will create an Org Manager account first, so make sure to let us know who should have this responsibility.</p>
+<h3 id="deleting-users">Deleting users</h3><p>When a team member leaves or stops working on a project, their access rights must be revoked.</p>
+<p>One of your Org Managers must <em>immediately</em> remove all user roles the user has within your orgs and spaces.</p>
+<p>The command to remove a space role is:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf unset-space-role USERNAME ORG SPACE ROLE
+</code></pre></div><p>For example, to remove all a user&rsquo;s space roles you might need to run:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf unset-space-role ana@example.com acme sandbox SpaceDeveloper
+
+cf unset-space-role ana@example.com acme dev SpaceDeveloper
+
+cf unset-space-role ana@example.com acme dev SpaceManager
+</code></pre></div><p>If the user is an Org Manager, you will also need to remove that role from all your organisations:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf unset-org-role USERNAME ORG ROLE
+</code></pre></div><p>For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf unset-org-role boss@example.com acme OrgManager
+</code></pre></div><p>If the user is only leaving one project, but still needs access on the PaaS to work on other projects in other organisations, nothing more needs to be done.</p>
+<p>If the user no longer needs access to GOV.UK PaaS, then the Org Manager should ask us to completely remove the user account.</p>

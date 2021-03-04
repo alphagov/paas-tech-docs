@@ -1,0 +1,18 @@
+<h2 id="deploy-an-app-to-production">Deploy an app to production</h2><p>To deploy an app to a production environment, your department, agency or team must have a <a href="/get_started.html#trial-and-paid-accounts">paid account</a> with the GOV.UK PaaS.</p>
+<p>Before you deploy an app to a production environment, you must set up a domain.</p>
+<p>If you are a central government service using the GOV.UK domain, you must <a href="https://www.gov.uk/service-manual/technology/get-a-domain-name">get a domain from GOV.UK</a> for your service and set the <a href="/deploying_services/use_a_custom_domain/#set-up-a-cdn-route-service-with-one-or-more-custom-domains">DNS records required by your cdn-route service</a>.</p>
+<p>If you are using your own content distribution network (CDN), you must <a href="/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn">set up a domain by configuring your CDN</a>.</p>
+<p>You must also:</p>
+
+<ul>
+<li>build your app in line with the <a href="/architecture.html#12-factor-application-principles">12-factor app principles</a></li>
+<li>use a separate staging environment to test your app (refer to the <a href="/orgs_spaces_users.html#case-studies">case studies on managing orgs, users and spaces</a> for more information)</li>
+<li><a href="https://docs.cloudfoundry.org/devguide/deploy-apps/healthchecks.html">configure an <code>http</code> health check</a> to allow Cloud Foundry to detect and attempt to replace unhealthy app instances</li>
+</ul>
+<p>When you deploy an app to a production environment, you should:</p>
+
+<ul>
+<li><a href="/get_started.html#deploying-with-zero-downtime">use zero downtime, rolling deploys</a></li>
+<li><a href="/managing_apps.html#scaling">run more than one instance of your app</a> to make sure your app is always available</li>
+<li>select a high-availability plan for your app&rsquo;s <a href="/deploying_services/#deploy-a-backing-or-routing-service">backing service</a> if your app uses a backing service</li>
+</ul>

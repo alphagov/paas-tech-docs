@@ -1,0 +1,9 @@
+<h2 id="postgresql-connection-problems">PostgreSQL connection problems</h2><p>If you are having trouble connecting your app to a PostgreSQL database, follow the steps below. You can also apply these instructions to <a href="/deploying_services/#deploy-a-backing-or-routing-service">other backing services</a>. If you require more guidance for other supported backing services, contact us at gov-uk-paas-support@digital.cabinet-office.gov.uk.</p>
+
+<ol>
+<li>Ensure your app is making a <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a> connection to the PostgreSQL service.</li>
+<li>Use <code>cf service SERVICE_INSTANCE</code> to check that the service is bound to the app.</li>
+<li>Use <code>cf env APPNAME</code> to see the app&rsquo;s environment variables and confirm that there is a <code>VCAP_SERVICES={&quot;postgres&quot;:</code> section, indicating the app has correctly received the environment variables.</li>
+<li>Make sure your app writes database connection errors to <code>STDOUT</code> or <code>STDERR</code>, then look for recent errors with <code>cf logs APPNAME --recent</code>.</li>
+<li>If restarting the app does not make it connect, try <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/start-restart-restage.html#restage">restaging</a> the app with <code>cf restage APPNAME</code>.</li>
+</ol>

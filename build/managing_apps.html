@@ -1,0 +1,1210 @@
+<!doctype html>
+<html lang="en" class="govuk-template no-js">
+  <head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>Managing apps - Platform as a Service</title>
+
+    <link href="/stylesheets/manifest.css" rel="stylesheet" />
+
+    <link rel="canonical" href="https://docs.cloud.service.gov.uk/managing_apps.html">
+
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:domain" content="docs.cloud.service.gov.uk" />
+      <meta name="twitter:image" content="https://docs.cloud.service.gov.uk/images/govuk-large.png" />
+      <meta name="twitter:title" content="Managing apps - Platform as a Service" />
+      <meta name="twitter:url" content="https://docs.cloud.service.gov.uk/managing_apps.html" />
+
+      <meta property="og:image" content="https://docs.cloud.service.gov.uk/images/govuk-large.png" />
+      <meta property="og:site_name" content="Platform as a Service" />
+      <meta property="og:title" content="Managing apps" />
+      <meta property="og:type" content="object" />
+      <meta property="og:url" content="https://docs.cloud.service.gov.uk/managing_apps.html" />
+
+    
+  </head>
+
+  <body class="govuk-template__body">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <div class="app-pane">
+      <div class="app-pane__header toc-open-disabled">
+        <a href="#content" class="govuk-skip-link">Skip to main content</a>
+
+        <header class="govuk-header app-header" role="banner" data-module="govuk-header">
+  <div class="govuk-header__container govuk-header__container--full-width">
+    <div class="govuk-header__logo">
+      <a href="https://www.cloud.service.gov.uk" class="govuk-header__link govuk-header__link--homepage">
+        <span class="govuk-header__logotype">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            class="govuk-header__logotype-crown"
+            xmlns="http://www.w3.org/2000/svg"
+            viewbox="0 0 132 97"
+            height="30"
+            width="36"
+          >
+            <path
+              fill="currentColor" fill-rule="evenodd"
+              d="M25 30.2c3.5 1.5 7.7-.2 9.1-3.7 1.5-3.6-.2-7.8-3.9-9.2-3.6-1.4-7.6.3-9.1 3.9-1.4 3.5.3 7.5 3.9 9zM9 39.5c3.6 1.5 7.8-.2 9.2-3.7 1.5-3.6-.2-7.8-3.9-9.1-3.6-1.5-7.6.2-9.1 3.8-1.4 3.5.3 7.5 3.8 9zM4.4 57.2c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.5-1.5-7.6.3-9.1 3.8-1.4 3.5.3 7.6 3.9 9.1zm38.3-21.4c3.5 1.5 7.7-.2 9.1-3.8 1.5-3.6-.2-7.7-3.9-9.1-3.6-1.5-7.6.3-9.1 3.8-1.3 3.6.4 7.7 3.9 9.1zm64.4-5.6c-3.6 1.5-7.8-.2-9.1-3.7-1.5-3.6.2-7.8 3.8-9.2 3.6-1.4 7.7.3 9.2 3.9 1.3 3.5-.4 7.5-3.9 9zm15.9 9.3c-3.6 1.5-7.7-.2-9.1-3.7-1.5-3.6.2-7.8 3.7-9.1 3.6-1.5 7.7.2 9.2 3.8 1.5 3.5-.3 7.5-3.8 9zm4.7 17.7c-3.6 1.5-7.8-.2-9.2-3.8-1.5-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.3 3.5-.4 7.6-3.9 9.1zM89.3 35.8c-3.6 1.5-7.8-.2-9.2-3.8-1.4-3.6.2-7.7 3.9-9.1 3.6-1.5 7.7.3 9.2 3.8 1.4 3.6-.3 7.7-3.9 9.1zM69.7 17.7l8.9 4.7V9.3l-8.9 2.8c-.2-.3-.5-.6-.9-.9L72.4 0H59.6l3.5 11.2c-.3.3-.6.5-.9.9l-8.8-2.8v13.1l8.8-4.7c.3.3.6.7.9.9l-5 15.4v.1c-.2.8-.4 1.6-.4 2.4 0 4.1 3.1 7.5 7 8.1h.2c.3 0 .7.1 1 .1.4 0 .7 0 1-.1h.2c4-.6 7.1-4.1 7.1-8.1 0-.8-.1-1.7-.4-2.4V34l-5.1-15.4c.4-.2.7-.6 1-.9zM66 92.8c16.9 0 32.8 1.1 47.1 3.2 4-16.9 8.9-26.7 14-33.5l-9.6-3.4c1 4.9 1.1 7.2 0 10.2-1.5-1.4-3-4.3-4.2-8.7L108.6 76c2.8-2 5-3.2 7.5-3.3-4.4 9.4-10 11.9-13.6 11.2-4.3-.8-6.3-4.6-5.6-7.9 1-4.7 5.7-5.9 8-.5 4.3-8.7-3-11.4-7.6-8.8 7.1-7.2 7.9-13.5 2.1-21.1-8 6.1-8.1 12.3-4.5 20.8-4.7-5.4-12.1-2.5-9.5 6.2 3.4-5.2 7.9-2 7.2 3.1-.6 4.3-6.4 7.8-13.5 7.2-10.3-.9-10.9-8-11.2-13.8 2.5-.5 7.1 1.8 11 7.3L80.2 60c-4.1 4.4-8 5.3-12.3 5.4 1.4-4.4 8-11.6 8-11.6H55.5s6.4 7.2 7.9 11.6c-4.2-.1-8-1-12.3-5.4l1.4 16.4c3.9-5.5 8.5-7.7 10.9-7.3-.3 5.8-.9 12.8-11.1 13.8-7.2.6-12.9-2.9-13.5-7.2-.7-5 3.8-8.3 7.1-3.1 2.7-8.7-4.6-11.6-9.4-6.2 3.7-8.5 3.6-14.7-4.6-20.8-5.8 7.6-5 13.9 2.2 21.1-4.7-2.6-11.9.1-7.7 8.8 2.3-5.5 7.1-4.2 8.1.5.7 3.3-1.3 7.1-5.7 7.9-3.5.7-9-1.8-13.5-11.2 2.5.1 4.7 1.3 7.5 3.3l-4.7-15.4c-1.2 4.4-2.7 7.2-4.3 8.7-1.1-3-.9-5.3 0-10.2l-9.5 3.4c5 6.9 9.9 16.7 14 33.5 14.8-2.1 30.8-3.2 47.7-3.2z"
+            ></path>
+            <image src="/assets/images/govuk-logotype-crown.png" xlink:href="" class="govuk-header__logotype-crown-fallback-image" width="36" height="32"></image>
+          </svg>
+          <span class="govuk-header__logotype-text">
+            GOV.UK
+          </span>
+        </span>
+        <span class="govuk-header__product-name">
+          Platform as a Service
+        </span>
+      </a>
+    </div>
+    <div class="govuk-header__content">
+      <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+      <nav>
+        <ul id="navigation" class="govuk-header__navigation govuk-header__navigation--end" aria-label="Top Level Navigation">
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://www.cloud.service.gov.uk">About</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://www.cloud.service.gov.uk/get-started">Get started</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://www.cloud.service.gov.uk/features">Features</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://github.com/alphagov/paas-roadmap/projects/1">Roadmap</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="/">Documentation</a>
+            </li>
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="https://admin.london.cloud.service.gov.uk/support">Support</a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+      </div>
+
+        <div id="toc-heading" class="toc-show fixedsticky">
+          <button type="button" class="toc-show__label js-toc-show" aria-controls="toc">
+            Table of contents <span class="toc-show__icon"></span>
+          </button>
+        </div>
+
+      <div class="app-pane__body" data-module="in-page-navigation">
+          <div class="app-pane__toc">
+            <div class="toc" data-module="table-of-contents" tabindex="-1" aria-label="Table of contents">
+              <div class="search" data-module="search">
+  <form action="https://www.google.co.uk/search" method="get" role="search">
+    <input type="hidden" name="as_sitesearch" value="https://docs.cloud.service.gov.uk"/>
+    <label class="govuk-label search__label" for="search">
+      Search (via Google)
+    </label>
+    <input class="govuk-input govuk-!-margin-bottom-4" id="search" name="q" type="text" aria-controls="search-results" placeholder="Search">
+  </form>
+  <div id="search-results" class="search-results" aria-hidden="true" role="dialog" aria-labelledby="search-results-title">
+    <div class="search-results__inner">
+      <button class="search-results__close">Close<span class="search-results__close-label"> search results</span></button>
+      <h2 id="search-results-title" class="search-results__title" aria-live="polite">Results</h2>
+      <div class="search-results__content"></div>
+    </div>
+  </div>
+</div>
+
+              <button type="button" class="toc__close js-toc-close" aria-controls="toc" aria-label="Hide table of contents"></button>
+              <nav id="toc" class="js-toc-list toc__list" aria-labelledby="toc-heading" data-module="collapsible-navigation">
+                      <ul>
+  <li>
+    <a href="/#gov-uk-platform-as-a-service"><span>GOV.UK Platform as a Service</span></a>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/before_you_start.html#before-you-start"><span>Before you start</span></a>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/get_started.html#get-started"><span>Get started</span></a>
+    <ul>
+      <li>
+        <a href="/get_started.html#get-an-account"><span>Get an account</span></a>
+      </li>
+      <li>
+        <a href="/get_started.html#set-up-the-cloud-foundry-command-line"><span>Set up the Cloud Foundry command line</span></a>
+      </li>
+      <li>
+        <a href="/get_started.html#sign-in-to-cloud-foundry"><span>Sign in to Cloud Foundry</span></a>
+      </li>
+      <li>
+        <a href="/get_started.html#deploy-a-test-static-html-page"><span>Deploy a test static HTML page</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/responsibility_model.html#know-your-responsibilities"><span>Know your responsibilities</span></a>
+    <ul>
+      <li>
+        <a href="/responsibility_model.html#standard-buildpack-responsibilities"><span>Standard buildpack responsibilities</span></a>
+      </li>
+      <li>
+        <a href="/responsibility_model.html#custom-buildpack-responsibilities"><span>Custom buildpack responsibilities</span></a>
+      </li>
+      <li>
+        <a href="/responsibility_model.html#docker-image-responsibilities"><span>Docker image responsibilities</span></a>
+      </li>
+      <li>
+        <a href="/responsibility_model.html#custom-buildpacks-compared-to-docker-images"><span>Custom buildpacks compared to Docker images</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/orgs_spaces_users.html#managing-organisations-spaces-and-users"><span>Managing organisations, spaces and users</span></a>
+    <ul>
+      <li>
+        <a href="/orgs_spaces_users.html#regions"><span>Regions</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#organisations"><span>Organisations</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#spaces"><span>Spaces</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#users-and-user-roles"><span>Users and user roles</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#manage-orgs-spaces-and-user-roles"><span>Manage orgs, spaces and user roles</span></a>
+      </li>
+      <li>
+        <a href="/orgs_spaces_users.html#case-studies"><span>Case studies</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_apps.html#deploying-apps"><span>Deploying apps</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_apps.html#deploying-public-apps"><span>Deploying public apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploying-private-apps"><span>Deploying private apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#data-security-classification"><span>Data security classification</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#secure-and-non-secure-requests"><span>Secure and non-secure requests</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-an-app-to-production"><span>Deploy an app to production</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#buildpacks"><span>Buildpacks</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#excluding-files"><span>Excluding files</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#environment-variables"><span>Environment variables</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#names-routes-and-domains"><span>Names, routes and domains</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-static-html-page"><span>Deploy a static HTML page</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-ruby-on-rails-app"><span>Deploy a Ruby on Rails app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-node-js-app"><span>Deploy a Node.js app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-django-app"><span>Deploy a Django app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-java-app"><span>Deploy a Java app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-net-core-app"><span>Deploy a .NET Core app</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#stopping-and-starting-apps"><span>Stopping and starting apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deleting-apps"><span>Deleting apps</span></a>
+      </li>
+      <li>
+        <a href="/deploying_apps.html#deploy-a-docker-image"><span>Deploy a Docker image</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/using_ci.html#configuring-a-continuous-integration-ci-tool"><span>Configuring a continuous integration (CI) tool</span></a>
+    <ul>
+      <li>
+        <a href="/using_ci.html#choose-ci-tool"><span>Choose CI tool</span></a>
+      </li>
+      <li>
+        <a href="/using_ci.html#configure-your-ci-tool-accounts"><span>Configure your CI tool accounts</span></a>
+      </li>
+      <li>
+        <a href="/using_ci.html#using-the-travis-ci-tool"><span>Using the Travis CI tool</span></a>
+      </li>
+      <li>
+        <a href="/using_ci.html#push-an-app-with-jenkins"><span>Push an app with Jenkins</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul><li><a href="/deploying_services/"><span>Deploy a backing or routing service</span></a>
+<ul>
+  <li>
+    <a href="/deploying_services/postgresql/#postgresql"><span>PostgreSQL</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/postgresql/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/postgresql/#upgrading-major-versions-of-postgres"><span>Upgrading major versions of Postgres</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/mysql/#mysql"><span>MySQL</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/mysql/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/mysql/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/mysql/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/mysql/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/redis/#redis"><span>Redis</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/redis/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/redis/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/redis/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/redis/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/elasticsearch/#elasticsearch"><span>Elasticsearch</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/elasticsearch/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/elasticsearch/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/elasticsearch/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/elasticsearch/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/sqs/#amazon-sqs"><span>Amazon SQS</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/sqs/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/sqs/#use-the-service"><span>Use the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/sqs/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/sqs/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/s3/#amazon-s3"><span>Amazon S3</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/s3/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/s3/#use-the-service"><span>Use the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/s3/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/influxdb/#influxdb"><span>InfluxDB</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/influxdb/#set-up-the-service"><span>Set up the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/influxdb/#use-the-service"><span>Use the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/influxdb/#remove-the-service"><span>Remove the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/influxdb/#maintaining-the-service"><span>Maintaining the service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/user_provided_services/#user-provided-backing-services"><span>User-provided backing services</span></a>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/route_services/#route-services"><span>Route services</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/route_services/#user-provided-route-services"><span>User-provided route services</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/route_services/#implement-a-route-service"><span>Implement a route service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/use_a_custom_domain/#managing-custom-domains-using-the-cdn-route-service"><span>Managing custom domains using the cdn-route service</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#register-a-domain-name"><span>Register a domain name</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#using-your-domain-name-with-gov-uk-paas"><span>Using your domain name with GOV.UK PaaS</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#set-up-the-gov-uk-paas-cdn-route-service"><span>Set up the GOV.UK PaaS cdn-route service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#amend-the-service"><span>Amend the service</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#configuring-your-custom-domain"><span>Configuring your custom domain</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#how-custom-domains-work"><span>How custom domains work</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#you-may-need-to-make-a-dns-change"><span>You may need to make a DNS change</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/use_a_custom_domain/#making-changes-to-your-dns-records"><span>Making changes to your DNS records</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/deploying_services/configure_cdn/#set-up-a-custom-domain-by-configuring-your-own-cdn"><span>Set up a custom domain by configuring your own CDN</span></a>
+    <ul>
+      <li>
+        <a href="/deploying_services/configure_cdn/#use-cloud-foundry-commands"><span>Use Cloud Foundry commands</span></a>
+      </li>
+      <li>
+        <a href="/deploying_services/configure_cdn/#amend-http-request-headers"><span>Amend HTTP request headers</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+</li></ul><ul>
+  <li>
+    <a href="/managing_apps.html#managing-apps"><span>Managing apps</span></a>
+    <ul>
+      <li>
+        <a href="/managing_apps.html#connecting-with-ssh"><span>Connecting with SSH</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#managing-ssh-permissions"><span>Managing SSH permissions</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#scaling"><span>Scaling</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#autoscaling"><span>Autoscaling</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#quotas"><span>Quotas</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#redirecting-all-traffic"><span>Redirecting all traffic</span></a>
+      </li>
+      <li>
+        <a href="/managing_apps.html#app-restarts"><span>App restarts</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/monitoring_apps.html#monitoring-apps"><span>Monitoring apps</span></a>
+    <ul>
+      <li>
+        <a href="/monitoring_apps.html#app-metrics"><span>App metrics</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_apps.html#more-about-monitoring"><span>More about monitoring</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_apps.html#logs"><span>Logs</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_apps.html#set-up-the-logit-log-management-service"><span>Set up the Logit log management service</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/monitoring_services.html#monitoring-backing-services"><span>Monitoring backing services</span></a>
+    <ul>
+      <li>
+        <a href="/monitoring_services.html#view-backing-service-metrics"><span>View backing service metrics</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_services.html#exporting-backing-service-metrics-to-prometheus"><span>Exporting backing service metrics to Prometheus</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_services.html#backing-service-logs"><span>Backing service logs</span></a>
+      </li>
+      <li>
+        <a href="/monitoring_services.html#monitoring-backing-services-more-about-monitoring"><span>More about monitoring</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/architecture.html#gov-uk-paas-architecture"><span>GOV.UK PaaS Architecture</span></a>
+    <ul>
+      <li>
+        <a href="/architecture.html#characteristics-of-gov-uk-paas"><span>Characteristics of GOV.UK PaaS</span></a>
+      </li>
+      <li>
+        <a href="/architecture.html#12-factor-application-principles"><span>12-factor application principles</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/guidance.html#guidance"><span>Guidance</span></a>
+    <ul>
+      <li>
+        <a href="/guidance.html#penetration-testing"><span>Penetration testing</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#connect-a-php-app-to-postgresql-or-mysql"><span>Connect a PHP app to PostgreSQL or MySQL</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#connect-drupal-to-mysql"><span>Connect Drupal to MySQL</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#connect-wordpress-to-mysql"><span>Connect Wordpress to MySQL</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#isolation-segments"><span>Isolation segments</span></a>
+      </li>
+      <li>
+        <a href="/guidance.html#useful-plugins"><span>Useful Plugins</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <a href="/troubleshooting.html#troubleshooting"><span>Troubleshooting</span></a>
+    <ul>
+      <li>
+        <a href="/troubleshooting.html#postgresql-connection-problems"><span>PostgreSQL connection problems</span></a>
+      </li>
+      <li>
+        <a href="/troubleshooting.html#pushing-apps-fails-on-windows-line-endings-issue"><span>Pushing apps fails on Windows (line endings issue)</span></a>
+      </li>
+      <li>
+        <a href="/troubleshooting.html#tracing-http-requests"><span>Tracing HTTP requests</span></a>
+      </li>
+      <li>
+        <a href="/troubleshooting.html#forgotten-passwords"><span>Forgotten passwords</span></a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+              </nav>
+            </div>
+          </div>
+
+        <div class="app-pane__content toc-open-disabled">
+          <main id="content" class="technical-documentation" data-module="anchored-headings">
+            <h1 id="managing-apps">Managing apps</h1><h2 id="connecting-with-ssh">Connecting with SSH</h2><p>When you deploy an app to GOV.UK PaaS, that app runs in a container.</p>
+<p>If you use a <a href="/responsibility_model.html#standard-buildpack-responsibilities">standard buildpack</a>, you can connect directly to an app’s container using SSH.</p>
+<p>Connecting using SSH gives you secure access to change an app&rsquo;s container.</p>
+<p>If you make changes to your app&rsquo;s container during an SSH session, these changes are not permanent and are specific to that app instance. You must push a new version of your app to make any permanent changes to your app.</p>
+<p>Before you connect to an app&rsquo;s container using SSH, you must:</p>
+
+<ul>
+<li>install the <a href="https://github.com/cloudfoundry/cli/wiki/V7-CLI-Installation-Guide">Cloud Foundry Command Line Interface (CLI)</a></li>
+<li>set up the <a href="#manage-ssh-permissions">correct SSH permissions</a> on the app and the space the app is in</li>
+</ul>
+
+<ol>
+<li><p>Run the following to start an SSH session:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf ssh APPNAME
+</code></pre></div><p>where <code>APPNAME</code> is the name of the app.</p>
+<p>The Cloud Foundry CLI will generate SSH keys for you.</p>
+
+<div class="govuk-warning-text">
+<span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+<strong class="govuk-warning-text__text">
+<span class="govuk-warning-text__assistive">Warning</span>
+If you are using Cloud Foundry CLI version 6, run `cf v3-ssh APPNAME
+</strong>
+</div></li>
+<li><p>To match your SSH environment to your app&rsquo;s environment, run the following from within your SSH session shell:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>/tmp/lifecycle/shell
+</code></pre></div></li>
+<li><p>Run <code>exit</code> to end the SSH session.</p></li>
+</ol>
+<p>For more information, refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html#ssh-env">Cloud Foundry documentation on SSH session environments</a>.</p>
+<h3 id="connecting-to-multiple-instances">Connecting to multiple instances</h3><p>If you’re running <a href="/managing_apps.html#scaling">multiple instances</a> of an app, you can connect to a specific app instance using SSH.</p>
+<p>Each instance of an app has an index number. Cloud Foundry assigns index numbers to app instances when you create those app instances.</p>
+
+<ol>
+<li><p>Run <code>cf app APPNAME</code> to see the app index numbers in the output. For example:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>requested state: started
+instances: 3/3
+usage: 64M x 3 instances
+urls: myapp.london.cloudapps.digital
+last uploaded: Wed Dec 21 13:56:24 UTC 2016
+stack: cflinuxfs3
+buildpack: staticfile_buildpack
+
+.   state     since                    cpu    memory        disk         details
+0   running   2016-12-21 02:27:11 PM   3.0%   7.1M of 64M   6.8M of 1G
+1   running   2016-12-21 02:44:46 PM   1.0%   3.5M of 64M   6.8M of 1G
+2   running   2016-12-21 02:44:46 PM   1.0%   3.5M of 64M   6.8M of 1G
+</code></pre></div></li>
+<li><p>Run <code>cf ssh -i APP_INSTANCE_NUMBER APPNAME</code> to connect to a specific app instance.</p>
+<p>For example, <code>cf ssh -i 2 myapp</code> connects to the last app instance in step 1 of the example.</p></li>
+</ol>
+<h3 id="connecting-to-a-non-publicly-available-backing-service">Connecting to a non-publicly available backing service</h3><p>The PostgreSQL, MySQL and Redis backing services are not publicly available to everyone on the internet. You can only connect to these backing services from inside Cloud Foundry.</p>
+<p>You should use the <a href="/guidance.html#conduit">Conduit</a> plugin to connect to <a href="deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine">PostgreSQL</a>, <a href="deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine">MySQL</a> or <a href="deploying_services/redis/#connect-to-a-redis-service-instance-from-your-local-machine">Redis</a> from your local machine.</p>
+<p>If you do not want to use Conduit, you can manually create an SSH tunnel to connect to these backing services from your local machine.</p>
+<p>The <code>cf ssh</code> command supports local port forwarding, which allows you to create tunnels from your local system to the app instance container.</p>
+<p>The following example shows how to connect to a PostgreSQL service bound to your app using an SSH tunnel.</p>
+
+<ol>
+<li><p>Run <code>cf env APPNAME</code> to show all environment variables for your app. Example output:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>$ cf env myapp
+Getting env variables for app myapp in org myoth / space myorg as randomuser...
+OK
+
+    System-Provided:
+    {
+    "VCAP_SERVICES": {
+     "postgres": [
+     {
+     "credentials": {
+     "host": "rdsbroker-01-ff-d2.cwm.eu-west-1.rds.amazonaws.com",
+     "jdbcUrl": "jdbc:postgresql://rdsbroker-01-ff-d2.cwm.eu-west-1.rds.amazonaws.com:5432/rdsbroker_9f0_97_aa4?user=rdsbroker_9f0_97_aa4_owner\u0026password=xnYXthsgUFwPUOO",
+     "name": "rdsbroker_9f0_97_aa4",
+     "password": "xnYXthsgUFwPUOO",
+     "port": 5432,
+     "uri": "postgres://rdsbroker_9f0_97_aa4_owner:xnYXthsgUFwPUOO@rdsbroker-01-ff-d2.cwm.eu-west-1.rds.amazonaws.com:5432/rdsbroker_9f0_97_aa4",
+     "username": "rdsbroker_9f0_97_aa4_owner"
+    },
+    ...
+</code></pre></div><p>Make a note of the:</p>
+
+<ul>
+<li>remote <code>&quot;host&quot;:</code></li>
+<li>remote <code>&quot;port&quot;</code></li>
+<li>PostgreSQL <code>&quot;username&quot;:</code></li>
+<li>PostgreSQL <code>&quot;password:</code></li>
+<li>database <code>&quot;name&quot;:</code></li>
+</ul></li>
+<li><p>Create an SSH tunnel between your local port 6666 and your backing service&rsquo;s remote host and port:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf ssh myapp -T -L 6666:HOST:PORT
+</code></pre></div><p>where:</p>
+
+<ul>
+<li><code>HOST</code> is the remote <code>&quot;host&quot;:</code> from the previous step</li>
+<li><code>PORT</code> is the remote <code>&quot;port&quot;</code> from the previous step</li>
+</ul>
+<p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-services.html#ssh-tunnel">Cloud Foundry documentation on configuring an SSH tunnel</a> for more information.</p>
+
+<div class="govuk-warning-text">
+<span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+<strong class="govuk-warning-text__text">
+<span class="govuk-warning-text__assistive">Warning</span>
+When you run this command, you’re in a shell in your remote app container. Once you exit the shell, the shell closes the tunnel to the remote host and port.
+</strong>
+</div></li>
+<li><p>Open a new local command line interface and connect to the local port in <code>localhost:6666</code> using a PostgreSQL client:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>psql postgres://USERNAME:PASSWORD@localhost:6666/DATABASE_NAME
+</code></pre></div><p>where:</p>
+
+<ul>
+<li><code>USERNAME</code> is the PostgreSQL <code>&quot;username&quot;:</code> from step 1</li>
+<li><code>PASSWORD</code> is the PostgreSQL <code>&quot;password&quot;:</code> from step 1</li>
+<li><code>DATABASE_NAME</code> is the database <code>&quot;name&quot;:</code> from step 1</li>
+</ul></li>
+</ol>
+<p>You have manually created an SSH tunnel to connect to your backing services from your local machine.</p>
+<p>For a PostgreSQL backing service, you can also back up the PostgreSQL database using <a href="https://www.postgresql.org/docs/9.5/static/backup-dump.html"><code>pg_dump</code></a>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>pg_dump postgres://USERNAME:PASSWORD@localhost:6666/DATABASE_NAME &gt; db.dump
+</code></pre></div><h3 id="handshake-failure-error">Handshake failure error</h3><p>If you get the following error, you must <a href="#enabling-ssh-for-an-app">enable SSH for your app</a>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>FAILED
+Error opening SSH connection: ssh: handshake failed: ssh:
+unable to authenticate, attempted methods [none password],
+no supported methods remain
+</code></pre></div><h2 id="managing-ssh-permissions">Managing SSH permissions</h2><p>Before you can connect to an app&rsquo;s container with SSH, you must enable SSH for both the app and the space the app is in.</p>
+<p>All new apps and spaces have SSH enabled by default. You can enable and disable SSH independently for each space and app.</p>
+<h3 id="enabling-ssh-for-an-app">Enabling SSH for an app</h3>
+<ol>
+<li><p>Check if SSH is enabled for an app:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf ssh-enabled APPNAME
+</code></pre></div><p>where <code>APPNAME</code> is the name of the app.</p></li>
+<li><p>If you get a message stating that SSH support is disabled for the app, enable SSH by running:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf enable-ssh APPNAME
+</code></pre></div><p>The <code>enable-ssh</code> command affects all running instances of an app.</p></li>
+</ol>
+<h3 id="enabling-ssh-for-a-space">Enabling SSH for a space</h3><p>You must be an <a href="/orgs_spaces_users.html#org-manager">org manager</a> or a <a href="/orgs_spaces_users.html#space-manager">space manager</a> to enable SSH for a space.</p>
+
+<ol>
+<li><p><a href="/deploying_apps.html#set-a-target">Target the correct space</a> and check if SSH is enabled in that space:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf space-ssh-allowed SPACENAME
+</code></pre></div><p>where <code>SPACENAME</code> is the name of the space.</p></li>
+<li><p>If you get a message stating that SSH support is disabled for the space, enable SSH by running:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf allow-space-ssh SPACENAME
+</code></pre></div></li>
+</ol>
+<h3 id="limiting-ssh-access">Limiting SSH access</h3><p>You should disable SSH where it’s not needed. For example, you can disable SSH in the <code>production</code> space where you host your live apps, but leave SSH enabled in your <code>development</code> and <code>testing</code> spaces.</p>
+<p>Run <code>cf disable-ssh APPNAME</code> and restart your app to disable SSH for that app.</p>
+<p>Run <code>cf disallow-space-ssh SPACENAME</code> to disable SSH for that space.</p>
+<h3 id="managing-ssh-permissions-further-information">Further information</h3><p>Refer to the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html">Cloud Foundry documentation on accessing apps with SSH</a>.</p>
+<p><h2 id="scaling">Scaling</h2><p>You can manually scale your app to meet increasing demand. You can do this by:</p></p>
+
+<ul>
+<li>changing the number of app instances running</li>
+<li>increasing memory and disk space allocated to your app</li>
+</ul>
+
+<p>Your organisation <a href="/managing_apps.html#quotas">quotas</a> limit the resources you can use for each app.</p>
+<p><h3 id="changing-the-number-of-app-instances">Changing the number of app instances</h3><p>You can change the number of instances of your app running at the same time. Running more than one app instance:</p></p>
+
+<ul>
+<li>allows your app to handle increased traffic and demand as incoming requests are automatically load-balanced across all instances</li>
+<li>helps maintain high availability and makes it less likely that the failure of a single component will take down your app</li>
+</ul>
+
+<p>For example, run the following command to set the number of app instances to 5:</p>
+
+<p><code>cf scale APPNAME -i 5</code></p>
+
+<p>You can also use the manifest to set the number of instances that will start when you <a href="/deploying_apps.html#deploying-public-apps">push the app</a>:</p>
+<p><div class="highlight"><pre class="highlight plaintext"><code>---
+applications:
+- name: APP_NAME
+   instances: 2
+</code></pre></div><p>You should always run more than one instance when <a href="/deploying_apps.html#deploy-an-app-to-production">deploying an app to production</a>.</p>
+<h3 id="increasing-memory-or-disk-space">Increasing memory or disk space</h3><p>You can scale an app vertically by increasing the memory or disk space available to each instance of the app.</p>
+<p>For example, this command increases the available memory for an app to 1 gigabyte:</p>
+<p><code>cf scale APPNAME -m 1G</code></p>
+<p>This command increases the disk space limit for an app to 512 megabytes:</p>
+<p><code>cf scale APPNAME -k 512M</code></p>
+<h3 id="further-information">Further information</h3><p>For more information, refer to the <a href="http://docs.cloudfoundry.org/devguide/deploy-apps/cf-scale.html">Cloud Foundry documentation on using <code>cf scale</code> to scale an app</a> in the Cloud Foundry docs.</p></p>
+<h2 id="autoscaling">Autoscaling</h2><p>Apps can be configured to dynamically increase or decrease the number of
+running instances using autoscaling.</p>
+<p>Scaling your app to fewer instances can reduce the cost during periods of low
+usage,
+eg at night.</p>
+<p>Scaling your app based on throughput or average latency can improve the user
+experience of your app during periods of high traffic,
+eg before a submission deadline.</p>
+<h3 id="scaling-methods">Scaling methods</h3><p>There are two ways of scaling:</p>
+
+<ol>
+<li><code>schedules</code> - scale apps based on time of day and day of week or month</li>
+<li><code>scaling_rules</code> - scale apps based on metrics, eg average latency</li>
+</ol>
+<p>Schedules and scaling rules can be used at the same time, or on their own.</p>
+<h3 id="limits">Limits</h3><p>There are two limits which you can apply to an autoscaling policy:</p>
+
+<ul>
+<li><code>instance_max_count</code> - maximum number of instances to run</li>
+<li><code>instance_min_count</code> - minimum number of instances to run</li>
+</ul>
+<p>The maximum value for <code>instance_max_count</code> is determined by your <a href="#quotas">quota</a>.</p>
+<p>The minimum value for <code>instance_min_count</code> is 1.</p>
+<h3 id="metrics">Metrics</h3><p>You can scale your app based on some provided metrics:</p>
+
+<ul>
+<li><code>memoryused</code> - how many megabytes of memory an app instance is using</li>
+<li><code>memoryutil</code> - percentage of memory utilization where <code>50</code> is 50%</li>
+<li><code>cpu</code> - percentage of CPU utilization where <code>100</code> is 100% of a single CPU</li>
+<li><code>responsetime</code> - average time in milliseconds an app instance takes to respond to external HTTP requests</li>
+<li><code>throughput</code> - number of external HTTP requests processed per second</li>
+</ul>
+<p>You can also scale your app based on custom metrics, please refer to the
+<a href="https://github.com/cloudfoundry/app-autoscaler/blob/df1c9a05a00d927b69d2fbf885f32e0b4f228359/docs/Readme.md#auto-scale-your-application-with-custom-metrics">app-autoscaler user guide</a>
+on GitHub.</p>
+<h3 id="example">Example</h3>
+<ol>
+<li><p>Ensure the autoscaling CLI plugin is installed:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf install-plugin -r CF-Community app-autoscaler-plugin
+</code></pre></div></li>
+<li><p>Deploy your app, where <code>APPNAME</code> is the name of your application:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf push APPNAME
+</code></pre></div></li>
+<li><p>Create an autoscaler service to scale your app:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf create-service autoscaler autoscaler-free-plan scale-APPNAME
+</code></pre></div></li>
+<li><p>Bind the autoscaler service to your app:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf bind-service APPNAME scale-APPNAME
+</code></pre></div></li>
+<li><p>Create an autoscaling policy, the following policy will scale your app:<ul>
+<li>adding one instance if CPU usage is greater than 50% for 120 seconds</li>
+<li>removing one instance if CPU usage is less than 50% for 120 seconds</li>
+</ul></p><p>It will ensure:<ul>
+<li>there are never more than 5 instances of your app</li>
+<li>there are never fewer than 3 instances of your app</li>
+<li>scaling does not occur multiple times within a 60 second period</li>
+</ul></p><p><!-- this was hard to do, refactorer beware -->
+Create the following policy in a file called <code>policy.json</code>:
+<div class="highlight"><pre class="highlight"><code>{
+  "instance_min_count": 3,
+  "instance_max_count": 5,
+  "scaling_rules": [
+    {
+      "metric_type": "cpu",
+      "breach_duration_secs": 120,
+      "threshold": 50,
+      "operator": "<",
+      "cool_down_secs": 60,
+      "adjustment": "-1"
+    },
+    {
+      "metric_type": "cpu",
+      "breach_duration_secs": 120,
+      "threshold": 50,
+      "operator": ">=",
+      "cool_down_secs": 60,
+      "adjustment": "+1"
+    }
+  ]
+}
+</code></pre></div></p></li>
+<li><p>Attach the autoscaling policy to your app:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf attach-autoscaling-policy APPNAME policy.json
+</code></pre></div></li>
+<li><p>Observe the app scaling automatically:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>cf autoscaling-history APPNAME
+</code></pre></div></li>
+</ol>
+<h3 id="example-policies">Example policies</h3><h4 id="scale-when-throughput-increases-or-decreases">Scale when throughput increases or decreases</h4><p>Imagine you have an app which can handle approximately 100 requests per second
+per instance before the user experience becomes slow, and the app unreliable.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "instance_min_count": 3,
+  "instance_max_count": 9,
+  "scaling_rules": [
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": "&lt;",
+      "cool_down_secs": 60,
+      "adjustment": "-1"
+    },
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": "&gt;=",
+      "cool_down_secs": 60,
+      "adjustment": "+1"
+    }
+  ]
+}
+</code></pre></div><p>This policy will scale your app:</p>
+
+<ul>
+<li>adding one instance if the average number of external HTTP requests per second per instance is greater than 90 for 60 seconds</li>
+<li>removing one instance if the average number of external HTTP requests per second per instance is less than 90 for 60 seconds</li>
+</ul>
+<p>This policy will ensure:</p>
+
+<ul>
+<li>there are never more than 6 instances of your app</li>
+<li>there are never fewer than 3 instances of your app</li>
+</ul>
+<p>This policy will avoid scaling multiple times within a 60 second period.</p>
+<h4 id="scale-during-the-day">Scale during the day</h4><p>Imagine you have an app which is used frequently during daytime working hours,
+but does not receive much traffic otherwise.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "instance_min_count": 2,
+  "instance_max_count": 4,
+  "scaling_rules": [
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": "&lt;",
+      "cool_down_secs": 60,
+      "adjustment": "-1"
+    },
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": "&gt;=",
+      "cool_down_secs": 60,
+      "adjustment": "+1"
+    }
+  ],
+  "schedules": {
+    "timezone": "Europe/London",
+    "recurring_schedule": [
+      {
+        "start_time": "08:00",
+        "end_time": "18:00",
+        "days_of_week": [1, 2, 4, 5],
+        "instance_min_count": 4,
+        "instance_max_count": 8,
+        "initial_min_instance_count": 4
+      },
+      {
+        "start_time": "08:00",
+        "end_time": "18:00",
+        "days_of_week": [3],
+        "instance_min_count": 6,
+        "instance_max_count": 10,
+        "initial_min_instance_count": 6
+      }
+    ]
+  }
+}
+</code></pre></div><p>This policy uses the same scaling rules as the previous example:</p>
+
+<ul>
+<li>adding one instance if the average number of external HTTP requests per second per instance is greater than 90 for 60 seconds</li>
+<li>removing one instance if the average number of external HTTP requests per second per instance is less than 90 for 60 seconds</li>
+</ul>
+<p>This policy will ensure:</p>
+
+<ul>
+<li>there are between 6 and 10 instances during Wednesday working hours</li>
+<li>there are between 4 and 8 instances during working hours on other weekdays</li>
+<li>there are between 2 and 4 instances otherwise</li>
+</ul>
+<h4 id="scale-during-the-month">Scale during the month</h4><p>Imagine you have an app which is used frequently during the first week of the
+month, but does not receive much traffic otherwise.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "instance_min_count": 2,
+  "instance_max_count": 4,
+  "scaling_rules": [
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": "&lt;",
+      "cool_down_secs": 60,
+      "adjustment": "-1"
+    },
+    {
+      "metric_type": "throughput",
+      "breach_duration_secs": 60,
+      "threshold": 90,
+      "operator": "&gt;=",
+      "cool_down_secs": 60,
+      "adjustment": "+1"
+    }
+  ],
+  "schedules": {
+    "timezone": "Europe/London",
+    "recurring_schedule": [
+      {
+        "start_time": "06:00",
+        "end_time": "22:00",
+        "days_of_month": [1, 2, 3, 4, 5, 6, 7],
+        "instance_min_count": 6,
+        "instance_max_count": 10,
+        "initial_min_instance_count": 6
+      }
+    ]
+  }
+}
+</code></pre></div><p>This policy uses the same scaling rules as the previous example:</p>
+
+<ul>
+<li>adding one instance if the average number of external HTTP requests per second per instance is greater than 90 for 60 seconds</li>
+<li>removing one instance if the average number of external HTTP requests per second per instance is less than 90 for 60 seconds</li>
+</ul>
+<p>This policy will ensure:</p>
+
+<ul>
+<li>there are between 6 and 10 instances during daylight hours of the first week of the month</li>
+<li>there are between 2 and 4 instances otherwise</li>
+</ul>
+<h3 id="tips-for-autoscaling-policies">Tips for autoscaling policies</h3>
+<ul>
+<li>Ensure that schedules do not overlap</li>
+<li>Small changes in scale which occur more often are better than large, infrequent changes</li>
+<li>Keep your autoscaling policies simple</li>
+<li>If your app should be highly available, ensure <code>instance_min_count</code> is at least 3</li>
+</ul>
+<h3 id="autoscaling-further-information">Further information</h3><p>Refer to the
+<a href="https://github.com/cloudfoundry/app-autoscaler/blob/df1c9a05a00d927b69d2fbf885f32e0b4f228359/docs/Readme.md">app-autoscaler user guide</a> on GitHub.</p>
+<p><h2 id="quotas">Quotas</h2><p>Cloud Foundry capacity is managed by quotas. Quotas provide a reservation of application routes, memory, compute power, and service instances which your organization cannot exceed. You can set individual application quotas to control how much of your quota each of your applications can use.</p>
+<h3 id="quota-allocations">Quota allocations</h3><p>Your organisation will be assigned a quota based on your stated needs. This will cover the app instances you run. Backing services do not count towards this quota.</p>
+<p>Your quota sets the following:</p></p>
+
+<ul>
+<li><p>RAM: The amount of RAM available to your applications. The application also has a compute share derived from its memory limit.</p></li>
+<li><p>Service instances: The number of service instances available to your organization.</p></li>
+<li><p>Paid services: Whether or not paid <a href="/deploying_services/#deploy-a-backing-or-routing-service">services</a> are available. <code>postgres</code> is a paid service.</p></li>
+<li><p>Routes: The number of routes available to your applications (hostname and domain pairs where an application that exposes a listening port can be reached).</p></li>
+</ul>
+
+<p>To see your organisation quota, run the command:</p>
+
+<p><code>cf org YOURORG</code></p>
+
+<p>where YOURORG is your organisations&rsquo;s name. (If you do not know the name, you can use <code>cf orgs</code> to find out). This will produce an output which includes the name of the org&rsquo;s current quota:</p>
+<p><div class="highlight"><pre class="highlight plaintext"><code>name:                  YOURORG
+domains:               my.domain,
+quota:                 medium
+spaces:                space1, space2
+isolation segments:
+</code></pre></div><p>To see the details of that quota, run:</p>
+<p><code>cf quota QUOTA</code></p>
+<p>where QUOTA is the name of the quota that GOV.UK PaaS has assigned to your org.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>Total Memory           60G
+Instance Memory        unlimited
+Routes                 1000
+Services               20
+Paid service plans     allowed
+App instance limit     unlimited
+Reserved Route Ports   0
+</code></pre></div><p>To see all quotas available on the GOV.UK PaaS, run the command:</p>
+<p><code>cf quotas</code></p>
+<h3 id="quota-limits">Quota limits</h3><p>If a new application <code>push</code> would exceed your organization&rsquo;s quota, the request will fail with status code <code>400</code> and a message describing the limit that would be exceeded.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre class="highlight plaintext"><code>Creating app APPLICATION in org ORG / space SPACE as USER...
+FAILED
+Server error, status code: 400, error code: 100007, message:
+You have exceeded the memory limit for your organization&#39;s quota.
+</code></pre></div><p>In this situation you have three options:</p></p>
+
+<ol>
+<li>Delete existing resources with <code>cf delete</code>, <code>cf delete-service</code>, <code>cf delete-route</code> or similar commands.</li>
+<li>Reconfigure existing <a href="/managing_apps.html#application-quotas">application quotas</a> and redeploy.</li>
+<li>Request a quota change: contact us at <a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk">gov-uk-paas-support@digital.cabinet-office.gov.uk</a>.</li>
+</ol>
+<p><h3 id="application-quotas">Application quotas</h3><p>As a PaaS tenant, you can divide your organization&rsquo;s quota capacity amongst your applications as you see fit, by way of application quotas. Application limits are specified in your application manifest or as <code>cf push</code> command line options.</p>
+<p>Use the following commands to set application quota options (in each pair below, the first is the version to use in the manifest, and the second is the command line version.)</p></p>
+
+<ul>
+<li><p><code>memory:</code> / <code>-m</code></p>
+<p>Your application&rsquo;s memory limit. An application&rsquo;s compute limit is derived from its memory limit (see <a href="/managing_apps.html#memory-share-and-compute-share">below</a>).</p></li>
+<li><p><code>disk_quota:</code> / <code>-k</code></p>
+<p>The maximum amount of disk space available to your app.</p></li>
+<li><p><code>instances:</code> / <code>-i</code></p>
+<p>Sets the number of application instances to launch. Each additional instance receives the same memory and disk reservation. An application with a manifest specifying <code>memory: 256M</code> and <code>instances: 4</code> would reserve 1GB (256M x 4) total.</p>
+<p>For a production application, you should always launch more than one instance. See <a href="/managing_apps.html#scaling">Scaling</a> for more information.</p></li>
+</ul>
+
+<h4 id="memory-share-and-compute-share">Memory share and compute share</h4><p>Your application&rsquo;s compute limit is derived from its memory limit. Each application receives a guaranteed compute share equal to its relative share of memory.</p>
+<p>Your application will be guaranteed to receive a portion of the vCPU compute power equal to its portion of memory allocation. In other words, it will receive at least this much vCPU time even if there are other applications competing for time.</p>
+<p>Your application will be offered 100% of the vCPU compute power. If no other applications are running, the app can use all the computer power available.
+If there are other applications competing for time, each application&rsquo;s guaranteed share determines how much time it will receive.</p>
+<p>The application cannot access more than the specified amount of memory.</p>
+<h4 id="application-quota-sizing">Application quota sizing</h4>
+
+<ul>
+<li><p>The environment default of 512MB <code>memory</code> is sufficient for most applications. Static sites and utility applications such as schedulers or loaders may require less. Use <code>cf app APPNAME</code> to check your application&rsquo;s current memory and compute utilization.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>requested state: started
+instances: 1/1
+usage: 128M x 1 instances
+urls:
+last uploaded: Wed Jul 22 20:09:56 UTC 2015
+
+     state     since                    cpu    memory          disk
+#0   running   2015-07-30 05:58:11 PM   0.0%   94.6M of 128M   80.4M of 128M
+</code></pre></div></li>
+<li><p>Any application which exceeds its memory quota will be automatically restarted. Use <code>cf events APPNAME</code> to look for &lsquo;out of memory&rsquo; crashes.</p>
+<div class="highlight"><pre class="highlight plaintext"><code>... description
+... index: 0, reason: CRASHED, exit_description: out of memory, exit_status: 255
+</code></pre></div></li>
+</ul>
+<p><h2 id="redirecting-all-traffic">Redirecting all traffic</h2><p>If a site moves to a different domain name, you can use a simple static site with a custom <code>nginx.conf</code>
+file to redirect all traffic from the old domain to the new domain. Example <code>nginx.conf</code> site for <code>NEW_DOMAIN_NAME</code>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>worker_processes 1;
+daemon off;</p>
+<p>error_log &lt;%= ENV[&quot;APP_ROOT&quot;] %&gt;/nginx/logs/error.log;
+events { worker_connections 1024; }</p>
+<p>http {
+  server {
+    listen &lt;%= ENV[&quot;PORT&quot;] %&gt;;
+    server_name localhost;
+    return 301 $scheme://NEW_DOMAIN_NAME$request_uri;
+  }
+}
+</code></pre></div><p>Deploy your application to <code>NEW_DOMAIN_NAME</code> and then <code>cf push</code> a simple static site with that <code>nginx.conf</code>
+configuration to the old domain name. You can see a <a href="https://github.com/18F/c2-redirect">full working example here</a>.</p>
+<p>You can read more about <a href="https://github.com/cloudfoundry/staticfile-buildpack#advanced-nginx-configuration">nginx customization</a>.</p></p>
+<p><h2 id="app-restarts">App restarts</h2><p>Your app can restart without you telling it to, due to:</p></p>
+
+<ul>
+<li>Cloud Foundry changes, such as platform upgrades or operating system patches</li>
+<li>an unexpected issue, such as your app instance running out of memory or disk space</li>
+</ul>
+<p><h3 id="cloud-foundry-changes">Cloud Foundry changes</h3><p>If your app processes take more than 10 seconds to finish, those processes will be affected by a Cloud Foundry-driven restart. Cloud Foundry will send a termination signal (<code>SIGTERM</code>) to any apps it wants to restart. To shut down cleanly, apps must finish any requests within 10 seconds of receiving the termination signal.</p>
+<p>If the app does not respond in time, Cloud Foundry will send a <code>SIGKILL</code> signal to terminate the app. The app will not shut down cleanly and requests may fail.</p>
+<p>If your app has more than one instance, the running instances will not restart at the same time. This makes sure that there are always available instances for your app.</p>
+<p>For more information, refer to the Cloud Foundry documentation on how:</p></p>
+
+<ul>
+<li>to configure Cloud Foundry for <a href="https://docs.cloudfoundry.org/concepts/high-availability.html#cf-ha">high availability</a></li>
+<li>Cloud Foundry moves your app instances between servers using <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/app-lifecycle.html#evacuation">evacuations</a></li>
+<li>Cloud Foundry requests a <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/app-lifecycle.html#shutdown">shutdown of your app instance</a></li>
+</ul>
+<p><h3 id="404s-after-commands-that-restart-your-app">404s after commands that restart your app</h3><p>After you use a command that restarts application instances, such as <code>cf push</code> or <code>cf restart</code>, your app may temporarily return incorrect 404 errors instead of returning a 5XX error. Apart from the brief downtime, this may lead to problems if the 404 is cached, or visiting web crawling bots (as used by search engines) receive a 404.</p>
+<p>Commands known to do this are:</p></p>
+
+<ul>
+<li><code>cf push</code></li>
+<li><code>cf restage</code></li>
+<li><code>cf restart</code></li>
+<li><code>cf scale</code> when changing disk or memory limits or forcing a restart</li>
+</ul>
+
+<p>We are working on a fix to prevent this happening.</p>
+
+<p>Until this fix is live, you should use a <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html">blue-green deployment process</a>. This is where you have two versions of an app, one that is &lsquo;live&rsquo; and one that is undergoing an update or restart. There are plugins for the Cloud Foundry command line client to help this process. We recommend the <a href="https://github.com/bluemixgaragelondon/cf-blue-green-deploy">cf-blue-green-deploy</a> plugin.</p>
+
+            
+          </main>
+
+          <aside>
+              <ul class="contribution-banner">
+                <li><a href="https://github.com/alphagov/paas-tech-docs//blob/master/source/managing_apps.html.md.erb">View source</a></li>
+                <li><a href="mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk?subject=Problem%20with%20GOV.UK%20PaaS%20technical%20documentation">Report problem</a></li>
+                <li><a href="https://github.com/alphagov/paas-tech-docs/">GitHub Repo</a></li>
+              </ul>
+          </aside>
+
+          <footer class="govuk-footer app-footer" role="contentinfo">
+  <div class="govuk-footer__meta">
+    <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+
+        <ul class="govuk-footer__inline-list">
+            <li class="govuk-footer__inline-list-item">
+              <a class="govuk-footer__link" href="/accessibility.html">Technical Documentation Accessibility</a>
+            </li>
+        </ul>
+
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        class="govuk-footer__licence-logo"
+        xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 0 483.2 195.7"
+        height="17"
+        width="41"
+      >
+        <path
+          fill="currentColor"
+          d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+        />
+      </svg>
+      <span class="govuk-footer__licence-description">
+        All content is available under the
+        <a
+          class="govuk-footer__link"
+          href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+          rel="license"
+        >Open Government Licence v3.0</a>, except where otherwise stated
+      </span>
+    </div>
+    <div class="govuk-footer__meta-item">
+      <a
+        class="govuk-footer__link govuk-footer__copyright-logo"
+        href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+      >© Crown copyright</a>
+    </div>
+  </div>
+</footer>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="/javascripts/application.js"></script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<h2 id="deploy-a-net-core-app">Deploy a .NET Core app</h2><p>This section covers how to deploy a .NET Core application to GOV.UK PaaS using the <a href="https://github.com/cloudfoundry/dotnet-core-buildpack">dotnet-core buildpack</a>.</p>
+<h3 id="deploying-an-asp-net-core-web-app">Deploying an ASP.NET Core Web App</h3><p>This example will walk through creating a simple &ldquo;Hello World&rdquo; web application using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/">the <code>dotnet</code> command line interface</a>.
+The instructions assume you have already carried out the setup process explained in the <a href="/get_started.html#get-started">Get started</a> section.</p>
+
+<ol>
+<li><p>Install the dotnet core command line interface (CLI) tools</p>
+<p>See Microsoft&rsquo;s <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/#installation">documentation for instructions on how to do this</a>.</p></li>
+<li><p>Create a new ASP.NET Core Web App using the dotnet CLI</p>
+<div class="highlight"><pre class="highlight shell"><code>dotnet new webapp <span class="nt">--name</span> your-app-name
+</code></pre></div></li>
+<li><p>Change directory into your new application&rsquo;s directory</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">cd </span>your-app-name
+</code></pre></div></li>
+<li><p>Create a manifest to describe how your application should be deployed</p>
+<div class="highlight"><pre class="highlight yaml"><code><span class="nn">---</span>
+<span class="na">applications</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">your-app-name</span>
+  <span class="na">buildpacks</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">dotnet_core_buildpack</span>
+  <span class="na">memory</span><span class="pi">:</span> <span class="s">256M</span>
+</code></pre></div></li>
+<li><p>Pick a version of the .NET framework to target which is supported by the current buildpack</p>
+
+<ol>
+<li>Run <code>cf buildpacks</code> and look at the filename for <code>dotnet_core_buildpack</code> to work out the version (for example, if the filename was <code>dotnet-core-buildpack-cflinuxfs3-v2.3.2.zip</code> the version of the buildpack would be <code>v2.3.2</code>).</li>
+<li>Visit the buildpack&rsquo;s releases page, for example <a href="https://github.com/cloudfoundry/dotnet-core-buildpack/releases/tag/v2.3.2">https://github.com/cloudfoundry/dotnet-core-buildpack/releases/tag/v2.3.2</a></li>
+<li>Check the versions of <code>dotnet-sdk</code> supported by the buildpack - you should usually use the latest supported version, for example 3.0.100</li>
+<li>Edit your <code>.csproj</code> file and change the contents of the <code>&lt;TargetFramework&gt;</code> element to the target framework corresponding to the supported framework version (for example, use <code>netcoreapp3.0</code> for a 3.0.x version of <code>dotnet-sdk</code>). See <a href="https://docs.microsoft.com/en-us/dotnet/standard/frameworks#supported-target-framework-versions">Microsoft&rsquo;s documentation on supported target framework versions</a>.</li>
+<li><p>Create a <code>buildpack.yml</code> file to specify which version of the framework the buildpack should use:</p>
+<div class="highlight"><pre class="highlight yaml"><code><span class="nn">---</span>
+<span class="na">dotnet-core</span><span class="pi">:</span>
+  <span class="na">sdk</span><span class="pi">:</span> <span class="s">3.x</span>
+</code></pre></div></li>
+</ol></li>
+<li><p>Push your application to GOV.UK PaaS</p>
+<div class="highlight"><pre class="highlight shell"><code>cf push
+</code></pre></div></li>
+</ol>
+<p>You have now deployed your .NET core application. Your application should now be accessible over HTTPS from the URL provided in the output.</p>
