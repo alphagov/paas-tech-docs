@@ -51,9 +51,9 @@ We recommend this GOV.UK PaaS account:
 
 	|Name|Value|
 	|:---|:---|
-	|`API_ENDPOINT`|- `https://api.cloud.service.gov.uk` for Ireland<br>- `https://api.london.cloud.service.gov.uk` for London|
-	|`USERNAME`|Cloud Foundry User|
-	|`PASSWORD`|Cloud Foundry Password|
+	|# `API_ENDPOINT`|- `https://api.cloud.service.gov.uk` for Ireland<br>- `https://api.london.cloud.service.gov.uk` for London|
+	|# `USERNAME`|Cloud Foundry User|
+	|# `PASSWORD`|Cloud Foundry Password|
 
 	You should use the `cf set-env` command for these mandatory variables as they contain secret information, and this method will keep them secure.
 
@@ -105,10 +105,10 @@ To set up the metrics exporter app:
 
 	|Name|Value|
 	|:---|:---|
-	|`API_ENDPOINT`|- `https://api.cloud.service.gov.uk` for Ireland<br>- `https://api.london.cloud.service.gov.uk` for London|
-	|`STATSD_ENDPOINT`|StatsD endpoint|
-	|`USERNAME`|Cloud Foundry User|
-	|`PASSWORD`|Cloud Foundry Password|
+	|# `API_ENDPOINT`|- `https://api.cloud.service.gov.uk` for Ireland<br>- `https://api.london.cloud.service.gov.uk` for London|
+	|# `STATSD_ENDPOINT`|StatsD endpoint|
+	|# `USERNAME`|Cloud Foundry User|
+	|# `PASSWORD`|Cloud Foundry Password|
 
 	You should use the `cf set-env` command for these mandatory variables as they contain secret information, and this method will keep them secure.
 

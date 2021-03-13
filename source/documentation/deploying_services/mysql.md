@@ -28,9 +28,9 @@ To set up a MySQL service:
 
     |Syntax|Meaning|
     |:---|:---|
-    |`ha`|High availability|
-    |`X.X`|Version number|
-    |`small / medium / large / xlarge`|Size of instance|
+    |# `ha`|High availability|
+    |# `X.X`|Version number|
+    |# `small / medium / large / xlarge`|Size of instance|
 
     More information can be found in the [MySQL plans](/deploying_services/mysql/#mysql-plans) section.
 
