@@ -22,9 +22,9 @@ You should tell Cloud Foundry which version of your app's language to use in the
 
 |Category|Python Example|
 |:---|:---|
-|Exact|`3.5.2`|
-|Minor|`3.5.x`|
-|Major|`3.x`|
+|# Exact|`3.5.2`|
+|# Minor|`3.5.x`|
+|# Major|`3.x`|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 

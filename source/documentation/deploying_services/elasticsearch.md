@@ -28,9 +28,9 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 
     |Syntax|Meaning|
     |:---|:---|
-    |`ha`|High availability|
-    |`X.X`|Version number|
-    |`small`|Size of instance|
+    |# `ha`|High availability|
+    |# `X.X`|Version number|
+    |# `small`|Size of instance|
 
     <div style="height:1px;font-size:1px;">&nbsp;</div>
 
