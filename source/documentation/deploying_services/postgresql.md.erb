@@ -19,11 +19,11 @@ To set up a PostgreSQL service:
     Here is an example of the output you will see (the exact plans will vary):
 
     ```
-    service plan             description                                                                                                                                                       free or paid
-    small-9.5                20GB Storage, Dedicated Instance, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                                           paid
-    small-ha-9.5             20GB Storage, Dedicated Instance, Highly Available, Max 500 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.m4.large.                         paid
+    service plan             description                                                                                                                                                       free or paid   costs   available
+    small-ha-12              100GB Storage, Dedicated Instance, Highly Available, Storage Encrypted, Max 200 Concurrent Connections. Postgres Version 12. DB Instance Class: db.t3.small.      paid                   yes
+    medium-12                100GB Storage, Dedicated Instance, Storage Encrypted, Max 500 Concurrent Connections. Postgres Version 12. DB Instance Class: db.m5.large.                        paid                   yes
     ...
-    tiny-9.5                 5GB Storage, NOT BACKED UP, Dedicated Instance, Max 50 Concurrent Connections. Postgres Version X.X. DB Instance Class: db.t2.micro.                              free
+    large-12                 512GB Storage, Dedicated Instance, Storage Encrypted, Max 5000 Concurrent Connections. Postgres Version 12. DB Instance Class: db.m5.2xlarge.                     paid                   yes
     ```
 
     The syntax in this output is explained in the following table:
@@ -31,8 +31,8 @@ To set up a PostgreSQL service:
     |Syntax|Meaning|
     |:---|:---|
     |# `ha`|High availability|
-    |# `X.X`|Version number|
-    |# `small / medium / large / xlarge`|Size of instance|
+    |# `small / medium / large / xlarge` |Size of instance|
+    |# `size-X` |Version number|
 
     More information can be found in the [PostgreSQL plans](/deploying_services/postgresql/#postgresql-plans) section.
 
@@ -45,7 +45,7 @@ To set up a PostgreSQL service:
     where `PLAN` is the plan you want, and `SERVICE_NAME` is a unique descriptive name for this service instance. For example:
 
     ```
-    cf create-service postgres small-9.5 my-pg-service
+    cf create-service postgres small-12 my-pg-service
     ```
 
     You should use a high-availability (`ha`) encrypted plan for production apps.
@@ -69,7 +69,7 @@ To set up a PostgreSQL service:
     Service: postgres
     Bound apps:
     Tags:
-    Plan: small-9.5
+    Plan: small-12
     Description: AWS RDS PostgreSQL service
     Documentation url: https://aws.amazon.com/documentation/rds/
     Dashboard:
@@ -259,7 +259,7 @@ cf update-service SERVICE_NAME -p NEW_PLAN_NAME
 where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
 
 ```
-cf update-service my-pg-service -p small-ha-9.5
+cf update-service my-pg-service -p small-ha-12
 ```
 
 The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
@@ -332,7 +332,7 @@ The following extensions are always enabled for PostgreSQL service instances:
 
 |Extension|PostgreSQL version|
 |:---|:---|
-|# uuid-ossp|9.5, 10, 11, 12|
+|# uuid-ossp|10, 11, 12|
 |# citext|10, 11, 12|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
@@ -345,65 +345,65 @@ GOV.UK PaaS supports the following optional extensions, but they are not enabled
 
 |Extension|PostgreSQL version|
 |:---|:---|
-|# address_standardizer|9.5, 10, 11, 12|
-|# address_standardizer_data_us|9.5, 10, 11, 12|
-|# bloom|9.5, 10, 11, 12|
-|# btree_gin|9.5, 10, 11, 12|
-|# btree_gist|9.5, 10, 11, 12|
-|# chkpass|9.5, 10|
-|# cube|9.5, 10, 11, 12|
-|# dblink|9.5, 10, 11, 12|
-|# dict_int|9.5, 10, 11, 12|
-|# dict_xsyn|9.5, 10, 11, 12|
-|# earthdistance|9.5, 10, 11, 12|
-|# fuzzystrmatch|9.5, 10, 11, 12|
-|# hstore|9.5, 10, 11, 12|
-|# hstore_plperl|9.5, 10, 11, 12|
-|# intagg|9.5, 10, 11, 12|
-|# intarray|9.5, 10, 11, 12|
-|# ip4r|9.5, 10, 11, 12|
-|# isn|9.5, 10, 11, 12|
+|# address_standardizer|10, 11, 12|
+|# address_standardizer_data_us|10, 11, 12|
+|# bloom|10, 11, 12|
+|# btree_gin|10, 11, 12|
+|# btree_gist|10, 11, 12|
+|# chkpass|10|
+|# cube|10, 11, 12|
+|# dblink|10, 11, 12|
+|# dict_int|10, 11, 12|
+|# dict_xsyn|10, 11, 12|
+|# earthdistance|10, 11, 12|
+|# fuzzystrmatch|10, 11, 12|
+|# hstore|10, 11, 12|
+|# hstore_plperl|10, 11, 12|
+|# intagg|10, 11, 12|
+|# intarray|10, 11, 12|
+|# ip4r|10, 11, 12|
+|# isn|10, 11, 12|
 |# libprotobuf|10, 11, 12|
-|# log_fdw|9.5, 10, 11, 12|
-|# ltree|9.5, 10, 11, 12|
+|# log_fdw|10, 11, 12|
+|# ltree|10, 11, 12|
 |# orafce|10, 11, 12|
 |# pageinspect|10, 11, 12|
-|# pg_buffercache|9.5, 10, 11, 12|
-|# pg_freespacemap|9.5, 10, 11, 12|
-|# pg_hint_plan|9.5, 10, 11, 12|
-|# pg_prewarm|9.5, 10, 11, 12|
+|# pg_buffercache|10, 11, 12|
+|# pg_freespacemap|10, 11, 12|
+|# pg_hint_plan|10, 11, 12|
+|# pg_prewarm|10, 11, 12|
 |# pg_repack|10, 11, 12|
 |# pg_similarity|10, 11, 12|
-|# pg_stat_statements|9.5, 10, 11, 12|
+|# pg_stat_statements|10, 11, 12|
 |# pgtap|11, 12|
 |# pg_transport|11, 12|
-|# pg_trgm|9.5, 10, 11, 12|
-|# pg_visibility|9.5, 10, 11, 12|
-|# pgaudit|9.5, 10, 11, 12|
-|# pgcrypto|9.5, 10, 11, 12|
+|# pg_trgm|10, 11, 12|
+|# pg_visibility|10, 11, 12|
+|# pgaudit|10, 11, 12|
+|# pgcrypto|10, 11, 12|
 |# pglogical|10, 11, 12|
 |# pgrouting|10, 11, 12|
-|# pgrowlocks|9.5, 10, 11, 12|
-|# pgstattuple|9.5, 10, 11, 12|
-|# plcoffee|9.5, 10, 11, 12|
-|# plls|9.5, 10, 11, 12|
-|# plperl|9.5, 10, 11, 12|
-|# plpgsql|9.5, 10, 11, 12|
-|# pltcl|9.5, 10, 11, 12|
-|# plv8|9.5, 10, 11, 12|
-|# postgis|9.5, 10, 11, 12|
-|# postgis_tiger_geocoder|9.5, 10, 11, 12|
-|# postgis_topology|9.5, 10, 11, 12|
-|# postgres_fdw|9.5, 10, 11, 12|
+|# pgrowlocks|10, 11, 12|
+|# pgstattuple|10, 11, 12|
+|# plcoffee|10, 11, 12|
+|# plls|10, 11, 12|
+|# plperl|10, 11, 12|
+|# plpgsql|10, 11, 12|
+|# pltcl|10, 11, 12|
+|# plv8|10, 11, 12|
+|# postgis|10, 11, 12|
+|# postgis_tiger_geocoder|10, 11, 12|
+|# postgis_topology|10, 11, 12|
+|# postgres_fdw|10, 11, 12|
 |# postgresql-hll|10, 11, 12|
 |# prefix|10, 11, 12|
-|# sslinfo|9.5, 10, 11, 12|
-|# tablefunc|9.5, 10, 11, 12|
-|# test_parser|9.5, 10, 11, 12|
-|# tsearch2|9.5, 10|
-|# tsm_system_rows|9.5, 10, 11, 12|
-|# tsm_system_time|9.5, 10, 11, 12|
-|# unaccent|9.5, 10, 11, 12|
+|# sslinfo|10, 11, 12|
+|# tablefunc|10, 11, 12|
+|# test_parser|10, 11, 12|
+|# tsearch2|10|
+|# tsm_system_rows|10, 11, 12|
+|# tsm_system_time|10, 11, 12|
+|# unaccent|10, 11, 12|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
@@ -571,7 +571,7 @@ GOV.UK PaaS does not currently support read replicas, but if you think you would
 
 #### PostgreSQL maintenance times
 
-Each PostgreSQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. Select a high availability (`HA`) plan to minimise this downtime. Minor version upgrades (for example from 9.4.1 to 9.4.2) are applied during this maintenance window.
+Each PostgreSQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. Select a high availability (`HA`) plan to minimise this downtime. Minor version upgrades (for example from 12.13 to 12.15) are applied during this maintenance window.
 
 Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to find out the default time of your maintenance window. Window start times will vary from 22:00 to 06:00 UTC.
 
@@ -600,7 +600,7 @@ cf update-service SERVICE_NAME -p PLAN -c '{"apply_at_maintenance_window": true,
 where `SERVICE_NAME` is a unique, descriptive name for this service instance and `PLAN` is the plan that you are upgrading to, for example:
 
 ```
-cf update-service my-pg-service -p small-ha-9.5 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
+cf update-service my-pg-service -p small-ha-12 -c '{"apply_at_maintenance_window": true, "preferred_maintenance_window": "wed:03:32-wed:04:02"}'
 ```
 
 Passing the `preferred_maintenance_window` parameter will alter the default maintenance window for any future maintenance events required for the database instance.
@@ -654,7 +654,7 @@ To restore from a snapshot:
     where `PLAN` is the plan used in the original instance (you can find this out by running `cf service SERVICE_NAME`), and `NEW_SERVICE_NAME` is a unique, descriptive name for this new instance. For example:
 
     ```
-    cf create-service postgres small-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
+    cf create-service postgres small-12 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
     ```
 
  3. It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:
@@ -685,7 +685,7 @@ you can use the `restore_from_latest_snapshot_before` parameter.
 For example:
 
 ```
-cf create-service postgres small-9.5 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_latest_snapshot_before": "2020-04-01 13:00:00"}'
+cf create-service postgres small-12 my-pg-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_latest_snapshot_before": "2020-04-01 13:00:00"}'
 ```
 
 will create a new database from the most recent snapshot created before April
