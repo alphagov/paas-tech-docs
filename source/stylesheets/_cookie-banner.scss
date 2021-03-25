@@ -1,8 +1,4 @@
-$govuk-button-colour: govuk-colour("green", $legacy: #00823b);
-$govuk-button-hover-colour: govuk-shade($govuk-button-colour, 20%);
-$govuk-button-shadow-colour: govuk-shade($govuk-button-colour, 60%);
-$govuk-button-text-colour: govuk-colour("white");
-$button-shadow-size: $govuk-border-width-form-element;
+@import "govuk/components/button/button";
 
 .cookie-banner__wrapper {
     @include govuk-responsive-padding(4, "top");
@@ -29,90 +25,6 @@ $button-shadow-size: $govuk-border-width-form-element;
   }
   
   .cookie-banner__button {
-    @include govuk-font($size: 19, $line-height: 19px);
-
-    box-sizing: border-box;
-    display: inline-block;
-    position: relative;
-    @include govuk-responsive-margin(6, "bottom", $adjustment: $button-shadow-size); // s2
-    padding: (govuk-spacing(2) - $govuk-border-width-form-element) govuk-spacing(2) (govuk-spacing(2) - $govuk-border-width-form-element - ($button-shadow-size / 2)); // s1
-    border: $govuk-border-width-form-element solid transparent;
-    border-radius: 0;
-    color: $govuk-button-text-colour;
-    background-color: $govuk-button-colour;
-    box-shadow: 0 $button-shadow-size 0 $govuk-button-shadow-colour; // s0
-    text-align: center;
-    vertical-align: top;
-    cursor: pointer;
-    -webkit-appearance: none;
-
-    @include govuk-if-ie8 {
-      border-bottom: $button-shadow-size solid $govuk-button-shadow-colour;
-    }
-
-    @include govuk-media-query($from: tablet) {
-      width: auto;
-    }
-
-    // Ensure that any global link styles are overridden
-    &:link,
-    &:visited,
-    &:active,
-    &:hover {
-      color: $govuk-button-text-colour;
-      text-decoration: none;
-    }
-
-    &::-moz-focus-inner {
-      padding: 0;
-      border: 0;
-    }
-
-    &:hover {
-      background-color: $govuk-button-hover-colour;
-    }
-
-    &:active {
-      top: $button-shadow-size;
-
-      @include govuk-if-ie8 {
-        border-bottom-width: 0;
-      }
-    }
-
-    &:focus {
-      border-color: $govuk-focus-colour;
-      @include govuk-not-ie8 {
-        outline: $govuk-focus-width solid transparent;
-      }
-
-      @include govuk-if-ie8 {
-        color: $govuk-focus-text-colour;
-        background-color: $govuk-focus-colour;
-      }
-      box-shadow: inset 0 0 0 1px $govuk-focus-colour;
-    }
-
-    &:focus:not(:active):not(:hover) {
-      border-color: $govuk-focus-colour;
-      color: $govuk-focus-text-colour;
-      background-color: $govuk-focus-colour;
-      box-shadow: 0 2px 0 $govuk-focus-text-colour;
-    }
-
-    &:before {
-      content: "";
-      display: block;
-      position: absolute;
-      top: -$govuk-border-width-form-element;
-      right: -$govuk-border-width-form-element;
-      bottom: -($govuk-border-width-form-element + $button-shadow-size);
-      left: -$govuk-border-width-form-element;
-      background: transparent;
-    }
-    &:active:before {
-      top: -($govuk-border-width-form-element + $button-shadow-size);
-    }
     display: inline-block;
     flex: 1 0;
     padding-left: govuk-spacing(9);
