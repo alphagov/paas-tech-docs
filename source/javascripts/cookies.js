@@ -169,6 +169,7 @@
   
     var config = {
       cookie_expires: cookieDuration * 24 * 60 * 60,
+      page_path: window.location.pathname + window.location.hash,
       // docs get a relatively small number	
       // of visits daily, so the default site speed	
       // sample rate of 1% gives us too few data points.	
