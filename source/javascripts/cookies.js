@@ -87,12 +87,12 @@
       <div class="cookie-banner__buttons">\
       <button class="govuk-button cookie-banner__button cookie-banner__button-accept" \
       type="submit" data-accept-cookies="true" aria-describedby="cookie-banner__heading">\
-      Yes <span class="govuk-visually-hidden">, PaaS can store analytics cookies on your device</span></button>\
+      Yes <span class="govuk-visually-hidden">, GOV.UK PaaS can store analytics cookies on your device</span></button>\
       <button class="govuk-button cookie-banner__button cookie-banner__button-reject" \
       type="submit" data-accept-cookies="false" aria-describedby="cookie-banner__heading">\
-      No <span class="govuk-visually-hidden">, PaaS cannot store analytics cookies on your device</span></button>\
+      No <span class="govuk-visually-hidden">, GOV.UK PaaS cannot store analytics cookies on your device</span></button>\
       <a class="govuk-link cookie-banner__link" href="https://www.cloud.service.gov.uk/cookies/">\
-      How PaaS uses cookies</a></div></div><div class="cookie-banner__confirmation govuk-width-container" tabindex="-1">\
+      How GOV.UK PaaS uses cookies</a></div></div><div class="cookie-banner__confirmation govuk-width-container" tabindex="-1">\
       <p class="cookie-banner__confirmation-message govuk-body">You can \
       <a class="govuk-link" href="https://www.cloud.service.gov.uk/cookies/">change your cookie settings</a> at any time.</p>\
       <button class="cookie-banner__hide-button govuk-link" data-hide-cookie-banner="true" role="link">\
