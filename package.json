@@ -8,11 +8,7 @@
     "lint:fix": "standard --fix"
   },
   "standard": {
-    "ignore": [
-      "out/*"
-    ],
     "env": [
-      "es6",
       "browser"
     ],
     "globals": [
