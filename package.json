@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "standard": "^16.0.3"
+  },
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "standard",
+    "lint:fix": "standard --fix"
+  },
+  "standard": {
+    "ignore": [
+      "out/*"
+    ],
+    "env": [
+      "es6",
+      "browser"
+    ],
+    "globals": [
+      "dataLayer"
+    ]
+  }
+}

@@ -23,3 +23,8 @@
 .DS_Store
 
 Staticfile.auth
+
+.idea/
+.vscode/
+
+node_modules
