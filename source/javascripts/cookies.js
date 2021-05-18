@@ -68,6 +68,7 @@
       // Load GTM
       loadGtmScript()
       setupGtm()
+      window.EventTracking.init()
     }
   }
 
