@@ -27,37 +27,20 @@ Before deploying a Django app, you must:
 
 4. Make sure you have all the required modules for your project installed into your virtual environment (including Django).
 
-1. Generate a ``requirements.txt`` file if your project doesn't already have one by running ``pip freeze > requirements.txt`` in the root of the local folder.
-    Add the following lines to the ``requirements.txt`` file.
+1. Generate a `requirements.txt` file if your project doesn't already have one by running `pip freeze > requirements.txt` in the root of the local folder.
 
-        whitenoise==1.0.6  #manages static assets
-        waitress==0.8.9 #a pure python WSGI server that is a replacement for gunicorn
+    Add the following lines to the `requirements.txt` file.
 
-4. Edit your `wsgi.py` file.
+        whitenoise==5.2.0  # manages static assets
+        waitress==2.0.0    # a pure python WSGI server that is a replacement for gunicorn
 
-    When you create a Django project, a default `wsgi.py` file should be created for you in the project folder. Excluding the opening comments, the default `wsgi.py` looks like this:
+4. Tell Django to use `whitenoise` to serve static files. In `settings.py` within the project folder, add this line to `MIDDLWARE`, immediately after `middleware.security.SecurityMiddleware`.
 
-        import os
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PROJECTNAME.settings")
+        'whitenoise.middleware.WhiteNoiseMiddleware',
 
-        from django.core.wsgi import get_wsgi_application
-        application = get_wsgi_application()
+    To serve the files in a compressed and cachable fashion add the following line to `settings.py`.
 
-
-    You'll need to add a few lines to import the `whitenoise` package and wrap the middleware around the WSGI application so that all static files are served using whitenoise. Edit your `wsgi.py` to:
-
-        import os
-        from django.core.wsgi import get_wsgi_application
-
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "PROJECTNAME.settings")
-        # important that the whitenoise import is after the line above
-        from whitenoise.django import DjangoWhiteNoise
-
-        application = get_wsgi_application()
-        application = DjangoWhiteNoise(application)
-
-
-    The order here is important. The `DJANGO_SETTINGS_MODULE` environment variable must be set before importing `DjangoWhiteNoise`.
+        STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 1. You should now tell Django where to look for static files. In `settings.py` within the project folder, add these lines below the ``import os`` statement.
 
