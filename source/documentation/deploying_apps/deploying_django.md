@@ -34,7 +34,7 @@ Before deploying a Django app, you must:
         whitenoise==5.2.0  # manages static assets
         waitress==2.0.0    # a pure python WSGI server that is a replacement for gunicorn
 
-4. Tell Django to use `whitenoise` to serve static files. In `settings.py` within the project folder, add this line to `MIDDLWARE`, immediately after `middleware.security.SecurityMiddleware`.
+4. Tell Django to use `whitenoise` to serve static files. In `settings.py` within the project folder, add this line to `MIDDLWARE`, immediately after `middleware.security.SecurityMiddleware`:
 
         'whitenoise.middleware.WhiteNoiseMiddleware',
 
