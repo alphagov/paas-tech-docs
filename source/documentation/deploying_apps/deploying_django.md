@@ -27,7 +27,7 @@ Before deploying a Django app, you must:
 
 4. Make sure you have all the required modules for your project installed into your virtual environment (including Django).
 
-1. Generate a `requirements.txt` file if your project doesn't already have one by running `pip freeze > requirements.txt` in the root of the local folder.
+1. Generate a `requirements.txt` file if your project does not already have one by running `pip freeze > requirements.txt` in the root of the local folder.
 
     Add the following lines to the `requirements.txt` file.
 
