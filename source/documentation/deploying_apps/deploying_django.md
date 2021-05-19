@@ -38,7 +38,7 @@ Before deploying a Django app, you must:
 
         'whitenoise.middleware.WhiteNoiseMiddleware',
 
-    To serve the files in a compressed and cachable fashion add the following line to `settings.py`.
+    To serve the files so that they can be compressed and cached, add the following line to `settings.py`:
 
         STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
