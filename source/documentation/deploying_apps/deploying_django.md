@@ -29,7 +29,7 @@ Before deploying a Django app, you must:
 
 1. Generate a `requirements.txt` file if your project does not already have one by running `pip freeze > requirements.txt` in the root of the local folder.
 
-    Add the following lines to the `requirements.txt` file.
+    Add the following lines to the `requirements.txt` file:
 
         whitenoise==5.2.0  # manages static assets
         waitress==2.0.0    # a pure python WSGI server that is a replacement for gunicorn
