@@ -1,0 +1,46 @@
+root: build
+status_codes:
+  400: /errors/generic.html
+  401: /errors/generic.html
+  402: /errors/generic.html
+  404: /errors/404.html
+  403: /errors/generic.html
+  405: /errors/generic.html
+  406: /errors/generic.html
+  407: /errors/generic.html
+  408: /errors/generic.html
+  409: /errors/generic.html
+  410: /errors/generic.html
+  411: /errors/generic.html
+  412: /errors/generic.html
+  413: /errors/generic.html
+  414: /errors/generic.html
+  415: /errors/generic.html
+  416: /errors/generic.html
+  417: /errors/generic.html
+  418: /errors/generic.html
+  420: /errors/generic.html
+  422: /errors/generic.html
+  423: /errors/generic.html
+  424: /errors/generic.html
+  426: /errors/generic.html
+  428: /errors/generic.html
+  429: /errors/generic.html
+  431: /errors/generic.html
+  444: /errors/generic.html
+  449: /errors/generic.html
+  450: /errors/generic.html
+  451: /errors/generic.html
+  500: /errors/generic.html
+  501: /errors/generic.html
+  502: /errors/generic.html
+  503: /errors/generic.html
+  504: /errors/generic.html
+  505: /errors/generic.html
+  506: /errors/generic.html
+  507: /errors/generic.html
+  508: /errors/generic.html
+  509: /errors/generic.html
+  510: /errors/generic.html
+  511: /errors/generic.html
+  
