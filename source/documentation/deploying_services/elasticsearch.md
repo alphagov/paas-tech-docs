@@ -221,6 +221,61 @@ Aiven provide a Kibana user interface through which you can explore the data in 
 
 4. To clean up when you are done, `CTRL+C` the `cf ssh` session from step 2 and run `cf delete-service-key NAME_OF_YOUR_ELASTICSEARCH creds-for-kibana`.
 
+### IP Restrictions for Elasticsearch
+
+You can add or remove IP restrictions for an Elasticsearch service instance when:
+
+- creating a new service instance
+- updating an existing service instance
+
+### Add IP restrictions when creating a service instance
+
+You [create a new Elasticsearch service instance](#set-up-the-service) by running `cf create-service`. You can enable optional IP restrictions in this new service instance by running:
+
+```
+cf create-service SERVICE_NAME -c '{"ip_filter": "IPADDRESS_1,IPADDRESS_2"}'
+```
+
+where:
+
+- `SERVICE_NAME` is a unique descriptive name for this service instance
+- `IPADDRESS_1...N` are the IP addresses you wish to add to the new service
+
+#### Add IP restrictions on an existing service instance
+
+When you enable optional extensions in an existing service instance, you must also reboot that service instance.
+
+Run the following to enable optional extensions in an existing service instance:
+
+```
+cf update-service SERVICE_NAME -c '{"ip_filter": "IPADDRESS_1,IPADDRESS_2"}'
+```
+
+where:
+
+- `SERVICE_NAME` is a unique descriptive name for this service instance
+- `IPADDRESS_1...N` are the IP addresses you wish to add to the existing service
+
+For example, your Elasticsearch service instance is named `my-es-service` and you wish to add the IP address `1.2.3.4` to the IP restrictions list. Run the following to add `1.2.3.4`:
+
+```
+cf update-service my-es-service -c '{"ip_filter": "1.2.3.4"}'
+```
+
+#### Removing IP addresses from an existing service
+
+To remove all IP addresses except the mandatory PaaS ones, pass an empty value in for the `ip_filter` key:
+
+```
+cf update-service my-es-service -c '{"ip_filter": ""}'
+```
+
+To remove one IP address from a list while keeping the mandatory PaaS ones, pass in the list without the IP address you wish to remove for the `ip_filter` key, for example removing `5.6.7.8` from the list of `1.2.3.4, 5.6.7.8, 9.10.11.12`:
+
+```
+cf update-service my-es-service -c '{"ip_filter": "1.2.3.4,9.10.11.12"}'
+```
+
 ### Further information
 
 Refer to the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html) for more information.
