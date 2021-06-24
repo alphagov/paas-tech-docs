@@ -168,6 +168,62 @@ cf delete-service my-influxdb-service
 
 <%= warning_text('Deleting the InfluxDB service also deletes your InfluxDB data. This includes any backups that Aiven has taken.') %>
 
+
+### IP Restrictions for InfluxDB
+
+You can add or remove IP restrictions for an InfluxDB service instance when:
+
+- creating a new service instance
+- updating an existing service instance
+
+### Add IP restrictions when creating a service instance
+
+You [create a new InfluxDB service instance](#set-up-the-service) by running `cf create-service`. You can enable optional IP restrictions in this new service instance by running:
+
+```
+cf create-service SERVICE_NAME -c '{"ip_filter": "IPADDRESS_1,IPADDRESS_2"}'
+```
+
+where:
+
+- `SERVICE_NAME` is a unique descriptive name for this service instance
+- `IPADDRESS_1...N` are the IP addresses you wish to add to the new service
+
+#### Add IP restrictions on an existing service instance
+
+Run the following to enable optional extensions in an existing service instance:
+
+```
+cf update-service SERVICE_NAME -c '{"ip_filter": "IPADDRESS_1,IPADDRESS_2"}'
+```
+
+where:
+
+- `SERVICE_NAME` is a unique descriptive name for this service instance
+- `IPADDRESS_1...N` are the IP addresses you wish to add to the existing service
+
+For example, your InfluxDB service instance is named `my-influx-service` and you wish to add the IP address `1.2.3.4` to the IP restrictions list. Run the following to add `1.2.3.4`:
+
+```
+cf update-service my-influx-service -c '{"ip_filter": "1.2.3.4"}'
+```
+
+#### Removing IP addresses from an existing service
+
+To remove all IP addresses except the mandatory PaaS ones, pass an empty value in for the `ip_filter` key:
+
+```
+cf update-service my-influx-service -c '{"ip_filter": ""}'
+```
+
+To remove one IP addresses from a list while keeping the mandatory PaaS ones, pass in the list without the IP address you wish to remove for the `ip_filter` key, for example removing `5.6.7.8` from the list of `1.2.3.4, 5.6.7.8, 9.10.11.12`:
+
+```
+cf update-service my-influx-service -c '{"ip_filter": "1.2.3.4,9.10.11.12"}'
+```
+
+
+
 <h2 id="maintaining-the-service">Maintaining the service</h2>
 
 ### Data classification
