@@ -175,12 +175,7 @@
   EventTracking.trackSearch = function (query) {
     var resultCount = document.getElementById('search-results-title').textContent
 
-    this.sendEvent('Number of results', {
-      event_category: 'Site Search',
-      event_label: resultCount
-    })
-
-    this.sendEvent('Query', {
+    this.sendEvent(resultCount, {
       event_category: 'Site Search',
       event_label: this.PIIfy(query)
     })
