@@ -1,4 +1,5 @@
 root: build
+location_include: includes/*.conf
 status_codes:
   400: /errors/generic.html
   401: /errors/generic.html
