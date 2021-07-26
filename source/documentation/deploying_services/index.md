@@ -84,6 +84,6 @@ You can store data classified up to ‘official’ on the GOV.UK PaaS.
 
 You cannot store data classified ‘secret‘ or ‘top secret‘ on the GOV.UK PaaS.
 
-Refer to the [information assurance page](https://www.cloud.service.gov.uk/ia) for more information on the assurance process.
+Refer to the [information assurance page](https://www.cloud.service.gov.uk/information-assurance/) for more information on the assurance process.
 
 Refer to the [GOV.UK page on government security classifications](https://www.gov.uk/government/publications/government-security-classifications) for more information on these classifications.
