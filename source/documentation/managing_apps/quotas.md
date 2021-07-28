@@ -17,7 +17,7 @@ Your quota sets the following:
 + Routes: The number of routes available to your applications (hostname and domain pairs where an application that exposes a listening port can be reached).
 
 
-As of 2021-07-28 our quotas are:
+Our quotas are:
 
 | Name            | RAM | Routes | Services |
 |-----------------|-----------|--------|----------|
