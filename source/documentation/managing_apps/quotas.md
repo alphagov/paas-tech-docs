@@ -117,3 +117,17 @@ The application cannot access more than the specified amount of memory.
 
 		... description
 		... index: 0, reason: CRASHED, exit_description: out of memory, exit_status: 255
+
+
+### Quotas (as of 2021-07-28)
+
+| Name            | Memory (MB) | Routes | Services |
+|-----------------|-------------|--------|----------|
+| default (trial) | 5120        | 1000   | 10       |
+| small           | 10240       | 1000   | 10       |
+| medium          | 61440       | 1000   | 20       |
+| large           | 102400      | 1000   | 40       |
+| xlarge          | 204800      | 1000   | 80       |
+| 2xlarge         | 409600      | 1000   | 160      |
+| 4xlarge         | 819200      | 2000   | 320      |
+| 8xlarge         | 1638400     | 4000   | 720      |
