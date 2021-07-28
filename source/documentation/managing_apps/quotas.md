@@ -16,6 +16,20 @@ Your quota sets the following:
 
 + Routes: The number of routes available to your applications (hostname and domain pairs where an application that exposes a listening port can be reached).
 
+
+Our quotas are:
+
+| Name            | RAM | Routes | Services |
+|-----------------|-----------|--------|----------|
+| default (trial) | 5.12GB    | 1000   | 10       |
+| small           | 10.24GB   | 1000   | 10       |
+| medium          | 61.44GB   | 1000   | 20       |
+| large           | 102.40GB  | 1000   | 40       |
+| xlarge          | 204.80GB  | 1000   | 80       |
+| 2xlarge         | 409.60GB  | 1000   | 160      |
+| 4xlarge         | 819.20GB  | 2000   | 320      |
+| 8xlarge         | 1638.40GB | 4000   | 720      |
+
 To see your organisation quota, run the command:
 
 ``cf org YOURORG``
@@ -117,3 +131,5 @@ The application cannot access more than the specified amount of memory.
 
 		... description
 		... index: 0, reason: CRASHED, exit_description: out of memory, exit_status: 255
+
+
