@@ -6,8 +6,9 @@ COPY requirements.txt /tmp/requirements.txt
 COPY Gemfile /tmp/Gemfile
 COPY Gemfile.lock /tmp/Gemfile.lock
 
-RUN apt update && apt install -y curl $RUNTIME_PACKAGES $DEV_PACKAGES
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt update && apt install -y curl $RUNTIME_PACKAGES $DEV_PACKAGES
+
 RUN pip3 install -r /tmp/requirements.txt \
     && gem install bundle --no-document \
     && cd /tmp && bundle
