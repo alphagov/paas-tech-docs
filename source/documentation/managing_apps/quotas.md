@@ -19,7 +19,7 @@ Your quota sets the following:
 
 As of 2021-07-28 our quotas are:
 
-| Name            | Memory    | Routes | Services |
+| Name            | RAM | Routes | Services |
 |-----------------|-----------|--------|----------|
 | default (trial) | 5.12GB    | 1000   | 10       |
 | small           | 10.24GB   | 1000   | 10       |
