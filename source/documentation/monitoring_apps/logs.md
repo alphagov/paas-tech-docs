@@ -168,7 +168,7 @@ Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailt
 
 By default, Logit allows anyone on the internet to send logs to your ELK stack. You can set up Logit to make sure that your ELK stack only receives logs from GOV.UK PaaS.
 
-1. Contact GOV.UK PaaS support at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) for a list of syslog drain egress IP addresses.
+1. Read [Static egress IP addresses](/guidance.html#static-egress-ip-addresses) for a list of syslog drain IP addresses.
 1. Send these IP addresses to Logit support at [https://logit.io/contact-us](https://logit.io/contact-us) and ask that your ELK stack only receives log messages from these addresses.
 
 ### Further information
