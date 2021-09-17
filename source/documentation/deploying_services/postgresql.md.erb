@@ -418,12 +418,13 @@ You can enable or disable optional extensions for a PostgreSQL service instance 
 You [create a new PostgreSQL service instance](#set-up-a-postgresql-service) by running `cf create-service`. You can enable optional extensions in this new service instance by running:
 
 ```
-cf create-service SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
+cf create-service postgres PLAN SERVICE_NAME -c '{"enable_extensions": ["EXTENSION_1","EXTENSION_2",...,"EXTENSION_N"]}'
 ```
 
 where:
 
 - `SERVICE_NAME` is a unique descriptive name for this service instance
+- `PLAN` is the plan you want
 - `EXTENSION_1...N` are the names of the optional extensions you want to enable
 
 #### Enable an optional extension in an existing service instance
