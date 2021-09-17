@@ -332,8 +332,8 @@ The following extensions are always enabled for PostgreSQL service instances:
 
 |Extension|PostgreSQL version|
 |:---|:---|
-|# uuid-ossp|10, 11, 12|
-|# citext|10, 11, 12|
+|# uuid-ossp|10, 11, 12, 13|
+|# citext|10, 11, 12, 13|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
@@ -345,65 +345,71 @@ GOV.UK PaaS supports the following optional extensions, but they are not enabled
 
 |Extension|PostgreSQL version|
 |:---|:---|
-|# address_standardizer|10, 11, 12|
-|# address_standardizer_data_us|10, 11, 12|
-|# bloom|10, 11, 12|
-|# btree_gin|10, 11, 12|
-|# btree_gist|10, 11, 12|
+|# address_standardizer|10, 11, 12, 13|
+|# address_standardizer_data_us|10, 11, 12, 13|
+|# bloom|10, 11, 12, 13|
+|# bool_plperl|13|
+|# btree_gin|10, 11, 12, 13|
+|# btree_gist|10, 11, 12, 13|
 |# chkpass|10|
-|# cube|10, 11, 12|
+|# cube|10, 11, 12, 13|
 |# dblink|10, 11, 12|
-|# dict_int|10, 11, 12|
-|# dict_xsyn|10, 11, 12|
-|# earthdistance|10, 11, 12|
-|# fuzzystrmatch|10, 11, 12|
-|# hll|10, 11, 12|
-|# hstore|10, 11, 12|
-|# hstore_plperl|10, 11, 12|
-|# intagg|10, 11, 12|
-|# intarray|10, 11, 12|
-|# ip4r|10, 11, 12|
-|# isn|10, 11, 12|
+|# dict_int|10, 11, 12, 13|
+|# dict_xsyn|10, 11, 12, 13|
+|# earthdistance|10, 11, 12, 13|
+|# fuzzystrmatch|10, 11, 12, 13|
+|# hll|10, 11, 12, 13|
+|# hstore|10, 11, 12, 13|
+|# hstore_plperl|10, 11, 12, 13|
+|# intagg|10, 11, 12, 13|
+|# intarray|10, 11, 12, 13|
+|# ip4r|10, 11, 12, 13|
+|# isn|10, 11, 12, 13|
+|# jsonb_plperl|13|
 |# libprotobuf|10, 11, 12|
 |# log_fdw|10, 11, 12|
-|# ltree|10, 11, 12|
-|# orafce|10, 11, 12|
+|# ltree|10, 11, 12, 13|
+|# orafce|10, 11, 12, 13|
 |# pageinspect|10, 11, 12|
+|# pg_bigm|13|
 |# pg_buffercache|10, 11, 12|
 |# pg_freespacemap|10, 11, 12|
-|# pg_hint_plan|10, 11, 12|
-|# pg_prewarm|10, 11, 12|
+|# pg_hint_plan|10, 11, 12, 13|
+|# pg_prewarm|10, 11, 12, 13|
+|# pg_proctab|13|
 |# pg_repack|10, 11, 12|
-|# pg_similarity|10, 11, 12|
-|# pg_stat_statements|10, 11, 12|
-|# pgtap|11, 12|
+|# pg_similarity|10, 11, 12, 13|
+|# pg_stat_statements|10, 11, 12, 13|
 |# pg_transport|11, 12|
-|# pg_trgm|10, 11, 12|
+|# pg_trgm|10, 11, 12, 13|
 |# pg_visibility|10, 11, 12|
-|# pgaudit|10, 11, 12|
-|# pgcrypto|10, 11, 12|
+|# pgaudit|10, 11, 12, 13|
+|# pgcrypto|10, 11, 12, 13|
 |# pglogical|10, 11, 12|
-|# pgrouting|10, 11, 12|
-|# pgrowlocks|10, 11, 12|
+|# pgrouting|10, 11, 12, 13|
+|# pgrowlocks|10, 11, 12, 13|
 |# pgstattuple|10, 11, 12|
-|# plcoffee|10, 11, 12|
-|# plls|10, 11, 12|
-|# plperl|10, 11, 12|
-|# plpgsql|10, 11, 12|
-|# pltcl|10, 11, 12|
-|# plv8|10, 11, 12|
-|# postgis|10, 11, 12|
-|# postgis_tiger_geocoder|10, 11, 12|
-|# postgis_topology|10, 11, 12|
+|# pgtap|11, 12, 13|
+|# plcoffee|10, 11, 12, 13|
+|# plls|10, 11, 12, 13|
+|# plperl|10, 11, 12, 13|
+|# plpgsql|10, 11, 12, 13|
+|# pltcl|10, 11, 12, 13|
+|# plv8|10, 11, 12, 13|
+|# postgis|10, 11, 12, 13|
+|# postgis_raster|13|
+|# postgis_tiger_geocoder|10, 11, 12, 13|
+|# postgis_topology|10, 11, 12, 13|
 |# postgres_fdw|10, 11, 12|
-|# prefix|10, 11, 12|
-|# sslinfo|10, 11, 12|
-|# tablefunc|10, 11, 12|
-|# test_parser|10, 11, 12|
+|# prefix|10, 11, 12, 13|
+|# rdkit|13|
+|# sslinfo|10, 11, 12, 13|
+|# tablefunc|10, 11, 12, 13|
+|# test_parser|10, 11, 12, 13|
 |# tsearch2|10|
-|# tsm_system_rows|10, 11, 12|
-|# tsm_system_time|10, 11, 12|
-|# unaccent|10, 11, 12|
+|# tsm_system_rows|10, 11, 12, 13|
+|# tsm_system_time|10, 11, 12, 13|
+|# unaccent|10, 11, 12, 13|
 
 <div style="height:1px;font-size:1px;">&nbsp;</div>
 
