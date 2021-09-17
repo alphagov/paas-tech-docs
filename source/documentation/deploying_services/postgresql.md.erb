@@ -566,6 +566,10 @@ Refer to the [Amazon RDS documentation on the failover process](https://docs.aws
 
 You should test how your app deals with a failover to make sure you are benefiting from the high availability plan. Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to arrange for us to trigger a failover for you.
 
+#### High IOPS plans - PostgreSQL
+
+For services which have a large volume of database reads and writes, GOV.UK PaaS has `high-iops` variants of its PostgreSQL service plans available.
+
 #### Read replicas - PostgreSQL
 
 Amazon RDS has the capability to provide a read-only copy of your database known as a read replica. This can be useful for performance, availability or security reasons.
