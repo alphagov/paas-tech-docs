@@ -345,6 +345,10 @@ Refer to the [Amazon RDS documentation on read replicas](https://aws.amazon.com/
 
 GOV.UK PaaS does not currently support read replicas, but if you think you would find them useful, please contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk), providing details of your use case.
 
+#### High IOPS plans - MySQL
+
+For services which have a large volume of database reads and writes, GOV.UK PaaS has `high-iops` variants of its MySQL service plans available.
+
 ### MySQL maintenance & backups
 
 #### MySQL maintenance times
