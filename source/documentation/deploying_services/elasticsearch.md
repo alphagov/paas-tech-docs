@@ -2,7 +2,7 @@
 
 [Elasticsearch](https://www.elastic.co/) is an open source full-text RESTful search and analytics engine that allows you to store and search data.
 
-Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) backing service such as [PostgreSQL](/deploying_services/postgresql/#postgresql) or [MySQL](/deploying_services/mysql/#mysql) would better meet your needs.
+Before using Elasticsearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) backing service such as [PostgreSQL](/deploying_services/postgresql/#postgresql) or [MySQL](/deploying_services/mysql/#mysql) would better meet your needs. Additionally, if using [elasticsearch-py](https://pypi.org/project/elasticsearch), you should check our [Compatibility Notes](#compatibility-notes).
 
 <h2 id="set-up-the-service">Set up the service</h2>
 
@@ -275,6 +275,15 @@ To remove one IP address from a list while keeping the mandatory PaaS ones, pass
 ```
 cf update-service my-es-service -c '{"ip_filter": "1.2.3.4,9.10.11.12"}'
 ```
+
+### Compatibility Notes
+
+#### elasticsearch-py
+
+[elasticsearch-py](https://pypi.org/project/elasticsearch) versions `>=7.14.0` are no longer compatible with AWS-managed Elasticsearch instances. Until [Opensearch](https://github.com/opensearch-project) release their fork, you should use [elasticsearch-py `7.13.4`](https://pypi.org/project/elasticsearch/7.13.4/).
+
+The [Department for International Trade](https://github.com/uktrade) have provided more information in a [pull request](https://github.com/uktrade/data-hub-api/pull/3672) on one of their repositories.
+
 
 ### Further information
 

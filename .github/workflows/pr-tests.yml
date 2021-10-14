@@ -2,20 +2,38 @@
 name: pr-tests
 on: pull_request
 
+env:
+  NODE_VERSION: "12.x"
+  RUBY_VERSION: "2.7.1"
+  PYTHON_VERSION: "3.x"
+  NODE_ENV: development
+
 jobs:
   test:
     name: Run tests
     runs-on: ubuntu-18.04
 
-    env:
-      NODE_ENV: development
-
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
-      - run: npm ci
+          node-version: "${{env.NODE_VERSION}}"
 
-      - name: Test
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "${{env.RUBY_VERSION}}"
+          bundler-cache: true
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "${{env.PYTHON_VERSION}}"
+
+      - run: npm ci
+      - run: pip install --user -r requirements.txt
+
+      - name: Node tests
         run: npm test
+
+      - name: Python tests
+        run: make test
