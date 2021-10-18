@@ -1,6 +1,6 @@
 ## Quotas
 
-Cloud Foundry capacity is managed by quotas. Quotas provide a reservation of application routes, memory, compute power, and service instances which your organization cannot exceed. You can set individual application quotas to control how much of your quota each of your applications can use.
+Cloud Foundry capacity is managed by quotas. Quotas provide a reservation of application routes, memory, compute power, and service instances which your organisation cannot exceed. You can set individual application quotas to control how much of your quota each of your applications can use.
 
 ### Quota allocations
 
@@ -66,7 +66,7 @@ To see all quotas available on the GOV.UK PaaS, run the command:
 
 ### Quota limits
 
-If a new application `push` would exceed your organization's quota, the request will fail with status code `400` and a message describing the limit that would be exceeded.
+If a new application `push` would exceed your organisation's quota, the request will fail with status code `400` and a message describing the limit that would be exceeded.
 
 **Example:**
 
@@ -83,7 +83,7 @@ In this situation you have three options:
 
 ### Application quotas
 
-As a PaaS tenant, you can divide your organization's quota capacity amongst your applications as you see fit, by way of application quotas. Application limits are specified in your application manifest or as `cf push` command line options.
+As a PaaS tenant, you can divide your organisation's quota capacity amongst your applications as you see fit, by way of application quotas. Application limits are specified in your application manifest or as `cf push` command line options.
 
 Use the following commands to set application quota options (in each pair below, the first is the version to use in the manifest, and the second is the command line version.)
 
@@ -115,7 +115,7 @@ The application cannot access more than the specified amount of memory.
 
 #### Application quota sizing
 
-- The environment default of 512MB `memory` is sufficient for most applications. Static sites and utility applications such as schedulers or loaders may require less. Use `cf app APPNAME` to check your application's current memory and compute utilization.
+- The environment default of 512MB `memory` is sufficient for most applications. Static sites and utility applications such as schedulers or loaders may require less. Use `cf app APPNAME` to check your application's current memory and compute utilisation.
 
 		requested state: started
 		instances: 1/1
