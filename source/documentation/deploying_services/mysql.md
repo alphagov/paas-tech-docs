@@ -397,7 +397,7 @@ Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is reta
 
 We can manually restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Data can be restored to a new MySQL service instance running in parallel, or it can replace the existing service instance.
 
-To arrange a manual restore, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). We will need approval from your organization manager if restoring will involve overwriting data.
+To arrange a manual restore, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). We will need approval from your organisation manager if restoring will involve overwriting data.
 
 Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.
 
