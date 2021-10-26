@@ -1,4 +1,4 @@
-<h1 id="influxdb">InfluxDB</h1>
+# InfluxDB
 
 [InfluxDB](https://www.influxdata.com/) is an open source time series database that allows you to store, index and search time series data.
 
@@ -9,19 +9,31 @@
 1. List the plans available for InfluxDB by running:
 
     ```
-    cf marketplace -s influxdb
+    cf marketplace -e influxdb
     ```
 
 
-    Here is an example of the output you will see:
+    Here is an example of the output you will see (the exact plans will vary):
 
     ```
     service plan   description                                                                            free or paid
     tiny-1.x       NOT Highly Available, 1 dedicated VM, 2 CPU per VM, 4GB RAM per VM, 16GB disk space.   free
+    small-1.x      NOT Highly Available, 1 dedicated VM, 2 CPU per VM, 8GB RAM per VM, 50GB disk space.   paid
     ```
 
+    The following table explains the syntax in this output:
 
-    Currently, there is only one plan available for InfluxDB: `tiny-1.x`.
+    <div style="height:1px;font-size:1px;">&nbsp;</div>
+
+    |Syntax|Meaning|
+    |:---|:---|
+    |# `small`|Size of instance|
+    |# `X.X`|Version number|
+
+    <div style="height:1px;font-size:1px;">&nbsp;</div>
+
+
+    Refer to the [InfluxDB plans](/deploying_services/influxdb/#influxdb-plans) section of the documentation for more information.
 
 2. Create a service instance:
 
@@ -129,6 +141,24 @@ Without local storage, Prometheus metrics will not persist after the Prometheus 
 
 1. the `prometheus.yml` configuration file, make sure the [`remote_read`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read) and [`remote_write`](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write) sections match the same sections in the `VCAP_SERVICES` environment variable.
 
+<h2 id="amend-the-service">Amend the service</h2>
+
+### Upgrade InfluxDB service plan
+
+You can upgrade your plan using the `cf update-service` command. Run the following in the command line:
+
+```sh
+cf update-service SERVICE_NAME -p NEW_PLAN_NAME
+```
+
+where `SERVICE_NAME` is a unique descriptive name for this service instance, and `NEW_PLAN_NAME` is the name of your new plan. For example:
+
+```sh
+cf update-service my-influxdb-service -p medium-1.x
+```
+
+The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
+
 <h2 id="remove-the-service">Remove the service</h2>
 
 ### Unbind an InfluxDB service from your app
@@ -229,6 +259,24 @@ cf update-service my-influx-service -c '{"ip_filter": "1.2.3.4,9.10.11.12"}'
 ### Data classification
 
 You can store data classified up to Official on the GOV.UK PaaS. Refer to the [data security classification documentation](/deploying_services/#data-security-classification) for more information.
+
+### InfluxDB plans
+
+Each service in the marketplace has multiple plans that vary by availability and storage capacity.
+
+#### Free plan - InfluxDB
+
+There is a free plan available with limited storage. This plan should only be used for development or testing and should not be used for production.
+
+#### Paid plans - InfluxDB
+
+Some service plans are paid and we will bill you based on your service usage.
+
+New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/managing_apps.html#quotas) settings.
+
+If paid plans are not enabled, when you try to use a paid service you will receive an error stating “service instance cannot be created because paid service plans are not allowed”. One of your [Org Managers](/orgs_spaces_users.html#org-manager) must contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to request that we enable paid services.
+
+
 
 ### InfluxDB backups
 
