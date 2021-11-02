@@ -13,7 +13,7 @@ To set up a Redis service:
 1. Run the following in the command line to see what service plans are available for Redis:
 
     ```
-    cf marketplace -s redis
+    cf marketplace -e redis
     ```
 
     Here is an example of the output you will see (the exact service plans will vary):

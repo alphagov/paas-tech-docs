@@ -11,7 +11,7 @@ Before using Elasticsearch as your primary data store, you should assess if an [
 1. Run the following in the command line to see what plans are available for Elasticsearch:
 
     ```
-    cf marketplace -s elasticsearch
+    cf marketplace -e elasticsearch
     ```
 
     Here is an example of the output you will see:
