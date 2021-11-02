@@ -13,7 +13,7 @@ To set up a MySQL service:
 1. Run the following code in the command line to see what plans are available for MySQL:
 
     ```
-    cf marketplace -s mysql
+    cf marketplace -e mysql
     ```
 
     Here is an example of the output you will see (the exact plans will vary):
