@@ -395,10 +395,209 @@ The data stored within any MySQL service you create is backed up using the stand
 
 Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is retained for 7 days.
 
-We can manually restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Data can be restored to a new MySQL service instance running in parallel, or it can replace the existing service instance.
+There are two ways you can restore data to an earlier state:
 
-To arrange a manual restore, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk). We will need approval from your organisation manager if restoring will involve overwriting data.
+1. You can restore to the latest snapshot. Refer to [Restoring a MySQL service snapshot](/deploying_services/mysql/#restoring-a-mysql-service-snapshot) for details.
+
+1. You can restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Refer to [Restoring a MySQL service from a point in time](/deploying_services/mysql/#restoring-a-mysql-service-from-a-point-in-time) for details.
 
 Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.
 
 For more details about how the RDS backup system works, see [Amazon's DB instance backups documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html).
+
+#### Restoring a MySQL service snapshot
+
+You can create a copy of any existing MySQL service instance using the latest snapshot of the RDS instance. These snapshots are taken during [the MySQL nightly backups](/deploying_services/mysql/#mysql-service-backup).
+
+This can be useful if you want to clone a production database to be used for testing or batch processing.
+
+To restore from a snapshot:
+
+ 1. Get the global unique identifier (GUID) of the existing instance by running the following code in the command line:
+
+    ```
+    cf service SERVICE_NAME --guid
+    ```
+
+    where `SERVICE_NAME` is the name of the MySQL service instance you want to copy. For example:
+
+    ```
+    cf service my-mysql-service --guid
+    ```
+
+    This returns a `GUID` in the format `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`, for example `32938730-e603-44d6-810e-b4f12d7d109e`.
+
+ 2. Trigger the creation of a new service based on the snapshot by running:
+
+    ```
+    cf create-service mysql PLAN NEW_SERVICE_NAME -c '{"restore_from_latest_snapshot_of": "GUID"}'
+    ```
+
+    where `PLAN` is the plan used in the original instance (you can find this out by running `cf service SERVICE_NAME`), and `NEW_SERVICE_NAME` is a unique, descriptive name for this new instance. For example:
+
+    ```
+    cf create-service mysql small-8.0 my-mysql-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
+    ```
+
+ 3. It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:
+
+    ```
+    cf service NEW_SERVICE_NAME
+    ```
+
+    for example:
+
+    ```
+    cf service my-mysql-service-copy
+    ```
+
+ 4. The new instance is set up when the `cf service NEW_SERVICE_NAME` command returns a `create succeeded` status. See [Set up a MySQL service](/deploying_services/mysql/#set-up-a-mysql-service) for more details.
+
+ This feature has the following limitations:
+
+  * You can only restore the most recent snapshot from the latest nightly backup
+  * You cannot restore from a service instance that has been deleted
+  * You must use the same service plan for the copy as for the original service instance
+  * You must create the new service instance in the same organisation and space as the original. This is to prevent unauthorised access to data between spaces. If you need to copy data to a different organisation and/or space, you can [connect to your MySQL instance from a local machine using Conduit](/deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine).
+
+By default, the database is restored to the most recent snapshot.
+If you need to restore to a snapshot before a certain date and time,
+you can use the `restore_from_latest_snapshot_before` parameter.
+
+For example:
+
+```
+cf create-service mysql small-8.0 my-mysql-service-copy  -c '{"restore_from_latest_snapshot_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_latest_snapshot_before": "2020-04-01 13:00:00"}'
+```
+
+will create a new database from the most recent snapshot created before April
+1st 2020 13:00 UTC.
+
+#### Restoring a MySQL service from a point in time
+
+You can create a copy of any existing MySQL service instance using the
+write-ahead log of the RDS instance.  The database generates write-ahead log
+checkpoints during normal use and stores them every 5 minutes. You can restore
+to a point in time with a resolution of 1 second.
+
+To restore from a point in time:
+
+ 1. Get the global unique identifier (GUID) of the existing instance by running the following code in the command line:
+
+    ```
+    cf service SERVICE_NAME --guid
+    ```
+
+    where `SERVICE_NAME` is the name of the MySQL service instance you want to copy. For example:
+
+    ```
+    cf service my-mysql-service --guid
+    ```
+
+    This returns a `GUID` in the format `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`, for example `32938730-e603-44d6-810e-b4f12d7d109e`.
+
+ 2. Trigger the creation of a new service based on the snapshot by running:
+
+    ```
+    cf create-service mysql PLAN NEW_SERVICE_NAME -c '{"restore_from_point_in_time_of": "GUID"}'
+    ```
+
+    where `PLAN` is the plan used in the original instance (you can find this out by running `cf service SERVICE_NAME`), and `NEW_SERVICE_NAME` is a unique, descriptive name for this new instance. For example:
+
+    ```
+    cf create-service mysql large-8.0 my-mysql-service-copy  -c '{"restore_from_point_in_time_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
+    ```
+
+ 3. It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:
+
+    ```
+    cf service NEW_SERVICE_NAME
+    ```
+
+    for example:
+
+    ```
+    cf service my-mysql-service-copy
+    ```
+
+ 4. The new instance is set up when the `cf service NEW_SERVICE_NAME` command returns a `create succeeded` status. See [Set up a MySQL service](/deploying_services/mysql/#set-up-a-mysql-service) for more details.
+
+ This feature has the following limitations:
+
+  * You cannot restore from a service instance that has been deleted
+  * You must use the same service plan for the copy as for the original service
+  instance
+  * You cannot restore to a point in time prior to the oldest snapshot (7 days ago)
+  * You must create the new service instance in the same organisation and space
+  as the original. This is to prevent unauthorised access to data between
+  spaces. If you need to copy data to a different organisation and/or space,
+  you can [connect to your MySQL instance from a local machine using
+  Conduit](/deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine).
+
+By default, the database is restored to the most recent point in time
+checkpoint available.
+If you need to restore to a particular point in time,
+you can use the `restore_from_point_in_time_of` parameter.
+
+For example:
+
+```
+cf create-service mysql large-8.0 my-mysql-service-copy  -c '{"restore_from_point_in_time_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_point_in_time_before": "2020-10-27 13:00:00"}'
+```
+
+will create a new database from the write-ahead logs before October 27th 2020
+13:00 UTC.
+
+## Upgrading major versions of MySQL
+
+You can upgrade from one major version to the next by performing a plan upgrade.
+
+You cannot downgrade major MySQL versions.
+
+To perform the plan upgrade, run the following code in the command line:
+
+```
+$cf update-service SERVICE_NAME -p PLAN_NAME
+Updating service instance accounts-db as <REDACTED>@digital.cabinet-office.gov.uk...
+OK
+
+Update in progress. Use 'cf services' or 'cf service SERVICE_NAME' to check operation status.
+```
+
+Where `SERVICE_NAME` is the name of the MySQL service instance being upgraded, and `PLAN_NAME` is the name of the plan it should be upgraded to.
+
+When the update process finishes, your database will be upgraded to the version named in the plan.
+To confirm that the database upgraded successfully to the right version, use the `cf service SERVICE_NAME` command to show the details:
+
+```
+$cf service SERVICE_NAME
+Showing info of service SERVICE_NAME in org <redacted> / space <redacted> as <redacted>@digital.cabinet-office.gov.uk...
+
+name:             SERVICE_NAME
+service:          mysql
+tags:
+plan:             PLAN_NAME
+description:      AWS RDS MySQL service
+documentation:    https://docs.cloud.service.gov.uk/deploying_services/mysql/
+dashboard:
+service broker:   rds-broker
+
+This service is not currently shared.
+
+Showing status of last operation from service SERVICE_NAME...
+
+status:    update succeeded
+message:   DB Instance 'rdsbroker-<redacted>' status is 'available'
+started:   2020-12-04T12:58:56Z
+updated:   2020-12-04T13:06:23Z
+
+bound apps:
+name            binding name   status             message
+APP_NAME                       create succeeded
+
+Upgrades are not supported by this broker.
+$
+```
+
+### Application and database availability during upgrade
+Migrating to a new plan may cause interruption to your service instance. To minimise interruption, you can [queue the change to begin during a maintenance window] (https://docs.cloud.service.gov.uk/deploying_services/mysql/#queue-a-plan-migration-mysql).
