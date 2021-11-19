@@ -391,7 +391,7 @@ You can only migrate your service if the new plan has the [same encryption type]
 
 #### MySQL service backup
 
-The data stored within any MySQL service you create is backed up using the standard Amazon RDS backup system if you are using a paid plan. Your data is not backed up if you are using the free plan.
+The data stored within any MySQL service you create is backed up using the standard Amazon RDS backup system if you are using a paid plan. Your data is not backed up if you are using the unencrypted plans.
 
 Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is retained for 7 days.
 
