@@ -8,6 +8,7 @@ In Cloud Foundry, backing and routing services are referred to as ‘services’
 - [MySQL](mysql/#mysql)
 - [Redis](redis/#redis)
 - [Elasticsearch](elasticsearch/#elasticsearch)
+- [OpenSearch](opensearch/#opensearch)
 - [Amazon S3](s3/#amazon-s3)
 - [Amazon SQS](sqs/#amazon-sqs)
 - [InfluxDB](influxdb/#influxdb)
@@ -24,6 +25,7 @@ You can now share instances of the following services between organisations and 
 * Amazon S3
 * Amazon SQS
 * Elasticsearch
+* OpenSearch
 * InfluxDB
 * MySQL
 * PostgreSQL
