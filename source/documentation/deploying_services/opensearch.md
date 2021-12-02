@@ -140,7 +140,7 @@ where `SERVICE_NAME` is a unique descriptive name for this service instance, and
 cf update-service my-opensearch-service -p medium-ha-1
 ```
 
-The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
+The plan upgrade will start immediately and finish within an hour, except for large plans which may take over an hour. You can check the status of the upgrade by running `cf services`.
 
 <h2 id="remove-the-service">Remove the service</h2>
 
@@ -213,11 +213,11 @@ Aiven provide a Kibana user interface through which you can explore the data in 
     cf ssh -L 4430:HOSTNAME_FROM_STEP_1:443 NAME_OF_AN_APP_YOU_CAN_SSH_TO
     ```
 
-   OpenSearch instances are only accessible from the PaaS. This sets up a tunnel so that you can get access, similar to how we use [Conduit](https://github.com/alphagov/paas-cf-conduit) elsewhere.
+   OpenSearch instances are only accessible from the GOV.UK PaaS. This sets up a tunnel so that you can get access, similar to how we use [Conduit](https://github.com/alphagov/paas-cf-conduit) elsewhere.
 
-3. Access Kibana via your browser by going to [https://localhost:4430](https://localhost:4430).
+3. Access Kibana through your browser by going to [https://localhost:4430](https://localhost:4430).
    When prompted for credentials, provide the username and password from step 1.
-   If you see a blank page then make sure your browser url is using `https` and not `http`.
+   If you see a blank page, make sure your browser URL is using `https` and not `http`.
 
 4. To clean up when you are done, `CTRL+C` the `cf ssh` session from step 2 and run `cf delete-service-key NAME_OF_YOUR_OPENSEARCH creds-for-kibana`.
 
@@ -264,13 +264,13 @@ cf update-service my-opensearch-service -c '{"ip_filter": "1.2.3.4"}'
 
 #### Removing IP addresses from an existing service
 
-To remove all IP addresses except the mandatory PaaS ones, pass an empty value in for the `ip_filter` key:
+To remove all IP addresses except the mandatory GOV.UK PaaS ones, pass an empty value in for the `ip_filter` key:
 
 ```
 cf update-service my-opensearch-service -c '{"ip_filter": ""}'
 ```
 
-To remove one IP address from a list while keeping the mandatory PaaS ones, pass in the list without the IP address you wish to remove for the `ip_filter` key, for example removing `5.6.7.8` from the list of `1.2.3.4, 5.6.7.8, 9.10.11.12`:
+To remove one IP address from a list while keeping the mandatory GOV.UK PaaS ones, pass in the list without the IP address you wish to remove for the `ip_filter` key, for example removing `5.6.7.8` from the list of `1.2.3.4, 5.6.7.8, 9.10.11.12`:
 
 ```
 cf update-service my-opensearch-service -c '{"ip_filter": "1.2.3.4,9.10.11.12"}'
