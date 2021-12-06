@@ -176,6 +176,11 @@ cf delete-service my-es-service
 
 Enter `yes` when asked for confirmation.
 
+<h2 id="migrating-to-opensearch">Migrating to OpenSearch</h2>
+GOV.UK PaaS will remove support for Elasticsearch in the first quarter of 2022. You need to migrate your existing Elasticsearch services to OpenSearch.
+
+For documentation on migrating from Elasticsearch to OpenSearch, see the section [Migrating from Elasticsearch in our OpenSearch documentation](/deploying_services/opensearch/#migrating-from-elasticsearch)
+
 <h2 id="maintaining-the-service">Maintaining the service</h2>
 
 ### Data classification
