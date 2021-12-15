@@ -167,6 +167,8 @@ Run `cf conduit --help` for more options, and refer to the [Conduit README file]
 
 ### Upgrade Redis service plan
 
+<%= warning_text('Redis upgrades will remove all data stored in the instance.') %>
+
 Our service broker does not currently allow us to upgrade Redis services in
 place. To upgrade your Redis service, perform the following
 steps:
