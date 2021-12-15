@@ -167,8 +167,8 @@ Run `cf conduit --help` for more options, and refer to the [Conduit README file]
 
 ### Upgrade Redis service plan
 
-Our service broker does not currently allow to upgrade Redis services in
-place. In order to upgrade your Redis service, please execute the following
+Our service broker does not currently allow us to upgrade Redis services in
+place. To upgrade your Redis service, perform the following
 steps:
 
 1. `cf create-service redis DESIRED_PLAN NEW_REDIS_NAME`
@@ -177,7 +177,7 @@ steps:
 4. `cf restage APP_NAME`
 5. `cf delete-service OLD_REDIS_NAME`
 
-You can find available plans on the marketplace via `cf marketplace -s redis`.
+You can find available plans on the marketplace using `cf marketplace -s redis`.
 
 <h2 id="remove-the-service">Remove the service</h2>
 
