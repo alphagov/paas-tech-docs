@@ -183,19 +183,19 @@ GOV.UK PaaS will remove support for Elasticsearch in the first quarter of 2022. 
 You can migrate from Elasticsearch to OpenSearch by creating an OpenSearch backing service from a backup of an Elasticsearch service.
 
 ```
-cf create-service opensearch OPENSEARCH_PLAN OPENSEARCH_SERVICE_NAME -c '{"restore_from_latest_backup_of": "ELASTICSEARCH_SERVICE_NAME"}'
+cf create-service opensearch OPENSEARCH_PLAN OPENSEARCH_SERVICE_NAME -c '{"restore_from_latest_backup_of": "ELASTICSEARCH_SERVICE_GUID"}'
 ```
 
 where:
 
 - `OPENSEARCH_PLAN` is the name of the OpenSearch service plan you want
 - `OPENSEARCH_SERVICE_NAME` is a unique descriptive name for the new service instance
-- `ELASTICSEARCH_SERVICE_NAME` is the name of an Elasticsearch service instance from which the latest backup will be picked
+- `ELASTICSEARCH_SERVICE_GUID` is the `GUID` (Global Unique Identifier) of an Elasticsearch service instance from which the latest backup will be picked
 
 For example:
 
 ```
-cf create-service opensearch small-ha-1 my-new-opensearch -c '{"restore_from_latest_backup_of": "my-old-elasticsearch"}'
+cf create-service opensearch small-ha-1 my-new-opensearch -c '{"restore_from_latest_backup_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
 ```
 
 When you create an OpenSearch backing service in this way, existing data will be available in the OpenSearch service. However new data added to the Elasticsearch service will not be replicated to the OpenSearch service, and vice versa.
