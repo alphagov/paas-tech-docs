@@ -33,9 +33,12 @@ jobs:
       CF_ORG: "ORG_NAME"
       CF_SPACE: "SPACE_NAME"
 
+    permissions:
+      contents: read
+
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
 
       - name: Install the CF CLI
         run: |
