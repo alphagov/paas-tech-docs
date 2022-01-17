@@ -15,7 +15,7 @@ Store the username as `CF_USERNAME` and the password as `CF_PASSWORD`.
 
 Create a `deploy.yml` file in the `.github/workflows` within your repository. The [workflow file](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#understanding-the-workflow-file) tells GitHub Actions how to deploy your application.
 
-```
+<pre class="highlight plaintext">
 name: Deploy
 
 on:
@@ -60,11 +60,12 @@ jobs:
         run: |
           cf push -f manifest.yml --strategy rolling
           cf logout
-```
+</pre>
 
 Where `ORG_NAME` is the name of your org and `SPACE_NAME` is the name of your space.
 
 This section in the file above is instructing GitHub Actions to run the workflow on pushes to the `main` branch.
+
 ```
 on:
   push:
