@@ -2,7 +2,7 @@
 
 A continuous integration (CI) tool deploys software automatically to help you deliver new features without breaking existing functionality.
 
-Examples of CI tools include [Jenkins](https://jenkins.io/), [Travis](https://travis-ci.com/), [Circle](https://circleci.com/), and [TeamCity](https://www.jetbrains.com/teamcity/).
+Examples of CI tools include [Concourse](https://concourse-ci.org/), [GitHub Actions](https://docs.github.com/en/actions), [Circle](https://circleci.com/) and [TeamCity](https://www.jetbrains.com/teamcity/).
 
 ## Choose CI tool
 
