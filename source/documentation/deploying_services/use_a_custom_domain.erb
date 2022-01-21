@@ -416,6 +416,36 @@ Server error, status code: 409, error code: 60016, message: An operation for ser
 
 This happens because you cannot do anything to a service instance while it's in a pending state. A CDN service instance stays pending until it detects the CNAME or ALIAS record. If this causes a problem for you, [contact support](https://www.cloud.service.gov.uk/support) to ask us to manually delete the pending instance.
 
+#### View the service configuration
+The `message` field may appear blank following operations such as changing the forwarded headers. In that case, you can get information about the configured domains using:
+
+```
+cf curl "/v3/service_instances/$(cf service SERVICE_INSTANCE --guid)/parameters"
+```
+
+where `SERVICE_INSTANCE` is the name of one of your existing cdn-route service instances.
+
+Example output:
+
+```
+{
+   "cache_ttl": 0,
+   "cloudfront_domain": "d3j6yjt78pkdqf.cloudfront.net",
+   "dns_records": [
+      {
+         "validating_domain_name": "www.example.com",
+         "challenge_dns_record": "_83878ed284b0b5fcaa3e99a618432ac8.www.example.com",
+         "challenges_dns_record_type": "CNAME",
+         "challenges_dns_record_value": "_5c7e8297b9691c59197e4e10b5bf0a98.tfmgdnztqk.acm-validations.aws",
+         "status": "SUCCESS"
+      }
+   ],
+   "forward_cookies": true,
+   "forwarded_headers": [
+      "Host"
+   ]
+}
+```
 
 ## How custom domains work
 
