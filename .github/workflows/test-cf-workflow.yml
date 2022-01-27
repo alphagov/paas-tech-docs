@@ -1,0 +1,36 @@
+name: Test CF workflow
+
+on: pull_request
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    env:
+      CF_API: "https://api.london.cloud.service.gov.uk"
+      CF_ORG: "ORG_NAME"
+      CF_SPACE: "SPACE_NAME"
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579
+
+      - name: Install the CF CLI
+        run: |
+          wget -q -O cf.tar.gz "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=7.4.0&source=github-rel"
+          sudo tar xzf cf.tar.gz --wildcards --directory /usr/local/bin/ "cf*"
+          ls -la .
+          ls -la /usr/local/bin/
+
+      - name: Test CF command
+        env:
+          CF_USERNAME: ${{ secrets.CF_USERNAME }}
+          CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+        run: |
+          ls -la /usr/local/bin/
+          which cf
+          cf help -a
