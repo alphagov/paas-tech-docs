@@ -42,9 +42,8 @@ jobs:
 
       - name: Install the CF CLI
         run: |
-          wget -O cf.tar.gz "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=7.4.0&source=github-rel"
-          tar xzf cf.tar.gz
-          sudo mv cf /usr/local/bin/cf
+          wget -q -O cf.tar.gz "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=7.4.0&source=github-rel"
+          sudo tar xzf cf.tar.gz --wildcards --directory /usr/local/bin/ "cf*"
 
       - name: Authenticate
         env:
