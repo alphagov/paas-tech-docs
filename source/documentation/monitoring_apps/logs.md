@@ -38,7 +38,7 @@ Before you set up Logit, you must:
 
 You must set up [Logstash](https://www.elastic.co/products/logstash) to process the Cloud Foundry logs into separate [Gorouter](https://docs.cloudfoundry.org/concepts/architecture/router.html) and app log types.
 
-1. Go to your Logit dashboard. For the Logit ELK stack you want to use, select __Settings__.
+1. Go to your Logit dashboard. For the Logit ELK stack you want to use, select __View Stack Settings__.
 1. On the __Stack options__ menu, select __Logstash Pipelines__.
 1. Go to the __Logstash Pipeline Editor__, and replace the code there with the following logstash filter code:
 
@@ -169,7 +169,9 @@ Contact us by emailing [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailt
 By default, Logit allows anyone on the internet to send logs to your ELK stack. You can set up Logit to make sure that your ELK stack only receives logs from GOV.UK PaaS.
 
 1. Read [Static egress IP addresses](/guidance.html#static-egress-ip-addresses) for a list of syslog drain IP addresses.
-1. Send these IP addresses to Logit support at [https://logit.io/contact-us](https://logit.io/contact-us) and ask that your ELK stack only receives log messages from these addresses.
+1. Go to your Logit dashboard. For the Logit ELK stack you want to use, select __View Stack Settings__.
+1. On the __Stack options__ menu, select __Logstash Firewall__.
+1. Select __Add New Firewall Group__ and follow the required steps, for further help on configuring your firewall settings visit [Logit.io logstash firewall help](https://help.logit.io/en/articles/5203179-managing-stack-logstash-firewall-configurations)
 
 ### Further information
 
