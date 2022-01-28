@@ -202,7 +202,7 @@ To restore data to an earlier state, you can visit the [GOV.UK PaaS support page
 
 Aiven provide a Kibana user interface through which you can explore the data in your Elasticsearch. You can access Kibana using the following instructions:
 
-1. Run the following to get some valid credentials for your Elasticsearch:
+1. Run the following to generate and retrieve some valid credentials for your Elasticsearch Instance:
 
     ```sh
     cf create-service-key NAME_OF_YOUR_ELASTICSEARCH creds-for-kibana

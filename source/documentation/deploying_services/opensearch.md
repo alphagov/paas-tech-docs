@@ -243,9 +243,13 @@ Aiven provide a Kibana user interface through which you can explore the data in 
 
    OpenSearch instances are only accessible from the GOV.UK PaaS. This sets up a tunnel so that you can get access, similar to how we use [Conduit](https://github.com/alphagov/paas-cf-conduit) elsewhere.
 
+   If you have included your own IP address(es) in any IP restrictions you can skip this step.
+
 3. Access Kibana through your browser by going to [https://localhost:4430](https://localhost:4430).
    When prompted for credentials, provide the username and password from step 1.
    If you see a blank page, make sure your browser URL is using `https` and not `http`.
+
+   If you have included your own IP address(es) in any IP restrictions, go to the hostname output in step 1.
 
 4. To clean up when you are done, `CTRL+C` the `cf ssh` session from step 2 and run `cf delete-service-key NAME_OF_YOUR_OPENSEARCH creds-for-kibana`.
 
@@ -255,6 +259,8 @@ You can add or remove IP restrictions for an OpenSearch service instance when:
 
 - creating a new service instance
 - updating an existing service instance
+
+IP restrictions will affect Kibana as well as OpenSearch.
 
 ### Add IP restrictions when creating a service instance
 
