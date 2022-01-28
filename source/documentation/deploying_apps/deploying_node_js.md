@@ -90,8 +90,7 @@ Then in your app, you can get configuration information for backing services. Th
         var pg = require('pg');
         var appEnv = cfenv.getAppEnv();
         var connectionString = appEnv.getServiceURL("SERVICE NAME");
-        var client = new pg.Client(connectionString);
-        client.ssl = true;
+        var client = new pg.Client({ connectionString, ssl: true });
         client.connect();
 
 Replace "SERVICE NAME" in the above code with the exact name of the PostgreSQL service you created. The ``getServiceURL`` function returns a connection string which includes the username and password required to connect to the database.
