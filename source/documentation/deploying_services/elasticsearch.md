@@ -285,9 +285,9 @@ cf update-service my-es-service -c '{"ip_filter": "1.2.3.4,9.10.11.12"}'
 
 #### elasticsearch-py
 
-[elasticsearch-py](https://pypi.org/project/elasticsearch) versions `>=7.14.0` are no longer compatible with AWS-managed Elasticsearch instances. Until [Opensearch](https://github.com/opensearch-project) release their fork, you should use [elasticsearch-py `7.13.4`](https://pypi.org/project/elasticsearch/7.13.4/).
+[elasticsearch-py](https://pypi.org/project/elasticsearch) versions `>=7.14.0` are no longer compatible with AWS-managed Elasticsearch instances.
 
-The [Department for International Trade](https://github.com/uktrade) have provided more information in a [pull request](https://github.com/uktrade/data-hub-api/pull/3672) on one of their repositories.
+When migrating to OpenSearch, use [the `opensearch-py` library](https://github.com/opensearch-project/opensearch-py) instead.
 
 
 ### Further information
