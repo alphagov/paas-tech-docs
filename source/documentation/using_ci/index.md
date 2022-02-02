@@ -21,6 +21,6 @@ You should create one or more dedicated PaaS user accounts for use by your CI to
 
 Use a different account for each [space](/orgs_spaces_users.html#spaces) you want to deploy your app to using your CI tool.
 
-Assign a [user role](https://docs.cloud.service.gov.uk/orgs_spaces_users.html#users-and-user-roles) to each of these accounts. These user roles should have the minimum permissions needed for setting up Travis to automatically build and deploy your app.
+Assign a [user role](https://docs.cloud.service.gov.uk/orgs_spaces_users.html#users-and-user-roles) to each of these accounts. These user roles should have the minimum permissions needed for setting up your CI tool to automatically build and deploy your app.
 
 The GOV.UK PaaS will lock your credentials if your CI tool makes [multiple failed login attempts in a short period of time](/troubleshooting.html#failed-login-rate-limit).
