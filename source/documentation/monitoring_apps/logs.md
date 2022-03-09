@@ -135,6 +135,8 @@ You must set up [Logstash](https://www.elastic.co/products/logstash) to process 
 1. Select __Apply__ once the code is valid. If this is not possible, check you have copied the code correctly or contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) .
 1. Go back to the Logit dashboard once the following message appears: “Filters have been applied to logstash, logstash will be restarted, this may take up to 2 minutes”.
 
+This configuration will result in application logs with two different levels of severity. Lines output from the app's `stdout` will have a `syslog_severity` of `informational` and lines output from the app's `stderr` will have a `syslog_severity` of `error`. For finer-grained severity levels, the logstash filter would need to be customized to extract this information from line contents.
+
 ### Configure app
 
 1. Select __Settings__ for the stack you want to use.
