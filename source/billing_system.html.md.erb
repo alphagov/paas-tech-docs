@@ -1,0 +1,74 @@
+# The GOV.UK PaaS billing system
+
+The GOV.UK Platform as a Service (PaaS) billing system generates bills for GOV.UK PaaS tenants. Our tenants use GOV.UK PaaS to create and delete various services and resources, such as compute instances running applications and databases. We need to calculate how much these services and resources cost on a monthly basis so we can recoup this money from tenants.
+
+The GOV.UK PaaS billing system comprises:
+
+- 2 applications written in Golang: the `paas-billing-collector` and the `paas-billing-api`
+- the GOV.UK PaaS billing Postgres database application, which uses stored functions to calculate tenants' bills in the database
+
+## Accessing GOV.UK PaaS billing
+
+To access GOV.UK PaaS billing information, use the PaaS Admin web application through the *Explore your costs and usage* link on your organisation’s page. You can also access more detailed information, such as resource IDs and charging plan details, through the [PaaS Billing API](https://github.com/alphagov/paas-billing/README.md).
+
+PaaS Admin calls the `\billable_events` endpoint of the API. The API then queries the billing database to get the required data and calls a stored function. For example, [the `get_tenant_bill` stored function](https://github.com/alphagov/paas-billing/blob/main/billing-db/sprocs/get_tenant_bill.sql)) is the database entry point for calculating tenant bills.
+
+
+## How GOV.UK PaaS billing works
+
+We use database SQL code to calculate tenants' bills. There are 2 parts to the procedure for calculating bills:
+
+1. Assembling what needs to be billed
+
+    We put together a set of billable resources and services and a time frame across which to bill them. The [`get_tenant_bill`](https://github.com/alphagov/paas-billing/blob/main/billing-db/sprocs/get_tenant_bill.sql) stored function calculates bills and can be invoked either manually or through the API. Information is collated from the event-sourced Cloud Foundry usage events for the queried time frame and written to a temporary database table by a stored function.
+
+    This stored function takes an organisation name as well as the start and end date of the queried time frame as arguments. It then goes through the *resources* table for the tenant and time frame, collects records of which services or resources the tenants used, and writes them to a temporary table.
+
+2. Calculating the bill
+
+    The [`calculate_bill`](https://github.com/alphagov/paas-billing/blob/main/billing-db/sprocs/calculate_bill.sql) stored function calculates the bill. This function accepts no parameters. It takes the contents of the temporary table populated by `get_tenant_bill` and calculates the bill, taking account of factors such as VAT rates and currency exchange rates. The exchange rates are important because many services provisioned by GOV.UK PaaS are billed in US dollars (USD), but we produce bills for our tenants in British pounds (GBP).
+
+
+### How we calculate bills
+
+The PaaS billing system calculates tenants’ costs, based on pricing information collected from our service providers. We do this by writing simple formulae in the billing database, and each service or resource we provide to tenants has a formula to calculate the cost.
+
+
+```
+($storage_in_mb/1024) * ($time_in_seconds/2678401) * 1.23
+```
+
+This formula calculates the charge using the `storage (in GB) * the AWS charge (in this case $1.23) * proportion of the month the tenant has provisioned the resource (number of seconds in a month is taken as 2678401, assuming a 31 day month)`.
+
+## How data flows through the billing system
+
+The core billing functionality is provided by the `calculate_bill` stored function, which evaluates a list of resources and returns their costs. The list of resources considered is based on a filter operation that an interfacing stored function such as `get_tenant_bill` operates on the *resources* database table.
+
+The *resources* table is populated based on an event-sourcing algorithm implemented in the `update_resources` stored function.
+
+The list of events considered in generating the *resources* table is currently based on `app_usage_events` and `service_usage_events` reported by the Cloud Foundry API. In the future, the list of events may be populated to include other billing event sources, such as AWS billing reports.
+
+
+
+## Main database tables in the billing database
+
+### resources
+
+Contains records of what tenants have provisioned (for example, RDS Postgres instance or S3 bucket) through GOV.UK PaaS. Populated by the `update_resources`  stored function , which filters the usage events collected from the Cloud Foundry API by the `paas-billing-collector` app.
+
+### charges
+
+Details how much each resource (for example, MySql RDS instance) costs and how the charge for the resource is calculated.
+
+### vat_rates_new
+
+Contains the VAT rates over a period of time.
+
+### currency_exchange_rates
+
+Contains the conversion rates from USD, which AWS uses, to GBP, which the GOV.UK PaaS billing system uses to produce bills.
+
+### billing_formulae
+
+Lists formulae used to calculate charges for resources provisioned through GOV.UK PaaS.
+
