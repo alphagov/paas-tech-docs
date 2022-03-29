@@ -3,6 +3,7 @@
 [OpenSearch](https://opensearch.org/) is an open source fork for [Elasticsearch](https://www.elastic.co/) and [Kibana](https://www.elastic.co/kibana/). It is a search and analytics engine that allows you to store and search data.
 
 Before using OpenSearch as your primary data store, you should assess if an [ACID-compliant](https://www.techopedia.com/definition/23949/atomicity-consistency-isolation-durability-acid) backing service such as [PostgreSQL](/deploying_services/postgresql/#postgresql) or [MySQL](/deploying_services/mysql/#mysql) would better meet your needs.
+
 <h2 id="set-up-the-service">Set up the service</h2>
 
 ### Set up an OpenSearch service
@@ -175,34 +176,6 @@ cf delete-service my-opensearch-service
 ```
 
 Enter `yes` when asked for confirmation.
-
-<h2 id="migrating-from-elasticsearch">Migrating from Elasticsearch</h2>
-
-GOV.UK PaaS will remove support for Elasticsearch in the first quarter of 2022. You need to migrate your existing Elasticsearch services to OpenSearch.
-
-You can migrate from Elasticsearch to OpenSearch by creating an OpenSearch backing service from a backup of an Elasticsearch service.
-
-```
-cf create-service opensearch OPENSEARCH_PLAN OPENSEARCH_SERVICE_NAME -c '{"restore_from_latest_backup_of": "ELASTICSEARCH_SERVICE_GUID"}'
-```
-
-where:
-
-- `OPENSEARCH_PLAN` is the name of the OpenSearch service plan you want
-- `OPENSEARCH_SERVICE_NAME` is a unique descriptive name for the new service instance
-- `ELASTICSEARCH_SERVICE_GUID` is the `GUID` (Global Unique Identifier) of an Elasticsearch service instance from which the latest backup will be picked
-
-For example:
-
-```
-cf create-service opensearch small-ha-1 my-new-opensearch -c '{"restore_from_latest_backup_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
-```
-
-When you create an OpenSearch backing service in this way, existing data will be available in the OpenSearch service. However new data added to the Elasticsearch service will not be replicated to the OpenSearch service, and vice versa.
-
-Backups are taken hourly, so you should expect up to one hour's worth of data to be missing from the new service. If this will cause problems in your applications, you can migrate the extra data between the two programmatically. OpenSearch and Elasticsearch are API compatible.
-
-You can begin using the OpenSearch service in your app by [unbinding the Elasticsearch service](/deploying_services/elasticsearch/#unbind-an-elasticsearch-service-from-your-app) and [binding the OpenSearch service](#bind-an-opensearch-service-to-your-apps)
 
 <h2 id="maintaining-the-service">Maintaining the service</h2>
 
