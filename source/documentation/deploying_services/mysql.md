@@ -195,6 +195,8 @@ To move data between two PaaS-hosted MySQL databases:
     - `DATA_FILE_NAME` is the SQL data file name created by the `mysqldump` command
     - `DATABASE_NAME` is the name of the source database (you should get this from the [`VCAP_SERVICES` environment variable](/deploying_services/mysql/#bind-a-mysql-service-to-your-app))
 
+    Depending on the version of your local `mysqldump` tool, you may need to add the flags `--no-tablespaces` and/or `--column-statistics=0` to exclude metadata that cannot be accessed on GOV.UK PaaS from the data dump.
+
 2. Run the following command to import the data file into the target database:
 
      ```
