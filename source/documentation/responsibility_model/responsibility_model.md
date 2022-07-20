@@ -2,7 +2,7 @@
 
 To be hosted on GOV.UK PaaS, your app must:
 
-- follow the [twelve-factor application principles](architecture.html#12-factor-application-principles); this will be true if your app has been written so it can deploy to another PaaS like Heroku
+- follow the [twelve-factor application principles](architecture.html#12-factor-application-principles); this will be true if you have written your app so it can deploy to another PaaS, such as Heroku
 - [store data classified up to ‘official’](deploying_apps.html#data-security-classification); your app cannot store data classified as 'secret' or 'top secret'
 
 
