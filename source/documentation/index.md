@@ -4,6 +4,6 @@ GOV.UK Platform as a Service (PaaS) is a cloud-hosting platform built by the Gov
 
 The GOV.UK PaaS is hosted in two regions, London and Ireland.
 
-GOV.UK PaaS is a live service.
+GOV.UK PaaS is a live service, however it is being decommissioned by Dec 22nd 2023. You can [read our blog post announcement](https://gds.blog.gov.uk/2022/07/12/why-weve-decided-to-decommission-gov-uk-paas-platform-as-a-service/).
 
-GOV.UK PaaS uses the open source [Cloud Foundry](https://www.cloudfoundry.org/) project, and runs on Amazon Web Services. [Read our blog post on why we chose Cloud Foundry](https://governmentasaplatform.blog.gov.uk/2015/12/17/choosing-cloudfoundry/) for more information. Refer to the [features page](https://www.cloud.service.gov.uk/features) for more information on GOV.UK PaaS.
+GOV.UK PaaS uses the open source [Cloud Foundry](https://www.cloudfoundry.org/) project, and runs on Amazon Web Services.

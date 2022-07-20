@@ -14,10 +14,6 @@ If you have an Ireland region account, your app domain is `APPNAME.cloudapps.dig
 
 An organisation, or org, represents a group of users, applications and environments. Each org shares the same resource, quota and custom domain.
 
-The GOV.UK PaaS team creates new orgs in the London region unless you request otherwise. We assign at least one [org manager](orgs_spaces_users.html#org-manager) to new orgs. You can request your first org on the [GOV.UK PaaS support page](https://admin.london.cloud.service.gov.uk/support/sign-up).
-
-To request additional orgs, contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) and tell us who the org manager(s) should be and the name of one of your existing orgs.
-
 Run `cf orgs` to list the orgs your user account can access.
 
 To see [quota](managing_apps.html#quotas) information about an org, you can select the appropriate org using the GOV.UK PaaS admin tool for the [London region](https://admin.london.cloud.service.gov.uk/) or the [Ireland region](https://admin.cloud.service.gov.uk/) (requires sign in), and check the __Memory__ total in the top right corner of the screen. The amount of information you can see depends on your user role within the org. For example, org managers can see all quota information, whereas space developers can only see information on spaces that they are members of.
