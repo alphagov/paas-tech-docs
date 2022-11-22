@@ -283,7 +283,7 @@ Your app can now receive requests through the subdomain.
 1. Your org manager should check if any apps are using a custom domain before removing that domain:
 
     ```
-    cf routes --orglevel | grep -we DOMAIN_NAME -e^space
+    cf routes --org-level | grep -we DOMAIN_NAME -e^space
     ```
 
     Example output:
