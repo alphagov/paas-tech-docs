@@ -155,7 +155,7 @@ You must create a [network policy](https://cli.cloudfoundry.org/en-US/cf/add-net
 1. Run the following in the command line to create the network policy:
 
 ```
-cf add-network-policy PUBLIC_APPNAME --destination-app PRIVATE_APPNAME --protocol tcp --port 8080
+cf add-network-policy PUBLIC_APPNAME PRIVATE_APPNAME --protocol tcp --port 8080
 ```
 
 <%= warning_text('If you are using Cloud Foundry CLI version 6 and the blue-green deploy plugin, you must recreate the network policy after each deployment') %>
