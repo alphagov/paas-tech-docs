@@ -34,14 +34,10 @@ We recommend this GOV.UK PaaS account:
 1. [Push the PaaS Prometheus exporter app](/deploying_apps.html#deploying-public-apps) to Cloud Foundry without starting the app:
 
 	```
-	cf push --no-start prometheus-exporter --hostname prometheus-exporter-ORGNAME
+	cf push --no-start prometheus-exporter --var orgname=ORGNAME
 	```
 
-	where `ORGNAME` is the name of your org. For example:
-
-	```
-	cf push --no-start prometheus-exporter --hostname prometheus-exporter-exampleorg
-	```
+	where `ORGNAME` is the name of your org. Note this replaces the `--hostname` flag from cf CLI v6, which was removed in cf CLI v7.
 
 	Running this command deploys the PaaS Prometheus exporter app to `https://prometheus-exporter-exampleorg.cloudapps.digital` without starting the app.
 
