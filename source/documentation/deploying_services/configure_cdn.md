@@ -30,7 +30,7 @@ There are many different CDNs available. Contact us at [gov-uk-paas-support@digi
 2. Create a domain in your organisation (replace `ORGNAME` with your org name, and replace `example.com` with your domain):
 
     ```bash
-    cf create-domain ORGNAME example.com
+    cf create-private-domain ORGNAME example.com
     ```
 
 3. Map the subdomain route to your application:

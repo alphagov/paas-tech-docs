@@ -37,7 +37,7 @@ Before you start setting up your service, you must be able to set TXT and CNAME 
 1. Create the required domain(s) in your organisation:
 
     ```
-    cf create-domain ORG_NAME APEX_DOMAIN_NAME
+    cf create-private-domain ORG_NAME APEX_DOMAIN_NAME
     ```
 
     where `APEX_DOMAIN_NAME` is the name of the apex domain, for example `example.service.gov.uk`
@@ -298,7 +298,7 @@ Your app can now receive requests through the subdomain.
 1. Remove the custom domain from Cloud Foundry's routing database:
 
     ```
-    cf delete-domain DOMAIN_NAME
+    cf delete-private-domain DOMAIN_NAME
     ```
     This also deletes the custom domain from every app using that domain.
 
