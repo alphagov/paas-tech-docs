@@ -7,10 +7,7 @@ gem 'wdm', '~> 0.1.0', platforms: [:mswin, :mingw]
 gem 'tzinfo-data', platforms: [:mswin, :mingw, :jruby]
 
 # Include the tech docs gem
-gem 'govuk_tech_docs', "~> 3.2"
+gem 'govuk_tech_docs'
 
 # The search functionality requires the `middleman-search` gem
 gem 'middleman-search-gds', git: 'https://github.com/alphagov/middleman-search.git'
-
-# Webrick required for running a local server in tests
-gem 'webrick', "~> 1.7"
