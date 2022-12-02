@@ -1,4 +1,4 @@
-FROM ghcr.io/alphagov/paas/ruby:8d6c556abd2d54f27c0fda934d00df8beafac1f8
+FROM ghcr.io/alphagov/paas/ruby:8621ead7e4ef0dd653aec80a15b6727b06927e59
 
 ENV RUNTIME_PACKAGES "git nodejs make"
 ENV DEV_PACKAGES "python3-pip python3-dev gcc ruby-dev g++ zlib1g-dev libffi-dev"
