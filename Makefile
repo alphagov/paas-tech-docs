@@ -38,6 +38,7 @@ test-local-http: build ## checks links against the build dir over HTTP
 	  ./build/ \
 	  -p$(SERVER_PORT) \
 	>/dev/null 2>&1 & SERVER_PID=$$! ; \
+	while ! curl -s -o /dev/null "localhost:$(SERVER_PORT)"; do echo "waiting for web server to start"; sleep 3; done; \
 	$(LINKCHECKER) http://localhost:$(SERVER_PORT) ; \
 	LINKCHECKER_STATUS=$$? ; \
 	kill $${SERVER_PID} ; \
