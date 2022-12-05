@@ -34,7 +34,7 @@ cf delete APPNAME
 
 ### Deleting app routes
 
-Run the following to delete an app and that app’s [routes](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes) at the same time:
+Run the following to delete an app and that app’s [routes](https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html#routes) at the same time, as long as those routes are not also mappped to other apps:
 
 ```
 cf delete -r APPNAME

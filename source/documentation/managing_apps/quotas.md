@@ -46,7 +46,7 @@ isolation segments:
 
 To see the details of that quota, run:
 
-``cf quota QUOTA``
+``cf org-quota QUOTA``
 
 where QUOTA is the name of the quota that GOV.UK PaaS has assigned to your org.
 
@@ -62,7 +62,7 @@ Reserved Route Ports   0
 
 To see all quotas available on the GOV.UK PaaS, run the command:
 
-``cf quotas``
+``cf org-quotas``
 
 ### Quota limits
 
