@@ -221,6 +221,8 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
 
     where `SERVICE_NAME` is a unique descriptive name for this service instance, and `DATA_FILE_NAME` is the SQL file created in the previous step.
 
+    You will see some error messages when importing the data file into the target database. [These errors are expected](/deploying_services/postgresql/#import-data-expected-errors) and the import process will succeed.
+
 > You can only use [certain PostgreSQL extensions](/deploying_services/postgresql/#add-or-remove-extensions-for-a-postgresql-service-instance).
 
 #### PaaS to PaaS
@@ -243,6 +245,25 @@ To move data between two PaaS-hosted PostgreSQL databases:
      ```
 
     where `DESTINATION_SERVICE_NAME` is the name of the target database.
+
+    You will see some error messages when importing the data file into the target database. [These errors are expected](/deploying_services/postgresql/#import-data-expected-errors) and the import process will succeed.
+
+<h4 id="import-data-expected-errors">Expected Errors</h4>
+
+When importing data into a target database, you may encounter errors that do not stop the import process from finishing:
+
+        ERROR:  function "forbid_ddl_reader" already exists with same argument types
+        ERROR:  function "make_readable" already exists with same argument types
+        ERROR:  function "make_readable_generic" already exists with same argument types
+        ERROR:  function "reassign_owned" already exists with same argument types
+        WARNING:  no privileges were granted for "sql_implementation_info"
+        WARNING:  no privileges were granted for "public"
+        ERROR:  permission denied to create event trigger "forbid_ddl_reader"
+        HINT:  Must be superuser to create an event trigger.
+        ERROR:  permission denied to create event trigger "make_readable"
+        HINT:  Must be superuser to create an event trigger.
+        ERROR:  permission denied to create event trigger "reassign_owned"
+        HINT:  Must be superuser to create an event trigger.
 
 Contact the PaaS team at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) if you have any questions.
 
