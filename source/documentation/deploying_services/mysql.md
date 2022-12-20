@@ -164,7 +164,7 @@ To move data from a non-PaaS MySQL database to a PaaS MySQL database:
 1. Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:
 
     ```
-    mysqldump --host HOST_NAME --result-file DATA_FILE_NAME DATABASE_NAME
+    mysqldump --set-gtid-purged=OFF --host HOST_NAME --result-file DATA_FILE_NAME DATABASE_NAME
     ```
 
     where:
@@ -187,7 +187,7 @@ To move data between two PaaS-hosted MySQL databases:
 1. Use the [Conduit plugin](/deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
 
     ```
-    cf conduit SERVICE_NAME -- mysqldump --result-file DATA_FILE_NAME DATABASE_NAME
+    cf conduit SERVICE_NAME -- mysqldump --set-gtid-purged=OFF --result-file DATA_FILE_NAME DATABASE_NAME
     ```
 
     where:
