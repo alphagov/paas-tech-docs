@@ -164,7 +164,7 @@ To move data from a non-PaaS MySQL database to a PaaS MySQL database:
 1. Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:
 
     ```
-    mysqldump --host HOST_NAME --result-file DATA_FILE_NAME DATABASE_NAME
+    mysqldump --set-gtid-purged=OFF --host HOST_NAME --result-file DATA_FILE_NAME DATABASE_NAME
     ```
 
     where:
@@ -187,7 +187,7 @@ To move data between two PaaS-hosted MySQL databases:
 1. Use the [Conduit plugin](/deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine) to connect to the source database and export the data into an SQL file by running:
 
     ```
-    cf conduit SERVICE_NAME -- mysqldump --result-file DATA_FILE_NAME DATABASE_NAME
+    cf conduit SERVICE_NAME -- mysqldump --set-gtid-purged=OFF --result-file DATA_FILE_NAME DATABASE_NAME
     ```
 
     where:
@@ -226,6 +226,17 @@ cf update-service my-ms-service -p medium-ha-5.7
 The plan upgrade will start immediately and finish within an hour. You can check the status of the upgrade by running `cf services`.
 
 You can also [queue a plan upgrade](/deploying_services/mysql/#queue-a-plan-migration-mysql) to happen during a maintenance window to minimise service interruption.
+
+Amazon automatically patch your database during the configured maintenance
+window.
+Updates are usually released more regularly than they are automatically
+applied.
+You can use the `update_minor_version_to_latest` configuration
+parameter to update your database to the latest available minor version:
+
+```
+cf update-service SERVICE_NAME -c '{"update_minor_version_to_latest": true}'
+```
 
 #### Different encryption type
 
@@ -498,7 +509,7 @@ To restore from a point in time:
 
     This returns a `GUID` in the format `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`, for example `32938730-e603-44d6-810e-b4f12d7d109e`.
 
- 2. Trigger the creation of a new service based on the snapshot by running:
+ 2. Trigger the creation of a new service based on the most recent available point in time by running:
 
     ```
     cf create-service mysql PLAN NEW_SERVICE_NAME -c '{"restore_from_point_in_time_of": "GUID"}'
@@ -539,7 +550,7 @@ To restore from a point in time:
 By default, the database is restored to the most recent point in time
 checkpoint available.
 If you need to restore to a particular point in time,
-you can use the `restore_from_point_in_time_of` parameter.
+you can use the `restore_from_point_in_time_before` parameter.
 
 For example:
 

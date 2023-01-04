@@ -746,7 +746,7 @@ To restore from a point in time:
 
     This returns a `GUID` in the format `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`, for example `32938730-e603-44d6-810e-b4f12d7d109e`.
 
- 2. Trigger the creation of a new service based on the snapshot by running:
+ 2. Trigger the creation of a new service based on the most recent available point in time by running:
 
     ```
     cf create-service postgres PLAN NEW_SERVICE_NAME -c '{"restore_from_point_in_time_of": "GUID"}'
@@ -787,7 +787,7 @@ To restore from a point in time:
 By default, the database is restored to the most recent point in time
 checkpoint available.
 If you need to restore to a particular point in time,
-you can use the `restore_from_point_in_time_of` parameter.
+you can use the `restore_from_point_in_time_before` parameter.
 
 For example:
 
