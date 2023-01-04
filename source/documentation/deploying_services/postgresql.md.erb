@@ -311,8 +311,8 @@ To upgrade, you must set up a new service and migrate your app data.
 
 You can downgrade your service plan provided that:
 
-1. The amount of storage for the new plan is not less than the existing plan.
-1. Both the existing plan and the new plan have the same major version.
+- the amount of storage for the new plan is not less than the existing plan.
+- both the existing plan and the new plan have the same major version.
 
 ### Reboot a PostgreSQL service instance
 
@@ -568,7 +568,7 @@ You can view available plans through the Cloud Foundry command line interface, o
 
 #### Paid plans - PostgreSQL
 
-Some service plans are paid and we will bill you based on the size of your plan.
+Some service plans are paid, and we will bill you based on the size of your plan.
 
 New organisations cannot access paid plans by default. Enabling this access is controlled by an organisation's [quota](/#quotas) settings.
 
@@ -588,7 +588,7 @@ When you use a high availability plan, Amazon RDS provides a hot standby service
 
 Refer to the [Amazon RDS documentation on the failover process](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html#Concepts.MultiAZ.Failover) for more information.
 
-You should test how your app deals with a failover to make sure you are benefiting from the high availability plan.
+You should [test how your app deals with a failover](https://docs.cloud.service.gov.uk/deploying_services/postgresql/#force-a-failover) to make sure you are benefitting from the high availability plan.
 
 #### High IOPS plans - PostgreSQL
 
