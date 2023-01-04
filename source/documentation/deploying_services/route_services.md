@@ -139,6 +139,15 @@ This example app uses the `X-Forwarded-For` header added by the GOV.UK PaaS rout
 Using an IP address to authenticate HTTP requests is not sufficient as a standalone authentication mechanism.
 You should use other authentication and authorization methods in your apps.
 
+Note: the example nginx configuration used in this app will not work out of the box
+when used with requests routed through a CDN. This includes requests routed through our
+own AWS CloudFront-based [cdn-route services](/deploying_services/use_a_custom_domain/). For these to work, you need to add [`set_real_ip_from`](https://nginx.org/en/docs/http/ngx_http_realip_module.html#set_real_ip_from)
+entries to `nginx.conf` for all IP ranges the CDN may forward
+traffic from. For CloudFront, this includes potentially hundreds of address ranges
+which are [published by AWS](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/LocationsOfEdgeServers.html)
+through a JSON file. These ranges are not completely static and you will need to
+update them occasionally.
+
 #### Using the `X-Forwarded-For` header
 
 The `X-Forwarded-For` header is useful for working out the source IP address of the originating HTTP request, and can be used for authentication, or analytics.
