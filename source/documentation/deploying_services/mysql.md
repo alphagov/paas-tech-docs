@@ -368,7 +368,19 @@ For services which have a large volume of database reads and writes, GOV.UK PaaS
 
 Each MySQL service you create will have a randomly-assigned weekly 30 minute maintenance window, during which there may be brief downtime. Select a high availability (`HA`) plan to minimise this downtime. Minor version upgrades (for example from 5.7.1 to 5.7.2) are applied during this maintenance window.
 
-Contact us at [gov-uk-paas-support@digital.cabinet-office.gov.uk](mailto:gov-uk-paas-support@digital.cabinet-office.gov.uk) to find out the default time of your maintenance window. Window start times will vary from 22:00 to 06:00 UTC.
+You can retrieve the day and time of this maintenance window with the Cloud Foundry CLI (version 8 and above) by running:
+
+```
+cf service --params SERVICE_NAME
+```
+
+```json
+{
+  ...
+  "preferred_maintenance_window": "sun:23:00-mon:01:30"
+  ...
+}
+```
 
 You can set your own maintenance window by running `cf update-service` in the command line and setting the `preferred_maintenance_window` custom parameter:
 
