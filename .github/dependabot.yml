@@ -4,6 +4,12 @@ updates:
 - package-ecosystem: "npm"
   directory: "/"
   schedule:
-    interval: "monthly"
+    interval: "daily"
+  pull-request-branch-name:
+    separator: "-"
+- package-ecosystem: "bundler"
+  directory: "/"
+  schedule:
+    interval: "daily"
   pull-request-branch-name:
     separator: "-"
