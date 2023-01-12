@@ -417,10 +417,10 @@ Server error, status code: 409, error code: 60016, message: An operation for ser
 This happens because you cannot do anything to a service instance while it's in a pending state. A CDN service instance stays pending until it detects the CNAME or ALIAS record. If this causes a problem for you, [contact support](https://www.cloud.service.gov.uk/support) to ask us to manually delete the pending instance.
 
 #### View the service configuration
-The `message` field may appear blank following operations such as changing the forwarded headers. In that case, you can get information about the configured domains using:
+The `message` field may appear blank following operations such as changing the forwarded headers. In that case, you can get information about the configured domains with the Cloud Foundry CLI (version 8 and above) using:
 
 ```
-cf curl "/v3/service_instances/$(cf service SERVICE_INSTANCE --guid)/parameters"
+cf service SERVICE_INSTANCE --params
 ```
 
 where `SERVICE_INSTANCE` is the name of one of your existing cdn-route service instances.
@@ -430,6 +430,7 @@ Example output:
 ```
 {
    "cache_ttl": 0,
+   "cloudfront_distribution_id": "ENHBRDSSQXJV0",
    "cloudfront_domain": "d3j6yjt78pkdqf.cloudfront.net",
    "dns_records": [
       {
@@ -446,6 +447,8 @@ Example output:
    ]
 }
 ```
+
+This also exposes information such as the CloudFront "distribution id" of the service instance, which can be useful when migrating a domain away from GOV.UK PaaS.
 
 ## How custom domains work
 
