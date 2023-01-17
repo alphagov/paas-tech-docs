@@ -4,7 +4,6 @@ on: pull_request
 
 env:
   NODE_VERSION: "12.x"
-  RUBY_VERSION: "2.7.1"
   PYTHON_VERSION: "3.x"
   NODE_ENV: development
 
@@ -22,7 +21,6 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "${{env.RUBY_VERSION}}"
           bundler-cache: true
 
       - uses: actions/setup-python@v2
@@ -36,4 +34,6 @@ jobs:
         run: npm test
 
       - name: Python tests
-        run: make test
+        run: |
+            gem install webrick
+            make test
