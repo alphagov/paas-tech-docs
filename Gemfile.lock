@@ -145,7 +145,7 @@ GEM
     parslet (2.0.0)
     public_suffix (5.0.0)
     racc (1.6.1)
-    rack (2.2.4)
+    rack (2.2.6.2)
     rack-livereload (0.3.17)
       rack
     rb-fsevent (0.11.2)
