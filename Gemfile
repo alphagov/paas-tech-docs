@@ -13,4 +13,4 @@ gem 'govuk_tech_docs', "~> 3.2"
 gem 'middleman-search-gds', git: 'https://github.com/alphagov/middleman-search.git'
 
 # Webrick required for running a local server in tests
-gem 'webrick', "~> 1.7"
+gem 'webrick', "~> 1.8"
