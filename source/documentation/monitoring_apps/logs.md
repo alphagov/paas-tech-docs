@@ -22,6 +22,12 @@ You can also run `cf events` to see all recent app events, such as when an app s
 cf events APP_NAME
 ```
 
+There are a number of factors that can [affect log delivery and retention
+through `cf logs`](https://github.com/cloudfoundry/log-cache-release#reliability). You should not rely solely on `cf logs` for your production
+systems. You should [configure a syslog
+drain](#set-up-the-logit-log-management-service) to persist the logs in your
+own log storage system.
+
 ## Set up the Logit log management service
 
 By default, Cloud Foundry streams a limited amount of logs to your terminal for a defined time. You can use a commercial log management service to keep more logging information for longer. This section describes how to set up the [Logit log management service](https://logit.io/).
