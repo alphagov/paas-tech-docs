@@ -266,6 +266,18 @@ cf update-service my-redis-service -c '{"preferred_maintenance_window": "Tue:04:
 
 For more information on maintenance times, refer to the [Amazon ElastiCache maintenance window documentation](https://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/VersionManagement.MaintenanceWindow.html).
 
+#### Force a failover
+
+If you have a [highly available service instance](/deploying_services/redis/#high-availability-plans-redis), you can force a [failover](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html) for that service instance. You can use this to test how your app behaves when a failover happens.
+
+Run the following to force a failover of your highly-available service:
+
+```
+cf update-service SERVICE_NAME -c '{"test_failover": true}'
+```
+
+When you force a failover, your Redis service's IP address will change. The service's hostname will not change. You must configure your app to close all Redis connections to the previous IP address when a failover happens.
+
 ### Redis key eviction policy
 
 The eviction policy is the behaviour Redis follows when you reach your service plan's maximum memory limit. The eviction policy can take the following values:
