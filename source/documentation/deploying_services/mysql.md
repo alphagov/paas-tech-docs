@@ -284,7 +284,7 @@ Run the following to reboot your highly available service and force a failover:
 cf update-service SERVICE_NAME -c '{"reboot": true, "force_failover": true}'
 ```
 
-When you force a failover, your MySQL database IP address will change. The database's hostname will not change. You must configure your app to close all database connections to the previous IP address after forcing a failover.
+When you force a failover, your MySQL database IP address will change. The database's hostname will not change. You must configure your app to close all database connections to the previous IP address when a failover happens.
 
 <h2 id="remove-the-service">Remove the service</h2>
 
