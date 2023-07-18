@@ -418,7 +418,7 @@ You can only migrate your service if the new plan has the [same encryption type]
 
 The data stored within any MySQL service you create is backed up using the standard Amazon RDS backup system if you are using a paid plan. Your data is not backed up if you are using the unencrypted plans.
 
-Backups are taken nightly at some time between 00:35 and 01:05 UTC. Data is retained for 7 days. When a database is deleted the final snapshot is held for 35 days.
+Backups are taken nightly in your service instance's backup window. Data is retained for 7 days. When a database is deleted the final snapshot is held for 35 days.
 
 There are two ways you can restore data to an earlier state:
 
