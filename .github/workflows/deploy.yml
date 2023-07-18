@@ -1,0 +1,48 @@
+---
+name: Deploy to GitHub Pages
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: "12.x"
+  PYTHON_VERSION: "3.x"
+  NODE_ENV: development
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+
+      - name: Setup Node
+        uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8
+        with:
+          node-version: "${{env.NODE_VERSION}}"
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@d3c9825d67b0d8720afdfdde5af56c79fdb38d16
+        with:
+          bundler-cache: true
+
+      - name: Setup Python
+        uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1
+        with:
+          python-version: "${{env.PYTHON_VERSION}}"
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          pip install --user -r requirements.txt
+
+      - name: Node tests
+        run: npm test
+
+      - name: Python tests
+        run: |
+          gem install webrick
+          make test
