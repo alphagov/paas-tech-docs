@@ -650,13 +650,13 @@ You can only migrate your service if the new plan has the [same encryption type]
 
 The data stored within any PostgreSQL service you create is backed up using the standard Amazon RDS backup system if you are using a paid plan. Your data is not backed up if you are using the unencrypted plans.
 
-Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is retained for 35 days.
+Backups are taken nightly in your service instance's backup window. Data is retained for 7 days. When a database is deleted the final snapshot is held for 35 days.
 
 There are two ways you can restore data to an earlier state:
 
 1. You can restore to the latest snapshot. Refer to [Restoring a PostgreSQL service snapshot](/deploying_services/postgresql/#restoring-a-postgresql-service-snapshot) for details.
 
-1. You can restore to any point from 5 minutes to 35 days ago, with a resolution of one second. Refer to [Restoring a PostgreSQL service from a point in time](/deploying_services/postgresql/#restoring-a-postgresql-service-from-a-point-in-time) for details.
+1. You can restore to any point from 5 minutes to 7 days ago, with a resolution of one second. Refer to [Restoring a PostgreSQL service from a point in time](/deploying_services/postgresql/#restoring-a-postgresql-service-from-a-point-in-time) for details.
 
 Note that data restore will not be available in the event of an RDS outage that affects the entire Amazon availability zone.
 
@@ -784,7 +784,7 @@ To restore from a point in time:
   * You cannot restore from a service instance that has been deleted
   * You must use the same service plan for the copy as for the original service
   instance
-  * You cannot restore to a point in time prior to the oldest snapshot (35 days ago)
+  * You cannot restore to a point in time prior to the oldest snapshot (7 days ago), unless it's a final snapshot from a deleted database (up to 35 days ago).
   * You must create the new service instance in the same organisation and space
   as the original. This is to prevent unauthorised access to data between
   spaces. If you need to copy data to a different organisation and/or space,
