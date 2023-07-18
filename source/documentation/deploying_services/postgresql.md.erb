@@ -650,7 +650,7 @@ You can only migrate your service if the new plan has the [same encryption type]
 
 The data stored within any PostgreSQL service you create is backed up using the standard Amazon RDS backup system if you are using a paid plan. Your data is not backed up if you are using the unencrypted plans.
 
-Backups are taken nightly at some time between 22:00 and 06:00 UTC. Data is retained for 7 days.
+Backups are taken nightly at some time between 00:35 and 01:05 UTC. Data is retained for 7 days. When a database is deleted the final snapshot is held for 35 days.
 
 There are two ways you can restore data to an earlier state:
 
@@ -784,7 +784,7 @@ To restore from a point in time:
   * You cannot restore from a service instance that has been deleted
   * You must use the same service plan for the copy as for the original service
   instance
-  * You cannot restore to a point in time prior to the oldest snapshot (7 days ago)
+  * You cannot restore to a point in time prior to the oldest snapshot (7 days ago), unless it's a final snapshot from a deleted database (up to 35 days ago).
   * You must create the new service instance in the same organisation and space
   as the original. This is to prevent unauthorised access to data between
   spaces. If you need to copy data to a different organisation and/or space,
