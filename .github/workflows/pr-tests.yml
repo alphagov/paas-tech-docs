@@ -35,5 +35,4 @@ jobs:
 
       - name: Python tests
         run: |
-            gem install webrick
             make test

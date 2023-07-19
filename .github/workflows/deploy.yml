@@ -12,9 +12,10 @@ env:
   NODE_ENV: development
 
 jobs:
-  test:
+  deploy:
+    environment:
+      name: github-pages
     runs-on: ubuntu-22.04
-
     steps:
       - name: Checkout
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
@@ -34,7 +35,7 @@ jobs:
         with:
           python-version: "${{env.PYTHON_VERSION}}"
 
-      - name: Install dependencies
+      - name: Install Python and Node dependencies
         run: |
           npm ci
           pip install --user -r requirements.txt
@@ -44,5 +45,13 @@ jobs:
 
       - name: Python tests
         run: |
-          gem install webrick
           make test
+      - name: Build middleman site
+        run: bundle exec middleman build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@253fd476ed429e83b7aae64a92a75b4ceb1a17cf
+        with:
+          path: 'build'
+      - name: Deploy to GitHub pages
+        id: deployment
+        uses: actions/deploy-pages@73e62e651178eeba977de2dc9f4c7645b3d01015
