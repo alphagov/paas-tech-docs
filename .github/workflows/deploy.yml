@@ -1,0 +1,79 @@
+---
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "12.x"
+  PYTHON_VERSION: "3.x"
+
+jobs:
+  deploy:
+    name: Deploy Tech Docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+
+      - name: Setup Node
+        uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8
+        with:
+          node-version: "${{env.NODE_VERSION}}"
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@d3c9825d67b0d8720afdfdde5af56c79fdb38d16
+        with:
+          bundler-cache: true
+
+      - name: Setup Python
+        uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1
+        with:
+          python-version: "${{env.PYTHON_VERSION}}"
+
+      - name: Install Python and Node dependencies
+        run: |
+          npm ci
+          pip install --user -r requirements.txt
+
+      - name: Node tests
+        run: npm test
+
+      - name: Python tests
+        run: |
+          gem install webrick
+          make test
+
+      - name: Build middleman site
+        run: bundle exec middleman build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@253fd476ed429e83b7aae64a92a75b4ceb1a17cf
+        with:
+          path: 'build'
+
+      - name: Deploy to GitHub pages
+        id: deployment
+        uses: actions/deploy-pages@73e62e651178eeba977de2dc9f4c7645b3d01015
+
+      - name: Slack notify on failure
+        if: failure()
+        uses: slackapi/slack-github-action@e28cf165c92ffef168d23c5c9000cffc8a25e117
+        with:
+          payload: |
+            {
+              "text": "Deployment of ${{ github.event.pull_request.html_url }} FAILED"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
