@@ -1,8 +1,6 @@
 # GOV.UK PaaS Technical Documentation
 
-This is the new technical documentation system for GOV.UK PaaS.
-
-It is published at https://docs.cloud.service.gov.uk (for technical reasons, it is also available at https://paas-tech-docs.cloudapps.digital but that is NOT the official address and you should not send cloudapps.digital URLs to tenants, link to them etc).
+This is the new technical documentation system for GOV.UK PaaS published at [docs.cloud.service.gov.uk](docs.cloud.service.gov.uk).
 
 Documentation for the technical documentation tool is published at [https://tdt-documentation.london.cloudapps.digital](https://tdt-documentation.london.cloudapps.digital) [external link].
 
@@ -74,7 +72,7 @@ Changes to the `tech-docs.yml` file require stopping and restarting the server t
 
 ## Running tests
 
-This repo is configured in Travis to run a link-checker over the generated docs
+This repo is configured in GitHub actions to run a link-checker over the generated docs
 to find any broken links and so on. If you want to run this locally, do the
 following:
 
@@ -87,13 +85,15 @@ make test
 
 ## Build and deploy
 
-The docs are hosted on the PaaS and any change to master is automatically deployed by the [PaaS release CI](https://github.com/alphagov/paas-release-ci). The build status can be seen here: https://concourse.build.ci.cloudpipeline.digital/teams/main/pipelines/paas-tech-docs
+The docs are hosted on GitHub Pages which is deployed using GitHub actions. GitHub pages is configured
+with a custom sub-domain at [docs.cloud.service.gov.uk](docs.cloud.service.gov.uk).
+
+The deploy process first runs `bundle exec middleman build` which generates a `build` directory consisting of static files for our site is generated after running `bundle exec middleman build`. Next the [upload-pages-artifact](https://github.com/actions/upload-pages-artifact) action takes the `build` directory and turns it into
+ a [gzip archive](https://en.wikipedia.org/wiki/Gzip) called `github-pages` which the [deploy-pages](https://github.com/actions/deploy-pages) action uses to deploy to GitHub pages.
 
 ## Updating the template
 
 The master repository for the tech docs template system is at https://github.com/alphagov/tech-docs-template
-
-See the section "Updating a project to use the latest template" at https://github.com/alphagov/tech-docs-template
 
 The template system is maintained and developed by the service design manual team.  You can contact them at `#tech-docs-format` on GDS Slack. Note that this is an MVP version and there is a roadmap of planned features and improvements.
 
