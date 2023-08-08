@@ -88,7 +88,9 @@ make test
 The docs are hosted on GitHub Pages which is deployed using GitHub actions. GitHub pages is configured
 with a custom sub-domain at [docs.cloud.service.gov.uk](docs.cloud.service.gov.uk).
 
-The deploy process first runs `bundle exec middleman build` which generates a `build` directory consisting of static files for our site is generated after running `bundle exec middleman build`. Next the [upload-pages-artifact](https://github.com/actions/upload-pages-artifact) action takes the `build` directory and turns it into
+The deploy process first runs `bundle exec middleman build` which generates a `build` directory consisting of static files for our site. 
+
+Next the [upload-pages-artifact](https://github.com/actions/upload-pages-artifact) action takes the `build` directory and turns it into
  a [gzip archive](https://en.wikipedia.org/wiki/Gzip) called `github-pages` which the [deploy-pages](https://github.com/actions/deploy-pages) action uses to deploy to GitHub pages.
 
 ## Updating the template
