@@ -533,6 +533,18 @@ To restore from a point in time:
     cf create-service mysql large-8.0 my-mysql-service-copy  -c '{"restore_from_point_in_time_of": "32938730-e603-44d6-810e-b4f12d7d109e"}'
     ```
 
+    By default, the database is restored to the most recent point in time checkpoint available.
+    If you need to restore to a particular point in time, you can use the `restore_from_point_in_time_before` parameter.
+
+    For example:
+
+    ```
+    cf create-service mysql large-8.0 my-mysql-service-copy  -c '{"restore_from_point_in_time_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_point_in_time_before": "2020-10-27 13:00:00"}'
+    ```
+
+    will create a new database from the write-ahead logs before October 27th 2020
+    13:00 UTC.
+
  3. It takes between 5 to 10 minutes for the new service instance to be set up. To find out its status, run:
 
     ```
@@ -558,20 +570,6 @@ To restore from a point in time:
   spaces. If you need to copy data to a different organisation and/or space,
   you can [connect to your MySQL instance from a local machine using
   Conduit](/deploying_services/mysql/#connect-to-a-mysql-service-from-your-local-machine).
-
-By default, the database is restored to the most recent point in time
-checkpoint available.
-If you need to restore to a particular point in time,
-you can use the `restore_from_point_in_time_before` parameter.
-
-For example:
-
-```
-cf create-service mysql large-8.0 my-mysql-service-copy  -c '{"restore_from_point_in_time_of": "32938730-e603-44d6-810e-b4f12d7d109e", "restore_from_point_in_time_before": "2020-10-27 13:00:00"}'
-```
-
-will create a new database from the write-ahead logs before October 27th 2020
-13:00 UTC.
 
 ## Upgrading major versions of MySQL
 
