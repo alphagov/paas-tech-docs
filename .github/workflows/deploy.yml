@@ -72,7 +72,7 @@ jobs:
         with:
           payload: |
             {
-              "text": "Deployment of ${{ github.event.pull_request.html_url }} FAILED"
+              "text": "Deployment of Paas Tech Docs with commit ${{ github.sha }} FAILED."
             }
         env:
           SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
