@@ -64,7 +64,7 @@ jobs:
 
       - name: Deploy to GitHub pages
         id: deployment
-        uses: actions/deploy-pages@12ab2b16cf43a7a061fe99da74b6f8f11fb77f5b
+        uses: actions/deploy-pages@9dbe3824824f8a1377b8e298bafde1a50ede43e5
 
       - name: Slack notify on failure
         if: failure()
