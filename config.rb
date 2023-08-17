@@ -8,7 +8,5 @@ end
 
 GovukTechDocs.configure(self)
 
-redirect "security.txt", to: "https://vdp.cabinetoffice.gov.uk/.well-known/security.txt"
-page "security.txt", :content_type => 'text/html'
-redirect ".well-known/security.txt", to: "https://vdp.cabinetoffice.gov.uk/.well-known/security.txt"
-page ".well-known/security.txt", :content_type => 'text/html'
+redirect "security.txt.html", to: "https://vdp.cabinetoffice.gov.uk/.well-known/security.txt"
+redirect ".well-known/security.txt.html", to: "https://vdp.cabinetoffice.gov.uk/.well-known/security.txt"
