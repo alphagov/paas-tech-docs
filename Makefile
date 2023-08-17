@@ -22,6 +22,8 @@ build: ## Builds the project
 	bundle exec middleman build $(VERBOSE_FLAG)
 	@echo "Copy additional files..."
 	cp googlec7239f490e1990a5.html build
+	cp security.txt.html build
+	cp security.txt.html build/.well-known
 
 .PHONY: test
 test: test-filesystem test-local-http ## Runs the tests
