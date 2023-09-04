@@ -1,6 +1,6 @@
 # GOV.UK PaaS Technical Documentation
 
-This is the new technical documentation system for GOV.UK PaaS published at [docs.cloud.service.gov.uk](docs.cloud.service.gov.uk).
+This is the new technical documentation system for GOV.UK PaaS published at [docs.cloud.service.gov.uk](https://docs.cloud.service.gov.uk).
 
 Documentation for the technical documentation tool is published at [https://tdt-documentation.london.cloudapps.digital](https://tdt-documentation.london.cloudapps.digital) [external link].
 
@@ -8,8 +8,8 @@ Documentation for the technical documentation tool is published at [https://tdt-
 
 Clone this repository to a folder on your computer.
 
-Install Ruby with Rubygems, preferably with [Ruby version manager](rvm),
-and the [Bundler gem](bundler).
+Install Ruby with Rubygems, preferably with [Ruby version manager](https://rvm.io/),
+and the [Bundler gem](https://bundler.io/).
 
 In the application folder, type the following to install the required gems:
 
@@ -66,7 +66,7 @@ If all goes well something like the following output will be displayed:
 == Inspect your site configuration at "http://Laptop.local:4567/__middleman", "http://192.168.0.8:4567/__middleman"
 ```
 
-You should now be able to view a live preview at http://localhost:4567.
+You should now be able to view a live preview at [http://localhost:4567](http://localhost:4567).
 
 Changes to the `tech-docs.yml` file require stopping and restarting the server to show up in the preview. (Stop it with `Ctrl-C`).
 
@@ -86,7 +86,7 @@ make test
 ## Build and deploy
 
 The docs are hosted on GitHub Pages which is deployed using GitHub actions. GitHub pages is configured
-with a custom sub-domain at [docs.cloud.service.gov.uk](docs.cloud.service.gov.uk).
+with a custom sub-domain at [docs.cloud.service.gov.uk](https://docs.cloud.service.gov.uk).
 
 The deploy process first runs `bundle exec middleman build` which generates a `build` directory consisting of static files for our site. 
 
@@ -95,13 +95,13 @@ Next the [upload-pages-artifact](https://github.com/actions/upload-pages-artifac
 
 ## Updating the template
 
-The master repository for the tech docs template system is at https://github.com/alphagov/tech-docs-template
+The master repository for the tech docs template system is at [https://github.com/alphagov/tech-docs-template](https://github.com/alphagov/tech-docs-template)
 
 The template system is maintained and developed by the service design manual team.  You can contact them at `#tech-docs-format` on GDS Slack. Note that this is an MVP version and there is a roadmap of planned features and improvements.
 
 ## Licence
 
-Unless stated otherwise, the codebase is released under [the MIT licence](./LICENSE).
+Unless stated otherwise, the codebase is released under [the MIT licence](https://opensource.org/license/mit/).
 
 The data is [© Crown
 copyright](http://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/copyright-and-re-use/crown-copyright/)
