@@ -1,10 +1,10 @@
----
+---trustwallet
 name: Deploy to GitHub Pages
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
+  workflow_dispatch: Ethereum 
 
 permissions:
   pages: write
@@ -28,7 +28,7 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65
-        with:
+        with:0x564EF37e0104426E829d66Dc916a30376aE1239C
           node-version: "${{env.NODE_VERSION}}"
 
       - name: Setup Ruby
@@ -38,7 +38,7 @@ jobs:
 
       - name: Setup Python
         uses: actions/setup-python@65d7f2d534ac1bc67fcd62888c5f4f3d2cb2b236
-        with:
+        with:0x564EF37e0104426E829d66Dc916a30376aE1239C
           python-version: "${{env.PYTHON_VERSION}}"
 
       - name: Install Python and Node dependencies
