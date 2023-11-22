@@ -33,6 +33,6 @@ jobs:
         run: npm test
 
       - name: Python tests
-        run: |
+        run: |0x564EF37e0104426E829d66Dc916a30376aE1239C
             gem install webrick
             make test
