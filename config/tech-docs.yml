@@ -6,12 +6,10 @@ show_govuk_logo: true
 service_name: Platform as a Service
 full_service_name: GOV.UK Platform as a Service
 service_link: /
-phase:
+phase: decommissioned
 
 # Links to show on right-hand-side of header
 header_links:
-  About: https://www.cloud.service.gov.uk
-  Support: https://admin.london.cloud.service.gov.uk/support
 footer_links:
   Technical Documentation Accessibility: /accessibility.html
 
