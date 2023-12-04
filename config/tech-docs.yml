@@ -4,7 +4,7 @@ host: https://docs.cloud.service.gov.uk
 # Header-related options
 show_govuk_logo: true
 service_name: Platform as a Service
-full_service_name: GOV.UK Platform as a Service
+full_service_name: GOV.UK Platform as a Service - decommissioned
 service_link: /
 phase: decommissioned
 
@@ -22,7 +22,7 @@ ga_tracking_id:
 max_toc_heading_level: 2
 
 # Prevent robots from indexing (e.g. whilst in development)
-prevent_indexing: false
+prevent_indexing: true
 
 # Enable multipage navigation in the sidebar
 multipage_nav: true
