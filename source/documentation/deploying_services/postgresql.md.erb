@@ -198,6 +198,28 @@ You must:
 - [create the new PaaS-hosted PostgreSQL database](/deploying_services/postgresql/#set-up-a-postgresql-service)
 - [target the space](/deploying_apps.html#set-a-target) where your new database is located
 
+#### PaaS to Non-PaaS
+
+To move data from a PaaS PostgreSQL database to a Non-PaaS PostgreSQL database:
+
+1. Use the [Conduit plugin](/deploying_services/postgresql/#connect-to-a-postgresql-service-from-your-local-machine) to connect to the source database and export the data into an     SQL file by running:
+
+    ```
+    cf conduit SERVICE_NAME -- pg_dump --file DATA_FILE_NAME --no-acl --no-owner
+    ```
+    where:
+      - `SERVICE_NAME` is a unique descriptive name for this service instance and `DATA_FILE_NAME` is the SQL data file created by the `pg_dump` command.
+
+2. Run the following command in the CLI to import data into the non-PaaS database from an SQL data file:
+
+    ```
+    psql -h HOSTNAME DATABASE_NAME < DATA_FILE_NAME
+    ```
+    where:
+      - `HOST_NAME` is the name of your host
+      - `DATA_FILE_NAME` is the SQL data file
+      - `DATABASE_NAME` is the name of the non-PaaS target database
+
 #### Non-PaaS to PaaS
 
 To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
@@ -205,7 +227,7 @@ To move data from a non-PaaS PostgreSQL database to a PaaS PostgreSQL database:
 1. Run the following command in the CLI to export data from the non-PaaS database to an SQL data file:
 
     ```
-    pg_dump --host HOST_NAME --file DATA_FILE_NAME DATABASE_NAME
+    pg_dump --host HOST_NAME --file DATA_FILE_NAME DATABASE_NAME --no-acl --no-owner
     ```
 
     where:
