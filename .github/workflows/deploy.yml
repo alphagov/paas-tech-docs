@@ -32,7 +32,7 @@ jobs:
           node-version: "${{env.NODE_VERSION}}"
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@5f19ec79cedfadb78ab837f95b87734d0003c899
+        uses: ruby/setup-ruby@28c4deda893d5a96a6b2d958c5b47fc18d65c9d3
         with:
           bundler-cache: true
 
