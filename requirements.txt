@@ -1,2 +1,2 @@
-git+https://github.com/linkchecker/linkchecker.git@f395c74aac13417f5676c53a91da79e6695bb8c1
+git+https://github.com/linkchecker/linkchecker.git@dae72c8b1142d0c3dd2a6784a78bc453ef28c46f
 requests>=2.15.0
