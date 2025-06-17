@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: "${{env.NODE_VERSION}}"
 
-      - uses: ruby/setup-ruby@5f19ec79cedfadb78ab837f95b87734d0003c899
+      - uses: ruby/setup-ruby@a4effe49ee8ee5b8b5091268c473a4628afb5651
         with:
           bundler-cache: true
 
